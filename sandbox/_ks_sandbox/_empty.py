@@ -1,32 +1,32 @@
-import fieldpack as fp
-from fieldpack import *
-
-
+import decodes.core as dc
+from decodes.core import *
 
 
 def main():
- outie = fp.makeOut(fp.outies.Rhino, "wayout")
- 
- epw = fake_epw_data()
- print epw
- 
- outie.draw()
-
-
-def fake_epw_data():
-  """ returns fake data of an EPW file
-  out: a list (8760 long) of dicts containing EPW data values
-  """
-  ret = []
-  for h in range(8760):
-    dict = {}
-    dict['DryBulbTemp'] = h%24
-    dict['RelHumid'] = h%365
-    ret.append(dict)
+    print 'hello main'
+    outie = makeOut(outies.Rhino, "linetest")
     
-  return ret
+    print "constructors"
+    p = Point(1,1)
+    v = Vec(0,0,1)
+    seg1 = Segment(p,v)
+    outie.put(seg1)
+    
+    p0 = Point(-1,1)
+    p1 = Vec(-2,1)
+    seg2 = Segment(p0,p1)
+    outie.put(seg2)
+    
+    ray1 = Ray(Point(0,-1),Vec(0,0,1))
+    outie.put(ray1)
+    
+    lin1 = Line(Point(0,1),Vec(0,0,1))
+    outie.put(lin1)
+    
+    
+    
+    
+    outie.draw()
 
-
-if __name__=="__main__": main()
-
-
+if __name__ == "__main__" : 
+    main()

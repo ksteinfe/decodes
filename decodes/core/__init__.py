@@ -3,6 +3,15 @@ VERBOSE_FS = False # determines if we verify file system loaded right
 VERBOSE = True
 
 
+
+#ERASE ME
+#from thingo import *
+#from thato import *
+
+from outies import *
+#from innies import *
+from color import *
+
 from base import *
 from vec import *
 from point import *
@@ -12,9 +21,7 @@ from xform import *
 from line import *
 from intersection import *
 
-from outies import *
-from innies import *
-from color import *
+
 
 # keep this up to date with what outies we support
 def makeOut(outtype, name):

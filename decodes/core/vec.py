@@ -1,9 +1,9 @@
-import fieldpack as fp
+from .. import core as dc
 import math, random
-if fp.VERBOSE_FS: print "vec.py loaded"
+if dc.VERBOSE_FS: print "vec.py loaded"
 
 
-class Vec(fp.Geometry):
+class Vec(dc.Geometry):
   
   def __init__(self, a=0, b=0, c=0):
     if all( hasattr(a,i) and hasattr(b,i) for i in ['x','y','z'] ) :
@@ -41,7 +41,7 @@ class Vec(fp.Geometry):
   def __div__(self, other): return Vec(self.x/float(other), self.y/float(other), self.z/float(other))
   def __invert__(self): return self.inverted()
   def __mul__(self, other):
-    if isinstance(other, fp.Xform) :
+    if isinstance(other, dc.Xform) :
       return other*self
     else : 
       #TODO: confim that other is a scalar
