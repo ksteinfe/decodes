@@ -1,4 +1,5 @@
 from .. import core as dc
+from decodes.core import *
 if dc.VERBOSE_FS: print "xform.py loaded"
 
 import Rhino

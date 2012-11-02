@@ -1,11 +1,11 @@
-import fieldpack as fp
-from fieldpack import *
+import decodes.core as dc
+from decodes.core import *
 
 import Rhino
 import rhinoscriptsyntax as rs
  
     
-outie = fp.makeOut(fp.outies.Rhino, "vectest")
+outie = dc.makeOut(dc.outies.Rhino, "vectest")
 
 
 print "constructors"
@@ -102,7 +102,7 @@ outie.put([v0,v1,v2,vAvg])
 #
 #
 #print "vecs are sorted by length"
-#redoutie = fp.makeOut(fp.outies.Rhino, "redstuff")
+#redoutie = dc.makeOut(dc.outies.Rhino, "redstuff")
 #redoutie.set_color(1.0,0,0)
 
 #vecs = [Vec.random(normalize=False) for n in range(20)]

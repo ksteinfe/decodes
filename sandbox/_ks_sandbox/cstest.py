@@ -1,7 +1,7 @@
-import fieldpack as fp
-from fieldpack import *
+import decodes.core as dc
+from decodes.core import *
 
-outie = fp.makeOut(fp.outies.Rhino, "wayout")
+outie = dc.makeOut(dc.outies.Rhino, "wayout")
 
 o = Point(0,0,10)
 vx = Vec(0,0,10)

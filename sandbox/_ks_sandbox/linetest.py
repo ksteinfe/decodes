@@ -1,7 +1,7 @@
-import fieldpack as fp
-from fieldpack import *
+import decodes.core as dc
+from decodes.core import *
 
-outie = fp.makeOut(fp.outies.Rhino, "linetest")
+outie = dc.makeOut(dc.outies.Rhino, "linetest")
 
 print "constructors"
 p = Point(1,1)

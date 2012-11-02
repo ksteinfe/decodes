@@ -1,14 +1,15 @@
-import fieldpack as fp
-from fieldpack import *
-innie = fp.makeIn(fp.innies.Rhino)
-outie = fp.makeOut(fp.outies.Rhino, "wayout")
+import decodes.core as dc
+from decodes.core import *
+
+innie = dc.makeIn(dc.innies.Rhino)
+outie = dc.makeOut(dc.outies.Rhino, "wayout")
 
 
 
 #outie.put(innie.get_point())
 
 print "a user selected mesh"
-innie = fp.makeIn(fp.innies.Rhino)
+innie = dc.makeIn(dc.innies.Rhino)
 mymesh = innie.get_mesh()
 mymesh *= Xform.translation(Vec(0,0,5))
 outie.put(mymesh)

@@ -1,7 +1,7 @@
-import fieldpack as fp
-from fieldpack import *
+import decodes.core as dc
+from decodes.core import *
 
-outie = fp.makeOut(fp.outies.Rhino, "pointtest")
+outie = dc.makeOut(dc.outies.Rhino, "pointtest")
 
 print "constructors"
 v0 = Vec(1,-2)
@@ -74,7 +74,7 @@ print "sort pts:  %s!" % [p.name for p in pts]
 #pts = [Point.random() for n in range(100)]
 #pts.sort()
 #rs.AddPolyline([p.to_tuple() for p in pts])
-#redoutie = fp.makeOut(fp.outies.Rhino, "redstuff")
+#redoutie = dc.makeOut(dc.outies.Rhino, "redstuff")
 #redoutie.set_color(1.0,0,0)
 #redoutie.put(Point(pts[0]))
 #redoutie.draw()

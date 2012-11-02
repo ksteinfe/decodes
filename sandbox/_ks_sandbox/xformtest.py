@@ -1,6 +1,6 @@
-import fieldpack as fp
-from fieldpack import *
-outie = fp.makeOut(fp.outies.Rhino, "wayout")
+import decodes.core as dc
+from decodes.core import *
+outie = dc.makeOut(dc.outies.Rhino, "wayout")
 
 import scriptcontext
 import System
@@ -47,7 +47,7 @@ xfC2 = xfB * xfA
 print rh_xformC1
 print xfC1
 
-outie = fp.makeOut(fp.outies.Rhino, "matrix multiplication")
+outie = dc.makeOut(dc.outies.Rhino, "matrix multiplication")
 out.iconscale = 0.5
 out.set_color(1.0,1.0,0)
 cs = CS(Point(0,1))
@@ -65,7 +65,7 @@ outie.draw()
 
 '''
 print "translation"
-outie = fp.makeOut(fp.outies.Rhino, "translation")
+outie = dc.makeOut(dc.outies.Rhino, "translation")
 out.set_color(1.0,1.0,0)
 pt0 = Point(1,1)
 vec = Vec(1,2,3)
@@ -82,7 +82,7 @@ print xf2
 
 '''
 print "scale"
-outie = fp.makeOut(fp.outies.Rhino, "scale")
+outie = dc.makeOut(dc.outies.Rhino, "scale")
 out.set_color(1.0,1.0,0)
 pt0 = Point(1,1)
 xf = Xform.scale(0.5)
@@ -91,7 +91,7 @@ print xf
 
 
 print "mirror"
-outie = fp.makeOut(fp.outies.Rhino, "mirror")
+outie = dc.makeOut(dc.outies.Rhino, "mirror")
 outie.set_color(1.0,0.0,1.0)
 pt = Point(1,1,1)
 xf = Xform.mirror("worldYZ")
@@ -111,7 +111,7 @@ print "rotation"
 basePt = Point(1,1)
 outie.put(basePt)
 
-outie = fp.makeOut(fp.outies.Rhino, "rotation")
+outie = dc.makeOut(dc.outies.Rhino, "rotation")
 out.set_color(1.0,0.0,1.0)
 rotPt = Point(0,1)
 xf = Xform.rotation(center=Point(0,1), angle=math.pi/2)
@@ -131,7 +131,7 @@ outie.draw()
 
 '''
 print "change basis"
-outie = fp.makeOut(fp.outies.Rhino, "change basis")
+outie = dc.makeOut(dc.outies.Rhino, "change basis")
 out.set_color((1.0,0.0,0.5))
 pa,pb,pc = Point(2,1,4),Point(2,1,5),Point(2,1,6)
 sourceCS = CS(Point(2,2,4),Vec(0,0,1))

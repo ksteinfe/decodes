@@ -1,9 +1,9 @@
-import fieldpack as fp
-from fieldpack import *
+import decodes.core as dc
+from decodes.core import *
 
-outie = fp.makeOut(fp.outies.Rhino, "wayout")
+outie = dc.makeOut(dc.outies.Rhino, "wayout")
 outie.set_color(Color(0.75))
-# m1 = fp.Mesh()
+# m1 = dc.Mesh()
 # m1.add_vert(Vec(0.0,0.0,1.0)) #0
 # m1.add_vert(Vec(1.0,0.0,1.0)) #1
 # m1.add_vert(Vec(2.0,0.0,1.0)) #2
@@ -33,7 +33,7 @@ verts = [
   Point(0.5257311 , 0.6881910	, 0.5)
 ]
 faces = [[0,1,2],[0,2,3],[2,3,0],[3,0,1]]
-m1 = fp.Mesh(verts,faces)
+m1 = dc.Mesh(verts,faces)
 m1.set_color(Color.HSB(0.75,0.5,1.0))
 #m1.add_vert(Point(0,0,2))
 #m1.add_face(3,4,1)
@@ -42,7 +42,7 @@ outie.put(m1)
 
 
 print "a user selected mesh"
-innie = fp.makeIn(fp.innies.Rhino)
+innie = dc.makeIn(dc.innies.Rhino)
 mymesh = innie.get_mesh()
 mymesh *= Xform.translation(Vec(0,0,5))
 outie.put(mymesh)
@@ -62,7 +62,7 @@ outie.put(normals)
 
 
 #print "mesh with defined basis"
-#m2 = fp.Mesh(faces=faces)
+#m2 = dc.Mesh(faces=faces)
 #cs = CS(Point(2,1,1),Vec(0,1),Vec(0,0,1)) * Xform.rotation(center=Point(), angle=math.pi/2, axis=Vec(0,0,1))
 #m2.basis = cs
 ## verts with no basis will be added in basis space

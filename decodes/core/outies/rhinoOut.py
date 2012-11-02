@@ -1,9 +1,13 @@
 from decodes import core as dc
+from decodes.core import *
+
 if dc.VERBOSE_FS: print "rhinoOut loaded"
 
 import outie
 import rhinoUtil
-from rhinoUtil import VecToPoint3d
+#from rhinoUtil import VecToPoint3d
+from rhinoUtil import *
+
 
 import scriptcontext
 import Rhino
@@ -55,7 +59,7 @@ class RhinoOut(outie.Outie):
     return False
 
   def _drawVec(self, vec, obj_attr):
-    origin = Vec(0,0,0)
+    origin = dc.Vec(0,0,0)
     guid = scriptcontext.doc.Objects.AddLine(VecToPoint3d(origin),VecToPoint3d(origin+vec),obj_attr)
     return guid!=System.Guid.Empty
 
@@ -116,14 +120,14 @@ class RhinoOut(outie.Outie):
     obj_attr.ObjectColor = System.Drawing.Color.FromArgb(255,255,255)  
 
     obj_attr.ObjectColor = System.Drawing.Color.FromArgb(255,0,0)  
-    x = sDocObj.AddLine(VecToPoint3d(cs.origin), VecToPoint3d(cs.origin+(Vec(1,0,0)*self.iconscale)),obj_attr)
+    x = sDocObj.AddLine(VecToPoint3d(cs.origin), VecToPoint3d(cs.origin+(dc.Vec(1,0,0)*self.iconscale)),obj_attr)
     obj_attr.ObjectColor = System.Drawing.Color.FromArgb(0,255,0)
-    rh_circ = Rhino.Geometry.Circle(Rhino.Geometry.Plane(VecToPoint3d(cs.origin),VecToVec3d(Vec(0,0,1))), self.iconscale*0.5)
+    rh_circ = Rhino.Geometry.Circle(Rhino.Geometry.Plane(VecToPoint3d(cs.origin),VecToVec3d(dc.Vec(0,0,1))), self.iconscale*0.5)
     y = sDocObj.AddCircle(rh_circ,obj_attr)
-    rh_circ = Rhino.Geometry.Circle(Rhino.Geometry.Plane(VecToPoint3d(cs.origin+Vec(0,0,self.iconscale*0.5)),VecToVec3d(Vec(0,0,1))), self.iconscale*0.5)
+    rh_circ = Rhino.Geometry.Circle(Rhino.Geometry.Plane(VecToPoint3d(cs.origin+dc.Vec(0,0,self.iconscale*0.5)),VecToVec3d(dc.Vec(0,0,1))), self.iconscale*0.5)
     yy = sDocObj.AddCircle(rh_circ,obj_attr)
     obj_attr.ObjectColor = System.Drawing.Color.FromArgb(0,0,255)
-    z = sDocObj.AddLine(VecToPoint3d(cs.origin), VecToPoint3d(cs.origin+(Vec(0,0,1)*0.5*self.iconscale)),obj_attr)
+    z = sDocObj.AddLine(VecToPoint3d(cs.origin), VecToPoint3d(cs.origin+(dc.Vec(0,0,1)*0.5*self.iconscale)),obj_attr)
     obj_attr.ObjectColor = System.Drawing.Color.FromArgb(255,255,255)
     o = sDocObj.AddPoint(VecToPoint3d(cs.origin),obj_attr)
     scriptcontext.doc.Groups.Add([o,x,y,yy,z])

@@ -2,6 +2,7 @@ from .. import core as dc
 if dc.VERBOSE_FS: print "cs.py loaded"
 
 import Rhino
+import math
 
 from core.outies.rhinoUtil import *
 import copy, collections
@@ -60,6 +61,6 @@ class CylCS(dc.Geometry, dc.Basis):
     except TypeError:
         print("mallard can't quack()")
         
-    return Point( radius * math.cos(radians), radius * math.sin(radians), z) + self.origin
+    return dc.Point( radius * math.cos(radians), radius * math.sin(radians), z) + self.origin
     
     

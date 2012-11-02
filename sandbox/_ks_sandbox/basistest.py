@@ -1,10 +1,11 @@
-import fieldpack as fp
-from fieldpack import *
+import decodes.core as dc
+from decodes.core import *
+
 import math, copy
 
 
-outie = fp.makeOut(fp.outies.Rhino, "basistest")
-outie_red = fp.makeOut(fp.outies.Rhino, "redstuff")
+outie = dc.makeOut(dc.outies.Rhino, "basistest")
+outie_red = dc.makeOut(dc.outies.Rhino, "redstuff")
 outie_red.set_color(1.0,0,0)
 
 #print "CS basis"
@@ -30,7 +31,7 @@ print "let's plot the same points in two different bases..."
 cylindrical_cs = CylCS(Point(-4,0))
 orthogonal_cs = CS(Point(4,0))
 
-pts = [Point(math.cos(t),t,math.sin(t)) for t in drange(0,math.pi*2,20)]
+pts = [dc.Point(math.cos(t),t,math.sin(t)) for t in drange(0,math.pi*2,20)]
 print pts
 pts_cyld = [p.set_basis(cylindrical_cs) for p in pts]
 pts_orth = [p.set_basis(orthogonal_cs) for p in pts]
