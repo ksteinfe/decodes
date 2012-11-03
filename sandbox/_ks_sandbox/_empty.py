@@ -3,7 +3,7 @@ from decodes.core import *
 
 
 def main():
-    print 'hello main'
+    print 'hello mains'
     outie = makeOut(outies.Rhino, "linetest")
     
     print "constructors"
