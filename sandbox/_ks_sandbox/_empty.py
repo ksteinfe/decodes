@@ -3,13 +3,8 @@ from decodes.core import *
 
 
 def main():
-<<<<<<< HEAD
     print 'hello mains'
     outie = makeOut(outies.Rhino, "linetest")
-=======
-    #print 'hello main'
-    outie = makeOut(outies.Grasshopper, "linetest")
->>>>>>> updated grasshopper outie
     
     #print "constructors"
     p = Point(1,1)

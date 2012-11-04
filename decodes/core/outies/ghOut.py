@@ -19,16 +19,21 @@ class GrasshopperOut(outie.Outie):
   
   def __init__(self):
     super(GrasshopperOut,self).__init__()
+    self._allow_foreign = True
     
   def _startDraw(self):
-    print "startDraw"
+    pass
   
   def _endDraw(self):
-    print "endDraw"
+    pass
     
   def _drawGeom(self, g):
     # here we sort out what type of geometry we're dealing with, and call the proper draw functions
     # MUST LOOK FOR CHILD CLASSES BEFORE PARENT CLASSES (points before vecs)
+    
+    if isinstance(g, collections.Iterable) : 
+      for n,i in enumerate(g): g[n] = _drawGeom(i)
+      return g
     
     if isinstance(g, dc.Point) : 
         return self._drawPoint(g)

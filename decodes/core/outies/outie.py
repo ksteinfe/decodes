@@ -8,16 +8,21 @@ class Outie(object):
   def __init__(self):
     self.iconscale = 1.0 # a scale factor for icons
     self.geom = [] # a simple list of geometry
-    
+    self._allow_foreign = False
+
   def put(self,ngeom):
-    if isinstance(ngeom, (dc.HasBasis) ) :
-      ngeom = ngeom.basis_applied()
-    if isinstance(ngeom, (dc.Geometry) ) :
-      self.geom.append(copy.deepcopy(ngeom))
-    elif isinstance(ngeom, collections.Iterable):
+    if isinstance(ngeom, (dc.HasBasis) ) : ngeom = ngeom.basis_applied()
+    
+    if self._allow_foreign : 
+      self.geom.append(copy.deepcopy(ngeom)) # if we allow foreigners, just put in whatever they gave us
+    else:
+      if isinstance(ngeom, (dc.Geometry) ) : 
+        self.geom.append(copy.deepcopy(ngeom))
+      elif isinstance(ngeom, collections.Iterable) : 
         for g in ngeom : self.put(g)
-    else :
-      raise NotImplementedError("This doesn't look like Fieldpack Geometry!\nYou can't put that in an outie!\n{0}".format(ngeom))
+      else : 
+        raise NotImplementedError("This doesn't look like Fieldpack Geometry!\nThis outie doesn't allow foreigners!\n{0}".format(ngeom))
+    
     
   def draw(self):
     #iterates over the geom list, 
