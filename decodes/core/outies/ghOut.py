@@ -3,7 +3,7 @@ from decodes.core import *
 
 if dc.VERBOSE_FS: print "ghOut loaded"
 
-import outie
+import outie, collections
 import rhinoUtil
 from rhinoUtil import *
 
@@ -32,7 +32,7 @@ class GrasshopperOut(outie.Outie):
     # MUST LOOK FOR CHILD CLASSES BEFORE PARENT CLASSES (points before vecs)
     
     if isinstance(g, collections.Iterable) : 
-      for n,i in enumerate(g): g[n] = _drawGeom(i)
+      for n,i in enumerate(g): g[n] = self._drawGeom(i)
       return g
     
     if isinstance(g, dc.Point) : 
