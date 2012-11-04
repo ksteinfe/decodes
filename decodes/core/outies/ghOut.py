@@ -3,14 +3,11 @@ from decodes.core import *
 
 if dc.VERBOSE_FS: print "ghOut loaded"
 
-import outie, collections
+import clr, outie, collections
 import rhinoUtil
 from rhinoUtil import *
 
-import clr
-
 import Rhino.Geometry as rg
-
 
 class GrasshopperOut(outie.Outie):
   """outie for pushing stuff to grasshopper"""
@@ -18,13 +15,18 @@ class GrasshopperOut(outie.Outie):
   def __init__(self):
     super(GrasshopperOut,self).__init__()
     self._allow_foreign = True
+    clr.AddReference("Grasshopper")
+    
+    
     
   def _startDraw(self):
+
     clr.AddReference("Grasshopper")
     from Grasshopper.Kernel.Data import GH_Path
     from Grasshopper import DataTree    
     geometryTree = DataTree[Rhino.Geometry.GeometryBase]()
   
+
   def _endDraw(self):
     pass
     
@@ -33,8 +35,13 @@ class GrasshopperOut(outie.Outie):
     # MUST LOOK FOR CHILD CLASSES BEFORE PARENT CLASSES (points before vecs)
     
     if isinstance(g, collections.Iterable) : 
-      for n,i in enumerate(g): g[n] = self._drawGeom(i)
-      return g
+      from Grasshopper import DataTree
+      from Grasshopper.Kernel.Data import GH_Path
+      tree = DataTree[object]()
+      for n,i in enumerate(g): 
+        path = GH_Path(n)
+        tree.Add(self._drawGeom(i))
+      return tree
     
     if isinstance(g, dc.Point) : 
         return self._drawPoint(g)
