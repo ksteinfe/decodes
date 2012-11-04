@@ -8,9 +8,6 @@ import rhinoUtil
 from rhinoUtil import *
 
 import clr
-clr.AddReference("Grasshopper")
-from Grasshopper.Kernel.Data import GH_Path
-from Grasshopper import DataTree
 
 import Rhino.Geometry as rg
 
@@ -23,6 +20,9 @@ class GrasshopperOut(outie.Outie):
     self._allow_foreign = True
     
   def _startDraw(self):
+    clr.AddReference("Grasshopper")
+    from Grasshopper.Kernel.Data import GH_Path
+    from Grasshopper import DataTree    
     geometryTree = DataTree[Rhino.Geometry.GeometryBase]()
   
   def _endDraw(self):
