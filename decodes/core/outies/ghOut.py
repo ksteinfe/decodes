@@ -20,14 +20,15 @@ class GrasshopperOut(outie.Outie):
     #creates a grasshopper data tree
     #calls the draw function for each geometric object
     #returns a list of whatever these draw functions return
+    clr.AddReference("Grasshopper")
     from Grasshopper import DataTree
     from Grasshopper.Kernel.Data import GH_Path
-    clr.AddReference("Grasshopper")
-    tree = DataTree[Rhino.Geometry.GeometryBase]()
+
+    tree = DataTree[object]()
     
     for n,g in enumerate(self.geom): 
       path = GH_Path(n)
-      tree.Add(self._drawGeom)
+      tree.Add(self._drawGeom(g))
     
     
     self.clear() #empty the outie after each draw
@@ -37,7 +38,10 @@ class GrasshopperOut(outie.Outie):
     # here we sort out what type of geometry we're dealing with, and call the proper draw functions
     # MUST LOOK FOR CHILD CLASSES BEFORE PARENT CLASSES (points before vecs)
     
-    if isinstance(g, collections.Iterable) : 
+    if isinstance(g, collections.Iterable) :
+      clr.AddReference("Grasshopper")
+      from Grasshopper import DataTree
+      from Grasshopper.Kernel.Data import GH_Path 
       tree = DataTree[object]()
       for n,i in enumerate(g): 
         path = GH_Path(n)
