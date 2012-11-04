@@ -24,7 +24,6 @@ from intersection import *
 
 # keep this up to date with what outies we support
 def makeOut(outtype, name="untitled"):
-  print "making out!"
   if outtype == outies.Rhino:
     return outies.RhinoOut(name)
   if outtype == outies.Grasshopper:
