@@ -28,21 +28,17 @@ class GrasshopperOut(outie.Outie):
     
     for n,g in enumerate(self.geom): 
       path = GH_Path(n)
-      tree.Add(self._drawGeom(g))
+      tree.Add(self._draw_branch(g, tree))
     
     
     self.clear() #empty the outie after each draw
     return tree
     
-  def _drawGeom(self, g):
+  def _draw_branch(self, g, tree):
     # here we sort out what type of geometry we're dealing with, and call the proper draw functions
     # MUST LOOK FOR CHILD CLASSES BEFORE PARENT CLASSES (points before vecs)
     
     if isinstance(g, collections.Iterable) :
-      clr.AddReference("Grasshopper")
-      from Grasshopper import DataTree
-      from Grasshopper.Kernel.Data import GH_Path 
-      tree = DataTree[object]()
       for n,i in enumerate(g): 
         path = GH_Path(n)
         tree.Add(self._drawGeom(i))
@@ -59,8 +55,8 @@ class GrasshopperOut(outie.Outie):
     if isinstance(g, dc.CS) : 
       return self._drawCS(g)
       
-    raise NotImplementedError("i do not have a translation for that object type in GrasshopperOut")
-    return False
+    if isinstance(ngeom, (dc.Geometry) ) : raise NotImplementedError("i do not have a translation for that decodes geometry type in GrasshopperOut")
+    return g
 
   def _drawVec(self, vec): 
     return rg.Vector3d(vec.x,vec.y,vec.z)
