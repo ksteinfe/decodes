@@ -44,34 +44,34 @@ class GrasshopperOut(outie.Outie):
     raise NotImplementedError("i do not have a translation for that object type in GrasshopperOut")
     return False
 
-def _drawVec(vec): 
-    return rg.Vector3d(vec.x,vec.y,vec.z)
+	def _drawVec(self, vec): 
+	    return rg.Vector3d(vec.x,vec.y,vec.z)
 
-def _drawPoint(pt):
-    pt = pt.basis_applied()
-    return rg.Point3d(pt.x,pt.y,pt.z)
+	def _drawPoint(self, pt):
+	    pt = pt.basis_applied()
+	    return rg.Point3d(pt.x,pt.y,pt.z)
 
-def _drawMesh(mesh):
-    rh_mesh = rg.Mesh()
-    for v in mesh.verts: rh_mesh.Vertices.Add(v.x,v.y,v.z)
-    for f in mesh.faces: 
-      if len(f)==3 : rh_mesh.Faces.AddFace(f[0], f[1], f[2])
-      if len(f)==4 : rh_mesh.Faces.AddFace(f[0], f[1], f[2], f[3])
-    rh_mesh.Normals.ComputeNormals()
-    rh_mesh.Compact()
-    return rh_mesh
+	def _drawMesh(self, mesh):
+	    rh_mesh = rg.Mesh()
+	    for v in mesh.verts: rh_mesh.Vertices.Add(v.x,v.y,v.z)
+	    for f in mesh.faces: 
+	      if len(f)==3 : rh_mesh.Faces.AddFace(f[0], f[1], f[2])
+	      if len(f)==4 : rh_mesh.Faces.AddFace(f[0], f[1], f[2], f[3])
+	    rh_mesh.Normals.ComputeNormals()
+	    rh_mesh.Compact()
+	    return rh_mesh
 
-def _drawLinearEntity(ln):
-    if isinstance(ln, dc.Segment) : 
-        return rg.Line(rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z),rg.Point3d(ln.ept.x,ln.ept.y,ln.ept.z))
-    if isinstance(ln, dc.Ray) : 
-        return [rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z),rg.Vector3d(ln.vec.x,ln.vec.y,ln.vec.z)]
-    if isinstance(ln, dc.Line) :
-        #TODO: do we really want to return a line segment here?
-        return rg.Line(rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z),rg.Point3d(ln.ept.x,ln.ept.y,ln.ept.z))
+	def _drawLinearEntity(self, ln):
+	    if isinstance(ln, dc.Segment) : 
+	        return rg.Line(rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z),rg.Point3d(ln.ept.x,ln.ept.y,ln.ept.z))
+	    if isinstance(ln, dc.Ray) : 
+	        return [rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z),rg.Vector3d(ln.vec.x,ln.vec.y,ln.vec.z)]
+	    if isinstance(ln, dc.Line) :
+	        #TODO: do we really want to return a line segment here?
+	        return rg.Line(rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z),rg.Point3d(ln.ept.x,ln.ept.y,ln.ept.z))
 
-def _drawCS(cs):
-    o = rg.Point3d(cs.origin.x,cs.origin.y,cs.origin.z)
-    x = rg.Vector3d(cs.xAxis.x,cs.xAxis.y,cs.xAxis.z) 
-    y = rg.Vector3d(cs.yAxis.x,cs.yAxis.y,cs.yAxis.z) 
-    return rg.Plane(o,x,y)
+	def _drawCS(self, cs):
+	    o = rg.Point3d(cs.origin.x,cs.origin.y,cs.origin.z)
+	    x = rg.Vector3d(cs.xAxis.x,cs.xAxis.y,cs.xAxis.z) 
+	    y = rg.Vector3d(cs.yAxis.x,cs.yAxis.y,cs.yAxis.z) 
+	    return rg.Plane(o,x,y)
