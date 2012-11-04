@@ -1,7 +1,11 @@
-import fieldpack as fp
-from fieldpack import *
-from fieldpack.outies.rhinoUtil import *
-if fp.VERBOSE_FS: print "rhinoIn loaded"
+from decodes import core as dc
+from decodes.core import *
+
+
+if dc.VERBOSE_FS: print "rhinoOut loaded"
+
+#from dc.outies.rhinoUtil import *
+
 
 import rhinoscriptsyntax as rs
 
@@ -21,7 +25,7 @@ class RhinoIn():
     mesh_id = rs.GetObject(prompt, 32, True)
     rh_mesh = rs.coercemesh(mesh_id)
     
-    verts = [Point(rh_pt.X,rh_pt.Y,rh_pt.Z) for rh_pt in rh_mesh.Vertices]
+    verts = [dc.Point(rh_pt.X,rh_pt.Y,rh_pt.Z) for rh_pt in rh_mesh.Vertices]
     faces = []
     for rh_fc in rh_mesh.Faces :
       if triangulate:
@@ -32,5 +36,5 @@ class RhinoIn():
         if rh_fc[2] == rh_fc[3] : faces.append([rh_fc[0],rh_fc[1],rh_fc[2]])
         else : faces.append([rh_fc[0],rh_fc[1],rh_fc[2],rh_fc[3]])
       
-    return fp.Mesh(verts,faces)
+    return dc.Mesh(verts,faces)
     

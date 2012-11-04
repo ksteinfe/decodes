@@ -1,9 +1,9 @@
-from .. import core as dc
+import decodes.core as dc
 from decodes.core import *
 if dc.VERBOSE_FS: print "xform.py loaded"
 
 import Rhino
-from core.outies.rhinoUtil import *
+from outies.rhinoUtil import *
 
 class Xform(object):
   def __init__(self,value=1.0,matrix=None):
@@ -110,7 +110,7 @@ class Xform(object):
     Multiply by another Matrix, or by any piece of fieldpack geometry
     This function must be kept up to date with every new class of DC geom
     '''
-    if isinstance(other, dc.Xform) : 
+    if isinstance(other, Xform) : 
       xf = Xform()
       xf._m = [
         self.m00 * other.m00 + self.m01 * other.m10 + self.m02 * other.m20 + self.m03 * other.m30,
@@ -142,7 +142,7 @@ class Xform(object):
     if isinstance(other, dc.CS) : 
       cs = other
       tup = self._xform_tuple(cs.origin.to_tuple())
-      origin = Point(tup[0],tup[1],tup[2])
+      origin = dc.Point(tup[0],tup[1],tup[2])
       
       xf = self.strip_translation()
       tup = xf._xform_tuple(cs.xAxis.to_tuple())
@@ -150,7 +150,7 @@ class Xform(object):
       tup = xf._xform_tuple(cs.yAxis.to_tuple())
       yAxis = Vec(tup[0],tup[1],tup[2])
       
-      return CS(origin, xAxis, yAxis)
+      return dc.CS(origin, xAxis, yAxis)
       
     if isinstance(other, dc.Point) : 
       if other.is_baseless : 

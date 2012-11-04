@@ -5,7 +5,7 @@ outie = dc.makeOut(dc.outies.Rhino, "wayout")
 import scriptcontext
 import System
 import Rhino
-from fieldpack.outies.rhinoUtil import *
+from decodes.core.outies.rhinoUtil import *
 import math
 
 

@@ -39,6 +39,18 @@ class Outie(object):
     self.clear() #empty the outie after each draw
     return results
     
+	
+  def as_drawn(self):
+    #iterates over the geom list,
+    #calls the overridden draw function for each geometric object
+    #returns a list of whatever these draw functions return
+    
+    self._startDraw()
+    results = map(self._drawGeom, self.geom)
+    self._endDraw()
+    self.clear() #empty the outie after each draw
+    return results
+	
   def clear(self):
     self.geom = []
     

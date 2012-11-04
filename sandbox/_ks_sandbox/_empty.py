@@ -3,10 +3,15 @@ from decodes.core import *
 
 
 def main():
+<<<<<<< HEAD
     print 'hello mains'
     outie = makeOut(outies.Rhino, "linetest")
+=======
+    #print 'hello main'
+    outie = makeOut(outies.Grasshopper, "linetest")
+>>>>>>> updated grasshopper outie
     
-    print "constructors"
+    #print "constructors"
     p = Point(1,1)
     v = Vec(0,0,1)
     seg1 = Segment(p,v)

@@ -1,18 +1,19 @@
-from .. import core as dc
-if dc.VERBOSE_FS: print "cs.py loaded"
+import decodes.core as dc
+from decodes.core import *
+if VERBOSE_FS: print "cs.py loaded"
 
 import Rhino
 import math
 
-from core.outies.rhinoUtil import *
+from decodes.core.outies.rhinoUtil import *
 import copy, collections
 
-class CS(dc.Geometry, dc.Basis):
+class CS(Geometry, Basis):
   """a ortho coordinate system class"""
   """a simple orthonormal cs floating around in R3"""
   """can describe any translation and rigid-body manipulation of the R3"""
   
-  def __init__(self,pt=dc.Point(0,0),vecX=dc.Vec(1,0),vecY=dc.Vec(0,1)):
+  def __init__(self,pt=Point(0,0),vecX=Vec(1,0),vecY=Vec(0,1)):
     #TODO: make axes priviate and provide getters and setters that maintain orthagonality and right-handedness
     self.origin = pt.basis_applied()
     self.xAxis = vecX.normalized()
@@ -34,19 +35,19 @@ class CS(dc.Geometry, dc.Basis):
 
   @property
   def xform(self): 
-    return dc.Xform.change_basis(CS(), self)
+    return Xform.change_basis(CS(), self)
     
   @property
   def ixform(self): 
-    return dc.Xform.change_basis(self, CS())
+    return Xform.change_basis(self, CS())
   
   def toRhPlane(self):
     return Rhino.Geometry.Plane(VecToPoint3d(self.origin),VecToVec3d(self.xAxis),VecToVec3d(self.yAxis))
 
 
-class CylCS(dc.Geometry, dc.Basis):
+class CylCS(Geometry, Basis):
   """a cylindrical coordinate system"""
-  def __init__(self,pt=dc.Point(0,0)):
+  def __init__(self,pt=Point(0,0)):
     self.origin = pt
 
     def __repr__(self):
@@ -61,6 +62,6 @@ class CylCS(dc.Geometry, dc.Basis):
     except TypeError:
         print("mallard can't quack()")
         
-    return dc.Point( radius * math.cos(radians), radius * math.sin(radians), z) + self.origin
+    return Point( radius * math.cos(radians), radius * math.sin(radians), z) + self.origin
     
     

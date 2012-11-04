@@ -1,4 +1,5 @@
-from .. import core as dc
+import decodes.core as dc
+from decodes.core import *
 import colorsys
 
 class Color():

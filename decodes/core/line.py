@@ -1,4 +1,5 @@
-from .. import core as dc
+import decodes.core as dc
+from decodes.core import *
 if dc.VERBOSE_FS: print "line.py loaded"
 
 #from SYMPY

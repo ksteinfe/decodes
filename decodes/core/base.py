@@ -1,4 +1,10 @@
-from .. import core as dc
+import decodes.core as dc
+from decodes.core import *
+
+#this also seemed to work
+#from .. import core as dc
+#from core import *
+
 if dc.VERBOSE_FS: print "base.py loaded"
 
 import copy,exceptions
