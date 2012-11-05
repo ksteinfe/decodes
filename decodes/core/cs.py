@@ -15,7 +15,8 @@ class CS(Geometry, Basis):
   
   def __init__(self,pt=Point(0,0),vecX=Vec(1,0),vecY=Vec(0,1)):
     #TODO: make axes priviate and provide getters and setters that maintain orthagonality and right-handedness
-    self.origin = pt.basis_applied()
+    try: self.origin = pt.basis_applied()
+    except : self.origin = pt
     self.xAxis = vecX.normalized()
     self.zAxis = self.xAxis.cross(vecY).normalized()
     self.yAxis = self.zAxis.cross(self.xAxis).normalized()
