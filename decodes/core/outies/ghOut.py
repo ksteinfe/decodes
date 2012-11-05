@@ -25,38 +25,56 @@ class GrasshopperOut(outie.Outie):
     from Grasshopper.Kernel.Data import GH_Path
 
     tree = DataTree[object]()
-    
+    is_leaf = self._is_leaf(self.geom)
     for n,g in enumerate(self.geom): 
-      path = GH_Path(n)
-      tree.Add(self._draw_branch(g, tree))
+      if is_leaf : 
+        path = GH_Path(0)
+        self._add_branch(g, tree,path)
+      else :
+        path = GH_Path(n)
+        self._add_branch(g, tree,path)
     
     
     self.clear() #empty the outie after each draw
     return tree
     
-  def _draw_branch(self, g, tree):
+  def _is_leaf(self, items):
+	return not any(self._should_iterate(item) for item in items)
+
+  def _should_iterate(self, item):
+	return isinstance(item, collections.Iterable) and not isinstance(item,basestring)
+	
+  def _add_branch(self, g, tree, path):
     # here we sort out what type of geometry we're dealing with, and call the proper draw functions
     # MUST LOOK FOR CHILD CLASSES BEFORE PARENT CLASSES (points before vecs)
     
-    if isinstance(g, collections.Iterable) :
+    if self._should_iterate(g) :
+      is_leaf = self._is_leaf(g)
       for n,i in enumerate(g): 
-        path = GH_Path(n)
-        tree.Add(self._drawGeom(i))
-      return tree
+        npath = path.AppendElement(n)
+        if is_leaf : self._add_branch(i,tree,path)
+        else : self._add_branch(i,tree,npath)
+      return True
     
     if isinstance(g, dc.Point) : 
-        return self._drawPoint(g)
+      tree.Add(self._drawPoint(g),path)
+      return True
     if isinstance(g, dc.Vec) : 
-        return self._drawVec(g)
+      tree.Add(self._drawVec(g),path)
+      return True
     if isinstance(g, dc.Mesh) : 
-        return self._drawMesh(g)
+      tree.Add(self._drawMesh(g),path)
+      return True
     if isinstance(g, dc.LinearEntity) : 
-      return self._drawLinearEntity(g)
+      tree.Add(self._drawLinearEntity(g),path)
+      return True
     if isinstance(g, dc.CS) : 
-      return self._drawCS(g)
+      tree.Add(self._drawCS(g),path)
+      return True
       
-    if isinstance(ngeom, (dc.Geometry) ) : raise NotImplementedError("i do not have a translation for that decodes geometry type in GrasshopperOut")
-    return g
+    
+    if isinstance(g, (dc.Geometry) ) : raise NotImplementedError("i do not have a translation for that decodes geometry type in GrasshopperOut")
+    tree.Add(g,path)
 
   def _drawVec(self, vec): 
     return rg.Vector3d(vec.x,vec.y,vec.z)
