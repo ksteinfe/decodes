@@ -1,8 +1,8 @@
 # FGC Part 4
 # danzerTile.py
 # provides classes that support danzer tile inflation
-import fieldpack as fp
-from fieldpack import *
+import decodes.core as dc
+from decodes.core import *
 import math
 
 # according to Danzer, the basic tile set contains tets with 
@@ -120,16 +120,16 @@ class DzTile(object):
     flipBase: useful when trying to orient a flipped tile
     '''
     sbasePts = cls()._scaledBasePts(rlvl)
-    if flipBase : sbasePts[3].z *= -1
+    if flipBase : sbasePts[3] = Point(sbasePts[3].x,sbasePts[3].y,-sbasePts[3].z)
     return CS(sbasePts[oPt],sbasePts[xPt]-sbasePts[oPt],sbasePts[yPt]-sbasePts[oPt])
  
  
 class DzTileA(DzTile):
   basePts= ( 
-      Vec(0.0       , 0.0	      , 0.0   ),
-      Vec(0.9510565	, 0.0   	  , 0.0   ),
-      Vec(0.6881910 , 1.3763819 , 0.0   ),
-      Vec(0.5257311 , 0.6881910	, 0.5   )
+      Point(0.0       , 0.0	      , 0.0   ),
+      Point(0.9510565	, 0.0   	  , 0.0   ),
+      Point(0.6881910 , 1.3763819 , 0.0   ),
+      Point(0.5257311 , 0.6881910	, 0.5   )
       )
       
   def inflate(self):
@@ -187,10 +187,10 @@ class DzTileA(DzTile):
      
 class DzTileB(DzTile):
   basePts= ( 
-      Vec(0.0       , 0.0	      , 0.0   ),
-      Vec(0.9510565	, 0.0   	  , 0.0   ),
-      Vec(0.2628656 , 1.3763819	, 0.0   ),
-      Vec(0.2628656 , 0.4253254 , 0.3090170)
+      Point(0.0       , 0.0	      , 0.0   ),
+      Point(0.9510565	, 0.0   	  , 0.0   ),
+      Point(0.2628656 , 1.3763819	, 0.0   ),
+      Point(0.2628656 , 0.4253254 , 0.3090170)
     )
     
   def inflate(self):
@@ -233,10 +233,10 @@ class DzTileB(DzTile):
 
 class DzTileC(DzTile):
   basePts= (
-      Vec(0.0       , 0.0	      , 0.0   ),
-      Vec(0.5877853	, 0.0   	  , 0.0   ),
-      Vec(0.8506509 , 1.3763819	, 0.0   ),
-      Vec(0.4253254 , 0.6881910 , 0.50 )
+      Point(0.0       , 0.0	      , 0.0   ),
+      Point(0.5877853	, 0.0   	  , 0.0   ),
+      Point(0.8506509 , 1.3763819	, 0.0   ),
+      Point(0.4253254 , 0.6881910 , 0.50 )
     )
     
   def inflate(self):
@@ -266,10 +266,10 @@ class DzTileC(DzTile):
 
 class DzTileK(DzTile):
   basePts= ( 
-    Vec(0.0       , 0.0	      , 0.0   ),
-    Vec(0.9510565	, 0.0   	  , 0.0   ),
-    Vec(0.2628656 , 0.5257311 , 0.0   ),
-    Vec(0.2628656 , 0.3440955 , 0.250 )
+    Point(0.0       , 0.0	      , 0.0   ),
+    Point(0.9510565	, 0.0   	  , 0.0   ),
+    Point(0.2628656 , 0.5257311 , 0.0   ),
+    Point(0.2628656 , 0.3440955 , 0.250 )
     )
   
 
@@ -290,7 +290,7 @@ class DzTileK(DzTile):
 # This section may be deleted when file distributed
 
 def DanzerAxiom():
-  outie = fp.makeOut(fp.outies.Rhino, "axiom")
+  outie = dc.makeOut(dc.outies.Rhino, "axiom")
   outie.iconscale = 0.1
   ta = DzTileA(xf=Xform.translation(Vec(1,0,0)),rlvl=1)
   tb = DzTileB(xf=Xform.translation(Vec(2,0,0)),rlvl=1)
@@ -354,15 +354,15 @@ def inflationK(out_0,out_1,out_2):
 # script instead of being used as a module by some other python script
 # This allows us to use the module which ever way we want.
 if __name__ == '__main__' :
-    out_0 = fp.makeOut(fp.outies.Rhino, "0")
+    out_0 = dc.makeOut(dc.outies.Rhino, "0")
     out_0.set_color(0,0,0)
     out_0.iconscale = 0.2
     
-    out_1 = fp.makeOut(fp.outies.Rhino, "1")
+    out_1 = dc.makeOut(dc.outies.Rhino, "1")
     out_1.set_color(0.5,0.5,1.0)
     out_1.iconscale = 0.1
   
-    out_2 = fp.makeOut(fp.outies.Rhino, "2")
+    out_2 = dc.makeOut(dc.outies.Rhino, "2")
     out_2.set_color(1.0,0.5,1.0)
     out_2.iconscale = 0.05  
     
