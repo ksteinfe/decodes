@@ -10,32 +10,6 @@ from rhinoUtil import *
 import Rhino.Geometry as rg
 
 
-test_variable = 47
-
-component_header_code = """
-
-import decodes.core as dc
-from decodes.core import *
-
-inputs = ghenv.Component.Params.Input
-outputs = ghenv.Component.Params.Output
-for output in outputs :
-    if output.NickName != "out":
-        vars()[output.NickName] = dc.makeOut(outies.Grasshopper)
-
-		
-"""
-
-component_footer_code = """
-
-for output in outputs :
-    if output.NickName != "out":
-        o = eval(output.NickName)
-        if isinstance(o, dc.outies.GrasshopperOut) : vars()[output.NickName] = o.extract_tree()
-
-		
-"""
-
 
 class GrasshopperOut(outie.Outie):
   """outie for pushing stuff to grasshopper"""
@@ -99,7 +73,9 @@ class GrasshopperOut(outie.Outie):
     if isinstance(g, dc.CS) : 
       tree.Add(self._drawCS(g),path)
       return True
-      
+    if isinstance(g, dc.Color) : 
+      tree.Add(self._drawColor(g),path)
+      return True
     
     if isinstance(g, (dc.Geometry) ) : raise NotImplementedError("i do not have a translation for that decodes geometry type in GrasshopperOut")
     tree.Add(g,path)
@@ -131,3 +107,43 @@ class GrasshopperOut(outie.Outie):
     x = rg.Vector3d(cs.xAxis.x,cs.xAxis.y,cs.xAxis.z) 
     y = rg.Vector3d(cs.yAxis.x,cs.yAxis.y,cs.yAxis.z) 
     return rg.Plane(o,x,y)
+	
+  def _drawColor(self, c): 
+	import Grasshopper.GUI.GH_GraphicsUtil as gh_gutil
+	return gh_gutil.ColourARGB(c.r,c.g,c.b)
+	
+'''
+for reference: the following code is injected before and after a user's script in grasshopper components
+## -- BEGIN DECODES HEADER -- ##
+import decodes.core as dc
+from decodes.core import *
+exec(dc.outies.ghOut.component_header_code)
+## -- END DECODES HEADER -- ##
+
+## -- BEGIN DECODES FOOTER -- ##
+exec(dc.outies.ghOut.component_footer_code)
+## -- END DECODES FOOTER -- ##
+'''
+
+
+component_header_code = """
+
+inputs = ghenv.Component.Params.Input
+outputs = ghenv.Component.Params.Output
+for output in outputs :
+    if output.NickName != "out":
+        vars()[output.NickName] = dc.makeOut(outies.Grasshopper)
+
+		
+"""
+
+component_footer_code = """
+
+for output in outputs :
+    if output.NickName != "out":
+        o = eval(output.NickName)
+        if isinstance(o, dc.outies.GrasshopperOut) : vars()[output.NickName] = o.extract_tree()
+
+		
+"""
+
