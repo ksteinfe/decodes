@@ -9,6 +9,34 @@ from rhinoUtil import *
 
 import Rhino.Geometry as rg
 
+
+test_variable = 47
+
+component_header_code = """
+
+import decodes.core as dc
+from decodes.core import *
+
+inputs = ghenv.Component.Params.Input
+outputs = ghenv.Component.Params.Output
+for output in outputs :
+    if output.NickName != "out":
+        vars()[output.NickName] = dc.makeOut(outies.Grasshopper)
+
+		
+"""
+
+component_footer_code = """
+
+for output in outputs :
+    if output.NickName != "out":
+        o = eval(output.NickName)
+        if isinstance(o, dc.outies.GrasshopperOut) : vars()[output.NickName] = o.extract_tree()
+
+		
+"""
+
+
 class GrasshopperOut(outie.Outie):
   """outie for pushing stuff to grasshopper"""
   
