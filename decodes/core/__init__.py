@@ -23,13 +23,16 @@ from intersection import *
 
 
 # keep this up to date with what outies we support
-def makeOut(outtype, name="untitled"):
+def makeOut(outtype, name="untitled", path=False):
   if outtype == outies.Rhino:
     return outies.RhinoOut(name)
-  if outtype == outies.Grasshopper:
+  elif outtype == outies.Grasshopper:
     return outies.GrasshopperOut()
-  if outtype == outies.Foo:
-    if VERBOSE : print "!!! hey, i don't have an outie of type foo !!!"
+  elif outtype == outies.SVG:
+    if path : return outies.SVGOut(name, path)
+    else : return outies.SVGOut(name)
+  else :
+    print "!!! hey, i don't have an outie of type foo !!!"
     return False
 
 # keep this up to date with what outies we support
