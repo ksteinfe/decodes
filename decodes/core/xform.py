@@ -110,6 +110,7 @@ class Xform(object):
     Multiply by another Matrix, or by any piece of fieldpack geometry
     This function must be kept up to date with every new class of DC geom
     '''
+	#TODO: work out polygon transformations
     if isinstance(other, Xform) : 
       xf = Xform()
       xf._m = [

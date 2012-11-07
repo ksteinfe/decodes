@@ -14,6 +14,7 @@ from vec import *
 from point import *
 
 from mesh import *
+from pgon import *
 from cs import *
 from line import *
 
