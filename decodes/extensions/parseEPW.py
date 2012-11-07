@@ -1,5 +1,5 @@
-import fieldpack as fp
-from fieldpack import *
+import decodes.core as dc
+from decodes.core import *
 
 # number of lines in the header
 # holds true for ALL EPW files
