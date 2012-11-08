@@ -2,7 +2,7 @@ from decodes import core as dc
 from decodes.core import *
 
 
-if dc.VERBOSE_FS: print "rhinoOut loaded"
+if dc.VERBOSE_FS: print "rhinoIn loaded"
 
 #from dc.outies.rhinoUtil import *
 
