@@ -4,6 +4,14 @@ if dc.VERBOSE_FS: print "polygon.py loaded"
 
 import copy, collections
 
+def rect(cpt, w, h):
+  w2 = w/2
+  h2 = h/2
+  basis = dc.CS(cpt)
+  return PGon([Point(-w2,-h2),Point(w2,-h2),Point(w2,h2),Point(-w2,h2)],basis)
+
+
+
 class PGon(dc.Geometry, dc.HasBasis):
   """a very simple polygon class"""
   """Polygons limit their vertices to x and y dimensions, and enforce that they employ a basis.  Transformations of a polygon should generally be applied to the basis.  Any tranfromations of the underlying vertices should ensure that the returned vectors are limited to x and y dimensions"""
@@ -16,11 +24,11 @@ class PGon(dc.Geometry, dc.HasBasis):
       for v in verts: self.add_vert(v)
     
   def basis_applied(self, copy_children=True): 
-    return False
+    return self
 	#TODO: copy this functionality from Mesh class
 	
   def basis_stripped(self, copy_children=True): 
-    return False
+    return self
 	#TODO: copy this functionality from Mesh class
     
   @property
@@ -44,6 +52,7 @@ class PGon(dc.Geometry, dc.HasBasis):
         # we assume here that the user is describing the point within the pgon's basis
         # they may, however, be trying to add a "world" point to a mesh with a defined basis
         # if this is the case, they should call pgon.basis_stripped()
+        #TODO: shouldn't we apply the basis to this point?
         self._verts.append(other)
       else : raise BasisError("The basis for this PGon and the point you're adding do not match.  Try applying or stripping the point of its basis, or describing the point in terms of the PGon's basis")
     

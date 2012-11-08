@@ -8,7 +8,7 @@ import outie
 import pysvg
 from pysvg.structure import *
 from pysvg.shape import *
-
+from pysvg.builders import *
 
 class SVGOut(outie.Outie):
   """outie for writing stuff to a SVG file"""
@@ -31,6 +31,8 @@ class SVGOut(outie.Outie):
     
     if isinstance(g, dc.Point) : 
       return self._drawPoint(g)
+    if isinstance(g, dc.PGon) : 
+      return self._drawPolygon(g)
     
     return False
 
@@ -42,6 +44,20 @@ class SVGOut(outie.Outie):
     svg_pt = circle(pt.x, pt.y, 2)
     svg_pt.set_style(style)
     self.svg.addElement(svg_pt)
+    return True
+    
+  def _drawPolygon(self, pgon):
+    if hasattr(pgon, 'props') and 'color' in pgon.props : 
+      style = self._props_to_style(fill_color=pgon.props['color'])
+    else :
+      style = self._props_to_style(fill_color=dc.Color(0))
+    
+    oh=ShapeBuilder()
+    pointsAsTuples=[(v.x,v.y) for v in pgon.verts]
+    svg_rect=oh.createPolygon(points=oh.convertTupleArrayToPoints(pointsAsTuples),strokewidth=10, stroke='blue', fill='red')
+    
+    svg_rect.set_style(style)
+    self.svg.addElement(svg_rect)
     return True
   
   def _props_to_style(self, fill_color=False, stroke_color=False, stroke_width=False):

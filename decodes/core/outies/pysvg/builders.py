@@ -4,15 +4,26 @@
 (C) 2008, 2009 Kerim Mansour
 For licensing information please refer to license.txt
 '''
-from pysvg.animate import *
-from pysvg.filter import *
-from pysvg.gradient import *
-from pysvg.linking import *
-from pysvg.script import *
-from pysvg.shape import *
-from pysvg.structure import *
-from pysvg.style import *
-from pysvg.text import *
+from animate import *
+from filter import *
+from gradient import *
+from linking import *
+from script import *
+from shape import *
+from structure import *
+from style import *
+from text import *
+
+#ksteinfe comment out
+#from pysvg.animate import *
+#from pysvg.filter import *
+#from pysvg.gradient import *
+#from pysvg.linking import *
+#from pysvg.script import *
+#from pysvg.shape import *
+#from pysvg.structure import *
+#from pysvg.style import *
+#from pysvg.text import *
 
 class ShapeBuilder:
     """

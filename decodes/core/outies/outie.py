@@ -21,7 +21,7 @@ class Outie(object):
       elif isinstance(ngeom, collections.Iterable) : 
         for g in ngeom : self.put(g)
       else : 
-        raise NotImplementedError("This doesn't look like Fieldpack Geometry!\nThis outie doesn't allow foreigners!\n{0}".format(ngeom))
+        raise NotImplementedError("This doesn't look like Decodes Geometry!\nThis outie doesn't allow foreigners!\n{0}".format(ngeom))
     
     
   def draw(self):
