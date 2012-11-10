@@ -9,7 +9,7 @@ from rhinoUtil import *
 
 import Rhino.Geometry as rg
 
-
+#TODO: check at end of script if the user overwrote the established 'outie' with either a singleton, a list of sc.Geoms, or something else, and act accordingly (raising the appropriate warnings) 
 
 class GrasshopperOut(outie.Outie):
   """outie for pushing stuff to grasshopper"""

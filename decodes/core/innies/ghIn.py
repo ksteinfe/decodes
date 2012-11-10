@@ -5,6 +5,8 @@ from decodes.core import *
 if dc.VERBOSE_FS: print "ghIn loaded"
 
 
+#TODO: adapt grasshopper component to have the "no type hint" value set by default
+
 class RhinoIn():
   """innie for pulling stuff from grasshopper"""
   
