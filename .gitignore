@@ -27,4 +27,4 @@ pip-log.txt
 .mr.developer.cfg
 
 #osx hidden file
-.DS_Store
+*.DS_Store
