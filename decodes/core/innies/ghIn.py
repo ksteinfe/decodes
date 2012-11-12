@@ -5,7 +5,7 @@ from decodes.core import *
 if dc.VERBOSE_FS: print "ghIn loaded"
 
 
-#TODO: adapt grasshopper component to have the "no type hint" value set by default
+#TODO: figure out how to hack the code completion thingo to display decodes geometry after gh geom has been translated
 
 class RhinoIn():
   """innie for pulling stuff from grasshopper"""
