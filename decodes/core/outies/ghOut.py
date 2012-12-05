@@ -99,7 +99,7 @@ class GrasshopperOut(outie.Outie):
   
   def _drawLinearEntity(self, ln):
     if isinstance(ln, dc.Segment) : return rg.Line(rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z),rg.Point3d(ln.ept.x,ln.ept.y,ln.ept.z))
-    if isinstance(ln, dc.Ray) : return [rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z),rg.Vector3d(ln.vec.x,ln.vec.y,ln.vec.z)]
+    if isinstance(ln, dc.Ray) : return rg.Line(rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z),rg.Point3d(ln.ept.x,ln.ept.y,ln.ept.z))
     if isinstance(ln, dc.Line) :  return rg.Line(rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z),rg.Point3d(ln.ept.x,ln.ept.y,ln.ept.z))
     
   def _drawCS(self, cs):
@@ -117,10 +117,12 @@ for reference: the following code is injected before and after a user's script i
 ## -- BEGIN DECODES HEADER -- ##
 import decodes.core as dc
 from decodes.core import *
+exec(dc.innies.ghIn.component_header_code)
 exec(dc.outies.ghOut.component_header_code)
 ## -- END DECODES HEADER -- ##
 
 ## -- BEGIN DECODES FOOTER -- ##
+exec(dc.innies.ghIn.component_footer_code)
 exec(dc.outies.ghOut.component_footer_code)
 ## -- END DECODES FOOTER -- ##
 '''
@@ -137,6 +139,8 @@ for output in outputs :
 		
 """
 
+#TODO, check if an output variable is fieldpack geometry or a list of fieldpack geometry
+# if so, translate apprpiately
 component_footer_code = """
 
 for output in outputs :

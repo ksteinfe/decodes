@@ -1,6 +1,6 @@
 # SolarGeometry module
-import fieldpack as fp
-from fieldpack import *
+import decodes.core as dc
+from decodes.core import *
 import datetime
 import math
 
