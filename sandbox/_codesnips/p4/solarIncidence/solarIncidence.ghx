@@ -479,7 +479,7 @@ radiation = radVals
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">5b9be8fc-a9da-468c-ab35-d6154ada6d82</item>
                     <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                     <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
-                    <item name="UserText" type_name="gh_string" type_code="10">USA_CA_San.Francisco.Intl.AP.724940_TMY3.epw</item>
+                    <item name="UserText" type_name="gh_string" type_code="10">G:\git\decodes\sandbox\_codesnips\p4\solarIncidence\USA_CA_San.Francisco.Intl.AP.724940_TMY3.epw</item>
                     <item name="MultilineData" type_name="gh_bool" type_code="1">true</item>
                     <item name="WrapItems" type_name="gh_bool" type_code="1">true</item>
                     <item name="EntryNumbers" type_name="gh_bool" type_code="1">true</item>
