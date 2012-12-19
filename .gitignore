@@ -28,3 +28,8 @@ pip-log.txt
 
 #osx hidden file
 *.DS_Store
+
+
+#visual studio files
+*.csproj.user
+*.suo
