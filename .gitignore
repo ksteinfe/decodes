@@ -31,5 +31,7 @@ pip-log.txt
 
 
 #visual studio files
-*.csproj.user
+*.user
 *.suo
+[Bb]in
+[Oo]bj
