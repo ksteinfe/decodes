@@ -28,7 +28,7 @@ def makeOut(outtype, name="untitled", path=False):
   if outtype == outies.Rhino:
     return outies.RhinoOut(name)
   elif outtype == outies.Grasshopper:
-    return outies.GrasshopperOut()
+    return outies.GrasshopperOut(name)
   elif outtype == outies.SVG:
     if path : return outies.SVGOut(name, path)
     else : return outies.SVGOut(name)

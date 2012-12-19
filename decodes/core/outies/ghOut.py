@@ -14,9 +14,10 @@ import Rhino.Geometry as rg
 class GrasshopperOut(outie.Outie):
   """outie for pushing stuff to grasshopper"""
   
-  def __init__(self):
+  def __init__(self, name):
     super(GrasshopperOut,self).__init__()
     self._allow_foreign = True
+    self.name = name
     
   def extract_tree(self):
     #creates a grasshopper data tree
@@ -27,18 +28,19 @@ class GrasshopperOut(outie.Outie):
     from Grasshopper.Kernel.Data import GH_Path
 
     tree = DataTree[object]()
+    tree_p = DataTree[object]()
     is_leaf = self._is_leaf(self.geom)
     for n,g in enumerate(self.geom): 
       if is_leaf : 
         path = GH_Path(0)
-        self._add_branch(g, tree,path)
+        self._add_branch(g, tree,tree_p,path)
       else :
         path = GH_Path(n)
-        self._add_branch(g, tree,path)
+        self._add_branch(g, tree,tree_p,path)
     
     
     self.clear() #empty the outie after each draw
-    return tree
+    return tree, tree_p
     
   def _is_leaf(self, items):
 	return not any(self._should_iterate(item) for item in items)
@@ -46,39 +48,50 @@ class GrasshopperOut(outie.Outie):
   def _should_iterate(self, item):
 	return isinstance(item, collections.Iterable) and not isinstance(item,basestring)
 	
-  def _add_branch(self, g, tree, path):
+  def _add_branch(self, g, tree, tree_p, path):
     # here we sort out what type of geometry we're dealing with, and call the proper draw functions
     # MUST LOOK FOR CHILD CLASSES BEFORE PARENT CLASSES (points before vecs)
+    
+    def extract_props(g):
+      if not hasattr(g, 'props') : return ""
+      return "::".join(["{0}={1}".format(k,v) for (k, v) in g.props.items()])
     
     if self._should_iterate(g) :
       is_leaf = self._is_leaf(g)
       for n,i in enumerate(g): 
         npath = path.AppendElement(n)
-        if is_leaf : self._add_branch(i,tree,path)
-        else : self._add_branch(i,tree,npath)
+        if is_leaf : self._add_branch(i,tree,tree_p, path)
+        else : self._add_branch(i,tree,tree_p, npath)
       return True
     
     if isinstance(g, dc.Point) : 
       tree.Add(self._drawPoint(g),path)
+      tree_p.Add(extract_props(g), path)
       return True
     if isinstance(g, dc.Vec) : 
       tree.Add(self._drawVec(g),path)
+      tree_p.Add(extract_props(g), path)
       return True
     if isinstance(g, dc.Mesh) : 
       tree.Add(self._drawMesh(g),path)
+      tree_p.Add(extract_props(g), path)
       return True
     if isinstance(g, dc.LinearEntity) : 
       tree.Add(self._drawLinearEntity(g),path)
+      tree_p.Add(extract_props(g), path)
       return True
     if isinstance(g, dc.CS) : 
       tree.Add(self._drawCS(g),path)
+      tree_p.Add(extract_props(g), path)
       return True
     if isinstance(g, dc.Color) : 
       tree.Add(self._drawColor(g),path)
+      tree_p.Add(extract_props(g), path)
       return True
     
     if isinstance(g, (dc.Geometry) ) : raise NotImplementedError("i do not have a translation for that decodes geometry type in GrasshopperOut")
     tree.Add(g,path)
+    tree_p.Add(extract_props(g), path)    
 
   def _drawVec(self, vec): 
     return rg.Vector3d(vec.x,vec.y,vec.z)
@@ -129,14 +142,13 @@ exec(dc.outies.ghOut.component_footer_code)
 
 
 component_header_code = """
-
-inputs = ghenv.Component.Params.Input
 outputs = ghenv.Component.Params.Output
+gh_outies = []
 for output in outputs :
     if output.NickName != "console":
         if not "_prop" in output.NickName :
-          vars()[output.NickName] = dc.makeOut(outies.Grasshopper)
-
+          vars()[output.NickName] = dc.makeOut(outies.Grasshopper,output.NickName)
+          gh_outies.append(vars()[output.NickName])
 		
 """
 
@@ -144,11 +156,10 @@ for output in outputs :
 # if so, translate apprpiately
 component_footer_code = """
 
-for output in outputs :
-    if output.NickName != "console":
-        o = eval(output.NickName)
-        if isinstance(o, dc.outies.GrasshopperOut) : 
-          vars()[output.NickName] = o.extract_tree()
+for gh_outie in gh_outies :
+        if not isinstance(vars()[gh_outie.name], dc.outies.GrasshopperOut) : 
+                print "Bad User!  It looks like you assigned to the output '{0}' using the equals operator like so: {0}=something.  You should have used the 'put' method instead, like so: {0}.put(something)".format(gh_outie.name)
+        vars()[gh_outie.name], vars()[gh_outie.name+"_prop"] = gh_outie.extract_tree()
 
 		
 """
