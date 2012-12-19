@@ -133,8 +133,9 @@ component_header_code = """
 inputs = ghenv.Component.Params.Input
 outputs = ghenv.Component.Params.Output
 for output in outputs :
-    if output.NickName != "out":
-        vars()[output.NickName] = dc.makeOut(outies.Grasshopper)
+    if output.NickName != "console":
+        if not "_prop" in output.NickName :
+          vars()[output.NickName] = dc.makeOut(outies.Grasshopper)
 
 		
 """
@@ -144,9 +145,10 @@ for output in outputs :
 component_footer_code = """
 
 for output in outputs :
-    if output.NickName != "out":
+    if output.NickName != "console":
         o = eval(output.NickName)
-        if isinstance(o, dc.outies.GrasshopperOut) : vars()[output.NickName] = o.extract_tree()
+        if isinstance(o, dc.outies.GrasshopperOut) : 
+          vars()[output.NickName] = o.extract_tree()
 
 		
 """
