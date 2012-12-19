@@ -14,7 +14,11 @@ exec(dc.innies.ghIn.component_header_code)
 exec(dc.outies.ghOut.component_header_code)
 ## -- END DECODES HEADER -- ##
 
-";
+
+
+
+"; // this makes it an even ten lines of code for header.  line numbers in text editor start on 11, the same line this comment is on.
+
         public static string footer = @"
 ## -- BEGIN DECODES FOOTER -- ##
 exec(dc.innies.ghIn.component_footer_code)
