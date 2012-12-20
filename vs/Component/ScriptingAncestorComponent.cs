@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using GhPython.DocReplacement;
 using GhPython.Properties;
+using GhPython.Decodes;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Parameters;
 using Grasshopper.Kernel.Parameters.Hints;
@@ -26,7 +27,7 @@ namespace GhPython.Component
     private PythonCompiledCode _compiled_py;
     protected string _previousRunCode;
     protected PythonEnvironment _env;
-    private bool _inDocStringsMode;
+    protected bool _inDocStringsMode;
     private string _codeInput;
 
     internal const string DOCUMENT_NAME = "ghdoc";
@@ -35,7 +36,7 @@ namespace GhPython.Component
 
     // ksteinfe: change the component categorization here
     protected ScriptingAncestorComponent()
-      : base("Decodes Python Script", "Decodes", DESCRIPTION, "Maths", "Script")
+        : base("Decodes Python Script", "Decodes", DESCRIPTION, "Maths", "Script")
     {
     }
 
@@ -48,19 +49,13 @@ namespace GhPython.Component
     {
       get
       {
-        //ksteinfe
-          return false;
-          /*
         if (Params.Input.Count < 1)
           return false;
         var param = Params.Input[0] as Grasshopper.Kernel.Parameters.Param_String;
         return (param != null && String.Compare(param.Name, "code", StringComparison.InvariantCultureIgnoreCase) == 0);
-           */
       }
       set
       {
-          //ksteinfe
-          /*
         if (value != CodeInputVisible)
         {
           if (value)
@@ -78,7 +73,6 @@ namespace GhPython.Component
           if(value) 
             ExpireSolution(true);
         }
-           * */
       }
     }
     
@@ -197,8 +191,8 @@ namespace GhPython.Component
     {
       var outText = new Param_String
         {
-          Name = "console",
-          NickName = "console",
+          Name = "out",
+          NickName = "out",
           Description = "The execution information, as output and error streams",
           MutableNickName = false
         };
@@ -370,7 +364,7 @@ namespace GhPython.Component
       }
       for (int i = HideCodeOutput ? 0 : 1; i < Params.Output.Count; i++)
       {
-        Params.Output[i].Description = "Script output " + Params.Output[i].NickName + ".";
+        //Params.Output[i].Description = "Script output " + Params.Output[i].NickName + "."; //ksteinfe
       }
 
       SpecialPythonHelpContent = null;
@@ -390,16 +384,13 @@ namespace GhPython.Component
       get { return GH_Exposure.secondary; }
     }
 
+
     public override bool AppendMenuItems(ToolStripDropDown iMenu)
     {
       var toReturn = base.AppendMenuItems(iMenu);
 
       try
       {
-
-          // ksteinfe: here the presentation style is set.  fuck that.  we should always show the "out" param and never use the code input param
-          // ksteinfe: notice, a dropdown menu item is added here!
-          /*
         {
           var tsi = new ToolStripMenuItem("&Presentation style", null, new ToolStripItem[]
             {
@@ -436,8 +427,6 @@ namespace GhPython.Component
 
           iMenu.Items.Insert(Math.Min(iMenu.Items.Count, 2), tsi);
         }
-          */
-
         {
           var tsi = new ToolStripMenuItem("&Open editor...", null, (sender, e) =>
             {

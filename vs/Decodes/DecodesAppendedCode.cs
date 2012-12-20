@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GhPython.Component
+namespace GhPython.Decodes
 {
     public class DecodesAppendedCode
     {

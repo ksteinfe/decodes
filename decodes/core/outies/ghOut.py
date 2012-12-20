@@ -145,7 +145,7 @@ component_header_code = """
 outputs = ghenv.Component.Params.Output
 gh_outies = []
 for output in outputs :
-    if output.NickName != "console":
+    if output.Name != "console":
         if not "_prop" in output.NickName :
           vars()[output.NickName] = dc.makeOut(outies.Grasshopper,output.NickName)
           gh_outies.append(vars()[output.NickName])
@@ -159,7 +159,7 @@ component_footer_code = """
 for gh_outie in gh_outies :
         if not isinstance(vars()[gh_outie.name], dc.outies.GrasshopperOut) : 
                 print "Bad User!  It looks like you assigned to the output '{0}' using the equals operator like so: {0}=something.  You should have used the 'put' method instead, like so: {0}.put(something)".format(gh_outie.name)
-        vars()[gh_outie.name], vars()[gh_outie.name+"_prop"] = gh_outie.extract_tree()
+        vars()[gh_outie.name], vars()[gh_outie.name+"_props"] = gh_outie.extract_tree()
 
 		
 """

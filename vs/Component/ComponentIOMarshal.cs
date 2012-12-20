@@ -19,12 +19,12 @@ namespace GhPython.Component
 
   sealed class NewComponentIOMarshal : ComponentIOMarshal
   {
-    private readonly ZuiPythonComponent _component;
+    private readonly ScriptingAncestorComponent _component;
 
     private readonly GrasshopperDocument _document;
     private readonly CustomTable _objectTable;
 
-    public NewComponentIOMarshal(GrasshopperDocument document, ZuiPythonComponent component)
+    public NewComponentIOMarshal(GrasshopperDocument document, ScriptingAncestorComponent component)
     {
       _document = document;
       _objectTable = _document.Objects;

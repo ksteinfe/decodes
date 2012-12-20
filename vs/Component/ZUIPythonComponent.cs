@@ -9,14 +9,14 @@ using System.Runtime.InteropServices;
 namespace GhPython.Component
 {
   [Guid("4CC91116-E9CC-46E7-8ABB-9671F0B72594")]
-  public class ZuiPythonComponent : ScriptingAncestorComponent, IGH_VariableParameterComponent
+  public class ZUIPythonComponent : ScriptingAncestorComponent, IGH_VariableParameterComponent
   {
       //ksteinfe
       List<string> used_script_variable_names;
       List<string> script_variables_in_use;
       string attributes_suffix = "prop";
-    
-      public ZuiPythonComponent()
+
+      public ZUIPythonComponent()
     {
       CodeInputVisible = false;
       Params.ParameterChanged += ParameterChanged;
@@ -247,7 +247,7 @@ namespace GhPython.Component
 
     public override Guid ComponentGuid
     {
-      get { return typeof(ZuiPythonComponent).GUID; }
+        get { return typeof(ZUIPythonComponent).GUID; }
     }
 
 

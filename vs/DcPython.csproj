@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="Assemblies\PyghaLoader.cs" />
     <Compile Include="Assemblies\PythonInstantiatorProxy.cs" />
+    <Compile Include="Decodes\DecodesBakeProps.cs" />
     <Compile Include="Decodes\DecodesAppendedCode.cs" />
     <Compile Include="Component\ComponentIOMarshal.cs" />
     <Compile Include="Component\DocStringUtils.cs" />
@@ -91,7 +92,7 @@
     <Compile Include="Component\ScriptingAncestorComponent.cs" />
     <Compile Include="Component\SpecialHints\AllNewHints.cs" />
     <Compile Include="Component\TextHashMaintainer.cs" />
-    <Compile Include="Component\ZUIPythonComponent.cs" />
+    <Compile Include="Decodes\DecodesPythonComponent.cs" />
     <Compile Include="DocReplacement\DocStorage.cs" />
     <Compile Include="Component\PythonComponentAttributes.cs" />
     <Compile Include="DocReplacement\AttributedGeometry.cs" />
