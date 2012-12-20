@@ -87,6 +87,15 @@ class Geometry(object):
     if isinstance(a, (dc.Color) ) : self.props['color'] = a
     else : self.props['color'] = dc.Color(a,b,c)
 
+  def set_name(self,str):
+    if not hasattr(self, 'props') : self.props = {}
+    self.props['name'] = str
+    
+  def set_weight(self,num):
+    if not hasattr(self, 'props') : self.props = {}
+    self.props['weight'] = num
+    
+    
   @property
   def xform(self): 
     return self.objCS.xform

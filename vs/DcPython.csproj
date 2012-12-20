@@ -154,6 +154,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Icons_Component_Preview.png" />
+    <None Include="Resources\Icons_Param_Props.png" />
     <Content Include="Samples\sampleCommon.py" />
     <None Include="Samples\helpText.html" />
     <Content Include="Samples\sampleScript.py" />

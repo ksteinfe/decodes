@@ -118,7 +118,8 @@ namespace DcPython.Decodes {
                     } else {
                         if (Params.Output.Count <= 1) return null;
                         string nickname = AttNicknameFromGeomNickname(Params.Output[index - 1].NickName);
-                        Param_String prop = new Param_String();
+                        //Param_String prop = new Param_String();
+                        GHParam_Decodes_Attributes prop = new GHParam_Decodes_Attributes();
                         prop.NickName = nickname;
                         prop.Name = nickname;
                         prop.Description = "Contains the non-geometric properties of the geometry found in the parameter above";
@@ -219,7 +220,7 @@ namespace DcPython.Decodes {
 
         private bool RemoveAttributeOutputParams(bool params_changed) {
             bool all_clean = true;
-            foreach (Param_String param in Params.Output.OfType<Param_String>())
+            foreach (GHParam_Decodes_Attributes param in Params.Output.OfType<GHParam_Decodes_Attributes>())
                 if (NicknameSuggestsAttributesOutputParam(param)) {
                     Params.UnregisterParameter(param);
                     all_clean = false;

@@ -26,7 +26,9 @@ class GrasshopperOut(outie.Outie):
     clr.AddReference("Grasshopper")
     from Grasshopper import DataTree
     from Grasshopper.Kernel.Data import GH_Path
-
+    clr.AddReference("DcPython")
+    from DcPython import Decodes as dcp
+    
     tree = DataTree[object]()
     tree_p = DataTree[object]()
     is_leaf = self._is_leaf(self.geom)
@@ -53,9 +55,15 @@ class GrasshopperOut(outie.Outie):
     # MUST LOOK FOR CHILD CLASSES BEFORE PARENT CLASSES (points before vecs)
     
     def extract_props(g):
-      if not hasattr(g, 'props') : g.props = {}
-      g.props['layer'] = self.name
-      return "::".join(["{0}={1}".format(k,v) for (k, v) in g.props.items()])
+      from DcPython import Decodes as dcp
+      att = dcp.Decodes_Attributes()
+      att.layer = self.name
+      if not hasattr(g, 'props') : return att
+      #return "::".join(["{0}={1}".format(k,v) for (k, v) in g.props.items()])
+      if "name" in g.props : att.name = g.props["name"]
+      if "weight" in g.props : att.weight = g.props["weight"]
+      if "color" in g.props : att.setColor( g.props["color"].r, g.props["color"].g, g.props["color"].b )
+      return att
     
     if self._should_iterate(g) :
       is_leaf = self._is_leaf(g)
@@ -98,7 +106,7 @@ class GrasshopperOut(outie.Outie):
     
     if isinstance(g, (dc.Geometry) ) : raise NotImplementedError("i do not have a translation for that decodes geometry type in GrasshopperOut")
     tree.Add(g,path)
-    tree_p.Add(extract_props(g), path)    
+    tree_p.Add(None, path)    
 
   def _drawVec(self, vec): 
     return rg.Vector3d(vec.x,vec.y,vec.z)

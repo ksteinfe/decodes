@@ -21,7 +21,7 @@ namespace DcPython.Decodes {
         public override bool IsValid { get { return true; } }
         public override object ScriptVariable() { return new Decodes_Attributes(this); }
 
-        public string layer; // must be handled when baking
+        public string layer; // must be handled properly when baking
         public string name { get { return Value.Name; } set { Value.Name = value; } }
         public Color color {
             get { return Value.ObjectColor; }
@@ -32,6 +32,9 @@ namespace DcPython.Decodes {
                 Value.PlotColorSource = Rhino.DocObjects.ObjectPlotColorSource.PlotColorFromObject;
             }
         }
+        public void setColor( float r, float g, float b ) { this.color = Color.FromArgb((int)(r * 255), (int)(g * 255), (int)(b * 255));  }
+        public void setColor( float a, float r, float g, float b ) { this.color = Color.FromArgb((int)(a * 255),(int)(r * 255), (int)(g * 255), (int)(b * 255)); }
+
         public double weight { get { return Value.PlotWeight; } set { Value.PlotWeight = value; Value.PlotWeightSource = Rhino.DocObjects.ObjectPlotWeightSource.PlotWeightFromObject; } }
 
         public void SetSourcesToObject() {
@@ -72,12 +75,12 @@ namespace DcPython.Decodes {
 
     public class GHParam_Decodes_Attributes : GH_Param<Decodes_Attributes> {
         public GHParam_Decodes_Attributes()
-            : base(new GH_InstanceDescription("Object Attributes", "Att", "Represents rhino object attributes.", "Params", "Primitive")) {
+            : base(new GH_InstanceDescription("Decodes Object Properties", "props", "Wraps rhino object attributes.", "Maths", "Script")) {
         }
 
         public override System.Guid ComponentGuid { get { return new Guid("{B1C480D3-EE0C-4E50-828F-4F3AC6D80639}"); } }
 
-        protected override Bitmap Icon { get { return Resources.python; } }
+        protected override Bitmap Icon { get { return Resources.Icons_Param_Props; } }
 
     }
 
