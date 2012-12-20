@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 using System.Reflection;
-using GhPython.Properties;
+using DcPython.Properties;
 using Grasshopper.Kernel;
 
 namespace GhPython

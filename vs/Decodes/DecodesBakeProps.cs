@@ -5,10 +5,10 @@ using System.Text;
 using System.Windows.Forms;
 using Grasshopper.Kernel;
 using System.Drawing;
-using GhPython.Properties;
+using DcPython.Properties;
 using GhPython.Component;
 
-namespace GhPython.Decodes
+namespace DcPython.Decodes
 {
 
     public class Decodes_ColorBakeComponent : SafeComponent

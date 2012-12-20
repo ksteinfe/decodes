@@ -8,8 +8,8 @@
     <ProjectGuid>{8955361B-7612-44DE-9B12-C081EC8C6F2E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GhPython</RootNamespace>
-    <AssemblyName>GhPython</AssemblyName>
+    <RootNamespace>DcPython</RootNamespace>
+    <AssemblyName>DcPython</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>
@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="Assemblies\PyghaLoader.cs" />
     <Compile Include="Assemblies\PythonInstantiatorProxy.cs" />
+    <Compile Include="Decodes\DecodesAttributes.cs" />
     <Compile Include="Decodes\DecodesBakeProps.cs" />
     <Compile Include="Decodes\DecodesAppendedCode.cs" />
     <Compile Include="Component\ComponentIOMarshal.cs" />

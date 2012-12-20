@@ -8,10 +8,10 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using GhPython.DocReplacement;
-using GhPython.Properties;
+using DcPython.Properties;
 using GhPython.Component;
 
-namespace GhPython.Decodes {
+namespace DcPython.Decodes {
     [Guid("FCCAD19E-DCB6-44AB-8EDB-54DD6AB7E966")]
     public class Decodes_PythonComponent : ScriptingAncestorComponent, IGH_VariableParameterComponent {
 

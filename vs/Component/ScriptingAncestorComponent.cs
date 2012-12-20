@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using GhPython.DocReplacement;
-using GhPython.Properties;
-using GhPython.Decodes;
+using DcPython.Properties;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Parameters;
 using Grasshopper.Kernel.Parameters.Hints;
@@ -256,7 +255,7 @@ namespace GhPython.Component
           }
 
             // ksteinfe - i think we put our hack here.
-          script = DecodesAppendedCode.header + script + DecodesAppendedCode.footer;
+          script = DcPython.Decodes.DecodesAppendedCode.header + script + DcPython.Decodes.DecodesAppendedCode.footer;
 
           if (_compiled_py == null ||
               string.Compare(script, _previousRunCode, StringComparison.InvariantCulture) != 0)

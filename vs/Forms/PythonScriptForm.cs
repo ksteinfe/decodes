@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using GhPython.Component;
-using GhPython.Properties;
+using DcPython.Properties;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Types;
 using System.Collections.Generic;
