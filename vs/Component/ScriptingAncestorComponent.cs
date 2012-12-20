@@ -276,7 +276,7 @@ namespace GhPython.Component
           for (int i = HideCodeOutput ? 0 : 1; i < Params.Output.Count; i++)
           {
             string varname = Params.Output[i].NickName;
-            object o = _py.GetVariable(varname);
+            object o = _py.GetVariable(varname); // ksteinfe: this is a tree coming in from gh python out.  can we just scan the tree and grab the attributes to store somewhere, then bake each param?
             _marshal.SetOutput(o, DA, i);
           }
         }

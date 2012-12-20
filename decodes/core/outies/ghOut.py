@@ -53,7 +53,8 @@ class GrasshopperOut(outie.Outie):
     # MUST LOOK FOR CHILD CLASSES BEFORE PARENT CLASSES (points before vecs)
     
     def extract_props(g):
-      if not hasattr(g, 'props') : return ""
+      if not hasattr(g, 'props') : g.props = {}
+      g.props['layer'] = self.name
       return "::".join(["{0}={1}".format(k,v) for (k, v) in g.props.items()])
     
     if self._should_iterate(g) :
@@ -77,8 +78,14 @@ class GrasshopperOut(outie.Outie):
       tree_p.Add(extract_props(g), path)
       return True
     if isinstance(g, dc.LinearEntity) : 
-      tree.Add(self._drawLinearEntity(g),path)
-      tree_p.Add(extract_props(g), path)
+      rh_geom = self._drawLinearEntity(g)
+      props = extract_props(g)
+      if type(rh_geom) is list: 
+        tree.AddRange(rh_geom,path)
+        for item in rh_geom: tree_p.Add(props, path)
+      else: 
+        tree.Add(rh_geom,path)
+        tree_p.Add(props, path)
       return True
     if isinstance(g, dc.CS) : 
       tree.Add(self._drawCS(g),path)
@@ -112,8 +119,11 @@ class GrasshopperOut(outie.Outie):
   
   def _drawLinearEntity(self, ln):
     if isinstance(ln, dc.Segment) : return rg.Line(rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z),rg.Point3d(ln.ept.x,ln.ept.y,ln.ept.z))
-    if isinstance(ln, dc.Ray) : return rg.Line(rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z),rg.Point3d(ln.ept.x,ln.ept.y,ln.ept.z))
     if isinstance(ln, dc.Line) :  return rg.Line(rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z),rg.Point3d(ln.ept.x,ln.ept.y,ln.ept.z))
+    if isinstance(ln, dc.Ray) : 
+      rh_spt = rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z)
+      rh_ept = rg.Point3d(ln.ept.x,ln.ept.y,ln.ept.z)
+      return [rh_spt,rg.Line(rh_spt,rh_ept)]
     
   def _drawCS(self, cs):
     o = rg.Point3d(cs.origin.x,cs.origin.y,cs.origin.z)
