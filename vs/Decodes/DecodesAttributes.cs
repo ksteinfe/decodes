@@ -51,8 +51,8 @@ namespace DcPython.Decodes {
         public override string ToString() {
             string ret = "attr[";
             ret += "name="+name;
-            ret += "| color=" + color.ToString();
-            ret += "| weight=" + weight;
+            if (Value.ColorSource == Rhino.DocObjects.ObjectColorSource.ColorFromObject) ret += "| color=" + color.ToString();
+            if (Value.PlotWeightSource == Rhino.DocObjects.ObjectPlotWeightSource.PlotWeightFromObject) ret += "| weight=" + weight;
             if (layer != null) ret += "| layer=" + layer;
             ret += "]";
             return ret;
