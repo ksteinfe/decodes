@@ -43,6 +43,7 @@ inputs = ghenv.Component.Params.Input
 import Rhino.Geometry as rg
 import System.Drawing.Color
 primitive_types = ["bool", "int", "float", "str"]
+friendly_types = ["DHr"]
 for input in inputs :
     gh_in_str = input.NickName
     gh_in = eval(gh_in_str)
@@ -65,6 +66,9 @@ for input in inputs :
                   faces.append([rh_fc[0],rh_fc[2],rh_fc[3]]) #if face is a quad, add the missing triangle
             vars()[gh_in_str] = dc.Mesh(verts,faces)
         elif any(p in str(type(gh_in)) for p in primitive_types) :
+            pass
+            #print "primitive: "+ str(type(gh_in))
+        elif any(p in str(type(gh_in)) for p in friendly_types) :
             pass
             #print "primitive: "+ str(type(gh_in))
         else :
