@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using GhPython.DocReplacement;
 using DcPython.Properties;
+using DcPython.Decodes;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Parameters;
 using Grasshopper.Kernel.Parameters.Hints;
@@ -221,7 +222,7 @@ namespace GhPython.Component
           string varname = Params.Output[i].NickName;
           _py.SetVariable(varname, null);
         }
-
+        
         // caching variable to keep things as fast as possible
         bool showing_code_input = CodeInputVisible; 
         // Set all input variables. Even null variables may be used in the
@@ -230,7 +231,7 @@ namespace GhPython.Component
         // Please pay attention to the input data structure type
         for (int i = showing_code_input ? 1 : 0; i < Params.Input.Count; i++)
         {
-          string varname = Params.Input[i].NickName;
+          string varname = Params.Input[i].Name; // ksteinfe: changed from Params.Input[i].Nickname
           object o = _marshal.GetInput(DA, i);
           _py.SetVariable(varname, o);
             //_py.SetIntellisenseVariable(varname, o); // ksteinfe: i think this set the Intellisense thingos for all the input variables.  we are converting, so Intellisense would just be confusing. 
@@ -255,8 +256,10 @@ namespace GhPython.Component
           }
 
             // ksteinfe - i think we put our hack here.
+          //_py.ExecuteScript(DcPython.Decodes.DecodesAppendedCode.header);
+          //script = script + DcPython.Decodes.DecodesAppendedCode.footer;
           script = DcPython.Decodes.DecodesAppendedCode.header + script + DcPython.Decodes.DecodesAppendedCode.footer;
-
+          
           if (_compiled_py == null ||
               string.Compare(script, _previousRunCode, StringComparison.InvariantCulture) != 0)
           {
@@ -359,7 +362,7 @@ namespace GhPython.Component
 
       for (int i = !CodeInputVisible ? 0 : 1; i < Params.Input.Count; i++)
       {
-        Params.Input[i].Description = "Script input " + Params.Input[i].NickName + ".";
+        //Params.Input[i].Description = "Script input " + Params.Input[i].NickName + "."; //ksteinfe
       }
       for (int i = HideCodeOutput ? 0 : 1; i < Params.Output.Count; i++)
       {
@@ -619,7 +622,7 @@ namespace GhPython.Component
       {
         for (int i = CodeInputVisible ? 1 : 0; i < Params.Input.Count; i++)
         {
-          var p = Params.Input[i] as Param_ScriptVariable;
+            var p = Params.Input[i] as Param_ScriptVariable; // ksteinfe (previously Param_ScriptVariable)
           if (p != null)
           {
             FixGhInput(p, false);
@@ -692,7 +695,7 @@ namespace GhPython.Component
         new GH_UVIntervalHint()
       };
 
-    internal abstract void FixGhInput(Param_ScriptVariable i, bool alsoSetIfNecessary = true);
+    internal abstract void FixGhInput(Param_ScriptVariable i, bool alsoSetIfNecessary = true); // ksteinfe (previously Param_ScriptVariable)
 
     public string SpecialPythonHelpContent { get; set; }
   }

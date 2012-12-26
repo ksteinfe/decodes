@@ -1,15 +1,16 @@
-﻿using System.Linq;
+﻿using DcPython.Properties;
+using GhPython.Component;
 using Grasshopper.Kernel;
+using Grasshopper.Kernel.Attributes;
 using Grasshopper.Kernel.Parameters;
 using Grasshopper.Kernel.Parameters.Hints;
 using System;
-using System.Drawing;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using GhPython.DocReplacement;
-using DcPython.Properties;
-using GhPython.Component;
 
 namespace DcPython.Decodes {
     [Guid("FCCAD19E-DCB6-44AB-8EDB-54DD6AB7E966")]
@@ -17,7 +18,7 @@ namespace DcPython.Decodes {
 
         List<string> used_script_variable_names;
         List<string> script_variables_in_use;
-        string attributes_suffix = "props";
+        public static string attributes_suffix = "props";
         bool props_visible;
 
         public Decodes_PythonComponent() {
@@ -41,20 +42,34 @@ namespace DcPython.Decodes {
         }
 
 
-        internal override void FixGhInput( Param_ScriptVariable i, bool alsoSetIfNecessary = true ) {
-            i.Name = i.NickName;
+        internal override void FixGhInput(Param_ScriptVariable param, bool alsoSetIfNecessary = true) {
+            param.NickName = cleanNickname(param.NickName);
+            param.NickName = param.NickName.Replace("_" + Decodes_PythonComponent.attributes_suffix, "_baduser");
+            if (String.Compare(param.NickName, "code", StringComparison.InvariantCultureIgnoreCase) == 0) param.NickName = "baduser";
 
-            if (string.IsNullOrEmpty(i.Description)) i.Description = string.Format("Script variable {0}", i.NickName);
-            i.AllowTreeAccess = true;
-            i.Optional = true;
-            i.ShowHints = true;
-            i.Hints = GetHints();
+            param.Name = param.NickName; // set name to nickname, omitting array brackets (added below)
 
-            if (alsoSetIfNecessary && i.TypeHint == null) i.TypeHint = i.Hints[0]; // ksteinfe: it looks like this is where the default hint is set
+            //if (param.Access == GH_ParamAccess.list) NickName = "[" + NickName + "]";
+
+            if (string.IsNullOrEmpty(Description)) Description = string.Format("Script variable {0}", Name);
+            param.Optional = true;
+            param.ShowHints = true;
+
+            param.Hints = Decodes_PythonComponent.GetHints();
+            if (param.TypeHint == null) param.TypeHint = param.Hints[0];
         }
 
+        public string cleanNickname(string str)
+        {
+            str = Regex.Replace(str, @"\s+", " "); // collapse multiple spaces
+            str = str.Trim().Replace(" ", "_");
+            str = Regex.Replace(str, @"[^\w\.@:-]", ""); // only allow normal word chars, dashes, underbars
+            return str;
+        }
+
+
         static readonly List<IGH_TypeHint> m_hints = new List<IGH_TypeHint>();
-        static List<IGH_TypeHint> GetHints() {
+        public static List<IGH_TypeHint> GetHints() {
             lock (m_hints) {
                 if (m_hints.Count == 0) {
                     m_hints.Add(new NoChangeHint());
@@ -95,11 +110,13 @@ namespace DcPython.Decodes {
         public IGH_Param CreateParameter( GH_ParameterSide side, int index, bool is_twin ) {
             switch (side) {
                 case GH_ParameterSide.Input:
-                    return new Param_ScriptVariable {
+                    return new Param_ScriptVariable
+                    {
                         NickName = GH_ComponentParamServer.InventUniqueNickname("xyzuvwst", this.Params.Input),
                         Name = NickName,
                         Description = "Script variable " + NickName,
-                        Access = GH_ParamAccess.list
+                        Access = GH_ParamAccess.item,
+                        AllowTreeAccess = false,
                     };
                 case GH_ParameterSide.Output:
                     IGH_Param p;
@@ -175,15 +192,7 @@ namespace DcPython.Decodes {
         public override void VariableParameterMaintenance() {
             foreach (Param_ScriptVariable variable in Params.Input.OfType<Param_ScriptVariable>())
                 FixGhInput(variable);
-
-            // fix names of all inputs
-            foreach (Param_GenericObject i in Params.Input) {
-                i.NickName = i.NickName.Replace("_" + attributes_suffix, "_baduser");
-                i.NickName = i.NickName.Trim().Replace(" ", "_");
-                if (String.Compare(i.NickName, "code", StringComparison.InvariantCultureIgnoreCase) == 0) i.NickName = "baduser";
-                i.Name = i.NickName;
-            }
-
+            
             // fix names of outputs carrying decodes geometry
             foreach (Param_GenericObject i in Params.Output.OfType<Param_GenericObject>()) {
                 i.NickName = i.NickName.Replace("_" + attributes_suffix, "_baduser");
@@ -303,10 +312,6 @@ namespace DcPython.Decodes {
         #endregion
 
 
-        public override Guid ComponentGuid {
-            get { return typeof(Decodes_PythonComponent).GUID; }
-        }
-
         public override bool Write( GH_IO.Serialization.GH_IWriter writer ) {
             for (int s = 0; s < this.script_variables_in_use.Count; s++ ) writer.SetString("script_variables_in_use["+s+"]", this.script_variables_in_use[s]);
             writer.SetBoolean("props_visible", this.props_visible);
@@ -324,8 +329,51 @@ namespace DcPython.Decodes {
                 if (str != null) script_variables_in_use.Add(str);
             }
 
-            return base.Read(reader);
+            bool ret = base.Read(reader);
+
+            return ret;
         }
+
+        public override Guid ComponentGuid { get { return typeof(Decodes_PythonComponent).GUID; } }
+        //public override void CreateAttributes() { m_attributes = new Decodes_PythonComponent_Attributes(this); }
+
+    }
+
+
+
+
+    public class Decodes_PythonComponent_Attributes : GH_ComponentAttributes
+    {
+        public Decodes_PythonComponent_Attributes(Decodes_PythonComponent owner) : base(owner) { }
+
+        SizeF min_param_size = new SizeF(40, 30);
+
+        protected override void Layout()
+        {
+            base.Layout();
+
+            // Compute the width of the NickName of each input (plus some extra padding), 
+            // then make sure we have at least 80 pixels.
+            //int max_width = (int) Math.Ceiling(Owner.Params.InputWidth + Owner.Params.OutputWidth);
+            //SizeF input_param_size = min_param_size;
+            //SizeF output_param_size = min_param_size;
+            //foreach (IGH_Param param in Owner.Params.Input) input_param_size.Width = Math.Max(input_param_size.Width, GH_FontServer.StringWidth(param.NickName, GH_FontServer.Standard));
+            //foreach (IGH_Param param in Owner.Params.Output) output_param_size.Width = Math.Max(output_param_size.Width, GH_FontServer.StringWidth(param.NickName, GH_FontServer.Standard));
+
+            //int width = (int) (input_param_size.Width + output_param_size.Width) + 80;
+            //int height = Math.Max(Owner.Params.Input.Count, Owner.Params.Output.Count) * ((int) min_param_size.Height);
+
+            // Assign the width and height to the Bounds property.
+            // Also, make sure the Bounds are anchored to the Pivot
+            //Bounds = new RectangleF(Pivot, new SizeF(width, height));
+
+            //Owner.Params.Input[0].Attributes.Bounds = new RectangleF(new PointF(Bounds.Left, Bounds.Top), input_param_size);
+            //Owner.Params.Output[0].Attributes.Bounds = new RectangleF(new PointF(Bounds.Right-output_param_size.Width, Bounds.Top), output_param_size);
+            //Owner.Params.Output[1].Attributes.Bounds = new RectangleF(new PointF(Bounds.Right - output_param_size.Width, Bounds.Top+output_param_size.Height), output_param_size);
+            
+            
+        }
+
 
     }
 }
