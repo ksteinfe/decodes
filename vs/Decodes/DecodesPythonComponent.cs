@@ -99,6 +99,7 @@ namespace DcPython.Decodes {
                         NickName = GH_ComponentParamServer.InventUniqueNickname("xyzuvwst", this.Params.Input),
                         Name = NickName,
                         Description = "Script variable " + NickName,
+                        Access = GH_ParamAccess.list
                     };
                 case GH_ParameterSide.Output:
                     IGH_Param p;
