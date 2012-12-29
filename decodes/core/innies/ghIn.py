@@ -29,7 +29,7 @@ class GrasshopperIn():
     elif type(gh_in)is rg.Point3d : 
       return dc.Point(gh_in.X,gh_in.Y,gh_in.Z)
     elif type(gh_in) is rg.Line : 
-      return dc.Segment(Point(gh_in.FromX,gh_in.FromY,gh_in.FromZ),Point(gh_in.ToX,gh_in.ToY,gh_in.ToZ))
+      return dc.Segment(dc.Point(gh_in.FromX,gh_in.FromY,gh_in.FromZ),dc.Point(gh_in.ToX,gh_in.ToY,gh_in.ToZ))
     elif type(gh_in) is System.Drawing.Color : 
       return dc.Color(float(gh_in.R)/255,float(gh_in.G)/255,float(gh_in.B)/255)
         

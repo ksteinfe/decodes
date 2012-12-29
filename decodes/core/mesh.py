@@ -38,6 +38,10 @@ class Mesh(dc.Geometry, dc.HasBasis):
     self._verts = []
     self.add_vert(verts)
    
+  @property
+  def centroid(self):
+    return Point.centroid(self.verts)
+   
   def add_vert(self,other) : 
     if isinstance(other, collections.Iterable) : 
       for v in other : self.add_vert(v)
@@ -74,3 +78,16 @@ class Mesh(dc.Geometry, dc.HasBasis):
   
   def __repr__(self):
     return "msh[{0}v,{1}f]".format(len(self._verts),len(self._faces))
+  
+  
+  @staticmethod
+  def explode(msh):
+    exploded_meshes = []
+    for face in msh.faces:
+      pts = [msh.verts[v] for v in face]
+      nface = [0,1,2] if len(face)==3 else [0,1,2,3]
+      exploded_meshes.append(Mesh(pts,[nface]))
+    return exploded_meshes
+  
+  
+  

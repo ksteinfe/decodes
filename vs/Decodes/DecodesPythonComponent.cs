@@ -19,6 +19,7 @@ namespace DcPython.Decodes {
         List<string> used_script_variable_names;
         List<string> script_variables_in_use;
         public static string attributes_suffix = "props";
+        public static string console_name = "console";
         bool props_visible;
 
         public Decodes_PythonComponent() {
@@ -27,7 +28,7 @@ namespace DcPython.Decodes {
             Params.ParameterChanged += ParameterChanged;
 
             // fix console name
-            Params.Output[0].Name = "console";
+            Params.Output[0].Name = console_name;
             Params.Output[0].NickName = "...";
         }
 
@@ -43,7 +44,7 @@ namespace DcPython.Decodes {
 
 
         internal override void FixGhInput(Param_ScriptVariable param, bool alsoSetIfNecessary = true) {
-            param.NickName = cleanNickname(param.NickName);
+            param.NickName = Decodes_PythonComponent.cleanNickname(param.NickName);
             param.NickName = param.NickName.Replace("_" + Decodes_PythonComponent.attributes_suffix, "_baduser");
             if (String.Compare(param.NickName, "code", StringComparison.InvariantCultureIgnoreCase) == 0) param.NickName = "baduser";
 
@@ -59,15 +60,13 @@ namespace DcPython.Decodes {
             if (param.TypeHint == null) param.TypeHint = param.Hints[0];
         }
 
-        public string cleanNickname(string str)
+        public static string cleanNickname(string str)
         {
             str = Regex.Replace(str, @"\s+", " "); // collapse multiple spaces
             str = str.Trim().Replace(" ", "_");
             str = Regex.Replace(str, @"[^\w\.@:-]", ""); // only allow normal word chars, dashes, underbars
             return str;
         }
-
-
         static readonly List<IGH_TypeHint> m_hints = new List<IGH_TypeHint>();
         public static List<IGH_TypeHint> GetHints() {
             lock (m_hints) {
@@ -257,7 +256,7 @@ namespace DcPython.Decodes {
 
 
         public void Menu_OpenEditorClicked( Object sender, EventArgs e ) {
-            var attr = Attributes as PythonComponentAttributes;
+            var attr = Attributes as Decodes_PythonComponent_Attributes;
             if (attr != null) attr.OpenEditor();
         }
 
@@ -335,19 +334,17 @@ namespace DcPython.Decodes {
         }
 
         public override Guid ComponentGuid { get { return typeof(Decodes_PythonComponent).GUID; } }
-        //public override void CreateAttributes() { m_attributes = new Decodes_PythonComponent_Attributes(this); }
+        public override void CreateAttributes() { m_attributes = new Decodes_PythonComponent_Attributes(this); }
 
     }
 
 
-
-
-    public class Decodes_PythonComponent_Attributes : GH_ComponentAttributes
+    class Decodes_PythonComponent_Attributes : PythonComponentAttributes
     {
         public Decodes_PythonComponent_Attributes(Decodes_PythonComponent owner) : base(owner) { }
 
-        SizeF min_param_size = new SizeF(40, 30);
-
+        //SizeF min_param_size = new SizeF(40, 30);
+        /*
         protected override void Layout()
         {
             base.Layout();
@@ -373,6 +370,47 @@ namespace DcPython.Decodes {
             
             
         }
+        */
+        protected override void Layout()
+        {
+            AddParamMarkers();
+            base.Layout();
+            RemoveParamMarkers();
+            
+        }
+
+        protected override void Render(Grasshopper.GUI.Canvas.GH_Canvas canvas, Graphics graphics, Grasshopper.GUI.Canvas.GH_CanvasChannel channel)
+        {
+            AddParamMarkers();
+            base.Render(canvas, graphics, channel);
+            RemoveParamMarkers();
+        }
+
+
+        private void RemoveParamMarkers()
+        {
+            foreach (IGH_Param param in Owner.Params.Input) param.NickName = Decodes_PythonComponent.cleanNickname(param.NickName);
+            foreach (IGH_Param param in Owner.Params.Output) param.NickName = Decodes_PythonComponent.cleanNickname(param.NickName);
+        }
+
+        private void AddParamMarkers()
+        {
+            foreach (IGH_Param param in Owner.Params.Input)
+            {
+                if (param.Access == GH_ParamAccess.list) param.NickName = "[" + param.NickName + "]";
+                if (param.Access == GH_ParamAccess.tree) param.NickName = "[[" + param.NickName + "]]";
+            }
+            foreach (IGH_Param param in Owner.Params.Output)
+            {
+                if ((param.Name != Decodes_PythonComponent.console_name) && (param.VolatileDataCount > 1))
+                {
+                    param.NickName = "[" + param.NickName + "]";
+                    if (param.VolatileData.PathCount > 1) param.NickName = "[" + param.NickName + "]";
+
+                }
+            }
+        }
+
 
 
     }

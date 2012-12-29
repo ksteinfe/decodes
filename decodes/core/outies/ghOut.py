@@ -142,7 +142,7 @@ class GrasshopperOut(outie.Outie):
   def _drawColor(self, c): 
 	import Grasshopper.GUI.GH_GraphicsUtil as gh_gutil
 	return gh_gutil.ColourARGB(c.r,c.g,c.b)
-	
+
 '''
 for reference: the following code is injected before and after a user's script in grasshopper components
 ## -- BEGIN DECODES HEADER -- ##
@@ -172,13 +172,11 @@ for output in outputs :
 
 #TODO, check if an output variable is fieldpack geometry or a list of fieldpack geometry
 # if so, translate apprpiately
-component_footer_code = """
 
+component_footer_code = """
 for gh_outie in gh_outies :
         if not isinstance(vars()[gh_outie.name], dc.outies.GrasshopperOut) : 
-                print "Bad User!  It looks like you assigned to the output '{0}' using the equals operator like so: {0}=something.  You should have used the 'put' method instead, like so: {0}.put(something)".format(gh_outie.name)
+                print "Bad User!  It looks like you assigned to the output '{0}' using the equals operator like so: {0}=something.\\nYou should have used the 'put' method instead, like so: {0}.put(something)\\nYou may also use the '+=' operator, like so: {0} += something".format(gh_outie.name)
         vars()[gh_outie.name], vars()[gh_outie.name+"_props"] = gh_outie.extract_tree()
-
-		
 """
 

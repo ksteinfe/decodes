@@ -10,6 +10,11 @@ class Outie(object):
     self.geom = [] # a simple list of geometry
     self._allow_foreign = False
 
+  def __iadd__(self, other): 
+    #todo: outie += other_outie should combine these outies
+    self.put(other)
+    return self
+  
   def put(self,ngeom):
     if isinstance(ngeom, (dc.HasBasis) ) : ngeom = ngeom.basis_applied()
     
