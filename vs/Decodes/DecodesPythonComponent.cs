@@ -26,7 +26,6 @@ namespace DcPython.Decodes {
             CodeInputVisible = false;
             props_visible = false;
             Params.ParameterChanged += ParameterChanged;
-
             // fix console name
             Params.Output[0].Name = console_name;
             Params.Output[0].NickName = "...";

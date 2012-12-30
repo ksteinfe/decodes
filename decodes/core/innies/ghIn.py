@@ -7,6 +7,8 @@ if dc.VERBOSE_FS: print "ghIn loaded"
 
 #TODO: figure out how to hack the code completion thingo to display decodes geometry after gh geom has been translated
 
+
+
 class GrasshopperIn():
   """innie for pulling stuff from grasshopper"""
   primitive_types = ["bool", "int", "float", "str"]
@@ -20,19 +22,21 @@ class GrasshopperIn():
     # main function for processing incoming data from Grasshopper into Decodes geometry
     # incoming may be a sigleton, a list, or a datatree
     # variable in GH script component will be replaced by whatever is returned here
-    #gh_in_str = gh_incoming.NickName
-    #gh_in = eval(gh_in_str)
     if gh_in is None : return None
     if type(gh_in) is list: return [GrasshopperIn.get(gh_in_str+"["+str(i)+"]",item) for i, item in enumerate(gh_in)]
-    if type(gh_in) is rg.Vector3d : 
-      return dc.Vec(gh_in.X,gh_in.Y,gh_in.Z)
-    elif type(gh_in)is rg.Point3d : 
-      return dc.Point(gh_in.X,gh_in.Y,gh_in.Z)
+    if type(gh_in) is rg.Vector3d : return rgvec_to_vec(gh_in)
+    elif type(gh_in)is rg.Point3d : return rgpt_to_pt(gh_in)
+      
     elif type(gh_in) is rg.Line : 
       return dc.Segment(dc.Point(gh_in.FromX,gh_in.FromY,gh_in.FromZ),dc.Point(gh_in.ToX,gh_in.ToY,gh_in.ToZ))
     elif type(gh_in) is System.Drawing.Color : 
       return dc.Color(float(gh_in.R)/255,float(gh_in.G)/255,float(gh_in.B)/255)
-        
+    elif type(gh_in) is rg.PolylineCurve : 
+      ispolyline, gh_polyline = gh_in.TryGetPolyline()
+      if (ispolyline) : return rgpolyline_to_pgon(gh_polyline)
+    elif type(gh_in) is rg.NurbsCurve : 
+      ispolyline, gh_polyline = gh_in.TryGetPolyline()
+      if (ispolyline) : return rgpolyline_to_pgon(gh_polyline)
     elif type(gh_in) is rg.Mesh : 
       verts = [dc.Point(rh_pt.X,rh_pt.Y,rh_pt.Z) for rh_pt in gh_in.Vertices]
       faces = []
@@ -49,9 +53,33 @@ class GrasshopperIn():
       #if issubclass(gh_in.__class__, rg.GeometryBase ) : print "this is geometry"
       #print gh_incoming.TypeHint
       #print gh_incoming.Description
-    
 
+      
 
+      
+def rgvec_to_vec(rg_vec):
+  return dc.Vec(rg_vec.X,rg_vec.Y,rg_vec.Z)
+
+def rgpt_to_pt(rg_pt):
+  return dc.Point(rg_pt.X,rg_pt.Y,rg_pt.Z)
+
+def rh_plane_to_cs(rh_plane):
+    cpt = rgpt_to_pt(rh_plane.Origin)
+    x_axis = rgvec_to_vec(rh_plane.XAxis)
+    y_axis = rgvec_to_vec(rh_plane.YAxis)
+    return dc.CS(cpt,x_axis,y_axis)
+
+def rgpolyline_to_pgon(gh_polyline):
+  if not gh_polyline.IsClosed : raise dc.GeometricError("Cannot import open polylines")
+  gh_curve = gh_polyline.ToNurbsCurve()
+  isplanar, plane = gh_curve.TryGetPlane()
+  if not isplanar : raise dc.GeometricError("Cannot import non-planar polylines")
+  cs = rh_plane_to_cs(plane)
+  w_verts = [rgpt_to_pt(gh_polyline[i]) for i in range(len(gh_polyline))]
+  verts = [ (pt*cs.ixform).set_basis(cs) for pt in w_verts ]
+  if (verts[0]==verts[-1]) : del verts[-1] #remove last vert if a duplicate
+  return dc.PGon(verts,cs)
+  
 
 '''
 for reference: the following code is injected before and after a user's script in grasshopper components

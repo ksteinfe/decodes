@@ -14,7 +14,7 @@ using DcPython.Properties;
 namespace DcPython.Decodes {
 
     public class Decodes_Attributes : GH_Goo<Rhino.DocObjects.ObjectAttributes> {
-        public Decodes_Attributes() : base() { this.Value = new Rhino.DocObjects.ObjectAttributes(); }
+        public Decodes_Attributes() : base() { this.Value = new Rhino.DocObjects.ObjectAttributes();  }
         public Decodes_Attributes( Decodes_Attributes instance ) { this.Value = instance.Value.Duplicate(); }
         public override IGH_Goo Duplicate() { return new Decodes_Attributes(this); }
 
@@ -75,7 +75,8 @@ namespace DcPython.Decodes {
 
     public class GHParam_Decodes_Attributes : GH_Param<Decodes_Attributes> {
         public GHParam_Decodes_Attributes()
-            : base(new GH_InstanceDescription("Decodes Object Properties", "props", "Wraps rhino object attributes.", "Maths", "Script")) {
+            : base(new GH_InstanceDescription("Decodes Object Properties", "props", "Wraps rhino object attributes.", "Maths", "Decodes"))
+        {
         }
 
         public override System.Guid ComponentGuid { get { return new Guid("{B1C480D3-EE0C-4E50-828F-4F3AC6D80639}"); } }

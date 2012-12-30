@@ -95,6 +95,12 @@ class GrasshopperOut(outie.Outie):
         tree.Add(rh_geom,path)
         tree_p.Add(props, path)
       return True
+    
+    if isinstance(g, dc.PGon) : 
+      tree.Add(self._drawPGon(g),path)
+      tree_p.Add(extract_props(g), path)
+      return True
+
     if isinstance(g, dc.CS) : 
       tree.Add(self._drawCS(g),path)
       tree_p.Add(extract_props(g), path)
@@ -133,15 +139,33 @@ class GrasshopperOut(outie.Outie):
       rh_ept = rg.Point3d(ln.ept.x,ln.ept.y,ln.ept.z)
       return [rh_spt,rg.Line(rh_spt,rh_ept)]
     
+  def _drawPGon(self, pgon):
+    return pgon_to_polyline(pgon)
+
   def _drawCS(self, cs):
     o = rg.Point3d(cs.origin.x,cs.origin.y,cs.origin.z)
     x = rg.Vector3d(cs.xAxis.x,cs.xAxis.y,cs.xAxis.z) 
     y = rg.Vector3d(cs.yAxis.x,cs.yAxis.y,cs.yAxis.z) 
     return rg.Plane(o,x,y)
-	
+
   def _drawColor(self, c): 
-	import Grasshopper.GUI.GH_GraphicsUtil as gh_gutil
-	return gh_gutil.ColourARGB(c.r,c.g,c.b)
+    import Grasshopper.GUI.GH_GraphicsUtil as gh_gutil
+    return gh_gutil.ColourARGB(c.r,c.g,c.b)
+
+
+
+def vec_to_rgvec(vec):
+  return rg.Vector3d(vec.x,vec.y,vec.z)
+
+def pt_to_rgpt(pt):
+  return rg.Point3d(pt.x,pt.y,pt.z)
+
+def pgon_to_polyline(pgon):
+  verts = [pt_to_rgpt(pt) for pt in pgon.verts]
+  verts.append(verts[0])
+  return rg.Polyline(verts)
+
+
 
 '''
 for reference: the following code is injected before and after a user's script in grasshopper components

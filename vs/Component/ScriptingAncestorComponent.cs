@@ -36,7 +36,7 @@ namespace GhPython.Component
 
     // ksteinfe: change the component categorization here
     protected ScriptingAncestorComponent()
-        : base("Decodes Python Script", "Decodes", DESCRIPTION, "Maths", "Script")
+        : base("Decodes Python Script", "Decodes", DESCRIPTION, "Maths", "Decodes")
     {
     }
 

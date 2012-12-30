@@ -139,6 +139,11 @@ class Xform(object):
       verts = [vert*self for vert in other._verts]
       other._verts = verts
       return other
+    
+    if isinstance(other, dc.PGon) : 
+      # applies transformation to the basis
+      other.basis = other.basis*self
+      return other
       
     if isinstance(other, dc.CS) : 
       cs = other

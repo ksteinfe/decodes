@@ -13,7 +13,7 @@ def rect(cpt, w, h):
 
 
 class PGon(dc.Geometry, dc.HasBasis):
-  """a very simple polygon class"""
+  """a very simple 2d polygon class"""
   """Polygons limit their vertices to x and y dimensions, and enforce that they employ a basis.  Transformations of a polygon should generally be applied to the basis.  Any tranfromations of the underlying vertices should ensure that the returned vectors are limited to x and y dimensions"""
   
   def __init__(self, verts=None, basis=None):

@@ -36,13 +36,14 @@ class CS(Geometry, Basis):
 
   @property
   def xform(self): 
-    return Xform.change_basis(CS(), self)
+    return dc.Xform.change_basis(CS(), self)
     
   @property
   def ixform(self): 
-    return Xform.change_basis(self, CS())
+    return dc.Xform.change_basis(self, CS())
   
   def toRhPlane(self):
+    #TODO: remove this method
     return Rhino.Geometry.Plane(VecToPoint3d(self.origin),VecToVec3d(self.xAxis),VecToVec3d(self.yAxis))
 
 
