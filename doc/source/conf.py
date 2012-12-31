@@ -31,6 +31,9 @@ sys.path.append("C:\Git\decodes")
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx', 'sphinx.ext.todo', 'sphinx.ext.ifconfig']
 
+[extensions]
+todo_include_todos=True
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 

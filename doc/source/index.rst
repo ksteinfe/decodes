@@ -10,7 +10,7 @@ Contents:
 .. automodule:: decodes
    :members: 
 
-core
+decodes.core
 =========================
 
 This is something I want to say that is not in the docstring.
@@ -19,55 +19,61 @@ This is something I want to say that is not in the docstring.
    :members: 
 
 
-base
+base.py
 --------------------------
 .. automodule:: decodes.core.base
    :members: 
 
-color
+color.py
 --------------------------   
 .. automodule:: decodes.core.color
    :members: 
 
-vec
+vec.py
 --------------------------
 .. automodule:: decodes.core.vec
    :members: 
 
-point
+point.py
 --------------------------  
 .. automodule:: decodes.core.point
    :members: 
 
-mesh
+mesh.py
 --------------------------   
 .. automodule:: decodes.core.mesh
    :members: 
 
-pgon
+pgon.py
 --------------------------   
 .. automodule:: decodes.core.pgon
    :members: 
 
-cs
+cs.py
 --------------------------   
 .. automodule:: decodes.core.cs
    :members: 
 
-line
+line.py
 --------------------------   
-.. automodule:: decodes.core.line
+.. autoclass:: decodes.core.line.Line
    :members: 
 
-.. autoclass:: decodes.core.line._LinearEntity
+.. autoclass:: decodes.core.line.Segment
    :members: 
 
-xform
+.. autoclass:: decodes.core.line.Ray
+   :members: 
+
+.. autoclass:: decodes.core.line.LinearEntity
+   :members: 
+
+xform.py
 --------------------------   
 .. automodule:: decodes.core.xform
    :members: 
 
-intersection
+intersection.py
 --------------------------   
 .. automodule:: decodes.core.intersection
    :members: 

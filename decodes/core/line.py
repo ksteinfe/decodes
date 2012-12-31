@@ -8,11 +8,9 @@ if VERBOSE_FS: print "line.py loaded"
 class LinearEntity(Geometry):
     """
     A linear entity (line, ray, segment, etc) in space.
+    
+    .. warning:: This is an abstract class and is not meant to be instantiated.
 
-    This is an abstract class and is not meant to be instantiated.
-    Subclasses should implement the following methods:
-        __eq__
-        __contains__
     """
     def __init__(self, a, b):
       self._pt = a if isinstance(a,Point) else Point(a.x,a.y,a.z)
@@ -37,7 +35,7 @@ class LinearEntity(Geometry):
     
     @property
     def coefficients(self):
-        """The coefficients (a,b,c) for equation ax+by+c=0"""
+        """The coefficients (a,b,c) of this line for equation ax+by+c=0"""
         raise NotImplementedError()
         return (self.p1[1]-self.p2[1],
                 self.p2[0]-self.p1[0],
@@ -49,18 +47,23 @@ class LinearEntity(Geometry):
         otherwise. Two or more linear entities are concurrent if they all
         intersect at a single point.
 
-        Description of Method Used:
-        Simply take the first two lines and find their intersection.
-        If there is no intersection, then the first two lines were
-        parallel and had no intersection so concurrenecy is impossible
-        amongst the whole set. Otherwise, check to see if the
-        intersection point of the first two lines is a member on
-        the rest of the lines. If so, the lines are concurrent.
+        .. note:: **Description of Method:**  First, take the first 
+          two lines and find their intersection. If there is no intersection, 
+          then the first two lines were parallel and had no intersection so 
+          concurrenecy is impossible amongst the whole set. Otherwise, check 
+          to see if the intersection point of the first two lines is a member 
+          on the rest of the lines. If so, the lines are concurrent.
+        
+        .. todo:: Implement this method.
         """
         raise NotImplementedError()
 
     def is_parallel(l1, l2):
-        """Returns True if l1 and l2 are parallel, False otherwise"""
+        """
+        Returns True if l1 and l2 are parallel, False otherwise
+             
+        .. todo:: Implement this method.
+        """
         raise NotImplementedError()
         try:
             a1,b1,c1 = l1.coefficients
@@ -70,7 +73,11 @@ class LinearEntity(Geometry):
             return False
 
     def is_perpendicular(l1, l2):
-        """Returns True if l1 and l2 are perpendicular, False otherwise"""
+        """
+        Returns True if l1 and l2 are perpendicular, False otherwise
+           
+        .. todo:: Implement this method.
+        """
         raise NotImplementedError()
         try:
             a1,b1,c1 = l1.coefficients
@@ -83,12 +90,16 @@ class LinearEntity(Geometry):
         """
         Returns an angle formed between the two linear entities.
 
-        Description of Method Used:
-        From the dot product of vectors v1 and v2 it is known that::
-            dot(v1, v2) = |v1|*|v2|*cos(A)
-        where A is the angle formed between the two vectors. We can
-        get the directional vectors of the two lines and readily
-        find the angle between the two using the above formula.
+        .. note:: **Description of Method:**  
+          From the dot product of vectors v1 and v2 it is known that::
+
+              dot(v1, v2) = |v1|*|v2|*cos(A)
+
+          where A is the angle formed between the two vectors. We can
+          get the directional vectors of the two lines and readily
+          find the angle between the two using the above formula.
+
+        .. todo:: Implement this method.
         """
         #v1 = l1.p2 - l1.p1
         #v2 = l2.p2 - l2.p1
@@ -106,6 +117,8 @@ class LinearEntity(Geometry):
         """
         Returns a new Line which is perpendicular to this linear entity and
         passes through the specified point.
+
+        .. todo:: Implement this method.
         """
         raise NotImplementedError()
 
@@ -114,27 +127,36 @@ class LinearEntity(Geometry):
         Returns a new Segment which connects p to a point on this linear
         entity and is also perpendicular to this line. Returns p itself
         if p is on this linear entity.
+
+        .. todo:: Implement this method.
         """
         raise NotImplementedError()
 
-    def __eq__(self, other):
-        raise NotImplementedError()
-
-    def __contains__(self, other):
-        raise NotImplementedError()
+    def __eq__(self, other):  raise NotImplementedError()
+    def __contains__(self, other):  raise NotImplementedError()
 
 
 class Line(LinearEntity):
     """A line in space."""
+    def __eq__(self, other):  raise NotImplementedError()
+    def __contains__(self, other):  raise NotImplementedError()
 
 class Ray(LinearEntity):
     """A ray in space."""
+    def __eq__(self, other):  raise NotImplementedError()
+    def __contains__(self, other):  raise NotImplementedError()
 
 class Segment(LinearEntity):
     """An undirected line segment in space."""
+    def __eq__(self, other):  raise NotImplementedError()
+    def __contains__(self, other):  raise NotImplementedError()
 
     @property
-    def length(self): return self.vec.length        
+    def length(self): 
+      """Returns the length of this segment"""
+      return self.vec.length        
 
     @property
-    def midpoint(self): return Point.interpolate(self.spt, self.ept)
+    def midpoint(self): 
+      """Returns the midpoint of this segment"""
+      return Point.interpolate(self.spt, self.ept)
