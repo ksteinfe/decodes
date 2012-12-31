@@ -54,10 +54,10 @@ class Point(Vec,HasBasis):
   def __div__(self, other): return Point(self.x/float(other), self.y/float(other), self.z/float(other))
   def __mul__(self, other):
     from .xform import Xform
-    if isinstance(other, dc.Xform) :
+    if isinstance(other, Xform) :
       return other*self
     else : 
-      return dc.Xform.scale(other) * self
+      return Xform.scale(other) * self
 
   def __repr__(self):
     if not self.is_baseless : return "pt[{0},{1},{2}] basis: {3}".format(self._x,self._y,self._z,self.basis)

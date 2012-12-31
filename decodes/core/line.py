@@ -5,7 +5,7 @@ if VERBOSE_FS: print "line.py loaded"
 #from SYMPY
 #http://code.google.com/p/sympy/source/browse/trunk.freezed/sympy/geometry/entity.py
 #formerlly exteneded GeometryEntity
-class _LinearEntity(Geometry):
+class LinearEntity(Geometry):
     """
     A linear entity (line, ray, segment, etc) in space.
 
@@ -124,13 +124,13 @@ class _LinearEntity(Geometry):
         raise NotImplementedError()
 
 
-class Line(_LinearEntity):
+class Line(LinearEntity):
     """A line in space."""
 
-class Ray(_LinearEntity):
+class Ray(LinearEntity):
     """A ray in space."""
 
-class Segment(_LinearEntity):
+class Segment(LinearEntity):
     """An undirected line segment in space."""
 
     @property

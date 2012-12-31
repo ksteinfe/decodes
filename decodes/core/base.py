@@ -1,9 +1,4 @@
 from decodes.core import *
-#from . import *
-#from decodes.core import *
-#this also seemed to work
-#from .. import core as dc
-#from core import *
 if VERBOSE_FS: print "base.py loaded"
 import copy,exceptions
 
@@ -80,13 +75,15 @@ class Geometry(object):
   """a base geometry class for all other geometry to inherit"""
   
   def __mul__(self, other):
-    if isinstance(other, dc.Xform) :
+    from .xform import Xform
+    if isinstance(other, Xform) :
       return other*self
   
   def set_color(self,a,b=None,c=None):
+    from .color import Color
     if not hasattr(self, 'props') : self.props = {}
-    if isinstance(a, (dc.Color) ) : self.props['color'] = a
-    else : self.props['color'] = dc.Color(a,b,c)
+    if isinstance(a, (Color) ) : self.props['color'] = a
+    else : self.props['color'] = Color(a,b,c)
 
   def set_name(self,str):
     if not hasattr(self, 'props') : self.props = {}
@@ -99,8 +96,10 @@ class Geometry(object):
     
   @property
   def xform(self): 
+    #TODO: i think these are obsolete
     return self.objCS.xform
     
   @property
   def ixform(self): 
+    #TODO: i think these are obsolete
     return self.objCS.ixform

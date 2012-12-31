@@ -4,9 +4,6 @@ from . import base, vec, point, cs, line, mesh, pgon
 
 if VERBOSE_FS: print "xform.py loaded"
 
-#import Rhino
-#from outies.rhinoUtil import *
-
 class Xform(object):
   def __init__(self,value=1.0,matrix=None):
     if matrix :
@@ -90,6 +87,7 @@ class Xform(object):
   @staticmethod
   def rotation(**kargs):
     #TODO: do this ourselves instead
+    import Rhino
     if all (k in kargs for k in ("angle","axis")) :
       # rotation by center, rotation angle, and rotation axis
       center = VecToPoint3d(kargs["center"]) if "rlvl" in kargs else VecToPoint3d(Point(0,0,0))
@@ -104,8 +102,10 @@ class Xform(object):
   @staticmethod
   def change_basis(csSource,csTarget):
     #TODO: do this ourselves instead
-    rh_source_plane = csSource.toRhPlane()
-    rh_target_plane = csTarget.toRhPlane()
+    import Rhino
+    from decodes.io.rhino_out import RhinoOut
+    rh_source_plane = RhinoOut.to_rgplane(csSource)
+    rh_target_plane = RhinoOut.to_rgplane(csTarget)
     rh_xform = Rhino.Geometry.Transform.PlaneToPlane(rh_source_plane, rh_target_plane)
     return Xform.from_rh_transform(rh_xform)
   
@@ -114,7 +114,6 @@ class Xform(object):
     Multiply by another Matrix, or by any piece of fieldpack geometry
     This function must be kept up to date with every new class of DC geom
     '''
-	#TODO: work out polygon transformations
     if isinstance(other, Xform) : 
       xf = Xform()
       xf._m = [
@@ -136,23 +135,31 @@ class Xform(object):
         self.m30 * other.m03 + self.m31 * other.m13 + self.m32 * other.m23 + self.m33 * other.m33,
       ]
       return xf
-      '''
-    if isinstance(other, dc.Mesh) : 
+    
+    if isinstance(other, Mesh) : 
       # applies transformation to the underlying points
       # bypassing the mesh basis
       verts = [vert*self for vert in other._verts]
       other._verts = verts
       return other
     
-    if isinstance(other, dc.PGon) : 
+    if isinstance(other, LinearEntity) : 
+      #TODO: make this work
+      other._pt = other._pt*self
+      xf = self.strip_translation()
+      other._vec = other._vec*xf
+      return other
+
+    if isinstance(other, PGon) : 
       # applies transformation to the basis
+      #TODO: make sure this works
       other.basis = other.basis*self
       return other
       
-    if isinstance(other, dc.CS) : 
+    if isinstance(other, CS) : 
       cs = other
       tup = self._xform_tuple(cs.origin.to_tuple())
-      origin = dc.Point(tup[0],tup[1],tup[2])
+      origin = Point(tup[0],tup[1],tup[2])
       
       xf = self.strip_translation()
       tup = xf._xform_tuple(cs.xAxis.to_tuple())
@@ -160,20 +167,22 @@ class Xform(object):
       tup = xf._xform_tuple(cs.yAxis.to_tuple())
       yAxis = Vec(tup[0],tup[1],tup[2])
       
-      return dc.CS(origin, xAxis, yAxis)
+      return CS(origin, xAxis, yAxis)
       
-    if isinstance(other, dc.Point) : 
+    if isinstance(other, Point) : 
       if other.is_baseless : 
         tup = self._xform_tuple(other.to_tuple())
         return Point(tup[0],tup[1],tup[2])
       else :
         tup = self._xform_tuple(other.basis_stripped().to_tuple())
         return Point(tup[0],tup[1],tup[2],basis=other.basis)
-    '''
+    
     if isinstance(other, Vec) : 
       tup = self._xform_tuple(other.to_tuple())
       return Vec(tup[0],tup[1],tup[2])
     
+
+
   def _xform_tuple(self,tup):
     return (
       tup[0] * self._m[0] + tup[1] * self._m[1] + tup[2] * self._m[2]   + self._m[3],

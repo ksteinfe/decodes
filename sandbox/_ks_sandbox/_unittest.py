@@ -1,21 +1,16 @@
-import decodes.core as dc
+import decodes as dc
 from decodes.core import *
 
+cs0 = CS()
+cs1 = CS(Point(1,1),Vec(1,1))
 
+ln = Line(Point(0,0),Point(0.2,0,2))
 
-v = Vec(1,1,1)
-xf = Xform.mirror()
-v = v * xf
-
-p = Point(2,2,2)
-p = p+v
-
-print VERBOSE
-
-
+xf = Xform()
+ln = ln * xf
 
 '''
-outie = dc.makeOut(dc.outies.SVG, "unittest")
+outie = dc.makeOut(dc.Outies.SVG, "unittest")
 
 print "constructors"
 v0 = Vec(1,-2)
