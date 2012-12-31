@@ -1,5 +1,7 @@
-from decodes import core as dc
-if dc.VERBOSE_FS: print "outie loaded"
+#from decodes import core as dc
+from .. import *
+
+if VERBOSE_FS: print "outie loaded"
 import copy, collections
 
 class Outie(object):

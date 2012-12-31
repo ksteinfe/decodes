@@ -1,10 +1,10 @@
-import decodes.core as dc
 from decodes.core import *
-if dc.VERBOSE_FS: print "mesh.py loaded"
+from . import base, vec, point #here we may only import modules that have been loaded before this one.  see core/__init__.py for proper order
+if VERBOSE_FS: print "mesh.py loaded"
 
 import copy, collections
 
-class Mesh(dc.Geometry, dc.HasBasis):
+class Mesh(Geometry, HasBasis):
   """a very simple mesh class"""
   ## TODO: make mesh only triangles
   

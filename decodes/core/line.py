@@ -1,11 +1,11 @@
-import decodes.core as dc
 from decodes.core import *
-if dc.VERBOSE_FS: print "line.py loaded"
+from . import base, vec, point #here we may only import modules that have been loaded before this one.  see core/__init__.py for proper order
+if VERBOSE_FS: print "line.py loaded"
 
 #from SYMPY
 #http://code.google.com/p/sympy/source/browse/trunk.freezed/sympy/geometry/entity.py
 #formerlly exteneded GeometryEntity
-class LinearEntity(dc.Geometry):
+class _LinearEntity(Geometry):
     """
     A linear entity (line, ray, segment, etc) in space.
 
@@ -15,9 +15,9 @@ class LinearEntity(dc.Geometry):
         __contains__
     """
     def __init__(self, a, b):
-      self._pt = a if isinstance(a,dc.Point) else Point(a.x,a.y,a.z)
-      if isinstance(b,dc.Point) : self._vec = b-a
-      elif isinstance(b,dc.Vec) : self._vec = b
+      self._pt = a if isinstance(a,Point) else Point(a.x,a.y,a.z)
+      if isinstance(b,Point) : self._vec = b-a
+      elif isinstance(b,Vec) : self._vec = b
       else : raise TypeError("%s constructor requires Vec instances" % self.__class__.__name__)
     
     @property
@@ -50,13 +50,12 @@ class LinearEntity(dc.Geometry):
         intersect at a single point.
 
         Description of Method Used:
-        ===========================
-            Simply take the first two lines and find their intersection.
-            If there is no intersection, then the first two lines were
-            parallel and had no intersection so concurrenecy is impossible
-            amongst the whole set. Otherwise, check to see if the
-            intersection point of the first two lines is a member on
-            the rest of the lines. If so, the lines are concurrent.
+        Simply take the first two lines and find their intersection.
+        If there is no intersection, then the first two lines were
+        parallel and had no intersection so concurrenecy is impossible
+        amongst the whole set. Otherwise, check to see if the
+        intersection point of the first two lines is a member on
+        the rest of the lines. If so, the lines are concurrent.
         """
         raise NotImplementedError()
 
@@ -85,12 +84,11 @@ class LinearEntity(dc.Geometry):
         Returns an angle formed between the two linear entities.
 
         Description of Method Used:
-        ===========================
-            From the dot product of vectors v1 and v2 it is known that:
-                dot(v1, v2) = |v1|*|v2|*cos(A)
-            where A is the angle formed between the two vectors. We can
-            get the directional vectors of the two lines and readily
-            find the angle between the two using the above formula.
+        From the dot product of vectors v1 and v2 it is known that::
+            dot(v1, v2) = |v1|*|v2|*cos(A)
+        where A is the angle formed between the two vectors. We can
+        get the directional vectors of the two lines and readily
+        find the angle between the two using the above formula.
         """
         #v1 = l1.p2 - l1.p1
         #v2 = l2.p2 - l2.p1
@@ -126,13 +124,13 @@ class LinearEntity(dc.Geometry):
         raise NotImplementedError()
 
 
-class Line(LinearEntity):
+class Line(_LinearEntity):
     """A line in space."""
 
-class Ray(LinearEntity):
+class Ray(_LinearEntity):
     """A ray in space."""
 
-class Segment(LinearEntity):
+class Segment(_LinearEntity):
     """An undirected line segment in space."""
 
     @property

@@ -1,14 +1,11 @@
-import decodes.core as dc
 from decodes.core import *
-
+#from . import *
+#from decodes.core import *
 #this also seemed to work
 #from .. import core as dc
 #from core import *
-
-if dc.VERBOSE_FS: print "base.py loaded"
-
+if VERBOSE_FS: print "base.py loaded"
 import copy,exceptions
-
 
 
 #TODO: do these better elsewhere
@@ -34,12 +31,16 @@ class BasisError(GeometricError):
     pass
 
 class Basis(object):
-  """a base class for anything that wants to call itself a basis"""
-  """bases must impliment the folloiwng methods:"""
+  """
+  a base class for anything that wants to call itself a basis
+  bases must impliment the folloiwng methods:
+  """
   
   def eval(self,other):
-    # other should be any object with either "x,y,z" attributes, "x,y" attributes, or a single "t" attribute
-    # which may be interpreted by the basis in order to generate a valid baseless point in R3
+    """
+    other should be any object with either "x,y,z" attributes, "x,y" attributes, or a single "t" attribute
+    which may be interpreted by the basis in order to generate a valid baseless point in R3
+    """
     raise NotImplementedError("Evalutate not implimented.  I am a BAD basis!")
 
 class HasBasis(object):

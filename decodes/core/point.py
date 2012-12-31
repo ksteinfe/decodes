@@ -1,8 +1,7 @@
-import decodes.core as dc
 from decodes.core import *
-
+from . import base, vec #here we may only import modules that have been loaded before this one.  see core/__init__.py for proper order
 import math, random
-if dc.VERBOSE_FS: print "point.py loaded"
+if VERBOSE_FS: print "point.py loaded"
 
 
 # points may define a "basis"
@@ -54,6 +53,7 @@ class Point(Vec,HasBasis):
   def __sub__(self, vec): return Point(self.x-vec.x , self.y-vec.y, self.z-vec.z)
   def __div__(self, other): return Point(self.x/float(other), self.y/float(other), self.z/float(other))
   def __mul__(self, other):
+    from .xform import Xform
     if isinstance(other, dc.Xform) :
       return other*self
     else : 

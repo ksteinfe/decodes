@@ -23,3 +23,7 @@ def VecToPoint3d(vec):
 
 def VecToVec3d(vec):
   return Rhino.Geometry.Vector3d(vec.x,vec.y,vec.z)
+
+  def toRhPlane(self):
+    #TODO: remove this method
+    return Rhino.Geometry.Plane(VecToPoint3d(self.origin),VecToVec3d(self.xAxis),VecToVec3d(self.yAxis))

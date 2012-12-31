@@ -1,9 +1,11 @@
-import decodes.core as dc
 from decodes.core import *
-if dc.VERBOSE_FS: print "xform.py loaded"
+from . import base, vec, point, cs, line, mesh, pgon
 
-import Rhino
-from outies.rhinoUtil import *
+
+if VERBOSE_FS: print "xform.py loaded"
+
+#import Rhino
+#from outies.rhinoUtil import *
 
 class Xform(object):
   def __init__(self,value=1.0,matrix=None):
@@ -76,12 +78,14 @@ class Xform(object):
     elif plane=="worldYZ" :
       xf.m00 *= -1
       return xf
-    elif isinstance(plane, dc.CS) : 
-      #TODO: do this ourselves instead
-      rh_xform = Rhino.Geometry.Transform.Mirror(VecToPoint3d(plane.origin),VecToVec3d(plane.zAxis))       
-      return Xform.from_rh_transform(rh_xform)
-    else :
-      raise NotImplementedError("Xform.mirror currently accepts the following values for 'plane':/n'worldXY','worldXZ','worldYZ'")
+    else:
+      if isinstance(plane, CS) : 
+        #TODO: do this ourselves instead
+        import Rhino
+        rh_xform = Rhino.Geometry.Transform.Mirror(VecToPoint3d(plane.origin),VecToVec3d(plane.zAxis))       
+        return Xform.from_rh_transform(rh_xform)
+    
+    raise NotImplementedError("Xform.mirror currently accepts the following values for 'plane':/n'worldXY','worldXZ','worldYZ'")
 
   @staticmethod
   def rotation(**kargs):
@@ -132,7 +136,7 @@ class Xform(object):
         self.m30 * other.m03 + self.m31 * other.m13 + self.m32 * other.m23 + self.m33 * other.m33,
       ]
       return xf
-      
+      '''
     if isinstance(other, dc.Mesh) : 
       # applies transformation to the underlying points
       # bypassing the mesh basis
@@ -165,7 +169,8 @@ class Xform(object):
       else :
         tup = self._xform_tuple(other.basis_stripped().to_tuple())
         return Point(tup[0],tup[1],tup[2],basis=other.basis)
-    if isinstance(other, dc.Vec) : 
+    '''
+    if isinstance(other, Vec) : 
       tup = self._xform_tuple(other.to_tuple())
       return Vec(tup[0],tup[1],tup[2])
     

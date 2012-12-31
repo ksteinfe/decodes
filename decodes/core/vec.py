@@ -1,11 +1,16 @@
-import decodes.core as dc
 from decodes.core import *
+from . import base #here we may only import modules that have been loaded before this one.  see core/__init__.py for proper order
+
 import math, random
-if dc.VERBOSE_FS: print "vec.py loaded"
+if VERBOSE_FS: print "vec.py loaded"
 
 
-class Vec(dc.Geometry):
-  
+class Vec(Geometry):
+  """
+  a base class for anything that wants to call itself a basis
+  bases must impliment the folloiwng methods:
+  """
+
   def __init__(self, a=0, b=0, c=0):
     if all( hasattr(a,i) and hasattr(b,i) for i in ['x','y','z'] ) :
       # we've been passed two things that act like points
@@ -42,7 +47,8 @@ class Vec(dc.Geometry):
   def __div__(self, other): return Vec(self.x/float(other), self.y/float(other), self.z/float(other))
   def __invert__(self): return self.inverted()
   def __mul__(self, other):
-    if isinstance(other, dc.Xform) :
+    from .xform import Xform
+    if isinstance(other, Xform) :
       return other*self
     else : 
       #TODO: confim that other is a scalar
@@ -141,8 +147,9 @@ class Vec(dc.Geometry):
       '''
       Return a new vector, the cross product.
       a x b = (a2b3 - a3b2, a3b1 - a1b3, a1b2 - a2b1)
-      This will be at right angles to both self and other, with a length::
-          len(self) * len(other) * sin(angle_between_them)
+      This will be at right angles to both self and other, with a length
+      ::
+      	len(self) * len(other) * sin(angle_between_them)
       '''
       return Vec(
           self.y * other.z - self.z * other.y,

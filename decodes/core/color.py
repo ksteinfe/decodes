@@ -1,6 +1,5 @@
-import decodes.core as dc
-from decodes.core import *
 import colorsys
+
 
 class Color():
   def __init__(self, a=None, b=None, c=None):

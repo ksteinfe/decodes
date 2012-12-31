@@ -44,12 +44,10 @@ class GrasshopperOut(outie.Outie):
     self.clear() #empty the outie after each draw
     return tree, tree_p
     
-  def _is_leaf(self, items):
-	return not any(self._should_iterate(item) for item in items)
+  def _is_leaf(self, items): return not any(self._should_iterate(item) for item in items)
 
-  def _should_iterate(self, item):
-	return isinstance(item, collections.Iterable) and not isinstance(item,basestring)
-	
+  def _should_iterate(self, item): return isinstance(item, collections.Iterable) and not isinstance(item,basestring)
+  
   def _add_branch(self, g, tree, tree_p, path):
     # here we sort out what type of geometry we're dealing with, and call the proper draw functions
     # MUST LOOK FOR CHILD CLASSES BEFORE PARENT CLASSES (points before vecs)
@@ -85,7 +83,7 @@ class GrasshopperOut(outie.Outie):
       tree.Add(self._drawMesh(g),path)
       tree_p.Add(extract_props(g), path)
       return True
-    if isinstance(g, dc.LinearEntity) : 
+    if isinstance(g, dc._LinearEntity) : 
       rh_geom = self._drawLinearEntity(g)
       props = extract_props(g)
       if type(rh_geom) is list: 

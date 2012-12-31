@@ -1,18 +1,18 @@
-import decodes.core as dc
 from decodes.core import *
-if dc.VERBOSE_FS: print "polygon.py loaded"
+from . import base, vec, point, cs #here we may only import modules that have been loaded before this one.  see core/__init__.py for proper order
+if VERBOSE_FS: print "polygon.py loaded"
 
 import copy, collections
 
 def rect(cpt, w, h):
   w2 = w/2
   h2 = h/2
-  basis = dc.CS(cpt)
+  basis = CS(cpt)
   return PGon([Point(-w2,-h2),Point(w2,-h2),Point(w2,h2),Point(-w2,h2)],basis)
 
 
 
-class PGon(dc.Geometry, dc.HasBasis):
+class PGon(Geometry, HasBasis):
   """a very simple 2d polygon class"""
   """Polygons limit their vertices to x and y dimensions, and enforce that they employ a basis.  Transformations of a polygon should generally be applied to the basis.  Any tranfromations of the underlying vertices should ensure that the returned vectors are limited to x and y dimensions"""
   

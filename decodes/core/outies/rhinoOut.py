@@ -49,7 +49,7 @@ class RhinoOut(outie.Outie):
       return self._drawCS(g,obj_attr)
     if isinstance(g, dc.CylCS) :
       return self._drawCylCS(g,obj_attr)
-    if isinstance(g, dc.LinearEntity) : 
+    if isinstance(g, dc._LinearEntity) : 
       return self._drawLinearEntity(g,obj_attr)
     if isinstance(g, dc.Point) : 
       return self._drawPoint(g,obj_attr)

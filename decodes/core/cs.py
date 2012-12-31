@@ -1,12 +1,7 @@
-import decodes.core as dc
 from decodes.core import *
+from . import base, vec, point #here we may only import modules that have been loaded before this one.  see core/__init__.py for proper order
 if VERBOSE_FS: print "cs.py loaded"
-
-import Rhino
-import math
-
-from decodes.core.outies.rhinoUtil import *
-import copy, collections
+import math, copy, collections
 
 class CS(Geometry, Basis):
   """a ortho coordinate system class"""
@@ -35,17 +30,15 @@ class CS(Geometry, Basis):
     return self.origin + ((self.xAxis*x)+(self.yAxis*y)+(self.zAxis*z))
 
   @property
-  def xform(self): 
-    return dc.Xform.change_basis(CS(), self)
+  def xform(self):
+    from .xform import Xform
+    return Xform.change_basis(CS(), self)
     
   @property
   def ixform(self): 
-    return dc.Xform.change_basis(self, CS())
+    from .xform import Xform
+    return Xform.change_basis(self, CS())
   
-  def toRhPlane(self):
-    #TODO: remove this method
-    return Rhino.Geometry.Plane(VecToPoint3d(self.origin),VecToVec3d(self.xAxis),VecToVec3d(self.yAxis))
-
 
 class CylCS(Geometry, Basis):
   """a cylindrical coordinate system"""
