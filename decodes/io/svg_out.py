@@ -2,7 +2,7 @@ from .. import *
 from ..core import *
 from ..core import base, vec, point, cs, line, mesh, pgon
 from . import outie
-if VERBOSE_FS: print "svgOut loaded"
+if VERBOSE_FS: print "svg_out loaded"
 
 import os, sys
 import pysvg

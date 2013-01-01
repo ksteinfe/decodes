@@ -5,6 +5,10 @@ from . import base, vec, point, cs, line, mesh, pgon
 if VERBOSE_FS: print "xform.py loaded"
 
 class Xform(object):
+  """
+    A transformation matrix class.
+    
+  """
   def __init__(self,value=1.0,matrix=None):
     if matrix :
       self._m = matrix
@@ -60,11 +64,15 @@ class Xform(object):
     
   @staticmethod
   def mirror(plane="worldXY"):
-    '''
+    """
     Produces mirror transform
     Can pass in "worldXY", "worldYZ", or "worldXZ"
     Or, pass in an arbitrary cs (produces mirror about XYplane of CS)
-    '''
+    
+    .. warning:: When mirroring about an arbitrary plane, this method currently relies on access to the Rhinocommon Kernel.  It will not work in other contexts.
+    
+    .. todo:: Re-implement this method without using the Rhinocommon Kernel.
+    """
     xf = Xform()
     if plane=="worldXY" :
       xf.m22 *= -1
@@ -79,35 +87,50 @@ class Xform(object):
       if isinstance(plane, CS) : 
         #TODO: do this ourselves instead
         import Rhino
-        rh_xform = Rhino.Geometry.Transform.Mirror(VecToPoint3d(plane.origin),VecToVec3d(plane.zAxis))       
-        return Xform.from_rh_transform(rh_xform)
+        from ..io.rhino_out import to_rgvec, to_rgpt
+        from ..io.rhino_in import from_rgtransform
+        rh_xform = Rhino.Geometry.Transform.Mirror(to_rgpt(plane.origin),to_rgvec(plane.zAxis))       
+        return from_rgtransform(rh_xform)
     
     raise NotImplementedError("Xform.mirror currently accepts the following values for 'plane':/n'worldXY','worldXZ','worldYZ'")
 
   @staticmethod
   def rotation(**kargs):
-    #TODO: do this ourselves instead
+    """
+    .. warning:: This method currently relies on access to the Rhinocommon Kernel.  It will not work in other contexts.
+    
+    .. todo:: Re-implement this method without using the Rhinocommon Kernel.
+
+    .. todo:: Rotation about an axis ought to take in a linear entitiy, not a vector
+    """
     import Rhino
+    from ..io.rhino_out import to_rgvec, to_rgpt
+    from ..io.rhino_in import from_rgtransform
     if all (k in kargs for k in ("angle","axis")) :
       # rotation by center, rotation angle, and rotation axis
-      center = VecToPoint3d(kargs["center"]) if "rlvl" in kargs else VecToPoint3d(Point(0,0,0))
-      rh_xform = Rhino.Geometry.Transform.Rotation(kargs["angle"],VecToVec3d(kargs["axis"]),center)
+      center = to_rgpt(kargs["center"]) if "rlvl" in kargs else to_rgpt(Point(0,0,0))
+      rh_xform = Rhino.Geometry.Transform.Rotation(kargs["angle"],to_rgvec(kargs["axis"]),center)
     elif all (k in kargs for k in ("center","angle")) :
       # rotation by center and rotation angle
-      rh_xform = Rhino.Geometry.Transform.Rotation(kargs["angle"],VecToPoint3d(kargs["center"]))
+      rh_xform = Rhino.Geometry.Transform.Rotation(kargs["angle"],to_rgpt(kargs["center"]))
     else :
       return False
-    return Xform.from_rh_transform(rh_xform)
+    return from_rgtransform(rh_xform)
       
   @staticmethod
   def change_basis(csSource,csTarget):
-    #TODO: do this ourselves instead
+    """
+    .. warning:: This method currently relies on access to the Rhinocommon Kernel.  It will not work in other contexts.
+    
+    .. todo:: Re-implement this method without using the Rhinocommon Kernel.
+    """
     import Rhino
-    from decodes.io.rhino_out import RhinoOut
-    rh_source_plane = RhinoOut.to_rgplane(csSource)
-    rh_target_plane = RhinoOut.to_rgplane(csTarget)
+    from ..io.rhino_out import to_rgvec, to_rgpt, to_rgplane
+    from ..io.rhino_in import from_rgtransform
+    rh_source_plane = to_rgplane(csSource)
+    rh_target_plane = to_rgplane(csTarget)
     rh_xform = Rhino.Geometry.Transform.PlaneToPlane(rh_source_plane, rh_target_plane)
-    return Xform.from_rh_transform(rh_xform)
+    return from_rgtransform(rh_xform)
   
   def __mul__(self, other):
     '''
@@ -259,23 +282,6 @@ class Xform(object):
   def m33(self,value): self._m[15] = value    
 
   
-  def to_rh_transform(self):
-    #TODO: shoudn't need this once we impliment xform ourselves
-    rh_xf = rh_xform = Rhino.Geometry.Transform(1.0)
-    rh_xf.M00, rh_xf.M01, rh_xf.M02, rh_xf.M03 = self.m00, self.m01, self.m02, self.m03
-    rh_xf.M10, rh_xf.M11, rh_xf.M12, rh_xf.M13 = self.m10, self.m11, self.m12, self.m13
-    rh_xf.M20, rh_xf.M21, rh_xf.M22, rh_xf.M23 = self.m20, self.m21, self.m22, self.m23
-    rh_xf.M30, rh_xf.M31, rh_xf.M32, rh_xf.M33 = self.m30, self.m31, self.m32, self.m33
-    return rh_xf
-    
-  @staticmethod
-  def from_rh_transform(rh_xf):
-    #TODO: shoudn't needxf this once we impliment xform ourselves
-    xf = Xform()
-    xf.m00, xf.m01, xf.m02, xf.m03 = rh_xf.M00, rh_xf.M01, rh_xf.M02, rh_xf.M03
-    xf.m10, xf.m11, xf.m12, xf.m13 = rh_xf.M10, rh_xf.M11, rh_xf.M12, rh_xf.M13
-    xf.m20, xf.m21, xf.m22, xf.m23 = rh_xf.M20, rh_xf.M21, rh_xf.M22, rh_xf.M23
-    xf.m30, xf.m31, xf.m32, xf.m33 = rh_xf.M30, rh_xf.M31, rh_xf.M32, rh_xf.M33
-    return xf
+
 
 

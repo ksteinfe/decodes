@@ -8,21 +8,21 @@ namespace DcPython.Decodes
     public class DecodesAppendedCode
     {
         public static string header = @"## -- BEGIN DECODES HEADER -- ##
-import decodes.core as dc
+import decodes as dc
 from decodes.core import *
-exec(dc.innies.ghIn.component_header_code)
-exec(dc.outies.ghOut.component_header_code)
+from decodes.io.gh_in import *
+from decodes.io.gh_out import *
+exec(io.gh_in.component_header_code)
+exec(io.gh_out.component_header_code)
 ## -- END DECODES HEADER -- ##
-
-
 
 
 "; // this makes it an even ten lines of code for header.  line numbers in text editor start on 11, the same line this comment is on.
 
         public static string footer = @"
 ## -- BEGIN DECODES FOOTER -- ##
-exec(dc.innies.ghIn.component_footer_code)
-exec(dc.outies.ghOut.component_footer_code)
+exec(io.gh_in.component_footer_code)
+exec(io.gh_out.component_footer_code)
 ## -- END DECODES FOOTER -- ##
 
 ";

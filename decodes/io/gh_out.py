@@ -1,12 +1,11 @@
-from decodes import core as dc
-from decodes.core import *
+from .. import *
+from ..core import *
+from ..core import base, vec, point, cs, line, mesh, pgon
+from .rhino_out import *
+from . import outie
+if VERBOSE_FS: print "gh_out loaded"
 
-if dc.VERBOSE_FS: print "ghOut loaded"
-
-import clr, outie, collections
-import rhinoUtil
-from rhinoUtil import *
-
+import clr, collections
 import Rhino.Geometry as rg
 
 #TODO: check at end of script if the user overwrote the established 'outie' with either a singleton, a list of sc.Geoms, or something else, and act accordingly (raising the appropriate warnings) 
@@ -71,19 +70,19 @@ class GrasshopperOut(outie.Outie):
         else : self._add_branch(i,tree,tree_p, npath)
       return True
     
-    if isinstance(g, dc.Point) : 
+    if isinstance(g, Point) : 
       tree.Add(self._drawPoint(g),path)
       tree_p.Add(extract_props(g), path)
       return True
-    if isinstance(g, dc.Vec) : 
+    if isinstance(g, Vec) : 
       tree.Add(self._drawVec(g),path)
       tree_p.Add(extract_props(g), path)
       return True
-    if isinstance(g, dc.Mesh) : 
+    if isinstance(g, Mesh) : 
       tree.Add(self._drawMesh(g),path)
       tree_p.Add(extract_props(g), path)
       return True
-    if isinstance(g, dc.LinearEntity) : 
+    if isinstance(g, LinearEntity) : 
       rh_geom = self._drawLinearEntity(g)
       props = extract_props(g)
       if type(rh_geom) is list: 
@@ -94,21 +93,21 @@ class GrasshopperOut(outie.Outie):
         tree_p.Add(props, path)
       return True
     
-    if isinstance(g, dc.PGon) : 
+    if isinstance(g, PGon) : 
       tree.Add(self._drawPGon(g),path)
       tree_p.Add(extract_props(g), path)
       return True
 
-    if isinstance(g, dc.CS) : 
+    if isinstance(g, CS) : 
       tree.Add(self._drawCS(g),path)
       tree_p.Add(extract_props(g), path)
       return True
-    if isinstance(g, dc.Color) : 
+    if isinstance(g, Color) : 
       tree.Add(self._drawColor(g),path)
       tree_p.Add(extract_props(g), path)
       return True
     
-    if isinstance(g, (dc.Geometry) ) : raise NotImplementedError("i do not have a translation for that decodes geometry type in GrasshopperOut")
+    if isinstance(g, (Geometry) ) : raise NotImplementedError("i do not have a translation for that decodes geometry type in GrasshopperOut")
     tree.Add(g,path)
     tree_p.Add(None, path)    
 
@@ -130,15 +129,15 @@ class GrasshopperOut(outie.Outie):
     return rh_mesh
   
   def _drawLinearEntity(self, ln):
-    if isinstance(ln, dc.Segment) : return rg.Line(rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z),rg.Point3d(ln.ept.x,ln.ept.y,ln.ept.z))
-    if isinstance(ln, dc.Line) :  return rg.Line(rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z),rg.Point3d(ln.ept.x,ln.ept.y,ln.ept.z))
-    if isinstance(ln, dc.Ray) : 
+    if isinstance(ln, Segment) : return rg.Line(rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z),rg.Point3d(ln.ept.x,ln.ept.y,ln.ept.z))
+    if isinstance(ln, Line) :  return rg.Line(rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z),rg.Point3d(ln.ept.x,ln.ept.y,ln.ept.z))
+    if isinstance(ln, Ray) : 
       rh_spt = rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z)
       rh_ept = rg.Point3d(ln.ept.x,ln.ept.y,ln.ept.z)
       return [rh_spt,rg.Line(rh_spt,rh_ept)]
     
   def _drawPGon(self, pgon):
-    return pgon_to_polyline(pgon)
+    return to_rgpolyline(pgon)
 
   def _drawCS(self, cs):
     o = rg.Point3d(cs.origin.x,cs.origin.y,cs.origin.z)
@@ -152,31 +151,24 @@ class GrasshopperOut(outie.Outie):
 
 
 
-def vec_to_rgvec(vec):
-  return rg.Vector3d(vec.x,vec.y,vec.z)
 
-def pt_to_rgpt(pt):
-  return rg.Point3d(pt.x,pt.y,pt.z)
-
-def pgon_to_polyline(pgon):
-  verts = [pt_to_rgpt(pt) for pt in pgon.verts]
-  verts.append(verts[0])
-  return rg.Polyline(verts)
 
 
 
 '''
 for reference: the following code is injected before and after a user's script in grasshopper components
 ## -- BEGIN DECODES HEADER -- ##
-import decodes.core as dc
+import decodes as dc
 from decodes.core import *
-exec(dc.innies.ghIn.component_header_code)
-exec(dc.outies.ghOut.component_header_code)
+from decodes.io.gh_in import *
+from decodes.io.gh_out import *
+exec(io.gh_in.component_header_code)
+exec(io.gh_out.component_header_code)
 ## -- END DECODES HEADER -- ##
 
 ## -- BEGIN DECODES FOOTER -- ##
-exec(dc.innies.ghIn.component_footer_code)
-exec(dc.outies.ghOut.component_footer_code)
+exec(io.gh_in.component_footer_code)
+exec(io.gh_out.component_footer_code)
 ## -- END DECODES FOOTER -- ##
 '''
 
@@ -187,7 +179,7 @@ gh_outies = []
 for output in outputs :
     if output.Name != "console":
         if not "_prop" in output.NickName :
-          vars()[output.NickName] = dc.makeOut(outies.Grasshopper,output.NickName)
+          vars()[output.NickName] = makeOut(Outies.Grasshopper,output.NickName)
           gh_outies.append(vars()[output.NickName])
 		
 """
@@ -197,7 +189,7 @@ for output in outputs :
 
 component_footer_code = """
 for gh_outie in gh_outies :
-        if not isinstance(vars()[gh_outie.name], dc.outies.GrasshopperOut) : 
+        if not isinstance(vars()[gh_outie.name], io.gh_out.GrasshopperOut) : 
                 print "Bad User!  It looks like you assigned to the output '{0}' using the equals operator like so: {0}=something.\\nYou should have used the 'put' method instead, like so: {0}.put(something)\\nYou may also use the '+=' operator, like so: {0} += something".format(gh_outie.name)
         vars()[gh_outie.name], vars()[gh_outie.name+"_props"] = gh_outie.extract_tree()
 """

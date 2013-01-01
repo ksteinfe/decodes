@@ -1,13 +1,8 @@
-from decodes import core as dc
-from decodes.core import *
-
-
-if dc.VERBOSE_FS: print "rhinoIn loaded"
-
-#from dc.outies.rhinoUtil import *
-
-
+from .. import *
+from ..core import *
+from ..core import base, vec, point, cs, line, mesh, pgon, xform
 import rhinoscriptsyntax as rs
+if VERBOSE_FS: print "rhino_in loaded"
 
 
 class RhinoIn():
@@ -25,7 +20,7 @@ class RhinoIn():
     mesh_id = rs.GetObject(prompt, 32, True)
     rh_mesh = rs.coercemesh(mesh_id)
     
-    verts = [dc.Point(rh_pt.X,rh_pt.Y,rh_pt.Z) for rh_pt in rh_mesh.Vertices]
+    verts = [Point(rh_pt.X,rh_pt.Y,rh_pt.Z) for rh_pt in rh_mesh.Vertices]
     faces = []
     for rh_fc in rh_mesh.Faces :
       if triangulate:
@@ -36,5 +31,38 @@ class RhinoIn():
         if rh_fc[2] == rh_fc[3] : faces.append([rh_fc[0],rh_fc[1],rh_fc[2]])
         else : faces.append([rh_fc[0],rh_fc[1],rh_fc[2],rh_fc[3]])
       
-    return dc.Mesh(verts,faces)
-    
+    return Mesh(verts,faces)
+
+     
+def from_rgvec(rg_vec):
+  return Vec(rg_vec.X,rg_vec.Y,rg_vec.Z)
+
+def from_rgpt(rg_pt):
+  return Point(rg_pt.X,rg_pt.Y,rg_pt.Z)
+
+def from_rgplane(rh_plane):
+    cpt = from_rgpt(rh_plane.Origin)
+    x_axis = from_rgvec(rh_plane.XAxis)
+    y_axis = from_rgvec(rh_plane.YAxis)
+    return CS(cpt,x_axis,y_axis)
+
+def from_rgpolyline(gh_polyline):
+  if not gh_polyline.IsClosed : raise GeometricError("Cannot import open polylines")
+  gh_curve = gh_polyline.ToNurbsCurve()
+  isplanar, plane = gh_curve.TryGetPlane()
+  if not isplanar : raise GeometricError("Cannot import non-planar polylines")
+  cs = from_rgplane(plane)
+  w_verts = [from_rgpt(gh_polyline[i]) for i in range(len(gh_polyline))]
+  verts = [ (pt*cs.ixform).set_basis(cs) for pt in w_verts ]
+  if (verts[0]==verts[-1]) : del verts[-1] #remove last vert if a duplicate
+  return PGon(verts,cs)
+  
+
+def from_rgtransform(rh_xf):
+  xf = Xform()
+  xf.m00, xf.m01, xf.m02, xf.m03 = rh_xf.M00, rh_xf.M01, rh_xf.M02, rh_xf.M03
+  xf.m10, xf.m11, xf.m12, xf.m13 = rh_xf.M10, rh_xf.M11, rh_xf.M12, rh_xf.M13
+  xf.m20, xf.m21, xf.m22, xf.m23 = rh_xf.M20, rh_xf.M21, rh_xf.M22, rh_xf.M23
+  xf.m30, xf.m31, xf.m32, xf.m33 = rh_xf.M30, rh_xf.M31, rh_xf.M32, rh_xf.M33
+  return xf
+
