@@ -1,3 +1,8 @@
+import sys
+#sys.path.append("G:\\git\\decodes")
+print sys.path
+
+
 import decodes as dc
 from decodes.core import *
 
