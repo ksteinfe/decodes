@@ -6,7 +6,7 @@ python setup.py bdist_msi
 echo the name is "%dc%"
 
 :: requires 7-zip http://www.7-zip.org/download.html (get command line version and put .exe file in C:\Windows directory)
-::7za x dist/%dc%.zip -odist -y
+7za x dist/%dc%.zip -odist -y
 
 
 :choice
