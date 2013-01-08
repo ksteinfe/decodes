@@ -49,9 +49,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>Copy "$(SolutionDir)ipyInstall\Express\SingleImage\DiskImages\DISK1\DecodesForRhino.msi" "$(SolutionDir)\..\dist\"
+    <PostBuildEvent>Copy "$(SolutionDir)Installer\ipyInstall\Express\SingleImage\DiskImages\DISK1\DecodesForRhino.msi" "$(SolutionDir)\..\dist\"
 rd /s /q "$(TargetDir)"
-rd /s /q "$(SolutionDir)ipyInstall\"</PostBuildEvent>
+rd /s /q "$(SolutionDir)Installer\ipyInstall\"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
