@@ -8,6 +8,11 @@ Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "ipyInstall", "ipyInstall.is
 		{8955361B-7612-44DE-9B12-C081EC8C6F2E} = {8955361B-7612-44DE-9B12-C081EC8C6F2E}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DummyForPostBuild", "DummyForPostBuild\DummyForPostBuild.csproj", "{BC25F932-FD87-4C6C-8808-66BEB7A4A459}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1DE9E9DC-80CB-4DB6-A6F8-6B0B770E4F51} = {1DE9E9DC-80CB-4DB6-A6F8-6B0B770E4F51}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
@@ -43,6 +48,18 @@ Global
 		{1DE9E9DC-80CB-4DB6-A6F8-6B0B770E4F51}.Release|Any CPU.Build.0 = SingleImage
 		{1DE9E9DC-80CB-4DB6-A6F8-6B0B770E4F51}.SingleImage|Any CPU.ActiveCfg = SingleImage
 		{1DE9E9DC-80CB-4DB6-A6F8-6B0B770E4F51}.SingleImage|Any CPU.Build.0 = SingleImage
+		{BC25F932-FD87-4C6C-8808-66BEB7A4A459}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{BC25F932-FD87-4C6C-8808-66BEB7A4A459}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{BC25F932-FD87-4C6C-8808-66BEB7A4A459}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC25F932-FD87-4C6C-8808-66BEB7A4A459}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC25F932-FD87-4C6C-8808-66BEB7A4A459}.Debug32|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC25F932-FD87-4C6C-8808-66BEB7A4A459}.Debug32|Any CPU.Build.0 = Debug|Any CPU
+		{BC25F932-FD87-4C6C-8808-66BEB7A4A459}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC25F932-FD87-4C6C-8808-66BEB7A4A459}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{BC25F932-FD87-4C6C-8808-66BEB7A4A459}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC25F932-FD87-4C6C-8808-66BEB7A4A459}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC25F932-FD87-4C6C-8808-66BEB7A4A459}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{BC25F932-FD87-4C6C-8808-66BEB7A4A459}.SingleImage|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
