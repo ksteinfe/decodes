@@ -1,6 +1,6 @@
 print "decodes core loaded"
 
-VERBOSE_FS = True # determines if we verify file system loaded right
+VERBOSE_FS = False # determines if we verify file system loaded right
 VERBOSE = True
 
 from color import *
