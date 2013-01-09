@@ -1,0 +1,1 @@
+recursive-include decodes *.txt *.png

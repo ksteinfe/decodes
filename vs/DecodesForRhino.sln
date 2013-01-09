@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DcPython", "DcPython\DcPython.csproj", "{8955361B-7612-44DE-9B12-C081EC8C6F2E}"
 EndProject
 Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "ipyInstall", "Installer\ipyInstall.isproj", "{1DE9E9DC-80CB-4DB6-A6F8-6B0B770E4F51}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8955361B-7612-44DE-9B12-C081EC8C6F2E} = {8955361B-7612-44DE-9B12-C081EC8C6F2E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DummyForPostBuild", "DummyForPostBuild\DummyForPostBuild.csproj", "{BC25F932-FD87-4C6C-8808-66BEB7A4A459}"
 	ProjectSection(ProjectDependencies) = postProject

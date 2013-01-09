@@ -1,7 +1,7 @@
 :: here we set a variable to the current decodes release number
+:: this must be set to whatever is set in setup.py
 set dc=decodes-0.0.1
 
-cd ..
 python setup.py sdist
 python setup.py bdist_msi
 
@@ -9,7 +9,7 @@ echo the name is "%dc%"
 
 :: requires 7-zip http://www.7-zip.org/download.html (get command line version and put .exe file in C:\Windows directory)
 7za x dist/%dc%.zip -odist -y
-
+del dist\%dc%.zip
 
 :choice
 ::set /P c=Install to Python Directory[Y/N]?

@@ -178,7 +178,14 @@
   -->
   <PropertyGroup>
     <PostBuildEvent>Copy "$(TargetPath)" "$(TargetDir)$(ProjectName).gha"
+Copy "$(TargetPath)" "$(TargetDir)\..\..\..\dist\$(ProjectName).gha"
 Copy "$(TargetPath)" "$(GrasshopperDir)$(ProjectName).gha"
 Erase "$(TargetPath)"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>pushd
+cd "$(TargetDir)\..\..\.."
+call makedist.bat
+popd</PreBuildEvent>
   </PropertyGroup>
 </Project>
