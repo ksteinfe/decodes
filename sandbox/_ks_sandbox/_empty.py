@@ -1,8 +1,4 @@
-import sys
-print sys.path
-
-
-import decodes.core as dc
+import decodes as dc
 from decodes.core import *
 
 vec = Vec()
