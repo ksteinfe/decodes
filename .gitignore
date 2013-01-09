@@ -35,3 +35,6 @@ pip-log.txt
 *.suo
 [Bb]in
 [Oo]bj
+
+#help files
+*.chm
