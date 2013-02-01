@@ -78,7 +78,7 @@ namespace DcPython.Decodes {
             : base(new GH_InstanceDescription("Decodes Object Properties", "props", "Wraps rhino object attributes.", "Maths", "Decodes"))
         {
         }
-
+        public override Grasshopper.Kernel.GH_Exposure Exposure { get { return GH_Exposure.secondary | GH_Exposure.obscure; } }
         public override System.Guid ComponentGuid { get { return new Guid("{B1C480D3-EE0C-4E50-828F-4F3AC6D80639}"); } }
 
         protected override Bitmap Icon { get { return Resources.Icons_Param_Props; } }

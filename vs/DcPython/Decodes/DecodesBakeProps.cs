@@ -25,6 +25,8 @@ namespace DcPython.Decodes
 
             this.IconDisplayMode = GH_IconDisplayMode.icon;
         }
+        public override Grasshopper.Kernel.GH_Exposure Exposure { get { return GH_Exposure.primary; } }
+
         //Rhino.DocObjects.ObjectAttributes
         private List<Decodes_Attributes> m_att;
         private List<Grasshopper.Kernel.Types.IGH_GeometricGoo> m_obj;

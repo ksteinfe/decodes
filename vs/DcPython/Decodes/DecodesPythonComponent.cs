@@ -31,6 +31,9 @@ namespace DcPython.Decodes {
             Params.Output[0].NickName = "...";
         }
 
+        public override Grasshopper.Kernel.GH_Exposure Exposure { get { return GH_Exposure.primary; } }
+
+
         #region DYNAMIC VARIABLE STUFF
 
         protected override void AddDefaultInput( GH_Component.GH_InputParamManager pManager ) {

@@ -156,6 +156,8 @@
   <ItemGroup>
     <None Include="Resources\Icons_Component_Preview.png" />
     <None Include="Resources\Icons_Param_Props.png" />
+    <None Include="Resources\Olgay.bmp" />
+    <None Include="Resources\Olgay.png" />
     <Content Include="Samples\sampleCommon.py" />
     <None Include="Samples\helpText.html" />
     <Content Include="Samples\sampleScript.py" />
