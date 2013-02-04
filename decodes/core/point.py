@@ -60,7 +60,9 @@ class Point(Vec,HasBasis):
       return Xform.scale(other) * self
 
   def __repr__(self):
-    if not self.is_baseless : return "pt[{0},{1},{2}] basis: {3}".format(self._x,self._y,self._z,self.basis)
+    #TODO: provide mechanism to print basis info if desired
+    #if not self.is_baseless : return "pt[{0},{1},{2}] basis: {3}".format(self._x,self._y,self._z,self.basis)
+    if not self.is_baseless : return "wpt[{0},{1},{2}]".format(self.x,self.y,self.z)
     return "pt[{0},{1},{2}]".format(self.x,self.y,self.z)
 
   '''comparisons are always done in world space'''
