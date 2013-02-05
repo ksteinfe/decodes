@@ -19,10 +19,40 @@ class Point(Vec,HasBasis):
   
   @property
   def x(self): return self.basis.eval(self.basis_stripped()).x if not self.is_baseless else self._x
+  @x.setter
+  def x(self,value): 
+    """Setting the x-value of a point with a basis requires stripping the basis of the point.  Set pt._x to alter the local coordinate instead"""
+    if self.is_baseless :
+      self._x = value
+    else: 
+      npt = self.basis_applied()
+      self.basis = None
+      self.x,self.y,self.z =  npt._x, value, npt._z
+  
   @property
   def y(self): return self.basis.eval(self.basis_stripped()).y if not self.is_baseless else self._y
+  @y.setter
+  def y(self,value): 
+    """Setting the y-value of a point with a basis requires stripping the basis of the point.  Set pt._y to alter the local coordinate instead"""
+    if self.is_baseless :
+      self._y = value
+    else: 
+      npt = self.basis_applied()
+      self.basis = None
+      self.x,self.y,self.z = value, npt._y, npt._z
+  
   @property
   def z(self): return self.basis.eval(self.basis_stripped()).z if not self.is_baseless else self._z
+  @z.setter
+  def z(self,value): 
+    """Setting the z-value of a point with a basis requires stripping the basis of the point.  Set pt._z to alter the local coordinate instead"""
+    if self.is_baseless :
+      self._z = value
+    else: 
+      npt = self.basis_applied()
+      self.basis = None
+      self.x,self.y,self.z = npt._x, npt._y, value
+  
 
   '''
   returns a new point with basis applied. 
