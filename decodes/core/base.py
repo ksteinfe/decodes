@@ -11,12 +11,14 @@ def frange(start, stop, step):
     yield r
     r += step
 
+'''
+TODO: this is misbehaving
 def drange(start, stop, divs):
   r = start
   while r < stop:
     yield r
     r += (stop-start)/divs
-
+'''
 
 
 class GeometricError(StandardError):

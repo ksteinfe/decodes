@@ -140,16 +140,20 @@ class Line(LinearEntity):
     """A line in space."""
     def __eq__(self, other):  raise NotImplementedError()
     def __contains__(self, other):  raise NotImplementedError()
+    def __repr__(self): return "line[{0} {1}]".format(self._pt,self._vec)
+
 
 class Ray(LinearEntity):
     """A ray in space."""
     def __eq__(self, other):  raise NotImplementedError()
     def __contains__(self, other):  raise NotImplementedError()
+    def __repr__(self): return "ray[{0} {1}]".format(self._pt,self._vec)
 
 class Segment(LinearEntity):
     """An undirected line segment in space."""
     def __eq__(self, other):  raise NotImplementedError()
     def __contains__(self, other):  raise NotImplementedError()
+    def __repr__(self): return "seg[{0} {1}]".format(self.spt,self._vec)
 
     @property
     def length(self): 

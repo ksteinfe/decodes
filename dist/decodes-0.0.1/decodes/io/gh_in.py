@@ -28,7 +28,8 @@ class GrasshopperIn():
     if type(gh_in) is list: return [GrasshopperIn.get(gh_in_str+"["+str(i)+"]",item) for i, item in enumerate(gh_in)]
     if type(gh_in) is rg.Vector3d : return from_rgvec(gh_in)
     elif type(gh_in)is rg.Point3d : return from_rgpt(gh_in)
-      
+    elif type(gh_in)is rg.Plane : 
+        return CS(from_rgpt(gh_in.Origin), from_rgvec(gh_in.XAxis), from_rgvec(gh_in.YAxis))
     elif type(gh_in) is rg.Line : 
       #TODO: check if gh_in can be described as a line first...
       return Segment(Point(gh_in.FromX,gh_in.FromY,gh_in.FromZ),Point(gh_in.ToX,gh_in.ToY,gh_in.ToZ))
@@ -51,7 +52,7 @@ class GrasshopperIn():
     elif any(p in str(type(gh_in)) for p in GrasshopperIn.primitive_types) : return gh_in
     elif any(p in str(type(gh_in)) for p in GrasshopperIn.friendly_types) : return gh_in
     else :
-      print "UNKNOWN TYPE: "+gh_in_str+" is a "+ str(type(gh_in))
+      print "UNKNOWN TYPE: "+gh_in_str+" is an "+ str(type(gh_in))
       return gh_in
       #print inspect.getmro(gh_in.__class__)
       #if issubclass(gh_in.__class__, rg.GeometryBase ) : print "this is geometry"

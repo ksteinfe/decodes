@@ -33,11 +33,15 @@ vec.py
 --------------------------
 .. automodule:: decodes.core.vec
    :members: 
+   :special-members:
+   :private-members:
 
 point.py
 --------------------------  
 .. automodule:: decodes.core.point
    :members: 
+   :special-members:
+   :private-members:
 
 mesh.py
 --------------------------   

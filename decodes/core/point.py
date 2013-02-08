@@ -12,16 +12,23 @@ if VERBOSE_FS: print "point.py loaded"
 # if no basis has been defined, these values are the same
 
 class Point(Vec,HasBasis):
+  """
+  a simple vector class
+  """
   
   def __init__(self, a=0, b=0, c=0, basis=None):
     super(Point,self).__init__(a,b,c)
     self.basis = basis
   
   @property
-  def x(self): return self.basis.eval(self.basis_stripped()).x if not self.is_baseless else self._x
+  def x(self): 
+    """
+    The x-coordinate of this point
+    Setting the x-value of a point with a basis requires stripping the basis of the point.  Set pt._x to alter the local coordinate instead
+    """
+    return self.basis.eval(self.basis_stripped()).x if not self.is_baseless else self._x
   @x.setter
   def x(self,value): 
-    """Setting the x-value of a point with a basis requires stripping the basis of the point.  Set pt._x to alter the local coordinate instead"""
     if self.is_baseless :
       self._x = value
     else: 
@@ -30,10 +37,14 @@ class Point(Vec,HasBasis):
       self.x,self.y,self.z =  npt._x, value, npt._z
   
   @property
-  def y(self): return self.basis.eval(self.basis_stripped()).y if not self.is_baseless else self._y
+  def y(self): 
+    """
+    The y-coordinate of this point
+    Setting the y-value of a point with a basis requires stripping the basis of the point.  Set pt._y to alter the local coordinate instead
+    """  
+    return self.basis.eval(self.basis_stripped()).y if not self.is_baseless else self._y
   @y.setter
   def y(self,value): 
-    """Setting the y-value of a point with a basis requires stripping the basis of the point.  Set pt._y to alter the local coordinate instead"""
     if self.is_baseless :
       self._y = value
     else: 
@@ -42,10 +53,14 @@ class Point(Vec,HasBasis):
       self.x,self.y,self.z = value, npt._y, npt._z
   
   @property
-  def z(self): return self.basis.eval(self.basis_stripped()).z if not self.is_baseless else self._z
+  def z(self): 
+    """
+    The z-coordinate of this point
+    Setting the z-value of a point with a basis requires stripping the basis of the point.  Set pt._z to alter the local coordinate instead
+    """
+    return self.basis.eval(self.basis_stripped()).z if not self.is_baseless else self._z
   @z.setter
   def z(self,value): 
-    """Setting the z-value of a point with a basis requires stripping the basis of the point.  Set pt._z to alter the local coordinate instead"""
     if self.is_baseless :
       self._z = value
     else: 
@@ -54,35 +69,62 @@ class Point(Vec,HasBasis):
       self.x,self.y,self.z = npt._x, npt._y, value
   
 
-  '''
-  returns a new point with basis applied. 
-  coords will be interpreted in world space
-  points will appear in the same position when drawn
-  '''
   def basis_applied(self, copy_children=True): 
+    """
+    returns a new point with basis applied. 
+    coords will be interpreted in world space
+    points will appear in the same position when drawn
+    """
     pt = Point(self.x,self.y,self.z)
     if hasattr(self, 'props') : pt.props = self.props
     return pt
   
-  '''
-  returns a new point stripped of any bases.  
-  coords will be interpreted in world space
-  points will appear in their "local" position when drawn
-  '''
   def basis_stripped(self, copy_children=True): 
+    """
+    returns a new point stripped of any bases.
+    coords will be interpreted in world space, and points will appear in their "local" position when drawn
+    """
     pt = Point(self._x,self._y,self._z)
     if hasattr(self, 'props') : pt.props = self.props
     return pt
   
-  '''
-  returns a new point with a new basis defined
-  '''
-  def set_basis(self,basis): return Point(self._x,self._y,self._z,basis=basis)
+  def set_basis(self,basis): 
+    """
+    returns a new point whose local coordniates are the same as this point, but whose basis is set by the basis provided.
+    """
+    return Point(self._x,self._y,self._z,basis=basis)
 
-  def __add__(self, vec): return Point(self.x+vec.x , self.y+vec.y, self.z+vec.z)
-  def __sub__(self, vec): return Point(self.x-vec.x , self.y-vec.y, self.z-vec.z)
-  def __div__(self, other): return Point(self.x/float(other), self.y/float(other), self.z/float(other))
+  def __add__(self, other): 
+    """
+    overloads the addition **(+)** operator
+    returns a new point that results from adding this point's world coordinates to the other point's (or vector's) world coordinates.
+    no matter the basis of the inputs, the resulting point will have no basis.
+    """
+    return Point(self.x+other.x , self.y+other.y, self.z+other.z)
+  
+  def __sub__(self, other): 
+    """
+    overloads the subtraction **(+)** operator
+    returns a new point that results from subtracting the other point's (or vector's) worldcoordinates from this point's world coordinates.
+    no matter the basis of the inputs, the resulting point will have no basis.
+    :rtype: Point
+    """
+    return Point(self.x-other.x , self.y-other.y, self.z-other.z)
+
+  def __div__(self, other): 
+    """
+    overloads the division **(+)** operator
+    returns a new point that results from divding each of this point's world coordinates by the value provided.
+    no matter the basis of the inputs, the resulting point will have no basis.
+    """
+    return Point(self.x/float(other), self.y/float(other), self.z/float(other))
+
   def __mul__(self, other):
+    """
+    overloads the multiplication **(*)** operator
+    if a transformation is provided, applies the transformation to this point in a way equivilent to the expression ``other * self``
+    otherwise, returns a new point that results from multiplying each of this point's world coordinates by the value provided.  no matter the basis of the inputs, the resulting point will have no basis.
+    """
     from .xform import Xform
     if isinstance(other, Xform) :
       return other*self
@@ -112,18 +154,40 @@ class Point(Vec,HasBasis):
   def __ne__(self, other): return not all([self.x==other.x,self.y==other.y,self.z==other.z])
   def __ge__(self, other): return True if (self > other or self == other) else False 
 
-  '''distance squared. Cheaper to calculate.'''
+
   def _distance2(self, other):
+    """
+    distance squared in local space. Cheaper to calculate than distance.
+    """
     if self.basis is not other.basis : raise BasisError("Cannot measure '_distance2' between points with different bases.  Use 'distance2' instead")
     return Vec(self,other).length2
+
   def _distance(self, other): 
+    """
+    returns the distance between this point and the other point in local space.
+    both points must use the same basis.
+    """
     if self.basis is not other.basis : raise BasisError("Cannot measure '_distance' between points with different bases.  Use 'distance' instead")
     return Vec(self,other).length
-  def distance2(self,other): return Vec(self.basis_applied(),other.basis_applied()).length2
-  def distance(self,other): return Vec(self.basis_applied(),other.basis_applied()).length
+  
+  def distance2(self,other): 
+    """
+    distance squared in world space. Cheaper to calculate than distance.
+    """
+    return Vec(self.basis_applied(),other.basis_applied()).length2
+
+  def distance(self,other): 
+    """
+    returns the distance between this point and the other point in world space.
+    both points must use the same basis.
+    """
+    return Vec(self.basis_applied(),other.basis_applied()).length
   
   @staticmethod
   def interpolate(p0,p1,t=0.5): 
+    """
+    returns a new point which is the result of an interpolation between the two given points at the given t-value
+    """
     if p0.basis is p1.basis : 
       v = Vec.interpolate(p0,p1,t)
       return Point(v.x,v.y,v.z,p0.basis)
@@ -142,13 +206,19 @@ class Point(Vec,HasBasis):
   def centroid(points): 
     return Point( Vec.average([p.basis_applied() for p in points]) )
     
-  '''Returns a new point projected onto a destination vector'''
-  def projected(self, other): return Point( Vec(self.x,self.y,self.z).projected(other) )
-  #TODO: think about what this function will mean for new "basis" construct
-  #probably eliminate, in favor of projecting onto lines and such in world space
+
+  def projected(self, other): 
+    """
+    Returns a new point projected onto a destination vector
+    .. todo:: think about what this function will mean for new "basis" construct.  probably eliminate, in favor of projecting onto lines and such in world space
+    """
+    return Point( Vec(self.x,self.y,self.z).projected(other) )
   
   @staticmethod
   def random(rnge=[-1.0,1.0],constrain2d=False):
+    """
+    Returns a random point within the given (optional) range
+    """
     x = random.uniform(rnge[0],rnge[1])
     y = random.uniform(rnge[0],rnge[1])
     z = random.uniform(rnge[0],rnge[1])
