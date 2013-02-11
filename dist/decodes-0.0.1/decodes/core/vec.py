@@ -13,9 +13,9 @@ class Vec(Geometry):
   def __init__(self, a=0, b=0, c=0):
     if all( hasattr(a,i) and hasattr(b,i) for i in ['x','y','z'] ) :
       # we've been passed two things that act like points
-      self._x = a.x - b.x
-      self._y = a.y - b.y
-      self._z = a.z - b.z  
+      self._x = b.x - a.x
+      self._y = b.y - a.y
+      self._z = b.z - a.z  
     elif all([hasattr(a,'x'),hasattr(a,'y'),hasattr(a,'z')]):
       # we've been passed one thing that acts like a vec
       self._x = a.x

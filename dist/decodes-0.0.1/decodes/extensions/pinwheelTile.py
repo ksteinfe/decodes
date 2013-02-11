@@ -1,8 +1,9 @@
 # FGC Part 4
 # pinwheelTile.py
 # provides classes that support pinwheel tile inflation
-import fieldpack as fp
-from fieldpack import *
+from .. import *
+from ..core import *
+from ..core import base, vec, point, cs, line, mesh, pgon
 import math
 
 # according to Radin, the pinwheel tiling contains one prototyle 
