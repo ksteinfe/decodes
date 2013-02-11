@@ -48,10 +48,10 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>144</X>
-                  <Y>120</Y>
+                  <X>278</X>
+                  <Y>357</Y>
                 </item>
-                <item name="Zoom" type_name="gh_single" type_code="5">1.5625</item>
+                <item name="Zoom" type_name="gh_single" type_code="5">1.25</item>
               </items>
             </chunk>
             <chunk name="Views">
@@ -398,7 +398,7 @@ if __name__=="__main__": main()
                   </items>
                   <chunks count="2">
                     <chunk name="Attributes">
-                      <items count="3">
+                      <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>165.2118</X>
                           <Y>70.9381</Y>
@@ -409,7 +409,6 @@ if __name__=="__main__": main()
                           <W>50</W>
                           <H>20</H>
                         </item>
-                        <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                       </items>
                     </chunk>
                     <chunk name="PersistentData">
@@ -428,7 +427,7 @@ if __name__=="__main__": main()
                               <chunks count="1">
                                 <chunk name="ReferenceData">
                                   <items count="5">
-                                    <item name="RefID" type_name="gh_guid" type_code="9">d3d71dab-bdae-4873-8877-4a025cba845e</item>
+                                    <item name="RefID" type_name="gh_guid" type_code="9">631e5a57-c634-4651-aafc-e26c4a61bb37</item>
                                     <item name="RefIndex" type_name="gh_int32" type_code="3">-1</item>
                                     <item name="RefParam" index="0" type_name="gh_double" type_code="6">0</item>
                                     <item name="RefParam" index="1" type_name="gh_double" type_code="6">0</item>
