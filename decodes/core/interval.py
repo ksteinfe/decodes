@@ -30,7 +30,7 @@ class Interval():
         else: raise ValueError('The number is not within the range')
     
     @property
-    def remap(self, target=Interval(a=0,b=1), number): #remap = default 0 to 1 both source and target
+    def remap(self, number, target=Interval(a=0,b=1)): #remap = default 0 to 1 both source and target
         if number > self.a and number < self.b: 
             return ((target.b-target.a) * percent_evaluate(self, number))/1 
         else: raise ValueError('The number is not within the range')
