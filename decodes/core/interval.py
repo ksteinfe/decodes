@@ -84,7 +84,7 @@ class Interval():
         
             :rtype: Number 
         """
-        
+        #
     def deval(self, number): # Return the number a percentage refers to
         if number > self.a and number < self.b: return float(number-self.a)/float(self.delta())
         elif self.delta() < 0 and number < self.a and number > self.b: return float(number-self.a)/float(self.delta())
