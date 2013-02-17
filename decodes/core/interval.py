@@ -86,15 +86,33 @@ class Interval():
         """
         #
     def deval(self, number): # Return the number a percentage refers to
+        """ Reparameterizes between zero and one the value of a number, within an interval.
+        
+            :param number: Number to reparameterize.
+            :type number: float
+            :rtype: Reparameterized number. 
+        """ 
         if number > self.a and number < self.b: return float(number-self.a)/float(self.delta())
         elif self.delta() < 0 and number < self.a and number > self.b: return float(number-self.a)/float(self.delta())
         else: raise ValueError('The number is not within the range')
         
     def eval(self, number):
+        """ Evaluates a number between zero and one in a range.
+        
+            :param number: Number to evaluate.
+            :type number: float
+            :rtype: Evalauted number. 
+        """  
         if number >= 0 and number <= 1: return (self.delta() * number) + self.a
         else: raise ValueError('The number is not within the range')
     
     def remap(self, number, target=None): 
+        """ Translates a number in an interval into a new interval.
+        
+            :param number: Number to remap.
+            :type number: float
+            :rtype: Translated number. 
+        """  
         if target==None: target =Interval(0,1)
         if number > self.a and number < self.b: 
             return target.eval(self.deval(number))
