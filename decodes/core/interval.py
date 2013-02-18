@@ -8,20 +8,21 @@ class Interval():
         self.a = a
         self.b = b
 
-    def list_int(self): return [self.a, self.b]
+    def list_int(self): 
         """Returns a list of the interval's start and end values.
         
             :rtype: List of interval's components
         """
+        return [self.a, self.b]
         
-    def ordered(self): return True if self.a < self.b else False
+    def ordered(self): 
         """Returns True if the start value of the interval is smaller than the end value.
         
             :rtype: Boolean value
         """
+        return True if self.a < self.b else False
         
     def order(self, copy=False):
-    #def makeOut(outtype, name="untitled", path=False):
         """Returns a list of interval components ordered from smaller to larger.
         
             :param copy: Specify whether you want to modify the original interval or create a new ordered one.
@@ -36,7 +37,7 @@ class Interval():
             else:
                 self.a, self.b = self.b, self.a
                 return [self.a, self.b]
-            
+    
     def division(self, number):
         """Divides an interval into a list of values with equal size.
         
@@ -79,13 +80,14 @@ class Interval():
         if length > 0: return length
         else: return length *-1
     
-    def delta(self): return self.b - self.a
+    def delta(self): 
         """Returns the length of the interval
         
             :rtype: Number 
         """
-        #
-    def deval(self, number): # Return the number a percentage refers to
+        return self.b - self.a
+        
+    def deval(self, number): 
         """ Reparameterizes between zero and one the value of a number, within an interval.
         
             :param number: Number to reparameterize.

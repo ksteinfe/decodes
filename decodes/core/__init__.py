@@ -18,3 +18,5 @@ from pgon import *
 
 from xform import *
 from intersection import *
+
+from interval import *
