@@ -47,15 +47,19 @@ def from_rgplane(rh_plane):
         return CS(cpt,x_axis,y_axis)
 
 def from_rgpolyline(gh_polyline):
-    if not gh_polyline.IsClosed : raise GeometricError("Cannot import open polylines")
-    gh_curve = gh_polyline.ToNurbsCurve()
-    isplanar, plane = gh_curve.TryGetPlane()
-    if not isplanar : raise GeometricError("Cannot import non-planar polylines")
-    cs = from_rgplane(plane)
-    w_verts = [from_rgpt(gh_polyline[i]) for i in range(len(gh_polyline))]
-    verts = [ (pt*cs.ixform).set_basis(cs) for pt in w_verts ]
-    if (verts[0]==verts[-1]) : del verts[-1] #remove last vert if a duplicate
-    return PGon(verts,cs)
+    if not gh_polyline.IsClosed : 
+        gh_curve = gh_polyline.ToNurbsCurve()
+        w_verts = [from_rgpt(gh_polyline[i]) for i in range(len(gh_polyline))]
+        return PLine(w_verts)
+    else:
+        gh_curve = gh_polyline.ToNurbsCurve()
+        isplanar, plane = gh_curve.TryGetPlane()
+        if not isplanar : raise GeometricError("Cannot import non-planar polylines")
+        cs = from_rgplane(plane)
+        w_verts = [from_rgpt(gh_polyline[i]) for i in range(len(gh_polyline))]
+        verts = [ (pt*cs.ixform).set_basis(cs) for pt in w_verts ]
+        if (verts[0]==verts[-1]) : del verts[-1] #remove last vert if a duplicate
+        return PGon(verts,cs)
     
 
 def from_rgtransform(rh_xf):

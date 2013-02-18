@@ -1,6 +1,6 @@
 from decodes.core import *
 if VERBOSE_FS: print "base.py loaded"
-import copy,exceptions
+import copy,exceptions, collections
 
 
 #TODO: do these better elsewhere
@@ -66,13 +66,6 @@ class HasBasis(object):
     def basis_stripped(self, copy_children=True): 
         raise NotImplementedError("basis_stripped not implimented.    I am a BAD HasBasis!")
 
-
-
-
-
-
-
-
 class Geometry(object):
     """a base geometry class for all other geometry to inherit"""
     
@@ -105,3 +98,26 @@ class Geometry(object):
     def ixform(self): 
         #TODO: i think these are obsolete
         return self.objCS.ixform
+ 
+class HasVerts(object):
+    def __getitem__(self,index):
+        return self._verts[index]
+    
+    def __setitem__(self,index,vert):
+        self._verts[index] = vert
+    
+    @property
+    def verts(self): return self._verts
+    
+    @verts.setter
+    def verts(self, verts): 
+        self._verts = []
+        self.append(verts)
+        
+    def append(self,other) : 
+        if isinstance(other, collections.Iterable) : 
+            for v in other : self.append(v)
+        else : 
+            self._verts.append(other)
+
+            

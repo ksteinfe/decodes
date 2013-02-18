@@ -1,6 +1,6 @@
 from .. import *
 from ..core import *
-from ..core import base, vec, point, cs, line, mesh, pgon
+from ..core import base, vec, point, cs, line, pline, mesh, pgon
 from .rhino_out import *
 from . import outie
 if VERBOSE_FS: print "gh_out loaded"
@@ -93,6 +93,11 @@ class GrasshopperOut(outie.Outie):
                 tree_p.Add(props, path)
             return True
         
+        if isinstance(g, PLine) : 
+            tree.Add(self._drawPLine(g),path)
+            tree_p.Add(extract_props(g), path)
+            return True
+        
         if isinstance(g, PGon) : 
             tree.Add(self._drawPGon(g),path)
             tree_p.Add(extract_props(g), path)
@@ -135,7 +140,10 @@ class GrasshopperOut(outie.Outie):
             rh_spt = rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z)
             rh_ept = rg.Point3d(ln.ept.x,ln.ept.y,ln.ept.z)
             return [rh_spt,rg.Line(rh_spt,rh_ept)]
-        
+    
+    def _drawPLine(self, pline):
+        return to_rgpolyline(pline)
+            
     def _drawPGon(self, pgon):
         return to_rgpolyline(pgon)
 

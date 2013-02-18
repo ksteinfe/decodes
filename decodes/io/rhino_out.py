@@ -1,6 +1,6 @@
 from .. import *
 from ..core import *
-from ..core import base, vec, point, cs, line, mesh, pgon
+from ..core import base, vec, point, cs, line, pline, mesh, pgon
 from . import outie
 if VERBOSE_FS: print "rhino_out loaded"
 
@@ -136,11 +136,10 @@ def to_rgvec(vec):
 
 def to_rgpt(pt):
     return Rhino.Geometry.Point3d(pt.x,pt.y,pt.z)
-
-
-def to_rgpolyline(pgon):
-    verts = [to_rgpt(pt) for pt in pgon.verts]
-    verts.append(verts[0])
+    
+def to_rgpolyline(other):
+    verts = [to_rgpt(pt) for pt in other.verts]
+    if isinstance(other, PGon) : verts.append(verts[0])
     return Rhino.Geometry.Polyline(verts)
 
 

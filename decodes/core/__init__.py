@@ -12,6 +12,7 @@ from cs import *
 
 from line import *
 
+from pline import *
 from mesh import *
 from pgon import *
 
