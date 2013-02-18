@@ -94,8 +94,8 @@ class Interval():
             :type number: float
             :rtype: Reparameterized number. 
         """ 
-        if number > self.a and number < self.b: return float(number-self.a)/float(self.delta())
-        elif self.delta() < 0 and number < self.a and number > self.b: return float(number-self.a)/float(self.delta())
+        if number >= self.a and number <= self.b: return float(number-self.a)/float(self.delta())
+        elif self.delta() <= 0 and number <= self.a and number >= self.b: return float(number-self.a)/float(self.delta())
         else: raise ValueError('The number is not within the range')
         
     def eval(self, number):
@@ -116,9 +116,9 @@ class Interval():
             :rtype: Translated number. 
         """  
         if target==None: target =Interval(0,1)
-        if number > self.a and number < self.b: 
+        if number >= self.a and number <= self.b: 
             return target.eval(self.deval(number))
-        elif self.delta() < 0 and number < self.a and number > self.b:
+        elif self.delta() <= 0 and number <= self.a and number >= self.b:
             return target.eval(self.deval(number))
-        else: raise ValueError('The number is not within the range')
+        #else: raise ValueError('The number is not within the range')
 

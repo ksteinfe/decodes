@@ -22,6 +22,10 @@ class PLine(Geometry, HasVerts):
         pass
         #return self
         #TODO: copy this functionality from Mesh class
+        
+    @property
+    def centroid(self):
+        return Point.centroid(self.verts)
          
     def __repr__(self):
         return "pline[{0}v]".format(len(self._verts))
