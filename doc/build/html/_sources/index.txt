@@ -29,6 +29,13 @@ color.py
 .. automodule:: decodes.core.color
    :members: 
 
+
+interval.py
+--------------------------   
+.. automodule:: decodes.core.interval
+   :members: 
+
+
 vec.py
 --------------------------
 .. automodule:: decodes.core.vec
@@ -46,6 +53,11 @@ point.py
 mesh.py
 --------------------------   
 .. automodule:: decodes.core.mesh
+   :members: 
+
+pline.py
+--------------------------   
+.. automodule:: decodes.core.pline
    :members: 
 
 pgon.py

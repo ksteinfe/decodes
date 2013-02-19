@@ -4,7 +4,15 @@ from decodes.core import *
 import math, random
 
 class Interval():
+    """
+    an interval class
+    """
+
     def __init__(self, a=0,b=1):
+        """Interval Constructor
+
+        .. todo:: Document this method
+        """
         self.a = a
         self.b = b
 
@@ -42,7 +50,7 @@ class Interval():
         """Divides an interval into a list of values with equal size.
         
             :param number: Number of interval divisions.
-            :type number: integer
+            :type number: int
             :rtype: List of numbers in which a list is divided. 
         """
         step = float(self.delta())/float(number-1)
@@ -58,7 +66,7 @@ class Interval():
         """Divides an interval into a list of equal size subdomains(interval objects).
         
             :param number: Number of interval subdomains.
-            :type number: integer
+            :type number: int
             :rtype: List of subdomains (interval objects). 
         """
         step = float(self.delta())/float(number-1)
@@ -72,17 +80,21 @@ class Interval():
         return division
     
     def length(self):
-        """Returns the absolut length of the interval
+        """Returns the absolute value of length of the interval.
         
-            :rtype: Number 
+        For a signed representation, use delta
+        
+            :rtype: int 
         """
         length = self.b - self.a 
         if length > 0: return length
         else: return length *-1
     
     def delta(self): 
-        """Returns the length of the interval
+        """Returns the signed delta of the interval, calculated as b-a
         
+        For an unsigned representation, use length
+
             :rtype: Number 
         """
         return self.b - self.a

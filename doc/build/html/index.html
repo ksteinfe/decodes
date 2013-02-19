@@ -61,7 +61,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>outtype</strong> (<em>int (enumerated from Outies class)</em>) &#8211; The type of outie to create</li>
-<li><strong>name</strong> (<em>string or &#8220;untitled&#8221;</em>) &#8211; The name of the outie to create.  This name is used in different ways, depending on the context to which we will be drawing geometry</li>
+<li><strong>name</strong> (<em>string or &#8220;untitled&#8221;</em>) &#8211; The name of the outie to create.    This name is used in different ways, depending on the context to which we will be drawing geometry</li>
 <li><strong>path</strong> (<a class="reference external" href="http://docs.python.org/library/string.html#string" title="(in Python v2.7)"><em>string</em></a>) &#8211; If an outie creates a file, the filepath to save to.</li>
 </ul>
 </td>
@@ -107,6 +107,173 @@ which may be interpreted by the basis in order to generate a valid baseless poin
 </div>
 <div class="section" id="module-decodes.core.color">
 <span id="color-py"></span><h3>color.py<a class="headerlink" href="#module-decodes.core.color" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="module-decodes.core.interval">
+<span id="interval-py"></span><h3>interval.py<a class="headerlink" href="#module-decodes.core.interval" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="decodes.core.interval.Interval">
+<em class="property">class </em><tt class="descclassname">decodes.core.interval.</tt><tt class="descname">Interval</tt><big>(</big><em>a=0</em>, <em>b=1</em><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval" title="Permalink to this definition">¶</a></dt>
+<dd><p>an interval class</p>
+<dl class="method">
+<dt id="decodes.core.interval.Interval.delta">
+<tt class="descname">delta</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.delta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the signed delta of the interval, calculated as b-a</p>
+<p>For an unsigned representation, use length</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">rtype:</th><td class="field-body">Number</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.interval.Interval.deval">
+<tt class="descname">deval</tt><big>(</big><em>number</em><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.deval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reparameterizes between zero and one the value of a number, within an interval.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>number</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Number to reparameterize.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Reparameterized number.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.interval.Interval.division">
+<tt class="descname">division</tt><big>(</big><em>number</em><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.division" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divides an interval into a list of values with equal size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>number</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of interval divisions.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">List of numbers in which a list is divided.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.interval.Interval.eval">
+<tt class="descname">eval</tt><big>(</big><em>number</em><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates a number between zero and one in a range.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>number</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Number to evaluate.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Evalauted number.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.interval.Interval.length">
+<tt class="descname">length</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the absolute value of length of the interval.</p>
+<p>For a signed representation, use delta</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">rtype:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.interval.Interval.list_int">
+<tt class="descname">list_int</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.list_int" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of the interval&#8217;s start and end values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">List of interval&#8217;s components</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.interval.Interval.order">
+<tt class="descname">order</tt><big>(</big><em>copy=False</em><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of interval components ordered from smaller to larger.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>copy</strong> (<em>True or False</em>) &#8211; Specify whether you want to modify the original interval or create a new ordered one.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Ordered list of domain components.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.interval.Interval.ordered">
+<tt class="descname">ordered</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.ordered" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the start value of the interval is smaller than the end value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Boolean value</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.interval.Interval.remap">
+<tt class="descname">remap</tt><big>(</big><em>number</em>, <em>target=None</em><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.remap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates a number in an interval into a new interval.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>number</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Number to remap.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Translated number.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.interval.Interval.subdomain">
+<tt class="descname">subdomain</tt><big>(</big><em>number</em><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.subdomain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divides an interval into a list of equal size subdomains(interval objects).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>number</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of interval subdomains.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">List of subdomains (interval objects).</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-decodes.core.vec">
 <span id="vec-py"></span><h3>vec.py<a class="headerlink" href="#module-decodes.core.vec" title="Permalink to this headline">¶</a></h3>
@@ -165,7 +332,7 @@ This will be at right angles to both self and other, with a length</p>
 <dl class="attribute">
 <dt id="decodes.core.vec.Vec.length">
 <tt class="descname">length</tt><a class="headerlink" href="#decodes.core.vec.Vec.length" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the length of this vector.  Use vec.length2 when possible, as it is cheaper to calculate</p>
+<dd><p>Returns the length of this vector.    Use vec.length2 when possible, as it is cheaper to calculate</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -234,7 +401,7 @@ no matter the basis of the inputs, the resulting point will have no basis.</p>
 <tt class="descname">__mul__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.__mul__" title="Permalink to this definition">¶</a></dt>
 <dd><p>overloads the multiplication <strong>(*)</strong> operator
 if a transformation is provided, applies the transformation to this point in a way equivilent to the expression <tt class="docutils literal"><span class="pre">other</span> <span class="pre">*</span> <span class="pre">self</span></tt>
-otherwise, returns a new point that results from multiplying each of this point&#8217;s world coordinates by the value provided.  no matter the basis of the inputs, the resulting point will have no basis.</p>
+otherwise, returns a new point that results from multiplying each of this point&#8217;s world coordinates by the value provided.    no matter the basis of the inputs, the resulting point will have no basis.</p>
 </dd></dl>
 
 <dl class="method">
@@ -297,7 +464,7 @@ both points must use the same basis.</p>
 <dt id="decodes.core.point.Point.projected">
 <tt class="descname">projected</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.projected" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a new point projected onto a destination vector
-.. todo:: think about what this function will mean for new &#8220;basis&#8221; construct.  probably eliminate, in favor of projecting onto lines and such in world space</p>
+.. todo:: think about what this function will mean for new &#8220;basis&#8221; construct.    probably eliminate, in favor of projecting onto lines and such in world space</p>
 </dd></dl>
 
 <dl class="staticmethod">
@@ -316,21 +483,21 @@ both points must use the same basis.</p>
 <dt id="decodes.core.point.Point.x">
 <tt class="descname">x</tt><a class="headerlink" href="#decodes.core.point.Point.x" title="Permalink to this definition">¶</a></dt>
 <dd><p>The x-coordinate of this point
-Setting the x-value of a point with a basis requires stripping the basis of the point.  Set pt._x to alter the local coordinate instead</p>
+Setting the x-value of a point with a basis requires stripping the basis of the point.    Set pt._x to alter the local coordinate instead</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.point.Point.y">
 <tt class="descname">y</tt><a class="headerlink" href="#decodes.core.point.Point.y" title="Permalink to this definition">¶</a></dt>
 <dd><p>The y-coordinate of this point
-Setting the y-value of a point with a basis requires stripping the basis of the point.  Set pt._y to alter the local coordinate instead</p>
+Setting the y-value of a point with a basis requires stripping the basis of the point.    Set pt._y to alter the local coordinate instead</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.point.Point.z">
 <tt class="descname">z</tt><a class="headerlink" href="#decodes.core.point.Point.z" title="Permalink to this definition">¶</a></dt>
 <dd><p>The z-coordinate of this point
-Setting the z-value of a point with a basis requires stripping the basis of the point.  Set pt._z to alter the local coordinate instead</p>
+Setting the z-value of a point with a basis requires stripping the basis of the point.    Set pt._z to alter the local coordinate instead</p>
 </dd></dl>
 
 </dd></dl>
@@ -342,6 +509,15 @@ Setting the z-value of a point with a basis requires stripping the basis of the 
 <dt id="decodes.core.mesh.Mesh">
 <em class="property">class </em><tt class="descclassname">decodes.core.mesh.</tt><tt class="descname">Mesh</tt><big>(</big><em>verts=None</em>, <em>faces=None</em>, <em>basis=None</em><big>)</big><a class="headerlink" href="#decodes.core.mesh.Mesh" title="Permalink to this definition">¶</a></dt>
 <dd><p>a very simple mesh class</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-decodes.core.pline">
+<span id="pline-py"></span><h3>pline.py<a class="headerlink" href="#module-decodes.core.pline" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="decodes.core.pline.PLine">
+<em class="property">class </em><tt class="descclassname">decodes.core.pline.</tt><tt class="descname">PLine</tt><big>(</big><em>verts=None</em><big>)</big><a class="headerlink" href="#decodes.core.pline.PLine" title="Permalink to this definition">¶</a></dt>
+<dd><p>a polyline class</p>
 </dd></dl>
 
 </div>
@@ -520,7 +696,7 @@ if p is on this linear entity.</p>
 <em class="property">static </em><tt class="descname">change_basis</tt><big>(</big><em>csSource</em>, <em>csTarget</em><big>)</big><a class="headerlink" href="#decodes.core.xform.Xform.change_basis" title="Permalink to this definition">¶</a></dt>
 <dd><div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">This method currently relies on access to the Rhinocommon Kernel.  It will not work in other contexts.</p>
+<p class="last">This method currently relies on access to the Rhinocommon Kernel.    It will not work in other contexts.</p>
 </div>
 <div class="admonition-todo admonition" id="index-6">
 <p class="first admonition-title">Todo</p>
@@ -549,7 +725,7 @@ Or, pass in an arbitrary cs (produces mirror about XYplane of CS)</p>
 <em class="property">static </em><tt class="descname">rotation</tt><big>(</big><em>**kargs</em><big>)</big><a class="headerlink" href="#decodes.core.xform.Xform.rotation" title="Permalink to this definition">¶</a></dt>
 <dd><div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">This method currently relies on access to the Rhinocommon Kernel.  It will not work in other contexts.</p>
+<p class="last">This method currently relies on access to the Rhinocommon Kernel.    It will not work in other contexts.</p>
 </div>
 <div class="admonition-todo admonition" id="index-8">
 <p class="first admonition-title">Todo</p>
