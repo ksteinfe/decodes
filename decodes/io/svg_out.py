@@ -5,15 +5,18 @@ from . import outie
 if VERBOSE_FS: print "svg_out loaded"
 
 import os, sys
-import pysvg
-from pysvg.structure import *
-from pysvg.shape import *
-from pysvg.builders import *
+import cStringIO
+#import pysvg
+#from pysvg.structure import *
+#from pysvg.shape import *
+#from pysvg.builders import *
 
 class SVGOut(outie.Outie):
     """outie for writing stuff to a SVG file"""
     
     default_color = Color(0)
+    point_size = 2
+    min_point_size = 0.001
 
     def __init__(self, filename, path=False):
         super(SVGOut,self).__init__()
@@ -23,10 +26,20 @@ class SVGOut(outie.Outie):
         
     def _startDraw(self):
         print "drawing svn to "+self.filepath
-        self.svg = svg()
+        self.buffer = cStringIO.StringIO()
+        self.buffer.write('<svg xmlns="http://www.w3.org/2000/svg" version="1.1">\n')
+        #self.svg = svg()
     
     def _endDraw(self):
-        self.svg.save(self.filepath)
+        self.buffer.write('</svg>')
+
+        # write buffer to file
+        fo = open(self.filepath, "wb")
+        fo.write( self.buffer.getvalue() )
+        fo.close()
+        self.buffer.close()
+
+        #self.svg.save(self.filepath)
         
     def _drawGeom(self, g):
         # here we sort out what type of geometry we're dealing with, and call the proper draw functions
@@ -39,19 +52,25 @@ class SVGOut(outie.Outie):
         
         return False
 
+    def _buffer_append(self,type,atts,style):
+        self.buffer.write('<'+type+' '+atts+' style="'+style+'"/>\n')
+
     def _drawPoint(self, pt):
-        svg_pt = circle(pt.x, pt.y, 2)
-        svg_pt.set_style(self._extract_props(pt,force_fill=True)) # circles are always filled
-        self.svg.addElement(svg_pt)
+        type = 'circle'
+        style = self._extract_props(pt,force_fill=True) # force filled
+        size = self.point_size/2.0
+        if (hasattr(pt, 'props')) and ('weight' in pt.props) : size = pt.props['weight']
+        if size < self.min_point_size : size = self.min_point_size
+        atts = 'cx="%s" cy="%s" r="%s"' % (pt.x, pt.y,size)
+        self._buffer_append(type,atts,style)
         return True
         
     def _drawPolygon(self, pgon):
-        oh=ShapeBuilder()
-        pointsAsTuples=[(v.x,v.y) for v in pgon.verts]
-        svg_rect=oh.createPolygon(points=oh.convertTupleArrayToPoints(pointsAsTuples),strokewidth=10, stroke='blue', fill='red')
-        
-        svg_rect.set_style(self._extract_props(pgon,force_fill=True)) # polygons are always filled
-        self.svg.addElement(svg_rect)
+        type = 'polygon'
+        style = self._extract_props(pgon,force_fill=True) # force filled
+        point_string = " ".join([str(v.x)+","+str(v.y) for v in pgon.verts])
+        atts = 'points="'+point_string+'"'
+        self._buffer_append(type,atts,style)
         return True
 
 
@@ -94,12 +113,12 @@ class SVGOut(outie.Outie):
         to turn off fills, set props['fill_color'] = False
         to turn off strokes, set props['stroke_color'] = False
         '''
-        fill_color = 'none' if not props['fill_color'] else 'rgb(%s,%s,%s)' % (props['fill_color'].r*255,props['fill_color'].g*255,props['fill_color'].b*255)
+        fill_color = 'none' if not props['fill_color'] else 'rgb(%s,%s,%s)' % (int(props['fill_color'].r*255),int(props['fill_color'].g*255),int(props['fill_color'].b*255))
         # TODO: fill opacity may be set, but would require an alpha color representation
 
         stroke_width = 0 if not props['stroke_color'] else props['stroke_width']
-        stroke_color = 'none' if not props['stroke_color'] else 'rgb(%s,%s,%s)' % (props['stroke_color'].r*255,props['stroke_color'].g*255,props['stroke_color'].b*255)
+        stroke_color = 'none' if not props['stroke_color'] else 'rgb(%s,%s,%s)' % (int(props['stroke_color'].r*255),int(props['stroke_color'].g*255),int(props['stroke_color'].b*255))
         
         
-        style = 'fill:%s;stroke-width:%s; stroke:%s' % (fill_color, stroke_width, stroke_color)
+        style = 'fill:%s;stroke-width:%s;stroke:%s' % (fill_color, stroke_width, stroke_color)
         return style

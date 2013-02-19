@@ -37,20 +37,24 @@ class Outie(object):
         #calls the (hopefully overridden) draw function for each geometric object
         #returns a list of successful writes
         self._startDraw()
-        results = map(self._drawGeom, self.geom)
-        if False in results:
-            print "dump not completely successful, the following geometry was not written:"
-            i = -1
-            try:
-                while 1:
-                    i = results.index(False, i+1)
-                    print str(i) , self.geom[i]
-            except ValueError:
-                pass
+        try:
+            results = map(self._drawGeom, self.geom)
+            if False in results:
+                print "dump not completely successful, the following geometry was not written:"
+                i = -1
+                try:
+                    while 1:
+                        i = results.index(False, i+1)
+                        print str(i) , self.geom[i]
+                except ValueError:
+                    pass
         
-        self._endDraw() #finish up anything we need to in our drawing context
-        self.clear() #empty the outie after each draw
-        return results
+            self._endDraw() #finish up anything we need to in our drawing context
+            self.clear() #empty the outie after each draw
+            return results
+        except:
+            self._endDraw()
+            raise
         
         
     def clear(self):
