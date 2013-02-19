@@ -87,6 +87,12 @@ class Geometry(object):
     def set_weight(self,num):
         if not hasattr(self, 'props') : self.props = {}
         self.props['weight'] = num
+
+    def set_fill(self,a,b=None,c=None):
+        from .color import Color
+        if not hasattr(self, 'props') : self.props = {}
+        if isinstance(a, (Color) ) : self.props['fill'] = a
+        else : self.props['fill'] = Color(a,b,c)
         
         
     @property

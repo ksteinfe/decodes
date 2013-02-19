@@ -242,6 +242,11 @@ namespace DcPython.Decodes
             rhdoc.Views.Redraw();
         }
 
+        /*
+        private void ExportSVG(Rhino.RhinoDoc rhdoc) {
+
+        }
+        */
 
         public override bool AppendMenuItems(ToolStripDropDown menu)
         {
@@ -258,6 +263,10 @@ namespace DcPython.Decodes
             Menu_AppendTextItem(menu, parent_layer_name, Menu_ParentLayerNameKeyDown, Menu_ParentLayerNameChanged, true);
 
             Menu_AppendSeparator(menu);
+            /*
+            Menu_AppendItem(menu, "Export to SVG", Menu_ExportSVG, Resources.Icons_Param_Props, true, false);
+            Menu_AppendSeparator(menu);
+            */
 
             Menu_AppendWarningsAndErrors(menu);
             Menu_AppendObjectHelp(menu);
@@ -269,6 +278,13 @@ namespace DcPython.Decodes
             Rhino.RhinoDoc rhdoc = Rhino.RhinoDoc.ActiveDoc;
             BakeStoredObjects(rhdoc);
         }
+
+        /*
+        public void Menu_ExportSVG(Object sender, EventArgs e) {
+            Rhino.RhinoDoc rhdoc = Rhino.RhinoDoc.ActiveDoc;
+            ExportSVG(rhdoc);
+        }
+        */
 
         private void Menu_ParentLayerNameKeyDown(Object sender, EventArgs e) { Menu_ParentLayerNameChanged(sender, ((Grasshopper.GUI.GH_MenuTextBox)sender).Text); }
         public void Menu_ParentLayerNameChanged(Object sender, string text) { this.parent_layer_name = text; }
