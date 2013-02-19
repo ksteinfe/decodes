@@ -6,10 +6,6 @@ if VERBOSE_FS: print "svg_out loaded"
 
 import os, sys
 import cStringIO
-#import pysvg
-#from pysvg.structure import *
-#from pysvg.shape import *
-#from pysvg.builders import *
 
 class SVGOut(outie.Outie):
     """outie for writing stuff to a SVG file"""
@@ -28,7 +24,6 @@ class SVGOut(outie.Outie):
         print "drawing svn to "+self.filepath
         self.buffer = cStringIO.StringIO()
         self.buffer.write('<svg xmlns="http://www.w3.org/2000/svg" version="1.1">\n')
-        #self.svg = svg()
     
     def _endDraw(self):
         self.buffer.write('</svg>')
@@ -39,7 +34,6 @@ class SVGOut(outie.Outie):
         fo.close()
         self.buffer.close()
 
-        #self.svg.save(self.filepath)
         
     def _drawGeom(self, g):
         # here we sort out what type of geometry we're dealing with, and call the proper draw functions
