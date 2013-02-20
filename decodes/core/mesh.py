@@ -5,10 +5,16 @@ if VERBOSE_FS: print "mesh.py loaded"
 import copy, collections
 
 class Mesh(Geometry, HasBasis):
-    """a very simple mesh class"""
+    """
+    a very simple mesh class
+    """
     ## TODO: make mesh only triangles
     
     def __init__(self, verts=None, faces=None, basis=None):
+        """Mesh Constructor
+
+        .. todo:: Document this method
+        """
         super(Mesh,self).__init__()
         self._verts = [] if (verts is None) else verts
         self._faces = [] if (faces is None) else faces
@@ -26,10 +32,19 @@ class Mesh(Geometry, HasBasis):
         return msh
         
     @property
-    def faces(self): return self._faces
+    def faces(self): 
+        """Returns a list of mesh faces.
+        
+            :rtype: List of mesh faces.
+        """
+        return self._faces
      
     @property
     def verts(self):
+        """Returns a list of mesh vertices.
+        
+            :rtype: List of mesh verticies.
+        """
         if not self.is_baseless: return [ v.set_basis(self.basis) for v in self._verts]
         else : return self._verts
         
@@ -40,9 +55,19 @@ class Mesh(Geometry, HasBasis):
      
     @property
     def centroid(self):
+        """Returns a list of mesh centroids (points).
+        
+            :rtype: List of centroids.
+        """
         return Point.centroid(self.verts)
      
-    def add_vert(self,other) : 
+    def add_vert(self,other) :
+        """Adds a vertice to the mesh.
+        
+            :param other: New vertice or vertices to be added to the mesh.
+            :type other: Point.
+            :rtype: Modifies list of vertices.
+        """
         if isinstance(other, collections.Iterable) : 
             for v in other : self.add_vert(v)
         else : 
@@ -57,17 +82,39 @@ class Mesh(Geometry, HasBasis):
             else : raise BasisError("The basis for this Mesh and the point you're adding do not match.    Try applying or stripping the point of its basis, or describing the point in terms of the Mesh's basis")
         
     def add_face(self,a,b,c,d=-1):
+        """Adds a face to the mesh.
+        
+            :param face: Face to be added to the list of faces.
+            :type face: Face (integer).
+            :rtype: Modifies list of faces.
+        """
         #TODO: add lists of faces just the same
         if (d>=0) : self._faces.append([a,b,c,d])
         else: self._faces.append([a,b,c])
     
     def face_verts(self,index):
+        """Returns the vertice of a given face.
+        
+            :param index: Face's index
+            :type copy: Integer
+            :rtype: Vertice (point).
+        """
         return [self.verts[i] for i in self.faces[index]]
     
     def face_centroid(self,index):
+        """Not sure if this is the same as centroid....
+        
+            .. todo:: document this function.
+        """
         return Point.centroid(self.face_verts(index))
         
     def face_normal(self,index):
+        """Returns the normal vector to a face.
+        
+            :param index: Index of a face.
+            :type index: Integer.
+            :rtype: Normal vector.
+        """
         verts = self.face_verts(index)
         if len(verts) == 3 : return Vec(verts[0],verts[1]).cross(Vec(verts[0],verts[2])).normalized()
         else :
@@ -77,11 +124,21 @@ class Mesh(Geometry, HasBasis):
     
     
     def __repr__(self):
+        """Dunno what this one does.
+        
+            .. todo:: document this function.
+        """
         return "msh[{0}v,{1}f]".format(len(self._verts),len(self._faces))
     
     
     @staticmethod
     def explode(msh):
+        """Explodes a mesh into individual faces.
+        
+            :param msh: Mesh to explode.
+            :type msh: Mesh.
+            :rtype: List of meshes.
+        """
         exploded_meshes = []
         for face in msh.faces:
             pts = [msh.verts[v] for v in face]

@@ -5,9 +5,17 @@ if VERBOSE_FS: print "pline.py loaded"
 import copy, collections
 
 class PLine(Geometry, HasVerts):
-    """a polyline class"""
+    """
+    a simple polyline class
+    """
     
     def __init__(self, verts=None):
+        """Polyline constructor.
+        
+            :param verts: Vertices to build the pline.
+            :type verts: List of Points.
+            :rtype: Polyline.
+        """
         super(PLine,self).__init__()
         self._verts = []
         if (verts is not None) : 
@@ -25,6 +33,10 @@ class PLine(Geometry, HasVerts):
         
     @property
     def centroid(self):
+        """Returns the centroid of a pline.
+        
+            :rtype: Centroid (point).
+        """
         return Point.centroid(self.verts)
          
     def __repr__(self):

@@ -9,9 +9,13 @@ class Interval():
     """
 
     def __init__(self, a=0,b=1):
-        """Interval Constructor
-
-        .. todo:: Document this method
+        """Interval Constructor.
+        
+            :param a: First number of the interval.
+            :type a: Number.
+            :param b: Second number of the interval.
+            :type a: Number.
+            :rtype: Interval object.
         """
         self.a = a
         self.b = b
