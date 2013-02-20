@@ -3,25 +3,18 @@ from . import base, vec, point, cs #here we may only import modules that have be
 if VERBOSE_FS: print "polygon.py loaded"
 
 import copy, collections
+import math
 
-def rect(cpt, w, h):
-    w2 = w/2
-    h2 = h/2
-    basis = CS(cpt)
-    return PGon([Point(-w2,-h2),Point(w2,-h2),Point(w2,h2),Point(-w2,h2)],basis)
-
-
-
-class PGon(Geometry, HasBasis):
+class PGon(Geometry, HasBasis, HasVerts):
     """a very simple 2d polygon class"""
     """Polygons limit their vertices to x and y dimensions, and enforce that they employ a basis.    Transformations of a polygon should generally be applied to the basis.    Any tranfromations of the underlying vertices should ensure that the returned vectors are limited to x and y dimensions"""
     
     def __init__(self, verts=None, basis=None):
         super(PGon,self).__init__()
-        self.basis = dc.CS() if (basis is None) else basis
+        self.basis = CS() if (basis is None) else basis
         self._verts = []
         if (verts is not None) : 
-            for v in verts: self.add_vert(v)
+            for v in verts: self.append(v)
         
     def basis_applied(self, copy_children=True): 
         return self
@@ -31,17 +24,21 @@ class PGon(Geometry, HasBasis):
         return self
     #TODO: copy this functionality from Mesh class
         
+
+    #TODO: update HasVerts to deal with bases and remove this method
     @property
     def verts(self):
         if not self.is_baseless: return [ v.set_basis(self.basis) for v in self._verts]
         else : return self._verts
         
+    #TODO: update HasVerts to deal with bases and remove this method
     @verts.setter
     def verts(self, verts): 
         self._verts = []
-        self.add_vert(verts)
+        self.append(verts)
      
-    def add_vert(self,other) : 
+    #TODO: update HasVerts to deal with bases and remove this method
+    def append(self,other) : 
         if isinstance(other, collections.Iterable) : 
             for v in other : self.add_vert(v)
         else : 
@@ -59,3 +56,27 @@ class PGon(Geometry, HasBasis):
         
     def __repr__(self):
         return "pgon[{0}v]".format(len(self._verts))
+    
+    @staticmethod
+    def rectangle(cpt, w, h):
+        """Constructs a rectangle based on a center point, a width, and a height
+
+        """
+        w2 = w/2
+        h2 = h/2
+        basis = CS(cpt)
+        return PGon([Point(-w2,-h2),Point(w2,-h2),Point(w2,h2),Point(-w2,h2)],basis)
+
+    @staticmethod
+    def doughnut(cpt,r0,r1,ang_start=0,ang_sweep=math.pi,res=10):
+        """Constructs a doughnut based on a center point, two radii, and optionally a start angle, sweep angle, and resolution
+
+        """
+        cs = CylCS(cpt)
+        pts = []
+        #TODO: frange doesn't work in reverse
+        for a in frange(ang_start,ang_start+ang_sweep,ang_sweep/float(res)):pts.append(Point(r0,a))
+        for a in frange(ang_start+ang_sweep,ang_start,-ang_sweep/float(res)):pts.append(Point(r1,a))
+        return False
+        #return PGon(pts)
+

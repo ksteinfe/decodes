@@ -17,8 +17,12 @@ class SVGOut(outie.Outie):
     def __init__(self, filename, path=False):
         super(SVGOut,self).__init__()
         #if not path : self.filepath = __file__.rpartition(os.sep)[0] + os.sep + filename + ".svg"
-        if not path : self.filepath = os.path.expanduser("~") + os.sep + filename + ".svg"
-        else : self.filepath = path
+        if filename[-4:].lower() == ".svg" : filename = filename[:-4]
+        if path==False : 
+            self.filepath = os.path.expanduser("~") + os.sep + filename + ".svg"
+        else : 
+            if path[-4:].lower() == ".svg" : self.filepath = path
+            else : self.filepath = path + os.sep + filename + ".svg"
         
     def _startDraw(self):
         print "drawing svn to "+self.filepath
@@ -39,10 +43,13 @@ class SVGOut(outie.Outie):
         # here we sort out what type of geometry we're dealing with, and call the proper draw functions
         # MUST LOOK FOR CHILD CLASSES BEFORE PARENT CLASSES (points before vecs)
         
-        if isinstance(g, Point) : 
-            return self._drawPoint(g)
-        if isinstance(g, PGon) : 
-            return self._drawPolygon(g)
+        if isinstance(g, Point) : return self._drawPoint(g)
+        if isinstance(g, PGon) :  return self._drawPolygon(g)
+        if isinstance(g, PLine) :  return self._drawPolyline(g)
+        if isinstance(g, LinearEntity) : 
+            if isinstance(g, Line) : return self._drawLine(g)
+            if isinstance(g, Ray) : return self._drawRay(g)
+            if isinstance(g, Segment) : return self._drawSegment(g)
         
         return False
 
@@ -67,8 +74,29 @@ class SVGOut(outie.Outie):
         self._buffer_append(type,atts,style)
         return True
 
+    def _drawPolyline(self, pline):
+        type = 'polyline'
+        style = self._extract_props(pline)
+        point_string = " ".join([str(v.x)+","+str(v.y) for v in pline.verts])
+        atts = 'points="'+point_string+'"'
+        self._buffer_append(type,atts,style)
+        return True
 
-    
+    def _drawSegment(self, seg):
+        type = 'line'
+        style = self._extract_props(seg)
+        atts = 'x1="%s" y1="%s" x2="%s" y2="%s"' % (seg.spt.x, seg.spt.y, seg.ept.x, seg.ept.y)
+        self._buffer_append(type,atts,style)
+        return True
+
+    def _drawRay(self, ray):
+        return False
+
+    def _drawLine(self, line):
+        return False
+
+
+
 
     def _extract_props(self,object,force_fill=False):
         '''
@@ -76,7 +104,7 @@ class SVGOut(outie.Outie):
         '''
 
         if not hasattr(object, 'props'): 
-            if force_fill or fill_by_default :  return self._props_to_style({'stroke_color': False, 'stroke_width': 0.0, 'fill_color': self.default_color})
+            if force_fill :  return self._props_to_style({'stroke_color': False, 'stroke_width': 0.0, 'fill_color': self.default_color})
             else : return self._props_to_style({'stroke_color': self.default_color, 'stroke_width': 0.5, 'fill_color': False})
         
         props = {}

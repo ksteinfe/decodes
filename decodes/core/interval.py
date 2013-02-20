@@ -120,17 +120,16 @@ class Interval():
         if number >= 0 and number <= 1: return (self.delta() * number) + self.a
         else: raise ValueError('The number is not within the range')
     
-    def remap(self, number, target=None): 
-        """ Translates a number in an interval into a new interval.
+    @staticmethod
+    def remap(val, source_interval, target_interval=None): 
+        """ Translates a number from its position within the source interval to its relative position in the target interval.
         
-            :param number: Number to remap.
-            :type number: float
+            :param val: Number to remap.
+            :type val: float
             :rtype: Translated number. 
         """  
-        if target==None: target =Interval(0,1)
-        if number >= self.a and number <= self.b: 
-            return target.eval(self.deval(number))
-        elif self.delta() <= 0 and number <= self.a and number >= self.b:
-            return target.eval(self.deval(number))
-        #else: raise ValueError('The number is not within the range')
+        if target_interval==None: target_interval = Interval(0,1)
+
+        t = source_interval.deval(val)
+        return target_interval.eval(t)
 
