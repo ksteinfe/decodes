@@ -3,22 +3,6 @@ if VERBOSE_FS: print "base.py loaded"
 import copy,exceptions, collections
 
 
-#TODO: do these better elsewhere
-# perhaps in a domain / range class?    
-def frange(start, stop, step):
-    r = start
-    while r < stop:
-        yield r
-        r += step
-
-'''
-TODO: this is misbehaving
-def drange(start, stop, divs):
-    r = start
-    while r < stop:
-        yield r
-        r += (stop-start)/divs
-'''
 
 
 class GeometricError(StandardError):
