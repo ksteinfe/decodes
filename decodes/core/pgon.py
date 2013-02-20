@@ -60,11 +60,12 @@ class PGon(Geometry, HasBasis, HasVerts):
     #TODO: update HasVerts to deal with bases and remove this method
     def append(self,other) :
         """ Adds vertices to the PGon.
-        
-            .. todo:: Get rid of this function and get it from base.py
+
             :param other: Vertice to add.
             :type other: Point
             :rtype: Updates the PGon. 
+
+        .. todo:: Get rid of this function and get it from base.py
         """ 
         if isinstance(other, collections.Iterable) : 
             for v in other : self.add_vert(v)
@@ -81,12 +82,7 @@ class PGon(Geometry, HasBasis, HasVerts):
             else : raise BasisError("The basis for this PGon and the point you're adding do not match.    Try applying or stripping the point of its basis, or describing the point in terms of the PGon's basis")
         
         
-    def __repr__(self):
-        """ Don't know what this does.
-        
-            .. todo:: figure out this function
-        """ 
-        return "pgon[{0}v]".format(len(self._verts))
+    def __repr__(self): return "pgon[{0}v]".format(len(self._verts))
     
     @staticmethod
     def rectangle(cpt, w, h):

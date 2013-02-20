@@ -113,7 +113,7 @@ class Point(Vec,HasBasis):
 
     def __div__(self, other): 
         """
-        overloads the division **(+)** operator
+        overloads the division **(/)** operator
         returns a new point that results from divding each of this point's world coordinates by the value provided.
         no matter the basis of the inputs, the resulting point will have no basis.
         """

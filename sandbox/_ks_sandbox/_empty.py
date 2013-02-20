@@ -3,7 +3,15 @@ from decodes.core import *
 import math
 
 
-print Interval.remap(5,Interval(0,10),Interval(20,30))
+ival = Interval(0,10)
+print Interval(10,20).deval(25)
+print Interval(10,20).eval(1.5)
+
+#print Interval.remap(5,ival,Interval(20,30))
+#print ival.divide(4)
+#print ival.subinterval(4)
+
+
 
 
 outie = dc.makeOut(dc.Outies.SVG)
@@ -29,8 +37,8 @@ r.set_color(Color(1,0,0))
 #outie.put(r)
 
 
-dough = PGon.doughnut(Point(200,500),10,100)
-outie.put(dough)
+#dough = PGon.doughnut(Point(200,500),10,100)
+#outie.put(dough)
 
 
 ln = Segment(Point(100,300),Vec(0,50))
