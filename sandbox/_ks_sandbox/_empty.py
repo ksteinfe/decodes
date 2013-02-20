@@ -8,7 +8,7 @@ print Interval(10,20).deval(25)
 print Interval(10,20).eval(1.5)
 
 #print Interval.remap(5,ival,Interval(20,30))
-#print ival.divide(4)
+print ival.divide(4,True)
 #print ival.subinterval(4)
 
 
@@ -26,19 +26,19 @@ for x in range(10):
         outie.put(pt)
         
 pl = PGon()
-for t in frange(0,math.pi*2,math.pi*2/30) :
+for t in Interval(0,math.pi*2)/30 :
     pt = Point(math.sin(t+5)-math.sin(t)**2,math.cos(t+10)-math.cos(t)**2)
     pl.append(pt*40+Vec(200,400))
 
-#outie.put(pl)
+outie.put(pl)
 
 r = PGon.rectangle(Point(100,100),20,30)
 r.set_color(Color(1,0,0))
-#outie.put(r)
+outie.put(r)
 
 
-#dough = PGon.doughnut(Point(200,500),10,100)
-#outie.put(dough)
+dough = PGon.doughnut(Point(200,500),Interval(50,100))
+outie.put(dough)
 
 
 ln = Segment(Point(100,300),Vec(0,50))

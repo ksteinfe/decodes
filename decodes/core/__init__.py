@@ -3,6 +3,7 @@ print "decodes core loaded"
 VERBOSE_FS = False # determines if we verify file system loaded right
 VERBOSE = True
 
+from interval import *
 from color import *
 
 from base import *
@@ -19,4 +20,4 @@ from pgon import *
 from xform import *
 from intersection import *
 
-from interval import *
+

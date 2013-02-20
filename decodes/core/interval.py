@@ -1,5 +1,4 @@
 from decodes.core import *
-#from . import base, point #here we may only import modules that have been loaded before this one.  see core/__init__.py for proper order
 
 import math, random
 
@@ -78,16 +77,24 @@ class Interval():
         """
         if self.ordered() == True: return Interval(self.a, self.b)
         else: return Interval(self.b, self.a)
+
+    def invert(self):
+        """Returns a copy of this interval with swapped values.
+        Such that this.a = new.b and this.b = new.a
+        
+        """
+        return Interval(self.b, self.a)
     
-    def divide(self, divs=10):
+    def divide(self, divs=10, include_last=False):
         """Divides this interval into a list of values equally spaced between a and b.
-        Returned list will not include Interval.b: the first value returned is Interval.a and the last is Interval.b-(Interval.delta/divs)
+        Unless include_last is set to True, returned list will not include Interval.b: the first value returned is Interval.a and the last is Interval.b-(Interval.delta/divs)
         
             :param divs: Number of interval divisions.
             :type divs: int
             :rtype: List of numbers in which a list is divided. 
         """
         step = self.delta/float(divs)
+        if include_last : divs += 1
         return [self.a+step*n for n in range(divs)]
     
     def subinterval(self, divs):

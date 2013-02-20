@@ -1,5 +1,5 @@
 from decodes.core import *
-from . import base, vec, point, cs #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
+from . import base, interval, vec, point, cs #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
 if VERBOSE_FS: print "polygon.py loaded"
 
 import copy, collections
@@ -102,16 +102,17 @@ class PGon(Geometry, HasBasis, HasVerts):
         return PGon([Point(-w2,-h2),Point(w2,-h2),Point(w2,h2),Point(-w2,h2)],basis)
 
     @staticmethod
-    def doughnut(cpt,r0,r1,ang_start=0,ang_sweep=math.pi,res=10):
+    def doughnut(cpt,radius_interval,angle_interval=Interval(0,math.pi*2),res=20):
         """ Constructs a doughnut based on a center point, two radii, and optionally a start angle, sweep angle, and resolution.
         
             .. todo:: document the parameters.
         """ 
         cs = CylCS(cpt)
         pts = []
-        #TODO: frange doesn't work in reverse
-        for a in frange(ang_start,ang_start+ang_sweep,ang_sweep/float(res)):pts.append(Point(r0,a))
-        for a in frange(ang_start+ang_sweep,ang_start,-ang_sweep/float(res)):pts.append(Point(r1,a))
-        return False
-        #return PGon(pts)
+        
+        def cyl_pt(rad,ang): return Point(rad,ang,basis=cs).basis_applied()
+
+        for t in angle_interval.divide(res,True):pts.append(cyl_pt(radius_interval.a,t))
+        for t in angle_interval.invert().divide(res,True):pts.append(cyl_pt(radius_interval.b,t))
+        return PGon(pts)
 
