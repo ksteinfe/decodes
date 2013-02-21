@@ -4,7 +4,7 @@
 from distutils.core import setup
 setup(
     name = 'decodes',
-    packages = ['decodes','decodes.core', 'decodes.extensions', 'decodes.io', 'decodes.io.pysvg', 'decodes.io.rhinoscript'],
+    packages = ['decodes','decodes.core', 'decodes.extensions', 'decodes.io', 'decodes.io.rhinoscript'],
     version = '0.0.1',
     description = 'a geometry library for 3d designers',
     url = "http://decod.es",

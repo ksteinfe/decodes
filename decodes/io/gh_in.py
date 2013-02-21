@@ -24,8 +24,12 @@ class GrasshopperIn():
         # main function for processing incoming data from Grasshopper into Decodes geometry
         # incoming may be a sigleton, a list, or a datatree
         # variable in GH script component will be replaced by whatever is returned here
+
         if gh_in is None : return None
         if type(gh_in) is list: return [GrasshopperIn.get(gh_in_str+"["+str(i)+"]",item) for i, item in enumerate(gh_in)]
+        
+        if type(gh_in) is rg.Interval: return Interval(gh_in.T0,gh_in.T1)
+
         if type(gh_in) is rg.Vector3d : return from_rgvec(gh_in)
         elif type(gh_in)is rg.Point3d : return from_rgpt(gh_in)
         elif type(gh_in)is rg.Plane : 

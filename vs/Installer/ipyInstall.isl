@@ -356,7 +356,6 @@
 		<row><td>ISX_DEFAULTCOMPONENT5</td><td>{B03E55A6-E1D1-4369-91E6-70C398B53B61}</td><td>CORE</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT6</td><td>{7D6DB49F-22CE-4953-8E57-1390EC51B30C}</td><td>EXTENSIONS</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT7</td><td>{418DE4BB-F57C-4821-A9EA-F2F5CB1BF47C}</td><td>IO</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>ISX_DEFAULTCOMPONENT8</td><td>{CF78B835-50E3-4C3F-88FA-29E7BCE6C390}</td><td>PYSVG</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT9</td><td>{A8DA997E-AA2E-49E0-81A4-EBA6F7CF79EA}</td><td>RHINOSCRIPT</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
@@ -1183,7 +1182,6 @@
 		<row><td>MyPicturesFolder</td><td>TARGETDIR</td><td>.:MyPict~1|MyPictures</td><td/><td>0</td><td/></row>
 		<row><td>NetHoodFolder</td><td>TARGETDIR</td><td>.:NetHood</td><td/><td>0</td><td/></row>
 		<row><td>PLUG_INS1</td><td>_.0</td><td>Plug-ins</td><td/><td>0</td><td/></row>
-		<row><td>PYSVG</td><td>IO</td><td>pysvg</td><td/><td>0</td><td/></row>
 		<row><td>PersonalFolder</td><td>TARGETDIR</td><td>.:Personal</td><td/><td>0</td><td/></row>
 		<row><td>PrimaryVolumePath</td><td>TARGETDIR</td><td>.:Primar~1|PrimaryVolumePath</td><td/><td>0</td><td/></row>
 		<row><td>PrintHoodFolder</td><td>TARGETDIR</td><td>.:PRINTH~1|PrintHood</td><td/><td>0</td><td/></row>
@@ -1916,7 +1914,6 @@
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT5</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT6</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT7</td></row>
-		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT8</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT9</td></row>
 	</table>
 
@@ -1934,29 +1931,22 @@
 		<col def="S72">ISComponentSubFolder_</col>
 		<row><td>__init__.py</td><td>ISX_DEFAULTCOMPONENT5</td><td>__init__.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\core\__init__.py</td><td>1</td><td/></row>
 		<row><td>__init__.py1</td><td>ISX_DEFAULTCOMPONENT6</td><td>__init__.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\extensions\__init__.py</td><td>1</td><td/></row>
-		<row><td>__init__.py2</td><td>ISX_DEFAULTCOMPONENT8</td><td>__init__.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\pysvg\__init__.py</td><td>1</td><td/></row>
 		<row><td>__init__.py3</td><td>ISX_DEFAULTCOMPONENT9</td><td>__init__.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\__init__.py</td><td>1</td><td/></row>
 		<row><td>__init__.py4</td><td>ISX_DEFAULTCOMPONENT7</td><td>__init__.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\__init__.py</td><td>1</td><td/></row>
 		<row><td>__init__.py5</td><td>ISX_DEFAULTCOMPONENT4</td><td>__init__.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\__init__.py</td><td>1</td><td/></row>
-		<row><td>animate.py</td><td>ISX_DEFAULTCOMPONENT8</td><td>animate.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\pysvg\animate.py</td><td>1</td><td/></row>
 		<row><td>application.py</td><td>ISX_DEFAULTCOMPONENT9</td><td>APPLIC~1.PY|application.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\application.py</td><td>1</td><td/></row>
-		<row><td>attributes.py</td><td>ISX_DEFAULTCOMPONENT8</td><td>ATTRIB~1.PY|attributes.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\pysvg\attributes.py</td><td>1</td><td/></row>
 		<row><td>base.py</td><td>ISX_DEFAULTCOMPONENT5</td><td>base.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\core\base.py</td><td>1</td><td/></row>
 		<row><td>block.py</td><td>ISX_DEFAULTCOMPONENT9</td><td>block.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\block.py</td><td>1</td><td/></row>
-		<row><td>builders.py</td><td>ISX_DEFAULTCOMPONENT8</td><td>builders.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\pysvg\builders.py</td><td>1</td><td/></row>
 		<row><td>color.py</td><td>ISX_DEFAULTCOMPONENT5</td><td>color.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\core\color.py</td><td>1</td><td/></row>
-		<row><td>core.py</td><td>ISX_DEFAULTCOMPONENT8</td><td>core.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\pysvg\core.py</td><td>1</td><td/></row>
 		<row><td>cs.py</td><td>ISX_DEFAULTCOMPONENT5</td><td>cs.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\core\cs.py</td><td>1</td><td/></row>
 		<row><td>curve.py</td><td>ISX_DEFAULTCOMPONENT9</td><td>curve.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\curve.py</td><td>1</td><td/></row>
 		<row><td>danzertile.py</td><td>ISX_DEFAULTCOMPONENT6</td><td>DANZER~1.PY|danzerTile.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\extensions\danzerTile.py</td><td>1</td><td/></row>
 		<row><td>dcpython.gha</td><td>ISX_DEFAULTCOMPONENT12</td><td>DcPython.gha</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\vs\DcPython\bin\DcPython.gha</td><td>1</td><td/></row>
 		<row><td>dimension.py</td><td>ISX_DEFAULTCOMPONENT9</td><td>DIMENS~1.PY|dimension.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\dimension.py</td><td>1</td><td/></row>
 		<row><td>document.py</td><td>ISX_DEFAULTCOMPONENT9</td><td>document.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\document.py</td><td>1</td><td/></row>
-		<row><td>filter.py</td><td>ISX_DEFAULTCOMPONENT8</td><td>filter.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\pysvg\filter.py</td><td>1</td><td/></row>
 		<row><td>geometry.py</td><td>ISX_DEFAULTCOMPONENT9</td><td>geometry.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\geometry.py</td><td>1</td><td/></row>
 		<row><td>gh_in.py</td><td>ISX_DEFAULTCOMPONENT7</td><td>gh_in.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\gh_in.py</td><td>1</td><td/></row>
 		<row><td>gh_out.py</td><td>ISX_DEFAULTCOMPONENT7</td><td>gh_out.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\gh_out.py</td><td>1</td><td/></row>
-		<row><td>gradient.py</td><td>ISX_DEFAULTCOMPONENT8</td><td>gradient.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\pysvg\gradient.py</td><td>1</td><td/></row>
 		<row><td>grips.py</td><td>ISX_DEFAULTCOMPONENT9</td><td>grips.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\grips.py</td><td>1</td><td/></row>
 		<row><td>group.py</td><td>ISX_DEFAULTCOMPONENT9</td><td>group.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\group.py</td><td>1</td><td/></row>
 		<row><td>hatch.py</td><td>ISX_DEFAULTCOMPONENT9</td><td>hatch.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\hatch.py</td><td>1</td><td/></row>
@@ -1966,14 +1956,12 @@
 		<row><td>line.py</td><td>ISX_DEFAULTCOMPONENT5</td><td>line.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\core\line.py</td><td>1</td><td/></row>
 		<row><td>line.py1</td><td>ISX_DEFAULTCOMPONENT9</td><td>line.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\line.py</td><td>1</td><td/></row>
 		<row><td>linetype.py</td><td>ISX_DEFAULTCOMPONENT9</td><td>linetype.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\linetype.py</td><td>1</td><td/></row>
-		<row><td>linking.py</td><td>ISX_DEFAULTCOMPONENT8</td><td>linking.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\pysvg\linking.py</td><td>1</td><td/></row>
 		<row><td>material.py</td><td>ISX_DEFAULTCOMPONENT9</td><td>material.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\material.py</td><td>1</td><td/></row>
 		<row><td>mesh.py</td><td>ISX_DEFAULTCOMPONENT5</td><td>mesh.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\core\mesh.py</td><td>1</td><td/></row>
 		<row><td>mesh.py1</td><td>ISX_DEFAULTCOMPONENT9</td><td>mesh.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\mesh.py</td><td>1</td><td/></row>
 		<row><td>object.py</td><td>ISX_DEFAULTCOMPONENT9</td><td>object.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\object.py</td><td>1</td><td/></row>
 		<row><td>outie.py</td><td>ISX_DEFAULTCOMPONENT7</td><td>outie.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\outie.py</td><td>1</td><td/></row>
 		<row><td>parseepw.py</td><td>ISX_DEFAULTCOMPONENT6</td><td>parseEPW.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\extensions\parseEPW.py</td><td>1</td><td/></row>
-		<row><td>parser.py</td><td>ISX_DEFAULTCOMPONENT8</td><td>parser.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\pysvg\parser.py</td><td>1</td><td/></row>
 		<row><td>pgon.py</td><td>ISX_DEFAULTCOMPONENT5</td><td>pgon.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\core\pgon.py</td><td>1</td><td/></row>
 		<row><td>pinwheeltile.py</td><td>ISX_DEFAULTCOMPONENT6</td><td>PINWHE~1.PY|pinwheelTile.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\extensions\pinwheelTile.py</td><td>1</td><td/></row>
 		<row><td>pkg_info</td><td>ISX_DEFAULTCOMPONENT4</td><td>PKG-INFO</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\PKG-INFO</td><td>1</td><td/></row>
@@ -1983,20 +1971,13 @@
 		<row><td>readme.txt</td><td>ISX_DEFAULTCOMPONENT4</td><td>README.txt</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\README.txt</td><td>1</td><td/></row>
 		<row><td>rhino_in.py</td><td>ISX_DEFAULTCOMPONENT7</td><td>rhino_in.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhino_in.py</td><td>1</td><td/></row>
 		<row><td>rhino_out.py</td><td>ISX_DEFAULTCOMPONENT7</td><td>RHINO_~1.PY|rhino_out.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhino_out.py</td><td>1</td><td/></row>
-		<row><td>script.py</td><td>ISX_DEFAULTCOMPONENT8</td><td>script.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\pysvg\script.py</td><td>1</td><td/></row>
 		<row><td>selection.py</td><td>ISX_DEFAULTCOMPONENT9</td><td>SELECT~1.PY|selection.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\selection.py</td><td>1</td><td/></row>
-		<row><td>shape.py</td><td>ISX_DEFAULTCOMPONENT8</td><td>shape.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\pysvg\shape.py</td><td>1</td><td/></row>
 		<row><td>solargeom.py</td><td>ISX_DEFAULTCOMPONENT6</td><td>SOLARG~1.PY|solarGeom.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\extensions\solarGeom.py</td><td>1</td><td/></row>
-		<row><td>structure.py</td><td>ISX_DEFAULTCOMPONENT8</td><td>STRUCT~1.PY|structure.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\pysvg\structure.py</td><td>1</td><td/></row>
-		<row><td>style.py</td><td>ISX_DEFAULTCOMPONENT8</td><td>style.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\pysvg\style.py</td><td>1</td><td/></row>
 		<row><td>surface.py</td><td>ISX_DEFAULTCOMPONENT9</td><td>surface.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\surface.py</td><td>1</td><td/></row>
 		<row><td>svg_out.py</td><td>ISX_DEFAULTCOMPONENT7</td><td>svg_out.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\svg_out.py</td><td>1</td><td/></row>
-		<row><td>text.py</td><td>ISX_DEFAULTCOMPONENT8</td><td>text.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\pysvg\text.py</td><td>1</td><td/></row>
 		<row><td>transformation.py</td><td>ISX_DEFAULTCOMPONENT9</td><td>TRANSF~1.PY|transformation.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\transformation.py</td><td>1</td><td/></row>
-		<row><td>turtle.py</td><td>ISX_DEFAULTCOMPONENT8</td><td>turtle.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\pysvg\turtle.py</td><td>1</td><td/></row>
 		<row><td>userdata.py</td><td>ISX_DEFAULTCOMPONENT9</td><td>userdata.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\userdata.py</td><td>1</td><td/></row>
 		<row><td>userinterface.py</td><td>ISX_DEFAULTCOMPONENT9</td><td>USERIN~1.PY|userinterface.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\userinterface.py</td><td>1</td><td/></row>
-		<row><td>util.py</td><td>ISX_DEFAULTCOMPONENT8</td><td>util.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\pysvg\util.py</td><td>1</td><td/></row>
 		<row><td>utility.py</td><td>ISX_DEFAULTCOMPONENT9</td><td>utility.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\utility.py</td><td>1</td><td/></row>
 		<row><td>vec.py</td><td>ISX_DEFAULTCOMPONENT5</td><td>vec.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\core\vec.py</td><td>1</td><td/></row>
 		<row><td>view.py</td><td>ISX_DEFAULTCOMPONENT9</td><td>view.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\view.py</td><td>1</td><td/></row>
@@ -2270,7 +2251,6 @@
 		<row><td>ISX_DEFAULTCOMPONENT5</td><td/><td/><td>_9952AC4F_032B_4FB9_AA83_18D09F7C55CC_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT6</td><td/><td/><td>_E67C189C_B5AA_4018_BE92_4FEDE6BDD9D6_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT7</td><td/><td/><td>_2F76C381_CD58_4929_BA22_EFDB92BC05D7_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>ISX_DEFAULTCOMPONENT8</td><td/><td/><td>_1C0289E9_8734_4305_971D_51A34A6DAECE_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT9</td><td/><td/><td>_7C1C6E79_3DE4_4F78_B98B_253A7432FC33_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
@@ -2901,7 +2881,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>Decodes</td><td>0</td><td/><td>1084351329</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>Decodes</td><td>0</td><td/><td>-1591633872</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>1084351329</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>1084351329</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_GRASSHOPPER</td><td>1033</td><td>Could not find "Grasshopper" folder in AppData</td><td>0</td><td/><td>1084300514</td></row>
@@ -4004,8 +3984,8 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>1084351329</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>1084351329</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>1084351329</td></row>
-		<row><td>ID_STRING1</td><td>1033</td><td>http://decod.es</td><td>0</td><td/><td>1084347745</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>Decodes</td><td>0</td><td/><td>1084351329</td></row>
+		<row><td>ID_STRING1</td><td>1033</td><td>http://www.Decodes.com</td><td>0</td><td/><td>-1591633872</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>Decodes</td><td>0</td><td/><td>-1591633872</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>1084351329</td></row>
 	</table>
 

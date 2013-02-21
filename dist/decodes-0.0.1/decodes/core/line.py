@@ -13,10 +13,10 @@ class LinearEntity(Geometry):
 
     """
     def __init__(self, a, b):
-      self._pt = a if isinstance(a,Point) else Point(a.x,a.y,a.z)
-      if isinstance(b,Point) : self._vec = b-a
-      elif isinstance(b,Vec) : self._vec = b
-      else : raise TypeError("%s constructor requires Vec instances" % self.__class__.__name__)
+        self._pt = a if isinstance(a,Point) else Point(a.x,a.y,a.z)
+        if isinstance(b,Point) : self._vec = b-a
+        elif isinstance(b,Vec) : self._vec = b
+        else : raise TypeError("%s constructor requires Vec instances" % self.__class__.__name__)
     
     @property
     def spt(self): return self._pt

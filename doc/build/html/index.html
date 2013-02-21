@@ -159,9 +159,9 @@ print Interval(10,20).deval(25)
 
 <dl class="method">
 <dt id="decodes.core.interval.Interval.divide">
-<tt class="descname">divide</tt><big>(</big><em>divs=10</em><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.divide" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">divide</tt><big>(</big><em>divs=10</em>, <em>include_last=False</em><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.divide" title="Permalink to this definition">¶</a></dt>
 <dd><p>Divides this interval into a list of values equally spaced between a and b.
-Returned list will not include Interval.b: the first value returned is Interval.a and the last is Interval.b-(Interval.delta/divs)</p>
+Unless include_last is set to True, returned list will not include Interval.b: the first value returned is Interval.a and the last is Interval.b-(Interval.delta/divs)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -197,6 +197,13 @@ Returned list will not include Interval.b: the first value returned is Interval.
 print Interval(10,20).deval(1.5)
 &gt;&gt;25</pre>
 </div>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.interval.Interval.invert">
+<tt class="descname">invert</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.invert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of this interval with swapped values.
+Such that this.a = new.b and this.b = new.a</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -710,7 +717,7 @@ Polygons limit their vertices to x and y dimensions, and enforce that they emplo
 
 <dl class="staticmethod">
 <dt id="decodes.core.pgon.PGon.doughnut">
-<em class="property">static </em><tt class="descname">doughnut</tt><big>(</big><em>cpt</em>, <em>r0</em>, <em>r1</em>, <em>ang_start=0</em>, <em>ang_sweep=3.141592653589793</em>, <em>res=10</em><big>)</big><a class="headerlink" href="#decodes.core.pgon.PGon.doughnut" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><tt class="descname">doughnut</tt><big>(</big><em>cpt, radius_interval, angle_interval=ival[0,6.28318530718], res=20</em><big>)</big><a class="headerlink" href="#decodes.core.pgon.PGon.doughnut" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs a doughnut based on a center point, two radii, and optionally a start angle, sweep angle, and resolution.</p>
 <div class="admonition-todo admonition" id="index-2">
 <p class="first admonition-title">Todo</p>

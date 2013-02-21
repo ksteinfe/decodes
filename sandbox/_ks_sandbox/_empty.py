@@ -3,6 +3,7 @@ from decodes.core import *
 import math
 
 
+
 ival = Interval(0,10)
 print Interval(10,20).deval(25)
 print Interval(10,20).eval(1.5)
@@ -11,7 +12,8 @@ print Interval(10,20).eval(1.5)
 print ival.divide(4,True)
 #print ival.subinterval(4)
 
-
+print 5 in ival
+print 12 in ival
 
 
 outie = dc.makeOut(dc.Outies.SVG)
