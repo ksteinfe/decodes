@@ -5,6 +5,7 @@ import math
 
 
 ival = Interval(0,10)
+print ival/3
 print Interval(10,20).deval(25)
 print Interval(10,20).eval(1.5)
 

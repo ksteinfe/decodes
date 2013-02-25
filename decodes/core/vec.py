@@ -43,6 +43,7 @@ class Vec(Geometry):
 
     def __add__(self, vec): return Vec(self.x+vec.x , self.y+vec.y, self.z+vec.z)
     def __sub__(self, vec): return Vec(self.x-vec.x , self.y-vec.y, self.z-vec.z)
+    def __truediv__(self,other): return self.__div__(other)
     def __div__(self, other): return Vec(self.x/float(other), self.y/float(other), self.z/float(other))
     def __invert__(self): return self.inverted()
     def __mul__(self, other):

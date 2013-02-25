@@ -19,6 +19,7 @@ class Interval():
         self.a = a
         self.b = b
     
+    def __truediv__(self,other): return self.__div__(other)
     def __div__(self, other): 
         """
         overloads the division **(/)** operator
