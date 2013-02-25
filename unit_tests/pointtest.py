@@ -1,18 +1,15 @@
 import decodes.core as dc
 from decodes.core import *
 
-outie = dc.makeOut(dc.outies.Rhino, "pointtest")
 
 print "constructors"
-v0 = Vec(1,-2)
-p0 = Point(0,2,2)
-p1 = Point(1,1,1)
-v1 = Vec(p0,p1)
-p2 = Point(v1)
-outie.put([p1,p0,v0,v1,p2])
+p0 = Point()
+if any([p0.x!=0,p0.y!=0,p0.z!=0]): raise Exception("point.constructors")
 
 
 
+
+'''
 print "operators"
 # operations between points and vectors are performed in basis space
 p0 = Point(0,2)
@@ -79,7 +76,4 @@ print "sort pts:  %s!" % [p.name for p in pts]
 #redoutie.put(Point(pts[0]))
 #redoutie.draw()
 
-
-
-
-outie.draw()
+'''

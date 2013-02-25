@@ -4,6 +4,7 @@ import math
 
 
 
+
 ival = Interval(0,10)
 print ival/3
 print Interval(10,20).deval(25)
