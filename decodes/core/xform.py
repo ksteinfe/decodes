@@ -221,7 +221,7 @@ class Xform(object):
             tup = self._xform_tuple(other.to_tuple())
             return Vec(tup[0],tup[1],tup[2])
         
-
+        raise Exception("can't xform that thing")
 
     def _xform_tuple(self,tup):
         return (
