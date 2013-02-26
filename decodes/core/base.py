@@ -13,12 +13,7 @@ class BasisError(GeometricError):
 
 class Basis(object):
     """
-<<<<<<< HEAD
     A base class for anything that wants to call itself a basis. Bases must impliment the folloiwng methods:
-=======
-    a base class for anything that wants to call itself a basis
-    bases must implement the folloiwng methods:
->>>>>>> 20556e5ec9b9bf3aa33079c493b5df3b132b5f97
     """
     
     def eval(self,other):
@@ -32,37 +27,32 @@ class Basis(object):
         raise NotImplementedError("Evalutate not implimented.    I am a BAD basis!")
 
 class HasBasis(object):
-<<<<<<< HEAD
     """
     A base class for anything that wants to define a basis for itself. Bases must impliment the following methods:
     """
-=======
-    """a base class for anything that wants to define a basis for itself"""
-    """bases must implement the folloiwng methods:"""
->>>>>>> 20556e5ec9b9bf3aa33079c493b5df3b132b5f97
     
-    '''
-    tells us if a basis has been defined
-    '''
     @property
     def is_baseless(self):
+        '''
+        tells us if a basis has been defined
+        '''
+        return (not hasattr(self, 'basis')) or self.basis is None
+
+
+    def basis_applied(self, copy_children=True):
         """Returns a new object with basis applied. Copies of are created of any child objects by default. Take care to copy over props if appropriate.
             
             :result: Object with basis applied.
             :rtype: Basis
         """
-        return (not hasattr(self, 'basis')) or self.basis is None
-
-
-    def basis_applied(self, copy_children=True):
+        raise NotImplementedError("basis_applied not implimented.    I am a BAD HasBasis!")
+    
+    def basis_stripped(self, copy_children=True): 
         """Returns a new object stripped of any basis. Copies of are created of any child objects by default. Take care to copy over props if appropriate.
             
             :result: Object with basis applied.
             :rtype: Basis
         """ 
-        raise NotImplementedError("basis_applied not implimented.    I am a BAD HasBasis!")
-    
-    def basis_stripped(self, copy_children=True): 
         raise NotImplementedError("basis_stripped not implimented.    I am a BAD HasBasis!")
 
 class Geometry(object):

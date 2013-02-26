@@ -28,7 +28,7 @@ class Mesh(Geometry, HasBasis):
         if (basis is not None) : self.basis = basis
         
     def basis_applied(self, copy_children=True): 
-
+        """
             :param copy_children: If True, creates a new Mesh object with 'world' coordinates.
             :type verts: bool
             :result: Mesh object with basis applied.

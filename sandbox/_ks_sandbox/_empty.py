@@ -15,7 +15,7 @@ crv = Curve(func,Interval(0,math.pi*2))
 outie.put(crv)
 
 
-cir = circle(Point(100,100),50)
+cir = circular_curve(Point(100,100),50)
 outie.put(cir)
 
 outie.draw()
