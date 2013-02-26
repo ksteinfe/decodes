@@ -1,6 +1,6 @@
 from decodes.core import *
 from . import base, vec #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
-import math, random
+import math, random, warnings
 if VERBOSE_FS: print "point.py loaded"
 
 
@@ -13,7 +13,7 @@ if VERBOSE_FS: print "point.py loaded"
 
 class Point(Vec,HasBasis):
     """
-    a simple vector class
+    a simple point class
     """
     
     def __init__(self, a=0, b=0, c=0, basis=None):
@@ -30,6 +30,10 @@ class Point(Vec,HasBasis):
         """
         super(Point,self).__init__(a,b,c)
         self.basis = basis
+
+        # there's a unique case where we've been passed a based point along with a defined basis here.
+        # in this case, we should take the local coordinates of the given point interpreted through the given basis
+        if isinstance(a, Point) and b==0 and c == 0 and basis !=None :  self._x , self._y, self._z = a._x , a._y, a._z
     
     @property
     def x(self): 
@@ -363,3 +367,111 @@ class Point(Vec,HasBasis):
         p = Point(x,y) if constrain2d else Point(x,y,z)
         return p
         
+
+
+class HasVerts(HasBasis):
+    """
+    A base class for anything that contains a list of vertices.
+    All HasVerts classes also have bases
+
+
+    """
+    def __init__(self):
+        self._verts = [] # a list of vecs that represent the local coordinates of this object's points
+        self.basis = None
+
+    def __getitem__(self,slice):
+        vecs = self._verts[slice]
+        try:
+            #TODO: move slice indexing to subclasses and return object rather than point list
+            return [Point(vec,basis=self.basis) for vec in vecs]
+        except:
+            return Point(vecs,basis=self.basis)
+    
+    def __setitem__(self,index,other):
+        try:
+            self.verts[index] = self._compatible_vec(other)
+        except TypeError, e:
+                raise TypeError("You cannot set the vertices of this object using slicing syntax")
+    
+    def __len__(self): return len(self._verts)
+
+    @property
+    def verts(self): 
+        """Gets the vertices of a geometry.
+
+            :result: List of vertices.
+            :rtype: list
+        """
+        return self._verts
+    
+    @verts.setter
+    def verts(self, verts): 
+        """Sets the geometry's vertices
+
+            :param verts: Vertice or vertices to append
+            :type verts: Point or list
+            :result: Sets the geometry's vertices.
+        """
+        self._verts = []
+        self.append(verts)
+        
+    def append(self,other) : 
+        """If a list is passed, it appends the objects to the list, else, the object is appended.
+
+            :param other: List or object to append.
+            :type other: object or list
+            :result: Appends elements to a list.
+        """
+        if isinstance(other, collections.Iterable) : 
+            for v in other : self.append(v)
+        else : 
+            self._verts.append(self._compatible_vec(other))
+    
+    @property
+    def centroid(self):
+        """Returns the centroid of the verts of this object
+        
+            :returns: Centroid (point).
+            :rtype: Point
+        """
+        return Point.centroid(self.verts)
+    
+    def _compatible_vec(self,other):
+        """ Returns a vector compatible with the collection of vectors in this object if possible
+        """
+        if self.is_baseless: return Vec(other) # if this object is baseless, then use the world coordinates of the other
+        if (not hasattr(other, 'basis')) or other.basis is None : 
+             # if the other is baseless, then use its world coordinates.  
+             # we assume here that the user is describing the point within this object's basis.
+             # they may, however, be trying to add a "world" point to a mesh with a defined basis
+             # if this is the case, we would have to describe this world point in terms of this object's basis... which isn't always possible
+             # we'll try and warn them.
+             # warnings.warn("You've just added a baseless point to a based object.  The world coordinates of the point have been interpreted as local coordinates of the object.  Is this what you wanted?")
+             return Vec(other)
+        if self.basis is other.basis : return Vec(other._x,other._y,other._z) # if we share a basis, then use the local coordinates of the other
+        raise BasisError("The basis for this Geometry and the point you're adding do not match. Try applying or stripping the point of its basis, or describing the point in terms of this Geometry's basis")
+'''   
+    def append(self,other) :
+        """ Adds vertices to the PGon.
+
+            :param other: Vertex to add.
+            :type other: Point
+            :returns: Updates this object.
+            
+        """ 
+        if isinstance(other, collections.Iterable) : 
+            for v in other : self.add_vert(v)
+        else : 
+            if self.is_baseless : self._verts.append(other.basis_applied())
+            elif self.basis is other.basis : 
+                self._verts.append(other.basis_stripped())
+            elif other.is_baseless : 
+                # we assume here that the user is describing the point within the pgon's basis
+                # they may, however, be trying to add a "world" point to a mesh with a defined basis
+                # if this is the case, they should call pgon.basis_stripped()
+                #TODO: shouldn't we apply the basis to this point?
+                self._verts.append(other)
+            else : raise BasisError("The basis for this Geometry and the point you're adding do not match.    Try applying or stripping the point of its basis, or describing the point in terms of this Geometry's basis")
+'''
+

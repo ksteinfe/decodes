@@ -21,9 +21,8 @@ class PGon(HasVerts):
             :returns: PGon object. 
             :rtype: PGon
         """ 
-        super(PGon,self).__init__()
+        super(PGon,self).__init__() #HasVerts constructor initializes list of verts
         self.basis = CS() if (basis is None) else basis
-        self._verts = []
         if (verts is not None) : 
             for v in verts: self.append(v)
         

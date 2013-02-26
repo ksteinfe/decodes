@@ -17,8 +17,7 @@ class PLine(HasVerts):
             :returns: Polyline.
             :rtype: PLine
         """
-        super(PLine,self).__init__()
-        self._verts = []
+        super(PLine,self).__init__() #HasVerts constructor initializes list of verts
         if (verts is not None) : 
             for v in verts: self.append(v)
     

@@ -4,6 +4,12 @@ import decodes.unit_tests
 
 
 
+pts = [Point(x,0,0) for x in range(10)]
+pline = PLine(pts)
+print pline[0]
+print pline[0:-1]
+
+pline[0] = Point(-3,2)
 
 '''
 outie = dc.makeOut(dc.Outies.SVG)

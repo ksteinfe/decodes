@@ -22,10 +22,12 @@ class Mesh(HasVerts):
             :result: Mesh object.
             :rtype: Mesh
         """
-        super(Mesh,self).__init__()
-        self._verts = [] if (verts is None) else verts
-        self._faces = [] if (faces is None) else faces
+        super(Mesh,self).__init__() #HasVerts constructor initializes list of verts
         if (basis is not None) : self.basis = basis
+        if (verts is not None) : 
+            for v in verts: self.append(v)
+        self._faces = [] if (faces is None) else faces
+        
     '''    
     def basis_applied(self, copy_children=True): 
         """

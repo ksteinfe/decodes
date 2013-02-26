@@ -9,8 +9,17 @@ class Tests(unittest.TestCase):
         msh = Mesh()
         self.assertEqual(len(msh.verts),0,"mesh has an empty list of verts")
 
-
-
+    def test_simple_constructor(self):
+        verts = [
+          Point(0.0       , 0.0	      , 0.0),
+          Point(0.9510565 , 0.0	      , 0.0),
+          Point(0.6881910 , 1.3763819 , 0.0),
+          Point(0.5257311 , 0.6881910	, 0.5)
+        ]
+        faces = [[0,1,2],[0,2,3],[2,3,0],[3,0,1]]
+        msh = Mesh(verts,faces)
+        
+        for n in range(len(verts)): self.assertEqual(msh[n],verts[n],"mesh returns a valid copy of point used to construct it")
 
 
 '''

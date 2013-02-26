@@ -9,5 +9,5 @@ class Tests(unittest.TestCase):
         pgon = PGon()
         self.assertEqual(len(pgon.verts),0,"a polygon constructed with no arguments contains an empty list of verts")
         
-    def test_nothing(self):
-        self.fail("i will always fail this test!")
+
+        
