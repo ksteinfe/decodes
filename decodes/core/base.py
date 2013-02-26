@@ -11,7 +11,7 @@ class GeometricError(StandardError):
 class BasisError(GeometricError):
         pass
 
-class Basis(object):
+class IsBasis(object):
     """
     A base class for anything that wants to call itself a basis. Bases must impliment the folloiwng methods:
     """
@@ -25,35 +25,6 @@ class Basis(object):
             :rtype: Basis
         """
         raise NotImplementedError("Evalutate not implimented.    I am a BAD basis!")
-
-class HasBasis(object):
-    """
-    A base class for anything that wants to define a basis for itself. Bases must impliment the following methods:
-    """
-    
-    @property
-    def is_baseless(self):
-        '''
-        tells us if a basis has been defined
-        '''
-        return (not hasattr(self, 'basis')) or self.basis is None
-
-
-    def basis_applied(self, copy_children=True):
-        """Returns a new object with basis applied. Copies of are created of any child objects by default. Take care to copy over props if appropriate.
-            
-            :result: Object with basis applied.
-            :rtype: Basis
-        """
-        raise NotImplementedError("basis_applied not implimented.    I am a BAD HasBasis!")
-    
-    def basis_stripped(self, copy_children=True): 
-        """Returns a new object stripped of any basis. Copies of are created of any child objects by default. Take care to copy over props if appropriate.
-            
-            :result: Object with basis applied.
-            :rtype: Basis
-        """ 
-        raise NotImplementedError("basis_stripped not implimented.    I am a BAD HasBasis!")
 
 class Geometry(object):
     """
@@ -139,7 +110,44 @@ class Geometry(object):
         #TODO: i think these are obsolete
         return self.objCS.ixform
  
-class HasVerts(object):
+
+class HasBasis(Geometry):
+    """
+    A base class for anything that wants to define a basis for itself. Bases must impliment the following methods:
+    """
+    
+    @property
+    def is_baseless(self):
+        '''
+        tells us if a basis has been defined
+        '''
+        return (not hasattr(self, 'basis')) or self.basis is None
+
+
+    def basis_applied(self, copy_children=True):
+        """Returns a new object with basis applied. Copies of are created of any child objects by default. Take care to copy over props if appropriate.
+            
+            :result: Object with basis applied.
+            :rtype: Basis
+        """
+        raise NotImplementedError("basis_applied not implimented.    I am a BAD HasBasis!")
+    
+    def basis_stripped(self, copy_children=True): 
+        """Returns a new object stripped of any basis. Copies of are created of any child objects by default. Take care to copy over props if appropriate.
+            
+            :result: Object with basis applied.
+            :rtype: Basis
+        """ 
+        raise NotImplementedError("basis_stripped not implimented.    I am a BAD HasBasis!")
+
+
+class HasVerts(HasBasis):
+    """
+    A base class for anything that contains a list of vertices.
+    All HasVerts classes also have bases
+
+
+    """
     def __getitem__(self,index):
         return self._verts[index]
     
@@ -177,5 +185,60 @@ class HasVerts(object):
             for v in other : self.append(v)
         else : 
             self._verts.append(other)
+    
+    
+    @property
+    def verts(self):
+        """ Returns the list of vertices associated with this object.
+        
+            :returns: List of vertices (points). 
+            :rtype: list
 
+        """ 
+        if not self.is_baseless: return [ v.set_basis(self.basis) for v in self._verts]
+        else : return self._verts
+        
+    
+    @verts.setter
+    def verts(self, verts):
+        """ Sets the vertices of this object.
+        
+            :param verts: Vertices to add to this object.
+            :type verts: Point or list 
+            :returns: Updates this object. 
+
+        """ 
+        self._verts = []
+        self.append(verts)
+     
+    
+    def append(self,other) :
+        """ Adds vertices to the PGon.
+
+            :param other: Vertex to add.
+            :type other: Point
+            :returns: Updates this object.
             
+        """ 
+        if isinstance(other, collections.Iterable) : 
+            for v in other : self.add_vert(v)
+        else : 
+            if self.is_baseless : self._verts.append(other.basis_applied())
+            elif self.basis is other.basis : 
+                self._verts.append(other.basis_stripped())
+            elif other.is_baseless : 
+                # we assume here that the user is describing the point within the pgon's basis
+                # they may, however, be trying to add a "world" point to a mesh with a defined basis
+                # if this is the case, they should call pgon.basis_stripped()
+                #TODO: shouldn't we apply the basis to this point?
+                self._verts.append(other)
+            else : raise BasisError("The basis for this Geometry and the point you're adding do not match.    Try applying or stripping the point of its basis, or describing the point in terms of this Geometry's basis")
+    
+    @property
+    def centroid(self):
+        """Returns the centroid of the verts of this object
+        
+            :returns: Centroid (point).
+            :rtype: Point
+        """
+        return Point.centroid(self.verts)

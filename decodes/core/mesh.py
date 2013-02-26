@@ -4,7 +4,7 @@ if VERBOSE_FS: print "mesh.py loaded"
 
 import copy, collections
 
-class Mesh(Geometry, HasBasis):
+class Mesh(HasVerts):
     """
     a very simple mesh class
     """
@@ -26,7 +26,7 @@ class Mesh(Geometry, HasBasis):
         self._verts = [] if (verts is None) else verts
         self._faces = [] if (faces is None) else faces
         if (basis is not None) : self.basis = basis
-        
+    '''    
     def basis_applied(self, copy_children=True): 
         """
             :param copy_children: If True, creates a new Mesh object with 'world' coordinates.
@@ -50,6 +50,7 @@ class Mesh(Geometry, HasBasis):
         else : msh = Mesh(self._verts,self._faces)
         if hasattr(self, 'props') : msh.props = self.props
         return msh
+    '''
         
     @property
     def faces(self): 
@@ -59,7 +60,7 @@ class Mesh(Geometry, HasBasis):
             :rtype: list
         """
         return self._faces
-     
+    '''
     @property
     def verts(self):
         """Returns a list of mesh vertices.
@@ -106,7 +107,7 @@ class Mesh(Geometry, HasBasis):
                 # if this is the case, they should call mesh.basis_stripped()
                 self._verts.append(other)
             else : raise BasisError("The basis for this Mesh and the point you're adding do not match.    Try applying or stripping the point of its basis, or describing the point in terms of the Mesh's basis")
-        
+    '''    
     def add_face(self,a,b,c,d=-1):
         """Adds a face to the mesh.
         

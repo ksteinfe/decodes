@@ -3,7 +3,7 @@ from . import base, vec, point #here we may only import modules that have been l
 if VERBOSE_FS: print "cs.py loaded"
 import math, copy, collections
 
-class CS(Geometry, Basis):
+class CS(Geometry, IsBasis):
     """a ortho coordinate system class"""
     """a simple orthonormal cs floating around in R3"""
     """can describe any translation and rigid-body manipulation of the R3"""
@@ -40,7 +40,7 @@ class CS(Geometry, Basis):
         return Xform.change_basis(self, CS())
     
 
-class CylCS(Geometry, Basis):
+class CylCS(Geometry, IsBasis):
     """a cylindrical coordinate system"""
     def __init__(self,pt=Point(0,0)):
         self.origin = pt
