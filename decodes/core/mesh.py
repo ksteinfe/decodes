@@ -13,7 +13,14 @@ class Mesh(Geometry, HasBasis):
     def __init__(self, verts=None, faces=None, basis=None):
         """Mesh Constructor
 
-        .. todo:: Document this method
+            :param verts: New vertice or vertices to be added to the mesh.
+            :type verts: Point
+            :param faces: List of ordered faces.
+            :type faces: list
+            :param basis: Plane basis of the mesh.
+            :type basis: Point
+            :result: Mesh object.
+            :rtype: Mesh
         """
         super(Mesh,self).__init__()
         self._verts = [] if (verts is None) else verts
@@ -21,11 +28,24 @@ class Mesh(Geometry, HasBasis):
         if (basis is not None) : self.basis = basis
         
     def basis_applied(self, copy_children=True): 
+
+            :param copy_children: If True, creates a new Mesh object with 'world' coordinates.
+            :type verts: bool
+            :result: Mesh object with basis applied.
+            :rtype: Mesh
+        """
         if copy_children : msh = Mesh([v.basis_applied() for v in self.verts],copy.copy(self._faces))
         else : msh = Mesh([v.basis_applied() for v in self.verts],self._faces)
         if hasattr(self, 'props') : msh.props = self.props
         return msh
-    def basis_stripped(self, copy_children=True): 
+    def basis_stripped(self, copy_children=True):
+        """Returns a mesh based on its local location.
+
+            :param copy_children: If True, creates a new Mesh object with the 'local' coordinates.
+            :type verts: bool
+            :result: Mesh object with basis stripped.
+            :rtype: Mesh
+        """    
         if copy_children : msh = Mesh(copy.copy(self._verts),copy.copy(self._faces))
         else : msh = Mesh(self._verts,self._faces)
         if hasattr(self, 'props') : msh.props = self.props
@@ -35,7 +55,8 @@ class Mesh(Geometry, HasBasis):
     def faces(self): 
         """Returns a list of mesh faces.
         
-            :rtype: List of mesh faces.
+            :returns: List of mesh faces.
+            :rtype: list
         """
         return self._faces
      
@@ -43,13 +64,17 @@ class Mesh(Geometry, HasBasis):
     def verts(self):
         """Returns a list of mesh vertices.
         
-            :rtype: List of mesh verticies.
+            :returns: List of mesh vertices.
+            :rtype: list
         """
         if not self.is_baseless: return [ v.set_basis(self.basis) for v in self._verts]
         else : return self._verts
         
     @verts.setter
-    def verts(self, verts): 
+    def verts(self, verts):
+        """
+        Sets vertices for a mesh.
+        """    
         self._verts = []
         self.add_vert(verts)
      
@@ -57,7 +82,8 @@ class Mesh(Geometry, HasBasis):
     def centroid(self):
         """Returns a list of mesh centroids (points).
         
-            :rtype: List of centroids.
+            :returns: List of centroids.
+            :rtype: list
         """
         return Point.centroid(self.verts)
      
@@ -66,7 +92,7 @@ class Mesh(Geometry, HasBasis):
         
             :param other: New vertice or vertices to be added to the mesh.
             :type other: Point.
-            :rtype: Modifies list of vertices.
+            :returns: Modifies list of vertices.
         """
         if isinstance(other, collections.Iterable) : 
             for v in other : self.add_vert(v)
@@ -84,9 +110,9 @@ class Mesh(Geometry, HasBasis):
     def add_face(self,a,b,c,d=-1):
         """Adds a face to the mesh.
         
-            :param face: Face to be added to the list of faces.
-            :type face: Face (integer).
-            :rtype: Modifies list of faces.
+            :param a,b,c,d: Face to be added to the list of faces.
+            :type a,b,c,d: int.
+            :returns: Modifies list of faces.
         """
         #TODO: add lists of faces just the same
         if (d>=0) : self._faces.append([a,b,c,d])
@@ -96,15 +122,19 @@ class Mesh(Geometry, HasBasis):
         """Returns the vertice of a given face.
         
             :param index: Face's index
-            :type copy: Integer
-            :rtype: Vertice (point).
+            :type index: int
+            :returns: Vertice.
+            :rtype: Point
         """
         return [self.verts[i] for i in self.faces[index]]
     
     def face_centroid(self,index):
-        """Not sure if this is the same as centroid....
+        """Returns the centroids of individual mesh faces.
         
-            .. todo:: document this function.
+            :param index: Index of a face.
+            :type index: int
+            :returns: Vertice.
+            :rtype: Point
         """
         return Point.centroid(self.face_verts(index))
         
@@ -112,8 +142,9 @@ class Mesh(Geometry, HasBasis):
         """Returns the normal vector to a face.
         
             :param index: Index of a face.
-            :type index: Integer.
-            :rtype: Normal vector.
+            :type index: int
+            :returns: Normal vector.
+            :rtype: Vec
         """
         verts = self.face_verts(index)
         if len(verts) == 3 : return Vec(verts[0],verts[1]).cross(Vec(verts[0],verts[2])).normalized()
@@ -124,10 +155,6 @@ class Mesh(Geometry, HasBasis):
     
     
     def __repr__(self):
-        """Dunno what this one does.
-        
-            .. todo:: document this function.
-        """
         return "msh[{0}v,{1}f]".format(len(self._verts),len(self._faces))
     
     
@@ -136,8 +163,9 @@ class Mesh(Geometry, HasBasis):
         """Explodes a mesh into individual faces.
         
             :param msh: Mesh to explode.
-            :type msh: Mesh.
-            :rtype: List of meshes.
+            :type msh: Mesh
+            :returns: List of meshes.
+            :type: list
         """
         exploded_meshes = []
         for face in msh.faces:

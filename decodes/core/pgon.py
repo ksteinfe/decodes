@@ -15,10 +15,11 @@ class PGon(Geometry, HasBasis, HasVerts):
         """ PGon Constructor.
         
             :param verts: List of vertices to build the polygon.
-            :type verts: List of Points
+            :type verts: list
             :param basis: Plane basis for the PGon.
-            :type basis: Plane
-            :rtype: PGon object. 
+            :type basis: Basis
+            :returns: PGon object. 
+            :rtype: PGon
         """ 
         super(PGon,self).__init__()
         self.basis = CS() if (basis is None) else basis
@@ -40,7 +41,8 @@ class PGon(Geometry, HasBasis, HasVerts):
     def verts(self):
         """ Returns the list of PGon vertices.
         
-            :rtype: List of vertices(points). 
+            :returns: List of vertices(points). 
+            :rtype: list
         """ 
         if not self.is_baseless: return [ v.set_basis(self.basis) for v in self._verts]
         else : return self._verts
@@ -51,8 +53,8 @@ class PGon(Geometry, HasBasis, HasVerts):
         """ Sets the vertices of a PGon object.
         
             :param verts: Vertices to add to the PGon.
-            :type verts: Points or list of points.
-            :rtype: Updates the PGon object. 
+            :type verts: Point or list 
+            :returns: Updates the PGon object. 
         """ 
         self._verts = []
         self.append(verts)
@@ -63,7 +65,7 @@ class PGon(Geometry, HasBasis, HasVerts):
 
             :param other: Vertice to add.
             :type other: Point
-            :rtype: Updates the PGon. 
+            :returns: Updates the PGon. 
 
         .. todo:: Get rid of this function and get it from base.py
         """ 
@@ -89,12 +91,13 @@ class PGon(Geometry, HasBasis, HasVerts):
         """ Constructs a rectangle based on a center point, a width, and a height.
         
             :param cpt: Center point of a rectangle.
-            :type cpt: Point.
+            :type cpt: Point
             :param w: Width of a rectangle.
-            :type w: Number.
+            :type w: float
             :param h: Height of a rectangle.
-            :type h: Number.
-            :rtype: Rectangle (PGon object). 
+            :type h: float
+            :returns: Rectangle (PGon object). 
+            :rtype: PGon
         """ 
         w2 = w/2
         h2 = h/2
@@ -105,7 +108,14 @@ class PGon(Geometry, HasBasis, HasVerts):
     def doughnut(cpt,radius_interval,angle_interval=Interval(0,math.pi*2),res=20):
         """ Constructs a doughnut based on a center point, two radii, and optionally a start angle, sweep angle, and resolution.
         
-            .. todo:: document the parameters.
+            :param cpt: Center point of a rectangle.
+            :type cpt: Point
+            :param angle_interval: Radii interval.
+            :type angle_interval: Interval
+            :param res: doughnut resolution.
+            :type res: float
+            :returns: Doughnut object. 
+            :rtype: PGon
         """ 
         cs = CylCS(cpt)
         pts = []

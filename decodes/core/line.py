@@ -13,25 +13,65 @@ class LinearEntity(Geometry):
 
     """
     def __init__(self, a, b):
+        """LinearEntity Constructor
+
+            :param a: Starting point.
+            :type a: Point
+            :param b: Second point or Vector.
+            :type b: Point or Vector
+            :result: LinearEntity object.
+            :rtype: LinearEntity
+        """
         self._pt = a if isinstance(a,Point) else Point(a.x,a.y,a.z)
         if isinstance(b,Point) : self._vec = b-a
         elif isinstance(b,Vec) : self._vec = b
         else : raise TypeError("%s constructor requires Vec instances" % self.__class__.__name__)
     
     @property
-    def spt(self): return self._pt
+    def spt(self): 
+        """Returns the starting Point of a LinearEntity
+
+            :result: Starting Point.
+            :rtype: Point
+        """
+        return self._pt
     @spt.setter
-    def spt(self, point): self._pt = point
+    def spt(self, point): 
+        """Sets the starting Point of a LinearEntity
+
+            :result: Sets a starting point.
+        """
+        self._pt = point
     @property
-    def vec(self): return self._vec
+    def vec(self): 
+        """Returns the Vec direction of a LinearEntity
+
+            :result: Vector.
+            :rtype: Vec
+        """
+        return self._vec
     @vec.setter
-    def vec(self, vec): self._vec = vec
+    def vec(self, vec):
+        """Sets the Vec direction of a LinearEntity
+
+            :result: Sets the Vec direction.
+        """    
+        self._vec = vec
     @property
-    def ept(self): return self._pt+self._vec
+    def ept(self): 
+        """Returns the end Point of a LinearEntity
+
+            :result: End Point.
+            :rtype: Point
+        """
+        return self._pt+self._vec
     @ept.setter
-    def ept(self, point): self._vec = point-self._pt
-    
-    
+    def ept(self, point): 
+        """Sets the end Point of a LinearEntity
+
+            :result: End Point.
+        """
+        self._vec = point-self._pt
     
     @property
     def coefficients(self):
@@ -59,10 +99,16 @@ class LinearEntity(Geometry):
         raise NotImplementedError()
 
     def is_parallel(l1, l2):
-        """
-        Returns True if l1 and l2 are parallel, False otherwise
-             
-        .. todo:: Implement this method.
+        """Returns True if l1 and l2 are parallel, False otherwise
+
+            :param l1: First LinearEntity
+            :type l1: LinearEntity
+            :param l2: Second LinearEntity
+            :type l2: LinearEntity
+            :result: True if parallel.
+            :rtype: bool
+        
+            .. todo:: Implement this method.
         """
         raise NotImplementedError()
         try:
@@ -73,9 +119,15 @@ class LinearEntity(Geometry):
             return False
 
     def is_perpendicular(l1, l2):
-        """
-        Returns True if l1 and l2 are perpendicular, False otherwise
+        """Returns True if l1 and l2 are perpendicular, False otherwise
            
+            :param l1: First LinearEntity
+            :type l1: LinearEntity
+            :param l2: Second LinearEntity
+            :type l2: LinearEntity
+            :result: True if perpendicular.
+            :rtype: bool
+            
         .. todo:: Implement this method.
         """
         raise NotImplementedError()
@@ -108,26 +160,37 @@ class LinearEntity(Geometry):
 
     def parallel_line(self, p):
         """
-        Returns a new Line which is parallel to this linear entity and passes
-        through the specified point.
+        Returns a new Line which is parallel to this linear entity and passes through the specified point.
+        
+            :param p: Point that the LinearEntity will pass through.
+            :type p: Point
+            :result: New LinearEntity.
+            :rtype: LinearEntity
         """
         return Line(p, self.vec)
 
     def perpendicular_line(self, p):
         """
-        Returns a new Line which is perpendicular to this linear entity and
-        passes through the specified point.
+        Returns a new Line which is perpendicular to this linear entity and passes through the specified point.
 
+            :param p: Point that the LinearEntity will pass through.
+            :type p: Point
+            :result: New LinearEntity.
+            :rtype: LinearEntity
+            
         .. todo:: Implement this method.
         """
         raise NotImplementedError()
 
     def perpendicular_segment(self, p):
         """
-        Returns a new Segment which connects p to a point on this linear
-        entity and is also perpendicular to this line. Returns p itself
-        if p is on this linear entity.
+        Returns a new Segment which connects p to a point on this linear entity and is also perpendicular to this line. Returns p itself if p is on this linear entity.
 
+            :param p: Point that the LinearEntity will pass through.
+            :type p: Point
+            :result: New LinearEntity.
+            :rtype: LinearEntity
+            
         .. todo:: Implement this method.
         """
         raise NotImplementedError()

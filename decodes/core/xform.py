@@ -7,9 +7,17 @@ if VERBOSE_FS: print "xform.py loaded"
 class Xform(object):
     """
         A transformation matrix class.
-        
     """
     def __init__(self,value=1.0,matrix=None):
+        """XForm Constructor
+
+            :param value: Transformation value (defaults to 1.0).
+            :type value: float
+            :param matrix: Matrix
+            :type matrix: list
+            :result: XForm object.
+            :rtype: XForm
+        """
         if matrix :
             self._m = matrix
         else :
@@ -27,6 +35,15 @@ class Xform(object):
     
     """an Xform can act as a basis for a point"""
     def eval(self,other):
+        """Returns...........
+
+            :param other: Point..............
+            :type other: Point
+            :param matrix: Matrix
+            :type matrix: list
+            :result: Point...............
+            :rtype: Point
+        """
         try:
             x = other.x
             y = other.y

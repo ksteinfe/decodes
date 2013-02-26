@@ -13,8 +13,9 @@ class PLine(Geometry, HasVerts):
         """Polyline constructor.
         
             :param verts: Vertices to build the pline.
-            :type verts: List of Points.
-            :rtype: Polyline.
+            :type verts: list
+            :returns: Polyline.
+            :rtype: PLine
         """
         super(PLine,self).__init__()
         self._verts = []
@@ -35,7 +36,8 @@ class PLine(Geometry, HasVerts):
     def centroid(self):
         """Returns the centroid of a pline.
         
-            :rtype: Centroid (point).
+            :returns: Centroid (point).
+            :rtype: Point
         """
         return Point.centroid(self.verts)
          
