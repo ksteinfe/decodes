@@ -4,7 +4,7 @@ from ..core import base, vec, point, cs, line, mesh, pgon
 from . import outie
 if VERBOSE_FS: print "svg_out loaded"
 
-import os, sys
+import os, sys, math
 import cStringIO
 
 class SVGOut(outie.Outie):
@@ -13,6 +13,7 @@ class SVGOut(outie.Outie):
     default_color = Color(0)
     point_size = 2
     min_point_size = 0.001
+    default_curve_resolution = 50
 
     def __init__(self, filename, path=False):
         super(SVGOut,self).__init__()
@@ -51,6 +52,8 @@ class SVGOut(outie.Outie):
             if isinstance(g, Ray) : return self._drawRay(g)
             if isinstance(g, Segment) : return self._drawSegment(g)
         
+        if isinstance(g,Curve): return self._drawCurve(g)
+
         return False
 
     def _buffer_append(self,type,atts,style):
@@ -95,7 +98,8 @@ class SVGOut(outie.Outie):
     def _drawLine(self, line):
         return False
 
-
+    def _drawCurve(self, curve):
+        return self._drawPolyline(curve.to_pline())
 
 
     def _extract_props(self,object,force_fill=False):

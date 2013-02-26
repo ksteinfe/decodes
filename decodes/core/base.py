@@ -14,7 +14,7 @@ class BasisError(GeometricError):
 class Basis(object):
     """
     a base class for anything that wants to call itself a basis
-    bases must impliment the folloiwng methods:
+    bases must implement the folloiwng methods:
     """
     
     def eval(self,other):
@@ -26,7 +26,7 @@ class Basis(object):
 
 class HasBasis(object):
     """a base class for anything that wants to define a basis for itself"""
-    """bases must impliment the folloiwng methods:"""
+    """bases must implement the folloiwng methods:"""
     
     '''
     tells us if a basis has been defined

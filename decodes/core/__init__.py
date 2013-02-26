@@ -20,4 +20,5 @@ from pgon import *
 from xform import *
 from intersection import *
 
-
+from curve import *
+from surface import *

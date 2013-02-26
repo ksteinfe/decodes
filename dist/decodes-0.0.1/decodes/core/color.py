@@ -3,7 +3,14 @@ import colorsys
 class Color():
     def __init__(self, a=None, b=None, c=None):
         if a is None : self.r,self.g,self.b = 0.5,0.5,0.5
-        elif b is None or c is None : self.r,self.g,self.b = a,a,a
+        elif b is None or c is None : 
+            try: 
+                self.r,self.g,self.b = a.r,a.g,a.b
+            except:
+                try: 
+                    self.r,self.g,self.b = a.R/255.0,a.G/255.0,a.B/255.0
+                except:
+                    self.r,self.g,self.b = a,a,a
         else :
             self.r = a
             self.g = b
