@@ -35,15 +35,6 @@ class Xform(object):
     
     """an Xform can act as a basis for a point"""
     def eval(self,other):
-        """Returns...........
-
-            :param other: Point..............
-            :type other: Point
-            :param matrix: Matrix
-            :type matrix: list
-            :result: Point...............
-            :rtype: Point
-        """
         try:
             x = other.x
             y = other.y
