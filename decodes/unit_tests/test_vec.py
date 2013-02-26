@@ -78,38 +78,38 @@ vAvg = Vec.average([v0,v1,v2])
 outie.put([v0,v1,v2,vAvg])
 
 
-#print "comparison and sorting"
-#
-#print "vector comparisons only check length"
-#v0 = Vec(0,2)
-#v1 = Vec(0,-1)
-#v2 = Vec(3,3)
-#print "%s < %s?  %s!" % (v0,v1, ( v0<v1 ))
-#print "%s > %s?  %s!" % (v0,v1, ( v0>v1 ))
-#print "%s == %s?  %s!" % (v0,v1, ( v0==v1 ))
-#print "%s == %s?  %s!" % (v0,v2, ( v0==v2 ))
-#
-#print "%s.is_identical(%s)?  %s!" % (v1,v2, ( v1.is_identical(v2) ))
-#print "%s.is_coincident(%s)?  %s!" % (v1,v2, ( v1.is_coincident(v2) ))
-#print "%s.is_2d?  %s!" % (v2, ( v2.is_2d ))
-#
-#outie.put(v2)
-#v2.length = v0.length
-#v2 = v2.inverted() # same as v2 = ~v2
-#outie.put(v2)
-#v2 = v2.rounded()
-#outie.put(v2)
-#
-#
-#print "vecs are sorted by length"
-#redoutie = dc.makeOut(dc.outies.Rhino, "redstuff")
-#redoutie.set_color(1.0,0,0)
+print "comparison and sorting"
 
-#vecs = [Vec.random(normalize=False) for n in range(20)]
-#vecs.sort()
-#rs.AddPolyline([v.to_tuple() for v in vecs])
-#outie.put(Point(vecs[0]))
-#redoutie.put(vecs)
+print "vector comparisons only check length"
+v0 = Vec(0,2)
+v1 = Vec(0,-1)
+v2 = Vec(3,3)
+print "%s < %s?  %s!" % (v0,v1, ( v0<v1 ))
+print "%s > %s?  %s!" % (v0,v1, ( v0>v1 ))
+print "%s == %s?  %s!" % (v0,v1, ( v0==v1 ))
+print "%s == %s?  %s!" % (v0,v2, ( v0==v2 ))
+
+print "%s.is_identical(%s)?  %s!" % (v1,v2, ( v1.is_identical(v2) ))
+print "%s.is_coincident(%s)?  %s!" % (v1,v2, ( v1.is_coincident(v2) ))
+print "%s.is_2d?  %s!" % (v2, ( v2.is_2d ))
+
+outie.put(v2)
+v2.length = v0.length
+v2 = v2.inverted() # same as v2 = ~v2
+outie.put(v2)
+v2 = v2.rounded()
+outie.put(v2)
+
+
+print "vecs are sorted by length"
+redoutie = dc.makeOut(dc.outies.Rhino, "redstuff")
+redoutie.set_color(1.0,0,0)
+
+vecs = [Vec.random(normalize=False) for n in range(20)]
+vecs.sort()
+rs.AddPolyline([v.to_tuple() for v in vecs])
+outie.put(Point(vecs[0]))
+redoutie.put(vecs)
 
 
 

@@ -1,10 +1,11 @@
 import decodes as dc
 from decodes.core import *
-import math
+import decodes.unit_tests 
 
 
-print math.ceil(1.1)
 
+
+'''
 outie = dc.makeOut(dc.Outies.SVG)
 
 
@@ -19,4 +20,4 @@ cir = circular_curve(Point(100,100),50)
 outie.put(cir)
 
 outie.draw()
-
+'''
