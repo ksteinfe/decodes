@@ -6,7 +6,7 @@ import math
 
 
 
-def circle(ctr,rad):
+def circular_curve(ctr,rad):
     """ constructs a Curve object that describes a circle given: a center (Point) and radius (float)
         the plane of the circle will always be parallel to the xy-plane
     """
@@ -16,7 +16,7 @@ def circle(ctr,rad):
         return Point(x,y)+ctr
     return Curve(func,Interval(0,math.pi*2))
 
-def helix(ctr,rad,rise_per_turn=1.0,number_of_turns=3.0):
+def helical_curve(ctr,rad,rise_per_turn=1.0,number_of_turns=3.0):
     """ constructs a Curve object that describes a helix given: a center (Point), a radius (float), a rise_per_turn (float), and a number_of_turns (float)
         the plane of the circle of the helix will always be parallel to the xy-plane
     """
