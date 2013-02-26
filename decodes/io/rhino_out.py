@@ -166,4 +166,15 @@ def makelayer(layer_name):
         
     layer_index = scriptcontext.doc.Layers.Add(layer_name, System.Drawing.Color.Black)
     return layer_index
-        
+
+def interpolated_curve(points):
+    import Rhino
+    import System
+    rh_points = [to_rgpt(pt) for pt in points]
+    degree = 3
+    start_tangent = Rhino.Geometry.Vector3d(0,0,0)
+    end_tangent = Rhino.Geometry.Vector3d(0,0,0)
+    knotstyle = System.Enum.ToObject(Rhino.Geometry.CurveKnotStyle, 0)
+    curve = Rhino.Geometry.Curve.CreateInterpolatedCurve(rh_points, degree, knotstyle, start_tangent, end_tangent)
+    if not curve: raise Exception("unable to CreateInterpolatedCurve")
+    return curve

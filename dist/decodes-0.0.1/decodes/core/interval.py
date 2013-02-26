@@ -162,7 +162,8 @@ class Interval():
         
             :param val: Number to remap.
             :type val: float
-            :rtype: Translated number. 
+            :returns: the given number remapped to the target interval.
+            :rtype: float
         """  
         if target_interval==None: target_interval = Interval(0,1)
 

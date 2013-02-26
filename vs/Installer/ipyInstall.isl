@@ -1940,6 +1940,7 @@
 		<row><td>color.py</td><td>ISX_DEFAULTCOMPONENT1</td><td>color.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\core\color.py</td><td>1</td><td/></row>
 		<row><td>cs.py</td><td>ISX_DEFAULTCOMPONENT1</td><td>cs.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\core\cs.py</td><td>1</td><td/></row>
 		<row><td>curve.py</td><td>ISX_DEFAULTCOMPONENT4</td><td>curve.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\curve.py</td><td>1</td><td/></row>
+		<row><td>curve.py1</td><td>ISX_DEFAULTCOMPONENT1</td><td>curve.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\core\curve.py</td><td>1</td><td/></row>
 		<row><td>danzertile.py</td><td>ISX_DEFAULTCOMPONENT2</td><td>DANZER~1.PY|danzerTile.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\extensions\danzerTile.py</td><td>1</td><td/></row>
 		<row><td>dcpython.gha</td><td>ISX_DEFAULTCOMPONENT12</td><td>DcPython.gha</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\vs\DcPython\bin\DcPython.gha</td><td>1</td><td/></row>
 		<row><td>dimension.py</td><td>ISX_DEFAULTCOMPONENT4</td><td>DIMENS~1.PY|dimension.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\dimension.py</td><td>1</td><td/></row>
@@ -1974,6 +1975,7 @@
 		<row><td>selection.py</td><td>ISX_DEFAULTCOMPONENT4</td><td>SELECT~1.PY|selection.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\selection.py</td><td>1</td><td/></row>
 		<row><td>solargeom.py</td><td>ISX_DEFAULTCOMPONENT2</td><td>SOLARG~1.PY|solarGeom.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\extensions\solarGeom.py</td><td>1</td><td/></row>
 		<row><td>surface.py</td><td>ISX_DEFAULTCOMPONENT4</td><td>surface.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\surface.py</td><td>1</td><td/></row>
+		<row><td>surface.py1</td><td>ISX_DEFAULTCOMPONENT1</td><td>surface.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\core\surface.py</td><td>1</td><td/></row>
 		<row><td>svg_out.py</td><td>ISX_DEFAULTCOMPONENT3</td><td>svg_out.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\svg_out.py</td><td>1</td><td/></row>
 		<row><td>test.png</td><td>ISX_DEFAULTCOMPONENT</td><td>test.png</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\test.png</td><td>1</td><td/></row>
 		<row><td>transformation.py</td><td>ISX_DEFAULTCOMPONENT4</td><td>TRANSF~1.PY|transformation.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\transformation.py</td><td>1</td><td/></row>

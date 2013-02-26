@@ -103,6 +103,11 @@ class GrasshopperOut(outie.Outie):
             tree_p.Add(extract_props(g), path)
             return True
 
+        if isinstance(g,Curve): 
+            tree.Add(self._drawCurve(g),path)
+            tree_p.Add(extract_props(g), path)
+            return True
+
         if isinstance(g, CS) : 
             tree.Add(self._drawCS(g),path)
             tree_p.Add(extract_props(g), path)
@@ -146,6 +151,10 @@ class GrasshopperOut(outie.Outie):
             
     def _drawPGon(self, pgon):
         return to_rgpolyline(pgon)
+
+    def _drawCurve(self, curve):
+        return interpolated_curve(curve.to_pline().verts)
+        #return self._drawPLine(curve.to_pline())
 
     def _drawCS(self, cs):
         o = rg.Point3d(cs.origin.x,cs.origin.y,cs.origin.z)
