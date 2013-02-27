@@ -447,7 +447,7 @@ class HasVerts(HasBasis):
              # they may, however, be trying to add a "world" point to a mesh with a defined basis
              # if this is the case, we would have to describe this world point in terms of this object's basis... which isn't always possible
              # we'll try and warn them.
-             # warnings.warn("You've just added a baseless point to a based object.  The world coordinates of the point have been interpreted as local coordinates of the object.  Is this what you wanted?")
+             warnings.warn("You've just added a baseless point to a based object.  The world coordinates of the point have been interpreted as local coordinates of the object.  Is this what you wanted?")
              return Vec(other)
         if self.basis is other.basis : return Vec(other._x,other._y,other._z) # if we share a basis, then use the local coordinates of the other
         raise BasisError("The basis for this Geometry and the point you're adding do not match. Try applying or stripping the point of its basis, or describing the point in terms of this Geometry's basis")

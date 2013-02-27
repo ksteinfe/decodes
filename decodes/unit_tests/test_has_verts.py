@@ -15,8 +15,10 @@ class Tests(unittest.TestCase):
         def func(): pline[0:2] = Point()
         self.assertRaises(TypeError,func) # confirms that an error is raised when this we try to set a point using slicing syntax
 
-    def test_appending(self):
+    def test_appending_points(self):
         pts = [Point(x,0,0) for x in range(10)]
         pgon = PGon(pts,basis=CS(Point(0,0,-1))) # the pts here are interpreted in local coordinates
         self.assertEqual(Point(0,0,-1),pgon[0],"when constructing with a defined basis, the given points are interpreted in local coordinates")
+
+        pgon = PGon()
 
