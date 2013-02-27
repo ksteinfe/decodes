@@ -8,49 +8,48 @@ outie = fp.makeOut(fp.outies.Rhino, "delaunay2Dtest")
     
 class Triangle():
     def __init__(self, v, f):
-	self._vert = v
-	self._face = f # ordered in a counterclockwise manner
+        self._vert = v
+        self._face = f # ordered in a counterclockwise manner
 
     def vert(self): return self._vert	
     def face(self): return self._face
-	  
+
     def circumcenter(self):
-	x1 = self._vert[0].x
-	y1 = self._vert[0].y
-	x2 = self._vert[1].x
-	y2 = self._vert[1].y
-	x3 = self._vert[2].x
-	y3 = self._vert[2].y
+        x1 = self._vert[0].x
+        y1 = self._vert[0].y
+        x2 = self._vert[1].x
+        y2 = self._vert[1].y
+        x3 = self._vert[2].x
+        y3 = self._vert[2].y
     
-	if math.fabs(y2-y1) < TOL:
-	    m2 = -(x3 - x2) / (y3 - y2)
-	    mx2 = (x2 + x3) / 2
-	    my2 = (y2 + y3) / 2
-	    xc = (x2 + x1) / 2
-	    yc = m2 * (xc - mx2) + my2
-	elif math.fabs(y3-y2) < TOL:
-	    m1 = -(x2 - x1) / (y2 - y1)
-	    mx1 = (x1 + x2) / 2
-	    my1 = (y1 + y2) / 2
-	    xc = (x3 + x2) / 2
-	    yc = m1 * (xc - mx1) + my1
-	else:
-	    m1 = -(x2 - x1) / (y2 - y1)
-	    m2 = -(x3 - x2) / (y3 - y2)
-	    mx1 = (x1 + x2) / 2
-	    mx2 = (x2 + x3) / 2
-	    my1 = (y1 + y2) / 2
-	    my2 = (y2 + y3) / 2
-	    xc = (m1 * mx1 - m2 * mx2 + my2 - my1) / (m1 - m2)
-	    yc = m1 * (xc - mx1) + my1
-	return Point(xc, yc)	
+        if math.fabs(y2-y1) < TOL:
+            m2 = -(x3 - x2) / (y3 - y2)
+            mx2 = (x2 + x3) / 2
+            my2 = (y2 + y3) / 2
+            xc = (x2 + x1) / 2
+            yc = m2 * (xc - mx2) + my2
+        elif math.fabs(y3-y2) < TOL:
+            m1 = -(x2 - x1) / (y2 - y1)
+            mx1 = (x1 + x2) / 2
+            my1 = (y1 + y2) / 2
+            xc = (x3 + x2) / 2
+            yc = m1 * (xc - mx1) + my1
+        else:
+            m1 = -(x2 - x1) / (y2 - y1)
+            m2 = -(x3 - x2) / (y3 - y2)
+            mx1 = (x1 + x2) / 2
+            mx2 = (x2 + x3) / 2
+            my1 = (y1 + y2) / 2
+            my2 = (y2 + y3) / 2
+            xc = (m1 * mx1 - m2 * mx2 + my2 - my1) / (m1 - m2)
+            yc = m1 * (xc - mx1) + my1
+        return Point(xc, yc)	
     
     def in_circumcircle(self, pt):
-	pv = self._vert[0]
-	pc = self.circumcenter()
-	if (((pc.x - pt.x)**2 + (pc.y - pt.y)**2) < ((pc.x - pv.x)**2 + (pc.y - pv.y)**2)):
-	    return True
-	else: return False
+        pv = self._vert[0]
+        pc = self.circumcenter()
+        if (((pc.x - pt.x)**2 + (pc.y - pt.y)**2) < ((pc.x - pv.x)**2 + (pc.y - pv.y)**2)): return True
+        else: return False
 
 
 def delaunay2D(verts):
@@ -87,26 +86,25 @@ def delaunay2D(verts):
         # and form new triangles from the point to the vertices of the enclosing polygon
         p = verts[i]
         edges = []
-	curTriangles = []
+        curTriangles = []
         curTriangles.extend(triangles)
         for t in curTriangles:
             if t.in_circumcircle(p):
-		edges.append([t._face[0],t._face[1]])
+                edges.append([t._face[0],t._face[1]])
                 edges.append([t._face[1],t._face[2]])
                 edges.append([t._face[2],t._face[0]])
                 triangles.remove(t)
-	#remove redundant edges (which leaves only the edges of the enclosing polygon)
-	edges = removeDuplicates(edges)
- 	for e in edges:
-	    triangles.append(Triangle([verts[e[0]], verts[e[1]], verts[i]] ,[e[0], e[1], i]))
+    #remove redundant edges (which leaves only the edges of the enclosing polygon)
+    edges = removeDuplicates(edges)
+    for e in edges:
+        triangles.append(Triangle([verts[e[0]], verts[e[1]], verts[i]] ,[e[0], e[1], i]))
     
     #TODO: implement a draw functionality for Triangle
     trianglesDraw = fp.Mesh()
     trianglesDraw.add_vert(verts)
     for t in triangles:
-        if t._face[0] > numPoints-1 or t._face[1] > numPoints - 1 or t._face[2] > numPoints - 1:
-	    continue
-	trianglesDraw.add_face(t._face[0],t._face[1],t._face[2])
+        if t._face[0] > numPoints-1 or t._face[1] > numPoints - 1 or t._face[2] > numPoints - 1: continue
+        trianglesDraw.add_face(t._face[0],t._face[1],t._face[2])
     
     outie.put(verts)
     outie.put(trianglesDraw)
@@ -121,12 +119,12 @@ def removeDuplicates(a):
     b = []
     index = 0
     for i in acopy:
-	times = 0
-	for j in acopy:
-	    if times > 1: continue
-	    if i==j: times +=1
-	if times == 1: b.append(a[index])
-	index +=1
+        times = 0
+        for j in acopy:
+            if times > 1: continue
+            if i==j: times +=1
+        if times == 1: b.append(a[index])
+        index +=1
     return b
 
 
@@ -135,12 +133,10 @@ if __name__=="__main__":
     pts = []
     ptFile = open("./ptCloud2D.txt", 'r')
     for line in ptFile:
-	fld = line.split()
-	x = float(fld[0])
-	y = float(fld[1])
-	pts.append(Point(x,y))
- 
-    delaunay2D(pts)   
-    
+        fld = line.split()
+        x = float(fld[0])
+        y = float(fld[1])
+        pts.append(Point(x,y))
 
+    delaunay2D(pts)
     outie.draw()

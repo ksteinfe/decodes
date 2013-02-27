@@ -46,13 +46,13 @@ def dirNormalIrad_fromFile(fileIn):
     #loop through lines
     for line in file:
         #skip header
-	if lineno > number_of_header_lines - 1 :
-	    #for a generic line, data is an array of four numbers
-	    #delimiter is white space
-	    data = [int(n) for n in line.split()]
-	    #extract data from 4th column and append to direct irradiance list initiated earlier
-	    dirNormalIradList.append(data[3])
-	lineno = lineno + 1
+        if lineno > number_of_header_lines - 1 :
+            #for a generic line, data is an array of four numbers
+            #delimiter is white space
+            data = [int(n) for n in line.split()]
+            #extract data from 4th column and append to direct irradiance list initiated earlier
+            dirNormalIradList.append(data[3])
+        lineno = lineno + 1
     return dirNormalIradList
 
 
