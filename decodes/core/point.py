@@ -369,10 +369,10 @@ class Point(Vec,HasBasis):
         
 
 
-class HasVerts(HasBasis):
+class HasPts(HasBasis):
     """
     A base class for anything that contains a list of vertices.
-    All HasVerts classes also have bases
+    All HasPts classes also have bases
 
 
     """
@@ -381,52 +381,54 @@ class HasVerts(HasBasis):
         self.basis = None
 
     def __getitem__(self,slice):
-        vecs = self._verts[slice]
+        sliced = self._verts[slice] # may return a singleton or list
         try:
             #TODO: move slice indexing to subclasses and return object rather than point list
-            return [Point(vec,basis=self.basis) for vec in vecs]
+            return [Point(vec,basis=self.basis) for vec in sliced]
         except:
-            return Point(vecs,basis=self.basis)
+            return sliced
     
     def __setitem__(self,index,other):
+        #TODO: perhaps this method bypasses the append function, and adds the given vector directly?
         try:
-            self.verts[index] = self._compatible_vec(other)
+            self._verts[index] = self._compatible_vec(other)
         except TypeError, e:
                 raise TypeError("You cannot set the vertices of this object using slicing syntax")
     
     def __len__(self): return len(self._verts)
 
     @property
-    def verts(self): 
-        """Gets the vertices of a geometry.
+    def pts(self): 
+        """Returns the points contained within this geometry.
 
-            :result: List of vertices.
-            :rtype: list
+            :rtype: Point or [Point]
         """
-        return self._verts
+        return [Point(vec,basis=self.basis) for vec in self._verts]
     
-    @verts.setter
-    def verts(self, verts): 
-        """Sets the geometry's vertices
+    @pts.setter
+    def pts(self, pts): 
+        """Sets the points contained within this geometry.  
+        The list of vectors currently stored within this geometry are cleared, and the given points are each appended in sequence, following the uusual rules regarding bases
 
-            :param verts: Vertice or vertices to append
-            :type verts: Point or list
-            :result: Sets the geometry's vertices.
+            :param pts: Point(s) to store
+            :type pts: Point or [Point]
+            :result: Modfies this geometry by redefining the stored list of points
         """
         self._verts = []
         self.append(verts)
         
-    def append(self,other) : 
-        """If a list is passed, it appends the objects to the list, else, the object is appended.
+    def append(self,pts) : 
+        """Appends the given Point to the stored list of points.
+        Each Point is processed to ensure compatibilty with this geometry's basis 
 
-            :param other: List or object to append.
-            :type other: object or list
-            :result: Appends elements to a list.
+            :param pts: Point(s) to append
+            :type pts: Point or [Point]
+            :result: Modfies this geometry by adding items to the stored list of points
         """
-        if isinstance(other, collections.Iterable) : 
-            for v in other : self.append(v)
+        if isinstance(pts, collections.Iterable) : 
+            for p in pts : self.append(p)
         else : 
-            self._verts.append(self._compatible_vec(other))
+            self._verts.append(self._compatible_vec(pts))
     
     @property
     def centroid(self):
@@ -435,6 +437,7 @@ class HasVerts(HasBasis):
             :returns: Centroid (point).
             :rtype: Point
         """
+        raise
         return Point.centroid(self.verts)
     
     def _compatible_vec(self,other):
@@ -447,7 +450,7 @@ class HasVerts(HasBasis):
              # they may, however, be trying to add a "world" point to a mesh with a defined basis
              # if this is the case, we would have to describe this world point in terms of this object's basis... which isn't always possible
              # we'll try and warn them.
-             warnings.warn("You've just added a baseless point to a based object.  The world coordinates of the point have been interpreted as local coordinates of the object.  Is this what you wanted?")
+             #warnings.warn("You've just added a baseless point to a based object.  The world coordinates of the point have been interpreted as local coordinates of the object.  Is this what you wanted?")
              return Vec(other)
         if self.basis is other.basis : return Vec(other._x,other._y,other._z) # if we share a basis, then use the local coordinates of the other
         raise BasisError("The basis for this Geometry and the point you're adding do not match. Try applying or stripping the point of its basis, or describing the point in terms of this Geometry's basis")

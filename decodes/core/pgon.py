@@ -5,7 +5,7 @@ if VERBOSE_FS: print "polygon.py loaded"
 import copy, collections
 import math
 
-class PGon(HasVerts):
+class PGon(HasPts):
     """
     a very simple 2d polygon class
     Polygons limit their vertices to x and y dimensions, and enforce that they employ a basis.    Transformations of a polygon should generally be applied to the basis.    Any tranfromations of the underlying vertices should ensure that the returned vectors are limited to x and y dimensions
@@ -21,7 +21,7 @@ class PGon(HasVerts):
             :returns: PGon object. 
             :rtype: PGon
         """ 
-        super(PGon,self).__init__() #HasVerts constructor initializes list of verts
+        super(PGon,self).__init__() #HasPts constructor initializes list of verts
         self.basis = CS() if (basis is None) else basis
         if (verts is not None) : 
             for v in verts: self.append(v)

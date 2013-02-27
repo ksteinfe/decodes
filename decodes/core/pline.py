@@ -4,7 +4,7 @@ if VERBOSE_FS: print "pline.py loaded"
 
 import copy, collections
 
-class PLine(HasVerts):
+class PLine(HasPts):
     """
     a simple polyline class
     """
@@ -17,7 +17,7 @@ class PLine(HasVerts):
             :returns: Polyline.
             :rtype: PLine
         """
-        super(PLine,self).__init__() #HasVerts constructor initializes list of verts
+        super(PLine,self).__init__() #HasPts constructor initializes list of verts
         if (verts is not None) : 
             for v in verts: self.append(v)
     

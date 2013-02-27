@@ -7,7 +7,7 @@ class Tests(unittest.TestCase):
 
     def test_empty_constructor(self):
         msh = Mesh()
-        self.assertEqual(len(msh.verts),0,"mesh has an empty list of verts")
+        self.assertEqual(len(msh.pts),0,"mesh has an empty list of verts")
 
     def test_simple_constructor(self):
         verts = [

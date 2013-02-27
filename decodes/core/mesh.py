@@ -4,7 +4,7 @@ if VERBOSE_FS: print "mesh.py loaded"
 
 import copy, collections
 
-class Mesh(HasVerts):
+class Mesh(HasPts):
     """
     a very simple mesh class
     """
@@ -22,7 +22,7 @@ class Mesh(HasVerts):
             :result: Mesh object.
             :rtype: Mesh
         """
-        super(Mesh,self).__init__() #HasVerts constructor initializes list of verts
+        super(Mesh,self).__init__() #HasPts constructor initializes list of verts
         if (basis is not None) : self.basis = basis
         if (verts is not None) : 
             for v in verts: self.append(v)

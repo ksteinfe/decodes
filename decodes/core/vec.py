@@ -22,6 +22,10 @@ class Vec(Geometry):
             :result: Vector object.
             :rtype: Vec
         """
+        if a is None : a = 0
+        if b is None : b = 0
+        if c is None : c = 0
+
         if all( hasattr(a,i) and hasattr(b,i) for i in ['x','y','z'] ) :
             # we've been passed two things that act like points
             self._x = b.x - a.x
