@@ -72,7 +72,7 @@ class SVGOut(outie.Outie):
     def _drawPolygon(self, pgon):
         type = 'polygon'
         style = self._extract_props(pgon,force_fill=True) # force filled
-        point_string = " ".join([str(v.x)+","+str(v.y) for v in pgon.verts])
+        point_string = " ".join([str(v.x)+","+str(v.y) for v in pgon.pts])
         atts = 'points="'+point_string+'"'
         self._buffer_append(type,atts,style)
         return True
@@ -80,7 +80,7 @@ class SVGOut(outie.Outie):
     def _drawPolyline(self, pline):
         type = 'polyline'
         style = self._extract_props(pline)
-        point_string = " ".join([str(v.x)+","+str(v.y) for v in pline.verts])
+        point_string = " ".join([str(v.x)+","+str(v.y) for v in pline.pts])
         atts = 'points="'+point_string+'"'
         self._buffer_append(type,atts,style)
         return True

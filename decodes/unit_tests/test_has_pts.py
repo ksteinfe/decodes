@@ -2,7 +2,6 @@ import unittest
 import decodes.core as dc
 from decodes.core import *
 
-
 class Tests(unittest.TestCase):
 
     def test_item_access(self):
@@ -38,3 +37,23 @@ class Tests(unittest.TestCase):
 
         pgon.pts[1].z = 10
         self.assertEqual(Point(1,0,-1),pgon.pts[1],"access via the pts function returns a list of point objects, which does not permit manipulation")
+
+    def test_centroid(self):
+        nums = range(10)
+        pgon = PGon([Point(x,0,0) for x in nums],basis=CS(Point(0,0,-1)))
+        avg = sum(nums)/float(len(nums))
+        self.assertEqual(Point(avg,0,-1),pgon.centroid,"centroid generates based points")
+
+    def test_basis_applied_and_stripped(self):
+        pts = [Point(x,0,0) for x in range(10)]
+        pgon = PGon(pts,basis=CS(Point(0,0,-1))) # the pts here are interpreted in local coordinates
+        pgon.set_weight(10)
+
+        pgon_bapplied = pgon.basis_applied()
+        pgon_bstripped = pgon.basis_stripped()
+
+        for x in range(10) : self.assertEqual(Vec(x,0,-1),pgon_bapplied[x])
+        self.assertEqual(10,pgon_bapplied.props['weight'])
+
+        for x in range(10) : self.assertEqual(Vec(x,0,0),pgon_bstripped[x])
+        self.assertEqual(10,pgon_bstripped.props['weight'])

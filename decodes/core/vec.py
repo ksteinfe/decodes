@@ -439,4 +439,5 @@ class Vec(Geometry):
         """
         return math.degrees(self.angle(other))
 
-
+    
+    

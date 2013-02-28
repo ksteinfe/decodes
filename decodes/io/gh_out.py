@@ -130,7 +130,7 @@ class GrasshopperOut(outie.Outie):
         
     def _drawMesh(self, mesh):
         rh_mesh = rg.Mesh()
-        for v in mesh.verts: rh_mesh.Vertices.Add(v.x,v.y,v.z)
+        for v in mesh.pts: rh_mesh.Vertices.Add(v.x,v.y,v.z)
         for f in mesh.faces: 
             if len(f)==3 : rh_mesh.Faces.AddFace(f[0], f[1], f[2])
             if len(f)==4 : rh_mesh.Faces.AddFace(f[0], f[1], f[2], f[3])
@@ -153,7 +153,7 @@ class GrasshopperOut(outie.Outie):
         return to_rgpolyline(pgon)
 
     def _drawCurve(self, curve):
-        return interpolated_curve(curve.to_pline().verts)
+        return interpolated_curve(curve.to_pline().pts)
         #return self._drawPLine(curve.to_pline())
 
     def _drawCS(self, cs):

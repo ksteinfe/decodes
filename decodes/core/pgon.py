@@ -11,20 +11,20 @@ class PGon(HasPts):
     Polygons limit their vertices to x and y dimensions, and enforce that they employ a basis.    Transformations of a polygon should generally be applied to the basis.    Any tranfromations of the underlying vertices should ensure that the returned vectors are limited to x and y dimensions
     """
     
-    def __init__(self, verts=None, basis=None):
+    def __init__(self, vertices=None, basis=None):
         """ PGon Constructor.
         
-            :param verts: List of vertices to build the polygon.
-            :type verts: list
+            :param vertices: List of vertices to build the polygon.
+            :type vertices: list
             :param basis: Plane basis for the PGon.
             :type basis: Basis
             :returns: PGon object. 
             :rtype: PGon
         """ 
-        super(PGon,self).__init__() #HasPts constructor initializes list of verts
+        super(PGon,self).__init__() #HasPts constructor initializes list of verts and an empty basis
         self.basis = CS() if (basis is None) else basis
-        if (verts is not None) : 
-            for v in verts: self.append(v)
+        if (vertices is not None) : 
+            for v in vertices: self.append(v)
         
         
     def __repr__(self): return "pgon[{0}v]".format(len(self._verts))

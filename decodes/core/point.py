@@ -1,6 +1,6 @@
 from decodes.core import *
 from . import base, vec #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
-import math, random, warnings
+import math, random, warnings, copy
 if VERBOSE_FS: print "point.py loaded"
 
 
@@ -91,7 +91,7 @@ class Point(Vec,HasBasis):
         """Returns a new point with basis applied. Coords will be interpreted in world space. Points will appear in the same position when drawn
         
             :param copy_children: If True, creates a new Point object with 'world' coordinates.
-            :type verts: bool
+            :type copy_children: bool
             :result: Point object with basis applied.
             :rtype: Point
         """
@@ -103,7 +103,7 @@ class Point(Vec,HasBasis):
         """Returns a new point stripped of any bases. Coords will be interpreted in world space, and points will appear in their "local" position when drawn
         
             :param copy_children: If True, creates a new Point object with 'local' coordinates.
-            :type verts: bool
+            :type copy_children: bool
             :result: Point object with basis stripped.
             :rtype: Point
         """
@@ -312,8 +312,10 @@ class Point(Vec,HasBasis):
 
     @staticmethod
     def _centroid(points): 
-        """Returns the centroid of a point cloud.
-        
+        """Returns the centroid of a point cloud in local coordinates.
+        All given points will be evaluated with their bases stripped, and the basis of the returned point will adopt the basis of the given points.
+        Mixed bases among the given points will throw an error.
+
             :param points: Point cloud
             :type p0: list
             :result: Centroid of point cloud.
@@ -327,6 +329,7 @@ class Point(Vec,HasBasis):
     @staticmethod
     def centroid(points): 
         """Returns the centroid of a point cloud.
+        All given points will be evaluated with their bases applied, and the returned point will be baseless
         
             :param points: Point cloud
             :type p0: list
@@ -389,7 +392,6 @@ class HasPts(HasBasis):
             return sliced
     
     def __setitem__(self,index,other):
-        #TODO: perhaps this method bypasses the append function, and adds the given vector directly?
         try:
             self._verts[index] = self._compatible_vec(other)
         except TypeError, e:
@@ -432,14 +434,35 @@ class HasPts(HasBasis):
     
     @property
     def centroid(self):
-        """Returns the centroid of the verts of this object
+        """Returns the centroid of the points of this object
         
             :returns: Centroid (point).
             :rtype: Point
         """
-        raise
-        return Point.centroid(self.verts)
+        return Point._centroid(self.pts) 
     
+
+    def basis_applied(self): 
+        """Returns a new Geometry with basis applied. Coords will be interpreted in world space, appearing in the same position when drawn
+        
+            :result: Object with basis applied.
+            :rtype: Object
+        """
+        clone = copy.copy(self)
+        clone._verts = [pt.basis_applied() for pt in self.pts]
+        return clone
+    
+    def basis_stripped(self): 
+        """Returns a new Geometry stripped of any bases. Coords will be interpreted in world space, in their analogous "local" position when drawn
+        
+            :result: Object with basis stripped.
+            :rtype: Object
+        """
+        clone = copy.copy(self)
+        clone._verts = [pt.basis_stripped() for pt in self.pts]
+        return clone
+
+
     def _compatible_vec(self,other):
         """ Returns a vector compatible with the collection of vectors in this object if possible
         """
@@ -454,27 +477,3 @@ class HasPts(HasBasis):
              return Vec(other)
         if self.basis is other.basis : return Vec(other._x,other._y,other._z) # if we share a basis, then use the local coordinates of the other
         raise BasisError("The basis for this Geometry and the point you're adding do not match. Try applying or stripping the point of its basis, or describing the point in terms of this Geometry's basis")
-'''   
-    def append(self,other) :
-        """ Adds vertices to the PGon.
-
-            :param other: Vertex to add.
-            :type other: Point
-            :returns: Updates this object.
-            
-        """ 
-        if isinstance(other, collections.Iterable) : 
-            for v in other : self.add_vert(v)
-        else : 
-            if self.is_baseless : self._verts.append(other.basis_applied())
-            elif self.basis is other.basis : 
-                self._verts.append(other.basis_stripped())
-            elif other.is_baseless : 
-                # we assume here that the user is describing the point within the pgon's basis
-                # they may, however, be trying to add a "world" point to a mesh with a defined basis
-                # if this is the case, they should call pgon.basis_stripped()
-                #TODO: shouldn't we apply the basis to this point?
-                self._verts.append(other)
-            else : raise BasisError("The basis for this Geometry and the point you're adding do not match.    Try applying or stripping the point of its basis, or describing the point in terms of this Geometry's basis")
-'''
-

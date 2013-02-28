@@ -5,22 +5,47 @@ from decodes.core import *
 
 class Tests(unittest.TestCase):
 
+    tet_pts = [
+        Point(0.0       , 0.0	      , 0.0),
+        Point(0.9510565 , 0.0	      , 0.0),
+        Point(0.6881910 , 1.3763819 , 0.0),
+        Point(0.5257311 , 0.6881910	, 0.5)
+    ]
+    tet_faces = [[0,1,2],[0,2,3],[2,3,0],[3,0,1]]
+
     def test_empty_constructor(self):
         msh = Mesh()
         self.assertEqual(len(msh.pts),0,"mesh has an empty list of verts")
 
     def test_simple_constructor(self):
-        verts = [
-          Point(0.0       , 0.0	      , 0.0),
-          Point(0.9510565 , 0.0	      , 0.0),
-          Point(0.6881910 , 1.3763819 , 0.0),
-          Point(0.5257311 , 0.6881910	, 0.5)
-        ]
-        faces = [[0,1,2],[0,2,3],[2,3,0],[3,0,1]]
-        msh = Mesh(verts,faces)
+        msh = Mesh(self.tet_pts,self.tet_faces)
+        for n in range(len(self.tet_pts)): self.assertEqual(msh[n],self.tet_pts[n],"a mesh constructed with a basis understands the given points in local coordinates")
+        for n in range(len(self.tet_pts)): self.assertEqual(msh.pts[n],self.tet_pts[n],"a mesh constructed with no basis uses the world coords of the given points")
         
-        for n in range(len(verts)): self.assertEqual(msh[n],verts[n],"mesh returns a valid copy of point used to construct it")
+        cs = CS(Point(0,0),Vec(1,0),Vec(0,-1))
+        msh = Mesh(self.tet_pts,self.tet_faces,basis=cs)
+        for n in range(len(self.tet_pts)): self.assertEqual(msh[n],self.tet_pts[n],"a mesh constructed with a basis understands the given points in local coordinates")
+        for n in range(len(self.tet_pts)): self.assertEqual(msh.pts[n],cs.eval(self.tet_pts[n]),"a mesh constructed with a basis understands the given points in local coordinates")
 
+    def test_face_access(self):
+        msh = Mesh(self.tet_pts,self.tet_faces)
+
+        for n in range(len(self.tet_faces)): self.assertEqual(msh.faces[n],self.tet_faces[n],"basic face access")
+        msh.add_face(1,2,3)
+        self.assertEqual(msh.faces[-1],[1,2,3],"added face")
+
+        self.assertEqual( msh.face_centroid(0) , Point.centroid([self.tet_pts[i] for i in self.tet_faces[0]]) , "face centroid")
+
+        self.assertEqual( msh.face_normal(0) , Point(0,0,1), "face normal")
+
+
+    def test_explode(self):
+        msh = Mesh(self.tet_pts,self.tet_faces)
+        meshes = Mesh.explode(msh)
+        
+        for n in range(len(meshes)):
+            for m in range(3):
+                self.assertEqual( self.tet_pts[self.tet_faces[n][m]] , meshes[n].pts[m] , "explode")
 
 '''
 m1 = dc.Mesh()
