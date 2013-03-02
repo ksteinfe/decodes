@@ -59,17 +59,17 @@ class Tests(unittest.TestCase):
             return Point(t,math.sin(t))
         crv = Curve(func,Interval(0,math.pi*2))
         
-        places = 3
         for t in Interval.twopi()/4:
             pt = Point(t,math.sin(t))
-            near_pt, near_t, dist = crv.near(pt,0.001)
-            self.assertAlmostEqual(near_pt.x,pt.x,places)
-            self.assertAlmostEqual(near_pt.y,pt.y,places)
-            self.assertAlmostEqual(near_pt.z,pt.z,places)
+            near_pt, near_t, dist = crv.near(pt,0.01)
+            self.AssertPointsAlmostEqual(pt,near_pt)
 
     def test_far(self):
-        def func(t):
-            return Point(t,t)
-        crv = Curve(func,Interval(0,10))
+        crv = Curve.circle(Point(),10)
+        far_pt, far_t, dist = crv.far(Point(0,1)) #near() returns a tuple containing two values (Point, float)
+        self.AssertPointsAlmostEqual(Point(0,-10),far_pt)
 
-        near_pt, near_t, dist = crv.near(Point(5,0)) #near() returns a tuple containing two values (Point, float)
+    def AssertPointsAlmostEqual(self,pa,pb,places=4):
+        self.assertAlmostEqual(pa.x,pb.x,places)
+        self.assertAlmostEqual(pa.y,pb.y,places)
+        self.assertAlmostEqual(pa.z,pb.z,places)
