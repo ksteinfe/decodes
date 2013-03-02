@@ -153,8 +153,7 @@ class GrasshopperOut(outie.Outie):
         return to_rgpolyline(pgon)
 
     def _drawCurve(self, curve):
-        return interpolated_curve(curve.to_pline().pts)
-        #return self._drawPLine(curve.to_pline())
+        return interpolated_curve(curve.surrogate.pts)
 
     def _drawCS(self, cs):
         o = rg.Point3d(cs.origin.x,cs.origin.y,cs.origin.z)

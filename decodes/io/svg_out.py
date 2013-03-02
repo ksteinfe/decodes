@@ -99,7 +99,7 @@ class SVGOut(outie.Outie):
         return False
 
     def _drawCurve(self, curve):
-        return self._drawPolyline(curve.to_pline())
+        return self._drawPolyline(curve.surrogate)
 
 
     def _extract_props(self,object,force_fill=False):

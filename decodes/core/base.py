@@ -6,10 +6,13 @@ import copy,exceptions, collections
 
 
 class GeometricError(StandardError):
-        pass
+    pass
 
 class BasisError(GeometricError):
-        pass
+    pass
+
+class DomainError(GeometricError):
+    pass
 
 class IsBasis(object):
     """

@@ -290,6 +290,73 @@ class Point(Vec,HasBasis):
         """
         return Vec(self.basis_applied(),other.basis_applied()).length
     
+    def projected(self, other): 
+        """Returns a new point projected onto a destination vector
+        
+            :param other: Destination vector.
+            :type other: Vec
+            :result: A Point projected onto a Vector.
+            :rtype: Point
+            
+            .. todo:: think about what this function will mean for new "basis" construct.    probably eliminate, in favor of projecting onto lines and such in world space
+        """
+        return Point( Vec(self.x,self.y,self.z).projected(other) )
+
+    @staticmethod
+    def near(pt, pts):
+        """ Returns a reference to a Point from the given list of Points which is nearest to the source Point.
+
+            :param pt: Source Point
+            :type pt: Point
+            :param pt: A list of Points through which to search
+            :type pts: [Point]
+            :result: A reference to a Point from the list which is nearest to the source Point
+            :rtype: Point
+        """
+        return pts[Point.near_index(pt,pts)]
+
+    @staticmethod
+    def near_index(pt, pts):
+        """ Returns the index of the Point within the given list of Points which is nearest to the source Point.
+
+            :param pt: Source Point
+            :type pt: Point
+            :param pt: A list of Points through which to search
+            :type pts: [Point]
+            :result: The index of the nearest Point
+            :rtype: int
+        """
+        dists = [pt.distance2(p) for p in pts]
+        return dists.index(min(dists))
+
+    @staticmethod
+    def far(pt, pts):
+        """ Returns a reference to a Point from the given list of Points which is furthest from the source Point.
+
+            :param pt: Source Point
+            :type pt: Point
+            :param pt: A list of Points through which to search
+            :type pts: [Point]
+            :result: A reference to a Point from the list which is furthest from the source Point
+            :rtype: Point
+        """
+        return pts[Point.far_index(pt,pts)]
+
+    @staticmethod
+    def far_index(pt, pts):
+        """ Returns the index of the Point within the given list of Points which is furthest from the source Point.
+
+            :param pt: Source Point
+            :type pt: Point
+            :param pt: A list of Points through which to search
+            :type pts: [Point]
+            :result: The index of the furthest Point
+            :rtype: int
+        """
+        dists = [pt.distance2(p) for p in pts]
+        return dists.index(max(dists))
+
+
     @staticmethod
     def interpolate(p0,p1,t=0.5): 
         """Returns a new point which is the result of an interpolation between the two given points at the given t-value
@@ -338,18 +405,6 @@ class Point(Vec,HasBasis):
         """
         return Point( Vec.average([p.basis_applied() for p in points]) )
         
-
-    def projected(self, other): 
-        """Returns a new point projected onto a destination vector
-        
-            :param other: Destination vector.
-            :type other: Vec
-            :result: Projected point.
-            :rtype: Point
-            
-            .. todo:: think about what this function will mean for new "basis" construct.    probably eliminate, in favor of projecting onto lines and such in world space
-        """
-        return Point( Vec(self.x,self.y,self.z).projected(other) )
     
     @staticmethod
     def random(interval=None,constrain2d=False):
@@ -362,7 +417,7 @@ class Point(Vec,HasBasis):
             :result: Random point.
             :rtype: Point
         """
-        if interval == None:
+        if interval is None:
             interval = Interval(-1.0,1.0)
         x = random.uniform(interval.a,interval.b)
         y = random.uniform(interval.a,interval.b)

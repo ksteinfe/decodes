@@ -3,6 +3,10 @@ from decodes.core import *
 import decodes.unit_tests 
 
 
+def func(t):
+    return Point(t,math.sin(t))
+crv = Curve(func,Interval(0,math.pi*2))
+
 
 pts = [Point(x,0,0) for x in range(10)]
 pline = PLine(pts)

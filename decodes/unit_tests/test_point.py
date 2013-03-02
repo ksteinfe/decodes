@@ -15,6 +15,12 @@ class Tests(unittest.TestCase):
         ptb = Point(pta,basis=CS(Point(-4,-4)))
         self.assertEqual(ptb,Point(-4,-4,0),"point b adopts local coordinates of point a")
 
+    def test_nearest_point(self):
+        pt = Point(4,1)
+        pts = [Point(x,0,0) for x in range(10)]
+        npt = Point.near(pt, pts)
+        self.assertEqual(npt,Point(4,0,0),"nearest point in list")
+
 
 
 '''
