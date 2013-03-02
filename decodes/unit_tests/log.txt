@@ -4,7 +4,7 @@
 test_empty_constructor (decodes.unit_tests.test_pgon.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.001s
+Ran 1 test in 0.002s
 
 OK
 
@@ -25,7 +25,7 @@ test_face_access (decodes.unit_tests.test_mesh.Tests) ... ok
 test_simple_constructor (decodes.unit_tests.test_mesh.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.082s
+Ran 4 tests in 0.046s
 
 OK
 
@@ -55,13 +55,110 @@ OK
 
 
 == TEST_CURVE ==
-test_constructor (decodes.unit_tests.test_curve.Tests) ... ok
-test_division (decodes.unit_tests.test_curve.Tests) ... ok
-test_far (decodes.unit_tests.test_curve.Tests) ... ok
-test_near (decodes.unit_tests.test_curve.Tests) ... ok
-test_subdivide (decodes.unit_tests.test_curve.Tests) ... ok
+test_constructor (decodes.unit_tests.test_curve.Tests) ... ERROR
+test_division (decodes.unit_tests.test_curve.Tests) ... ERROR
+test_far (decodes.unit_tests.test_curve.Tests) ... ERROR
+test_near (decodes.unit_tests.test_curve.Tests) ... ERROR
+test_subdivide (decodes.unit_tests.test_curve.Tests) ... ERROR
+
+======================================================================
+ERROR: test_constructor (decodes.unit_tests.test_curve.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\git\decodes\decodes\unit_tests\test_curve.py", line 11, in test_constructor
+    crv = Curve(func,Interval(0,math.pi*2))
+  File "G:\git\decodes\decodes\core\curve.py", line 30, in __init__
+    self._surrogate = self._to_pline()
+  File "G:\git\decodes\decodes\core\curve.py", line 183, in _to_pline
+    return PLine([self.deval(t) for t in self.domain.divide(int(math.ceil(self.domain.delta/self.tol)),True)])
+  File "G:\git\decodes\decodes\core\curve.py", line 91, in deval
+    return Plane(pt, Vec(pt,pv))
+  File "G:\git\decodes\decodes\core\plane.py", line 19, in __init__
+    self._vec = normal.normalized()
+  File "G:\git\decodes\decodes\core\vec.py", line 334, in normalized
+    factor = length / self.length
+ZeroDivisionError: float division by zero
+
+======================================================================
+ERROR: test_division (decodes.unit_tests.test_curve.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\git\decodes\decodes\unit_tests\test_curve.py", line 23, in test_division
+    crv = Curve(func,Interval(0,10))
+  File "G:\git\decodes\decodes\core\curve.py", line 30, in __init__
+    self._surrogate = self._to_pline()
+  File "G:\git\decodes\decodes\core\curve.py", line 183, in _to_pline
+    return PLine([self.deval(t) for t in self.domain.divide(int(math.ceil(self.domain.delta/self.tol)),True)])
+  File "G:\git\decodes\decodes\core\curve.py", line 91, in deval
+    return Plane(pt, Vec(pt,pv))
+  File "G:\git\decodes\decodes\core\plane.py", line 19, in __init__
+    self._vec = normal.normalized()
+  File "G:\git\decodes\decodes\core\vec.py", line 334, in normalized
+    factor = length / self.length
+ZeroDivisionError: float division by zero
+
+======================================================================
+ERROR: test_far (decodes.unit_tests.test_curve.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\git\decodes\decodes\unit_tests\test_curve.py", line 68, in test_far
+    crv = Curve.circle(Point(),10)
+  File "G:\git\decodes\decodes\core\curve.py", line 196, in circle
+    return Curve(func,Interval(0,math.pi*2))
+  File "G:\git\decodes\decodes\core\curve.py", line 30, in __init__
+    self._surrogate = self._to_pline()
+  File "G:\git\decodes\decodes\core\curve.py", line 183, in _to_pline
+    return PLine([self.deval(t) for t in self.domain.divide(int(math.ceil(self.domain.delta/self.tol)),True)])
+  File "G:\git\decodes\decodes\core\curve.py", line 91, in deval
+    return Plane(pt, Vec(pt,pv))
+  File "G:\git\decodes\decodes\core\plane.py", line 19, in __init__
+    self._vec = normal.normalized()
+  File "G:\git\decodes\decodes\core\vec.py", line 334, in normalized
+    factor = length / self.length
+ZeroDivisionError: float division by zero
+
+======================================================================
+ERROR: test_near (decodes.unit_tests.test_curve.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\git\decodes\decodes\unit_tests\test_curve.py", line 49, in test_near
+    crv = Curve(func,Interval(0,10))
+  File "G:\git\decodes\decodes\core\curve.py", line 30, in __init__
+    self._surrogate = self._to_pline()
+  File "G:\git\decodes\decodes\core\curve.py", line 183, in _to_pline
+    return PLine([self.deval(t) for t in self.domain.divide(int(math.ceil(self.domain.delta/self.tol)),True)])
+  File "G:\git\decodes\decodes\core\curve.py", line 91, in deval
+    return Plane(pt, Vec(pt,pv))
+  File "G:\git\decodes\decodes\core\plane.py", line 19, in __init__
+    self._vec = normal.normalized()
+  File "G:\git\decodes\decodes\core\vec.py", line 334, in normalized
+    factor = length / self.length
+ZeroDivisionError: float division by zero
+
+======================================================================
+ERROR: test_subdivide (decodes.unit_tests.test_curve.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\git\decodes\decodes\unit_tests\test_curve.py", line 36, in test_subdivide
+    crv = Curve(func,Interval(0,10))
+  File "G:\git\decodes\decodes\core\curve.py", line 30, in __init__
+    self._surrogate = self._to_pline()
+  File "G:\git\decodes\decodes\core\curve.py", line 183, in _to_pline
+    return PLine([self.deval(t) for t in self.domain.divide(int(math.ceil(self.domain.delta/self.tol)),True)])
+  File "G:\git\decodes\decodes\core\curve.py", line 91, in deval
+    return Plane(pt, Vec(pt,pv))
+  File "G:\git\decodes\decodes\core\plane.py", line 19, in __init__
+    self._vec = normal.normalized()
+  File "G:\git\decodes\decodes\core\vec.py", line 334, in normalized
+    factor = length / self.length
+ZeroDivisionError: float division by zero
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.639s
+Ran 5 tests in 0.054s
 
-OK
+FAILED (errors=5)
+
+
+== TEST_PLANE ==
+test_copy_constructors (decodes.unit_tests.test_plane.Tests) ... FAIL
+test_empty_constructor (decodes.unit_tests.test_plane.Tests) ... 

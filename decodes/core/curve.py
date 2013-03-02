@@ -78,14 +78,20 @@ class Curve(Geometry):
     
 
     def deval(self,t):
-        """ Evaluates this Curve and returns a Point.
+        """ Evaluates this Curve and returns a Plane.
         T is a float value that falls within the defined domain of this Curve.
         """
         if t<self.domain.a or t>self.domain.b : raise DomainError("Curve evaluated outside the bounds of its domain: deval(%s) %s"%(t,self.domain))
-        return self._func(t)
+        pt = self._func(t)
+        
+        tv = t + self.tol/100
+        if tv > self.domain.b : pv = self._func(self.domain.b)
+        else : pv = self._func(tv)
+
+        return Plane(pt, Vec(pt,pv))
 
     def eval(self,t):
-        """ Evaluates this Curve and returns a Point.
+        """ Evaluates this Curve and returns a Plane.
         T is a normalized float value (0->1) which will be remapped to the domain defined by this Curve.
         equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain))
         """
@@ -93,7 +99,7 @@ class Curve(Geometry):
         return self.deval(Interval.remap(t,Interval(),self.domain))
 
     def divide(self, divs=10, include_last=True):
-        """Divides this Curve into a list of evaluated points equally spaced between Curve.domain.a and Curve.domain.b.
+        """Divides this Curve into a list of evaluated Planes equally spaced between Curve.domain.a and Curve.domain.b.
         If include_last is True (by default), returned list will contain divs+1 Points.
         If include_last is False, returned list will not include the point at Curve.domain.b
         
@@ -133,7 +139,7 @@ class Curve(Geometry):
         if tolerance is None : tolerance = self.tol/10.0
         t = self._nearfar(Point.near_index,pt,tolerance,max_recursion)
         result = self.deval(t)
-        return(result,t,pt.distance(result))
+        return(result,t,pt.distance(result.cpt))
 
     def far(self,pt,tolerance=None,max_recursion=20):
         """ Finds a location on this curve which is furthest from the given Point.
@@ -144,14 +150,14 @@ class Curve(Geometry):
         if tolerance is None : tolerance = self.tol/10.0
         t = self._nearfar(Point.far_index,pt,tolerance,max_recursion)
         result = self.deval(t)
-        return(result,t,pt.distance(result))
+        return(result,t,pt.distance(result.cpt))
 
 
     def _nearfar(self,func_nf,pt,tolerance,max_recursion):
         def sub(crv):
             divs = 8 # number of divisions to cut the given curve into
             buffer = 1.5 # multiplier for resulting area
-            ni = func_nf(pt,crv/divs) # divide the curve and find the nearest or furthest point (depending on the function that was provided)
+            ni = func_nf(pt,[pln.cpt for pln in crv/divs]) # divide the curve and find the nearest or furthest point (depending on the function that was provided)
             nd = crv.domain.eval(ni/float(divs)) # find the domain value associated with this point
             domain = Interval( nd-(buffer*crv.domain.delta/divs), nd+(buffer*crv.domain.delta/divs) ) #  create a new domain that may contain the nearest point
             if domain.a < crv.domain.a : domain.a = crv.domain.a
