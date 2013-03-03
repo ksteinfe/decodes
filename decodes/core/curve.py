@@ -84,11 +84,12 @@ class Curve(Geometry):
         if t<self.domain.a or t>self.domain.b : raise DomainError("Curve evaluated outside the bounds of its domain: deval(%s) %s"%(t,self.domain))
         pt = self._func(t)
         
-        tv = t + self.tol/100
-        if tv > self.domain.b : pv = self._func(self.domain.b)
-        else : pv = self._func(tv)
+        nudge = self.tol/100
+        tv = t + nudge
+        if tv > self.domain.b :  vec = Vec(pt, self._func(t - nudge)).inverted()
+        else : vec = Vec(pt, self._func(tv))
 
-        return Plane(pt, Vec(pt,pv))
+        return Plane(pt, vec)
 
     def eval(self,t):
         """ Evaluates this Curve and returns a Plane.

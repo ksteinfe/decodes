@@ -21,6 +21,7 @@ class Plane(Vec):
             :result: Plane object.
             :rtype: Plane
         """
+        if normal.length == 0 : raise GeometricError("Cannot construct a plane with a normal vector of length zero: %s"%(normal))
         super(Plane,self).__init__(point)
         self._vec = normal.normalized()
 

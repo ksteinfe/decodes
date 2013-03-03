@@ -331,6 +331,7 @@ class Vec(Geometry):
             :result: Normalized vector.
             :rtype: Vec
         """
+        if self.length == 0 : raise GeometricError("Cannot normalize a vector of length zero: %s"%(self))
         factor = length / self.length
         return Vec(self.x * factor, self.y * factor, self.z * factor)        
 

@@ -18,9 +18,9 @@ class Tests(unittest.TestCase):
 
         self.assertEqual(Point(1,2,3),pln)
         self.assertEqual(Point(1,2,3),pln.cpt)
-        self.assertEqual(Vec(-1,1,2),pln.vec)
+        self.assertEqual(Vec(-1,1,2).normalized(),pln.vec)
 
         pa = Point(10,20,30)
         va = Vec(1,2,3)
-        self.assertEqual(Point(1,2,3),pln,"planes, like vecs, keep a copy of cpts")
-        self.assertEqual(Vec(-1,1,2),pln.vec, "planes make a unitzed copy of their vecs")
+        self.assertEqual(Point(1,2,3),pln,"planes, like vecs, keep a copy of cpts (and not a reference)")
+        self.assertEqual(Vec(-1,1,2).normalized(),pln.vec, "planes make a unitzed copy of their vecs")
