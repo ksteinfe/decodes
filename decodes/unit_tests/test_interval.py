@@ -7,16 +7,16 @@ class Tests(unittest.TestCase):
     interval = Interval()
     def test_empty_constructor(self):
         inter_test = Interval(0,1)
-        self.assertEqual(self,inter_test,"intervals with empty constructors are from 0 to 1")
-        self.assertEqual(self.a,inter_test.a)
-        self.assertEqual(self.b,inter_test.b)
+        self.assertEqual(self.interval,inter_test,"intervals with empty constructors are from 0 to 1")
+        self.assertEqual(self.interval.a,inter_test.a)
+        self.assertEqual(self.interval.b,inter_test.b)
 
     def test_properties(self):
-        self.assertEqual(self.list,[0,1])
-        self.assertEqual(self.is_ordered,True)
-        self.assertEqual(self.length,1)
-        self.assertEqual(self.delta,1)
-        self.assertEqual(self.is_ordered,True)
+        self.assertEqual(self.interval.list,[0,1])
+        self.assertEqual(self.interval.is_ordered,True)
+        self.assertEqual(self.interval.length,1)
+        self.assertEqual(self.interval.delta,1)
+        self.assertEqual(self.interval.is_ordered,True)
         
     def test_operations(self):
         inter_test = Interval(5,2)

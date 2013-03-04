@@ -372,7 +372,7 @@ class Vec(Geometry):
             :result: Dot product.
             :rtype: float
         """
-        return (self.x * other.x + self.y * other.y + self.z * other.z)
+        return float(self.x * other.x + self.y * other.y + self.z * other.z)
 
     def projected_length(self,other): 
         """Returns the length of the vector which results from the projection of this onto other

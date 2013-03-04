@@ -9,15 +9,16 @@ class Tests(unittest.TestCase):
         p1 = Point(0,0,0)
         p2 = Point (1,0,0)
         segment = Segment(p1,p2)
-        self.assertEqual(segment.spt,p1)
-        self.assertEqual(segment.length,1)
-        self.assertEqual(segment.midpoint,Point(0,0.5,0))
+        self.assertEqual(segment.spt,Point(0,0,0))
+        self.assertEqual(segment.length,1.0)
+        self.assertEqual(segment.midpoint,Point(0.5,0,0))
         
     def test_line(self):
         p1 = Point(0,0,0)
         p2 = Point (1,0,0)
         line = Line(p1,p2)
-        self.assertEqual(line.spt,p1)
+        self.assertEqual(line.spt,Point(0,0,0))
+        self.assertEqual(line.ept,Point(1,0,0))
 
     def test_ray(self):
         p1 = Point(0,0,0)
@@ -25,4 +26,10 @@ class Tests(unittest.TestCase):
         ray = Ray(p1,p2)
         self.assertEqual(ray.spt,p1)
 
-
+    def test_near_pt(self):
+        p1 = Point(0,0,0)
+        p2 = Point (10,0,0)
+        seg = Segment(p1,p2)
+        pt = Point(5,0,1)
+        
+        self.assertEqual(seg.near_pt(pt),Point(5,0,0))
