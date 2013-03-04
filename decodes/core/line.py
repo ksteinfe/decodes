@@ -198,7 +198,15 @@ class LinearEntity(Geometry):
     def __eq__(self, other):  raise NotImplementedError()
     def __contains__(self, other):  raise NotImplementedError()
 
-
+    def closest_point(self, p):
+        diff = Vec(self.spt,p)
+        dir = self.vec
+        t = (diff.dot(dir))/(dir.dot(dir))
+        
+        #t = (diff * dir)/(dir*dir)
+        print t
+        return t
+        
 class Line(LinearEntity):
     """A line in space."""
     def __eq__(self, other):  raise NotImplementedError()
