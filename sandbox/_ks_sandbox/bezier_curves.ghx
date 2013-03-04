@@ -490,7 +490,7 @@ b.put(crv.eval(t))</item>
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">0.6251</item>
+                        <item name="Value" type_name="gh_double" type_code="6">0.0875</item>
                         <item name="Min" type_name="gh_double" type_code="6">0</item>
                         <item name="Max" type_name="gh_double" type_code="6">1</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">4</item>
@@ -546,7 +546,7 @@ b.put(crv.eval(t))</item>
                 <chunk name="Container">
                   <items count="11">
                     <item name="slider_value" type_name="gh_point3d" type_code="51">
-                      <X>0.912000060081482</X>
+                      <X>0.73199999332428</X>
                       <Y>0.368000030517578</Y>
                       <Z>0.5</Z>
                     </item>

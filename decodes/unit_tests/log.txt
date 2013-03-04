@@ -4,7 +4,7 @@
 test_empty_constructor (decodes.unit_tests.test_pgon.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.003s
+Ran 1 test in 0.002s
 
 OK
 
@@ -25,7 +25,7 @@ test_face_access (decodes.unit_tests.test_mesh.Tests) ... ok
 test_simple_constructor (decodes.unit_tests.test_mesh.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.046s
+Ran 4 tests in 0.079s
 
 OK
 
@@ -36,7 +36,7 @@ test_empty_constructor (decodes.unit_tests.test_point.Tests) ... ok
 test_nearest_point (decodes.unit_tests.test_point.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.018s
+Ran 3 tests in 0.017s
 
 OK
 
@@ -62,7 +62,7 @@ test_far (decodes.unit_tests.test_curve.Tests) ... ok
 test_subdivide (decodes.unit_tests.test_curve.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.757s
+Ran 5 tests in 0.772s
 
 OK
 

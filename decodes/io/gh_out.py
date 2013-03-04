@@ -70,6 +70,10 @@ class GrasshopperOut(outie.Outie):
                 else : self._add_branch(i,tree,tree_p, npath)
             return True
         
+        if isinstance(g, Plane) : 
+            tree.Add(self._drawPlane(g),path)
+            tree_p.Add(extract_props(g), path)
+            return True
         if isinstance(g, Point) : 
             tree.Add(self._drawPoint(g),path)
             tree_p.Add(extract_props(g), path)
@@ -128,6 +132,11 @@ class GrasshopperOut(outie.Outie):
         pt = pt.basis_applied()
         return rg.Point3d(pt.x,pt.y,pt.z)
         
+    def _drawPlane(self, pln):
+        o = rg.Point3d(pln.origin.x,pln.origin.y,pln.origin.z)
+        n = rg.Vector3d(pln.normal.x,pln.normal.y,pln.normal.z) 
+        return rg.Plane(o,n)
+
     def _drawMesh(self, mesh):
         rh_mesh = rg.Mesh()
         for v in mesh.pts: rh_mesh.Vertices.Add(v.x,v.y,v.z)

@@ -143,8 +143,11 @@ def to_rgpolyline(other):
     return Rhino.Geometry.Polyline(verts)
 
 
-def to_rgplane(cs):
-    return Rhino.Geometry.Plane(to_rgpt(cs.origin),to_rgvec(cs.xAxis),to_rgvec(cs.yAxis))
+def to_rgplane(other):
+    if isinstance(other, CS) : 
+        return Rhino.Geometry.Plane(to_rgpt(other.origin),to_rgvec(other.xAxis),to_rgvec(other.yAxis))
+    if isinstance(other, Plane) : 
+        return Rhino.Geometry.Plane(to_rgpt(other.origin),to_rgvec(other.normal))
 
 def to_rh_transform(xf):
     rh_xf = rh_xform = Rhino.Geometry.Transform(1.0)

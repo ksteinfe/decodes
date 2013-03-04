@@ -17,7 +17,7 @@ class Tests(unittest.TestCase):
         pln = Plane(pa,va)
 
         self.assertEqual(Point(1,2,3),pln)
-        self.assertEqual(Point(1,2,3),pln.cpt)
+        self.assertEqual(Point(1,2,3),pln.origin)
         self.assertEqual(Vec(-1,1,2).normalized(),pln.vec)
 
         pa = Point(10,20,30)

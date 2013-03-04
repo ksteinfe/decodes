@@ -155,14 +155,14 @@ class Curve(Geometry):
         if tolerance is None : tolerance = self.tol/10.0
         t = self._nearfar(Point.far_index,pt,tolerance,max_recursion)
         result = self.deval(t)
-        return(result,t,pt.distance(result.cpt))
+        return(result,t,pt.distance(result.origin))
 
 
     def _nearfar(self,func_nf,pt,tolerance,max_recursion):
         def sub(crv):
             divs = 8 # number of divisions to cut the given curve into
             buffer = 1.5 # multiplier for resulting area
-            ni = func_nf(pt,[pln.cpt for pln in crv/divs]) # divide the curve and find the nearest or furthest point (depending on the function that was provided)
+            ni = func_nf(pt,[pln.origin for pln in crv/divs]) # divide the curve and find the nearest or furthest point (depending on the function that was provided)
             nd = crv.domain.eval(ni/float(divs)) # find the domain value associated with this point
             domain = Interval( nd-(buffer*crv.domain.delta/divs), nd+(buffer*crv.domain.delta/divs) ) #  create a new domain that may contain the nearest point
             if domain.a < crv.domain.a : domain.a = crv.domain.a

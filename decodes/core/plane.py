@@ -65,16 +65,16 @@ class Plane(Vec):
         self._vec = v.normalized()
 
     @property
-    def cpt(self): 
-        """ Returns the plane's center point.
+    def origin(self): 
+        """ Returns the plane's origin point.
 
-            :result: Plane's center point.
+            :result: Plane's origin point.
             :rtype: Point
         """
         return Point(self.x,self.y,self.z)
-    @cpt.setter
-    def cpt(self, pt): 
-        """ Sets the plane's center point.
+    @origin.setter
+    def origin(self, pt): 
+        """ Sets the plane's origin point.
 
             :param pt: Sets the center point of the plane .
             :type pt: Point
