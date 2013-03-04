@@ -6,9 +6,11 @@ from decodes.core import *
 class Tests(unittest.TestCase):
 
     def test_constructor(self):
+
         def func(t):
             return Point(t,math.sin(t))
         crv = Curve(func,Interval(0,math.pi*2))
+
         for t in crv.domain/20: self.assertEqual(crv.deval(t).y,math.sin(t),"deval() calls Curve.func(t) and is valid for all numbers within domain of the Curve") 
         for t in Interval()/20: self.assertEqual(crv.eval(t).y,math.sin(Interval(0,math.pi*2).eval(t)),"eval() calls Curve.func(t) and is valid for 0->1") 
 
