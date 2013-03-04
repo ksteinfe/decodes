@@ -1,26 +1,36 @@
+import unittest, math
 import decodes.core 
 from decodes.core import *
 
-print 'Constructors'
-interval = Interval(2,0)
-a = interval.a
-b = interval.b
 
-print 'Interval List'
-list = interval.list_int()
-division = interval.division(3)
-subdomain = interval.subdomain(3)
+class Tests(unittest.TestCase):
+    interval = Interval()
+    def test_empty_constructor(self):
+        inter_test = Interval(0,1)
+        self.assertEqual(self,inter_test,"intervals with empty constructors are from 0 to 1")
+        self.assertEqual(self.a,inter_test.a)
+        self.assertEqual(self.b,inter_test.b)
 
-print 'Interval Order' 
-order = interval.order()
-interval_2 = Interval(5,2)
-order_interval = interval_2.order(copy=True)
-interval_2.order() # mutate_interval
+    def test_properties(self):
+        self.assertEqual(self.list,[0,1])
+        self.assertEqual(self.is_ordered,True)
+        self.assertEqual(self.length,1)
+        self.assertEqual(self.delta,1)
+        self.assertEqual(self.is_ordered,True)
+        
+    def test_operations(self):
+        inter_test = Interval(5,2)
+        self.assertEqual(inter_test.order,Interval(2,5))
+        self.assertEqual(inter_test.invert,Interval(2,5))
+        self.assertEqual(inter_test.divide,range(5,2,.3))
+        self.assertEqual(inter_test.divide(include_last=True),range(5,2.3,.3))
+        self.assertEqual(inter_test.subinterval(2),[Interval(5,3.5),Interval(3.5,2)])
+        
+    def test_operations(self):
+        inter_test = Interval(0,math.pi*2)
+        self.assertEqual(inter_test.eval(0.5),math.pi)
+        self.assertEqual(inter_test.deval(math.pi),0.5)
+        self.assertEqual(Interval.remap(.5, Interval(), Interval(0,10)),5)
+        
 
-print 'Evaluators'
-eval_int = Interval(2,0)
-length = eval_int.length()
-delta = eval_int.delta()
-deval = eval_int.deval(1.25)
-eval = eval_int.eval(.5)
-remap = eval_int.remap(1,Interval(0,4))
+

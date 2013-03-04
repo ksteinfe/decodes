@@ -1,26 +1,28 @@
+import unittest
 import decodes.core as dc
 from decodes.core import *
 
-outie = dc.makeOut(dc.outies.Rhino, "linetest")
 
-print "constructors"
-p = Point(1,1)
-v = Vec(0,0,1)
-seg1 = Segment(p,v)
-outie.put(seg1)
+class Tests(unittest.TestCase):
 
-p0 = Point(-1,1)
-p1 = Vec(-2,1)
-seg2 = Segment(p0,p1)
-outie.put(seg2)
+    def test_segment(self):
+        p1 = Point(0,0,0)
+        p2 = Point (1,0,0)
+        segment = Segment(p1,p2)
+        self.assertEqual(segment.spt,p1)
+        self.assertEqual(segment.length,1)
+        self.assertEqual(segment.midpoint,Point(0,0.5,0))
+        
+    def test_line(self):
+        p1 = Point(0,0,0)
+        p2 = Point (1,0,0)
+        line = Line(p1,p2)
+        self.assertEqual(line.spt,p1)
 
-ray1 = Ray(Point(0,-1),Vec(0,0,1))
-outie.put(ray1)
-
-lin1 = Line(Point(0,1),Vec(0,0,1))
-outie.put(lin1)
-
-
+    def test_ray(self):
+        p1 = Point(0,0,0)
+        p2 = Point (1,0,0)
+        ray = Ray(p1,p2)
+        self.assertEqual(ray.spt,p1)
 
 
-outie.draw()
