@@ -52,7 +52,7 @@ for h in range(24):
 		+", directbeamintensity = "+str(directNormalIrad(day, h))
 	      )
 		
- 
+
 # or to show the sun path throughout a range of dates in the year, and for each date, a range of
 # times in the day
 dateStart = "1/1"

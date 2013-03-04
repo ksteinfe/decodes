@@ -23,17 +23,25 @@ base.py
 --------------------------
 .. automodule:: decodes.core.base
    :members: 
-
+   :special-members:
+   :private-members:
+   
 color.py
 --------------------------   
 .. automodule:: decodes.core.color
    :members: 
+   :special-members:
+   :private-members:
+   
 
 
 interval.py
 --------------------------   
 .. automodule:: decodes.core.interval
    :members: 
+   :special-members:
+   :private-members:
+   
 
 
 vec.py
@@ -54,46 +62,101 @@ mesh.py
 --------------------------   
 .. automodule:: decodes.core.mesh
    :members: 
+   :special-members:
+   :private-members:
+   
 
 pline.py
 --------------------------   
 .. automodule:: decodes.core.pline
    :members: 
+   :special-members:
+   :private-members:
+   
 
 pgon.py
 --------------------------   
 .. automodule:: decodes.core.pgon
    :members: 
+   :special-members:
+   :private-members:
+   
 
 cs.py
 --------------------------   
 .. automodule:: decodes.core.cs
    :members: 
+   :special-members:
+   :private-members:
+   
 
 line.py
 --------------------------   
 .. autoclass:: decodes.core.line.Line
    :members: 
+   :special-members:
+   :private-members:
+   
 
 .. autoclass:: decodes.core.line.Segment
    :members: 
+   :special-members:
+   :private-members:
+   
 
 .. autoclass:: decodes.core.line.Ray
    :members: 
+   :special-members:
+   :private-members:
+   
 
 .. autoclass:: decodes.core.line.LinearEntity
    :members: 
+   :special-members:
+   :private-members:
+   
 
 xform.py
 --------------------------   
 .. automodule:: decodes.core.xform
    :members: 
+   :special-members:
+   :private-members:
+   
 
 intersection.py
 --------------------------   
 .. automodule:: decodes.core.intersection
    :members: 
+   :special-members:
+   :private-members:
+   
+curve.py
+--------------------------   
+.. automodule:: decodes.core.curve
+   :members: 
+   :special-members:
+   :private-members:
 
+
+surface.py
+--------------------------   
+.. automodule:: decodes.core.surface
+   :members: 
+   :special-members:
+   :private-members:
+
+
+plane.py
+--------------------------   
+.. automodule:: decodes.core.plane
+   :members: 
+   :special-members:
+   :private-members:
+
+
+   
+   
 
 
 

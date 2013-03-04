@@ -79,34 +79,304 @@
 <span class="target" id="module-decodes.core"></span><div class="section" id="module-decodes.core.base">
 <span id="base-py"></span><h3>base.py<a class="headerlink" href="#module-decodes.core.base" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
-<dt id="decodes.core.base.Basis">
-<em class="property">class </em><tt class="descclassname">decodes.core.base.</tt><tt class="descname">Basis</tt><a class="headerlink" href="#decodes.core.base.Basis" title="Permalink to this definition">¶</a></dt>
-<dd><p>a base class for anything that wants to call itself a basis
-bases must impliment the folloiwng methods:</p>
-<dl class="method">
-<dt id="decodes.core.base.Basis.eval">
-<tt class="descname">eval</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.base.Basis.eval" title="Permalink to this definition">¶</a></dt>
-<dd><p>other should be any object with either &#8220;x,y,z&#8221; attributes, &#8220;x,y&#8221; attributes, or a single &#8220;t&#8221; attribute
-which may be interpreted by the basis in order to generate a valid baseless point in R3</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
 <dt id="decodes.core.base.Geometry">
 <em class="property">class </em><tt class="descclassname">decodes.core.base.</tt><tt class="descname">Geometry</tt><a class="headerlink" href="#decodes.core.base.Geometry" title="Permalink to this definition">¶</a></dt>
-<dd><p>a base geometry class for all other geometry to inherit</p>
+<dd><p>A base geometry class for all other geometry to inherit.</p>
+<dl class="method">
+<dt id="decodes.core.base.Geometry.__mul__">
+<tt class="descname">__mul__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.base.Geometry.__mul__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloads the multiplication <strong>(*)</strong> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Geometry</em>) &#8211; Geometry to be multiplied.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">New geometry.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Geometry</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.base.Geometry.__weakref__">
+<tt class="descname">__weakref__</tt><a class="headerlink" href="#decodes.core.base.Geometry.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.base.Geometry.set_color">
+<tt class="descname">set_color</tt><big>(</big><em>a</em>, <em>b=None</em>, <em>c=None</em><big>)</big><a class="headerlink" href="#decodes.core.base.Geometry.set_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the geometry&#8217;s color</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>Color or float</em>) &#8211; Color object to set the geometry&#8217;s color, or number value (between 0 and 1) to create a new color. If only a is passed as a float, the color will be greyscale.</li>
+<li><strong>b</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; If no color object is passed, the G value in an RGB scale.</li>
+<li><strong>c</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; If no color object is passed, the B value in an RGB scale.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Sets the geometry&#8217;s color.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Geometry</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.base.Geometry.set_fill">
+<tt class="descname">set_fill</tt><big>(</big><em>a</em>, <em>b=None</em>, <em>c=None</em><big>)</big><a class="headerlink" href="#decodes.core.base.Geometry.set_fill" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the geometry&#8217;s fill</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>Color or float</em>) &#8211; Color object to set the geometry&#8217;s fill, or number value (between 0 and 1) to create a new color. If only a is passed as a float, the color will be greyscale.</li>
+<li><strong>b</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; If no color object is passed, the G value in an RGB scale.</li>
+<li><strong>c</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; If no color object is passed, the B value in an RGB scale.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Sets the geometry&#8217;s fill.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Geometry</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.base.Geometry.set_name">
+<tt class="descname">set_name</tt><big>(</big><em>str</em><big>)</big><a class="headerlink" href="#decodes.core.base.Geometry.set_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the geometry&#8217;s name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>str</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; A str with the new geometry&#8217;s name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Sets the geometry&#8217;s name.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Geometry</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.base.Geometry.set_weight">
+<tt class="descname">set_weight</tt><big>(</big><em>num</em><big>)</big><a class="headerlink" href="#decodes.core.base.Geometry.set_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the geometry&#8217;s weight</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>num</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; A number with the new geometry&#8217;s weight.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Sets the geometry&#8217;s name.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Geometry</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="decodes.core.base.HasBasis">
 <em class="property">class </em><tt class="descclassname">decodes.core.base.</tt><tt class="descname">HasBasis</tt><a class="headerlink" href="#decodes.core.base.HasBasis" title="Permalink to this definition">¶</a></dt>
-<dd><p>a base class for anything that wants to define a basis for itself</p>
+<dd><p>A base class for anything that wants to define a basis for itself. Bases must impliment the following methods:</p>
+<dl class="method">
+<dt id="decodes.core.base.HasBasis.basis_applied">
+<tt class="descname">basis_applied</tt><big>(</big><em>copy_children=True</em><big>)</big><a class="headerlink" href="#decodes.core.base.HasBasis.basis_applied" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new object with basis applied. Copies of are created of any child objects by default. Take care to copy over props if appropriate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Object with basis applied.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Basis</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.base.HasBasis.basis_stripped">
+<tt class="descname">basis_stripped</tt><big>(</big><em>copy_children=True</em><big>)</big><a class="headerlink" href="#decodes.core.base.HasBasis.basis_stripped" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new object stripped of any basis. Copies of are created of any child objects by default. Take care to copy over props if appropriate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Object with basis applied.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Basis</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.base.HasBasis.is_baseless">
+<tt class="descname">is_baseless</tt><a class="headerlink" href="#decodes.core.base.HasBasis.is_baseless" title="Permalink to this definition">¶</a></dt>
+<dd><p>tells us if a basis has been defined</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="decodes.core.base.IsBasis">
+<em class="property">class </em><tt class="descclassname">decodes.core.base.</tt><tt class="descname">IsBasis</tt><a class="headerlink" href="#decodes.core.base.IsBasis" title="Permalink to this definition">¶</a></dt>
+<dd><p>A base class for anything that wants to call itself a basis. Bases must impliment the folloiwng methods:</p>
+<dl class="attribute">
+<dt id="decodes.core.base.IsBasis.__weakref__">
+<tt class="descname">__weakref__</tt><a class="headerlink" href="#decodes.core.base.IsBasis.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.base.IsBasis.eval">
+<tt class="descname">eval</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.base.IsBasis.eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Other should be any object with either &#8220;x,y,z&#8221; attributes, &#8220;x,y&#8221; attributes, or a single &#8220;t&#8221; attribute which may be interpreted by the basis in order to generate a valid baseless point in R3</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Basis</em>) &#8211; Object with &#8220;x,y,z&#8221; attributes, &#8220;x,y&#8221; attributes, or a single &#8220;t&#8221;.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Basis object.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Basis</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 </div>
 <div class="section" id="module-decodes.core.color">
 <span id="color-py"></span><h3>color.py<a class="headerlink" href="#module-decodes.core.color" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="decodes.core.color.Color">
+<em class="property">class </em><tt class="descclassname">decodes.core.color.</tt><tt class="descname">Color</tt><big>(</big><em>a=None</em>, <em>b=None</em>, <em>c=None</em><big>)</big><a class="headerlink" href="#decodes.core.color.Color" title="Permalink to this definition">¶</a></dt>
+<dd><p>a simple color class</p>
+<dl class="staticmethod">
+<dt id="decodes.core.color.Color.HSB">
+<em class="property">static </em><tt class="descname">HSB</tt><big>(</big><em>h</em>, <em>s=1</em>, <em>b=1</em><big>)</big><a class="headerlink" href="#decodes.core.color.Color.HSB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a color object from HSB values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>h</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; H color value (between 0.0 and 1.0).</li>
+<li><strong>s</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; S color value (between 0.0 and 1.0). Defaults to 1</li>
+<li><strong>b</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; B color value (between 0.0 and 1.0). Defaults to 1</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Color object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Color</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.color.Color.RGB">
+<em class="property">static </em><tt class="descname">RGB</tt><big>(</big><em>r</em>, <em>g</em>, <em>b</em><big>)</big><a class="headerlink" href="#decodes.core.color.Color.RGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a color object from RGB values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>r</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; R color value (between 0.0 and 1.0).</li>
+<li><strong>g</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; G color value (between 0.0 and 1.0).</li>
+<li><strong>b</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; B color value (between 0.0 and 1.0).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Color object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Color</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.color.Color.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>a=None</em>, <em>b=None</em>, <em>c=None</em><big>)</big><a class="headerlink" href="#decodes.core.color.Color.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Color constructor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; First color value (between 0.0 and 1.0). Defaults to 0.5</li>
+<li><strong>b</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Second color value (between 0.0 and 1.0). Defaults to 0.5</li>
+<li><strong>c</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Third color value (between 0.0 and 1.0). Defaults to 0.5</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Color object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Color</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.color.Color.interpolate">
+<em class="property">static </em><tt class="descname">interpolate</tt><big>(</big><em>c0</em>, <em>c1</em>, <em>t=0.5</em><big>)</big><a class="headerlink" href="#decodes.core.color.Color.interpolate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new color interpolated from two Color objects.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>c0</strong> (<em>Color</em>) &#8211; First Color object</li>
+<li><strong>c1</strong> (<em>Color</em>) &#8211; Second Color object</li>
+<li><strong>t</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Interpolation value (between 0.0 and 1.0). Defaults to 0.5</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Interpolated Color object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Color</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-decodes.core.interval">
 <span id="interval-py"></span><h3>interval.py<a class="headerlink" href="#module-decodes.core.interval" title="Permalink to this headline">¶</a></h3>
@@ -114,6 +384,69 @@ which may be interpreted by the basis in order to generate a valid baseless poin
 <dt id="decodes.core.interval.Interval">
 <em class="property">class </em><tt class="descclassname">decodes.core.interval.</tt><tt class="descname">Interval</tt><big>(</big><em>a=0</em>, <em>b=1</em><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval" title="Permalink to this definition">¶</a></dt>
 <dd><p>an interval class</p>
+<dl class="method">
+<dt id="decodes.core.interval.Interval.__contains__">
+<tt class="descname">__contains__</tt><big>(</big><em>number</em><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.__contains__" title="Permalink to this definition">¶</a></dt>
+<dd><p>overloads the containment <strong>(in)</strong> operator
+calls Interval.subinterval(other)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.interval.Interval.__div__">
+<tt class="descname">__div__</tt><big>(</big><em>divs</em><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.__div__" title="Permalink to this definition">¶</a></dt>
+<dd><p>overloads the division <strong>(/)</strong> operator
+calls Interval.divide(divs)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.interval.Interval.__eq__">
+<tt class="descname">__eq__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloads the equal <strong>(==)</strong> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Interval</em>) &#8211; Interval to be compared.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Boolean result of comparison</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.interval.Interval.__floordiv__">
+<tt class="descname">__floordiv__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.__floordiv__" title="Permalink to this definition">¶</a></dt>
+<dd><p>overloads the integer division <strong>(//)</strong> operator
+calls Interval.subinterval(other)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.interval.Interval.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>a=0</em>, <em>b=1</em><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interval Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; First number of the interval.</li>
+<li><strong>b</strong> &#8211; Second number of the interval.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Interval Object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Interval.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="decodes.core.interval.Interval.delta">
 <tt class="descname">delta</tt><a class="headerlink" href="#decodes.core.interval.Interval.delta" title="Permalink to this definition">¶</a></dt>
@@ -124,7 +457,9 @@ which may be interpreted by the basis in order to generate a valid baseless poin
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">rtype:</th><td class="field-body">Number</td>
+<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body">Delta of an interval.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">float</td>
 </tr>
 </tbody>
 </table>
@@ -145,7 +480,9 @@ Effectively, the opposite of eval()</p>
 </tr>
 <tr class="field-even field"><th class="field-name">type number:</th><td class="field-body">float</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">rtype:</th><td class="field-body">parameter</td>
+<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body">Parameter.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">float</td>
 </tr>
 </tbody>
 </table>
@@ -168,7 +505,9 @@ Unless include_last is set to True, returned list will not include Interval.b: t
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>divs</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of interval divisions.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">List of numbers in which a list is divided.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of numbers in which a list is divided.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
 </tr>
 </tbody>
 </table>
@@ -177,7 +516,8 @@ Unless include_last is set to True, returned list will not include Interval.b: t
 <dl class="method">
 <dt id="decodes.core.interval.Interval.eval">
 <tt class="descname">eval</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.eval" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluates a given parameter within this interval.</p>
+<dd><p>Evaluates a given parameter within this interval.
+For example, given an Interval(0-&gt;2*math.pi): eval(0.5) == math.pi</p>
 <blockquote>
 <div><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -187,15 +527,17 @@ Unless include_last is set to True, returned list will not include Interval.b: t
 </tr>
 <tr class="field-even field"><th class="field-name">type t:</th><td class="field-body">float</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">rtype:</th><td class="field-body">Evalauted number.</td>
+<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body">Evalauted number.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">float</td>
 </tr>
 </tbody>
 </table>
 </div></blockquote>
 <div class="highlight-python"><pre>print Interval(10,20).eval(0.2)
-&gt;&gt;12
+&gt;&gt;12.0
 print Interval(10,20).deval(1.5)
-&gt;&gt;25</pre>
+&gt;&gt;25.0</pre>
 </div>
 </dd></dl>
 
@@ -204,6 +546,16 @@ print Interval(10,20).deval(1.5)
 <tt class="descname">invert</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.invert" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a copy of this interval with swapped values.
 Such that this.a = new.b and this.b = new.a</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Interval object with swapped values.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Interval</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
@@ -214,7 +566,9 @@ Such that this.a = new.b and this.b = new.a</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Boolean value</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Boolean value</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
 </tr>
 </tbody>
 </table>
@@ -230,7 +584,9 @@ Such that this.a = new.b and this.b = new.a</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">rtype:</th><td class="field-body">int</td>
+<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body">Absolute value of length of an interval.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">int</td>
 </tr>
 </tbody>
 </table>
@@ -245,7 +601,9 @@ Such that this.a = new.b and this.b = new.a</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">List of interval&#8217;s components</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of interval&#8217;s components</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
 </tr>
 </tbody>
 </table>
@@ -255,6 +613,16 @@ Such that this.a = new.b and this.b = new.a</p>
 <dt id="decodes.core.interval.Interval.order">
 <tt class="descname">order</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.order" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a copy of this interval with ordered values, such that a &lt; b</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Ordered copy of Interval object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Interval</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="staticmethod">
@@ -267,9 +635,9 @@ Such that this.a = new.b and this.b = new.a</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>val</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Number to remap.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the given number remapped to the target interval.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The given number remapped to the target interval.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(float)</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
 </tr>
 </tbody>
 </table>
@@ -285,7 +653,9 @@ Such that this.a = new.b and this.b = new.a</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>divs</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of subintervals.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">List of subintervals (interval objects).</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of subintervals (interval objects).</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
 </tr>
 </tbody>
 </table>
@@ -301,22 +671,312 @@ Such that this.a = new.b and this.b = new.a</p>
 <em class="property">class </em><tt class="descclassname">decodes.core.vec.</tt><tt class="descname">Vec</tt><big>(</big><em>a=0</em>, <em>b=0</em>, <em>c=0</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec" title="Permalink to this definition">¶</a></dt>
 <dd><p>a simple vector class</p>
 <dl class="method">
+<dt id="decodes.core.vec.Vec.__add__">
+<tt class="descname">__add__</tt><big>(</big><em>vec</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.__add__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloads the addition <strong>(+)</strong> operator. 
+Returns a new vector that results from adding this vector&#8217;s world coordinates to the other vector&#8217;s world coordinates.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vec</strong> (<em>Vec</em>) &#8211; Vec to be added.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">New vec.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.vec.Vec.__div__">
+<tt class="descname">__div__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.__div__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloads the addition <strong>(/)</strong> operator. 
+Returns a new vector that results from dividing this vector&#8217;s world coordinates to the other vector&#8217;s world coordinates.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vec</strong> (<em>Vec</em>) &#8211; Vec to be divided.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">New vec.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.vec.Vec.__eq__">
+<tt class="descname">__eq__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloads the equal <strong>(==)</strong> operator for vector length.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Vec to be compared.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Boolean result of comparison.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.vec.Vec.__ge__">
+<tt class="descname">__ge__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.__ge__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloads the greater or equal <strong>(&gt;=)</strong> operator for vector length.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Vec to be compared.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Boolean result of comparison.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.vec.Vec.__gt__">
+<tt class="descname">__gt__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.__gt__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloads the greater than <strong>(&gt;)</strong> operator for vector length.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Vec to be compared.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Boolean result of comparison.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.vec.Vec.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>a=0</em>, <em>b=0</em>, <em>c=0</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vector Constructor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; a value.</li>
+<li><strong>b</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; b value</li>
+<li><strong>c</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; c value</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Vector object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Vec</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.vec.Vec.__invert__">
+<tt class="descname">__invert__</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.__invert__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inverts the direction of the vector
+Returns a new inverted vector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Inverted Vec.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.vec.Vec.__le__">
+<tt class="descname">__le__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.__le__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloads the less or equal than <strong>(&lt;=)</strong> operator for vector length.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Vec to be compared.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Boolean result of comparison.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.vec.Vec.__lt__">
+<tt class="descname">__lt__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.__lt__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloads the less than <strong>(&lt;)</strong> operator for vector length.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Vec to be compared.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Boolean result of comparison.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.vec.Vec.__mul__">
+<tt class="descname">__mul__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.__mul__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloads the addition <strong>(*)</strong> operator. 
+Returns a new vector that results from multiplying this vector&#8217;s world coordinates to the other vector&#8217;s world coordinates.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vec</strong> (<em>Vec</em>) &#8211; Vec to be multiplied.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">New vec.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.vec.Vec.__ne__">
+<tt class="descname">__ne__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.__ne__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloads the not equal <strong>(!=)</strong> operator for vector length.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Vec to be compared.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Boolean result of comparison.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.vec.Vec.__sub__">
+<tt class="descname">__sub__</tt><big>(</big><em>vec</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.__sub__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloads the addition <strong>(-)</strong> operator. 
+Returns a new vector that results from subtracting this vector&#8217;s world coordinates to the other vector&#8217;s world coordinates.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vec</strong> (<em>Vec</em>) &#8211; Vec to be subtracted.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">New vec.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="decodes.core.vec.Vec.angle">
 <tt class="descname">angle</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.angle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the angle in radians between this vector and the other vector 
 return value is constrained to the range [-PI,PI].</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param other:</th><td class="field-body">Second vector to for angle calculation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type other:</th><td class="field-body">Vec</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Angle in radians.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.vec.Vec.angle_deg">
+<tt class="descname">angle_deg</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.angle_deg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the angle in degrees between this vector and the other vector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Second vector to for angle calculation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Angle in degrees.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.vec.Vec.average">
 <em class="property">static </em><tt class="descname">average</tt><big>(</big><em>vecs</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.average" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the average of a list of vectors</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vecs</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; List of vectors to average.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Averaged vector.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.vec.Vec.bisector">
 <em class="property">static </em><tt class="descname">bisector</tt><big>(</big><em>v0</em>, <em>v1</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.bisector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the normalized bisector of two vectors</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>v0</strong> (<em>Vec</em>) &#8211; First vector to get the bisector from.</li>
+<li><strong>v1</strong> (<em>Vec</em>) &#8211; Second vector to get the bisector from.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Bisector vector.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Vec</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -325,8 +985,12 @@ return value is constrained to the range [-PI,PI].</p>
 <dd><p>Return a new vector, the cross product.
 a x b = (a2b3 - a3b2, a3b1 - a1b3, a1b2 - a2b1)
 This will be at right angles to both self and other, with a length</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">angle_between_them</span><span class="p">)</span>
-</pre></div>
+<div class="highlight-python"><pre>len(self) * len(other) * sin(angle_between_them)
+
+:param other: Second vector to calculate cross product. 
+:type other: Vec
+:result: New vector.
+:rtype: Vec</pre>
 </div>
 </dd></dl>
 
@@ -334,60 +998,322 @@ This will be at right angles to both self and other, with a length</p>
 <dt id="decodes.core.vec.Vec.dot">
 <tt class="descname">dot</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.dot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the dot product of this vector and the other vector</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Second vector to compute dot product.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Dot product.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.vec.Vec.interpolate">
 <em class="property">static </em><tt class="descname">interpolate</tt><big>(</big><em>v0</em>, <em>v1</em>, <em>t=0.5</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.interpolate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Linearly interpolates between vectors v1 and v2 at param t</p>
+<dd><p>Interpolates between vectors v0 and v1 at param t</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>v0</strong> (<em>Vec</em>) &#8211; First Vec.</li>
+<li><strong>v1</strong> (<em>Vec</em>) &#8211; Second Vec.</li>
+<li><strong>t</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Parameter to interpolate at between the vectors.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Interpolated vector.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Vec</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.vec.Vec.inverted">
 <tt class="descname">inverted</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.inverted" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a new vector pointing in the opposite direction</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Inverted vector.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.vec.Vec.is_2d">
+<tt class="descname">is_2d</tt><a class="headerlink" href="#decodes.core.vec.Vec.is_2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the vector is 2d</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">True if 2d.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.vec.Vec.is_coincident">
+<tt class="descname">is_coincident</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.is_coincident" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the vectors have equal direction.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Vec to be compared.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Boolean result of comparison.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.vec.Vec.is_identical">
+<tt class="descname">is_identical</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.is_identical" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the vectors are equal.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Vec to be compared.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Boolean result of comparison.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.vec.Vec.length">
 <tt class="descname">length</tt><a class="headerlink" href="#decodes.core.vec.Vec.length" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the length of this vector.    Use vec.length2 when possible, as it is cheaper to calculate</p>
+<dd><p>Returns the length of this vector. Use vec.length2 when possible, as it is cheaper to calculate</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Length of the Vec.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.vec.Vec.length2">
 <tt class="descname">length2</tt><a class="headerlink" href="#decodes.core.vec.Vec.length2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Length squared. Cheaper to calculate than vec.length.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Length of the Vec.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.vec.Vec.limited">
 <tt class="descname">limited</tt><big>(</big><em>n=1.0</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.limited" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a new vector limited to a given length</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Value to limit the Vec&#8217;s length.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Limited vector.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.vec.Vec.normalized">
 <tt class="descname">normalized</tt><big>(</big><em>length=1.0</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.normalized" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a new vector in the same direction, but given length (default 1.0)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>length</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; New length for the Vec (default 1.0)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Normalized vector.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.vec.Vec.projected">
 <tt class="descname">projected</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.projected" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a new vector projected onto a destination vector</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Vector to project vector to.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Projected vector.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.vec.Vec.projected_length">
 <tt class="descname">projected_length</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.projected_length" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the length of the vector which results from the projection of this onto other</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Vector to project vector to.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Projected vector length.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.vec.Vec.random">
+<em class="property">static </em><tt class="descname">random</tt><big>(</big><em>interval=None</em>, <em>normalize=True</em>, <em>constrain2d=False</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.random" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a random vector within a given interval.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>interval</strong> (<em>Interval</em>) &#8211; Interval to get the random values from.</li>
+<li><strong>normalize</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If True, unitizes the Vec.</li>
+<li><strong>constrain2d</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If True, the Vec is constrained to 2d space.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Random vector.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Vec</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.vec.Vec.rounded">
 <tt class="descname">rounded</tt><big>(</big><em>n=0</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.rounded" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a new vector with coords rounded to n-digits (defaults to 0 digits (nearest int) )</p>
+<dd><p>Returns a new vector with coords rounded to n-digits (defaults to 0 digits (nearest int)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of digits to rounf the Vec&#8217;s coordinates.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Rounded vector.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.vec.Vec.to_tuple">
+<tt class="descname">to_tuple</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.to_tuple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple of the vec components</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Tuple of Vec values.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.vec.Vec.x">
+<tt class="descname">x</tt><a class="headerlink" href="#decodes.core.vec.Vec.x" title="Permalink to this definition">¶</a></dt>
+<dd><p>The x-value of this vector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">x value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.vec.Vec.y">
+<tt class="descname">y</tt><a class="headerlink" href="#decodes.core.vec.Vec.y" title="Permalink to this definition">¶</a></dt>
+<dd><p>The y-value of this vector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">y value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.vec.Vec.z">
+<tt class="descname">z</tt><a class="headerlink" href="#decodes.core.vec.Vec.z" title="Permalink to this definition">¶</a></dt>
+<dd><p>The z-value of this vector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">z value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -396,127 +1322,664 @@ This will be at right angles to both self and other, with a length</p>
 <div class="section" id="module-decodes.core.point">
 <span id="point-py"></span><h3>point.py<a class="headerlink" href="#module-decodes.core.point" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
+<dt id="decodes.core.point.HasPts">
+<em class="property">class </em><tt class="descclassname">decodes.core.point.</tt><tt class="descname">HasPts</tt><a class="headerlink" href="#decodes.core.point.HasPts" title="Permalink to this definition">¶</a></dt>
+<dd><p>A base class for anything that contains a list of vertices.
+All HasPts classes also have bases</p>
+<dl class="method">
+<dt id="decodes.core.point.HasPts._compatible_vec">
+<tt class="descname">_compatible_vec</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.point.HasPts._compatible_vec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a vector compatible with the collection of vectors in this object if possible</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.point.HasPts.append">
+<tt class="descname">append</tt><big>(</big><em>pts</em><big>)</big><a class="headerlink" href="#decodes.core.point.HasPts.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appends the given Point to the stored list of points.
+Each Point is processed to ensure compatibilty with this geometry&#8217;s basis</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pts</strong> (<em>Point or [Point]</em>) &#8211; Point(s) to append</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Modfies this geometry by adding items to the stored list of points</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.point.HasPts.basis_applied">
+<tt class="descname">basis_applied</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.point.HasPts.basis_applied" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new Geometry with basis applied. Coords will be interpreted in world space, appearing in the same position when drawn</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Object with basis applied.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.point.HasPts.basis_stripped">
+<tt class="descname">basis_stripped</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.point.HasPts.basis_stripped" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new Geometry stripped of any bases. Coords will be interpreted in world space, in their analogous &#8220;local&#8221; position when drawn</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Object with basis stripped.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.point.HasPts.centroid">
+<tt class="descname">centroid</tt><a class="headerlink" href="#decodes.core.point.HasPts.centroid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the centroid of the points of this object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Centroid (point).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.point.HasPts.pts">
+<tt class="descname">pts</tt><a class="headerlink" href="#decodes.core.point.HasPts.pts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the points contained within this geometry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point or [Point]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="decodes.core.point.Point">
 <em class="property">class </em><tt class="descclassname">decodes.core.point.</tt><tt class="descname">Point</tt><big>(</big><em>a=0</em>, <em>b=0</em>, <em>c=0</em>, <em>basis=None</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point" title="Permalink to this definition">¶</a></dt>
-<dd><p>a simple vector class</p>
+<dd><p>a simple point class</p>
 <dl class="method">
 <dt id="decodes.core.point.Point.__add__">
 <tt class="descname">__add__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.__add__" title="Permalink to this definition">¶</a></dt>
-<dd><p>overloads the addition <strong>(+)</strong> operator
-returns a new point that results from adding this point&#8217;s world coordinates to the other point&#8217;s (or vector&#8217;s) world coordinates.
-no matter the basis of the inputs, the resulting point will have no basis.</p>
+<dd><p>Overloads the addition <strong>(+)</strong> operator. 
+Returns a new point that results from adding this point&#8217;s world coordinates to the other point&#8217;s (or vector&#8217;s) world coordinates.
+No matter the basis of the inputs, the resulting point will have no basis.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param other:</th><td class="field-body">Point or Vec to be added.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type other:</th><td class="field-body">Point or Vec</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">New point.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.point.Point.__div__">
 <tt class="descname">__div__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.__div__" title="Permalink to this definition">¶</a></dt>
-<dd><p>overloads the division <strong>(/)</strong> operator
-returns a new point that results from divding each of this point&#8217;s world coordinates by the value provided.
-no matter the basis of the inputs, the resulting point will have no basis.</p>
+<dd><p>Overloads the division <strong>(/)</strong> operator
+Returns a new point that results from divding each of this point&#8217;s world coordinates by the value provided.
+No matter the basis of the inputs, the resulting point will have no basis.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param other:</th><td class="field-body">Point or Vec to be divided.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type other:</th><td class="field-body">Point or Vec</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">New point.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.point.Point.__eq__">
+<tt class="descname">__eq__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloads the equal <strong>(==)</strong> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Point</em>) &#8211; Point to be compared.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Boolean result of comparison</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.point.Point.__ge__">
+<tt class="descname">__ge__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.__ge__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloads the greater or equal <strong>(&gt;=)</strong> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Point</em>) &#8211; Point to be compared.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Boolean result of comparison</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.point.Point.__gt__">
+<tt class="descname">__gt__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.__gt__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloads the greater than <strong>(&gt;)</strong> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Point</em>) &#8211; Point to be compared.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Boolean result of comparison</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.point.Point.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>a=0</em>, <em>b=0</em>, <em>c=0</em>, <em>basis=None</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Point Constructor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; a value.</li>
+<li><strong>b</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; b value</li>
+<li><strong>c</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; c value</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Point object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Point</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.point.Point.__le__">
+<tt class="descname">__le__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.__le__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloads the less or equal <strong>(&lt;=)</strong> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Point</em>) &#8211; Point to be compared.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Boolean result of comparison</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.point.Point.__lt__">
+<tt class="descname">__lt__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.__lt__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloads the less than <strong>(&lt;)</strong> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Point</em>) &#8211; Point to be compared.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Boolean result of comparison</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.point.Point.__mul__">
 <tt class="descname">__mul__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.__mul__" title="Permalink to this definition">¶</a></dt>
-<dd><p>overloads the multiplication <strong>(*)</strong> operator
-if a transformation is provided, applies the transformation to this point in a way equivilent to the expression <tt class="docutils literal"><span class="pre">other</span> <span class="pre">*</span> <span class="pre">self</span></tt>
+<dd><p>Overloads the multiplication <strong>(*)</strong> operator.
+If a transformation is provided, applies the transformation to this point in a way equivilent to the expression <tt class="docutils literal"><span class="pre">other</span> <span class="pre">*</span> <span class="pre">self</span></tt>.
 otherwise, returns a new point that results from multiplying each of this point&#8217;s world coordinates by the value provided.    no matter the basis of the inputs, the resulting point will have no basis.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param other:</th><td class="field-body">Point or Vec to be multiplied.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type other:</th><td class="field-body">Point or Vec</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">New point.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.point.Point.__ne__">
+<tt class="descname">__ne__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.__ne__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloads the nor equal <strong>(!=)</strong> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Point</em>) &#8211; Point to be compared.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Boolean result of comparison</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.point.Point.__sub__">
 <tt class="descname">__sub__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.__sub__" title="Permalink to this definition">¶</a></dt>
-<dd><p>overloads the subtraction <strong>(+)</strong> operator
-returns a new point that results from subtracting the other point&#8217;s (or vector&#8217;s) worldcoordinates from this point&#8217;s world coordinates.
-no matter the basis of the inputs, the resulting point will have no basis.
-:rtype: Point</p>
+<dd><p>Overloads the subtraction <strong>(-)</strong> operator
+Returns a new point that results from subtracting the other point&#8217;s (or vector&#8217;s) worldcoordinates from this point&#8217;s world coordinates.
+No matter the basis of the inputs, the resulting point will have no basis.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param other:</th><td class="field-body">Point or Vec to be subtracted.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type other:</th><td class="field-body">Point or Vec</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">New point.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.point.Point._centroid">
+<em class="property">static </em><tt class="descname">_centroid</tt><big>(</big><em>points</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point._centroid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the centroid of a point cloud in local coordinates.
+All given points will be evaluated with their bases stripped, and the basis of the returned point will adopt the basis of the given points.
+Mixed bases among the given points will throw an error.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param points:</th><td class="field-body">Point cloud</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type p0:</th><td class="field-body">list</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Centroid of point cloud.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.point.Point._distance">
 <tt class="descname">_distance</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point._distance" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns the distance between this point and the other point in local space.
-both points must use the same basis.</p>
+<dd><p>Returns the distance between this point and the other point in local space. Both points must use the same basis.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Point</em>) &#8211; Point to calculate the distance from.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Distance between points.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.point.Point._distance2">
 <tt class="descname">_distance2</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point._distance2" title="Permalink to this definition">¶</a></dt>
-<dd><p>distance squared in local space. Cheaper to calculate than distance.</p>
+<dd><p>Distance squared in local space. Cheaper to calculate than distance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Point</em>) &#8211; Point to calculate the distance from.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Distance between points.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.point.Point.basis_applied">
 <tt class="descname">basis_applied</tt><big>(</big><em>copy_children=True</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.basis_applied" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns a new point with basis applied. 
-coords will be interpreted in world space
-points will appear in the same position when drawn</p>
+<dd><p>Returns a new point with basis applied. Coords will be interpreted in world space. Points will appear in the same position when drawn</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>copy_children</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If True, creates a new Point object with &#8216;world&#8217; coordinates.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Point object with basis applied.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.point.Point.basis_stripped">
 <tt class="descname">basis_stripped</tt><big>(</big><em>copy_children=True</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.basis_stripped" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns a new point stripped of any bases.
-coords will be interpreted in world space, and points will appear in their &#8220;local&#8221; position when drawn</p>
+<dd><p>Returns a new point stripped of any bases. Coords will be interpreted in world space, and points will appear in their &#8220;local&#8221; position when drawn</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>copy_children</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If True, creates a new Point object with &#8216;local&#8217; coordinates.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Point object with basis stripped.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.point.Point.centroid">
+<em class="property">static </em><tt class="descname">centroid</tt><big>(</big><em>points</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.centroid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the centroid of a point cloud.
+All given points will be evaluated with their bases applied, and the returned point will be baseless</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>points</strong> &#8211; Point cloud</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Centroid of point cloud.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.point.Point.distance">
 <tt class="descname">distance</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.distance" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns the distance between this point and the other point in world space.
-both points must use the same basis.</p>
+<dd><p>Returns the distance between this point and the other point in local space. Both points must use the same basis.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Point</em>) &#8211; Point to calculate the distance from.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Distance between points.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.point.Point.distance2">
 <tt class="descname">distance2</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.distance2" title="Permalink to this definition">¶</a></dt>
-<dd><p>distance squared in world space. Cheaper to calculate than distance.</p>
+<dd><p>Returns the distance between this point and the other point in local space. Both points must use the same basis.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Point</em>) &#8211; Point to calculate the distance from.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Distance between points.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.point.Point.interpolate">
 <em class="property">static </em><tt class="descname">interpolate</tt><big>(</big><em>p0</em>, <em>p1</em>, <em>t=0.5</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.interpolate" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns a new point which is the result of an interpolation between the two given points at the given t-value</p>
+<dd><p>Returns a new point which is the result of an interpolation between the two given points at the given t-value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>p0</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; First point to interpolate.</li>
+<li><strong>p0</strong> &#8211; Second point to interpolate.</li>
+<li><strong>p0</strong> &#8211; t-value of interpolation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Interpolated point.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Point</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.point.Point.nearest">
+<em class="property">static </em><tt class="descname">nearest</tt><big>(</big><em>pt</em>, <em>pts</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.nearest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a reference to a Point from the given list of Points which is nearest to the source Point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pt</strong> (<em>Point</em>) &#8211; Source Point</li>
+<li><strong>pt</strong> &#8211; A list of Points through which to search</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">A reference to a Point from the list which is nearest to the source Point</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Point</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.point.Point.nearest_index">
+<em class="property">static </em><tt class="descname">nearest_index</tt><big>(</big><em>pt</em>, <em>pts</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.nearest_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the index of the Point within the given list of Points which is nearest to the source Point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pt</strong> (<em>Point</em>) &#8211; Source Point</li>
+<li><strong>pt</strong> &#8211; A list of Points through which to search</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">The index of the nearest Point</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.point.Point.projected">
 <tt class="descname">projected</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.projected" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a new point projected onto a destination vector
-.. todo:: think about what this function will mean for new &#8220;basis&#8221; construct.    probably eliminate, in favor of projecting onto lines and such in world space</p>
+<dd><p>Returns a new point projected onto a destination vector</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Destination vector.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">A Point projected onto a Vector.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">think about what this function will mean for new &#8220;basis&#8221; construct.    probably eliminate, in favor of projecting onto lines and such in world space</p>
+</div>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.point.Point.random">
-<em class="property">static </em><tt class="descname">random</tt><big>(</big><em>rnge=[-1.0, 1.0], constrain2d=False</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.random" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><tt class="descname">random</tt><big>(</big><em>interval=None</em>, <em>constrain2d=False</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.random" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a random point within the given (optional) range</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>interval</strong> (<em>Interval</em>) &#8211; Range to get the random value from.</li>
+<li><strong>constrain2d</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Constrain the point to 2d space</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Random point.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Point</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.point.Point.set_basis">
 <tt class="descname">set_basis</tt><big>(</big><em>basis</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.set_basis" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns a new point whose local coordniates are the same as this point, but whose basis is set by the basis provided.</p>
+<dd><p>Returns a new point whose local coordniates are the same as this point, but whose basis is set by the basis provided.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>basis</strong> (<em>Basis</em>) &#8211; New basis for the point.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Point object with new basis.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.point.Point.x">
 <tt class="descname">x</tt><a class="headerlink" href="#decodes.core.point.Point.x" title="Permalink to this definition">¶</a></dt>
-<dd><p>The x-coordinate of this point
-Setting the x-value of a point with a basis requires stripping the basis of the point.    Set pt._x to alter the local coordinate instead</p>
+<dd><p>The x-coordinate of this point. Setting the x-value of a point with a basis requires stripping the basis of the point. Set pt._x to alter the local coordinate instead.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">x value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.point.Point.y">
 <tt class="descname">y</tt><a class="headerlink" href="#decodes.core.point.Point.y" title="Permalink to this definition">¶</a></dt>
-<dd><p>The y-coordinate of this point
-Setting the y-value of a point with a basis requires stripping the basis of the point.    Set pt._y to alter the local coordinate instead</p>
+<dd><p>The y-coordinate of this point. Setting the y-value of a point with a basis requires stripping the basis of the point. Set pt._y to alter the local coordinate instead</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">y value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.point.Point.z">
 <tt class="descname">z</tt><a class="headerlink" href="#decodes.core.point.Point.z" title="Permalink to this definition">¶</a></dt>
-<dd><p>The z-coordinate of this point
-Setting the z-value of a point with a basis requires stripping the basis of the point.    Set pt._z to alter the local coordinate instead</p>
+<dd><p>The z-coordinate of this point. Setting the z-value of a point with a basis requires stripping the basis of the point.    Set pt._z to alter the local coordinate instead</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">z value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -526,8 +1989,33 @@ Setting the z-value of a point with a basis requires stripping the basis of the 
 <span id="mesh-py"></span><h3>mesh.py<a class="headerlink" href="#module-decodes.core.mesh" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="decodes.core.mesh.Mesh">
-<em class="property">class </em><tt class="descclassname">decodes.core.mesh.</tt><tt class="descname">Mesh</tt><big>(</big><em>verts=None</em>, <em>faces=None</em>, <em>basis=None</em><big>)</big><a class="headerlink" href="#decodes.core.mesh.Mesh" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">decodes.core.mesh.</tt><tt class="descname">Mesh</tt><big>(</big><em>vertices=None</em>, <em>faces=None</em>, <em>basis=None</em><big>)</big><a class="headerlink" href="#decodes.core.mesh.Mesh" title="Permalink to this definition">¶</a></dt>
 <dd><p>a very simple mesh class</p>
+<dl class="method">
+<dt id="decodes.core.mesh.Mesh.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>vertices=None</em>, <em>faces=None</em>, <em>basis=None</em><big>)</big><a class="headerlink" href="#decodes.core.mesh.Mesh.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mesh Constructor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>vertices</strong> (<em>[Point]</em>) &#8211; The vertices of the mesh</li>
+<li><strong>faces</strong> (<em>[int]</em>) &#8211; List of ordered faces.</li>
+<li><strong>basis</strong> (<em>Basis</em>) &#8211; The (optional) basis of the mesh.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Mesh object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Mesh</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="decodes.core.mesh.Mesh.add_face">
 <tt class="descname">add_face</tt><big>(</big><em>a</em>, <em>b</em>, <em>c</em>, <em>d=-1</em><big>)</big><a class="headerlink" href="#decodes.core.mesh.Mesh.add_face" title="Permalink to this definition">¶</a></dt>
@@ -536,39 +2024,9 @@ Setting the z-value of a point with a basis requires stripping the basis of the 
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>face</strong> (<em>Face (integer).</em>) &#8211; Face to be added to the list of faces.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a,b,c,d</strong> (<em>int.</em>) &#8211; Face to be added to the list of faces.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Modifies list of faces.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="decodes.core.mesh.Mesh.add_vert">
-<tt class="descname">add_vert</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.mesh.Mesh.add_vert" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds a vertice to the mesh.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Point.</em>) &#8211; New vertice or vertices to be added to the mesh.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Modifies list of vertices.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="decodes.core.mesh.Mesh.centroid">
-<tt class="descname">centroid</tt><a class="headerlink" href="#decodes.core.mesh.Mesh.centroid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a list of mesh centroids (points).</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">List of centroids.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Modifies list of faces.</td>
 </tr>
 </tbody>
 </table>
@@ -582,9 +2040,11 @@ Setting the z-value of a point with a basis requires stripping the basis of the 
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>msh</strong> (<em>Mesh.</em>) &#8211; Mesh to explode.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>msh</strong> (<em>Mesh</em>) &#8211; Mesh to explode.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">List of meshes.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of meshes.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Type :</th><td class="field-body">list</td>
 </tr>
 </tbody>
 </table>
@@ -593,40 +2053,52 @@ Setting the z-value of a point with a basis requires stripping the basis of the 
 <dl class="method">
 <dt id="decodes.core.mesh.Mesh.face_centroid">
 <tt class="descname">face_centroid</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#decodes.core.mesh.Mesh.face_centroid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Not sure if this is the same as centroid....</p>
-<div class="admonition-todo admonition" id="index-0">
-<p class="first admonition-title">Todo</p>
-<p class="last">document this function.</p>
-</div>
-</dd></dl>
-
-<dl class="method">
-<dt id="decodes.core.mesh.Mesh.face_normal">
-<tt class="descname">face_normal</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#decodes.core.mesh.Mesh.face_normal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the normal vector to a face.</p>
+<dd><p>Returns the centroids of individual mesh faces.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<em>Integer.</em>) &#8211; Index of a face.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Index of a face.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Normal vector.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The centroid of a face.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="method">
-<dt id="decodes.core.mesh.Mesh.face_verts">
-<tt class="descname">face_verts</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#decodes.core.mesh.Mesh.face_verts" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the vertice of a given face.</p>
+<dt id="decodes.core.mesh.Mesh.face_normal">
+<tt class="descname">face_normal</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#decodes.core.mesh.Mesh.face_normal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the normal vector of a face.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> &#8211; Face&#8217;s index</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Index of a face.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Vertice (point).</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Normal vector.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.mesh.Mesh.face_pts">
+<tt class="descname">face_pts</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#decodes.core.mesh.Mesh.face_pts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the points of a given face.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Face&#8217;s index</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Vertice.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
 </tr>
 </tbody>
 </table>
@@ -640,21 +2112,9 @@ Setting the z-value of a point with a basis requires stripping the basis of the 
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">List of mesh faces.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of mesh faces.</td>
 </tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="decodes.core.mesh.Mesh.verts">
-<tt class="descname">verts</tt><a class="headerlink" href="#decodes.core.mesh.Mesh.verts" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a list of mesh vertices.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">List of mesh verticies.</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
 </tr>
 </tbody>
 </table>
@@ -667,20 +2127,30 @@ Setting the z-value of a point with a basis requires stripping the basis of the 
 <span id="pline-py"></span><h3>pline.py<a class="headerlink" href="#module-decodes.core.pline" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="decodes.core.pline.PLine">
-<em class="property">class </em><tt class="descclassname">decodes.core.pline.</tt><tt class="descname">PLine</tt><big>(</big><em>verts=None</em><big>)</big><a class="headerlink" href="#decodes.core.pline.PLine" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">decodes.core.pline.</tt><tt class="descname">PLine</tt><big>(</big><em>vertices=None</em><big>)</big><a class="headerlink" href="#decodes.core.pline.PLine" title="Permalink to this definition">¶</a></dt>
 <dd><p>a simple polyline class</p>
-<dl class="attribute">
-<dt id="decodes.core.pline.PLine.centroid">
-<tt class="descname">centroid</tt><a class="headerlink" href="#decodes.core.pline.PLine.centroid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the centroid of a pline.</p>
+<dl class="method">
+<dt id="decodes.core.pline.PLine.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>vertices=None</em><big>)</big><a class="headerlink" href="#decodes.core.pline.PLine.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Polyline constructor.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Centroid (point).</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vertices</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; Vertices to build the pline.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Polyline.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">PLine</td>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.pline.PLine.seg">
+<tt class="descname">seg</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#decodes.core.pline.PLine.seg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a segment of this polyline</p>
 </dd></dl>
 
 </dd></dl>
@@ -690,41 +2160,56 @@ Setting the z-value of a point with a basis requires stripping the basis of the 
 <span id="pgon-py"></span><h3>pgon.py<a class="headerlink" href="#module-decodes.core.pgon" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="decodes.core.pgon.PGon">
-<em class="property">class </em><tt class="descclassname">decodes.core.pgon.</tt><tt class="descname">PGon</tt><big>(</big><em>verts=None</em>, <em>basis=None</em><big>)</big><a class="headerlink" href="#decodes.core.pgon.PGon" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">decodes.core.pgon.</tt><tt class="descname">PGon</tt><big>(</big><em>vertices=None</em>, <em>basis=None</em><big>)</big><a class="headerlink" href="#decodes.core.pgon.PGon" title="Permalink to this definition">¶</a></dt>
 <dd><p>a very simple 2d polygon class
 Polygons limit their vertices to x and y dimensions, and enforce that they employ a basis.    Transformations of a polygon should generally be applied to the basis.    Any tranfromations of the underlying vertices should ensure that the returned vectors are limited to x and y dimensions</p>
 <dl class="method">
-<dt id="decodes.core.pgon.PGon.append">
-<tt class="descname">append</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.pgon.PGon.append" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds vertices to the PGon.</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<dt id="decodes.core.pgon.PGon.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>vertices=None</em>, <em>basis=None</em><big>)</big><a class="headerlink" href="#decodes.core.pgon.PGon.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>PGon Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param other:</th><td class="field-body">Vertice to add.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>vertices</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; List of vertices to build the polygon.</li>
+<li><strong>basis</strong> (<em>Basis</em>) &#8211; Plane basis for the PGon.</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type other:</th><td class="field-body">Point</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">PGon object.</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">rtype:</th><td class="field-body">Updates the PGon.</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">PGon</p>
+</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
-<div class="admonition-todo admonition" id="index-1">
-<p class="first admonition-title">Todo</p>
-<p class="last">Get rid of this function and get it from base.py</p>
-</div>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.pgon.PGon.doughnut">
 <em class="property">static </em><tt class="descname">doughnut</tt><big>(</big><em>cpt, radius_interval, angle_interval=ival[0,6.28318530718], res=20</em><big>)</big><a class="headerlink" href="#decodes.core.pgon.PGon.doughnut" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs a doughnut based on a center point, two radii, and optionally a start angle, sweep angle, and resolution.</p>
-<div class="admonition-todo admonition" id="index-2">
-<p class="first admonition-title">Todo</p>
-<p class="last">document the parameters.</p>
-</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>cpt</strong> (<em>Point</em>) &#8211; Center point of a rectangle.</li>
+<li><strong>angle_interval</strong> (<em>Interval</em>) &#8211; Radii interval.</li>
+<li><strong>res</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; doughnut resolution.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Doughnut object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">PGon</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="staticmethod">
@@ -736,28 +2221,17 @@ Polygons limit their vertices to x and y dimensions, and enforce that they emplo
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>cpt</strong> (<em>Point.</em>) &#8211; Center point of a rectangle.</li>
-<li><strong>w</strong> (<em>Number.</em>) &#8211; Width of a rectangle.</li>
-<li><strong>h</strong> (<em>Number.</em>) &#8211; Height of a rectangle.</li>
+<li><strong>cpt</strong> (<em>Point</em>) &#8211; Center point of a rectangle.</li>
+<li><strong>w</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Width of a rectangle.</li>
+<li><strong>h</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Height of a rectangle.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Rectangle (PGon object).</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Rectangle (PGon object).</p>
 </td>
 </tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="decodes.core.pgon.PGon.verts">
-<tt class="descname">verts</tt><a class="headerlink" href="#decodes.core.pgon.PGon.verts" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the list of PGon vertices.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">List of vertices(points).</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">PGon</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -770,8 +2244,18 @@ Polygons limit their vertices to x and y dimensions, and enforce that they emplo
 <span id="cs-py"></span><h3>cs.py<a class="headerlink" href="#module-decodes.core.cs" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="decodes.core.cs.CS">
-<em class="property">class </em><tt class="descclassname">decodes.core.cs.</tt><tt class="descname">CS</tt><big>(</big><em>pt=pt[0,0,0], vecX=vec[1,0,0], vecY=vec[0,1,0]</em><big>)</big><a class="headerlink" href="#decodes.core.cs.CS" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">decodes.core.cs.</tt><tt class="descname">CS</tt><big>(</big><em>a=None</em>, <em>b=None</em>, <em>c=None</em><big>)</big><a class="headerlink" href="#decodes.core.cs.CS" title="Permalink to this definition">¶</a></dt>
 <dd><p>a ortho coordinate system class</p>
+<dl class="method">
+<dt id="decodes.core.cs.CS.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>a=None</em>, <em>b=None</em>, <em>c=None</em><big>)</big><a class="headerlink" href="#decodes.core.cs.CS.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>CS Constructor.</p>
+<div class="admonition-todo admonition" id="index-1">
+<p class="first admonition-title">Todo</p>
+<p class="last">write docstring detailing the different ways of constructing a CS</p>
+</div>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -822,6 +2306,30 @@ Polygons limit their vertices to x and y dimensions, and enforce that they emplo
 <p class="last">This is an abstract class and is not meant to be instantiated.</p>
 </div>
 <dl class="method">
+<dt id="decodes.core.line.LinearEntity.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#decodes.core.line.LinearEntity.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>LinearEntity Constructor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>Point</em>) &#8211; Starting point.</li>
+<li><strong>b</strong> (<em>Point or Vector</em>) &#8211; Second point or Vector.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">LinearEntity object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">LinearEntity</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="decodes.core.line.LinearEntity.angle_between">
 <tt class="descname">angle_between</tt><big>(</big><em>l1</em>, <em>l2</em><big>)</big><a class="headerlink" href="#decodes.core.line.LinearEntity.angle_between" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns an angle formed between the two linear entities.</p>
@@ -835,7 +2343,7 @@ From the dot product of vectors v1 and v2 it is known that:</p>
 get the directional vectors of the two lines and readily
 find the angle between the two using the above formula.</p>
 </div>
-<div class="admonition-todo admonition" id="index-3">
+<div class="admonition-todo admonition" id="index-2">
 <p class="first admonition-title">Todo</p>
 <p class="last">Implement this method.</p>
 </div>
@@ -845,6 +2353,22 @@ find the angle between the two using the above formula.</p>
 <dt id="decodes.core.line.LinearEntity.coefficients">
 <tt class="descname">coefficients</tt><a class="headerlink" href="#decodes.core.line.LinearEntity.coefficients" title="Permalink to this definition">¶</a></dt>
 <dd><p>The coefficients (a,b,c) of this line for equation ax+by+c=0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.line.LinearEntity.ept">
+<tt class="descname">ept</tt><a class="headerlink" href="#decodes.core.line.LinearEntity.ept" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the end Point of a LinearEntity</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">End Point.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -862,7 +2386,7 @@ concurrenecy is impossible amongst the whole set. Otherwise, check
 to see if the intersection point of the first two lines is a member 
 on the rest of the lines. If so, the lines are concurrent.</p>
 </div>
-<div class="admonition-todo admonition" id="index-4">
+<div class="admonition-todo admonition" id="index-3">
 <p class="first admonition-title">Todo</p>
 <p class="last">Implement this method.</p>
 </div>
@@ -872,7 +2396,25 @@ on the rest of the lines. If so, the lines are concurrent.</p>
 <dt id="decodes.core.line.LinearEntity.is_parallel">
 <tt class="descname">is_parallel</tt><big>(</big><em>l1</em>, <em>l2</em><big>)</big><a class="headerlink" href="#decodes.core.line.LinearEntity.is_parallel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns True if l1 and l2 are parallel, False otherwise</p>
-<div class="admonition-todo admonition" id="index-5">
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>l1</strong> (<em>LinearEntity</em>) &#8211; First LinearEntity</li>
+<li><strong>l2</strong> (<em>LinearEntity</em>) &#8211; Second LinearEntity</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">True if parallel.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-todo admonition" id="index-4">
 <p class="first admonition-title">Todo</p>
 <p class="last">Implement this method.</p>
 </div>
@@ -882,7 +2424,27 @@ on the rest of the lines. If so, the lines are concurrent.</p>
 <dt id="decodes.core.line.LinearEntity.is_perpendicular">
 <tt class="descname">is_perpendicular</tt><big>(</big><em>l1</em>, <em>l2</em><big>)</big><a class="headerlink" href="#decodes.core.line.LinearEntity.is_perpendicular" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns True if l1 and l2 are perpendicular, False otherwise</p>
-<div class="admonition-todo admonition" id="index-6">
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param l1:</th><td class="field-body">First LinearEntity</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type l1:</th><td class="field-body">LinearEntity</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">param l2:</th><td class="field-body">Second LinearEntity</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type l2:</th><td class="field-body">LinearEntity</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">True if perpendicular.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="admonition-todo admonition" id="index-5">
 <p class="first admonition-title">Todo</p>
 <p class="last">Implement this method.</p>
 </div>
@@ -891,16 +2453,42 @@ on the rest of the lines. If so, the lines are concurrent.</p>
 <dl class="method">
 <dt id="decodes.core.line.LinearEntity.parallel_line">
 <tt class="descname">parallel_line</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.line.LinearEntity.parallel_line" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a new Line which is parallel to this linear entity and passes
-through the specified point.</p>
+<dd><p>Returns a new Line which is parallel to this linear entity and passes through the specified point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>Point</em>) &#8211; Point that the LinearEntity will pass through.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">New LinearEntity.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">LinearEntity</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.line.LinearEntity.perpendicular_line">
 <tt class="descname">perpendicular_line</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.line.LinearEntity.perpendicular_line" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a new Line which is perpendicular to this linear entity and
-passes through the specified point.</p>
-<div class="admonition-todo admonition" id="index-7">
+<dd><p>Returns a new Line which is perpendicular to this linear entity and passes through the specified point.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param p:</th><td class="field-body">Point that the LinearEntity will pass through.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type p:</th><td class="field-body">Point</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">New LinearEntity.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">LinearEntity</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="admonition-todo admonition" id="index-6">
 <p class="first admonition-title">Todo</p>
 <p class="last">Implement this method.</p>
 </div>
@@ -909,13 +2497,59 @@ passes through the specified point.</p>
 <dl class="method">
 <dt id="decodes.core.line.LinearEntity.perpendicular_segment">
 <tt class="descname">perpendicular_segment</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.line.LinearEntity.perpendicular_segment" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a new Segment which connects p to a point on this linear
-entity and is also perpendicular to this line. Returns p itself
-if p is on this linear entity.</p>
-<div class="admonition-todo admonition" id="index-8">
+<dd><p>Returns a new Segment which connects p to a point on this linear entity and is also perpendicular to this line. Returns p itself if p is on this linear entity.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param p:</th><td class="field-body">Point that the LinearEntity will pass through.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type p:</th><td class="field-body">Point</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">New LinearEntity.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">LinearEntity</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="admonition-todo admonition" id="index-7">
 <p class="first admonition-title">Todo</p>
 <p class="last">Implement this method.</p>
 </div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.line.LinearEntity.spt">
+<tt class="descname">spt</tt><a class="headerlink" href="#decodes.core.line.LinearEntity.spt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the starting Point of a LinearEntity</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Starting Point.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.line.LinearEntity.vec">
+<tt class="descname">vec</tt><a class="headerlink" href="#decodes.core.line.LinearEntity.vec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Vec direction of a LinearEntity</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Vector.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -927,6 +2561,43 @@ if p is on this linear entity.</p>
 <dt id="decodes.core.xform.Xform">
 <em class="property">class </em><tt class="descclassname">decodes.core.xform.</tt><tt class="descname">Xform</tt><big>(</big><em>value=1.0</em>, <em>matrix=None</em><big>)</big><a class="headerlink" href="#decodes.core.xform.Xform" title="Permalink to this definition">¶</a></dt>
 <dd><p>A transformation matrix class.</p>
+<dl class="method">
+<dt id="decodes.core.xform.Xform.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>value=1.0</em>, <em>matrix=None</em><big>)</big><a class="headerlink" href="#decodes.core.xform.Xform.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>XForm Constructor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>value</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Transformation value (defaults to 1.0).</li>
+<li><strong>matrix</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; Matrix</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">XForm object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">XForm</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.xform.Xform.__mul__">
+<tt class="descname">__mul__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.xform.Xform.__mul__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiply by another Matrix, or by any piece of fieldpack geometry
+This function must be kept up to date with every new class of DC geom</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.xform.Xform.__weakref__">
+<tt class="descname">__weakref__</tt><a class="headerlink" href="#decodes.core.xform.Xform.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
 <dl class="staticmethod">
 <dt id="decodes.core.xform.Xform.change_basis">
 <em class="property">static </em><tt class="descname">change_basis</tt><big>(</big><em>csSource</em>, <em>csTarget</em><big>)</big><a class="headerlink" href="#decodes.core.xform.Xform.change_basis" title="Permalink to this definition">¶</a></dt>
@@ -934,10 +2605,34 @@ if p is on this linear entity.</p>
 <p class="first admonition-title">Warning</p>
 <p class="last">This method currently relies on access to the Rhinocommon Kernel.    It will not work in other contexts.</p>
 </div>
-<div class="admonition-todo admonition" id="index-9">
+<div class="admonition-todo admonition" id="index-8">
 <p class="first admonition-title">Todo</p>
 <p class="last">Re-implement this method without using the Rhinocommon Kernel.</p>
 </div>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.xform.Xform.eval">
+<tt class="descname">eval</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.xform.Xform.eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns...........</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>other</strong> (<em>Point</em>) &#8211; Point..............</li>
+<li><strong>matrix</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; Matrix</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Point...............</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Point</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="staticmethod">
@@ -950,7 +2645,7 @@ Or, pass in an arbitrary cs (produces mirror about XYplane of CS)</p>
 <p class="first admonition-title">Warning</p>
 <p class="last">When mirroring about an arbitrary plane, this method currently relies on access to the Rhinocommon Kernel.  It will not work in other contexts.</p>
 </div>
-<div class="admonition-todo admonition" id="index-10">
+<div class="admonition-todo admonition" id="index-9">
 <p class="first admonition-title">Todo</p>
 <p class="last">Re-implement this method without using the Rhinocommon Kernel.</p>
 </div>
@@ -963,11 +2658,11 @@ Or, pass in an arbitrary cs (produces mirror about XYplane of CS)</p>
 <p class="first admonition-title">Warning</p>
 <p class="last">This method currently relies on access to the Rhinocommon Kernel.    It will not work in other contexts.</p>
 </div>
-<div class="admonition-todo admonition" id="index-11">
+<div class="admonition-todo admonition" id="index-10">
 <p class="first admonition-title">Todo</p>
 <p class="last">Re-implement this method without using the Rhinocommon Kernel.</p>
 </div>
-<div class="admonition-todo admonition" id="index-12">
+<div class="admonition-todo admonition" id="index-11">
 <p class="first admonition-title">Todo</p>
 <p class="last">Rotation about an axis ought to take in a linear entitiy, not a vector</p>
 </div>

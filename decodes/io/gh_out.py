@@ -70,6 +70,10 @@ class GrasshopperOut(outie.Outie):
                 else : self._add_branch(i,tree,tree_p, npath)
             return True
         
+        if isinstance(g, Plane) : 
+            tree.Add(self._drawPlane(g),path)
+            tree_p.Add(extract_props(g), path)
+            return True
         if isinstance(g, Point) : 
             tree.Add(self._drawPoint(g),path)
             tree_p.Add(extract_props(g), path)
@@ -128,9 +132,14 @@ class GrasshopperOut(outie.Outie):
         pt = pt.basis_applied()
         return rg.Point3d(pt.x,pt.y,pt.z)
         
+    def _drawPlane(self, pln):
+        o = rg.Point3d(pln.origin.x,pln.origin.y,pln.origin.z)
+        n = rg.Vector3d(pln.normal.x,pln.normal.y,pln.normal.z) 
+        return rg.Plane(o,n)
+
     def _drawMesh(self, mesh):
         rh_mesh = rg.Mesh()
-        for v in mesh.verts: rh_mesh.Vertices.Add(v.x,v.y,v.z)
+        for v in mesh.pts: rh_mesh.Vertices.Add(v.x,v.y,v.z)
         for f in mesh.faces: 
             if len(f)==3 : rh_mesh.Faces.AddFace(f[0], f[1], f[2])
             if len(f)==4 : rh_mesh.Faces.AddFace(f[0], f[1], f[2], f[3])
@@ -153,8 +162,7 @@ class GrasshopperOut(outie.Outie):
         return to_rgpolyline(pgon)
 
     def _drawCurve(self, curve):
-        return interpolated_curve(curve.to_pline().verts)
-        #return self._drawPLine(curve.to_pline())
+        return interpolated_curve(curve.surrogate.pts)
 
     def _drawCS(self, cs):
         o = rg.Point3d(cs.origin.x,cs.origin.y,cs.origin.z)

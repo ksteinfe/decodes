@@ -1,6 +1,6 @@
 from decodes.core import *
 from . import base, vec #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
-import math, random
+import math, random, warnings, copy
 if VERBOSE_FS: print "point.py loaded"
 
 
@@ -13,7 +13,7 @@ if VERBOSE_FS: print "point.py loaded"
 
 class Point(Vec,HasBasis):
     """
-    a simple vector class
+    a simple point class
     """
     
     def __init__(self, a=0, b=0, c=0, basis=None):
@@ -30,6 +30,10 @@ class Point(Vec,HasBasis):
         """
         super(Point,self).__init__(a,b,c)
         self.basis = basis
+
+        # there's a unique case where we've been passed a based point along with a defined basis here.
+        # in this case, we should take the local coordinates of the given point interpreted through the given basis
+        if isinstance(a, Point) and b==0 and c == 0 and basis !=None :  self._x , self._y, self._z = a._x , a._y, a._z
     
     @property
     def x(self): 
@@ -87,7 +91,7 @@ class Point(Vec,HasBasis):
         """Returns a new point with basis applied. Coords will be interpreted in world space. Points will appear in the same position when drawn
         
             :param copy_children: If True, creates a new Point object with 'world' coordinates.
-            :type verts: bool
+            :type copy_children: bool
             :result: Point object with basis applied.
             :rtype: Point
         """
@@ -99,7 +103,7 @@ class Point(Vec,HasBasis):
         """Returns a new point stripped of any bases. Coords will be interpreted in world space, and points will appear in their "local" position when drawn
         
             :param copy_children: If True, creates a new Point object with 'local' coordinates.
-            :type verts: bool
+            :type copy_children: bool
             :result: Point object with basis stripped.
             :rtype: Point
         """
@@ -286,6 +290,73 @@ class Point(Vec,HasBasis):
         """
         return Vec(self.basis_applied(),other.basis_applied()).length
     
+    def projected(self, other): 
+        """Returns a new point projected onto a destination vector
+        
+            :param other: Destination vector.
+            :type other: Vec
+            :result: A Point projected onto a Vector.
+            :rtype: Point
+            
+            .. todo:: think about what this function will mean for new "basis" construct.    probably eliminate, in favor of projecting onto lines and such in world space
+        """
+        return Point( Vec(self.x,self.y,self.z).projected(other) )
+
+    @staticmethod
+    def near(pt, pts):
+        """ Returns a reference to a Point from the given list of Points which is nearest to the source Point.
+
+            :param pt: Source Point
+            :type pt: Point
+            :param pt: A list of Points through which to search
+            :type pts: [Point]
+            :result: A reference to a Point from the list which is nearest to the source Point
+            :rtype: Point
+        """
+        return pts[Point.near_index(pt,pts)]
+
+    @staticmethod
+    def near_index(pt, pts):
+        """ Returns the index of the Point within the given list of Points which is nearest to the source Point.
+
+            :param pt: Source Point
+            :type pt: Point
+            :param pt: A list of Points through which to search
+            :type pts: [Point]
+            :result: The index of the nearest Point
+            :rtype: int
+        """
+        dists = [pt.distance2(p) for p in pts]
+        return dists.index(min(dists))
+
+    @staticmethod
+    def far(pt, pts):
+        """ Returns a reference to a Point from the given list of Points which is furthest from the source Point.
+
+            :param pt: Source Point
+            :type pt: Point
+            :param pt: A list of Points through which to search
+            :type pts: [Point]
+            :result: A reference to a Point from the list which is furthest from the source Point
+            :rtype: Point
+        """
+        return pts[Point.far_index(pt,pts)]
+
+    @staticmethod
+    def far_index(pt, pts):
+        """ Returns the index of the Point within the given list of Points which is furthest from the source Point.
+
+            :param pt: Source Point
+            :type pt: Point
+            :param pt: A list of Points through which to search
+            :type pts: [Point]
+            :result: The index of the furthest Point
+            :rtype: int
+        """
+        dists = [pt.distance2(p) for p in pts]
+        return dists.index(max(dists))
+
+
     @staticmethod
     def interpolate(p0,p1,t=0.5): 
         """Returns a new point which is the result of an interpolation between the two given points at the given t-value
@@ -308,8 +379,10 @@ class Point(Vec,HasBasis):
 
     @staticmethod
     def _centroid(points): 
-        """Returns the centroid of a point cloud.
-        
+        """Returns the centroid of a point cloud in local coordinates.
+        All given points will be evaluated with their bases stripped, and the basis of the returned point will adopt the basis of the given points.
+        Mixed bases among the given points will throw an error.
+
             :param points: Point cloud
             :type p0: list
             :result: Centroid of point cloud.
@@ -323,6 +396,7 @@ class Point(Vec,HasBasis):
     @staticmethod
     def centroid(points): 
         """Returns the centroid of a point cloud.
+        All given points will be evaluated with their bases applied, and the returned point will be baseless
         
             :param points: Point cloud
             :type p0: list
@@ -331,18 +405,6 @@ class Point(Vec,HasBasis):
         """
         return Point( Vec.average([p.basis_applied() for p in points]) )
         
-
-    def projected(self, other): 
-        """Returns a new point projected onto a destination vector
-        
-            :param other: Destination vector.
-            :type other: Vec
-            :result: Projected point.
-            :rtype: Point
-            
-            .. todo:: think about what this function will mean for new "basis" construct.    probably eliminate, in favor of projecting onto lines and such in world space
-        """
-        return Point( Vec(self.x,self.y,self.z).projected(other) )
     
     @staticmethod
     def random(interval=None,constrain2d=False):
@@ -355,7 +417,7 @@ class Point(Vec,HasBasis):
             :result: Random point.
             :rtype: Point
         """
-        if interval == None:
+        if interval is None:
             interval = Interval(-1.0,1.0)
         x = random.uniform(interval.a,interval.b)
         y = random.uniform(interval.a,interval.b)
@@ -363,3 +425,110 @@ class Point(Vec,HasBasis):
         p = Point(x,y) if constrain2d else Point(x,y,z)
         return p
         
+
+
+class HasPts(HasBasis):
+    """
+    A base class for anything that contains a list of vertices.
+    All HasPts classes also have bases
+
+
+    """
+    def __init__(self):
+        self._verts = [] # a list of vecs that represent the local coordinates of this object's points
+        self.basis = None
+
+    def __getitem__(self,slice):
+        sliced = self._verts[slice] # may return a singleton or list
+        try:
+            #TODO: move slice indexing to subclasses and return object rather than point list
+            return [Point(vec,basis=self.basis) for vec in sliced]
+        except:
+            return sliced
+    
+    def __setitem__(self,index,other):
+        try:
+            self._verts[index] = self._compatible_vec(other)
+        except TypeError, e:
+                raise TypeError("You cannot set the vertices of this object using slicing syntax")
+    
+    def __len__(self): return len(self._verts)
+
+    @property
+    def pts(self): 
+        """Returns the points contained within this geometry.
+
+            :rtype: Point or [Point]
+        """
+        return [Point(vec,basis=self.basis) for vec in self._verts]
+    
+    @pts.setter
+    def pts(self, pts): 
+        """Sets the points contained within this geometry.  
+        The list of vectors currently stored within this geometry are cleared, and the given points are each appended in sequence, following the uusual rules regarding bases
+
+            :param pts: Point(s) to store
+            :type pts: Point or [Point]
+            :result: Modfies this geometry by redefining the stored list of points
+        """
+        self._verts = []
+        self.append(verts)
+        
+    def append(self,pts) : 
+        """Appends the given Point to the stored list of points.
+        Each Point is processed to ensure compatibilty with this geometry's basis 
+
+            :param pts: Point(s) to append
+            :type pts: Point or [Point]
+            :result: Modfies this geometry by adding items to the stored list of points
+        """
+        if isinstance(pts, collections.Iterable) : 
+            for p in pts : self.append(p)
+        else : 
+            self._verts.append(self._compatible_vec(pts))
+    
+    @property
+    def centroid(self):
+        """Returns the centroid of the points of this object
+        
+            :returns: Centroid (point).
+            :rtype: Point
+        """
+        return Point._centroid(self.pts) 
+    
+
+    def basis_applied(self): 
+        """Returns a new Geometry with basis applied. Coords will be interpreted in world space, appearing in the same position when drawn
+        
+            :result: Object with basis applied.
+            :rtype: Object
+        """
+        clone = copy.copy(self)
+        clone._verts = [pt.basis_applied() for pt in self.pts]
+        return clone
+    
+    def basis_stripped(self): 
+        """Returns a new Geometry stripped of any bases. Coords will be interpreted in world space, in their analogous "local" position when drawn
+        
+            :result: Object with basis stripped.
+            :rtype: Object
+        """
+        clone = copy.copy(self)
+        clone._verts = [pt.basis_stripped() for pt in self.pts]
+        return clone
+
+
+    def _compatible_vec(self,other):
+        """ Returns a vector compatible with the collection of vectors in this object if possible
+        """
+        if self.is_baseless: return Vec(other) # if this object is baseless, then use the world coordinates of the other
+        if (not hasattr(other, 'basis')) or other.basis is None : 
+             # if the other is baseless, then use its world coordinates.  
+             # we assume here that the user is describing the point within this object's basis.
+             # they may, however, be trying to add a "world" point to a mesh with a defined basis
+             # if this is the case, we would have to describe this world point in terms of this object's basis... which isn't always possible
+             # we'll try and warn them.
+             #warnings.warn("You've just added a baseless point to a based object.  The world coordinates of the point have been interpreted as local coordinates of the object.  Is this what you wanted?")
+             return Vec(other)
+        if self.basis is other.basis : return Vec(other._x,other._y,other._z) # if we share a basis, then use the local coordinates of the other
+        raise BasisError("The basis for this Geometry and the point you're adding do not match. Try applying or stripping the point of its basis, or describing the point in terms of this Geometry's basis")

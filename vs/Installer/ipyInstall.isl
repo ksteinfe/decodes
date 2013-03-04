@@ -1967,6 +1967,7 @@
 		<row><td>pgon.py</td><td>ISX_DEFAULTCOMPONENT1</td><td>pgon.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\core\pgon.py</td><td>1</td><td/></row>
 		<row><td>pinwheeltile.py</td><td>ISX_DEFAULTCOMPONENT2</td><td>PINWHE~1.PY|pinwheelTile.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\extensions\pinwheelTile.py</td><td>1</td><td/></row>
 		<row><td>plane.py</td><td>ISX_DEFAULTCOMPONENT4</td><td>plane.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\plane.py</td><td>1</td><td/></row>
+		<row><td>plane.py1</td><td>ISX_DEFAULTCOMPONENT1</td><td>plane.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\decodes\core\plane.py</td><td>1</td><td/></row>
 		<row><td>pline.py</td><td>ISX_DEFAULTCOMPONENT1</td><td>pline.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\core\pline.py</td><td>1</td><td/></row>
 		<row><td>point.py</td><td>ISX_DEFAULTCOMPONENT1</td><td>point.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\core\point.py</td><td>1</td><td/></row>
 		<row><td>pointvector.py</td><td>ISX_DEFAULTCOMPONENT4</td><td>POINTV~1.PY|pointvector.py</td><td>0</td><td/><td/><td/><td>1</td><td>G:\git\decodes\dist\decodes-0.0.1\decodes\io\rhinoscript\pointvector.py</td><td>1</td><td/></row>

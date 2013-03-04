@@ -3,13 +3,28 @@ from . import base, vec, point #here we may only import modules that have been l
 if VERBOSE_FS: print "cs.py loaded"
 import math, copy, collections
 
-class CS(Geometry, Basis):
+class CS(Geometry, IsBasis):
     """a ortho coordinate system class"""
     """a simple orthonormal cs floating around in R3"""
     """can describe any translation and rigid-body manipulation of the R3"""
     
-    def __init__(self,pt=Point(0,0),vecX=Vec(1,0),vecY=Vec(0,1)):
+    def __init__(self,a=None,b=None,c=None):
+        """
+        CS Constructor.
+
+        .. todo:: write docstring detailing the different ways of constructing a CS
+        """
         #TODO: make axes priviate and provide getters and setters that maintain orthagonality and right-handedness
+        pt,vecX,vecY = Point(), Vec(1,0), Vec(0,1)
+        if all( hasattr(a,i) for i in ['x','y','z'] ) :
+            # a is something that acts like a point
+            pt=a
+            if b is not None : vecX = b
+            if c is not None : vecY = c
+        else :
+            # a cannont act like a point, let's try to make a point out of a,b,c
+            pt = Point(a,b,c)
+
         try: self.origin = pt.basis_applied()
         except : self.origin = pt
         self.xAxis = vecX.normalized()
@@ -40,7 +55,7 @@ class CS(Geometry, Basis):
         return Xform.change_basis(self, CS())
     
 
-class CylCS(Geometry, Basis):
+class CylCS(Geometry, IsBasis):
     """a cylindrical coordinate system"""
     def __init__(self,pt=Point(0,0)):
         self.origin = pt

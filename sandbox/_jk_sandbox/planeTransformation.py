@@ -157,8 +157,8 @@ def MakePerpLineCS(lineIn, pIn):
 			#AddPointList(pInt2)
 			rs.AddLine(pInt2[0],pInt2[1])
 		rs.DeleteObjects([circ,circ1,circ2])
- 
- 
+
+
 #MakePerpLineCS(line, p)
 
 

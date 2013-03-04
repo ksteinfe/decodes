@@ -22,6 +22,10 @@ class Vec(Geometry):
             :result: Vector object.
             :rtype: Vec
         """
+        if a is None : a = 0
+        if b is None : b = 0
+        if c is None : c = 0
+
         if all( hasattr(a,i) and hasattr(b,i) for i in ['x','y','z'] ) :
             # we've been passed two things that act like points
             self._x = b.x - a.x
@@ -327,6 +331,7 @@ class Vec(Geometry):
             :result: Normalized vector.
             :rtype: Vec
         """
+        if self.length == 0 : raise GeometricError("Cannot normalize a vector of length zero: %s"%(self))
         factor = length / self.length
         return Vec(self.x * factor, self.y * factor, self.z * factor)        
 
@@ -435,4 +440,5 @@ class Vec(Geometry):
         """
         return math.degrees(self.angle(other))
 
-
+    
+    

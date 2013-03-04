@@ -6,19 +6,17 @@ import copy,exceptions, collections
 
 
 class GeometricError(StandardError):
-        pass
+    pass
 
 class BasisError(GeometricError):
-        pass
+    pass
 
-class Basis(object):
+class DomainError(GeometricError):
+    pass
+
+class IsBasis(object):
     """
-<<<<<<< HEAD
     A base class for anything that wants to call itself a basis. Bases must impliment the folloiwng methods:
-=======
-    a base class for anything that wants to call itself a basis
-    bases must implement the folloiwng methods:
->>>>>>> 20556e5ec9b9bf3aa33079c493b5df3b132b5f97
     """
     
     def eval(self,other):
@@ -30,40 +28,6 @@ class Basis(object):
             :rtype: Basis
         """
         raise NotImplementedError("Evalutate not implimented.    I am a BAD basis!")
-
-class HasBasis(object):
-<<<<<<< HEAD
-    """
-    A base class for anything that wants to define a basis for itself. Bases must impliment the following methods:
-    """
-=======
-    """a base class for anything that wants to define a basis for itself"""
-    """bases must implement the folloiwng methods:"""
->>>>>>> 20556e5ec9b9bf3aa33079c493b5df3b132b5f97
-    
-    '''
-    tells us if a basis has been defined
-    '''
-    @property
-    def is_baseless(self):
-        """Returns a new object with basis applied. Copies of are created of any child objects by default. Take care to copy over props if appropriate.
-            
-            :result: Object with basis applied.
-            :rtype: Basis
-        """
-        return (not hasattr(self, 'basis')) or self.basis is None
-
-
-    def basis_applied(self, copy_children=True):
-        """Returns a new object stripped of any basis. Copies of are created of any child objects by default. Take care to copy over props if appropriate.
-            
-            :result: Object with basis applied.
-            :rtype: Basis
-        """ 
-        raise NotImplementedError("basis_applied not implimented.    I am a BAD HasBasis!")
-    
-    def basis_stripped(self, copy_children=True): 
-        raise NotImplementedError("basis_stripped not implimented.    I am a BAD HasBasis!")
 
 class Geometry(object):
     """
@@ -149,43 +113,33 @@ class Geometry(object):
         #TODO: i think these are obsolete
         return self.objCS.ixform
  
-class HasVerts(object):
-    def __getitem__(self,index):
-        return self._verts[index]
-    
-    def __setitem__(self,index,vert):
-        self._verts[index] = vert
+
+class HasBasis(Geometry):
+    """
+    A base class for anything that wants to define a basis for itself. Bases must impliment the following methods:
+    """
     
     @property
-    def verts(self): 
-        """Gets the vertices of a geometry.
+    def is_baseless(self):
+        '''
+        tells us if a basis has been defined
+        '''
+        return (not hasattr(self, 'basis')) or self.basis is None
 
-            :result: List of vertices.
-            :rtype: list
-        """
-        return self._verts
-    
-    @verts.setter
-    def verts(self, verts): 
-        """Sets the geometry's vertices
 
-            :param verts: Vertice or vertices to append
-            :type verts: Point or list
-            :result: Sets the geometry's vertices.
-        """
-        self._verts = []
-        self.append(verts)
-        
-    def append(self,other) : 
-        """If a list is passed, it appends the objects to the list, else, the object is appended.
-
-            :param other: List or object to append.
-            :type other: object or list
-            :result: Appends elements to a list.
-        """
-        if isinstance(other, collections.Iterable) : 
-            for v in other : self.append(v)
-        else : 
-            self._verts.append(other)
-
+    def basis_applied(self, copy_children=True):
+        """Returns a new object with basis applied. Copies of are created of any child objects by default. Take care to copy over props if appropriate.
             
+            :result: Object with basis applied.
+            :rtype: Basis
+        """
+        raise NotImplementedError("basis_applied not implimented.    I am a BAD HasBasis!")
+    
+    def basis_stripped(self, copy_children=True): 
+        """Returns a new object stripped of any basis. Copies of are created of any child objects by default. Take care to copy over props if appropriate.
+            
+            :result: Object with basis applied.
+            :rtype: Basis
+        """ 
+        raise NotImplementedError("basis_stripped not implimented.    I am a BAD HasBasis!")
+

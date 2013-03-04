@@ -1,11 +1,25 @@
+import unittest
 import decodes.core as dc
 from decodes.core import *
 
 
-print "constructors"
-p0 = Point()
-if any([p0.x!=0,p0.y!=0,p0.z!=0]): raise Exception("point.constructors")
+class Tests(unittest.TestCase):
 
+    def test_empty_constructor(self):
+        self.assertEqual(Point(0,0,0),Point(),"points with empty constructors are at 0,0,0")
+
+    def test_based_constructor(self):
+        # there's a unique case where we've been passed a based point along with a defined basis here.
+        # in this case, we should take the local coordinates of the given point interpreted through the given basis
+        pta = Point(0,0,0,basis=CS(Point(2,2,2)))
+        ptb = Point(pta,basis=CS(Point(-4,-4)))
+        self.assertEqual(ptb,Point(-4,-4,0),"point b adopts local coordinates of point a")
+
+    def test_nearest_point(self):
+        pt = Point(4,1)
+        pts = [Point(x,0,0) for x in range(10)]
+        npt = Point.near(pt, pts)
+        self.assertEqual(npt,Point(4,0,0),"nearest point in list")
 
 
 

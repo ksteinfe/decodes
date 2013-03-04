@@ -5,83 +5,26 @@ if VERBOSE_FS: print "polygon.py loaded"
 import copy, collections
 import math
 
-class PGon(Geometry, HasBasis, HasVerts):
+class PGon(HasPts):
     """
     a very simple 2d polygon class
     Polygons limit their vertices to x and y dimensions, and enforce that they employ a basis.    Transformations of a polygon should generally be applied to the basis.    Any tranfromations of the underlying vertices should ensure that the returned vectors are limited to x and y dimensions
     """
     
-    def __init__(self, verts=None, basis=None):
+    def __init__(self, vertices=None, basis=None):
         """ PGon Constructor.
         
-            :param verts: List of vertices to build the polygon.
-            :type verts: list
+            :param vertices: List of vertices to build the polygon.
+            :type vertices: list
             :param basis: Plane basis for the PGon.
             :type basis: Basis
             :returns: PGon object. 
             :rtype: PGon
         """ 
-        super(PGon,self).__init__()
+        super(PGon,self).__init__() #HasPts constructor initializes list of verts and an empty basis
         self.basis = CS() if (basis is None) else basis
-        self._verts = []
-        if (verts is not None) : 
-            for v in verts: self.append(v)
-        
-    def basis_applied(self, copy_children=True): 
-        return self
-    #TODO: copy this functionality from Mesh class
-    
-    def basis_stripped(self, copy_children=True): 
-        return self
-    #TODO: copy this functionality from Mesh class
-        
-
-    #TODO: update HasVerts to deal with bases and remove this method
-    @property
-    def verts(self):
-        """ Returns the list of PGon vertices.
-        
-            :returns: List of vertices(points). 
-            :rtype: list
-        """ 
-        if not self.is_baseless: return [ v.set_basis(self.basis) for v in self._verts]
-        else : return self._verts
-        
-    #TODO: update HasVerts to deal with bases and remove this method
-    @verts.setter
-    def verts(self, verts):
-        """ Sets the vertices of a PGon object.
-        
-            :param verts: Vertices to add to the PGon.
-            :type verts: Point or list 
-            :returns: Updates the PGon object. 
-        """ 
-        self._verts = []
-        self.append(verts)
-     
-    #TODO: update HasVerts to deal with bases and remove this method
-    def append(self,other) :
-        """ Adds vertices to the PGon.
-
-            :param other: Vertice to add.
-            :type other: Point
-            :returns: Updates the PGon. 
-
-        .. todo:: Get rid of this function and get it from base.py
-        """ 
-        if isinstance(other, collections.Iterable) : 
-            for v in other : self.add_vert(v)
-        else : 
-            if self.is_baseless : self._verts.append(other.basis_applied())
-            elif self.basis is other.basis : 
-                self._verts.append(other.basis_stripped())
-            elif other.is_baseless : 
-                # we assume here that the user is describing the point within the pgon's basis
-                # they may, however, be trying to add a "world" point to a mesh with a defined basis
-                # if this is the case, they should call pgon.basis_stripped()
-                #TODO: shouldn't we apply the basis to this point?
-                self._verts.append(other)
-            else : raise BasisError("The basis for this PGon and the point you're adding do not match.    Try applying or stripping the point of its basis, or describing the point in terms of the PGon's basis")
+        if (vertices is not None) : 
+            for v in vertices: self.append(v)
         
         
     def __repr__(self): return "pgon[{0}v]".format(len(self._verts))
