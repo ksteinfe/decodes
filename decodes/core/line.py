@@ -199,18 +199,36 @@ class LinearEntity(Geometry):
     def __contains__(self, other):  raise NotImplementedError()
 
     def near(self, p):
-        """
+        """Returns a tuple of the closest point to a given LinearEntity, its t value and the distance from the Point to the near Point.
        
+            :param p: Point to look for a near Point on the LinearEntity.
+            :type p: Point
+            :result: Tuple of near point on LinearEntity, t value and distance from point to near point.
+            :rtype: (Point, float, float)
         """
         t = Vec(self.spt,p).dot(self.vec)/self.vec.dot(self.vec)
-        #return (self.eval(t), t)
-        return (self.spt+(self.vec.normalized(self.vec.length*t)), t)
+        point = self.eval(t)
+        return (point, t,point.distance(p))
 
     def near_pt(self, p):
-        """
+        """Returns the closest point to a given LinearEntity
        
+            :param p: Point to look for a near Point on the LinearEntity.
+            :type p: Point
+            :result: Near point on LinearEntity.
+            :rtype: Point
         """
         return self.near(p)[0]
+        
+     def eval(self, t):
+        """Evaluates a LinearEntity at a given number.
+        
+            :param t: Number between 0 and 1 to evaluate the LinearEntity at.
+            :type t: float
+            :result: Evaluated Point on LinearEntity.
+            :rtype: Point
+        """
+        return self.spt+(self.vec.normalized(self.vec.length*t)
         
 class Line(LinearEntity):
     """A line in space."""
@@ -224,13 +242,29 @@ class Ray(LinearEntity):
     def __eq__(self, other):  raise NotImplementedError()
     def __contains__(self, other):  raise NotImplementedError()
     def __repr__(self): return "ray[{0} {1}]".format(self._pt,self._vec)
+    
+    def near(self,p):
+        near = super(Ray,self).near(self, p)
+        if near[1] < 0:
+            near = (self.spt,0,p.distance(self.spt))
+        return near
+    
 
 class Segment(LinearEntity):
     """An undirected line segment in space."""
     def __eq__(self, other):  raise NotImplementedError()
     def __contains__(self, other):  raise NotImplementedError()
     def __repr__(self): return "seg[{0} {1}]".format(self.spt,self._vec)
-
+    
+    def near(self,p):
+        near = super(Segment,self).near(self, p)
+        if near[1] < 0:
+            near = (self.spt,0.0,p.distance(self.spt))
+        elif near[1] > 1:
+            near = (self.ept,1.0,p.distance(self.ept))
+        return near
+        
+        
     @property
     def length(self): 
       """Returns the length of this segment"""
