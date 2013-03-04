@@ -33,7 +33,7 @@ class RhinoIn():
             
         return Mesh(verts,faces)
 
-         
+
 def from_rgvec(rg_vec):
     return Vec(rg_vec.X,rg_vec.Y,rg_vec.Z)
 

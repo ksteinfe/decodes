@@ -81,6 +81,10 @@ class Curve(Geometry):
         """ Evaluates this Curve and returns a Plane.
         T is a float value that falls within the defined domain of this Curve.
         """
+        # some rounding errors require something like this:
+        if t < self.domain.a and t > self.domain.a-self.tol : t = self.domain.a
+        if t > self.domain.b and t < self.domain.b+self.tol : t = self.domain.b
+
         if t<self.domain.a or t>self.domain.b : raise DomainError("Curve evaluated outside the bounds of its domain: deval(%s) %s"%(t,self.domain))
         pt = self._func(t)
         
@@ -208,3 +212,12 @@ class Curve(Geometry):
             z = b*t
             return Point(x,y,z)+ctr
         return Curve(func,Interval(0,math.pi*2*number_of_turns))
+
+    @staticmethod
+    def bezier(control_points):
+        def func(t):
+            pts = control_points
+            while len(pts) > 1: pts = [Point.interpolate(pts[n],pts[n+1],t) for n in range(len(pts)-1)]
+            return pts[0]
+
+        return Curve(func)

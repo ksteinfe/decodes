@@ -43,7 +43,8 @@ class Tests(unittest.TestCase):
         for n,ival in enumerate(crv.domain//10) : 
             self.assertEqual(subcrvs[n].domain,ival,"")
 
-    def test_near(self):
+    def _test_near(self):
+        #NOTE: this test takes 1 sec.  disabled for now.
         def func(t):
             return Point(t,t)
         crv = Curve(func,Interval(0,10))
@@ -68,6 +69,14 @@ class Tests(unittest.TestCase):
         crv = Curve.circle(Point(),10)
         far_pt, far_t, dist = crv.far(Point(0,1)) #near() returns a tuple containing two values (Point, float)
         self.AssertPointsAlmostEqual(Point(0,-10),far_pt)
+
+
+    def test_bezier(self):
+        pt_a = Point()
+        pt_b = Point(1,0)
+        pt_c = Point(1,1)
+        crv = Curve.bezier([pt_a,pt_b,pt_c])
+
 
     def AssertPointsAlmostEqual(self,pa,pb,places=4):
         self.assertAlmostEqual(pa.x,pb.x,places)
