@@ -78,7 +78,18 @@ class Tests(unittest.TestCase):
         pt_b = Point(1,0)
         pt_c = Point(1,1)
         crv = Curve.bezier([pt_a,pt_b,pt_c])
+        self.assertEqual(crv.eval(0),pt_a,"Curve.eval(0) returns first control point")
+        self.assertEqual(crv.eval(1),pt_c,"Curve.eval(1) returns last control point")
+        #TODO: evaluate point in the middle somehow
 
+    def test_hermite(self):
+        pt_a = Point()
+        pt_b = Point(1,0)
+        pt_c = Point(1,1)
+        crv = Curve.hermite([pt_a,pt_b,pt_c])
+        self.assertEqual(crv.eval(0),pt_a,"Curve.eval(0) returns first control point")
+        self.assertEqual(crv.eval(1),pt_c,"Curve.eval(1) returns last control point")
+        #TODO: evaluate point in the middle somehow
 
     def AssertPointsAlmostEqual(self,pa,pb,places=4):
         self.assertAlmostEqual(pa.x,pb.x,places)

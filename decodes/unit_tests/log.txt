@@ -13,7 +13,7 @@ OK
 test_empty_constructor (decodes.unit_tests.test_pline.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.001s
+Ran 1 test in 0.000s
 
 OK
 
@@ -25,7 +25,7 @@ test_face_access (decodes.unit_tests.test_mesh.Tests) ... ok
 test_simple_constructor (decodes.unit_tests.test_mesh.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.095s
+Ran 4 tests in 0.053s
 
 OK
 
@@ -36,7 +36,7 @@ test_empty_constructor (decodes.unit_tests.test_point.Tests) ... ok
 test_nearest_point (decodes.unit_tests.test_point.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.017s
+Ran 3 tests in 0.019s
 
 OK
 
@@ -49,7 +49,7 @@ test_item_access (decodes.unit_tests.test_has_pts.Tests) ... ok
 test_manipulating_points (decodes.unit_tests.test_has_pts.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.080s
+Ran 5 tests in 0.086s
 
 OK
 
@@ -59,12 +59,27 @@ test_bezier (decodes.unit_tests.test_curve.Tests) ... ok
 test_constructor (decodes.unit_tests.test_curve.Tests) ... ok
 test_division (decodes.unit_tests.test_curve.Tests) ... ok
 test_far (decodes.unit_tests.test_curve.Tests) ... ok
+test_hermite (decodes.unit_tests.test_curve.Tests) ... ERROR
 test_subdivide (decodes.unit_tests.test_curve.Tests) ... ok
 
+======================================================================
+ERROR: test_hermite (decodes.unit_tests.test_curve.Tests)
 ----------------------------------------------------------------------
-Ran 5 tests in 0.770s
+Traceback (most recent call last):
+  File "G:\git\decodes\decodes\unit_tests\test_curve.py", line 89, in test_hermite
+    crv = Curve.hermite([pt_a,pt_b,pt_c])
+  File "G:\git\decodes\decodes\core\curve.py", line 336, in hermite
+    return Curve(func)
+  File "G:\git\decodes\decodes\core\curve.py", line 35, in __init__
+    if not isinstance(self.func(self.domain.b), Point) : raise GeometricError("Curve not valid: The given function does not return a point at parameter %s"%(self.domain.b))
+  File "G:\git\decodes\decodes\core\curve.py", line 330, in func
+    p3 = cpts[t_index+3]
+IndexError: list index out of range
 
-OK
+----------------------------------------------------------------------
+Ran 6 tests in 18.236s
+
+FAILED (errors=1)
 
 
 == TEST_PLANE ==
@@ -73,7 +88,7 @@ test_empty_constructor (decodes.unit_tests.test_plane.Tests) ... ok
 test_near (decodes.unit_tests.test_plane.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.009s
+Ran 3 tests in 0.011s
 
 OK
 
@@ -96,6 +111,6 @@ test_ray (decodes.unit_tests.test_line.Tests) ... ok
 test_segment (decodes.unit_tests.test_line.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.021s
+Ran 4 tests in 0.023s
 
 OK

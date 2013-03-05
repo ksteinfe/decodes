@@ -271,15 +271,69 @@ class Curve(Geometry):
         return Curve(func,Interval(0,math.pi*2*number_of_turns))
 
     @staticmethod
-    def bezier(control_points):
+    def bezier(cpts):
         """ Constructs a bezier curve.
         
-            :param control_points: List of points the bezier curve is going to be built with.
-            :type control_points: [Point]
+            :param cpts: List of points the bezier curve is going to be built with.
+            :type cpts: [Point]
         """
         def func(t):
-            pts = control_points
+            pts = cpts
             while len(pts) > 1: pts = [Point.interpolate(pts[n],pts[n+1],t) for n in range(len(pts)-1)]
             return pts[0]
 
         return Curve(func)
+
+    @staticmethod
+    def hermite(cpts):
+
+        # from http://paulbourke.net/miscellaneous/interpolation/
+        def hermite_interpolate(y0,y1,y2,y3,mu,tension,bias):
+            mu2 = mu * mu
+            mu3 = mu2 * mu
+            m0 = (y1-y0)*(1+bias)*(1-tension)/2
+            m0 += (y2-y1)*(1-bias)*(1-tension)/2
+            m1 = (y2-y1)*(1+bias)*(1-tension)/2
+            m1 += (y3-y2)*(1-bias)*(1-tension)/2
+            a0 = 2*mu3 - 3*mu2 + 1
+            a1 = mu3 - 2*mu2 + mu
+            a2 = mu3 -   mu2
+            a3 = -2*mu3 + 3*mu2
+            return(a0*y1+a1*m0+a2*m1+a3*y2)
+        
+        # find total distance between given points, and construct intervals
+        ivals = []
+        a,b = 0,0
+        for n in range(len(cpts)-1):
+            b = a + cpts[n].distance(cpts[n+1])
+            ivals.append(Interval(a,b))
+            a = b
+
+        # add tangent control points
+        cpts.insert(0,cpts[0]+Vec(cpts[1],cpts[0]))
+        cpts.append(cpts[-1]+Vec(cpts[-2],cpts[-1]))
+        def func(t):
+            if t==1: t_index = len(cpts)-4
+            if t==0: t_index = 0
+            else : t_index = int(math.floor(t*(len(cpts)-3))) 
+            
+            #t_index = int(Interval.remap(t,Interval(),Interval(0,len(cpts)-3)))
+            #t = t*ivals[-1].b # remap t from 0->1 to 0->length
+            #t_index = -1
+            #for n in range(len(ivals)) : 
+            #    if t in ivals[n] : 
+            #        t_index = n
+            #        break
+            p0 = cpts[t_index]
+            p1 = cpts[t_index+1]
+            p2 = cpts[t_index+2]
+            p3 = cpts[t_index+3]
+            x = hermite_interpolate(p0.x,p1.x,p2.x,p3.x,ivals[t_index].deval(t),0,0)
+            y = hermite_interpolate(p0.y,p1.y,p2.y,p3.y,ivals[t_index].deval(t),0,0)
+            z = hermite_interpolate(p0.z,p1.z,p2.z,p3.z,ivals[t_index].deval(t),0,0)
+            return False
+            return Point(x,y,z)
+        
+        return Curve(func)
+
+

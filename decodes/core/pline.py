@@ -16,6 +16,8 @@ class PLine(HasPts):
             :type vertices: list
             :returns: Polyline.
             :rtype: PLine
+
+        .todo: check if passed an empty array of points
         """
         super(PLine,self).__init__() #HasPts constructor initializes list of verts and an empty basis
         if (vertices is not None) : 
