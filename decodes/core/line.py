@@ -220,7 +220,7 @@ class LinearEntity(Geometry):
         """
         return self.near(p)[0]
         
-     def eval(self, t):
+    def eval(self, t):
         """Evaluates a LinearEntity at a given number.
         
             :param t: Number between 0 and 1 to evaluate the LinearEntity at.
@@ -228,8 +228,9 @@ class LinearEntity(Geometry):
             :result: Evaluated Point on LinearEntity.
             :rtype: Point
         """
-        return self.spt+(self.vec.normalized(self.vec.length*t)
-        
+        return self.spt+(self.vec.normalized(self.vec.length*t))
+    
+
 class Line(LinearEntity):
     """A line in space."""
     def __eq__(self, other):  raise NotImplementedError()
@@ -244,7 +245,7 @@ class Ray(LinearEntity):
     def __repr__(self): return "ray[{0} {1}]".format(self._pt,self._vec)
     
     def near(self,p):
-        near = super(Ray,self).near(self, p)
+        near = super(Ray,self).near(p)
         if near[1] < 0:
             near = (self.spt,0,p.distance(self.spt))
         return near
@@ -257,7 +258,7 @@ class Segment(LinearEntity):
     def __repr__(self): return "seg[{0} {1}]".format(self.spt,self._vec)
     
     def near(self,p):
-        near = super(Segment,self).near(self, p)
+        near = super(Segment,self).near(p)
         if near[1] < 0:
             near = (self.spt,0.0,p.distance(self.spt))
         elif near[1] > 1:

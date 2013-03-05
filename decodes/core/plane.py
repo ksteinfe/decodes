@@ -86,15 +86,21 @@ class Plane(Vec):
         self.z = pt.z
         
     def near(self, p):
-        """Returns a tuple of the closest point to a given LinearEntity, its t value and the distance from the Point to the near Point.
+        """Returns a tuple of the closest point to a given Plane, its t value and the distance from the given Point to the near Point.
        
-            :param p: Point to look for a near Point on the LinearEntity.
+            :param p: Point to look for a near Point on the Plane.
             :type p: Point
-            :result: Tuple of near point on LinearEntity, t value and distance from point to near point.
+            :result: Tuple of near point on Plane, t value and distance from given point to near point.
             :rtype: (Point, float, float)
         """
+        from .line import Line
         line = Line(self.origin, self.vec)
         t = line.near(p)[1]
-        vplane = self.vec*-t
-        point = self.vec + vplane
-        return (point, t,point.distance(p))
+        tvec = self.vec*-t
+        point = p + tvec
+        return (point,t) 
+
+    def near_pt(self, p):
+        """
+        """
+        return self.near(p)[0]

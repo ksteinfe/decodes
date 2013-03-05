@@ -24,3 +24,16 @@ class Tests(unittest.TestCase):
         va = Vec(1,2,3)
         self.assertEqual(Point(1,2,3),pln,"planes, like vecs, keep a copy of cpts (and not a reference)")
         self.assertEqual(Vec(-1,1,2).normalized(),pln.vec, "planes make a unitzed copy of their vecs")
+
+    def test_near(self):
+        pa = Point(2,2,2)
+        va = Vec(0,0,1)
+        pln = Plane(pa,va)
+
+        pt_a = Point(1,1,0)
+        pt_b = Point(1,1,3)
+        pt_c = Point(2,2,2)
+
+        self.assertEqual(Point(1,1,2),pln.near_pt(pt_a),"behind plane")
+        self.assertEqual(Point(1,1,2),pln.near_pt(pt_a),"in front of plane")
+        self.assertEqual(Point(2,2,2),pln.near_pt(pt_c),"on plane at center point")
