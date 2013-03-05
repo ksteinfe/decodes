@@ -70,6 +70,11 @@ class PGon(HasPts):
         return PGon(pts)
         
     def edges(self):
+        """Returns the edges of a PGon.
+       
+            :result: List of edges of a PGon.
+            :rtype: [Segment]
+        """
         edges = []
         while i < len(self):
             edges.append(Segment(self[i],self[i+1]))

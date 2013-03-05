@@ -31,6 +31,11 @@ class PLine(HasPts):
         return "pline[{0}v]".format(len(self._verts))
         
     def edges(self):
+        """Returns the edges of a PLine.
+       
+            :result: List of edges of a PLine
+            :rtype: [Segment]
+        """
         edges = []
         while i < len(self):
             edges.append(Segment(self[i],self[i+1]))
