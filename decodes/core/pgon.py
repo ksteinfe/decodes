@@ -68,4 +68,35 @@ class PGon(HasPts):
         for t in angle_interval.divide(res,True):pts.append(cyl_pt(radius_interval.a,t))
         for t in angle_interval.invert().divide(res,True):pts.append(cyl_pt(radius_interval.b,t))
         return PGon(pts)
+        
+    def edges(self):
+        edges = []
+        while i < len(self):
+            edges.append(Segment(self[i],self[i+1]))
+        edges.append(Segment(self[0], self[-1]))
+        return edges
+        
+    def near(self, p):
+        """Returns a tuple of the closest point to a given PGon, the index of the closest segment and the distance from the Point to the near Point.
+       
+            :param p: Point to look for a near Point on the PGon.
+            :type p: Point
+            :result: Tuple of near point on PGon, index of near segment and distance from point to near point.
+            :rtype: (Point, integer, float)
+        """
+        npts = [seg.near(p) for seg in self.edges]
+        ni = Point.near_index(p,[npt[0] for npt in npts])
+        return (npts[ni][0],ni,npts[ni][2])
+
+    def near_pt(self, p):
+        """Returns the closest point to a given PGon
+       
+            :param p: Point to look for a near Point on the PGon.
+            :type p: Point
+            :result: Near point on PGon.
+            :rtype: Point
+        """
+        npts = [seg.near(p) for seg in self.edges]
+        ni = Point.near_index(p,[npt[0] for npt in npts])
+        return npts[ni][0]
 

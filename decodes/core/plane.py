@@ -101,6 +101,11 @@ class Plane(Vec):
         return (point,t) 
 
     def near_pt(self, p):
-        """
+        """Returns the closest point to a given Plane.
+       
+            :param p: Point to look for a near Point on the Plane.
+            :type p: Point
+            :result: Near point on Plane.
+            :rtype: Point
         """
         return self.near(p)[0]
