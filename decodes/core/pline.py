@@ -36,6 +36,7 @@ class PLine(HasPts):
             :result: List of edges of a PLine
             :rtype: [Segment]
         """
+        # this is not working....
         edges = []
         while i < len(self):
             edges.append(Segment(self[i],self[i+1]))

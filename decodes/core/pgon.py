@@ -75,6 +75,7 @@ class PGon(HasPts):
             :result: List of edges of a PGon.
             :rtype: [Segment]
         """
+        #this is not working!
         edges = []
         while i < len(self):
             edges.append(Segment(self[i],self[i+1]))
