@@ -313,17 +313,17 @@ class Curve(Geometry):
         cpts.insert(0,cpts[0]+Vec(cpts[1],cpts[0]))
         cpts.append(cpts[-1]+Vec(cpts[-2],cpts[-1]))
         def func(t):
-            if t==1: t_index = len(cpts)-4
-            if t==0: t_index = 0
-            else : t_index = int(math.floor(t*(len(cpts)-3))) 
+            #if t==1: t_index = len(cpts)-4
+            #if t==0: t_index = 0
+            #else : t_index = int(math.floor(t*(len(cpts)-3))) 
             
-            #t_index = int(Interval.remap(t,Interval(),Interval(0,len(cpts)-3)))
-            #t = t*ivals[-1].b # remap t from 0->1 to 0->length
-            #t_index = -1
-            #for n in range(len(ivals)) : 
-            #    if t in ivals[n] : 
-            #        t_index = n
-            #        break
+            t_index = int(Interval.remap(t,Interval(),Interval(0,len(cpts)-3)))
+            t = t*ivals[-1].b # remap t from 0->1 to 0->length
+            t_index = -1
+            for n in range(len(ivals)) : 
+                if t in ivals[n] : 
+                    t_index = n
+                    break
             p0 = cpts[t_index]
             p1 = cpts[t_index+1]
             p2 = cpts[t_index+2]
@@ -331,7 +331,6 @@ class Curve(Geometry):
             x = hermite_interpolate(p0.x,p1.x,p2.x,p3.x,ivals[t_index].deval(t),0,0)
             y = hermite_interpolate(p0.y,p1.y,p2.y,p3.y,ivals[t_index].deval(t),0,0)
             z = hermite_interpolate(p0.z,p1.z,p2.z,p3.z,ivals[t_index].deval(t),0,0)
-            return False
             return Point(x,y,z)
         
         return Curve(func)

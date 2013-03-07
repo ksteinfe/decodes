@@ -3,6 +3,9 @@ from decodes.core import *
 import decodes.unit_tests 
 
 
+
+
+
 def func(t):
     return Point(t,math.sin(t))
 crv = Curve(func,Interval(0,math.pi*2))

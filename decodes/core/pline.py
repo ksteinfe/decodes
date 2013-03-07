@@ -31,7 +31,8 @@ class PLine(HasPts):
         
     def __repr__(self):
         return "pline[{0}v]".format(len(self._verts))
-        
+    
+    @property
     def edges(self):
         """Returns the edges of a PLine.
        
@@ -40,8 +41,8 @@ class PLine(HasPts):
         """
         # this is not working....
         edges = []
-        while i < len(self):
-            edges.append(Segment(self[i],self[i+1]))
+        for n in range(len(self)-1):
+            edges.append(self.seg(n))
         return edges
         
     def near(self, p):

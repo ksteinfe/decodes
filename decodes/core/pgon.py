@@ -69,17 +69,25 @@ class PGon(HasPts):
         for t in angle_interval.invert().divide(res,True):pts.append(cyl_pt(radius_interval.b,t))
         return PGon(pts)
         
+    def seg(self,index):
+        """ Returns a segment of this Polygon
+        """
+        if index > len(self) : raise IndexError()
+        if index == len(self) : return Segment(self[index],self[0])
+        #TODO: handle negative indices
+        return Segment(self[index],self[index+1])
+        
+
+    @property
     def edges(self):
         """Returns the edges of a PGon.
        
-            :result: List of edges of a PGon.
+            :result: List of edges of a PGon
             :rtype: [Segment]
         """
-        #this is not working!
         edges = []
-        while i < len(self):
-            edges.append(Segment(self[i],self[i+1]))
-        edges.append(Segment(self[0], self[-1]))
+        for n in range(len(self)):
+            edges.append(self.seg(n))
         return edges
         
     def near(self, p):

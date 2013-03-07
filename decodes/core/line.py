@@ -23,7 +23,7 @@ class LinearEntity(Geometry):
             :rtype: LinearEntity
         """
         self._pt = a if isinstance(a,Point) else Point(a.x,a.y,a.z)
-        if isinstance(b,Point) : self._vec = b-a
+        if isinstance(b,Point) : self._vec = Vec(b-a)
         elif isinstance(b,Vec) : self._vec = b
         else : raise TypeError("%s constructor requires Vec instances" % self.__class__.__name__)
     
