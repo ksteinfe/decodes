@@ -4,7 +4,7 @@ from ..core import base, vec, point, cs, line, mesh, pgon
 from . import outie
 if VERBOSE_FS: print "svg_out loaded"
 
-import os, sys
+import os, sys, math
 import cStringIO
 
 class SVGOut(outie.Outie):
@@ -13,6 +13,7 @@ class SVGOut(outie.Outie):
     default_color = Color(0)
     point_size = 2
     min_point_size = 0.001
+    default_curve_resolution = 50
 
     def __init__(self, filename, path=False):
         super(SVGOut,self).__init__()
@@ -51,6 +52,8 @@ class SVGOut(outie.Outie):
             if isinstance(g, Ray) : return self._drawRay(g)
             if isinstance(g, Segment) : return self._drawSegment(g)
         
+        if isinstance(g,Curve): return self._drawCurve(g)
+
         return False
 
     def _buffer_append(self,type,atts,style):
@@ -69,7 +72,7 @@ class SVGOut(outie.Outie):
     def _drawPolygon(self, pgon):
         type = 'polygon'
         style = self._extract_props(pgon,force_fill=True) # force filled
-        point_string = " ".join([str(v.x)+","+str(v.y) for v in pgon.verts])
+        point_string = " ".join([str(v.x)+","+str(v.y) for v in pgon.pts])
         atts = 'points="'+point_string+'"'
         self._buffer_append(type,atts,style)
         return True
@@ -77,7 +80,7 @@ class SVGOut(outie.Outie):
     def _drawPolyline(self, pline):
         type = 'polyline'
         style = self._extract_props(pline)
-        point_string = " ".join([str(v.x)+","+str(v.y) for v in pline.verts])
+        point_string = " ".join([str(v.x)+","+str(v.y) for v in pline.pts])
         atts = 'points="'+point_string+'"'
         self._buffer_append(type,atts,style)
         return True
@@ -95,7 +98,8 @@ class SVGOut(outie.Outie):
     def _drawLine(self, line):
         return False
 
-
+    def _drawCurve(self, curve):
+        return self._drawPolyline(curve.surrogate)
 
 
     def _extract_props(self,object,force_fill=False):

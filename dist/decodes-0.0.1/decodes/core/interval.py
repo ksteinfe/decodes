@@ -1,6 +1,6 @@
 from decodes.core import *
-
 import math, random
+
 
 class Interval():
     """
@@ -11,21 +11,22 @@ class Interval():
         """Interval Constructor.
         
             :param a: First number of the interval.
-            :type a: Number.
+            :type a: float
             :param b: Second number of the interval.
-            :type a: Number.
-            :rtype: Interval object.
+            :type a: float
+            :returns: Interval Object.
+            :rtype: Interval.
         """
         self.a = a
         self.b = b
     
-    def __truediv__(self,other): return self.__div__(other)
-    def __div__(self, other): 
+    def __truediv__(self,divs): return self.__div__(divs)
+    def __div__(self, divs): 
         """
         overloads the division **(/)** operator
-        calls Interval.divide(other)
+        calls Interval.divide(divs)
         """
-        return self.divide(other)
+        return self.divide(divs)
 
     def __floordiv__(self, other): 
         """
@@ -42,11 +43,22 @@ class Interval():
         ival = self.order()
         return (ival.a <= number) and (ival.b >= number)
 
+    def __eq__(self, other): 
+        """Overloads the equal **(==)** operator.
+        
+            :param other: Interval to be compared.
+            :type other: Interval
+            :result: Boolean result of comparison
+            :rtype: bool
+        """
+        return all([self.a==other.a,self.b==other.b])
+
     @property
     def list(self): 
         """Returns a list of the interval's start and end values.
         
-            :rtype: List of interval's components
+            :returns: List of interval's components
+            :rtype: list
         """
         return [self.a, self.b]
         
@@ -54,7 +66,8 @@ class Interval():
     def is_ordered(self): 
         """Returns True if the start value of the interval is smaller than the end value.
         
-            :rtype: Boolean value
+            :returns: Boolean value
+            :rtype: bool
         """
         return True if self.a < self.b else False
 
@@ -64,6 +77,7 @@ class Interval():
         
         For a signed representation, use delta
         
+            :returns: Absolute value of length of an interval.
             :rtype: int 
         """
         length = self.b - self.a 
@@ -76,13 +90,16 @@ class Interval():
         
         For an unsigned representation, use length
 
-            :rtype: Number 
+            :returns: Delta of an interval.
+            :rtype: float 
         """
         return float(self.b - self.a)
 
     def order(self):
         """Returns a copy of this interval with ordered values, such that a < b
         
+            :returns: Ordered copy of Interval object.
+            :rtype: Interval 
         """
         if self.is_ordered: return Interval(self.a, self.b)
         else: return Interval(self.b, self.a)
@@ -91,6 +108,8 @@ class Interval():
         """Returns a copy of this interval with swapped values.
         Such that this.a = new.b and this.b = new.a
         
+            :returns: Interval object with swapped values.
+            :rtype: Interval 
         """
         return Interval(self.b, self.a)
     
@@ -100,7 +119,8 @@ class Interval():
         
             :param divs: Number of interval divisions.
             :type divs: int
-            :rtype: List of numbers in which a list is divided. 
+            :returns: List of numbers in which a list is divided. 
+            :rtype: list
         """
         step = self.delta/float(divs)
         if include_last : divs += 1
@@ -111,7 +131,8 @@ class Interval():
         
             :param divs: Number of subintervals.
             :type divs: int
-            :rtype: List of subintervals (interval objects). 
+            :returns: List of subintervals (interval objects). 
+            :rtype: list
         """
         return [Interval(n,n+self.delta/float(divs)) for n in self.divide(divs)]
     
@@ -123,7 +144,8 @@ class Interval():
 
             :param number: Number to find the parameter of.
             :type number: float
-            :rtype: parameter
+            :returns: Parameter.
+            :rtype: float
 
         ::
             
@@ -137,20 +159,23 @@ class Interval():
         
     def eval(self, t):
         """ Evaluates a given parameter within this interval.
-        
+            For example, given an Interval(0->2*math.pi): eval(0.5) == math.pi
             :param t: Number to evaluate.
             :type t: float
-            :rtype: Evalauted number. 
+            :returns: Evalauted number. 
+            :rtype: float
 
         ::
             
             print Interval(10,20).eval(0.2)
-            >>12
+            >>12.0
             print Interval(10,20).deval(1.5)
-            >>25
+            >>25.0
 
         """  
         return self.delta * t + self.a
+    
+
     
     def __repr__(self): return "ival[{0},{1}]".format(self.a,self.b)
 
@@ -162,11 +187,25 @@ class Interval():
         
             :param val: Number to remap.
             :type val: float
-            :returns: the given number remapped to the target interval.
+            :returns: The given number remapped to the target interval.
             :rtype: float
         """  
-        if target_interval==None: target_interval = Interval(0,1)
+        if target_interval is None: target_interval = Interval(0,1)
 
         t = source_interval.deval(val)
         return target_interval.eval(t)
+
+    @staticmethod
+    def twopi():
+        """Creates an interval from 0->2PI
+        """
+        return Interval(0,math.pi*2)
+
+    @staticmethod
+    def pi():
+        """Creates an interval from 0->PI
+        """
+        return Interval(0,math.pi)
+
+
 

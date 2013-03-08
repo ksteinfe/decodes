@@ -626,6 +626,12 @@ Such that this.a = new.b and this.b = new.a</p>
 </dd></dl>
 
 <dl class="staticmethod">
+<dt id="decodes.core.interval.Interval.pi">
+<em class="property">static </em><tt class="descname">pi</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.pi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an interval from 0-&gt;PI</p>
+</dd></dl>
+
+<dl class="staticmethod">
 <dt id="decodes.core.interval.Interval.remap">
 <em class="property">static </em><tt class="descname">remap</tt><big>(</big><em>val</em>, <em>source_interval</em>, <em>target_interval=None</em><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.remap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Translates a number from its position within the source interval to its relative position in the target interval.</p>
@@ -659,6 +665,12 @@ Such that this.a = new.b and this.b = new.a</p>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.interval.Interval.twopi">
+<em class="property">static </em><tt class="descname">twopi</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.twopi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an interval from 0-&gt;2PI</p>
 </dd></dl>
 
 </dd></dl>
@@ -1798,6 +1810,54 @@ All given points will be evaluated with their bases applied, and the returned po
 </dd></dl>
 
 <dl class="staticmethod">
+<dt id="decodes.core.point.Point.far">
+<em class="property">static </em><tt class="descname">far</tt><big>(</big><em>pt</em>, <em>pts</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.far" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a reference to a Point from the given list of Points which is furthest from the source Point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pt</strong> (<em>Point</em>) &#8211; Source Point</li>
+<li><strong>pt</strong> &#8211; A list of Points through which to search</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">A reference to a Point from the list which is furthest from the source Point</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Point</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.point.Point.far_index">
+<em class="property">static </em><tt class="descname">far_index</tt><big>(</big><em>pt</em>, <em>pts</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.far_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the index of the Point within the given list of Points which is furthest from the source Point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pt</strong> (<em>Point</em>) &#8211; Source Point</li>
+<li><strong>pt</strong> &#8211; A list of Points through which to search</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">The index of the furthest Point</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
 <dt id="decodes.core.point.Point.interpolate">
 <em class="property">static </em><tt class="descname">interpolate</tt><big>(</big><em>p0</em>, <em>p1</em>, <em>t=0.5</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.interpolate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a new point which is the result of an interpolation between the two given points at the given t-value</p>
@@ -1823,8 +1883,8 @@ All given points will be evaluated with their bases applied, and the returned po
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="decodes.core.point.Point.nearest">
-<em class="property">static </em><tt class="descname">nearest</tt><big>(</big><em>pt</em>, <em>pts</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.nearest" title="Permalink to this definition">¶</a></dt>
+<dt id="decodes.core.point.Point.near">
+<em class="property">static </em><tt class="descname">near</tt><big>(</big><em>pt</em>, <em>pts</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.near" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a reference to a Point from the given list of Points which is nearest to the source Point.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1847,8 +1907,8 @@ All given points will be evaluated with their bases applied, and the returned po
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="decodes.core.point.Point.nearest_index">
-<em class="property">static </em><tt class="descname">nearest_index</tt><big>(</big><em>pt</em>, <em>pts</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.nearest_index" title="Permalink to this definition">¶</a></dt>
+<dt id="decodes.core.point.Point.near_index">
+<em class="property">static </em><tt class="descname">near_index</tt><big>(</big><em>pt</em>, <em>pts</em><big>)</big><a class="headerlink" href="#decodes.core.point.Point.near_index" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the index of the Point within the given list of Points which is nearest to the source Point.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2133,15 +2193,72 @@ All given points will be evaluated with their bases applied, and the returned po
 <dt id="decodes.core.pline.PLine.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>vertices=None</em><big>)</big><a class="headerlink" href="#decodes.core.pline.PLine.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Polyline constructor.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param vertices:</th><td class="field-body">Vertices to build the pline.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type vertices:</th><td class="field-body">list</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body">Polyline.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">PLine</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>.todo: check if passed an empty array of points</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.pline.PLine.edges">
+<tt class="descname">edges</tt><a class="headerlink" href="#decodes.core.pline.PLine.edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the edges of a PLine.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vertices</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; Vertices to build the pline.</td>
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">List of edges of a PLine</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Polyline.</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">[Segment]</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">PLine</td>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.pline.PLine.near">
+<tt class="descname">near</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.pline.PLine.near" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple of the closest point to a given PLine, the index of the closest segment and the distance from the Point to the near Point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>Point</em>) &#8211; Point to look for a near Point on the PLine.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Tuple of near point on PLine, index of near segment and distance from point to near point.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(Point, integer, float)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.pline.PLine.near_pt">
+<tt class="descname">near_pt</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.pline.PLine.near_pt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the closest point to a given PLine</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>Point</em>) &#8211; Point to look for a near Point on the PLine.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Near point on Pline.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
 </tr>
 </tbody>
 </table>
@@ -2212,6 +2329,58 @@ Polygons limit their vertices to x and y dimensions, and enforce that they emplo
 </table>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="decodes.core.pgon.PGon.edges">
+<tt class="descname">edges</tt><a class="headerlink" href="#decodes.core.pgon.PGon.edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the edges of a PGon.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">List of edges of a PGon</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">[Segment]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.pgon.PGon.near">
+<tt class="descname">near</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.pgon.PGon.near" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple of the closest point to a given PGon, the index of the closest segment and the distance from the Point to the near Point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>Point</em>) &#8211; Point to look for a near Point on the PGon.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Tuple of near point on PGon, index of near segment and distance from point to near point.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(Point, integer, float)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.pgon.PGon.near_pt">
+<tt class="descname">near_pt</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.pgon.PGon.near_pt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the closest point to a given PGon</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>Point</em>) &#8211; Point to look for a near Point on the PGon.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Near point on PGon.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="staticmethod">
 <dt id="decodes.core.pgon.PGon.rectangle">
 <em class="property">static </em><tt class="descname">rectangle</tt><big>(</big><em>cpt</em>, <em>w</em>, <em>h</em><big>)</big><a class="headerlink" href="#decodes.core.pgon.PGon.rectangle" title="Permalink to this definition">¶</a></dt>
@@ -2235,6 +2404,13 @@ Polygons limit their vertices to x and y dimensions, and enforce that they emplo
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.pgon.PGon.seg">
+<tt class="descname">seg</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#decodes.core.pgon.PGon.seg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a segment of this Polygon
+The returned line segment will contain a copy of the Points stored in the</p>
 </dd></dl>
 
 </dd></dl>
@@ -2372,6 +2548,24 @@ find the angle between the two using the above formula.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="decodes.core.line.LinearEntity.eval">
+<tt class="descname">eval</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.line.LinearEntity.eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates a LinearEntity at a given number.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Number between 0 and 1 to evaluate the LinearEntity at.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Evaluated Point on LinearEntity.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="decodes.core.line.LinearEntity.is_concurrent">
 <tt class="descname">is_concurrent</tt><big>(</big><em>*lines</em><big>)</big><a class="headerlink" href="#decodes.core.line.LinearEntity.is_concurrent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns True if the set of linear entities are concurrent, False
@@ -2448,6 +2642,42 @@ on the rest of the lines. If so, the lines are concurrent.</p>
 <p class="first admonition-title">Todo</p>
 <p class="last">Implement this method.</p>
 </div>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.line.LinearEntity.near">
+<tt class="descname">near</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.line.LinearEntity.near" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple of the closest point to a given LinearEntity, its t value and the distance from the Point to the near Point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>Point</em>) &#8211; Point to look for a near Point on the LinearEntity.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Tuple of near point on LinearEntity, t value and distance from point to near point.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(Point, float, float)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.line.LinearEntity.near_pt">
+<tt class="descname">near_pt</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.line.LinearEntity.near_pt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the closest point to a given LinearEntity</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>Point</em>) &#8211; Point to look for a near Point on the LinearEntity.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Near point on LinearEntity.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -2601,71 +2831,118 @@ This function must be kept up to date with every new class of DC geom</p>
 <dl class="staticmethod">
 <dt id="decodes.core.xform.Xform.change_basis">
 <em class="property">static </em><tt class="descname">change_basis</tt><big>(</big><em>csSource</em>, <em>csTarget</em><big>)</big><a class="headerlink" href="#decodes.core.xform.Xform.change_basis" title="Permalink to this definition">¶</a></dt>
-<dd><div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">This method currently relies on access to the Rhinocommon Kernel.    It will not work in other contexts.</p>
-</div>
-<div class="admonition-todo admonition" id="index-8">
-<p class="first admonition-title">Todo</p>
-<p class="last">Re-implement this method without using the Rhinocommon Kernel.</p>
-</div>
-</dd></dl>
-
-<dl class="method">
-<dt id="decodes.core.xform.Xform.eval">
-<tt class="descname">eval</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.xform.Xform.eval" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns...........</p>
-<table class="docutils field-list" frame="void" rules="none">
+<dd><p>Changes the plane basis of an object.
+.. warning:: This method currently relies on access to the Rhinocommon Kernel.    It will not work in other contexts.
+.. todo:: Re-implement this method without using the Rhinocommon Kernel.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>other</strong> (<em>Point</em>) &#8211; Point..............</li>
-<li><strong>matrix</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; Matrix</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">param csSource:</th><td class="field-body">Plane source of the object.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Point...............</p>
-</td>
+<tr class="field-even field"><th class="field-name">type csSource:</th><td class="field-body">Plane</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Point</p>
-</td>
+<tr class="field-odd field"><th class="field-name">param csTarget:</th><td class="field-body">Target plane of the object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type csTarget:</th><td class="field-body">Plane</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Object with new Plane basis.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Geometry</td>
 </tr>
 </tbody>
 </table>
+</div></blockquote>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.xform.Xform.mirror">
 <em class="property">static </em><tt class="descname">mirror</tt><big>(</big><em>plane='worldXY'</em><big>)</big><a class="headerlink" href="#decodes.core.xform.Xform.mirror" title="Permalink to this definition">¶</a></dt>
-<dd><p>Produces mirror transform
-Can pass in &#8220;worldXY&#8221;, &#8220;worldYZ&#8221;, or &#8220;worldXZ&#8221;
-Or, pass in an arbitrary cs (produces mirror about XYplane of CS)</p>
+<dd><p>Produces mirror transform. Can pass in &#8220;worldXY&#8221;, &#8220;worldYZ&#8221;, or &#8220;worldXZ&#8221;. Or, pass in an arbitrary cs (produces mirror about XYplane of CS)</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">When mirroring about an arbitrary plane, this method currently relies on access to the Rhinocommon Kernel.  It will not work in other contexts.</p>
 </div>
-<div class="admonition-todo admonition" id="index-9">
+<div class="admonition-todo admonition" id="index-8">
 <p class="first admonition-title">Todo</p>
-<p class="last">Re-implement this method without using the Rhinocommon Kernel.</p>
+<p>Re-implement this method without using the Rhinocommon Kernel.</p>
+<table class="last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param plane:</th><td class="field-body">Plane to mirror the object with. Defaults to world XY plane.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type plane:</th><td class="field-body">Plane</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Mirrored object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Geometry</td>
+</tr>
+</tbody>
+</table>
 </div>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.xform.Xform.rotation">
 <em class="property">static </em><tt class="descname">rotation</tt><big>(</big><em>**kargs</em><big>)</big><a class="headerlink" href="#decodes.core.xform.Xform.rotation" title="Permalink to this definition">¶</a></dt>
-<dd><div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">This method currently relies on access to the Rhinocommon Kernel.    It will not work in other contexts.</p>
-</div>
-<div class="admonition-todo admonition" id="index-10">
-<p class="first admonition-title">Todo</p>
-<p class="last">Re-implement this method without using the Rhinocommon Kernel.</p>
-</div>
-<div class="admonition-todo admonition" id="index-11">
-<p class="first admonition-title">Todo</p>
-<p class="last">Rotation about an axis ought to take in a linear entitiy, not a vector</p>
-</div>
+<dd><p>Rotates an object around by center and rotation angle, or by a center, an axis and a rotation angle. 
+.. warning:: This method currently relies on access to the Rhinocommon Kernel.    It will not work in other contexts.
+.. todo:: Re-implement this method without using the Rhinocommon Kernel.
+.. todo:: Rotation about an axis ought to take in a linear entitiy, not a vector</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param <a href="#id1"><span class="problematic" id="id2">**</span></a>kargs:</th><td class="field-body">Function that accepts multiple parameters to be passed. Parameters include center and axis of rotation and a rotation angle.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type <a href="#id3"><span class="problematic" id="id4">**</span></a>kargs:</th><td class="field-body">Point, Vec, float</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Rotated object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Geometry</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.xform.Xform.scale">
+<em class="property">static </em><tt class="descname">scale</tt><big>(</big><em>factor</em><big>)</big><a class="headerlink" href="#decodes.core.xform.Xform.scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scales an object by a given factor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>factor</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Factor to scale by</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Scaled object.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Geometry</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.xform.Xform.translation">
+<em class="property">static </em><tt class="descname">translation</tt><big>(</big><em>vec</em><big>)</big><a class="headerlink" href="#decodes.core.xform.Xform.translation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates a geometry by a given Vector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vec</strong> (<em>Vec</em>) &#8211; Vector to apply a translation</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Translates an object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Geometry</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -2673,6 +2950,422 @@ Or, pass in an arbitrary cs (produces mirror about XYplane of CS)</p>
 </div>
 <div class="section" id="module-decodes.core.intersection">
 <span id="intersection-py"></span><h3>intersection.py<a class="headerlink" href="#module-decodes.core.intersection" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="module-decodes.core.curve">
+<span id="curve-py"></span><h3>curve.py<a class="headerlink" href="#module-decodes.core.curve" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="decodes.core.curve.Curve">
+<em class="property">class </em><tt class="descclassname">decodes.core.curve.</tt><tt class="descname">Curve</tt><big>(</big><em>function=None, domain=ival[0,1], tolerance=None</em><big>)</big><a class="headerlink" href="#decodes.core.curve.Curve" title="Permalink to this definition">¶</a></dt>
+<dd><p>a simple curve class</p>
+<p>to construct a curve, pass in a function and an [optional] interval that determines a valid range of values
+the function should expect a single parameter t(float), and return a Point.</p>
+<dl class="method">
+<dt id="decodes.core.curve.Curve.__div__">
+<tt class="descname">__div__</tt><big>(</big><em>divs</em><big>)</big><a class="headerlink" href="#decodes.core.curve.Curve.__div__" title="Permalink to this definition">¶</a></dt>
+<dd><p>overloads the division <strong>(/)</strong> operator. Calls Curve.divide(divs)
+:param divs: Number of curve planes to divide the curve in.
+:type divs: float
+:result: List of curve segments.
+:rtype: [Point]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.curve.Curve.__floordiv__">
+<tt class="descname">__floordiv__</tt><big>(</big><em>divs</em><big>)</big><a class="headerlink" href="#decodes.core.curve.Curve.__floordiv__" title="Permalink to this definition">¶</a></dt>
+<dd><p>overloads the integer division <strong>(//)</strong> operator. calls Interval.subdivide(divs)
+:param divs: Number of segments to divide the curve in.
+:type divs: float
+:result: List of curve segments.
+:rtype: [Curve]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.curve.Curve.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>function=None, domain=ival[0,1], tolerance=None</em><big>)</big><a class="headerlink" href="#decodes.core.curve.Curve.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a Curve object. If tolerance is None, Curve.tol = tol_max().</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>function</strong> (<em>function</em>) &#8211; A function returning points.</li>
+<li><strong>domain</strong> (<em>Interval</em>) &#8211; Domain for curve points.</li>
+<li><strong>tolerance</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Distance between points.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Curve object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Curve</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.curve.Curve.bezier">
+<em class="property">static </em><tt class="descname">bezier</tt><big>(</big><em>cpts</em><big>)</big><a class="headerlink" href="#decodes.core.curve.Curve.bezier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a bezier curve.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cpts</strong> (<em>[Point]</em>) &#8211; List of points the bezier curve is going to be built with.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.curve.Curve.circle">
+<em class="property">static </em><tt class="descname">circle</tt><big>(</big><em>ctr</em>, <em>rad</em><big>)</big><a class="headerlink" href="#decodes.core.curve.Curve.circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>constructs a Curve object that describes a circle given: a center (Point) and radius (float)
+the plane of the circle will always be parallel to the xy-plane</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ctr</strong> (<em>Point</em>) &#8211; Center point of the circle.</li>
+<li><strong>rad</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Radius of the circle.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Curve describing a circle.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Curve</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.curve.Curve.deval">
+<tt class="descname">deval</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.curve.Curve.deval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates this Curve and returns a Plane.
+T is a float value that falls within the defined domain of this Curve.
+:param t: Value to evaluate the curve at.
+:type t: float
+:result: Plane.
+:rtype: Plane</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.curve.Curve.divide">
+<tt class="descname">divide</tt><big>(</big><em>divs=10</em>, <em>include_last=True</em><big>)</big><a class="headerlink" href="#decodes.core.curve.Curve.divide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divides this Curve into a list of evaluated Planes equally spaced between Curve.domain.a and Curve.domain.b.
+If include_last is True (by default), returned list will contain divs+1 Points.
+If include_last is False, returned list will not include the point at Curve.domain.b</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param divs:</th><td class="field-body">Number of segments to divide this curve into.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type divs:</th><td class="field-body">int</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body">List of points</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">[Point]</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.curve.Curve.eval">
+<tt class="descname">eval</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.curve.Curve.eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates this Curve and returns a Plane.
+T is a normalized float value (0-&gt;1) which will be remapped to the domain defined by this Curve.
+equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain))</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param t:</th><td class="field-body">Normalized value between 0 and 1, to evaluate a curve.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type t:</th><td class="field-body">float</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Plane.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Plane</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.curve.Curve.far">
+<tt class="descname">far</tt><big>(</big><em>pt</em>, <em>tolerance=None</em>, <em>max_recursion=20</em><big>)</big><a class="headerlink" href="#decodes.core.curve.Curve.far" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds a location on this curve which is furthest from the given Point.
+Unstable and inaccurate.
+Recursive function that searches for closer points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
+Returns a tuple containing a Point, a t-value associated with this point, and the distance from this Point to the given Point</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param pt:</th><td class="field-body">Point to look for the farthest point on a curve.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type pt:</th><td class="field-body">Point</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">param tolerance:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">Tolerance to search for the far point. Defaults to None.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type tolerance:</th><td class="field-body">float</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">param max_recursion:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">Maximum number of loops to look for the farthest point. Defaults to 20.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">type max_recursion:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">integer</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Tuple containing a Point, a t-value associated with this point, and the distance from this Point to the given Point.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">(Point, float, float)</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.curve.Curve.helix">
+<em class="property">static </em><tt class="descname">helix</tt><big>(</big><em>ctr</em>, <em>rad</em>, <em>rise_per_turn=1.0</em>, <em>number_of_turns=3.0</em><big>)</big><a class="headerlink" href="#decodes.core.curve.Curve.helix" title="Permalink to this definition">¶</a></dt>
+<dd><p>constructs a Curve object that describes a helix given: a center (Point), a radius (float), a rise_per_turn (float), and a number_of_turns (float)
+the plane of the circle of the helix will always be parallel to the xy-plane
+:param ctr: Center point of the helix.
+:type ctr: Point
+:param rad: Radius of the helix.
+:type rad: float
+:param rise_per_turn: Amount the helix rises in z per turn.
+:type rise_per_turn: float
+:param number_of_turns: Number of turns the helix has.
+:type number_of_turns: float
+:result: Helix Curve object.
+:rtype: Curve</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.curve.Curve.near">
+<tt class="descname">near</tt><big>(</big><em>pt</em>, <em>tolerance=None</em>, <em>max_recursion=20</em><big>)</big><a class="headerlink" href="#decodes.core.curve.Curve.near" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds a location on this curve which is nearest to the given Point.
+Unstable and inaccurate.
+Recursive function that searches for further points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
+Returns a tuple containing a Point, a t-value associated with this point, and the distance from this Point to the given Point</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param pt:</th><td class="field-body">Point to look for the nearest point on a curve.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type pt:</th><td class="field-body">Point</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">param tolerance:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">Tolerance to search for the near point. Defaults to None.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type tolerance:</th><td class="field-body">float</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">param max_recursion:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">Maximum number of loops to look for the nearest point. Defaults to 20.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">type max_recursion:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">integer</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Tuple containing a Point, a t-value associated with this point, and the distance from this Point to the given Point.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">(Point, float, float)</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.curve.Curve.subcurve">
+<tt class="descname">subcurve</tt><big>(</big><em>domain</em><big>)</big><a class="headerlink" href="#decodes.core.curve.Curve.subcurve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new Curve which is a copy of this Curve with the given Interval as the domain
+:param domain: New curve with a new given interval.
+:type domain: Interval
+:result: Copy of curve with new domain.
+:rtype: Curve</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.curve.Curve.subdivide">
+<tt class="descname">subdivide</tt><big>(</big><em>divs</em><big>)</big><a class="headerlink" href="#decodes.core.curve.Curve.subdivide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divides this Curve into a list of equal size sub-Curves.
+Each sub-Curve will adopt the tol of this curve, unless greater than the tol_max of the subcurve</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>divs</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of subcurves.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of sub-Curves.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">[Curve]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.curve.Curve.tol">
+<tt class="descname">tol</tt><a class="headerlink" href="#decodes.core.curve.Curve.tol" title="Permalink to this definition">¶</a></dt>
+<dd><p>the tolerence of this curve expressed in domain space
+for example, given an interval of 0-&gt;1, a tol of 0.1 will result in a curve constructed of 10 segments, evaulated with t-values 0.1 apart
+given an interval 0-&gt;PI, a tol of 0.1 will result in a curve constructed of 32 segments, evaluated with t-values less than 0.1 apart</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Sets the distance between point of a curve.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.curve.Curve.tol_max">
+<tt class="descname">tol_max</tt><a class="headerlink" href="#decodes.core.curve.Curve.tol_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines the maximium tolerance as Curve.domain.delta / 10</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-decodes.core.surface">
+<span id="surface-py"></span><h3>surface.py<a class="headerlink" href="#module-decodes.core.surface" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="module-decodes.core.plane">
+<span id="plane-py"></span><h3>plane.py<a class="headerlink" href="#module-decodes.core.plane" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="decodes.core.plane.Plane">
+<em class="property">class </em><tt class="descclassname">decodes.core.plane.</tt><tt class="descname">Plane</tt><big>(</big><em>point=pt[0,0,0], normal=vec[0,0,1]</em><big>)</big><a class="headerlink" href="#decodes.core.plane.Plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>a simple plane class</p>
+<dl class="method">
+<dt id="decodes.core.plane.Plane.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>point=pt[0,0,0], normal=vec[0,0,1]</em><big>)</big><a class="headerlink" href="#decodes.core.plane.Plane.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plane constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>point</strong> (<em>Point</em>) &#8211; Base point for a plane.</li>
+<li><strong>normal</strong> (<em>Vec</em>) &#8211; Normal direction of the new Plane. Defaults to Vec(0,0,1)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Plane object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Plane</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.plane.Plane.near">
+<tt class="descname">near</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.plane.Plane.near" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple of the closest point to a given Plane, its t value and the distance from the given Point to the near Point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>Point</em>) &#8211; Point to look for a near Point on the Plane.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Tuple of near point on Plane, t value and distance from given point to near point.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(Point, float, float)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.plane.Plane.near_pt">
+<tt class="descname">near_pt</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.plane.Plane.near_pt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the closest point to a given Plane.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>Point</em>) &#8211; Point to look for a near Point on the Plane.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Near point on Plane.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.plane.Plane.normal">
+<tt class="descname">normal</tt><a class="headerlink" href="#decodes.core.plane.Plane.normal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the plane&#8217;s normal.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Plane&#8217;s normal.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.plane.Plane.origin">
+<tt class="descname">origin</tt><a class="headerlink" href="#decodes.core.plane.Plane.origin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the plane&#8217;s origin point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Plane&#8217;s origin point.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.plane.Plane.vec">
+<tt class="descname">vec</tt><a class="headerlink" href="#decodes.core.plane.Plane.vec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the plane&#8217;s vector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Plane&#8217;s vector (Point).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 <div class="section" id="indices-and-tables">

@@ -9,6 +9,7 @@ from color import *
 from base import *
 from vec import *
 from point import *
+from plane import *
 from cs import *
 
 from line import *

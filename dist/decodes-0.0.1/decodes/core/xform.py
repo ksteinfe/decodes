@@ -7,9 +7,17 @@ if VERBOSE_FS: print "xform.py loaded"
 class Xform(object):
     """
         A transformation matrix class.
-        
     """
     def __init__(self,value=1.0,matrix=None):
+        """XForm Constructor
+
+            :param value: Transformation value (defaults to 1.0).
+            :type value: float
+            :param matrix: Matrix
+            :type matrix: list
+            :result: XForm object.
+            :rtype: XForm
+        """
         if matrix :
             self._m = matrix
         else :
@@ -47,6 +55,13 @@ class Xform(object):
     
     @staticmethod
     def translation(vec):
+        """Translates a geometry by a given Vector.
+
+            :param vec: Vector to apply a translation
+            :type vec: Vec
+            :result: Translates an object
+            :rtype: Geometry
+        """
         xf = Xform()
         xf.m03 = vec.x
         xf.m13 = vec.y
@@ -55,6 +70,13 @@ class Xform(object):
 
     @staticmethod
     def scale(factor):
+        """Scales an object by a given factor.
+
+            :param factor: Factor to scale by
+            :type factor: float
+            :result: Scaled object.
+            :rtype: Geometry
+        """
         #TODO: add scaling about a given point
         xf = Xform()
         xf.m00 = factor
@@ -64,14 +86,15 @@ class Xform(object):
         
     @staticmethod
     def mirror(plane="worldXY"):
-        """
-        Produces mirror transform
-        Can pass in "worldXY", "worldYZ", or "worldXZ"
-        Or, pass in an arbitrary cs (produces mirror about XYplane of CS)
+        """Produces mirror transform. Can pass in "worldXY", "worldYZ", or "worldXZ". Or, pass in an arbitrary cs (produces mirror about XYplane of CS)
         
         .. warning:: When mirroring about an arbitrary plane, this method currently relies on access to the Rhinocommon Kernel.  It will not work in other contexts.
-        
         .. todo:: Re-implement this method without using the Rhinocommon Kernel.
+        
+            :param plane: Plane to mirror the object with. Defaults to world XY plane.
+            :type plane: Plane
+            :result: Mirrored object.
+            :rtype: Geometry
         """
         xf = Xform()
         if plane=="worldXY" :
@@ -96,12 +119,14 @@ class Xform(object):
 
     @staticmethod
     def rotation(**kargs):
-        """
+        """Rotates an object around by center and rotation angle, or by a center, an axis and a rotation angle. 
         .. warning:: This method currently relies on access to the Rhinocommon Kernel.    It will not work in other contexts.
-        
         .. todo:: Re-implement this method without using the Rhinocommon Kernel.
-
         .. todo:: Rotation about an axis ought to take in a linear entitiy, not a vector
+            :param **kargs: Function that accepts multiple parameters to be passed. Parameters include center and axis of rotation and a rotation angle. 
+            :type **kargs: Point, Vec, float
+            :result: Rotated object.
+            :rtype: Geometry
         """
         import Rhino
         from ..io.rhino_out import to_rgvec, to_rgpt
@@ -119,10 +144,15 @@ class Xform(object):
             
     @staticmethod
     def change_basis(csSource,csTarget):
-        """
+        """Changes the plane basis of an object.
         .. warning:: This method currently relies on access to the Rhinocommon Kernel.    It will not work in other contexts.
-        
         .. todo:: Re-implement this method without using the Rhinocommon Kernel.
+            :param csSource: Plane source of the object.
+            :type csSource: Plane
+            :param csTarget: Target plane of the object.
+            :type csTarget: Plane
+            :result: Object with new Plane basis.
+            :rtype: Geometry
         """
         import Rhino
         from ..io.rhino_out import to_rgvec, to_rgpt, to_rgplane
@@ -204,7 +234,7 @@ class Xform(object):
             tup = self._xform_tuple(other.to_tuple())
             return Vec(tup[0],tup[1],tup[2])
         
-
+        raise Exception("can't xform that thing")
 
     def _xform_tuple(self,tup):
         return (

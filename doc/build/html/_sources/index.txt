@@ -131,7 +131,32 @@ intersection.py
    :special-members:
    :private-members:
    
+curve.py
+--------------------------   
+.. automodule:: decodes.core.curve
+   :members: 
+   :special-members:
+   :private-members:
 
+
+surface.py
+--------------------------   
+.. automodule:: decodes.core.surface
+   :members: 
+   :special-members:
+   :private-members:
+
+
+plane.py
+--------------------------   
+.. automodule:: decodes.core.plane
+   :members: 
+   :special-members:
+   :private-members:
+
+
+   
+   
 
 
 

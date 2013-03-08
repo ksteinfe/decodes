@@ -65,7 +65,7 @@ class RhinoOut(outie.Outie):
 
     def _drawMesh(self, mesh, obj_attr):
         rh_mesh = Rhino.Geometry.Mesh()
-        for v in mesh.verts: rh_mesh.Vertices.Add(v.x,v.y,v.z)
+        for v in mesh.pts: rh_mesh.Vertices.Add(v.x,v.y,v.z)
         for f in mesh.faces: 
             if len(f)==3 : rh_mesh.Faces.AddFace(f[0], f[1], f[2])
             if len(f)==4 : rh_mesh.Faces.AddFace(f[0], f[1], f[2], f[3])
@@ -138,13 +138,16 @@ def to_rgpt(pt):
     return Rhino.Geometry.Point3d(pt.x,pt.y,pt.z)
     
 def to_rgpolyline(other):
-    verts = [to_rgpt(pt) for pt in other.verts]
+    verts = [to_rgpt(pt) for pt in other.pts]
     if isinstance(other, PGon) : verts.append(verts[0])
     return Rhino.Geometry.Polyline(verts)
 
 
-def to_rgplane(cs):
-    return Rhino.Geometry.Plane(to_rgpt(cs.origin),to_rgvec(cs.xAxis),to_rgvec(cs.yAxis))
+def to_rgplane(other):
+    if isinstance(other, CS) : 
+        return Rhino.Geometry.Plane(to_rgpt(other.origin),to_rgvec(other.xAxis),to_rgvec(other.yAxis))
+    if isinstance(other, Plane) : 
+        return Rhino.Geometry.Plane(to_rgpt(other.origin),to_rgvec(other.normal))
 
 def to_rh_transform(xf):
     rh_xf = rh_xform = Rhino.Geometry.Transform(1.0)
@@ -166,4 +169,15 @@ def makelayer(layer_name):
         
     layer_index = scriptcontext.doc.Layers.Add(layer_name, System.Drawing.Color.Black)
     return layer_index
-        
+
+def interpolated_curve(points):
+    import Rhino
+    import System
+    rh_points = [to_rgpt(pt) for pt in points]
+    degree = 3
+    start_tangent = Rhino.Geometry.Vector3d(0,0,0)
+    end_tangent = Rhino.Geometry.Vector3d(0,0,0)
+    knotstyle = System.Enum.ToObject(Rhino.Geometry.CurveKnotStyle, 0)
+    curve = Rhino.Geometry.Curve.CreateInterpolatedCurve(rh_points, degree, knotstyle, start_tangent, end_tangent)
+    if not curve: raise Exception("unable to CreateInterpolatedCurve")
+    return curve
