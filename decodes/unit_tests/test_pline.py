@@ -9,13 +9,16 @@ class Tests(unittest.TestCase):
         pline = PLine()
         self.assertEqual(len(pline.pts),0,"a polyline constructed with no arguments contains an empty list of verts")
         
-    def test_segments(self):
-        pl = PLine([Point(t,t,0) for t in Interval(0,10)/10])
-        self.assertEqual(len(pl),10,"len(PLine) returns the number of verts in the Pline")
-        seg = Segment(Point(1,1),Point(2,2))
-        self.assertEqual(seg.spt,pl.edges[1].spt)
-        self.assertEqual(seg.ept,pl.edges[1].ept)
+    def test_segs_and_edges(self):
+        pl = PLine([Point(t,t,0) for t in Interval(0,10).divide(10,True)])
+        self.assertEqual(len(pl.edges),10,"len(PLine.edges) returns the number of segments in the Pline")
+        self.assertEqual(len(pl),11,"len(PLine) returns the number of verts in the Pline")
+        
+        for n,ival in enumerate(Interval(0,10)//10):
+          seg = Segment(Point(ival.a,ival.a),Point(ival.b,ival.b))
+          self.assertEqual(seg.spt,pl.seg(n).spt)
+          self.assertEqual(seg.ept,pl.seg(n).ept)
+          self.assertEqual(seg.spt,pl.edges[n].spt)
+          self.assertEqual(seg.ept,pl.edges[n].ept)
 
-        pl = PLine([Point(0,0),Point(1,1),Point(2,2)])
-        segs = pl.edges
-        self.assertEqual(seg.ept,pl.edges[1].ept)
+        

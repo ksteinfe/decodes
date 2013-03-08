@@ -37,4 +37,4 @@ outie.put(cir)
 outie.draw()
 '''
 
-raw_input("press enter...")
+#raw_input("press enter...")

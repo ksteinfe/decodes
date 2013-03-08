@@ -61,6 +61,9 @@ class Curve(Geometry):
     def surrogate(self): return self._surrogate
 
     @property
+    def appx_length(self): return self._surrogate.length
+
+    @property
     def domain(self): return self._domain
 
     @property
@@ -176,7 +179,7 @@ class Curve(Geometry):
         if tolerance is None : tolerance = self.tol/10.0
         t = self._nearfar(Point.near_index,pt,tolerance,max_recursion)
         result = self.deval(t)
-        return(result,t,pt.distance(result.cpt))
+        return(result,t,pt.distance(result.origin))
 
     def far(self,pt,tolerance=None,max_recursion=20):
         """ Finds a location on this curve which is furthest from the given Point.

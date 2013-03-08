@@ -444,7 +444,8 @@ class HasPts(HasBasis):
             #TODO: move slice indexing to subclasses and return object rather than point list
             return [Point(vec,basis=self.basis) for vec in sliced]
         except:
-            return Point(sliced)
+            return sliced
+            #return Point(sliced)
     
     def __setitem__(self,index,other):
         try:

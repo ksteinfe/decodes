@@ -23,15 +23,6 @@ class PLine(HasPts):
         if (vertices is not None) : 
             for v in vertices: self.append(v)
     
-    def seg(self,index):
-        """ Returns a segment of this polyline
-        """
-        if index >= len(self) : raise IndexError()
-        return Segment(self[index],self[index+1])
-        
-    def __repr__(self):
-        return "pline[{0}v]".format(len(self._verts))
-    
     @property
     def edges(self):
         """Returns the edges of a PLine.
@@ -39,11 +30,21 @@ class PLine(HasPts):
             :result: List of edges of a PLine
             :rtype: [Segment]
         """
-        # this is not working....
         edges = []
         for n in range(len(self)-1):
             edges.append(self.seg(n))
         return edges
+
+    @property
+    def length(self):
+        return sum([edge.length for edge in self.edges])
+
+    def seg(self,index):
+        """ Returns a segment of this polyline
+        """
+        if index >= len(self) : raise IndexError()
+        return Segment(self.pts[index],self.pts[index+1])
+        
         
     def near(self, p):
         """Returns a tuple of the closest point to a given PLine, the index of the closest segment and the distance from the Point to the near Point.
@@ -53,6 +54,8 @@ class PLine(HasPts):
             :result: Tuple of near point on PLine, index of near segment and distance from point to near point.
             :rtype: (Point, integer, float)
         """
+        #KS: this does not function as advertised, after narrowing down to the nearest segment we need to project the given point
+        return False
         npts = [seg.near(p) for seg in self.edges]
         ni = Point.near_index(p,[npt[0] for npt in npts])
         return (npts[ni][0],ni,npts[ni][2])
@@ -65,7 +68,7 @@ class PLine(HasPts):
             :result: Near point on Pline.
             :rtype: Point
         """
-        npts = [seg.near(p) for seg in self.edges]
-        ni = Point.near_index(p,[npt[0] for npt in npts])
-        return npts[ni][0]
+        return self.near(p)[0]
         
+    def __repr__(self):
+        return "pline[{0}v]".format(len(self._verts))
