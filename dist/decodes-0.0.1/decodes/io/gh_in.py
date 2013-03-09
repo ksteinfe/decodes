@@ -50,8 +50,8 @@ class GrasshopperIn():
             verts = [Point(rh_pt.X,rh_pt.Y,rh_pt.Z) for rh_pt in gh_in.Vertices]
             faces = []
             for rh_fc in gh_in.Faces :
-                faces.append([rh_fc[0],rh_fc[1],rh_fc[2]]) #add the first three points of each face
-                if rh_fc[2] != rh_fc[3] :    faces.append([rh_fc[0],rh_fc[2],rh_fc[3]]) #if face is a quad, add the missing triangle
+                if rh_fc[2] == rh_fc[3] : faces.append([rh_fc[0],rh_fc[1],rh_fc[2]]) #add this triangle
+                else : faces.append([rh_fc[0],rh_fc[1],rh_fc[2],rh_fc[3]]) #add this quad
             return Mesh(verts,faces)
         elif any(p in str(type(gh_in)) for p in GrasshopperIn.primitive_types) : return gh_in
         elif any(p in str(type(gh_in)) for p in GrasshopperIn.friendly_types) : return gh_in

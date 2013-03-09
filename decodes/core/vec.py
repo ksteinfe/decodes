@@ -166,6 +166,8 @@ class Vec(Geometry):
             :type other: Vec
             :result: Boolean result of comparison.
             :rtype: bool
+
+            .. todo:: change this so that it tests for length and direction
         """    
         return self.length2 == other.length2
     def __ne__(self, other): 
@@ -175,6 +177,8 @@ class Vec(Geometry):
             :type other: Vec
             :result: Boolean result of comparison.
             :rtype: bool
+
+            .. todo:: change this so that it tests for length and direction
         """
         return self.length2 != other.length2
     def __gt__(self, other): 

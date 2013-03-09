@@ -21,6 +21,8 @@ class PGon(HasPts):
             :returns: PGon object. 
             :rtype: PGon
         """ 
+        #TODO: if i pass in verices but no basis, try and figure out what the CS should be and project all points to plane
+
         super(PGon,self).__init__() #HasPts constructor initializes list of verts and an empty basis
         self.basis = CS() if (basis is None) else basis
         if (vertices is not None) : 
