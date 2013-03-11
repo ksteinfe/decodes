@@ -1,12 +1,43 @@
+import unittest
 import decodes.core as dc
 from decodes.core import *
-outie = dc.makeOut(dc.outies.Rhino, "wayout")
 
-import scriptcontext
-import System
-import Rhino
-from decodes.core.outies.rhinoUtil import *
-import math
+
+class Tests(unittest.TestCase):
+
+    def test_scale(self):
+        l1 = Segment(Point(0,0,0),Point (1,0,0))
+        l2 = Segment(Point(-1,0,0),Point (1,0,0))
+        xf = Xform.scale(2)
+        l1 = l1 * xf
+        
+        self.assertEqual(l1,l2)
+
+    def test_mirror(self):
+        l1 = Segment(Point(0,0,0),Point (1,0,0))
+        l2 = Segment(Point(-1,0,0),Point (0,0,0))
+        xf = Xform.mirror()
+        l1 = l1 * xf
+        
+        self.assertEqual(l1,l2)
+
+    def test_rotation(self):
+        l1 = Segment(Point(0,0,0),Point (1,0,0))
+        l2 = Segment(Point(0,1,0),Point (0,0,0))
+        rotPt = Point()
+        xf = Xform.rotation(center=Point(0,1), angle=90)
+        l1 = l1 * xf
+        
+        self.assertEqual(l1,l2)
+
+    def test_translation(self):
+        l1 = Segment(Point(0,0,0),Point (1,0,0))
+        l2 = Segment(Point(1,0,0),Point (2,0,0))
+        vec = Vec(1,0,0)
+        xf = Xform.translation(vec)
+        l1 = l1 * xf
+        
+        self.assertEqual(l1,l2)
 
 
 '''
@@ -89,7 +120,7 @@ xf = Xform.scale(0.5)
 print xf
 '''
 
-
+'''
 print "mirror"
 outie = dc.makeOut(dc.outies.Rhino, "mirror")
 outie.set_color(1.0,0.0,1.0)
@@ -105,7 +136,7 @@ print xf
 ptXX = pt * xf
 for p in [cs,ptXX]: outie.put(p)
 outie.draw()
-
+'''
 '''
 print "rotation"
 basePt = Point(1,1)
@@ -146,5 +177,3 @@ csx = cs * xf
 for g in [cs,csx] : outie.put(g)
 '''
 
-
-outie.draw()
