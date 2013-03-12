@@ -58,7 +58,7 @@ class DzTile(object):
         
     def toMesh(self):
         msh = Mesh()
-        for v in self._tilePts() : msh.add_vert(v)
+        for v in self._tilePts() : msh.append(v)
         if self.flip : 
             msh.add_face(0,1,2)
             msh.add_face(1,3,2)
