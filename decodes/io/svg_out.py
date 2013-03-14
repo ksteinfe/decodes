@@ -119,12 +119,15 @@ class SVGOut(outie.Outie):
             if 'fill' in object.props : props['fill_color'] = object.props['fill']
         else:
             if (not 'color' in object.props) and (not 'weight' in object.props): props['stroke_color'] = False
-            if (not 'color' in object.props) and ('weight' in object.props): 
+            elif (not 'color' in object.props) and ('weight' in object.props): 
                 props['stroke_color'] = self.default_color
                 props['stroke_width'] = object.props['weight']
-            if ('color' in object.props) and (not 'weight' in object.props): 
+            elif ('color' in object.props) and (not 'weight' in object.props): 
                 props['stroke_color'] = object.props['color']
                 props['stroke_width'] = 0.5
+            elif ('color' in object.props) and ('weight' in object.props): 
+                props['stroke_color'] = object.props['color']
+                props['stroke_width'] = object.props['weight']
         
             if not 'fill' in object.props: props['fill_color'] = False
             else : props['fill_color'] = object.props['fill']
