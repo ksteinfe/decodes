@@ -15,7 +15,7 @@ class SVGOut(outie.Outie):
     min_point_size = 0.001
     default_curve_resolution = 50
 
-    def __init__(self, filename, path=False):
+    def __init__(self, filename, path=False, canvas_dimensions=False, flip_y=False):
         super(SVGOut,self).__init__()
         #if not path : self.filepath = __file__.rpartition(os.sep)[0] + os.sep + filename + ".svg"
         if filename[-4:].lower() == ".svg" : filename = filename[:-4]
@@ -25,10 +25,15 @@ class SVGOut(outie.Outie):
             if path[-4:].lower() == ".svg" : self.filepath = path
             else : self.filepath = path + os.sep + filename + ".svg"
         
+        self._canvas_dim = canvas_dimensions
+        self._flip = flip_y
+
     def _startDraw(self):
         print "drawing svn to "+self.filepath
         self.buffer = cStringIO.StringIO()
-        self.buffer.write('<svg xmlns="http://www.w3.org/2000/svg" version="1.1">\n')
+        svg_size = ""
+        if self._canvas_dim is not False: svg_size = 'width="'+str(self._canvas_dim.a)+'" height="'+str(self._canvas_dim.b)+'"'
+        self.buffer.write('<svg '+svg_size+' xmlns="http://www.w3.org/2000/svg" version="1.1">\n')
     
     def _endDraw(self):
         self.buffer.write('</svg>')
@@ -43,7 +48,10 @@ class SVGOut(outie.Outie):
     def _drawGeom(self, g):
         # here we sort out what type of geometry we're dealing with, and call the proper draw functions
         # MUST LOOK FOR CHILD CLASSES BEFORE PARENT CLASSES (points before vecs)
+        if isinstance(g,Curve): g = g.surrogate
         
+        g = self._flip_geom(g)
+
         if isinstance(g, Point) : return self._drawPoint(g)
         if isinstance(g, PGon) :  return self._drawPolygon(g)
         if isinstance(g, PLine) :  return self._drawPolyline(g)
@@ -51,13 +59,20 @@ class SVGOut(outie.Outie):
             if isinstance(g, Line) : return self._drawLine(g)
             if isinstance(g, Ray) : return self._drawRay(g)
             if isinstance(g, Segment) : return self._drawSegment(g)
-        
-        if isinstance(g,Curve): return self._drawCurve(g)
 
         return False
 
     def _buffer_append(self,type,atts,style):
         self.buffer.write('<'+type+' '+atts+' style="'+style+'"/>\n')
+
+    def _flip_geom(self,geom):
+        if self._flip and self._canvas_dim is not False:
+            xf = Xform.mirror(plane="worldXZ")
+            ngeom = geom*xf
+            xf = Xform.translation(Vec(0,self._canvas_dim.b))
+            ngeom = ngeom*xf
+            if hasattr(geom, 'props'): ngeom.props = geom.props
+            return ngeom
 
     def _drawPoint(self, pt):
         type = 'circle'
@@ -98,8 +113,6 @@ class SVGOut(outie.Outie):
     def _drawLine(self, line):
         return False
 
-    def _drawCurve(self, curve):
-        return self._drawPolyline(curve.surrogate)
 
 
     def _extract_props(self,object,force_fill=False):
