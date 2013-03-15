@@ -96,27 +96,40 @@ class Vec(Geometry):
         return Vec(self.x-vec.x , self.y-vec.y, self.z-vec.z)
     def __truediv__(self,other): 
         return self.__div__(other)
-    def __div__(self, other): 
+    def __div__(self, scalar): 
         """Overloads the addition **(/)** operator. 
-        Returns a new vector that results from dividing this vector's world coordinates to the other vector's world coordinates.
+        Returns a new vector that results from dividing this vector's world coordinates by a given scalar.
         
-            :param vec: Vec to be divided.
-            :type vec: Vec
+            :param scalar: number to divide by
+            :type scalar: Float
             :result: New vec.
             :rtype: Vec
         """  
-        return Vec(self.x/float(other), self.y/float(other), self.z/float(other))
+        return Vec(self.x/float(scalar), self.y/float(scalar), self.z/float(scalar))
     def __invert__(self): 
-        """Inverts the direction of the vector
+        """Overloads the inversion **(~vec)** operator. 
+        Inverts the direction of the vector
         Returns a new inverted vector.
         
             :result: Inverted Vec.
             :rtype: Vec
         """  
         return self.inverted()
+
+    def __neg__(self): 
+        """Overloads the arithmetic negation **(-vec)** operator. 
+        Inverts the direction of the vector
+        Returns a new inverted vector.
+        
+            :result: Inverted Vec.
+            :rtype: Vec
+        """  
+        return self.inverted()
+
     def __mul__(self, other):
         """Overloads the addition **(*)** operator. 
-        Returns a new vector that results from multiplying this vector's world coordinates to the other vector's world coordinates.
+        If given a scalar, returns a new vector that results from multiplying this vector by the scalar
+        If given a vector, returns the cross product of this vector and the other vector
         
             :param vec: Vec to be multiplied.
             :type vec: Vec
@@ -127,7 +140,7 @@ class Vec(Geometry):
         if isinstance(other, Xform) :
             return other*self
         else : 
-            #TODO: confim that other is a scalar
+            if isinstance(other, Vec) : return self.cross(other)
             return Vec(self.x * other, self.y * other, self.z * other)
 
 
@@ -160,16 +173,15 @@ class Vec(Geometry):
         """
         return self.length2 <= other.length2
     def __eq__(self, other):
-        """Overloads the equal **(==)** operator for vector length.
+        """Overloads the equal **(==)** operator for vector identity.
         
             :param other: Vec to be compared.
             :type other: Vec
             :result: Boolean result of comparison.
             :rtype: bool
 
-            .. todo:: change this so that it tests for length and direction
         """    
-        return self.length2 == other.length2
+        return self.is_identical(other)
     def __ne__(self, other): 
         """Overloads the not equal **(!=)** operator for vector length.
         
@@ -178,9 +190,8 @@ class Vec(Geometry):
             :result: Boolean result of comparison.
             :rtype: bool
 
-            .. todo:: change this so that it tests for length and direction
         """
-        return self.length2 != other.length2
+        return not self.is_identical(other)
     def __gt__(self, other): 
         """Overloads the greater than **(>)** operator for vector length.
         

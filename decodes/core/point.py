@@ -488,6 +488,10 @@ class HasPts(HasBasis):
         else : 
             self._verts.append(self._compatible_vec(pts))
     
+    def clear(self):
+        """Clears this Geometry of all the Points contained within it"""
+        del self._verts[:]
+
     @property
     def centroid(self):
         """Returns the centroid of the points of this object
@@ -505,7 +509,7 @@ class HasPts(HasBasis):
             :rtype: Object
         """
         clone = copy.copy(self)
-        clone._verts = [pt.basis_applied() for pt in self.pts]
+        clone._verts = [Vec(pt.basis_applied()) for pt in self.pts]
         return clone
     
     def basis_stripped(self): 
@@ -515,7 +519,7 @@ class HasPts(HasBasis):
             :rtype: Object
         """
         clone = copy.copy(self)
-        clone._verts = [pt.basis_stripped() for pt in self.pts]
+        clone._verts = [Vec(pt.basis_stripped()) for pt in self.pts]
         return clone
 
 

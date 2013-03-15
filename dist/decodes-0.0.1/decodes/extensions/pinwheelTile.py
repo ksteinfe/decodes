@@ -40,9 +40,9 @@ class PwTile(object):
             
     def draw(self):
         msh = Mesh()
-        msh.add_vert(PwTile.basePts[0] * self.xf)
-        msh.add_vert(PwTile.basePts[1] * self.xf)
-        msh.add_vert(PwTile.basePts[2] * self.xf)
+        msh.append(PwTile.basePts[0] * self.xf)
+        msh.append(PwTile.basePts[1] * self.xf)
+        msh.append(PwTile.basePts[2] * self.xf)
         msh.add_face(0,1,2)
         msh.name = self.lineage
         return msh
