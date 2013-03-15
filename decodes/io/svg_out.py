@@ -29,7 +29,7 @@ class SVGOut(outie.Outie):
         self._flip = flip_y
 
     def _startDraw(self):
-        print "drawing svn to "+self.filepath
+        print "drawing svg to "+self.filepath
         self.buffer = cStringIO.StringIO()
         svg_size = ""
         if self._canvas_dim is not False: svg_size = 'width="'+str(self._canvas_dim.a)+'" height="'+str(self._canvas_dim.b)+'"'
@@ -67,7 +67,7 @@ class SVGOut(outie.Outie):
 
     def _flip_geom(self,geom):
         if self._flip and self._canvas_dim is not False:
-            xf = Xform.mirror(plane="worldXZ")
+            xf = Xform.mirror(plane="world_xz")
             ngeom = geom*xf
             xf = Xform.translation(Vec(0,self._canvas_dim.b))
             ngeom = ngeom*xf
