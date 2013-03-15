@@ -6,41 +6,54 @@ from decodes.core import *
 class Tests(unittest.TestCase):
 
     def test_scale(self):
-        l1 = Segment(Point(0,0,0),Point (1,0,0))
-        l2 = Segment(Point(-1,0,0),Point (1,0,0))
+        ln1 = Segment(Point(1,1,0),Point (1,1,2))
+        ln2 = Segment(Point(2,2,0),Point (2,2,4))
         xf = Xform.scale(2)
-        l1 = l1 * xf
-        
-        self.assertEqual(l1,l2)
+        ln1 = ln1 * xf
+        self.assertEqual(ln1,ln2)
 
     def test_mirror(self):
-        l1 = Segment(Point(0,0,0),Point (1,0,0))
-        l2 = Segment(Point(-1,0,0),Point (0,0,0))
-        xf = Xform.mirror()
-        l1 = l1 * xf
-        
-        self.assertEqual(l1,l2)
+        ln1 = Segment(Point(1,1,0),Point (1,1,2))
+        ln2 = Segment(Point(1,1,0),Point (1,1,-2))
+        xf = Xform.mirror("world_xy")
+        ln1 = ln1 * xf
+        self.assertEqual(ln1,ln2)
 
-    def test_rotation(self):
-        l1 = Segment(Point(0,0,0),Point (1,0,0))
-        l2 = Segment(Point(0,1,0),Point (0,0,0))
-        rotPt = Point()
-        xf = Xform.rotation(center=Point(0,1), angle=90)
-        l1 = l1 * xf
-        
-        self.assertEqual(l1,l2)
+        ln1 = Segment(Point(1,1,0),Point (1,1,2))
+        ln2 = Segment(Point(1,-1,0),Point (1,-1,2))
+        xf = Xform.mirror("world_xz")
+        ln1 = ln1 * xf
+        self.assertEqual(ln1,ln2)
+
+        ln1 = Segment(Point(1,1,0),Point (1,1,2))
+        ln2 = Segment(Point(-1,1,0),Point (-1,1,2))
+        xf = Xform.mirror("world_yz")
+        ln1 = ln1 * xf
+        self.assertEqual(ln1,ln2)
+
+
 
     def test_translation(self):
-        l1 = Segment(Point(0,0,0),Point (1,0,0))
-        l2 = Segment(Point(1,0,0),Point (2,0,0))
+        ln1 = Segment(Point(0,0,0),Point (1,0,0))
+        ln2 = Segment(Point(1,0,0),Point (2,0,0))
         vec = Vec(1,0,0)
         xf = Xform.translation(vec)
-        l1 = l1 * xf
+        ln1 = ln1 * xf
         
-        self.assertEqual(l1,l2)
+        self.assertEqual(ln1,ln2)
 
 
 '''
+CAN'T DO THIS ONE WITHOUT RHINO
+    def test_rotation(self):
+        ln1 = Segment(Point(0,0,0),Point (1,0,0))
+        ln2 = Segment(Point(0,1,0),Point (0,0,0))
+        rotPt = Point()
+        xf = Xform.rotation(center=Point(0,1), angle=90)
+        ln1 = ln1 * xf
+        
+        self.assertEqual(ln1,ln2)
+
 print "from rhino transform"
 rh_xform = Rhino.Geometry.Transform.Translation(VecToVec3d(Vec(10,20,30)))
 xf = Xform.from_rh_transform(rh_xform)
