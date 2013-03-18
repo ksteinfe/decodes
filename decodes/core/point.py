@@ -426,11 +426,24 @@ class Point(Vec,HasBasis):
         return p
         
     @staticmethod
-    def cull_duplicates(pts):
-        culled_pts = []
-        for pt in pts: 
-            if not (pt in culled_pts) : culled_pts.append(pt)
-        return culled_pts
+    def cull_duplicates(pts, threshold = None):
+        if threshold == None:
+            culled_pts = []
+            for pt in pts: 
+                if not (pt in culled_pts) : culled_pts.append(pt)
+            return culled_pts
+        else:
+            culled_pts = [pts[0]]
+            for pt in pts:
+                is_good = True
+                for cpt in culled_pts:
+                    if pt.distance2(cpt) < threshold**2 : 
+                        is_good = False
+                        break
+                if is_good: culled_pts.append(pt)
+            return culled_pts
+
+
 
 
 class HasPts(HasBasis):

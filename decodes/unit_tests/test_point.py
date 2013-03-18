@@ -21,13 +21,17 @@ class Tests(unittest.TestCase):
         npt = Point.near(pt, pts)
         self.assertEqual(npt,Point(4,0,0),"nearest point in list")
 
-
     def test_cull_dups(self):
         pts = [Point(x,0,0) for x in range(10)]
         pts.append(Point(0,0,0))
         culled_pts = Point.cull_duplicates(pts)
         self.assertEqual(len(pts),len(culled_pts)+1)
 
+    def test_cull_dups2(self):
+        pts = [Point(x,0,0) for x in range(10)]
+        pts.append(Point(.5,0,0))
+        culled_pts = Point.cull_duplicates(pts,.51)
+        self.assertEqual(len(pts),len(culled_pts)+1)
 
 '''
 print "operators"
