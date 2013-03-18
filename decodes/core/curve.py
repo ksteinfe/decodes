@@ -61,10 +61,22 @@ class Curve(Geometry):
     def surrogate(self): return self._surrogate
 
     @property
-    def appx_length(self): return self._surrogate.length
+    def appx_length(self): 
+        """
+        Returns the approximate length of a curve
+            :result: Approximate length of a curve.
+            :rtype: float
+        """
+        return self._surrogate.length
 
     @property
-    def domain(self): return self._domain
+    def domain(self): 
+        """
+        Returns the Interval domain of a curve
+            :result: Domain of a curve.
+            :rtype: Interval
+        """
+        return self._domain
 
     @property
     def func(self): return self._func
@@ -228,6 +240,11 @@ class Curve(Geometry):
 
 
     def _to_pline(self):
+        """ Creates a PLine from a curve.
+
+            :result: Returns a PLine built from a curve.
+            :rtype: PLine
+        """
         return PLine([self.deval(t) for t in self.domain.divide(int(math.ceil(self.domain.delta/self.tol)),True)])
 
 

@@ -431,8 +431,6 @@ class HasPts(HasBasis):
     """
     A base class for anything that contains a list of vertices.
     All HasPts classes also have bases
-
-
     """
     def __init__(self):
         self._verts = [] # a list of vecs that represent the local coordinates of this object's points

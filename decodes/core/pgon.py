@@ -31,7 +31,12 @@ class PGon(HasPts):
         
     def seg(self,index):
         """ Returns a segment of this Polygon
-        The returned line segment will contain a copy of the Points stored in the
+        The returned line segment will contain a copy of the Points stored in the segment.
+        
+            :param index: Index of the desired segment.
+            :type index: Int
+            :returns: Segment object. 
+            :rtype: Segment
         """
         if index >= len(self) : raise IndexError()
         if index == len(self)-1 : return Segment(self.pts[index],self.pts[0])

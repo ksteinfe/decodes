@@ -37,10 +37,20 @@ class PLine(HasPts):
 
     @property
     def length(self):
+        """ Returns the length of this polyline.
+        
+            :result: Length of this PLine
+            :rtype: float
+        """
         return sum([edge.length for edge in self.edges])
 
     def seg(self,index):
         """ Returns a segment of this polyline
+       
+            :param index: Index of the polyline's segment
+            :type index: Int
+            :result: Line segment
+            :rtype: Segment
         """
         if index >= len(self) : raise IndexError()
         return Segment(self.pts[index],self.pts[index+1])
