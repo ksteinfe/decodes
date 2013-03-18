@@ -425,6 +425,12 @@ class Point(Vec,HasBasis):
         p = Point(x,y) if constrain2d else Point(x,y,z)
         return p
         
+    @staticmethod
+    def cull_duplicates(pts):
+        culled_pts = []
+        for pt in pts: 
+            if not (pt in culled_pts) : culled_pts.append(pt)
+        return culled_pts
 
 
 class HasPts(HasBasis):
