@@ -185,14 +185,32 @@ class Curve(Geometry):
             :type tolerance: float
             :param max_recursion: Maximum number of loops to look for the nearest point. Defaults to 20.
             :type max_recursion: integer
-            :result: Tuple containing a Point, a t-value associated with this point, and the distance from this Point to the given Point.
-            :rtype: (Point, float, float)
+            :result: Tuple containing a Plane, a t-value associated with this point, and the distance from this Point to the given Point.
+            :rtype: (Plane, float, float)
         """
         if tolerance is None : tolerance = self.tol/10.0
         t = self._nearfar(Point.near_index,pt,tolerance,max_recursion)
         result = self.deval(t)
         return(result,t,pt.distance(result.origin))
 
+    def near_pt(self,pt,tolerance=None,max_recursion=20):
+        """ Finds a location on this curve which is nearest to the given Point.
+        Unstable and inaccurate.
+        Recursive function that searches for further points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
+        Returns a Point
+            
+            :param pt: Point to look for the nearest point on a curve.
+            :type pt: Point
+            :param tolerance: Tolerance to search for the near point. Defaults to None.
+            :type tolerance: float
+            :param max_recursion: Maximum number of loops to look for the nearest point. Defaults to 20.
+            :type max_recursion: integer
+            :result: Plane.
+            :rtype: Plane
+        """
+
+        return self.near(pt,tolerance,max_recursion)[0]
+        
     def far(self,pt,tolerance=None,max_recursion=20):
         """ Finds a location on this curve which is furthest from the given Point.
         Unstable and inaccurate.
@@ -204,14 +222,29 @@ class Curve(Geometry):
             :type tolerance: float
             :param max_recursion: Maximum number of loops to look for the farthest point. Defaults to 20.
             :type max_recursion: integer
-            :result: Tuple containing a Point, a t-value associated with this point, and the distance from this Point to the given Point.
-            :rtype: (Point, float, float)
+            :result: Tuple containing a Plane, a t-value associated with this point, and the distance from this Point to the given Point.
+            :rtype: (Plane, float, float)
         """
-        if tolerance is None : tolerance = self.tol/10.0
-        t = self._nearfar(Point.far_index,pt,tolerance,max_recursion)
-        result = self.deval(t)
+
         return(result,t,pt.distance(result.origin))
 
+    def far_pt(self,pt,tolerance=None,max_recursion=20):
+        """ Finds a location on this curve which is furthest to the given Point.
+        Unstable and inaccurate.
+        Recursive function that searches for further points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
+        Returns a Point
+            
+            :param pt: Point to look for the furthest point on a curve.
+            :type pt: Point
+            :param tolerance: Tolerance to search for the far point. Defaults to None.
+            :type tolerance: float
+            :param max_recursion: Maximum number of loops to look for the nearest point. Defaults to 20.
+            :type max_recursion: integer
+            :result: Plane.
+            :rtype: Plane
+        """
+
+        return self.far(pt,tolerance,max_recursion)[0]
 
     def _nearfar(self,func_nf,pt,tolerance,max_recursion):
         def sub(crv):
