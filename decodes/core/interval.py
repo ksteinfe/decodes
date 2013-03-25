@@ -22,15 +22,16 @@ class Interval():
     
     def __truediv__(self,divs): return self.__div__(divs)
     def __div__(self, divs): 
-        """
-        overloads the division **(/)** operator
+        """overloads the division **(/)** operator
         calls Interval.divide(divs)
+        
+            :returns: List of numbers in which a list is divided. 
+            :rtype: list
         """
         return self.divide(divs)
 
     def __floordiv__(self, other): 
-        """
-        overloads the integer division **(//)** operator
+        """overloads the integer division **(//)** operator
         calls Interval.subinterval(other)
         """
         return self.subinterval(other)
@@ -198,12 +199,16 @@ class Interval():
     @staticmethod
     def twopi():
         """Creates an interval from 0->2PI
+        
+            :rtype: Interval
         """
         return Interval(0,math.pi*2)
 
     @staticmethod
     def pi():
         """Creates an interval from 0->PI
+        
+            :rtype: Interval
         """
         return Interval(0,math.pi)
 

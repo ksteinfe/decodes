@@ -129,9 +129,8 @@ class HasBasis(Geometry):
     
     @property
     def is_baseless(self):
-        '''
-        tells us if a basis has been defined
-        '''
+        """Tells us if a basis has been defined
+        """
         return (not hasattr(self, 'basis')) or self.basis is None
 
 

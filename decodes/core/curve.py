@@ -339,7 +339,12 @@ class Curve(Geometry):
 
     @staticmethod
     def hermite(cpts):
-
+        """ constructs a hermite curve. It has nice tension and biasing controls. 
+            :param cpts: List of control points to build the curve.
+            :type cpts: [Point]
+            :result: Hermite Curve object.
+            :rtype: Curve
+        """
         # from http://paulbourke.net/miscellaneous/interpolation/
         def hermite_interpolate(y0,y1,y2,y3,mu,tension,bias):
             mu2 = mu * mu

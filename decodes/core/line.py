@@ -1,4 +1,5 @@
 from decodes.core import *
+
 from . import base, vec, point #here we may only import modules that have been loaded before this one.  see core/__init__.py for proper order
 if VERBOSE_FS: print "line.py loaded"
 
@@ -24,8 +25,9 @@ class LinearEntity(Geometry):
         """
         self._pt = a if isinstance(a,Point) else Point(a.x,a.y,a.z)
         if isinstance(b,Point) : self._vec = Vec(b-a)
+        elif isinstance(b,Plane) : self._vec = Vec(b.origin-a)
         elif isinstance(b,Vec) : self._vec = b
-        else : raise TypeError("%s constructor requires Vec instances" % self.__class__.__name__)
+        else : raise TypeError("Incorrect parameters provided to %s constructor" % self.__class__.__name__)
     
     @property
     def spt(self): 
