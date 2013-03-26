@@ -23,7 +23,7 @@ except Exception:
     # we are under readthedocs.org and need to mock this
     ACAD = None
 
-import pyautocad.types
+import types
 
 logger = logging.getLogger(__name__)
 
@@ -168,9 +168,9 @@ class Autocad(object):
         return selection
 
     #: shortcut for :func:`pyautocad.types.aDouble`
-    aDouble = staticmethod(pyautocad.types.aDouble)
+    aDouble = staticmethod(types.aDouble)
     #: shortcut for :func:`pyautocad.types.aInt`
-    aInt = staticmethod(pyautocad.types.aInt)
+    aInt = staticmethod(types.aInt)
     #: shortcut for :func:`pyautocad.types.aShort`
-    aShort = staticmethod(pyautocad.types.aShort)
+    aShort = staticmethod(types.aShort)
 

@@ -8,7 +8,7 @@ print "http://decod.es"
 
 class Outies:
     # list here all the outies we currently support
-    Rhino, Grasshopper, SVG = range(3)
+    Rhino, Grasshopper, SVG , ACAD = range(4)
 
 
 # keep this up to date with what outies we support
@@ -28,6 +28,9 @@ def makeOut(outtype, name="untitled", path=False, **kargs):
     if outtype == Outies.Rhino:
         import io.rhino_out
         return io.rhino_out.RhinoOut(name)
+    elif outtype == Outies.ACAD:
+        import io.autocad_out
+        return io.autocad_out.AutocadOut(name)
     elif outtype == Outies.Grasshopper:
         import io.gh_out
         return io.gh_out.GrasshopperOut(name)
