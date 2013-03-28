@@ -7,6 +7,7 @@ if VERBOSE_FS: print "autocad-out loaded"
 from decodes.io.pyautocad import *
 
 
+
 class AutocadOut(outie.Outie):
     """outie for pushing stuff to autocad"""
     
@@ -29,16 +30,15 @@ class AutocadOut(outie.Outie):
     def _drawGeom(self, g):
         # here we sort out what type of geometry we're dealing with, and call the proper draw functions
         # MUST LOOK FOR CHILD CLASSES BEFORE PARENT CLASSES (points before vecs)
-        '''
-        obj_attr = self.attr.Duplicate()
-        if hasattr(g, 'name'): obj_attr.Name = g.name
+
+        obj_attr = {}
+        if hasattr(g, 'name'): obj_attr['name'] = g.name
         if hasattr(g, 'props') and 'color' in g.props:
-            obj_attr.ColorSource = Rhino.DocObjects.ObjectColorSource.ColorFromObject
-            obj_attr.ObjectColor = System.Drawing.Color.FromArgb(g.props['color'].r*255,g.props['color'].g*255,g.props['color'].b*255)
-        '''
-        
-        obj_attr = None
-        
+            obj_attr['color'] = g.props['color']
+        if hasattr(g, 'props') and 'weight' in g.props:
+            obj_attr['weight'] = g.props['weight']
+        else:
+            obj_attr = None
         if isinstance(g, Mesh) : 
             return self._drawMesh(g,obj_attr)
         if isinstance(g, CS) : 
@@ -51,47 +51,88 @@ class AutocadOut(outie.Outie):
             return self._drawPoint(g,obj_attr)
         if isinstance(g, Vec) : 
             return self._drawVec(g,obj_attr)
+        if isinstance(g, PLine) : 
+            return self._drawPLine(g,obj_attr)
+        if isinstance(g, PGon) : 
+            return self._drawPGon(g,obj_attr)
+        if isinstance(g, Curve) : 
+            return self._drawCurve(g,obj_attr)
+        if isinstance(g, Plane) : 
+            return self._drawPlane(g,obj_attr)
         
         return False
-    '''
+    
     def _drawVec(self, vec, obj_attr):
         origin = Vec(0,0,0)
-        guid = scriptcontext.doc.Objects.AddLine(to_rgpt(origin),to_rgpt(origin+vec),obj_attr)
-        return guid!=System.Guid.Empty'''
+        new_geom = self.acad.model.AddLine(to_acadpt(origin),to_acadpt(vec))
+        if new_geom: return True
 
     def _drawPoint(self, pt, obj_attr):
         pt = pt.basis_applied()
-        pt = to_pt(pt)
-        new_geom = self.acad.model.AddPoint(pt)
-        if new_geom:
-            return True
-    '''
+        new_geom = self.acad.model.AddPoint(to_acadpt(pt))
+        if new_geom: return True
+    
     def _drawMesh(self, mesh, obj_attr):
-        rh_mesh = Rhino.Geometry.Mesh()
-        for v in mesh.pts: rh_mesh.Vertices.Add(v.x,v.y,v.z)
-        for f in mesh.faces: 
-            if len(f)==3 : rh_mesh.Faces.AddFace(f[0], f[1], f[2])
-            if len(f)==4 : rh_mesh.Faces.AddFace(f[0], f[1], f[2], f[3])
-        rh_mesh.Normals.ComputeNormals()
-        rh_mesh.Compact()
-        guid = scriptcontext.doc.Objects.AddMesh(rh_mesh, obj_attr)
-        return guid!=System.Guid.Empty
+        meshes = Mesh.explode(mesh)
+        for mesh in meshes:
+            if len(mesh.pts) == 3:
+                pt1 = aDouble([mesh.pts[0].x,mesh.pts[0].y,mesh.pts[0].z])
+                pt2 = aDouble([mesh.pts[1].x,mesh.pts[1].y,mesh.pts[1].z])
+                pt3 = aDouble([mesh.pts[2].x,mesh.pts[2].y,mesh.pts[2].z])
+                new_geom = self.acad.model.Add3DFace(pt1,pt2,pt3,pt3)
+                #testing to add colors
+                #new_geom.Color = 15
+            else:
+                pt1 = aDouble([mesh.pts[0].x,mesh.pts[0].y,mesh.pts[0].z])
+                pt2 = aDouble([mesh.pts[1].x,mesh.pts[1].y,mesh.pts[1].z])
+                pt3 = aDouble([mesh.pts[2].x,mesh.pts[2].y,mesh.pts[2].z])
+                pt4 = aDouble([mesh.pts[3].x,mesh.pts[3].y,mesh.pts[3].z])
+                new_geom = self.acad.model.Add3DFace(pt1,pt2,pt4,pt3)
+        if new_geom: return True
         
+    def _drawPlane(self, plane, obj_attr):
+        origin = plane.origin
+        tvec = plane.vec
+        '''
+        pt1 = aDouble([plane.pts[0].x,plane.pts[0].y,plane.pts[0].z])
+        pt2 = aDouble([plane.pts[1].x,plane.pts[1].y,plane.pts[1].z])
+        pt3 = aDouble([plane.pts[2].x,plane.pts[2].y,plane.pts[2].z])
+        pt4 = aDouble([plane.pts[3].x,plane.pts[3].y,plane.pts[3].z])
+        new_geom = self.acad.model.Add3DFace(pt1,pt2,pt4,pt3)
+        '''
+        if new_geom: return True
+    
     def _drawLinearEntity(self, ln, obj_attr):
         if ln._vec.length == 0 : return False
-        sDocObj = scriptcontext.doc.Objects
         if isinstance(ln, Segment) : 
-            guid = sDocObj.AddLine(to_rgpt(ln.spt),to_rgpt(ln.ept),obj_attr)
-            return guid!=System.Guid.Empty
+            new_geom = self.acad.model.AddLine(to_acadpt(ln.spt),to_acadpt(ln.ept))
+            if new_geom: return True
         if isinstance(ln, Ray) : 
-            p = sDocObj.AddPoint(to_rgpt(ln.spt),obj_attr)
-            l = sDocObj.AddLine(to_rgpt(ln.spt),to_rgpt(ln.ept),obj_attr)
-            scriptcontext.doc.Groups.Add([p,l])
+            new_geom = self.acad.model.AddRay(to_acadpt(ln.spt),to_acadpt(ln.ept))
+            if new_geom: return True
         if isinstance(ln, Line) : 
-            p = sDocObj.AddPoint(to_rgpt(ln.spt),obj_attr)
-            l = sDocObj.AddLine(to_rgpt(ln.spt-ln.vec/2),to_rgpt(ln.spt+ln.vec/2),obj_attr)
-            scriptcontext.doc.Groups.Add([p,l])
-                
+            new_geom = self.acad.model.AddXLine(to_acadpt(ln.spt),to_acadpt(ln.ept))
+            if new_geom: return True
+            
+    def _drawPLine(self, pl, obj_attr):
+        if pl.length == 0 : return False
+        new_geom = self.acad.model.Add3Dpoly(to_acadverts(pl))
+        if new_geom: return True
+        
+    def _drawPGon(self, pg, obj_attr):
+        if len(pg.edges) == 0 : return False
+        new_geom = self.acad.model.Add3Dpoly(to_acadverts(pg,True))
+        if new_geom: return True
+
+    def _drawCurve(self, crv, obj_attr):
+        crv = crv.surrogate
+        if crv.length == 0 : return False
+        new_geom = self.acad.model.Add3Dpoly(to_acadverts(crv))
+        new_lay = self.acad.Layers.Add("ABC")
+        new_geom.Layer = new_lay
+        if new_geom: return True
+        
+    '''
     def _drawCS(self, cs, obj_attr):
         sDocObj = scriptcontext.doc.Objects
         
@@ -137,15 +178,22 @@ def to_rgvec(vec):
     return Rhino.Geometry.Vector3d(vec.x,vec.y,vec.z)
     
 '''
-def to_pt(point):
+def to_acadpt(point):
     return APoint(point.x, point.y, point.z) 
+    
+def to_acadverts(pl, closed=False):
+    pline_pts = []
+    for vert in pl.pts:
+        pline_pts.append(vert.x)
+        pline_pts.append(vert.y)
+        pline_pts.append(vert.z)
+    if closed: 
+        pline_pts.append(pline_pts[0])
+        pline_pts.append(pline_pts[1])
+        pline_pts.append(pline_pts[2])
+    return aDouble(pline_pts)
+
 '''
-def to_rgpolyline(other):
-    verts = [to_rgpt(pt) for pt in other.pts]
-    if isinstance(other, PGon) : verts.append(verts[0])
-    return Rhino.Geometry.Polyline(verts)
-
-
 def to_rgplane(other):
     if isinstance(other, CS) : 
         return Rhino.Geometry.Plane(to_rgpt(other.origin),to_rgvec(other.xAxis),to_rgvec(other.yAxis))
@@ -172,15 +220,4 @@ def makelayer(layer_name):
         
     layer_index = scriptcontext.doc.Layers.Add(layer_name, System.Drawing.Color.Black)
     return layer_index
-
-def interpolated_curve(points):
-    import Rhino
-    import System
-    rh_points = [to_rgpt(pt) for pt in points]
-    degree = 3
-    start_tangent = Rhino.Geometry.Vector3d(0,0,0)
-    end_tangent = Rhino.Geometry.Vector3d(0,0,0)
-    knotstyle = System.Enum.ToObject(Rhino.Geometry.CurveKnotStyle, 0)
-    curve = Rhino.Geometry.Curve.CreateInterpolatedCurve(rh_points, degree, knotstyle, start_tangent, end_tangent)
-    if not curve: raise Exception("unable to CreateInterpolatedCurve")
-    return curve'''
+'''
