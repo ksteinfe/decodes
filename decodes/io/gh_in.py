@@ -37,8 +37,9 @@ class GrasshopperIn():
         elif type(gh_in)is rg.Plane : 
             return CS(from_rgpt(gh_in.Origin), from_rgvec(gh_in.XAxis), from_rgvec(gh_in.YAxis))
         elif type(gh_in) is rg.Line : 
-            #TODO: check if gh_in can be described as a line first...
             return Segment(Point(gh_in.FromX,gh_in.FromY,gh_in.FromZ),Point(gh_in.ToX,gh_in.ToY,gh_in.ToZ))
+        elif type(gh_in) is rg.LineCurve : 
+            return Segment(Point(gh_in.PointAtStart.X,gh_in.PointAtStart.Y,gh_in.PointAtStart.Z),Point(gh_in.PointAtEnd.X,gh_in.PointAtEnd.Y,gh_in.PointAtEnd.Z))
         elif type(gh_in) is System.Drawing.Color : 
             return Color(float(gh_in.R)/255,float(gh_in.G)/255,float(gh_in.B)/255)
         elif type(gh_in) is rg.PolylineCurve: 

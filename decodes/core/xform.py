@@ -192,7 +192,7 @@ class Xform(object):
         # BASED GEOMETRY
         # all objects that have a basis defined must apply their basis before transforming points
         if isinstance(other, HasBasis) and (not other.is_baseless): 
-            o = o.basis_applied
+            o = other.basis_applied()
             o.copy_props(other)
             other = o
 

@@ -527,6 +527,7 @@ class HasPts(HasBasis):
         """
         clone = copy.copy(self)
         clone._verts = [Vec(pt.basis_applied()) for pt in self.pts]
+        clone.basis = None
         return clone
     
     def basis_stripped(self): 
@@ -537,6 +538,7 @@ class HasPts(HasBasis):
         """
         clone = copy.copy(self)
         clone._verts = [Vec(pt.basis_stripped()) for pt in self.pts]
+        clone.basis = None
         return clone
 
 

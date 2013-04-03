@@ -82,7 +82,15 @@ class PGon(HasPts):
 
     def __repr__(self): return "pgon[{0}v]".format(len(self._verts))
     
+    def basis_applied(self):
+        clone = super(PGon,self).basis_applied()
+        clone.basis = CS()
+        return clone
 
+    def basis_stripped(self):
+        clone = super(PGon,self).basis_stripped()
+        clone.basis = CS()
+        return clone
 
     @staticmethod
     def rectangle(cpt, w, h):
