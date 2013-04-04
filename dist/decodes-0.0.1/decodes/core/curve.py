@@ -61,10 +61,22 @@ class Curve(Geometry):
     def surrogate(self): return self._surrogate
 
     @property
-    def appx_length(self): return self._surrogate.length
+    def appx_length(self): 
+        """
+        Returns the approximate length of a curve
+            :result: Approximate length of a curve.
+            :rtype: float
+        """
+        return self._surrogate.length
 
     @property
-    def domain(self): return self._domain
+    def domain(self): 
+        """
+        Returns the Interval domain of a curve
+            :result: Domain of a curve.
+            :rtype: Interval
+        """
+        return self._domain
 
     @property
     def func(self): return self._func
@@ -173,14 +185,32 @@ class Curve(Geometry):
             :type tolerance: float
             :param max_recursion: Maximum number of loops to look for the nearest point. Defaults to 20.
             :type max_recursion: integer
-            :result: Tuple containing a Point, a t-value associated with this point, and the distance from this Point to the given Point.
-            :rtype: (Point, float, float)
+            :result: Tuple containing a Plane, a t-value associated with this point, and the distance from this Point to the given Point.
+            :rtype: (Plane, float, float)
         """
         if tolerance is None : tolerance = self.tol/10.0
         t = self._nearfar(Point.near_index,pt,tolerance,max_recursion)
         result = self.deval(t)
         return(result,t,pt.distance(result.origin))
 
+    def near_pt(self,pt,tolerance=None,max_recursion=20):
+        """ Finds a location on this curve which is nearest to the given Point.
+        Unstable and inaccurate.
+        Recursive function that searches for further points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
+        Returns a Point
+            
+            :param pt: Point to look for the nearest point on a curve.
+            :type pt: Point
+            :param tolerance: Tolerance to search for the near point. Defaults to None.
+            :type tolerance: float
+            :param max_recursion: Maximum number of loops to look for the nearest point. Defaults to 20.
+            :type max_recursion: integer
+            :result: Plane.
+            :rtype: Plane
+        """
+
+        return self.near(pt,tolerance,max_recursion)[0]
+        
     def far(self,pt,tolerance=None,max_recursion=20):
         """ Finds a location on this curve which is furthest from the given Point.
         Unstable and inaccurate.
@@ -192,14 +222,29 @@ class Curve(Geometry):
             :type tolerance: float
             :param max_recursion: Maximum number of loops to look for the farthest point. Defaults to 20.
             :type max_recursion: integer
-            :result: Tuple containing a Point, a t-value associated with this point, and the distance from this Point to the given Point.
-            :rtype: (Point, float, float)
+            :result: Tuple containing a Plane, a t-value associated with this point, and the distance from this Point to the given Point.
+            :rtype: (Plane, float, float)
         """
-        if tolerance is None : tolerance = self.tol/10.0
-        t = self._nearfar(Point.far_index,pt,tolerance,max_recursion)
-        result = self.deval(t)
+
         return(result,t,pt.distance(result.origin))
 
+    def far_pt(self,pt,tolerance=None,max_recursion=20):
+        """ Finds a location on this curve which is furthest to the given Point.
+        Unstable and inaccurate.
+        Recursive function that searches for further points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
+        Returns a Point
+            
+            :param pt: Point to look for the furthest point on a curve.
+            :type pt: Point
+            :param tolerance: Tolerance to search for the far point. Defaults to None.
+            :type tolerance: float
+            :param max_recursion: Maximum number of loops to look for the nearest point. Defaults to 20.
+            :type max_recursion: integer
+            :result: Plane.
+            :rtype: Plane
+        """
+
+        return self.far(pt,tolerance,max_recursion)[0]
 
     def _nearfar(self,func_nf,pt,tolerance,max_recursion):
         def sub(crv):
@@ -228,6 +273,11 @@ class Curve(Geometry):
 
 
     def _to_pline(self):
+        """ Creates a PLine from a curve.
+
+            :result: Returns a PLine built from a curve.
+            :rtype: PLine
+        """
         return PLine([self.deval(t) for t in self.domain.divide(int(math.ceil(self.domain.delta/self.tol)),True)])
 
 
@@ -289,7 +339,12 @@ class Curve(Geometry):
 
     @staticmethod
     def hermite(cpts):
-
+        """ constructs a hermite curve. It has nice tension and biasing controls. 
+            :param cpts: List of control points to build the curve.
+            :type cpts: [Point]
+            :result: Hermite Curve object.
+            :rtype: Curve
+        """
         # from http://paulbourke.net/miscellaneous/interpolation/
         def hermite_interpolate(y0,y1,y2,y3,mu,tension,bias):
             mu2 = mu * mu

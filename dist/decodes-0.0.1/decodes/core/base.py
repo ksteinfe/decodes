@@ -46,6 +46,14 @@ class Geometry(object):
         if isinstance(other, Xform) :
             return other*self
     
+    def copy_props(self,other):
+        """ Transfers the properties of the other geometry to this geometry, overwriting any properties this object currently has"""
+        new_props = {}
+        if hasattr(other, 'props') : new_props = other.props
+        self.props = new_props
+        return new_props
+
+
     def set_color(self,a,b=None,c=None):
         """Sets the geometry's color
 
@@ -121,9 +129,8 @@ class HasBasis(Geometry):
     
     @property
     def is_baseless(self):
-        '''
-        tells us if a basis has been defined
-        '''
+        """Tells us if a basis has been defined
+        """
         return (not hasattr(self, 'basis')) or self.basis is None
 
 

@@ -5,7 +5,7 @@ test_empty_constructor (decodes.unit_tests.test_pgon.Tests) ... ok
 test_segs_and_edges (decodes.unit_tests.test_pgon.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.304s
+Ran 2 tests in 0.306s
 
 OK
 
@@ -15,7 +15,7 @@ test_empty_constructor (decodes.unit_tests.test_pline.Tests) ... ok
 test_segs_and_edges (decodes.unit_tests.test_pline.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.690s
+Ran 2 tests in 0.673s
 
 OK
 
@@ -34,11 +34,13 @@ OK
 
 == TEST_POINT ==
 test_based_constructor (decodes.unit_tests.test_point.Tests) ... ok
+test_cull_dups (decodes.unit_tests.test_point.Tests) ... ok
+test_cull_dups2 (decodes.unit_tests.test_point.Tests) ... ok
 test_empty_constructor (decodes.unit_tests.test_point.Tests) ... ok
 test_nearest_point (decodes.unit_tests.test_point.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.018s
+Ran 5 tests in 0.049s
 
 OK
 
@@ -51,7 +53,7 @@ test_item_access (decodes.unit_tests.test_has_pts.Tests) ... ok
 test_manipulating_points (decodes.unit_tests.test_has_pts.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.094s
+Ran 5 tests in 0.087s
 
 OK
 
@@ -60,14 +62,24 @@ OK
 test_bezier (decodes.unit_tests.test_curve.Tests) ... ok
 test_constructor (decodes.unit_tests.test_curve.Tests) ... ok
 test_division (decodes.unit_tests.test_curve.Tests) ... ok
-test_far (decodes.unit_tests.test_curve.Tests) ... ok
+test_far (decodes.unit_tests.test_curve.Tests) ... ERROR
 test_hermite (decodes.unit_tests.test_curve.Tests) ... ok
 test_subdivide (decodes.unit_tests.test_curve.Tests) ... ok
 
+======================================================================
+ERROR: test_far (decodes.unit_tests.test_curve.Tests)
 ----------------------------------------------------------------------
-Ran 6 tests in 0.884s
+Traceback (most recent call last):
+  File "C:\Git\decodes\decodes\unit_tests\test_curve.py", line 72, in test_far
+    far_pt, far_t, dist = crv.far(Point(0,1)) #near() returns a tuple containing two values (Point, float)
+  File "C:\Git\decodes\decodes\core\curve.py", line 229, in far
+    return(result,t,pt.distance(result.origin))
+NameError: global name 'result' is not defined
 
-OK
+----------------------------------------------------------------------
+Ran 6 tests in 0.644s
+
+FAILED (errors=1)
 
 
 == TEST_PLANE ==
@@ -102,3 +114,24 @@ test_segment (decodes.unit_tests.test_line.Tests) ... ok
 Ran 4 tests in 0.022s
 
 OK
+
+
+== TEST_VEC ==
+test_angle (decodes.unit_tests.test_vec.Tests) ... ok
+test_dot_and_cross_products (decodes.unit_tests.test_vec.Tests) ... ok
+test_empty_constructor (decodes.unit_tests.test_vec.Tests) ... ok
+test_normalizing (decodes.unit_tests.test_vec.Tests) ... ok
+test_operators (decodes.unit_tests.test_vec.Tests) ... ok
+test_properties (decodes.unit_tests.test_vec.Tests) ... ok
+test_static (decodes.unit_tests.test_vec.Tests) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.011s
+
+OK
+
+
+== TEST_XFORM ==
+test_mirror (decodes.unit_tests.test_xform.Tests) ... ok
+test_scale (decodes.unit_tests.test_xform.Tests) ... ok
+test_translation (decodes.unit_tests.test_xform.Tests) ... 

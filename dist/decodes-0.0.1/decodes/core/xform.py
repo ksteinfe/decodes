@@ -85,8 +85,8 @@ class Xform(object):
         return xf
         
     @staticmethod
-    def mirror(plane="worldXY"):
-        """Produces mirror transform. Can pass in "worldXY", "worldYZ", or "worldXZ". Or, pass in an arbitrary cs (produces mirror about XYplane of CS)
+    def mirror(plane="world_xy"):
+        """Produces mirror transform. Can pass in "world_xy", "world_yz", or "world_xz". Or, pass in an arbitrary cs (produces mirror about XYplane of CS)
         
         .. warning:: When mirroring about an arbitrary plane, this method currently relies on access to the Rhinocommon Kernel.  It will not work in other contexts.
         .. todo:: Re-implement this method without using the Rhinocommon Kernel.
@@ -97,13 +97,13 @@ class Xform(object):
             :rtype: Geometry
         """
         xf = Xform()
-        if plane=="worldXY" :
+        if plane=="world_xy" :
             xf.m22 *= -1
             return xf
-        elif plane=="worldXZ" :
+        elif plane=="world_xz" :
             xf.m11 *= -1
             return xf
-        elif plane=="worldYZ" :
+        elif plane=="world_yz" :
             xf.m00 *= -1
             return xf
         else:
@@ -115,7 +115,7 @@ class Xform(object):
                 rh_xform = Rhino.Geometry.Transform.Mirror(to_rgpt(plane.origin),to_rgvec(plane.zAxis))       
                 return from_rgtransform(rh_xform)
         
-        raise NotImplementedError("Xform.mirror currently accepts the following values for 'plane':/n'worldXY','worldXZ','worldYZ'")
+        raise NotImplementedError("Xform.mirror currently accepts the following values for 'plane':/n'world_xy','world_xz','world_yz'")
 
     @staticmethod
     def rotation(**kargs):
@@ -189,26 +189,25 @@ class Xform(object):
             ]
             return xf
         
-        if isinstance(other, Mesh) : 
-            # applies transformation to the underlying points
-            # bypassing the mesh basis
-            verts = [vert*self for vert in other._verts]
+        # BASED GEOMETRY
+        # all objects that have a basis defined must apply their basis before transforming points
+        if isinstance(other, HasBasis) and (not other.is_baseless): 
+            o = other.basis_applied()
+            o.copy_props(other)
+            other = o
+
+        if isinstance(other, HasPts) : 
+            verts = [Vec(pt*self) for pt in other.pts]
+            other.clear()
             other._verts = verts
             return other
-        
+               
         if isinstance(other, LinearEntity) : 
-            #TODO: make this work
             other._pt = other._pt*self
             xf = self.strip_translation()
             other._vec = other._vec*xf
             return other
 
-        if isinstance(other, PGon) : 
-            # applies transformation to the basis
-            #TODO: make sure this works
-            other.basis = other.basis*self
-            return other
-            
         if isinstance(other, CS) : 
             cs = other
             tup = self._xform_tuple(cs.origin.to_tuple())
@@ -220,19 +219,33 @@ class Xform(object):
             tup = xf._xform_tuple(cs.yAxis.to_tuple())
             yAxis = Vec(tup[0],tup[1],tup[2])
             
-            return CS(origin, xAxis, yAxis)
+            cs = CS(origin, xAxis, yAxis)
+            cs.copy_props(other)
+            return cs
             
         if isinstance(other, Point) : 
+            tup = self._xform_tuple(other.to_tuple())
+            pt = Point(tup[0],tup[1],tup[2])
+            pt.copy_props(other)
+            return pt
+            '''
             if other.is_baseless : 
                 tup = self._xform_tuple(other.to_tuple())
-                return Point(tup[0],tup[1],tup[2])
+                pt = Point(tup[0],tup[1],tup[2])
+                pt.copy_props(other)
+                return pt
             else :
                 tup = self._xform_tuple(other.basis_stripped().to_tuple())
-                return Point(tup[0],tup[1],tup[2],basis=other.basis)
-        
+                pt = Point(tup[0],tup[1],tup[2],basis=other.basis)
+                pt.copy_props(other)
+                return pt
+            '''
+
         if isinstance(other, Vec) : 
             tup = self._xform_tuple(other.to_tuple())
-            return Vec(tup[0],tup[1],tup[2])
+            vec = Vec(tup[0],tup[1],tup[2])
+            vec.copy_props(other)
+            return vec
         
         raise Exception("can't xform that thing")
 

@@ -31,7 +31,12 @@ class PGon(HasPts):
         
     def seg(self,index):
         """ Returns a segment of this Polygon
-        The returned line segment will contain a copy of the Points stored in the
+        The returned line segment will contain a copy of the Points stored in the segment.
+        
+            :param index: Index of the desired segment.
+            :type index: Int
+            :returns: Segment object. 
+            :rtype: Segment
         """
         if index >= len(self) : raise IndexError()
         if index == len(self)-1 : return Segment(self.pts[index],self.pts[0])
@@ -77,7 +82,15 @@ class PGon(HasPts):
 
     def __repr__(self): return "pgon[{0}v]".format(len(self._verts))
     
+    def basis_applied(self):
+        clone = super(PGon,self).basis_applied()
+        clone.basis = CS()
+        return clone
 
+    def basis_stripped(self):
+        clone = super(PGon,self).basis_stripped()
+        clone.basis = CS()
+        return clone
 
     @staticmethod
     def rectangle(cpt, w, h):

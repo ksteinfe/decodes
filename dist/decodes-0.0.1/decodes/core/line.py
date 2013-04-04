@@ -1,4 +1,5 @@
 from decodes.core import *
+
 from . import base, vec, point #here we may only import modules that have been loaded before this one.  see core/__init__.py for proper order
 if VERBOSE_FS: print "line.py loaded"
 
@@ -24,8 +25,9 @@ class LinearEntity(Geometry):
         """
         self._pt = a if isinstance(a,Point) else Point(a.x,a.y,a.z)
         if isinstance(b,Point) : self._vec = Vec(b-a)
+        elif isinstance(b,Plane) : self._vec = Vec(b.origin-a)
         elif isinstance(b,Vec) : self._vec = b
-        else : raise TypeError("%s constructor requires Vec instances" % self.__class__.__name__)
+        else : raise TypeError("Incorrect parameters provided to %s constructor" % self.__class__.__name__)
     
     @property
     def spt(self): 
@@ -240,7 +242,9 @@ class Line(LinearEntity):
 
 class Ray(LinearEntity):
     """A ray in space."""
-    def __eq__(self, other):  raise NotImplementedError()
+    def __eq__(self, other):  
+        return self._pt == other._pt and self._vec.is_coincident(other._vec)
+
     def __contains__(self, other):  raise NotImplementedError()
     def __repr__(self): return "ray[{0} {1}]".format(self._pt,self._vec)
     
@@ -252,8 +256,10 @@ class Ray(LinearEntity):
     
 
 class Segment(LinearEntity):
-    """An undirected line segment in space."""
-    def __eq__(self, other):  raise NotImplementedError()
+    """A directed line segment in space."""
+    def __eq__(self, other):  
+        return self._pt == other._pt and self._vec == other._vec
+
     def __contains__(self, other):  raise NotImplementedError()
     def __repr__(self): return "seg[{0} {1}]".format(self.spt,self._vec)
     

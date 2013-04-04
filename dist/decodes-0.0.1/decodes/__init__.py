@@ -8,11 +8,11 @@ print "http://decod.es"
 
 class Outies:
     # list here all the outies we currently support
-    Rhino, Grasshopper, SVG = range(3)
+    Rhino, Grasshopper, SVG , ACAD = range(4)
 
 
 # keep this up to date with what outies we support
-def makeOut(outtype, name="untitled", path=False):
+def makeOut(outtype, name="untitled", path=False, **kargs):
     """This function constructs a new outie of the given type.
     
         :param outtype: The type of outie to create
@@ -28,13 +28,24 @@ def makeOut(outtype, name="untitled", path=False):
     if outtype == Outies.Rhino:
         import io.rhino_out
         return io.rhino_out.RhinoOut(name)
+    elif outtype == Outies.ACAD:
+        import io.autocad_out
+        return io.autocad_out.AutocadOut(name)
     elif outtype == Outies.Grasshopper:
         import io.gh_out
         return io.gh_out.GrasshopperOut(name)
     elif outtype == Outies.SVG:
         import io.svg_out
-        if path : return io.svg_out.SVGOut(name, path)
-        else : return io.svg_out.SVGOut(name)
+
+        c_dim=False
+        flip=False
+        if "canvas_dimensions" in kargs : c_dim = kargs["canvas_dimensions"]
+        if "flip_y" in kargs : 
+            if c_dim is False : raise Exception("If you want to flip the y-axis of this SVG, you have to tell me the canvas_dimensions.  Please pass an Interval.")
+            flip = kargs["flip_y"]
+        
+        if path : return io.svg_out.SVGOut(name, path, canvas_dimensions=c_dim, flip_y=flip)
+        else : return io.svg_out.SVGOut(name, canvas_dimensions=c_dim, flip_y=flip)
     else :
         print "!!! hey, i don't have an outie of type foo !!!"
         return False

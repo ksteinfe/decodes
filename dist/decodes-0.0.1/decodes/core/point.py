@@ -425,14 +425,31 @@ class Point(Vec,HasBasis):
         p = Point(x,y) if constrain2d else Point(x,y,z)
         return p
         
+    @staticmethod
+    def cull_duplicates(pts, threshold = None):
+        if threshold == None:
+            culled_pts = []
+            for pt in pts: 
+                if not (pt in culled_pts) : culled_pts.append(pt)
+            return culled_pts
+        else:
+            culled_pts = [pts[0]]
+            for pt in pts:
+                is_good = True
+                for cpt in culled_pts:
+                    if pt.distance2(cpt) < threshold**2 : 
+                        is_good = False
+                        break
+                if is_good: culled_pts.append(pt)
+            return culled_pts
+
+
 
 
 class HasPts(HasBasis):
     """
     A base class for anything that contains a list of vertices.
     All HasPts classes also have bases
-
-
     """
     def __init__(self):
         self._verts = [] # a list of vecs that represent the local coordinates of this object's points
@@ -488,6 +505,10 @@ class HasPts(HasBasis):
         else : 
             self._verts.append(self._compatible_vec(pts))
     
+    def clear(self):
+        """Clears this Geometry of all the Points contained within it"""
+        del self._verts[:]
+
     @property
     def centroid(self):
         """Returns the centroid of the points of this object
@@ -505,7 +526,8 @@ class HasPts(HasBasis):
             :rtype: Object
         """
         clone = copy.copy(self)
-        clone._verts = [pt.basis_applied() for pt in self.pts]
+        clone._verts = [Vec(pt.basis_applied()) for pt in self.pts]
+        clone.basis = None
         return clone
     
     def basis_stripped(self): 
@@ -515,7 +537,8 @@ class HasPts(HasBasis):
             :rtype: Object
         """
         clone = copy.copy(self)
-        clone._verts = [pt.basis_stripped() for pt in self.pts]
+        clone._verts = [Vec(pt.basis_stripped()) for pt in self.pts]
+        clone.basis = None
         return clone
 
 

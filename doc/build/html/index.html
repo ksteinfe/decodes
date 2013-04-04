@@ -53,7 +53,7 @@
 </div>
 <span class="target" id="module-decodes"></span><dl class="function">
 <dt id="decodes.makeOut">
-<tt class="descclassname">decodes.</tt><tt class="descname">makeOut</tt><big>(</big><em>outtype</em>, <em>name='untitled'</em>, <em>path=False</em><big>)</big><a class="headerlink" href="#decodes.makeOut" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">decodes.</tt><tt class="descname">makeOut</tt><big>(</big><em>outtype</em>, <em>name='untitled'</em>, <em>path=False</em>, <em>**kargs</em><big>)</big><a class="headerlink" href="#decodes.makeOut" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function constructs a new outie of the given type.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -104,6 +104,12 @@
 <dt id="decodes.core.base.Geometry.__weakref__">
 <tt class="descname">__weakref__</tt><a class="headerlink" href="#decodes.core.base.Geometry.__weakref__" title="Permalink to this definition">¶</a></dt>
 <dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.base.Geometry.copy_props">
+<tt class="descname">copy_props</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.base.Geometry.copy_props" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transfers the properties of the other geometry to this geometry, overwriting any properties this object currently has</p>
 </dd></dl>
 
 <dl class="method">
@@ -233,7 +239,7 @@
 <dl class="attribute">
 <dt id="decodes.core.base.HasBasis.is_baseless">
 <tt class="descname">is_baseless</tt><a class="headerlink" href="#decodes.core.base.HasBasis.is_baseless" title="Permalink to this definition">¶</a></dt>
-<dd><p>tells us if a basis has been defined</p>
+<dd><p>Tells us if a basis has been defined</p>
 </dd></dl>
 
 </dd></dl>
@@ -396,6 +402,16 @@ calls Interval.subinterval(other)</p>
 <tt class="descname">__div__</tt><big>(</big><em>divs</em><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.__div__" title="Permalink to this definition">¶</a></dt>
 <dd><p>overloads the division <strong>(/)</strong> operator
 calls Interval.divide(divs)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of numbers in which a list is divided.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -629,6 +645,14 @@ Such that this.a = new.b and this.b = new.a</p>
 <dt id="decodes.core.interval.Interval.pi">
 <em class="property">static </em><tt class="descname">pi</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.pi" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates an interval from 0-&gt;PI</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Interval</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="staticmethod">
@@ -671,6 +695,14 @@ Such that this.a = new.b and this.b = new.a</p>
 <dt id="decodes.core.interval.Interval.twopi">
 <em class="property">static </em><tt class="descname">twopi</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.interval.Interval.twopi" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates an interval from 0-&gt;2PI</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Interval</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -703,14 +735,14 @@ Returns a new vector that results from adding this vector&#8217;s world coordina
 
 <dl class="method">
 <dt id="decodes.core.vec.Vec.__div__">
-<tt class="descname">__div__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.__div__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__div__</tt><big>(</big><em>scalar</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.__div__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Overloads the addition <strong>(/)</strong> operator. 
-Returns a new vector that results from dividing this vector&#8217;s world coordinates to the other vector&#8217;s world coordinates.</p>
+Returns a new vector that results from dividing this vector&#8217;s world coordinates by a given scalar.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vec</strong> (<em>Vec</em>) &#8211; Vec to be divided.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>scalar</strong> (<em>Float</em>) &#8211; number to divide by</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">New vec.</td>
 </tr>
@@ -723,7 +755,7 @@ Returns a new vector that results from dividing this vector&#8217;s world coordi
 <dl class="method">
 <dt id="decodes.core.vec.Vec.__eq__">
 <tt class="descname">__eq__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.__eq__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Overloads the equal <strong>(==)</strong> operator for vector length.</p>
+<dd><p>Overloads the equal <strong>(==)</strong> operator for vector identity.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -736,10 +768,6 @@ Returns a new vector that results from dividing this vector&#8217;s world coordi
 </tr>
 </tbody>
 </table>
-<div class="admonition-todo admonition" id="index-0">
-<p class="first admonition-title">Todo</p>
-<p class="last">change this so that it tests for length and direction</p>
-</div>
 </dd></dl>
 
 <dl class="method">
@@ -806,18 +834,21 @@ Returns a new vector that results from dividing this vector&#8217;s world coordi
 <dl class="method">
 <dt id="decodes.core.vec.Vec.__invert__">
 <tt class="descname">__invert__</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.__invert__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Inverts the direction of the vector
+<dd><p>Overloads the inversion <strong>(~vec)</strong> operator. 
+Inverts the direction of the vector
 Returns a new inverted vector.</p>
-<table class="docutils field-list" frame="void" rules="none">
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Inverted Vec.</td>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Inverted Vec.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Vec</td>
 </tr>
 </tbody>
 </table>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
@@ -860,19 +891,24 @@ Returns a new inverted vector.</p>
 <dt id="decodes.core.vec.Vec.__mul__">
 <tt class="descname">__mul__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.__mul__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Overloads the addition <strong>(*)</strong> operator. 
-Returns a new vector that results from multiplying this vector&#8217;s world coordinates to the other vector&#8217;s world coordinates.</p>
-<table class="docutils field-list" frame="void" rules="none">
+If given a scalar, returns a new vector that results from multiplying this vector by the scalar
+If given a vector, returns the cross product of this vector and the other vector</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vec</strong> (<em>Vec</em>) &#8211; Vec to be multiplied.</td>
+<tr class="field-odd field"><th class="field-name">param vec:</th><td class="field-body">Vec to be multiplied.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">New vec.</td>
+<tr class="field-even field"><th class="field-name">type vec:</th><td class="field-body">Vec</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">New vec.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Vec</td>
 </tr>
 </tbody>
 </table>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
@@ -891,10 +927,26 @@ Returns a new vector that results from multiplying this vector&#8217;s world coo
 </tr>
 </tbody>
 </table>
-<div class="admonition-todo admonition" id="index-1">
-<p class="first admonition-title">Todo</p>
-<p class="last">change this so that it tests for length and direction</p>
-</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.vec.Vec.__neg__">
+<tt class="descname">__neg__</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.vec.Vec.__neg__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloads the arithmetic negation <strong>(-vec)</strong> operator. 
+Inverts the direction of the vector
+Returns a new inverted vector.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Inverted Vec.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
@@ -1415,6 +1467,12 @@ Each Point is processed to ensure compatibilty with this geometry&#8217;s basis<
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.point.HasPts.clear">
+<tt class="descname">clear</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.point.HasPts.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clears this Geometry of all the Points contained within it</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -1954,7 +2012,7 @@ All given points will be evaluated with their bases applied, and the returned po
 </tr>
 </tbody>
 </table>
-<div class="admonition-todo admonition" id="index-2">
+<div class="admonition-todo admonition" id="index-0">
 <p class="first admonition-title">Todo</p>
 <p class="last">think about what this function will mean for new &#8220;basis&#8221; construct.    probably eliminate, in favor of projecting onto lines and such in world space</p>
 </div>
@@ -2236,6 +2294,22 @@ All given points will be evaluated with their bases applied, and the returned po
 </table>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="decodes.core.pline.PLine.length">
+<tt class="descname">length</tt><a class="headerlink" href="#decodes.core.pline.PLine.length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the length of this polyline.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Length of this PLine</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="decodes.core.pline.PLine.near">
 <tt class="descname">near</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.pline.PLine.near" title="Permalink to this definition">¶</a></dt>
@@ -2276,6 +2350,18 @@ All given points will be evaluated with their bases applied, and the returned po
 <dt id="decodes.core.pline.PLine.seg">
 <tt class="descname">seg</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#decodes.core.pline.PLine.seg" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a segment of this polyline</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<em>Int</em>) &#8211; Index of the polyline&#8217;s segment</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Line segment</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Segment</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -2418,7 +2504,19 @@ Polygons limit their vertices to x and y dimensions, and enforce that they emplo
 <dt id="decodes.core.pgon.PGon.seg">
 <tt class="descname">seg</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#decodes.core.pgon.PGon.seg" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a segment of this Polygon
-The returned line segment will contain a copy of the Points stored in the</p>
+The returned line segment will contain a copy of the Points stored in the segment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<em>Int</em>) &#8211; Index of the desired segment.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Segment object.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Segment</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -2434,7 +2532,7 @@ The returned line segment will contain a copy of the Points stored in the</p>
 <dt id="decodes.core.cs.CS.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>a=None</em>, <em>b=None</em>, <em>c=None</em><big>)</big><a class="headerlink" href="#decodes.core.cs.CS.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>CS Constructor.</p>
-<div class="admonition-todo admonition" id="index-3">
+<div class="admonition-todo admonition" id="index-1">
 <p class="first admonition-title">Todo</p>
 <p class="last">write docstring detailing the different ways of constructing a CS</p>
 </div>
@@ -2460,7 +2558,7 @@ The returned line segment will contain a copy of the Points stored in the</p>
 <dl class="class">
 <dt id="decodes.core.line.Segment">
 <em class="property">class </em><tt class="descclassname">decodes.core.line.</tt><tt class="descname">Segment</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#decodes.core.line.Segment" title="Permalink to this definition">¶</a></dt>
-<dd><p>An undirected line segment in space.</p>
+<dd><p>A directed line segment in space.</p>
 <dl class="attribute">
 <dt id="decodes.core.line.Segment.length">
 <tt class="descname">length</tt><a class="headerlink" href="#decodes.core.line.Segment.length" title="Permalink to this definition">¶</a></dt>
@@ -2527,7 +2625,7 @@ From the dot product of vectors v1 and v2 it is known that:</p>
 get the directional vectors of the two lines and readily
 find the angle between the two using the above formula.</p>
 </div>
-<div class="admonition-todo admonition" id="index-4">
+<div class="admonition-todo admonition" id="index-2">
 <p class="first admonition-title">Todo</p>
 <p class="last">Implement this method.</p>
 </div>
@@ -2588,7 +2686,7 @@ concurrenecy is impossible amongst the whole set. Otherwise, check
 to see if the intersection point of the first two lines is a member 
 on the rest of the lines. If so, the lines are concurrent.</p>
 </div>
-<div class="admonition-todo admonition" id="index-5">
+<div class="admonition-todo admonition" id="index-3">
 <p class="first admonition-title">Todo</p>
 <p class="last">Implement this method.</p>
 </div>
@@ -2616,7 +2714,7 @@ on the rest of the lines. If so, the lines are concurrent.</p>
 </tr>
 </tbody>
 </table>
-<div class="admonition-todo admonition" id="index-6">
+<div class="admonition-todo admonition" id="index-4">
 <p class="first admonition-title">Todo</p>
 <p class="last">Implement this method.</p>
 </div>
@@ -2646,7 +2744,7 @@ on the rest of the lines. If so, the lines are concurrent.</p>
 </tbody>
 </table>
 </div></blockquote>
-<div class="admonition-todo admonition" id="index-7">
+<div class="admonition-todo admonition" id="index-5">
 <p class="first admonition-title">Todo</p>
 <p class="last">Implement this method.</p>
 </div>
@@ -2726,7 +2824,7 @@ on the rest of the lines. If so, the lines are concurrent.</p>
 </tbody>
 </table>
 </div></blockquote>
-<div class="admonition-todo admonition" id="index-8">
+<div class="admonition-todo admonition" id="index-6">
 <p class="first admonition-title">Todo</p>
 <p class="last">Implement this method.</p>
 </div>
@@ -2752,7 +2850,7 @@ on the rest of the lines. If so, the lines are concurrent.</p>
 </tbody>
 </table>
 </div></blockquote>
-<div class="admonition-todo admonition" id="index-9">
+<div class="admonition-todo admonition" id="index-7">
 <p class="first admonition-title">Todo</p>
 <p class="last">Implement this method.</p>
 </div>
@@ -2866,13 +2964,13 @@ This function must be kept up to date with every new class of DC geom</p>
 
 <dl class="staticmethod">
 <dt id="decodes.core.xform.Xform.mirror">
-<em class="property">static </em><tt class="descname">mirror</tt><big>(</big><em>plane='worldXY'</em><big>)</big><a class="headerlink" href="#decodes.core.xform.Xform.mirror" title="Permalink to this definition">¶</a></dt>
-<dd><p>Produces mirror transform. Can pass in &#8220;worldXY&#8221;, &#8220;worldYZ&#8221;, or &#8220;worldXZ&#8221;. Or, pass in an arbitrary cs (produces mirror about XYplane of CS)</p>
+<em class="property">static </em><tt class="descname">mirror</tt><big>(</big><em>plane='world_xy'</em><big>)</big><a class="headerlink" href="#decodes.core.xform.Xform.mirror" title="Permalink to this definition">¶</a></dt>
+<dd><p>Produces mirror transform. Can pass in &#8220;world_xy&#8221;, &#8220;world_yz&#8221;, or &#8220;world_xz&#8221;. Or, pass in an arbitrary cs (produces mirror about XYplane of CS)</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">When mirroring about an arbitrary plane, this method currently relies on access to the Rhinocommon Kernel.  It will not work in other contexts.</p>
 </div>
-<div class="admonition-todo admonition" id="index-10">
+<div class="admonition-todo admonition" id="index-8">
 <p class="first admonition-title">Todo</p>
 <p>Re-implement this method without using the Rhinocommon Kernel.</p>
 <table class="last docutils field-list" frame="void" rules="none">
@@ -3012,6 +3110,41 @@ the function should expect a single parameter t(float), and return a Point.</p>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="decodes.core.curve.Curve._to_pline">
+<tt class="descname">_to_pline</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.curve.Curve._to_pline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a PLine from a curve.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Returns a PLine built from a curve.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">PLine</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.curve.Curve.appx_length">
+<tt class="descname">appx_length</tt><a class="headerlink" href="#decodes.core.curve.Curve.appx_length" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Returns the approximate length of a curve</dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Approximate length of a curve.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="staticmethod">
 <dt id="decodes.core.curve.Curve.bezier">
 <em class="property">static </em><tt class="descname">bezier</tt><big>(</big><em>cpts</em><big>)</big><a class="headerlink" href="#decodes.core.curve.Curve.bezier" title="Permalink to this definition">¶</a></dt>
@@ -3086,6 +3219,25 @@ If include_last is False, returned list will not include the point at Curve.doma
 </div></blockquote>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="decodes.core.curve.Curve.domain">
+<tt class="descname">domain</tt><a class="headerlink" href="#decodes.core.curve.Curve.domain" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Returns the Interval domain of a curve</dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Domain of a curve.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Interval</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="method">
 <dt id="decodes.core.curve.Curve.eval">
 <tt class="descname">eval</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.curve.Curve.eval" title="Permalink to this definition">¶</a></dt>
@@ -3137,9 +3289,45 @@ Returns a tuple containing a Point, a t-value associated with this point, and th
 <tr class="field-even field"><th class="field-name" colspan="2">type max_recursion:</th></tr>
 <tr class="field-even field"><td>&nbsp;</td><td class="field-body">integer</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Tuple containing a Point, a t-value associated with this point, and the distance from this Point to the given Point.</td>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Tuple containing a Plane, a t-value associated with this point, and the distance from this Point to the given Point.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">(Point, float, float)</td>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">(Plane, float, float)</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.curve.Curve.far_pt">
+<tt class="descname">far_pt</tt><big>(</big><em>pt</em>, <em>tolerance=None</em>, <em>max_recursion=20</em><big>)</big><a class="headerlink" href="#decodes.core.curve.Curve.far_pt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds a location on this curve which is furthest to the given Point.
+Unstable and inaccurate.
+Recursive function that searches for further points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
+Returns a Point</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param pt:</th><td class="field-body">Point to look for the furthest point on a curve.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type pt:</th><td class="field-body">Point</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">param tolerance:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">Tolerance to search for the far point. Defaults to None.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type tolerance:</th><td class="field-body">float</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">param max_recursion:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">Maximum number of loops to look for the nearest point. Defaults to 20.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">type max_recursion:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">integer</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Plane.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Plane</td>
 </tr>
 </tbody>
 </table>
@@ -3160,6 +3348,16 @@ the plane of the circle of the helix will always be parallel to the xy-plane
 :param number_of_turns: Number of turns the helix has.
 :type number_of_turns: float
 :result: Helix Curve object.
+:rtype: Curve</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.curve.Curve.hermite">
+<em class="property">static </em><tt class="descname">hermite</tt><big>(</big><em>cpts</em><big>)</big><a class="headerlink" href="#decodes.core.curve.Curve.hermite" title="Permalink to this definition">¶</a></dt>
+<dd><p>constructs a hermite curve. It has nice tension and biasing controls. 
+:param cpts: List of control points to build the curve.
+:type cpts: [Point]
+:result: Hermite Curve object.
 :rtype: Curve</p>
 </dd></dl>
 
@@ -3190,9 +3388,45 @@ Returns a tuple containing a Point, a t-value associated with this point, and th
 <tr class="field-even field"><th class="field-name" colspan="2">type max_recursion:</th></tr>
 <tr class="field-even field"><td>&nbsp;</td><td class="field-body">integer</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Tuple containing a Point, a t-value associated with this point, and the distance from this Point to the given Point.</td>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Tuple containing a Plane, a t-value associated with this point, and the distance from this Point to the given Point.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">(Point, float, float)</td>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">(Plane, float, float)</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.curve.Curve.near_pt">
+<tt class="descname">near_pt</tt><big>(</big><em>pt</em>, <em>tolerance=None</em>, <em>max_recursion=20</em><big>)</big><a class="headerlink" href="#decodes.core.curve.Curve.near_pt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds a location on this curve which is nearest to the given Point.
+Unstable and inaccurate.
+Recursive function that searches for further points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
+Returns a Point</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param pt:</th><td class="field-body">Point to look for the nearest point on a curve.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type pt:</th><td class="field-body">Point</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">param tolerance:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">Tolerance to search for the near point. Defaults to None.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type tolerance:</th><td class="field-body">float</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">param max_recursion:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">Maximum number of loops to look for the nearest point. Defaults to 20.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">type max_recursion:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">integer</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Plane.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Plane</td>
 </tr>
 </tbody>
 </table>

@@ -30,18 +30,23 @@ class GrasshopperIn():
         
         if type(gh_in) is rg.Interval: return Interval(gh_in.T0,gh_in.T1)
 
+        if type(gh_in) is rg.Rectangle3d :  gh_in = gh_in.ToPolyline()
+
         if type(gh_in) is rg.Vector3d : return from_rgvec(gh_in)
         elif type(gh_in)is rg.Point3d : return from_rgpt(gh_in)
         elif type(gh_in)is rg.Plane : 
             return CS(from_rgpt(gh_in.Origin), from_rgvec(gh_in.XAxis), from_rgvec(gh_in.YAxis))
         elif type(gh_in) is rg.Line : 
-            #TODO: check if gh_in can be described as a line first...
             return Segment(Point(gh_in.FromX,gh_in.FromY,gh_in.FromZ),Point(gh_in.ToX,gh_in.ToY,gh_in.ToZ))
+        elif type(gh_in) is rg.LineCurve : 
+            return Segment(Point(gh_in.PointAtStart.X,gh_in.PointAtStart.Y,gh_in.PointAtStart.Z),Point(gh_in.PointAtEnd.X,gh_in.PointAtEnd.Y,gh_in.PointAtEnd.Z))
         elif type(gh_in) is System.Drawing.Color : 
             return Color(float(gh_in.R)/255,float(gh_in.G)/255,float(gh_in.B)/255)
-        elif type(gh_in) is rg.PolylineCurve : 
+        elif type(gh_in) is rg.PolylineCurve: 
             ispolyline, gh_polyline = gh_in.TryGetPolyline()
             if (ispolyline) : return from_rgpolyline(gh_polyline)
+        elif type(gh_in) is rg.Polyline:
+            return from_rgpolyline(gh_in)
         elif type(gh_in) is rg.NurbsCurve : 
             #TODO: check if gh_in can be described as a line first...
             ispolyline, gh_polyline = gh_in.TryGetPolyline()
@@ -53,6 +58,7 @@ class GrasshopperIn():
                 if rh_fc[2] == rh_fc[3] : faces.append([rh_fc[0],rh_fc[1],rh_fc[2]]) #add this triangle
                 else : faces.append([rh_fc[0],rh_fc[1],rh_fc[2],rh_fc[3]]) #add this quad
             return Mesh(verts,faces)
+
         elif any(p in str(type(gh_in)) for p in GrasshopperIn.primitive_types) : return gh_in
         elif any(p in str(type(gh_in)) for p in GrasshopperIn.friendly_types) : return gh_in
         else :
