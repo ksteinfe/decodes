@@ -73,6 +73,7 @@ class SVGOut(outie.Outie):
             ngeom = ngeom*xf
             if hasattr(geom, 'props'): ngeom.props = geom.props
             return ngeom
+        return geom
 
     def _drawPoint(self, pt):
         type = 'circle'

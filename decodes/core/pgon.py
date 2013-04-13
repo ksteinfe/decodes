@@ -105,8 +105,8 @@ class PGon(HasPts):
             :returns: Rectangle (PGon object). 
             :rtype: PGon
         """ 
-        w2 = w/2
-        h2 = h/2
+        w2 = w/2.0
+        h2 = h/2.0
         basis = CS(cpt)
         return PGon([Point(-w2,-h2),Point(w2,-h2),Point(w2,h2),Point(-w2,h2)],basis)
 

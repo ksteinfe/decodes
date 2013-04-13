@@ -21,6 +21,7 @@ class CS(Geometry, IsBasis):
             pt=a
             if b is not None : vecX = b
             if c is not None : vecY = c
+            #TODO: handle situation when we've been passed three points
         else :
             # a cannont act like a point, let's try to make a point out of a,b,c
             pt = Point(a,b,c)

@@ -54,7 +54,7 @@ def from_rgpolyline(gh_polyline):
     else:
         gh_curve = gh_polyline.ToNurbsCurve()
         isplanar, plane = gh_curve.TryGetPlane()
-        if not isplanar : raise GeometricError("Cannot import non-planar polylines")
+        if not isplanar : raise GeometricError("Cannot import non-planar polylines as polygons.  Did you give me degenerate geometry?")
         cs = from_rgplane(plane)
         w_verts = [from_rgpt(gh_polyline[i]) for i in range(len(gh_polyline))]
         verts = [ (pt*cs.ixform).set_basis(cs) for pt in w_verts ]
