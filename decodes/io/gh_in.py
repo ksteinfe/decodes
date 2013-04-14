@@ -14,6 +14,7 @@ import System.Drawing.Color
 class GrasshopperIn():
     """innie for pulling stuff from grasshopper"""
     primitive_types = ["bool", "int", "float", "str"]
+    structure_types = ["classobj", "instance"]
     friendly_types = ["DHr"]
     
     def __init__(self):
@@ -61,6 +62,7 @@ class GrasshopperIn():
 
         elif any(p in str(type(gh_in)) for p in GrasshopperIn.primitive_types) : return gh_in
         elif any(p in str(type(gh_in)) for p in GrasshopperIn.friendly_types) : return gh_in
+        elif any(p in str(type(gh_in)) for p in GrasshopperIn.structure_types) : return gh_in
         else :
             print "UNKNOWN TYPE: "+gh_in_str+" is an "+ str(type(gh_in))
             return gh_in
