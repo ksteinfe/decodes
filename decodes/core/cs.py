@@ -28,6 +28,10 @@ class CS(Geometry, IsBasis):
 
         try: self.origin = pt.basis_applied()
         except : self.origin = pt
+
+        if vecX.length == 0 : raise GeometricError("vecX is a Vector of length 0")
+        if vecY.length == 0 : raise GeometricError("vecY is a Vector of length 0")
+
         self.xAxis = vecX.normalized()
         self.zAxis = self.xAxis.cross(vecY).normalized()
         self.yAxis = self.zAxis.cross(self.xAxis).normalized()
@@ -36,13 +40,16 @@ class CS(Geometry, IsBasis):
         return "cs o[{0},{1},{2}] n[{3},{4},{5}]".format(self.origin.x,self.origin.y,self.origin.z,self.zAxis.x,self.zAxis.y,self.zAxis.z)
 
     """a CS can act as a basis for a point"""
-    def eval(self,other):
+    def eval(self,a=0,b=0,c=0):
         try:
-            x = other.x
-            y = other.y
-            z = other.z
-        except TypeError:
-            print("mallard can't quack()")
+            # try using a as a point
+            x = a.x
+            y = a.y
+            z = a.z
+        except:
+            x = a
+            y = b
+            z = c
         return self.origin + ((self.xAxis*x)+(self.yAxis*y)+(self.zAxis*z))
 
     @property
