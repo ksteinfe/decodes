@@ -48,10 +48,10 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>-3</X>
-                  <Y>54</Y>
+                  <X>-562</X>
+                  <Y>-89</Y>
                 </item>
-                <item name="Zoom" type_name="gh_single" type_code="5">0.7999999</item>
+                <item name="Zoom" type_name="gh_single" type_code="5">1.953125</item>
               </items>
             </chunk>
             <chunk name="Views">
@@ -798,7 +798,7 @@ b.put(strings)</item>
                                   <X>672</X>
                                   <Y>660</Y>
                                   <W>29</W>
-                                  <H>26</H>
+                                  <H>27</H>
                                 </item>
                               </items>
                             </chunk>
@@ -990,7 +990,7 @@ a.put(MovementRule("b",func))
                                   <X>811</X>
                                   <Y>365</Y>
                                   <W>34</W>
-                                  <H>21</H>
+                                  <H>22</H>
                                 </item>
                               </items>
                             </chunk>
@@ -1310,8 +1310,8 @@ for turtle in turtles:
                 <chunk name="Container">
                   <items count="11">
                     <item name="slider_value" type_name="gh_point3d" type_code="51">
-                      <X>1</X>
-                      <Y>0.500487676480921</Y>
+                      <X>0.959414598418445</X>
+                      <Y>0.384975479870307</Y>
                       <Z>0.5</Z>
                     </item>
                     <item name="x_domain" type_name="gh_interval1d" type_code="60">
@@ -1362,8 +1362,8 @@ for turtle in turtles:
                 <chunk name="Container">
                   <items count="11">
                     <item name="slider_value" type_name="gh_point3d" type_code="51">
-                      <X>1</X>
-                      <Y>1</Y>
+                      <X>0</X>
+                      <Y>0.837658579756574</Y>
                       <Z>0.5</Z>
                     </item>
                     <item name="x_domain" type_name="gh_interval1d" type_code="60">
@@ -1488,13 +1488,13 @@ b-&gt;r</item>
                         <item name="MarginLeft" type_name="gh_int32" type_code="3">0</item>
                         <item name="MarginRight" type_name="gh_int32" type_code="3">0</item>
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>750.2167</X>
+                          <X>750.2227</X>
                           <Y>788.9625</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                           <X>750</X>
                           <Y>788</Y>
-                          <W>366</W>
+                          <W>376</W>
                           <H>371</H>
                         </item>
                       </items>
@@ -1660,7 +1660,7 @@ b-&gt;r</item>
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">0</item>
+                        <item name="Value" type_name="gh_double" type_code="6">-0.154</item>
                         <item name="Min" type_name="gh_double" type_code="6">-0.5</item>
                         <item name="Max" type_name="gh_double" type_code="6">0.5</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">3</item>
@@ -1726,7 +1726,7 @@ b-&gt;r</item>
                   <items count="6">
                     <item name="PreviewDocument" type_name="gh_bool" type_code="1">false</item>
                     <item name="ClusterDocument" type_name="gh_bytearray" type_code="20">
-                      <stream length="1327">zZd9TBtlHMevpdz6wsvYEDdNtDoC0UzMjGhcHND2eFugQ9gYIBkc1wd60t7Vu2uBKYYoGCRuyxTnyx+ERVlmUFkWw7awbCwZuGTTTiaRqPOPgcYgLMw/xGXJ8LnrXd/uCoVQ4yWX9H6/3/Py+/ye5/s81WI04XYCiluCjwpBkHj4Jrkc7iaSqvMAhiVpineVIb5Hx7v5V2pXBHAbYPiQeDFEL7mKMd7Mt2j3OMbuWhcKDu3Ay8cO/JOYWMYADwlarDTjxB18VLrQ9JgtWfRUAAcgOGDz+44htg2ij7fpoQmtsMOx/U1KAWvf2+YCvDsOuvlsUjHQSFIkB7MoY2gXYDgSsFIA/2qsuBNIHRocbBvLAWdWk73VgAGWYEgXJwLg/YgGwzkhWgs/JpJTe47OebW6cjg8z4mVGPJPomS10G4f3TiJD5zJKzA5sWO1aEb34kwTECIfgZ/N95eWxuBvTQ1NOwN4+3PjK2GuIUPpeItsGNTk5uy0UBnRgiQUFplKyAYGZ0QKUg/xstYpAXB7GvjZ+uP5eRh8tpBWvB312fkO1GIFNIX7Autg97fJA2ZvbsnbaepM/Pdr74fQ12GAoJ0umgU6C01xOEn51pVG7DxCsNZKEs3BrniPBXqU6rfd38iIGz1wojRjJCmONpIcaxQ8FFy2RhfOcGxWQjHFcjhFgEI3aZMSePXCqWzPma6CwZbHnWTvV516E8cxZIOb8/GUahlfRnpogcyj/OeoEUM6rlpQM+RlEwK3CWFboXnEgiBvmhGkw2yA4+LOOpJyuQWCGySCwcmhlcK0ZUmrKpUShjnAzsRUFRPafud5ghi6UjTcmPJE+hbVqHaP0IFvUwrLw1BBuxkChNRaJew+wS6JwtSB3tyN3rfyB15f6tG+V/1sdGT6H1Yk08GTOQ/J1JsQxGVO8JGh3ZyIBlVCY6gK1FDOp0qJT6qPpvG11vZAW0VOE8WnUdWZbflHz/XlqCYeWoiOk7DdowORATO+JAeRLoLohiD6TSEgVBFBVC8HonpZEG0rgfiJLdif3Hqy8GTz5V9+PN7TExMQCiuCBzGuDEIdEUTNciBqlgVxcCUQz8zU/n235tO8LycyS4nO+vKYgJhUBnHdD0JUXFUkxR3MOlf52PeLlt4bjqmFm7NTIXz0YrJV1TVyyUXDaQZFy2DGQZ8SzgwLA+CRGZDbRoZ2wu3WFow3gtb+UddaNfzkjLVr8uPB5F33vokOW8dziutnNGv1WhtTQfko42zDn2p092D2pOl27dDimoU3XJmiw1S/Q1Fv8p4OEt5+UzAmVURMsZSb0Zuzl4a63yj4eldcweEPP395zZjCdWsVmOSrScA0rohJHRFTLMWob952a7btgbyRU/oRq/mHkTVjypzrfHDxsD3/C2Zm0/j0X/OrwCTXKgHTdT+m6I7x1d1wNoqICHj95hg3oYxnfO42+tLB/Vj3O+13ps4O7Vtvra5/EUOQy/L8dwad3gtRnt5oCaCaOLs8/xKl/BPF/B1CI8Xks3P6Fn6e3my+mP7Bvfl3c56KSfI3lJO/6k9ePKj4PhQPqrRbh7BNO72W49nTF4eutGBKayL0kNKJ3egtbpajncHxSJJoC2OIpPjsiv/tYnnNDr8dr3cNOhAIe0z+D0N60ixBl4W4NdUgWL/+u0LEVDXDxW69q5KXBqvijbIqmkhVud91+rPNWRrzcO2WT064SgdW3hn6/83OiE6eh4+YX9ia9Ct2/rsT3t/UadfWfHqF63yUm6cICtiFlcr0Lw==</stream>
+                      <stream length="1328">zZd9TBtlHMevpb31BcbYEDdNtDoC0UzMjGhcHND2eFugQ9gYIBkc1wd60t7Vu2uBKYYoGCRuyxTnyx+ERVlmUFkWw7awbCwZuGRTJpNI1PnHQGMQFuYf4rJk+Nz1rm93hdKsxksu6f1+v+e5+36e5/k+T3UYTXhcgOKW4aVCEEQL7/Vup6eJpOq8gGFJmuJTZYjv0vNp/pbaFQHcDhi+RCuWGKRUMcaH+RbtXufYHdtiwcHtePnY/n+SksoY4CVBi41mXLiTr0oXmh61J4uZCuAEBAfs/txRxL5OzPExAwyhFQ74bn+TUsA69rS5AZ9OgGleTSoGGkmK5KCKMoZ2A4YjASsV8LfGhruA1KHRybaxHHBlNTlajRhgCYZ0cyIAPo9oMJwTqnXwYTI5tefI/IROXw5fz3NiJYb8lSRFrbTHRzdB4gO/5BUoTuxYLYbRPTjTBITKR+Bj873l5TH4W1ND064A3v5cbSXUGvIqPR+RvQY1ezgHLYyMGEESC4vMJWQDgzMiBakHrax1SgDc7gb+a/31/HcYfbGQVnwc9cX5DtTiCGgK9wbmwa5vkwcsE7klb6epM/Hfr74fQl+PAYJ2uWkW6K00xeEk5ZtXGrHzCMU6G0k0B6e0XivMKI3fNn8jE27ywg+lGRNJcbSJ5FiTkKHgtDW5cYZjsxKLKZbDKQIUeki7JODV8yezvae7CgZbHneRvV91Gswcx5ANHs7HUxpLbRnppQUyj/KPoyYM6bhiRS2Ql10o3CqUbYHhESuCvGlBkA6LEb4Xd9WRlNsjEFwnEQwWh1YKny0TrapUEgw1wM5EqYqCtt1+niCGLhcNN6Y8kb5ZNarbLXTgW5TC9DBW0B6GACFjrRJWnxCXTGF6f2/uhom38gdeX+7RvVf9bHRk+h9WJNPBkzkHydSbEcRtSfSRoT2ciAZVQmOsCoyhnE+VEp9UH03Ta63tgbaKnCaLT6Gq01vzj5zty1FNPrQYHSdhuUcHIgMqvigHkS6C6IYg+s0hIFQRQVSvBKJ6RRBtq4H4iS3Yl9x6ovBE86VffjzW0xMXEAozggcxrgxCHRFEzUogalYEcWA1EM/M1v59p+bTvC8nM0uJzvryuICYUgZxzQ9CdFxVJMcdzDpb+dj3S9be687pxRtz0yF8DKLYquoaueWi4TSDqmUwE2BOCWeGlQFwywzYbSNDu+ByawvGG8Fr/6hrrRp+ctbWNfXxYPLOu99Eh63jOcX5M5q1dq+Nq6F8lHGm4U81umswe8p8q3ZoKWbjDXem6DDVb1f0m7yng4y33xyMSRURUzztZvTG3MWh7jcKvt6ZUHDow89fjhlTuG+tAZN8NgmYxhUxqSNiiqcZ9S3Yb861PZA3ctIwYrP8MBIzpsz5zgeXDjnyv2BmN47P/LWwBkxyrxIwXfNjim4bX9sJZ4OIiIDHb47xEMp4xudvoS8d2Id1v9N+e/rM0N777dX1L2IIckmuf0fQ7r0Y5e6NlgCqiXPI9Zco6U8S9TuFRoris3P6Fn+e2WS5kP7B3YV3c56Ki/jryuKv+MWLGxXfh+JGlXbzILZxx4T1WPbMhaHLLZjSnAjdpPRiNwarh+VoV3A9sl6MhTFEUnxxxf928Txmh5+OYx4D6R+b7FiAQNpjVv60DE1Top0QE+1gp/rvkMfVH8Nt7b7zz0uD/CfC+Wsi8b/XdeqzTVkay3Dt5k+Ou0sHVp/thv/NbI/OcocPW17Ysv5X7Nx3xyd+U6ddjXlHCvfuaBdEEXSl8/4B+Rc=</stream>
                     </item>
                     <item name="Name" type_name="gh_string" type_code="10">Cluster</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Cluster</item>
