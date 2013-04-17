@@ -48,10 +48,10 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>-562</X>
-                  <Y>-89</Y>
+                  <X>-46</X>
+                  <Y>112</Y>
                 </item>
-                <item name="Zoom" type_name="gh_single" type_code="5">1.953125</item>
+                <item name="Zoom" type_name="gh_single" type_code="5">1</item>
               </items>
             </chunk>
             <chunk name="Views">
@@ -880,7 +880,7 @@ a.put(MovementRule("b",func))
                   </items>
                   <chunks count="2">
                     <chunk name="Attributes">
-                      <items count="2">
+                      <items count="3">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>860</X>
                           <Y>355</Y>
@@ -891,6 +891,7 @@ a.put(MovementRule("b",func))
                           <W>90</W>
                           <H>68</H>
                         </item>
+                        <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                       </items>
                     </chunk>
                     <chunk name="ParameterData">
@@ -920,7 +921,7 @@ a.put(MovementRule("b",func))
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>829.5</X>
                                   <Y>333.6667</Y>
@@ -931,6 +932,7 @@ a.put(MovementRule("b",func))
                                   <W>34</W>
                                   <H>21</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -951,7 +953,7 @@ a.put(MovementRule("b",func))
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>829.5</X>
                                   <Y>355</Y>
@@ -962,6 +964,7 @@ a.put(MovementRule("b",func))
                                   <W>34</W>
                                   <H>21</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -981,7 +984,7 @@ a.put(MovementRule("b",func))
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>829.5</X>
                                   <Y>376.3333</Y>
@@ -992,6 +995,7 @@ a.put(MovementRule("b",func))
                                   <W>34</W>
                                   <H>22</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -1008,7 +1012,7 @@ a.put(MovementRule("b",func))
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>886</X>
                                   <Y>339</Y>
@@ -1019,6 +1023,7 @@ a.put(MovementRule("b",func))
                                   <W>22</W>
                                   <H>32</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -1034,7 +1039,7 @@ a.put(MovementRule("b",func))
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>886</X>
                                   <Y>371</Y>
@@ -1045,6 +1050,7 @@ a.put(MovementRule("b",func))
                                   <W>22</W>
                                   <H>32</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
