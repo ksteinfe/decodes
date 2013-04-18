@@ -281,3 +281,5 @@ class Segment(LinearEntity):
     def midpoint(self): 
       """Returns the midpoint of this segment"""
       return Point.interpolate(self.spt, self.ept)
+
+

@@ -301,7 +301,7 @@ class Vec(Geometry):
             :result: Random vector.
             :rtype: Vec
         """
-        if interval == None:
+        if interval is None:
             interval = Interval(-1,1)
         x = random.uniform(interval.a,interval.b)
         y = random.uniform(interval.a,interval.b)
