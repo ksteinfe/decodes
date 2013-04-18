@@ -36,6 +36,15 @@ class Interval():
         """
         return self.subinterval(other)
 
+    def __add__(self, val):
+        """Overloads the addition **(+)** operator. 
+        """    
+        return Interval(self.a + val, self.b + val)
+    def __sub__(self, val): 
+        """Overloads the addition **(-)** operator. 
+        """    
+        return Interval(self.a - val, self.b - val)
+
     def __contains__(self, number):
         """
         overloads the containment **(in)** operator

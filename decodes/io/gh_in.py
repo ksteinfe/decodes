@@ -14,7 +14,7 @@ import System.Drawing.Color
 class GrasshopperIn():
     """innie for pulling stuff from grasshopper"""
     primitive_types = ["bool", "int", "float", "str"]
-    structure_types = ["classobj", "instance"]
+    structure_types = ["classobj", "instance", "function"]
     friendly_types = ["DHr"]
     
     def __init__(self):
