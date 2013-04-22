@@ -6,6 +6,9 @@ pts = [Point(1,1),Point(2,1),Point(1,2)]
 cs = CS(Point(10,10))
 pgon = PGon(pts,cs)
 
+c = Color(0.5,0,1.0)
+print c.hue
+
 
 print pgon
 
