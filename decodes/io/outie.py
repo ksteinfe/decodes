@@ -19,12 +19,12 @@ class Outie(object):
         return self
     
     def put(self,ngeom):
-        if isinstance(ngeom, (HasBasis) ) : ngeom = ngeom.basis_applied()
         
         if self._allow_foreign : 
             self.geom.append(copy.deepcopy(ngeom)) # if we allow foreigners, just put in whatever they gave us
         else:
-            if isinstance(ngeom, (Geometry) ) : 
+            if isinstance(ngeom, (Geometry) ) :
+                if isinstance(ngeom, (HasBasis) ) and ngeom.do_translate : ngeom = ngeom.basis_applied()
                 self.geom.append(copy.deepcopy(ngeom))
             elif isinstance(ngeom, collections.Iterable) : 
                 for g in ngeom : self.put(g)
