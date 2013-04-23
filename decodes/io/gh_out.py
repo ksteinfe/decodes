@@ -51,6 +51,10 @@ class GrasshopperOut(outie.Outie):
         # here we sort out what type of geometry we're dealing with, and call the proper draw functions
         # MUST LOOK FOR CHILD CLASSES BEFORE PARENT CLASSES (points before vecs)
         
+        if isinstance(g, Geometry) and not g.do_translate:
+            tree.Add(g,path)
+            return True
+
         def extract_props(g):
             from DcPython import Decodes as dcp
             att = dcp.Decodes_Attributes()
