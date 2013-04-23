@@ -29,7 +29,7 @@
             <item name="PreviewSelected" type_name="gh_drawing_color" type_code="36">
               <ARGB>100;0;150;0</ARGB>
             </item>
-            <item name="Preview" type_name="gh_string" type_code="10">Shaded</item>
+            <item name="Preview" type_name="gh_string" type_code="10">Wireframe</item>
             <item name="PreviewMeshType" type_name="gh_int32" type_code="3">1</item>
           </items>
         </chunk>
@@ -48,10 +48,10 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>-74</X>
-                  <Y>-952</Y>
+                  <X>4</X>
+                  <Y>-491</Y>
                 </item>
-                <item name="Zoom" type_name="gh_single" type_code="5">1.5625</item>
+                <item name="Zoom" type_name="gh_single" type_code="5">1.25</item>
               </items>
             </chunk>
             <chunk name="Views">
@@ -851,7 +851,7 @@ a.put(msh)
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">10</item>
+                        <item name="Value" type_name="gh_double" type_code="6">20</item>
                         <item name="Min" type_name="gh_double" type_code="6">3</item>
                         <item name="Max" type_name="gh_double" type_code="6">20</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">3</item>
@@ -1129,7 +1129,7 @@ for x in Interval().divide(count,include_last = True):
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">0.88</item>
+                        <item name="Value" type_name="gh_double" type_code="6">0.87</item>
                         <item name="Min" type_name="gh_double" type_code="6">-0.2</item>
                         <item name="Max" type_name="gh_double" type_code="6">1.2</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">2</item>
@@ -1455,7 +1455,7 @@ for x in Interval().divide(count,include_last = True):
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">10</item>
+                        <item name="Value" type_name="gh_double" type_code="6">20</item>
                         <item name="Min" type_name="gh_double" type_code="6">3</item>
                         <item name="Max" type_name="gh_double" type_code="6">20</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">3</item>
