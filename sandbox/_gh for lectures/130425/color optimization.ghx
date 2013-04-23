@@ -48,8 +48,8 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>-89</X>
-                  <Y>48</Y>
+                  <X>-154</X>
+                  <Y>-667</Y>
                 </item>
                 <item name="Zoom" type_name="gh_single" type_code="5">1.25</item>
               </items>
@@ -346,12 +346,11 @@ a.put( fitness )</item>
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="5">
+                  <items count="4">
                     <item name="Name" type_name="gh_string" type_code="10">Colour RGB</item>
                     <item name="NickName" type_name="gh_string" type_code="10">RGB</item>
                     <item name="Description" type_name="gh_string" type_code="10">Create a colour from {RGB} channels.</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">689aebba-d7d0-4dd3-a857-5261211dabbc</item>
-                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                   </items>
                   <chunks count="6">
                     <chunk name="Attributes">
@@ -369,12 +368,11 @@ a.put( fitness )</item>
                       </items>
                     </chunk>
                     <chunk name="param_input" index="0">
-                      <items count="7">
+                      <items count="6">
                         <item name="Name" type_name="gh_string" type_code="10">Alpha</item>
                         <item name="NickName" type_name="gh_string" type_code="10">A</item>
                         <item name="Description" type_name="gh_string" type_code="10">Alpha channel (255 = opaque)</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">0dd127a6-afda-461c-9baa-7d27797eec18</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                       </items>
@@ -416,12 +414,11 @@ a.put( fitness )</item>
                       </chunks>
                     </chunk>
                     <chunk name="param_input" index="1">
-                      <items count="8">
+                      <items count="7">
                         <item name="Name" type_name="gh_string" type_code="10">Red</item>
                         <item name="NickName" type_name="gh_string" type_code="10">R</item>
                         <item name="Description" type_name="gh_string" type_code="10">Red channel</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">a5aa8fbf-7897-4b14-a07d-d219ce837945</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                         <item name="Source" index="0" type_name="gh_guid" type_code="9">2d85acad-4c5d-4247-bb77-df8e0c6b028f</item>
@@ -464,12 +461,11 @@ a.put( fitness )</item>
                       </chunks>
                     </chunk>
                     <chunk name="param_input" index="2">
-                      <items count="8">
+                      <items count="7">
                         <item name="Name" type_name="gh_string" type_code="10">Green</item>
                         <item name="NickName" type_name="gh_string" type_code="10">G</item>
                         <item name="Description" type_name="gh_string" type_code="10">Green channel</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">efb83a56-e978-4fbf-b079-373075cefe6e</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                         <item name="Source" index="0" type_name="gh_guid" type_code="9">5a852b16-f656-4125-bb32-542a646a386e</item>
@@ -512,12 +508,11 @@ a.put( fitness )</item>
                       </chunks>
                     </chunk>
                     <chunk name="param_input" index="3">
-                      <items count="8">
+                      <items count="7">
                         <item name="Name" type_name="gh_string" type_code="10">Blue</item>
                         <item name="NickName" type_name="gh_string" type_code="10">B</item>
                         <item name="Description" type_name="gh_string" type_code="10">Blue channel</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">bb657554-bc78-436e-88c9-da906ff629dd</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                         <item name="Source" index="0" type_name="gh_guid" type_code="9">45a8e540-adb2-4a16-b7e7-503de46a0984</item>
@@ -560,12 +555,11 @@ a.put( fitness )</item>
                       </chunks>
                     </chunk>
                     <chunk name="param_output" index="0">
-                      <items count="7">
+                      <items count="6">
                         <item name="Name" type_name="gh_string" type_code="10">Colour</item>
                         <item name="NickName" type_name="gh_string" type_code="10">C</item>
                         <item name="Description" type_name="gh_string" type_code="10">Resulting colour</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">a04bed07-8657-4aae-8c74-06ff3f07da62</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                       </items>
@@ -597,12 +591,11 @@ a.put( fitness )</item>
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="7">
+                  <items count="6">
                     <item name="Name" type_name="gh_string" type_code="10">Number Slider</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Slider</item>
                     <item name="Description" type_name="gh_string" type_code="10">Numeric slider for single values</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">2d85acad-4c5d-4247-bb77-df8e0c6b028f</item>
-                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                     <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                     <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                   </items>
@@ -623,7 +616,7 @@ a.put( fitness )</item>
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">110</item>
+                        <item name="Value" type_name="gh_double" type_code="6">126</item>
                         <item name="Min" type_name="gh_double" type_code="6">0</item>
                         <item name="Max" type_name="gh_double" type_code="6">255</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">3</item>
@@ -642,12 +635,11 @@ a.put( fitness )</item>
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="7">
+                  <items count="6">
                     <item name="Name" type_name="gh_string" type_code="10">Number Slider</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Slider</item>
                     <item name="Description" type_name="gh_string" type_code="10">Numeric slider for single values</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">5a852b16-f656-4125-bb32-542a646a386e</item>
-                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                     <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                     <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                   </items>
@@ -668,7 +660,7 @@ a.put( fitness )</item>
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">120</item>
+                        <item name="Value" type_name="gh_double" type_code="6">138</item>
                         <item name="Min" type_name="gh_double" type_code="6">0</item>
                         <item name="Max" type_name="gh_double" type_code="6">255</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">3</item>
@@ -687,12 +679,11 @@ a.put( fitness )</item>
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="7">
+                  <items count="6">
                     <item name="Name" type_name="gh_string" type_code="10">Number Slider</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Slider</item>
                     <item name="Description" type_name="gh_string" type_code="10">Numeric slider for single values</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">45a8e540-adb2-4a16-b7e7-503de46a0984</item>
-                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                     <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                     <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                   </items>
@@ -713,7 +704,7 @@ a.put( fitness )</item>
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">186</item>
+                        <item name="Value" type_name="gh_double" type_code="6">187</item>
                         <item name="Min" type_name="gh_double" type_code="6">0</item>
                         <item name="Max" type_name="gh_double" type_code="6">255</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">3</item>
@@ -1556,13 +1547,12 @@ c.put(best_fit)</item>
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="9">
+                  <items count="8">
                     <item name="props_visible" type_name="gh_bool" type_code="1">false</item>
                     <item name="Name" type_name="gh_string" type_code="10">Decodes Python Script</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Decodes</item>
                     <item name="Description" type_name="gh_string" type_code="10">A python scriptable component that implements the Decodes library</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">0f3f4713-9aa5-4d19-ad3c-962b1136fc0f</item>
-                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                     <item name="HideInput" type_name="gh_bool" type_code="1">true</item>
                     <item name="CodeInput" type_name="gh_string" type_code="10">
 
@@ -1595,12 +1585,11 @@ a.put(fitness(sample))</item>
                       </items>
                       <chunks count="4">
                         <chunk name="InputParam" index="0">
-                          <items count="12">
+                          <items count="11">
                             <item name="Name" type_name="gh_string" type_code="10">fitness</item>
                             <item name="NickName" type_name="gh_string" type_code="10">fitness</item>
                             <item name="Description" type_name="gh_string" type_code="10">Script variable Decodes</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">4c07e4f8-7c63-47e2-a97d-ee03d16ab71e</item>
-                            <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">true</item>
                             <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                             <item name="Source" index="0" type_name="gh_guid" type_code="9">634f1cd7-fcc0-4ca1-8e65-03e2b1ae8969</item>
@@ -1627,12 +1616,11 @@ a.put(fitness(sample))</item>
                           </chunks>
                         </chunk>
                         <chunk name="InputParam" index="1">
-                          <items count="12">
+                          <items count="11">
                             <item name="Name" type_name="gh_string" type_code="10">sample</item>
                             <item name="NickName" type_name="gh_string" type_code="10">sample</item>
                             <item name="Description" type_name="gh_string" type_code="10">Script variable Decodes</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">cb3162b3-6602-4801-ad6a-74b24f9a3858</item>
-                            <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">true</item>
                             <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                             <item name="Source" index="0" type_name="gh_guid" type_code="9">a04bed07-8657-4aae-8c74-06ff3f07da62</item>
@@ -1659,13 +1647,12 @@ a.put(fitness(sample))</item>
                           </chunks>
                         </chunk>
                         <chunk name="OutputParam" index="0">
-                          <items count="8">
+                          <items count="7">
                             <item name="Name" type_name="gh_string" type_code="10">console</item>
                             <item name="NickName" type_name="gh_string" type_code="10">...</item>
                             <item name="Description" type_name="gh_string" type_code="10">The execution information, as output and error streams</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">249544eb-747a-4d80-a8ae-bcf1da9f8bd1</item>
                             <item name="Mutable" type_name="gh_bool" type_code="1">false</item>
-                            <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                             <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                           </items>
@@ -1687,12 +1674,11 @@ a.put(fitness(sample))</item>
                           </chunks>
                         </chunk>
                         <chunk name="OutputParam" index="1">
-                          <items count="7">
+                          <items count="6">
                             <item name="Name" type_name="gh_string" type_code="10">a</item>
                             <item name="NickName" type_name="gh_string" type_code="10">a</item>
                             <item name="Description" type_name="gh_string" type_code="10">Contains the translated geometry found in outie a</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">e4fc9d91-9975-46d3-807b-27c1e1190cab</item>
-                            <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                             <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                           </items>
@@ -1726,12 +1712,11 @@ a.put(fitness(sample))</item>
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="9">
+                  <items count="8">
                     <item name="Name" type_name="gh_string" type_code="10">Data</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Fitness Function</item>
                     <item name="Description" type_name="gh_string" type_code="10">Represents a collection of generic data</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">634f1cd7-fcc0-4ca1-8e65-03e2b1ae8969</item>
-                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                     <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                     <item name="WireDisplay" type_name="gh_int32" type_code="3">2</item>
                     <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
@@ -2039,12 +2024,11 @@ a.put(fitness(sample))</item>
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="17">
+                  <items count="16">
                     <item name="Name" type_name="gh_string" type_code="10">Panel</item>
                     <item name="NickName" type_name="gh_string" type_code="10">fitness</item>
                     <item name="Description" type_name="gh_string" type_code="10">A panel for custom notes and String values</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">597f91d4-db49-4dfa-974a-00b76e210d90</item>
-                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                     <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                     <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                     <item name="Source" index="0" type_name="gh_guid" type_code="9">0a10d864-c38b-4789-9da1-901c5bc55844</item>
@@ -2098,7 +2082,7 @@ a.put(fitness(sample))</item>
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="7">
+                  <items count="6">
                     <item name="PreviewDocument" type_name="gh_bool" type_code="1">false</item>
                     <item name="ClusterDocument" type_name="gh_bytearray" type_code="20">
                       <stream length="1491">zVhrbBRFHN/ei7bXFguiVpJyvP0A+ACEEAy9R9MWyvVyh6YUFbZ30962+3Jvtw+awqm0VAKCBBAJJahQSX0lYEgkBvoBfAZRQirSxBiwMX7A1qBGDVZnZnfvtXPt2dDIJvNh/4+5+f1+s/P/z2V7hKDCAV7+Bz5ZFEVZ4SgQWaWe4Tc2ASnCCDxy+Sj1yUFuNPS8ckCHgIRCrFpIru6q8CAzyrh4nD4UmSN7j/l/FH5YePCLfJ8EmhjQ7BUkjmZR1ByceiA0WfMEAAuCMgjFfAeo0CTNh2y50GQLhOFvx1LWgkh4XasIkNsM3QjNvR5Qx/CMDFH4JEEEksyAiB6AhsVLc0CfcFpQYAXJIYgywzGbaZS1qD5s94BIUGJEWaMCRVIWDy3jvGz48tafu2h7/lfZOX64EMRYRGcTPfm61S0oKs9mnSm4pgYIU5vYpJlt62ipHuDIYvhaq7ksNYLAxYmOrrI+BVEn/VQOshh+xuZU5LCANdIsVF5ZubOSqZVoSeNDn8FqyC6MU1hVi1Ybi7fAYVdtSVnIblPtaAKTpoWl7Mn4jjC3T166+9hM50c/P7ZzpPjboSQdcgMiy8gOp7/MleMWeJlmeHWL4ZlTVUuIzvYywcZEnwVZSQIuVpNoB5JckRwMLwuOOlaAovP1DlGA7442lNzuCIZpngdsZFFeBR+RaT4IyhQmpAO58NN3ee7PG8sPSi3zli+70Z7rlGWJqVVklVddU6uPaRIwQzPw+yU3RTW5bS7IWwgHzsaanoPmSji2uSjqhMsu0hLNbWR4UcFMTtKZTIRoc2MEBuhZbhJuiAFOpqEmAqo/03977ruvVZ5+fm7vqSWymF2FJ1A/U7xN7AGYGwRJmmfh7xHb9WMC+P9wDS95u+rV4sv8YNHw95kx03eezEwfNHvh2OSkqKOuPJUZQZE1amwkaqxOVgzTRmacJGbycbCuNpGaZzpP8/NfaKg89+GJ4GDjhScyowZ/6ZntigEIsNqIvV/DvgdhdyZhz0qH3ewHISNyPwm5HYaOintqvT8/0thTeoa92PnlkGNoQnCzZNy1ZNymtJqXSQDwRuRlRM1x8KjYn91yjd6y8OuSw1dvrVw+56XqCcEeJWNvImM3p8NucbEKMEInHoB5KHZU5MuYB1devzJQ2tlw9taGxcU3JwT5DjLyjhhyrZCg3yMWksL3anYo2we9H9weWDH96uGHkwjJ8eGDvHp9TQZ1JB5soNDkk0kcznNLALYBsIqoBaNOEjhHW0vrZlg0BEEKMTz0pqkbV0J7H98wf6Sq++8XS3p/YWdlxll0xE1FOwycUUOQLxqOrrR1w5QK114NF8mJAg87NeOeqSZ+Lm0t7fEkIqyZR6YtONB/uerslIdM+dv/mjHu6pF65mTGT8mvkATOyM8wNAf16uEs8KHGNiJDELCNo/Wl4fbXuC6XBEGGqcQN6KPlcOygbXuk3ZhlqZABR2kv6LHxCler7j4bFX8SpcpKK9X60aRaT5aqdSypdg882lJS/PGa/UPdnpL7B1vHLVXqEZm5VFHjwYelar7bpTKllapmNKlqyFJtHkuqrAWrT56/1rt6zz5rV9GsTd+MW6rUM/0/SGU8qZFU0Y67XSpzOqlsgVa4WM6oUoCk0nR37ER3RHCiow7eFfHBT9Rs2zuBnr2fPFe679SsrTcXF31mK2dCIcDHaLnT5RSLtI8s0u7/VSSryNI8precGusZXpWpP8MrAC7qmRb0e9QWIF68icounb2k+83gfs+hYPOR9p5J3jutZNTqIRZ5s0ctYkfxFUhrjExUmsbovuu7PFNWXHK/vvTGufc/bfaQLo3JXVGONk2uW4nIApcYTxVothQeqULVTvyLZCJvqamXy3FrEDtJUtvQlyHTDXCIsKXq09tQczq2RzpOHpu6yOI6/fQDh3rEtccJmzCZ7NwJJHsiNv3vb4xYu6turun6rb+z7ZWrl8ZdglK/ngz1oKbA3b81pse/</stream>
@@ -2107,7 +2091,6 @@ a.put(fitness(sample))</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Cluster</item>
                     <item name="Description" type_name="gh_string" type_code="10">Contains a cluster of Grasshopper components</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">4f1a461f-d0fe-42d5-9f9b-eb3712d7cbe7</item>
-                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                   </items>
                   <chunks count="4">
                     <chunk name="Author" />
@@ -2143,12 +2126,11 @@ a.put(fitness(sample))</item>
                       </items>
                       <chunks count="2">
                         <chunk name="InputParam" index="0">
-                          <items count="8">
+                          <items count="7">
                             <item name="Name" type_name="gh_string" type_code="10">Colour</item>
                             <item name="NickName" type_name="gh_string" type_code="10">clr</item>
                             <item name="Description" type_name="gh_string" type_code="10">Input colour</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">c312e47a-5603-41e7-a148-96ec091f97f6</item>
-                            <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                             <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                             <item name="Source" index="0" type_name="gh_guid" type_code="9">a04bed07-8657-4aae-8c74-06ff3f07da62</item>
@@ -2171,12 +2153,11 @@ a.put(fitness(sample))</item>
                           </chunks>
                         </chunk>
                         <chunk name="OutputParam" index="0">
-                          <items count="7">
+                          <items count="6">
                             <item name="Name" type_name="gh_string" type_code="10">Point</item>
                             <item name="NickName" type_name="gh_string" type_code="10">pt</item>
                             <item name="Description" type_name="gh_string" type_code="10">Point coordinate</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">c56304ed-a0b4-495c-8ae1-9cb1ba92c067</item>
-                            <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                             <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                           </items>
@@ -2210,12 +2191,11 @@ a.put(fitness(sample))</item>
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="8">
+                  <items count="7">
                     <item name="Name" type_name="gh_string" type_code="10">Number</item>
                     <item name="NickName" type_name="gh_string" type_code="10">fitness</item>
                     <item name="Description" type_name="gh_string" type_code="10">Represents a collection of floating point numbers</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">0a10d864-c38b-4789-9da1-901c5bc55844</item>
-                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                     <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                     <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                     <item name="Source" index="0" type_name="gh_guid" type_code="9">e4fc9d91-9975-46d3-807b-27c1e1190cab</item>
@@ -2261,7 +2241,7 @@ a.put(fitness(sample))</item>
                         <item name="gene" index="1" type_name="gh_guid" type_code="9">5a852b16-f656-4125-bb32-542a646a386e</item>
                         <item name="gene" index="2" type_name="gh_guid" type_code="9">45a8e540-adb2-4a16-b7e7-503de46a0984</item>
                         <item name="solver_settings" type_name="gh_bytearray" type_code="20">
-                          <stream length="2499">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiIHN0YW5kYWxvbmU9InllcyI/Pg0KPEdhbGFwYWdvcz4NCiAgPCEtLUdQX1NvbHZlciBEdW1wLS0+DQogIDwhLS1DcmVhdGVkIG9uOiAxMDozNzoyMiwgVHVlc2RheSwgMjMgQXByaWwgMjAxMy0tPg0KICA8U29sdmVyPjE8L1NvbHZlcj4NCiAgPFRhcmdldD5JbmZpbml0eTwvVGFyZ2V0Pg0KICA8VGhyZXNob2xkPjAuOTk5PC9UaHJlc2hvbGQ+DQogIDxHQV9Jbml0aWFsU2l6ZT41MDwvR0FfSW5pdGlhbFNpemU+DQogIDxHQV9NaW5pbXVtU2l6ZT4yMDwvR0FfTWluaW11bVNpemU+DQogIDxHQV9Jbml0aWFsQm9vc3Q+MjwvR0FfSW5pdGlhbEJvb3N0Pg0KICA8R0FfRnJ1aXRsZXNzTGltaXQ+NTA8L0dBX0ZydWl0bGVzc0xpbWl0Pg0KICA8R0FfSW5icmVlZGluZ0ZhY3Rvcj43NTwvR0FfSW5icmVlZGluZ0ZhY3Rvcj4NCiAgPEdBX01haW50YWluUGVyY2VudGFnZT41PC9HQV9NYWludGFpblBlcmNlbnRhZ2U+DQogIDxHQV9Db3VwbGluZ0NvdW50PjM8L0dBX0NvdXBsaW5nQ291bnQ+DQogIDxHQV9Db3VwbGluZ18wPg0KICAgIDxjb3VwbGluZ19hbGdvcml0aG0+MzwvY291cGxpbmdfYWxnb3JpdGhtPg0KICAgIDxjb3VwbGluZ19iaWFzPjI8L2NvdXBsaW5nX2JpYXM+DQogICAgPGNvdXBsaW5nX2luY2x1c2lvbj4xMDwvY291cGxpbmdfaW5jbHVzaW9uPg0KICA8L0dBX0NvdXBsaW5nXzA+DQogIDxHQV9Db3VwbGluZ18xPg0KICAgIDxjb3VwbGluZ19hbGdvcml0aG0+MzwvY291cGxpbmdfYWxnb3JpdGhtPg0KICAgIDxjb3VwbGluZ19iaWFzPjU8L2NvdXBsaW5nX2JpYXM+DQogICAgPGNvdXBsaW5nX2luY2x1c2lvbj4xMDwvY291cGxpbmdfaW5jbHVzaW9uPg0KICA8L0dBX0NvdXBsaW5nXzE+DQogIDxHQV9Db3VwbGluZ18yPg0KICAgIDxjb3VwbGluZ19hbGdvcml0aG0+MTwvY291cGxpbmdfYWxnb3JpdGhtPg0KICAgIDxjb3VwbGluZ19iaWFzPjE8L2NvdXBsaW5nX2JpYXM+DQogICAgPGNvdXBsaW5nX2luY2x1c2lvbj4wPC9jb3VwbGluZ19pbmNsdXNpb24+DQogIDwvR0FfQ291cGxpbmdfMj4NCiAgPEdBX0NvYWxlc2NlbmNlQ291bnQ+MzwvR0FfQ29hbGVzY2VuY2VDb3VudD4NCiAgPEdBX0NvYWxlc2NlbmNlXzA+DQogICAgPGNvYWxlc2NlbmNlX2FsZ29yaXRobT4zPC9jb2FsZXNjZW5jZV9hbGdvcml0aG0+DQogICAgPGNvYWxlc2NlbmNlX3ByZWZlcmVuY2U+ODA8L2NvYWxlc2NlbmNlX3ByZWZlcmVuY2U+DQogIDwvR0FfQ29hbGVzY2VuY2VfMD4NCiAgPEdBX0NvYWxlc2NlbmNlXzE+DQogICAgPGNvYWxlc2NlbmNlX2FsZ29yaXRobT4yPC9jb2FsZXNjZW5jZV9hbGdvcml0aG0+DQogICAgPGNvYWxlc2NlbmNlX3ByZWZlcmVuY2U+NTA8L2NvYWxlc2NlbmNlX3ByZWZlcmVuY2U+DQogIDwvR0FfQ29hbGVzY2VuY2VfMT4NCiAgPEdBX0NvYWxlc2NlbmNlXzI+DQogICAgPGNvYWxlc2NlbmNlX2FsZ29yaXRobT4xPC9jb2FsZXNjZW5jZV9hbGdvcml0aG0+DQogICAgPGNvYWxlc2NlbmNlX3ByZWZlcmVuY2U+NTA8L2NvYWxlc2NlbmNlX3ByZWZlcmVuY2U+DQogIDwvR0FfQ29hbGVzY2VuY2VfMj4NCiAgPEdBX011dGF0aW9uQ291bnQ+NDwvR0FfTXV0YXRpb25Db3VudD4NCiAgPEdBX011dGF0aW9uXzA+DQogICAgPG11dGF0aW9uX2FsZ29yaXRobT4xPC9tdXRhdGlvbl9hbGdvcml0aG0+DQogICAgPG11dGF0aW9uX3BvaW50cmFuZ2U+MTwvbXV0YXRpb25fcG9pbnRyYW5nZT4NCiAgICA8bXV0YXRpb25fZnJlcXVlbmN5PjU8L211dGF0aW9uX2ZyZXF1ZW5jeT4NCiAgPC9HQV9NdXRhdGlvbl8wPg0KICA8R0FfTXV0YXRpb25fMT4NCiAgICA8bXV0YXRpb25fYWxnb3JpdGhtPjE8L211dGF0aW9uX2FsZ29yaXRobT4NCiAgICA8bXV0YXRpb25fcG9pbnRyYW5nZT4xMDwvbXV0YXRpb25fcG9pbnRyYW5nZT4NCiAgICA8bXV0YXRpb25fZnJlcXVlbmN5PjE1PC9tdXRhdGlvbl9mcmVxdWVuY3k+DQogIDwvR0FfTXV0YXRpb25fMT4NCiAgPEdBX011dGF0aW9uXzI+DQogICAgPG11dGF0aW9uX2FsZ29yaXRobT4xPC9tdXRhdGlvbl9hbGdvcml0aG0+DQogICAgPG11dGF0aW9uX3BvaW50cmFuZ2U+MjU8L211dGF0aW9uX3BvaW50cmFuZ2U+DQogICAgPG11dGF0aW9uX2ZyZXF1ZW5jeT4zMDwvbXV0YXRpb25fZnJlcXVlbmN5Pg0KICA8L0dBX011dGF0aW9uXzI+DQogIDxHQV9NdXRhdGlvbl8zPg0KICAgIDxtdXRhdGlvbl9hbGdvcml0aG0+MTwvbXV0YXRpb25fYWxnb3JpdGhtPg0KICAgIDxtdXRhdGlvbl9wb2ludHJhbmdlPjEwMDwvbXV0YXRpb25fcG9pbnRyYW5nZT4NCiAgICA8bXV0YXRpb25fZnJlcXVlbmN5PjYwPC9tdXRhdGlvbl9mcmVxdWVuY3k+DQogIDwvR0FfTXV0YXRpb25fMz4NCiAgPFNBX0luaXRpYWxFbmVyZ3k+MTAwPC9TQV9Jbml0aWFsRW5lcmd5Pg0KICA8U0FfRW5lcmd5RGVjYXk+OTUwMDAwPC9TQV9FbmVyZ3lEZWNheT4NCiAgPFNBX0RyaWZ0UmF0ZT4yNTwvU0FfRHJpZnRSYXRlPg0KPC9HYWxhcGFnb3M+</stream>
+                          <stream length="2499">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiIHN0YW5kYWxvbmU9InllcyI/Pg0KPEdhbGFwYWdvcz4NCiAgPCEtLUdQX1NvbHZlciBEdW1wLS0+DQogIDwhLS1DcmVhdGVkIG9uOiAxNTo0OTo1NywgVHVlc2RheSwgMjMgQXByaWwgMjAxMy0tPg0KICA8U29sdmVyPjE8L1NvbHZlcj4NCiAgPFRhcmdldD5JbmZpbml0eTwvVGFyZ2V0Pg0KICA8VGhyZXNob2xkPjAuOTk5PC9UaHJlc2hvbGQ+DQogIDxHQV9Jbml0aWFsU2l6ZT41MDwvR0FfSW5pdGlhbFNpemU+DQogIDxHQV9NaW5pbXVtU2l6ZT4yMDwvR0FfTWluaW11bVNpemU+DQogIDxHQV9Jbml0aWFsQm9vc3Q+MjwvR0FfSW5pdGlhbEJvb3N0Pg0KICA8R0FfRnJ1aXRsZXNzTGltaXQ+NTA8L0dBX0ZydWl0bGVzc0xpbWl0Pg0KICA8R0FfSW5icmVlZGluZ0ZhY3Rvcj43NTwvR0FfSW5icmVlZGluZ0ZhY3Rvcj4NCiAgPEdBX01haW50YWluUGVyY2VudGFnZT41PC9HQV9NYWludGFpblBlcmNlbnRhZ2U+DQogIDxHQV9Db3VwbGluZ0NvdW50PjM8L0dBX0NvdXBsaW5nQ291bnQ+DQogIDxHQV9Db3VwbGluZ18wPg0KICAgIDxjb3VwbGluZ19hbGdvcml0aG0+MzwvY291cGxpbmdfYWxnb3JpdGhtPg0KICAgIDxjb3VwbGluZ19iaWFzPjI8L2NvdXBsaW5nX2JpYXM+DQogICAgPGNvdXBsaW5nX2luY2x1c2lvbj4xMDwvY291cGxpbmdfaW5jbHVzaW9uPg0KICA8L0dBX0NvdXBsaW5nXzA+DQogIDxHQV9Db3VwbGluZ18xPg0KICAgIDxjb3VwbGluZ19hbGdvcml0aG0+MzwvY291cGxpbmdfYWxnb3JpdGhtPg0KICAgIDxjb3VwbGluZ19iaWFzPjU8L2NvdXBsaW5nX2JpYXM+DQogICAgPGNvdXBsaW5nX2luY2x1c2lvbj4xMDwvY291cGxpbmdfaW5jbHVzaW9uPg0KICA8L0dBX0NvdXBsaW5nXzE+DQogIDxHQV9Db3VwbGluZ18yPg0KICAgIDxjb3VwbGluZ19hbGdvcml0aG0+MTwvY291cGxpbmdfYWxnb3JpdGhtPg0KICAgIDxjb3VwbGluZ19iaWFzPjE8L2NvdXBsaW5nX2JpYXM+DQogICAgPGNvdXBsaW5nX2luY2x1c2lvbj4wPC9jb3VwbGluZ19pbmNsdXNpb24+DQogIDwvR0FfQ291cGxpbmdfMj4NCiAgPEdBX0NvYWxlc2NlbmNlQ291bnQ+MzwvR0FfQ29hbGVzY2VuY2VDb3VudD4NCiAgPEdBX0NvYWxlc2NlbmNlXzA+DQogICAgPGNvYWxlc2NlbmNlX2FsZ29yaXRobT4zPC9jb2FsZXNjZW5jZV9hbGdvcml0aG0+DQogICAgPGNvYWxlc2NlbmNlX3ByZWZlcmVuY2U+ODA8L2NvYWxlc2NlbmNlX3ByZWZlcmVuY2U+DQogIDwvR0FfQ29hbGVzY2VuY2VfMD4NCiAgPEdBX0NvYWxlc2NlbmNlXzE+DQogICAgPGNvYWxlc2NlbmNlX2FsZ29yaXRobT4yPC9jb2FsZXNjZW5jZV9hbGdvcml0aG0+DQogICAgPGNvYWxlc2NlbmNlX3ByZWZlcmVuY2U+NTA8L2NvYWxlc2NlbmNlX3ByZWZlcmVuY2U+DQogIDwvR0FfQ29hbGVzY2VuY2VfMT4NCiAgPEdBX0NvYWxlc2NlbmNlXzI+DQogICAgPGNvYWxlc2NlbmNlX2FsZ29yaXRobT4xPC9jb2FsZXNjZW5jZV9hbGdvcml0aG0+DQogICAgPGNvYWxlc2NlbmNlX3ByZWZlcmVuY2U+NTA8L2NvYWxlc2NlbmNlX3ByZWZlcmVuY2U+DQogIDwvR0FfQ29hbGVzY2VuY2VfMj4NCiAgPEdBX011dGF0aW9uQ291bnQ+NDwvR0FfTXV0YXRpb25Db3VudD4NCiAgPEdBX011dGF0aW9uXzA+DQogICAgPG11dGF0aW9uX2FsZ29yaXRobT4xPC9tdXRhdGlvbl9hbGdvcml0aG0+DQogICAgPG11dGF0aW9uX3BvaW50cmFuZ2U+MTwvbXV0YXRpb25fcG9pbnRyYW5nZT4NCiAgICA8bXV0YXRpb25fZnJlcXVlbmN5PjU8L211dGF0aW9uX2ZyZXF1ZW5jeT4NCiAgPC9HQV9NdXRhdGlvbl8wPg0KICA8R0FfTXV0YXRpb25fMT4NCiAgICA8bXV0YXRpb25fYWxnb3JpdGhtPjE8L211dGF0aW9uX2FsZ29yaXRobT4NCiAgICA8bXV0YXRpb25fcG9pbnRyYW5nZT4xMDwvbXV0YXRpb25fcG9pbnRyYW5nZT4NCiAgICA8bXV0YXRpb25fZnJlcXVlbmN5PjE1PC9tdXRhdGlvbl9mcmVxdWVuY3k+DQogIDwvR0FfTXV0YXRpb25fMT4NCiAgPEdBX011dGF0aW9uXzI+DQogICAgPG11dGF0aW9uX2FsZ29yaXRobT4xPC9tdXRhdGlvbl9hbGdvcml0aG0+DQogICAgPG11dGF0aW9uX3BvaW50cmFuZ2U+MjU8L211dGF0aW9uX3BvaW50cmFuZ2U+DQogICAgPG11dGF0aW9uX2ZyZXF1ZW5jeT4zMDwvbXV0YXRpb25fZnJlcXVlbmN5Pg0KICA8L0dBX011dGF0aW9uXzI+DQogIDxHQV9NdXRhdGlvbl8zPg0KICAgIDxtdXRhdGlvbl9hbGdvcml0aG0+MTwvbXV0YXRpb25fYWxnb3JpdGhtPg0KICAgIDxtdXRhdGlvbl9wb2ludHJhbmdlPjEwMDwvbXV0YXRpb25fcG9pbnRyYW5nZT4NCiAgICA8bXV0YXRpb25fZnJlcXVlbmN5PjYwPC9tdXRhdGlvbl9mcmVxdWVuY3k+DQogIDwvR0FfTXV0YXRpb25fMz4NCiAgPFNBX0luaXRpYWxFbmVyZ3k+MTAwPC9TQV9Jbml0aWFsRW5lcmd5Pg0KICA8U0FfRW5lcmd5RGVjYXk+OTUwMDAwPC9TQV9FbmVyZ3lEZWNheT4NCiAgPFNBX0RyaWZ0UmF0ZT4yNTwvU0FfRHJpZnRSYXRlPg0KPC9HYWxhcGFnb3M+</stream>
                         </item>
                       </items>
                     </chunk>
