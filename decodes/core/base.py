@@ -112,6 +112,13 @@ class Geometry(object):
         
         
     @property
+    def do_translate(self):
+        """
+        if this property is set to false, outies will not translate this geometry into external formats, and pass along the class as-is.
+        """
+        return True
+
+    @property
     def xform(self): 
         #TODO: i think these are obsolete
         return self.objCS.xform
