@@ -31,6 +31,20 @@ class Color():
             self.g = b
             self.b = c
         
+    @property
+    def hue(self):  return colorsys.rgb_to_hsv(self.r,self.g,self.b)[0]
+    @property
+    def sat(self):  return colorsys.rgb_to_hsv(self.r,self.g,self.b)[1]
+    @property
+    def val(self):  return colorsys.rgb_to_hsv(self.r,self.g,self.b)[2]
+
+    @property
+    def y(self):  return colorsys.rgb_to_yiq(self.r,self.g,self.b)[0]
+    @property
+    def i(self):  return colorsys.rgb_to_yiq(self.r,self.g,self.b)[1]
+    @property
+    def q(self):  return colorsys.rgb_to_yiq(self.r,self.g,self.b)[2]
+
     @staticmethod
     def RGB(r,g,b):
         """Creates a color object from RGB values.
