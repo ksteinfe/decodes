@@ -13,12 +13,12 @@ rad_1 = 0.22
 ipt = Point(1.0,1.0,0.0)
 
 # u_val Parameters
-count_u = 20
+count_u = 15
 skew_u = 0.5
 ival_u = Interval(0, math.pi)
 
 # v_val Parameters
-count_v = 20
+count_v = 15
 skew_v = 0.9
 ival_v = Interval(0, math.pi)
 
@@ -72,14 +72,14 @@ for v in v_vals:
 res_u = len(u_vals)
 
 # simple triangulation style
-for v in range(len(v_vals)):
+for v in range(len(v_vals)-1):
     row = v*res_u
     for u in range(len(u_vals)-1):
         pi_0 = row+u
         pi_1 = row+u+1
         pi_2 = row+u+res_u+1
         pi_3 = row+u+res_u
-        msh.add_face(pi_0,pi_1,pi_2,pi_3)
+        msh.add_face(pi_0,pi_1,pi_3,pi_2)
 
 outie.put(msh)
 outie.draw()
