@@ -25,7 +25,19 @@ class Plane(Vec):
         super(Plane,self).__init__(point)
         self._vec = normal.normalized()
 
-    
+    def __eq__(self, other):
+        """Overloads the equal **(==)** operator for vector identity.
+        
+            :param other: Vec to be compared.
+            :type other: Vec
+            :result: Boolean result of comparison.
+            :rtype: bool
+
+        """    
+        return self.is_identical(other)
+
+    def __repr__(self): return "pln[{0},{1},{2},{3},{4},{5}]".format(self.x,self.y,self.z,self.vec.x,self.vec.y,self.vec.z)
+
     @property
     def vec(self): 
         """ Returns the plane's vector.
@@ -85,6 +97,27 @@ class Plane(Vec):
         self.y = pt.y
         self.z = pt.z
         
+
+    def is_identical(self,other): 
+        """Returns True if the planes are equal.
+        
+            :param other: Plane to be compared.
+            :type other: Plane
+            :result: Boolean result of comparison.
+            :rtype: bool
+        """   
+        return all([self.x==other.x,self.y==other.y,self.z==other.z,self.vec.x==other.vec.x,self.vec.y==other.vec.y,self.vec.z==other.vec.z])
+
+    def is_coplanar(self,other,tolerence=0.000001): 
+        """Returns True if the planes are co-planar within a given tolerence.
+        
+            :param other: Plane to be compared.
+            :type other: Plane
+            :result: Boolean result of comparison.
+            :rtype: bool
+        """   
+        return all([self.near(other.origin)[0].distance(other.origin)<tolerence,self.vec.x==other.vec.x,self.vec.y==other.vec.y,self.vec.z==other.vec.z])
+
     def near(self, p):
         """Returns a tuple of the closest point to a given Plane, its t value and the distance from the given Point to the near Point.
        
