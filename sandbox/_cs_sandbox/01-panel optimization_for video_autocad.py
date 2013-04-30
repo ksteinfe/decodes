@@ -9,7 +9,7 @@ outie = dc.makeOut(dc.Outies.ACAD, "wayout")
 
 # Surface Parameters
 rad_0 = 0.4
-rad_1 = 0.22
+rad_1 = 0.2
 ipt = Point(1.0,1.0,0.0)
 
 # u_val Parameters
@@ -19,7 +19,7 @@ ival_u = Interval(0, math.pi)
 
 # v_val Parameters
 count_v = 15
-skew_v = 0.9
+skew_v = 1
 ival_v = Interval(0, math.pi)
 
 # Surface Function
