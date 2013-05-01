@@ -133,7 +133,7 @@ class Xform(object):
         from ..io.rhino_in import from_rgtransform
         if all (k in kargs for k in ("angle","axis")) :
             # rotation by center, rotation angle, and rotation axis
-            center = to_rgpt(kargs["center"]) if "rlvl" in kargs else to_rgpt(Point(0,0,0))
+            center = to_rgpt(kargs["center"]) if "center" in kargs else to_rgpt(Point(0,0,0))
             rh_xform = Rhino.Geometry.Transform.Rotation(kargs["angle"],to_rgvec(kargs["axis"]),center)
         elif all (k in kargs for k in ("center","angle")) :
             # rotation by center and rotation angle
