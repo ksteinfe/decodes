@@ -107,6 +107,8 @@ class Curve(Geometry):
     def deval(self,t):
         """ Evaluates this Curve and returns a Plane.
         T is a float value that falls within the defined domain of this Curve.
+        Tangent vector determined by a nearest neighbor at distance Curve.tol/100
+
             :param t: Value to evaluate the curve at.
             :type t: float
             :result: Plane.
