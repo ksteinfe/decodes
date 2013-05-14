@@ -48,10 +48,10 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>-145</X>
-                  <Y>-538</Y>
+                  <X>-34</X>
+                  <Y>-946</Y>
                 </item>
-                <item name="Zoom" type_name="gh_single" type_code="5">0.6166352</item>
+                <item name="Zoom" type_name="gh_single" type_code="5">1</item>
               </items>
             </chunk>
             <chunk name="Views">
@@ -79,9 +79,9 @@
         </chunk>
         <chunk name="DefinitionObjects">
           <items count="1">
-            <item name="ObjectCount" type_name="gh_int32" type_code="3">55</item>
+            <item name="ObjectCount" type_name="gh_int32" type_code="3">58</item>
           </items>
-          <chunks count="55">
+          <chunks count="58">
             <chunk name="Object" index="0">
               <items count="3">
                 <item name="GUID" type_name="gh_guid" type_code="9">fccad19e-dcb6-44ab-8edb-54dd6ab7e966</item>
@@ -1132,12 +1132,12 @@ a.put(func)
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>404</X>
-                          <Y>1012</Y>
+                          <X>421</X>
+                          <Y>1247</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>353</X>
-                          <Y>978</Y>
+                          <X>370</X>
+                          <Y>1213</Y>
                           <W>85</W>
                           <H>68</H>
                         </item>
@@ -1171,12 +1171,12 @@ a.put(func)
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>373.5</X>
-                                  <Y>996</Y>
+                                  <X>390.5</X>
+                                  <Y>1231</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>355</X>
-                                  <Y>980</Y>
+                                  <X>372</X>
+                                  <Y>1215</Y>
                                   <W>34</W>
                                   <H>32</H>
                                 </item>
@@ -1202,12 +1202,12 @@ a.put(func)
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>373.5</X>
-                                  <Y>1028</Y>
+                                  <X>390.5</X>
+                                  <Y>1263</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>355</X>
-                                  <Y>1012</Y>
+                                  <X>372</X>
+                                  <Y>1247</Y>
                                   <W>34</W>
                                   <H>32</H>
                                 </item>
@@ -1229,12 +1229,12 @@ a.put(func)
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>427.5</X>
-                                  <Y>996</Y>
+                                  <X>444.5</X>
+                                  <Y>1231</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>419</X>
-                                  <Y>980</Y>
+                                  <X>436</X>
+                                  <Y>1215</Y>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
@@ -1255,12 +1255,12 @@ a.put(func)
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>427.5</X>
-                                  <Y>1028</Y>
+                                  <X>444.5</X>
+                                  <Y>1263</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>419</X>
-                                  <Y>1012</Y>
+                                  <X>436</X>
+                                  <Y>1247</Y>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
@@ -1527,20 +1527,20 @@ a.put(pt_out)</item>
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>569.8673</X>
+                          <X>569.7882</X>
                           <Y>965.0953</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                           <X>569</X>
                           <Y>965</Y>
-                          <W>266</W>
+                          <W>243</W>
                           <H>20</H>
                         </item>
                       </items>
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">0.655</item>
+                        <item name="Value" type_name="gh_double" type_code="6">0</item>
                         <item name="Min" type_name="gh_double" type_code="6">0</item>
                         <item name="Max" type_name="gh_double" type_code="6">1</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">3</item>
@@ -1571,12 +1571,12 @@ a.put(pt_out)</item>
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>154.5676</X>
-                          <Y>981.3523</Y>
+                          <X>171.6274</X>
+                          <Y>1217.767</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>154</X>
-                          <Y>981</Y>
+                          <X>171</X>
+                          <Y>1217</Y>
                           <W>160</W>
                           <H>20</H>
                         </item>
@@ -1615,12 +1615,12 @@ a.put(pt_out)</item>
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>154.3938</X>
-                          <Y>1025.016</Y>
+                          <X>171.4536</X>
+                          <Y>1261.431</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>154</X>
-                          <Y>1025</Y>
+                          <X>171</X>
+                          <Y>1261</Y>
                           <W>160</W>
                           <H>20</H>
                         </item>
@@ -1728,11 +1728,11 @@ a.put(func)
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>441</X>
-                          <Y>1804</Y>
+                          <Y>2135</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                           <X>401</X>
-                          <Y>1770</Y>
+                          <Y>2101</Y>
                           <W>74</W>
                           <H>68</H>
                         </item>
@@ -1768,11 +1768,11 @@ a.put(func)
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>416</X>
-                                  <Y>1782.667</Y>
+                                  <Y>2113.667</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>403</X>
-                                  <Y>1772</Y>
+                                  <Y>2103</Y>
                                   <W>23</W>
                                   <H>21</H>
                                 </item>
@@ -1799,11 +1799,11 @@ a.put(func)
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>416</X>
-                                  <Y>1804</Y>
+                                  <Y>2135</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>403</X>
-                                  <Y>1793</Y>
+                                  <Y>2124</Y>
                                   <W>23</W>
                                   <H>21</H>
                                 </item>
@@ -1830,13 +1830,13 @@ a.put(func)
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>416</X>
-                                  <Y>1825.333</Y>
+                                  <Y>2156.333</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>403</X>
-                                  <Y>1814</Y>
+                                  <Y>2145</Y>
                                   <W>23</W>
-                                  <H>21</H>
+                                  <H>22</H>
                                 </item>
                               </items>
                             </chunk>
@@ -1857,11 +1857,11 @@ a.put(func)
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>464.5</X>
-                                  <Y>1788</Y>
+                                  <Y>2119</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>456</X>
-                                  <Y>1772</Y>
+                                  <Y>2103</Y>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
@@ -1883,11 +1883,11 @@ a.put(func)
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>464.5</X>
-                                  <Y>1820</Y>
+                                  <Y>2151</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>456</X>
-                                  <Y>1804</Y>
+                                  <Y>2135</Y>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
@@ -1921,11 +1921,11 @@ a.put(func)
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>206.5631</X>
-                          <Y>1746.238</Y>
+                          <Y>2079.517</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                           <X>206</X>
-                          <Y>1746</Y>
+                          <Y>2079</Y>
                           <W>160</W>
                           <H>20</H>
                         </item>
@@ -1965,11 +1965,11 @@ a.put(func)
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>205.4979</X>
-                          <Y>1789.245</Y>
+                          <Y>2122.524</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                           <X>205</X>
-                          <Y>1789</Y>
+                          <Y>2122</Y>
                           <W>160</W>
                           <H>20</H>
                         </item>
@@ -2034,12 +2034,12 @@ a.put(func)
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>408</X>
-                          <Y>1120</Y>
+                          <X>425</X>
+                          <Y>1355</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>357</X>
-                          <Y>1086</Y>
+                          <X>374</X>
+                          <Y>1321</Y>
                           <W>85</W>
                           <H>68</H>
                         </item>
@@ -2073,12 +2073,12 @@ a.put(func)
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>377.5</X>
-                                  <Y>1104</Y>
+                                  <X>394.5</X>
+                                  <Y>1339</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>359</X>
-                                  <Y>1088</Y>
+                                  <X>376</X>
+                                  <Y>1323</Y>
                                   <W>34</W>
                                   <H>32</H>
                                 </item>
@@ -2104,12 +2104,12 @@ a.put(func)
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>377.5</X>
-                                  <Y>1136</Y>
+                                  <X>394.5</X>
+                                  <Y>1371</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>359</X>
-                                  <Y>1120</Y>
+                                  <X>376</X>
+                                  <Y>1355</Y>
                                   <W>34</W>
                                   <H>32</H>
                                 </item>
@@ -2131,12 +2131,12 @@ a.put(func)
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>431.5</X>
-                                  <Y>1104</Y>
+                                  <X>448.5</X>
+                                  <Y>1339</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>423</X>
-                                  <Y>1088</Y>
+                                  <X>440</X>
+                                  <Y>1323</Y>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
@@ -2157,12 +2157,12 @@ a.put(func)
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>431.5</X>
-                                  <Y>1136</Y>
+                                  <X>448.5</X>
+                                  <Y>1371</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>423</X>
-                                  <Y>1120</Y>
+                                  <X>440</X>
+                                  <Y>1355</Y>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
@@ -2209,12 +2209,12 @@ a.put(func)
                         <item name="MarginLeft" type_name="gh_int32" type_code="3">0</item>
                         <item name="MarginRight" type_name="gh_int32" type_code="3">0</item>
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>33.53202</X>
-                          <Y>1078.279</Y>
+                          <X>50.59184</X>
+                          <Y>1314.694</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>33</X>
-                          <Y>1078</Y>
+                          <X>50</X>
+                          <Y>1314</Y>
                           <W>108</W>
                           <H>108</H>
                         </item>
@@ -2257,12 +2257,12 @@ a.put(func)
                         <item name="MarginLeft" type_name="gh_int32" type_code="3">0</item>
                         <item name="MarginRight" type_name="gh_int32" type_code="3">0</item>
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>30.55839</X>
-                          <Y>960.2975</Y>
+                          <X>47.6182</X>
+                          <Y>1196.712</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>30</X>
-                          <Y>960</Y>
+                          <X>47</X>
+                          <Y>1196</Y>
                           <W>108</W>
                           <H>100</H>
                         </item>
@@ -2306,11 +2306,11 @@ a.put(func)
                         <item name="MarginRight" type_name="gh_int32" type_code="3">0</item>
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>64.54575</X>
-                          <Y>1744.86</Y>
+                          <Y>2078.139</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                           <X>64</X>
-                          <Y>1744</Y>
+                          <Y>2078</Y>
                           <W>108</W>
                           <H>100</H>
                         </item>
@@ -2653,11 +2653,11 @@ d.put(poly_out)
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>206.9352</X>
-                          <Y>1828.627</Y>
+                          <Y>2161.906</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                           <X>206</X>
-                          <Y>1828</Y>
+                          <Y>2161</Y>
                           <W>160</W>
                           <H>20</H>
                         </item>
@@ -2708,12 +2708,12 @@ a.put(func)</item>
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>427</X>
-                          <Y>1250</Y>
+                          <X>444</X>
+                          <Y>1485</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>378</X>
-                          <Y>1216</Y>
+                          <X>395</X>
+                          <Y>1451</Y>
                           <W>83</W>
                           <H>68</H>
                         </item>
@@ -2747,12 +2747,12 @@ a.put(func)</item>
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>397.5</X>
-                                  <Y>1234</Y>
+                                  <X>414.5</X>
+                                  <Y>1469</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>380</X>
-                                  <Y>1218</Y>
+                                  <X>397</X>
+                                  <Y>1453</Y>
                                   <W>32</W>
                                   <H>32</H>
                                 </item>
@@ -2778,12 +2778,12 @@ a.put(func)</item>
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>397.5</X>
-                                  <Y>1266</Y>
+                                  <X>414.5</X>
+                                  <Y>1501</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>380</X>
-                                  <Y>1250</Y>
+                                  <X>397</X>
+                                  <Y>1485</Y>
                                   <W>32</W>
                                   <H>32</H>
                                 </item>
@@ -2805,12 +2805,12 @@ a.put(func)</item>
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>450.5</X>
-                                  <Y>1234</Y>
+                                  <X>467.5</X>
+                                  <Y>1469</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>442</X>
-                                  <Y>1218</Y>
+                                  <X>459</X>
+                                  <Y>1453</Y>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
@@ -2831,12 +2831,12 @@ a.put(func)</item>
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>450.5</X>
-                                  <Y>1266</Y>
+                                  <X>467.5</X>
+                                  <Y>1501</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>442</X>
-                                  <Y>1250</Y>
+                                  <X>459</X>
+                                  <Y>1485</Y>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
@@ -2869,12 +2869,12 @@ a.put(func)</item>
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>201.5631</X>
-                          <Y>1229.719</Y>
+                          <X>218.6229</X>
+                          <Y>1466.134</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>201</X>
-                          <Y>1229</Y>
+                          <X>218</X>
+                          <Y>1466</Y>
                           <W>160</W>
                           <H>20</H>
                         </item>
@@ -2927,12 +2927,12 @@ a.put(func)</item>
                         <item name="MarginLeft" type_name="gh_int32" type_code="3">0</item>
                         <item name="MarginRight" type_name="gh_int32" type_code="3">0</item>
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>35.46455</X>
-                          <Y>1204.614</Y>
+                          <X>52.52436</X>
+                          <Y>1441.029</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>35</X>
-                          <Y>1204</Y>
+                          <X>52</X>
+                          <Y>1441</Y>
                           <W>108</W>
                           <H>100</H>
                         </item>
@@ -2961,12 +2961,12 @@ a.put(func)</item>
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>199.11</X>
-                          <Y>1264.641</Y>
+                          <X>216.1698</X>
+                          <Y>1501.056</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>199</X>
-                          <Y>1264</Y>
+                          <X>216</X>
+                          <Y>1501</Y>
                           <W>160</W>
                           <H>20</H>
                         </item>
@@ -3019,12 +3019,12 @@ a.put(func)</item>
                         <item name="MarginLeft" type_name="gh_int32" type_code="3">0</item>
                         <item name="MarginRight" type_name="gh_int32" type_code="3">0</item>
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>34.4709</X>
-                          <Y>1327.692</Y>
+                          <X>51.53072</X>
+                          <Y>1564.107</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>34</X>
-                          <Y>1327</Y>
+                          <X>51</X>
+                          <Y>1564</Y>
                           <W>108</W>
                           <H>100</H>
                         </item>
@@ -3067,12 +3067,12 @@ a.put(func)</item>
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>436</X>
-                          <Y>1385</Y>
+                          <X>453</X>
+                          <Y>1620</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>387</X>
-                          <Y>1351</Y>
+                          <X>404</X>
+                          <Y>1586</Y>
                           <W>83</W>
                           <H>68</H>
                         </item>
@@ -3107,12 +3107,12 @@ a.put(func)</item>
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>406.5</X>
-                                  <Y>1363.667</Y>
+                                  <X>423.5</X>
+                                  <Y>1598.667</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>389</X>
-                                  <Y>1353</Y>
+                                  <X>406</X>
+                                  <Y>1588</Y>
                                   <W>32</W>
                                   <H>21</H>
                                 </item>
@@ -3138,12 +3138,12 @@ a.put(func)</item>
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>406.5</X>
-                                  <Y>1385</Y>
+                                  <X>423.5</X>
+                                  <Y>1620</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>389</X>
-                                  <Y>1374</Y>
+                                  <X>406</X>
+                                  <Y>1609</Y>
                                   <W>32</W>
                                   <H>21</H>
                                 </item>
@@ -3169,12 +3169,12 @@ a.put(func)</item>
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>406.5</X>
-                                  <Y>1406.333</Y>
+                                  <X>423.5</X>
+                                  <Y>1641.333</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>389</X>
-                                  <Y>1395</Y>
+                                  <X>406</X>
+                                  <Y>1630</Y>
                                   <W>32</W>
                                   <H>21</H>
                                 </item>
@@ -3196,12 +3196,12 @@ a.put(func)</item>
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>459.5</X>
-                                  <Y>1369</Y>
+                                  <X>476.5</X>
+                                  <Y>1604</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>451</X>
-                                  <Y>1353</Y>
+                                  <X>468</X>
+                                  <Y>1588</Y>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
@@ -3222,12 +3222,12 @@ a.put(func)</item>
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>459.5</X>
-                                  <Y>1401</Y>
+                                  <X>476.5</X>
+                                  <Y>1636</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>451</X>
-                                  <Y>1385</Y>
+                                  <X>468</X>
+                                  <Y>1620</Y>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
@@ -3260,12 +3260,12 @@ a.put(func)</item>
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>200.3382</X>
-                          <Y>1389.336</Y>
+                          <X>217.398</X>
+                          <Y>1625.751</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>200</X>
-                          <Y>1389</Y>
+                          <X>217</X>
+                          <Y>1625</Y>
                           <W>160</W>
                           <H>20</H>
                         </item>
@@ -3273,7 +3273,7 @@ a.put(func)</item>
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">0.669</item>
+                        <item name="Value" type_name="gh_double" type_code="6">0.898</item>
                         <item name="Min" type_name="gh_double" type_code="6">0</item>
                         <item name="Max" type_name="gh_double" type_code="6">1</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">3</item>
@@ -3345,12 +3345,12 @@ a.put(func)
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>418</X>
-                          <Y>1539</Y>
+                          <X>435</X>
+                          <Y>1774</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>378</X>
-                          <Y>1505</Y>
+                          <X>395</X>
+                          <Y>1740</Y>
                           <W>74</W>
                           <H>68</H>
                         </item>
@@ -3383,12 +3383,12 @@ a.put(func)
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>393</X>
-                                  <Y>1539</Y>
+                                  <X>410</X>
+                                  <Y>1774</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>380</X>
-                                  <Y>1507</Y>
+                                  <X>397</X>
+                                  <Y>1742</Y>
                                   <W>23</W>
                                   <H>64</H>
                                 </item>
@@ -3410,12 +3410,12 @@ a.put(func)
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>441.5</X>
-                                  <Y>1523</Y>
+                                  <X>458.5</X>
+                                  <Y>1758</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>433</X>
-                                  <Y>1507</Y>
+                                  <X>450</X>
+                                  <Y>1742</Y>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
@@ -3436,12 +3436,12 @@ a.put(func)
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>441.5</X>
-                                  <Y>1555</Y>
+                                  <X>458.5</X>
+                                  <Y>1790</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>433</X>
-                                  <Y>1539</Y>
+                                  <X>450</X>
+                                  <Y>1774</Y>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
@@ -3474,12 +3474,12 @@ a.put(func)
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>187.7961</X>
-                          <Y>1473.547</Y>
+                          <X>204.8559</X>
+                          <Y>1709.962</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>187</X>
-                          <Y>1473</Y>
+                          <X>204</X>
+                          <Y>1709</Y>
                           <W>160</W>
                           <H>20</H>
                         </item>
@@ -3487,7 +3487,7 @@ a.put(func)
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">10</item>
+                        <item name="Value" type_name="gh_double" type_code="6">9.82</item>
                         <item name="Min" type_name="gh_double" type_code="6">1</item>
                         <item name="Max" type_name="gh_double" type_code="6">10</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">3</item>
@@ -3533,12 +3533,12 @@ a.put(func)
                         <item name="MarginLeft" type_name="gh_int32" type_code="3">0</item>
                         <item name="MarginRight" type_name="gh_int32" type_code="3">0</item>
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>38.4709</X>
-                          <Y>1453.388</Y>
+                          <X>55.53072</X>
+                          <Y>1689.803</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>38</X>
-                          <Y>1453</Y>
+                          <X>55</X>
+                          <Y>1689</Y>
                           <W>108</W>
                           <H>56</H>
                         </item>
@@ -3578,12 +3578,12 @@ verts.put([p1,p2,p3])
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>419</X>
-                          <Y>1468</Y>
+                          <X>436</X>
+                          <Y>1703</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>379</X>
-                          <Y>1434</Y>
+                          <X>396</X>
+                          <Y>1669</Y>
                           <W>90</W>
                           <H>68</H>
                         </item>
@@ -3617,12 +3617,12 @@ verts.put([p1,p2,p3])
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>394</X>
-                                  <Y>1468</Y>
+                                  <X>411</X>
+                                  <Y>1703</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>381</X>
-                                  <Y>1436</Y>
+                                  <X>398</X>
+                                  <Y>1671</Y>
                                   <W>23</W>
                                   <H>64</H>
                                 </item>
@@ -3645,12 +3645,12 @@ verts.put([p1,p2,p3])
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>450.5</X>
-                                  <Y>1452</Y>
+                                  <X>467.5</X>
+                                  <Y>1687</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>434</X>
-                                  <Y>1436</Y>
+                                  <X>451</X>
+                                  <Y>1671</Y>
                                   <W>33</W>
                                   <H>32</H>
                                 </item>
@@ -3672,12 +3672,12 @@ verts.put([p1,p2,p3])
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>450.5</X>
-                                  <Y>1484</Y>
+                                  <X>467.5</X>
+                                  <Y>1719</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>434</X>
-                                  <Y>1468</Y>
+                                  <X>451</X>
+                                  <Y>1703</Y>
                                   <W>33</W>
                                   <H>32</H>
                                 </item>
@@ -3725,11 +3725,11 @@ verts.put([p1,p2,p3])
                         <item name="MarginRight" type_name="gh_int32" type_code="3">0</item>
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>200.5079</X>
-                          <Y>1659.016</Y>
+                          <Y>1992.295</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                           <X>200</X>
-                          <Y>1659</Y>
+                          <Y>1992</Y>
                           <W>160</W>
                           <H>66</H>
                         </item>
@@ -3753,7 +3753,7 @@ verts.put([p1,p2,p3])
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">7da80d15-535a-44f4-aa24-1427d90a18d4</item>
                     <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                     <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
-                    <item name="UserText" type_name="gh_string" type_code="10">Generalization of Releaux for any triangle</item>
+                    <item name="UserText" type_name="gh_string" type_code="10">TODO - Generalization of Releaux for any triangle</item>
                     <item name="MultilineData" type_name="gh_bool" type_code="1">true</item>
                     <item name="WrapItems" type_name="gh_bool" type_code="1">true</item>
                     <item name="EntryNumbers" type_name="gh_bool" type_code="1">true</item>
@@ -3772,12 +3772,12 @@ verts.put([p1,p2,p3])
                         <item name="MarginLeft" type_name="gh_int32" type_code="3">0</item>
                         <item name="MarginRight" type_name="gh_int32" type_code="3">0</item>
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>38.4709</X>
-                          <Y>1555.388</Y>
+                          <X>55.53072</X>
+                          <Y>1791.803</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>38</X>
-                          <Y>1555</Y>
+                          <X>55</X>
+                          <Y>1791</Y>
                           <W>108</W>
                           <H>56</H>
                         </item>
@@ -3837,11 +3837,11 @@ verts.put([p1,p2,p3])
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>177.7703</X>
-                          <Y>2030.194</Y>
+                          <Y>2452.182</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                           <X>152</X>
-                          <Y>2020</Y>
+                          <Y>2442</Y>
                           <W>50</W>
                           <H>20</H>
                         </item>
@@ -3942,11 +3942,11 @@ b.put(crv.eval(t))</item>
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>280</X>
-                          <Y>2044</Y>
+                          <Y>2465</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                           <X>234</X>
-                          <Y>2010</Y>
+                          <Y>2431</Y>
                           <W>80</W>
                           <H>68</H>
                         </item>
@@ -3984,11 +3984,11 @@ b.put(crv.eval(t))</item>
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>252</X>
-                                  <Y>2028</Y>
+                                  <Y>2449</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>236</X>
-                                  <Y>2012</Y>
+                                  <Y>2433</Y>
                                   <W>29</W>
                                   <H>32</H>
                                 </item>
@@ -4016,11 +4016,11 @@ b.put(crv.eval(t))</item>
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>252</X>
-                                  <Y>2060</Y>
+                                  <Y>2481</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>236</X>
-                                  <Y>2044</Y>
+                                  <Y>2465</Y>
                                   <W>29</W>
                                   <H>32</H>
                                 </item>
@@ -4044,11 +4044,11 @@ b.put(crv.eval(t))</item>
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>303.5</X>
-                                  <Y>2022.667</Y>
+                                  <Y>2443.667</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>295</X>
-                                  <Y>2012</Y>
+                                  <Y>2433</Y>
                                   <W>17</W>
                                   <H>21</H>
                                 </item>
@@ -4071,11 +4071,11 @@ b.put(crv.eval(t))</item>
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>303.5</X>
-                                  <Y>2044</Y>
+                                  <Y>2465</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>295</X>
-                                  <Y>2033</Y>
+                                  <Y>2454</Y>
                                   <W>17</W>
                                   <H>21</H>
                                 </item>
@@ -4098,11 +4098,11 @@ b.put(crv.eval(t))</item>
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>303.5</X>
-                                  <Y>2065.333</Y>
+                                  <Y>2486.333</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>295</X>
-                                  <Y>2054</Y>
+                                  <Y>2475</Y>
                                   <W>17</W>
                                   <H>22</H>
                                 </item>
@@ -4138,11 +4138,11 @@ b.put(crv.eval(t))</item>
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>363.6935</X>
-                          <Y>2068.175</Y>
+                          <Y>2490.163</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                           <X>338</X>
-                          <Y>2058</Y>
+                          <Y>2480</Y>
                           <W>50</W>
                           <H>20</H>
                         </item>
@@ -4173,11 +4173,11 @@ b.put(crv.eval(t))</item>
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>52.87756</X>
-                          <Y>2055.839</Y>
+                          <Y>2477.827</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                           <X>52</X>
-                          <Y>2055</Y>
+                          <Y>2477</Y>
                           <W>160</W>
                           <H>20</H>
                         </item>
@@ -4212,15 +4212,16 @@ b.put(crv.eval(t))</item>
                     <item name="Description" type_name="gh_string" type_code="10">A python scriptable component that implements the Decodes library</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">ea7933b6-158f-4b7f-8bf0-8d8c779895c0</item>
                     <item name="HideInput" type_name="gh_bool" type_code="1">true</item>
-                    <item name="CodeInput" type_name="gh_string" type_code="10">#Illustrates the key geometric properties of tangent vector, osculating plane/circle and curvature
-#Evaluates these at t in [0,1] with a resolution determined by N
+                    <item name="CodeInput" type_name="gh_string" type_code="10">#Illustrates the key geometric objects of tangent vector, osculating circle, curvature and Frenet frame
+#Evaluates these at t in [0,1] with a resolution determined by n
 
 
-res = 1.0/N
+res = 1.0/n
 
 #a point along the curve
-pt_t = func_in(t)
-a.put(pt_t)
+pt_out = func_in(t)
+a.put(pt_out)
+
 
 # Draws the curve as well as a discrete polyline with resolution res
 crv_out = Curve(func_in,Interval(0,1), res)
@@ -4228,14 +4229,25 @@ b.put(crv_out)
 poly_out = crv_out._to_pline()
 c.put(poly_out)
 
-#nearest neighbors of pt_t; used for discrete approximations  
-if (t &lt; 0.5*res):
-    pt_plus = func_in(t + 0.5*res)
-    pt_minus = pt_t
-elif (t &gt; 1-0.5*res):
-    pt_plus = pt_t
-    pt_minus = func_in(t-0.5*res)
+#nearest neighbors of point in question; used for discrete approximations calculations 
+if (t == 0):
+    pt_t = func_in(0.1*res)
+    pt_plus = func_in(0.2*res)
+    pt_minus = func_in(0)    
+elif (t &gt; 0) and (t &lt; 0.5*res):
+    pt_t = pt_out
+    pt_plus = func_in(2*t)
+    pt_minus = func_in(0)
+elif (t &gt; 1-0.5*res) and (t &lt; 1):
+    pt_t = pt_out
+    pt_plus = func_in(1)
+    pt_minus = func_in(0.5*t)
+elif (t == 1):
+    pt_t = func_in(1-0.1*res)
+    pt_plus = func_in(1)
+    pt_minus = func_in(1-0.2*res)
 else:
+    pt_t = pt_out
     pt_plus = func_in(t + 0.5*res)
     pt_minus = func_in(t - 0.5*res)
 
@@ -4246,11 +4258,10 @@ factor = crv_out.appx_length/(20*vec_t.length)
 ln_out = Segment(pt_t + vec_t*factor, pt_t - vec_t*factor)
 d.put(ln_out)
 
-#draws the osculating plane and circle at t with resolution res
+#draws the osculating circle and calculates the curvature at t with resolution res
 v1 = Vec(pt_plus - pt_t)
 v2 = Vec(pt_minus - pt_t)
 v3 = Vec(pt_plus - pt_minus)
-
 
 rad_osc = 0.5*v1.length*v2.length*v3.length/(v1*v3).length
 denom = 2*(v1.cross(v3).length)*(v1.cross(v3).length)
@@ -4260,11 +4271,16 @@ a3 = v1.length*v1.length*(-v2.dot(v3))/denom
 center_osc = pt_t*a1 + pt_plus*a2 + pt_minus*a3
 
 pln_out = Plane(center_osc, v1.cross(v2))
-e.put(pln_out)
-
 circ_out = Circle(pln_out,rad_osc)
-f.put(circ_out.to_gh())
+e.put(circ_out.to_gh())
 print "approximate curvature: ", 1/rad_osc
+
+#draws Frenet frame (T, N, B) at t with resolution res
+#the direction of the unit normal N gives an easy visualization of inflection points
+vec_T = vec_t.normalized()
+vec_N = Vec(center_osc-pt_t).normalized()
+cs_out = CS(pt_t, vec_T, vec_N)
+f.put(cs_out)
 
 </item>
                     <item name="HideOutput" type_name="gh_bool" type_code="1">false</item>
@@ -4274,11 +4290,11 @@ print "approximate curvature: ", 1/rad_osc
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>1096</X>
-                          <Y>1330</Y>
+                          <Y>1335</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                           <X>1038</X>
-                          <Y>1258</Y>
+                          <Y>1263</Y>
                           <W>92</W>
                           <H>144</H>
                         </item>
@@ -4303,8 +4319,8 @@ print "approximate curvature: ", 1/rad_osc
                       <chunks count="11">
                         <chunk name="InputParam" index="0">
                           <items count="11">
-                            <item name="Name" type_name="gh_string" type_code="10">N</item>
-                            <item name="NickName" type_name="gh_string" type_code="10">N</item>
+                            <item name="Name" type_name="gh_string" type_code="10">n</item>
+                            <item name="NickName" type_name="gh_string" type_code="10">n</item>
                             <item name="Description" type_name="gh_string" type_code="10">Script variable Decodes</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">bfc111bb-0824-49ff-8fbf-2b3086da6b87</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">true</item>
@@ -4320,11 +4336,11 @@ print "approximate curvature: ", 1/rad_osc
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>1062</X>
-                                  <Y>1277.5</Y>
+                                  <Y>1282.5</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>1040</X>
-                                  <Y>1260</Y>
+                                  <Y>1265</Y>
                                   <W>41</W>
                                   <H>35</H>
                                 </item>
@@ -4351,11 +4367,11 @@ print "approximate curvature: ", 1/rad_osc
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>1062</X>
-                                  <Y>1312.5</Y>
+                                  <Y>1317.5</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>1040</X>
-                                  <Y>1295</Y>
+                                  <Y>1300</Y>
                                   <W>41</W>
                                   <H>35</H>
                                 </item>
@@ -4382,11 +4398,11 @@ print "approximate curvature: ", 1/rad_osc
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>1062</X>
-                                  <Y>1347.5</Y>
+                                  <Y>1352.5</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>1040</X>
-                                  <Y>1330</Y>
+                                  <Y>1335</Y>
                                   <W>41</W>
                                   <H>35</H>
                                 </item>
@@ -4413,11 +4429,11 @@ print "approximate curvature: ", 1/rad_osc
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>1062</X>
-                                  <Y>1382.5</Y>
+                                  <Y>1387.5</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>1040</X>
-                                  <Y>1365</Y>
+                                  <Y>1370</Y>
                                   <W>41</W>
                                   <H>35</H>
                                 </item>
@@ -4440,11 +4456,11 @@ print "approximate curvature: ", 1/rad_osc
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>1119.5</X>
-                                  <Y>1270</Y>
+                                  <Y>1275</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>1111</X>
-                                  <Y>1260</Y>
+                                  <Y>1265</Y>
                                   <W>17</W>
                                   <H>20</H>
                                 </item>
@@ -4466,11 +4482,11 @@ print "approximate curvature: ", 1/rad_osc
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>1119.5</X>
-                                  <Y>1290</Y>
+                                  <Y>1295</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>1111</X>
-                                  <Y>1280</Y>
+                                  <Y>1285</Y>
                                   <W>17</W>
                                   <H>20</H>
                                 </item>
@@ -4492,11 +4508,11 @@ print "approximate curvature: ", 1/rad_osc
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>1119.5</X>
-                                  <Y>1310</Y>
+                                  <Y>1315</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>1111</X>
-                                  <Y>1300</Y>
+                                  <Y>1305</Y>
                                   <W>17</W>
                                   <H>20</H>
                                 </item>
@@ -4518,11 +4534,11 @@ print "approximate curvature: ", 1/rad_osc
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>1119.5</X>
-                                  <Y>1330</Y>
+                                  <Y>1335</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>1111</X>
-                                  <Y>1320</Y>
+                                  <Y>1325</Y>
                                   <W>17</W>
                                   <H>20</H>
                                 </item>
@@ -4544,11 +4560,11 @@ print "approximate curvature: ", 1/rad_osc
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>1119.5</X>
-                                  <Y>1350</Y>
+                                  <Y>1355</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>1111</X>
-                                  <Y>1340</Y>
+                                  <Y>1345</Y>
                                   <W>17</W>
                                   <H>20</H>
                                 </item>
@@ -4570,11 +4586,11 @@ print "approximate curvature: ", 1/rad_osc
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>1119.5</X>
-                                  <Y>1370</Y>
+                                  <Y>1375</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>1111</X>
-                                  <Y>1360</Y>
+                                  <Y>1365</Y>
                                   <W>17</W>
                                   <H>20</H>
                                 </item>
@@ -4596,11 +4612,11 @@ print "approximate curvature: ", 1/rad_osc
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>1119.5</X>
-                                  <Y>1390</Y>
+                                  <Y>1395</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>1111</X>
-                                  <Y>1380</Y>
+                                  <Y>1385</Y>
                                   <W>17</W>
                                   <H>20</H>
                                 </item>
@@ -4646,7 +4662,7 @@ print "approximate curvature: ", 1/rad_osc
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">54</item>
+                        <item name="Value" type_name="gh_double" type_code="6">102</item>
                         <item name="Min" type_name="gh_double" type_code="6">1</item>
                         <item name="Max" type_name="gh_double" type_code="6">200</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">3</item>
@@ -4672,7 +4688,7 @@ print "approximate curvature: ", 1/rad_osc
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">01264bfe-7ec7-494e-a8d9-2883f573c045</item>
                     <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                     <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
-                    <item name="UserText" type_name="gh_string" type_code="10">N</item>
+                    <item name="UserText" type_name="gh_string" type_code="10">n</item>
                     <item name="MultilineData" type_name="gh_bool" type_code="1">true</item>
                     <item name="WrapItems" type_name="gh_bool" type_code="1">true</item>
                     <item name="EntryNumbers" type_name="gh_bool" type_code="1">true</item>
@@ -4883,7 +4899,7 @@ a.put(Circle)</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">13087cb2-6cdd-4d01-8182-f92789ab211c</item>
                     <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                     <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
-                    <item name="UserText" type_name="gh_string" type_code="10">Illustrates the key geometric objects of tangent line, osculating plane/circle and curvature along a curve.  Uses discrete approximations with resolution controlled by N.</item>
+                    <item name="UserText" type_name="gh_string" type_code="10">Illustrates the key geometric objects of tangent line, osculating circle, curvature and Frenet frame along a curve.  Uses discrete approximations with resolution controlled by n.</item>
                     <item name="MultilineData" type_name="gh_bool" type_code="1">true</item>
                     <item name="WrapItems" type_name="gh_bool" type_code="1">true</item>
                     <item name="EntryNumbers" type_name="gh_bool" type_code="1">true</item>
@@ -4902,13 +4918,13 @@ a.put(Circle)</item>
                         <item name="MarginLeft" type_name="gh_int32" type_code="3">0</item>
                         <item name="MarginRight" type_name="gh_int32" type_code="3">0</item>
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>1039.599</X>
+                          <X>1039.576</X>
                           <Y>1125.478</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                           <X>1039</X>
                           <Y>1125</Y>
-                          <W>200</W>
+                          <W>193</W>
                           <H>123</H>
                         </item>
                       </items>
@@ -5000,13 +5016,245 @@ a.put(Circle)</item>
                         <item name="MarginRight" type_name="gh_int32" type_code="3">0</item>
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>1162.317</X>
-                          <Y>1257.084</Y>
+                          <Y>1257.109</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                           <X>1162</X>
                           <Y>1257</Y>
                           <W>149</W>
-                          <H>53</H>
+                          <H>69</H>
+                        </item>
+                      </items>
+                    </chunk>
+                  </chunks>
+                </chunk>
+              </chunks>
+            </chunk>
+            <chunk name="Object" index="55">
+              <items count="3">
+                <item name="GUID" type_name="gh_guid" type_code="9">fccad19e-dcb6-44ab-8edb-54dd6ab7e966</item>
+                <item name="Name" type_name="gh_string" type_code="10">Decodes Python Script</item>
+                <item name="Lib" type_name="gh_guid" type_code="9">30f802e3-1f17-2416-d927-d82433eca0a2</item>
+              </items>
+              <chunks count="1">
+                <chunk name="Container">
+                  <items count="8">
+                    <item name="props_visible" type_name="gh_bool" type_code="1">false</item>
+                    <item name="Name" type_name="gh_string" type_code="10">Decodes Python Script</item>
+                    <item name="NickName" type_name="gh_string" type_code="10">Decodes</item>
+                    <item name="Description" type_name="gh_string" type_code="10">A python scriptable component that implements the Decodes library</item>
+                    <item name="InstanceGuid" type_name="gh_guid" type_code="9">838812ab-8b9b-4d5b-80ac-70899c71e616</item>
+                    <item name="HideInput" type_name="gh_bool" type_code="1">true</item>
+                    <item name="CodeInput" type_name="gh_string" type_code="10">import math
+
+def func(t):
+    pt_out = Point(2*math.pi*k*t,math.exp(t)*math.sin(2*math.pi*k*t))
+    return pt_out
+    
+    
+a.put(func)
+</item>
+                    <item name="HideOutput" type_name="gh_bool" type_code="1">false</item>
+                  </items>
+                  <chunks count="2">
+                    <chunk name="Attributes">
+                      <items count="2">
+                        <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
+                          <X>416</X>
+                          <Y>1089</Y>
+                        </item>
+                        <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
+                          <X>386</X>
+                          <Y>1055</Y>
+                          <W>64</W>
+                          <H>68</H>
+                        </item>
+                      </items>
+                    </chunk>
+                    <chunk name="ParameterData">
+                      <items count="5">
+                        <item name="InputCount" type_name="gh_int32" type_code="3">1</item>
+                        <item name="OutputCount" type_name="gh_int32" type_code="3">2</item>
+                        <item name="InputId" index="0" type_name="gh_guid" type_code="9">84fa917c-1ed8-4db3-8be1-7bdc4a6495a2</item>
+                        <item name="OutputId" index="0" type_name="gh_guid" type_code="9">3ede854e-c753-40eb-84cb-b48008f14fd4</item>
+                        <item name="OutputId" index="1" type_name="gh_guid" type_code="9">8ec86459-bf01-4409-baee-174d0d2b13d0</item>
+                      </items>
+                      <chunks count="3">
+                        <chunk name="InputParam" index="0">
+                          <items count="11">
+                            <item name="Name" type_name="gh_string" type_code="10">k</item>
+                            <item name="NickName" type_name="gh_string" type_code="10">k</item>
+                            <item name="Description" type_name="gh_string" type_code="10">Script variable Decodes</item>
+                            <item name="InstanceGuid" type_name="gh_guid" type_code="9">6f7e1051-bf2a-4949-82b2-1a0847a55765</item>
+                            <item name="Optional" type_name="gh_bool" type_code="1">true</item>
+                            <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
+                            <item name="Source" index="0" type_name="gh_guid" type_code="9">e2f2a0da-1da5-466a-a005-a4129c43d5d1</item>
+                            <item name="TypeHintID" type_name="gh_guid" type_code="9">35915213-5534-4277-81b8-1bdc9e7383d2</item>
+                            <item name="ShowTypeHints" type_name="gh_bool" type_code="1">true</item>
+                            <item name="AllowTreeAccess" type_name="gh_bool" type_code="1">false</item>
+                            <item name="ScriptParamAccess" type_name="gh_int32" type_code="3">0</item>
+                          </items>
+                          <chunks count="1">
+                            <chunk name="Attributes">
+                              <items count="2">
+                                <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
+                                  <X>396</X>
+                                  <Y>1089</Y>
+                                </item>
+                                <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
+                                  <X>388</X>
+                                  <Y>1057</Y>
+                                  <W>13</W>
+                                  <H>64</H>
+                                </item>
+                              </items>
+                            </chunk>
+                          </chunks>
+                        </chunk>
+                        <chunk name="OutputParam" index="0">
+                          <items count="7">
+                            <item name="Name" type_name="gh_string" type_code="10">console</item>
+                            <item name="NickName" type_name="gh_string" type_code="10">...</item>
+                            <item name="Description" type_name="gh_string" type_code="10">The execution information, as output and error streams</item>
+                            <item name="InstanceGuid" type_name="gh_guid" type_code="9">c624ab76-1da3-4218-93f3-ddb9c5d67fc7</item>
+                            <item name="Mutable" type_name="gh_bool" type_code="1">false</item>
+                            <item name="Optional" type_name="gh_bool" type_code="1">false</item>
+                            <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
+                          </items>
+                          <chunks count="1">
+                            <chunk name="Attributes">
+                              <items count="2">
+                                <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
+                                  <X>439.5</X>
+                                  <Y>1073</Y>
+                                </item>
+                                <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
+                                  <X>431</X>
+                                  <Y>1057</Y>
+                                  <W>17</W>
+                                  <H>32</H>
+                                </item>
+                              </items>
+                            </chunk>
+                          </chunks>
+                        </chunk>
+                        <chunk name="OutputParam" index="1">
+                          <items count="6">
+                            <item name="Name" type_name="gh_string" type_code="10">a</item>
+                            <item name="NickName" type_name="gh_string" type_code="10">a</item>
+                            <item name="Description" type_name="gh_string" type_code="10">Contains the translated geometry found in outie a</item>
+                            <item name="InstanceGuid" type_name="gh_guid" type_code="9">0ac0a472-e688-425f-b4cf-83a7733356f5</item>
+                            <item name="Optional" type_name="gh_bool" type_code="1">false</item>
+                            <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
+                          </items>
+                          <chunks count="1">
+                            <chunk name="Attributes">
+                              <items count="2">
+                                <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
+                                  <X>439.5</X>
+                                  <Y>1105</Y>
+                                </item>
+                                <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
+                                  <X>431</X>
+                                  <Y>1089</Y>
+                                  <W>17</W>
+                                  <H>32</H>
+                                </item>
+                              </items>
+                            </chunk>
+                          </chunks>
+                        </chunk>
+                      </chunks>
+                    </chunk>
+                  </chunks>
+                </chunk>
+              </chunks>
+            </chunk>
+            <chunk name="Object" index="56">
+              <items count="2">
+                <item name="GUID" type_name="gh_guid" type_code="9">57da07bd-ecab-415d-9d86-af36d7073abc</item>
+                <item name="Name" type_name="gh_string" type_code="10">Number Slider</item>
+              </items>
+              <chunks count="1">
+                <chunk name="Container">
+                  <items count="6">
+                    <item name="Name" type_name="gh_string" type_code="10">Number Slider</item>
+                    <item name="NickName" type_name="gh_string" type_code="10">Slider</item>
+                    <item name="Description" type_name="gh_string" type_code="10">Numeric slider for single values</item>
+                    <item name="InstanceGuid" type_name="gh_guid" type_code="9">e2f2a0da-1da5-466a-a005-a4129c43d5d1</item>
+                    <item name="Optional" type_name="gh_bool" type_code="1">false</item>
+                    <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
+                  </items>
+                  <chunks count="2">
+                    <chunk name="Attributes">
+                      <items count="2">
+                        <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
+                          <X>176.261</X>
+                          <Y>1080.81</Y>
+                        </item>
+                        <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
+                          <X>176</X>
+                          <Y>1080</Y>
+                          <W>160</W>
+                          <H>20</H>
+                        </item>
+                      </items>
+                    </chunk>
+                    <chunk name="Slider">
+                      <items count="6">
+                        <item name="Value" type_name="gh_double" type_code="6">5</item>
+                        <item name="Min" type_name="gh_double" type_code="6">1</item>
+                        <item name="Max" type_name="gh_double" type_code="6">10</item>
+                        <item name="Digits" type_name="gh_int32" type_code="3">3</item>
+                        <item name="Interval" type_name="gh_int32" type_code="3">1</item>
+                        <item name="GripDisplay" type_name="gh_int32" type_code="3">1</item>
+                      </items>
+                    </chunk>
+                  </chunks>
+                </chunk>
+              </chunks>
+            </chunk>
+            <chunk name="Object" index="57">
+              <items count="2">
+                <item name="GUID" type_name="gh_guid" type_code="9">59e0b89a-e487-49f8-bab8-b5bab16be14c</item>
+                <item name="Name" type_name="gh_string" type_code="10">Panel</item>
+              </items>
+              <chunks count="1">
+                <chunk name="Container">
+                  <items count="14">
+                    <item name="Name" type_name="gh_string" type_code="10">Panel</item>
+                    <item name="NickName" type_name="gh_string" type_code="10"></item>
+                    <item name="Description" type_name="gh_string" type_code="10">A panel for custom notes and String values</item>
+                    <item name="InstanceGuid" type_name="gh_guid" type_code="9">21ed2d96-ec1c-4206-be6b-48e7426967e1</item>
+                    <item name="Optional" type_name="gh_bool" type_code="1">false</item>
+                    <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
+                    <item name="UserText" type_name="gh_string" type_code="10">Wavy function with k oscillations</item>
+                    <item name="MultilineData" type_name="gh_bool" type_code="1">true</item>
+                    <item name="WrapItems" type_name="gh_bool" type_code="1">true</item>
+                    <item name="EntryNumbers" type_name="gh_bool" type_code="1">true</item>
+                    <item name="DrawPaths" type_name="gh_bool" type_code="1">true</item>
+                    <item name="ScrollRatio" type_name="gh_double" type_code="6">0</item>
+                    <item name="StreamContents" type_name="gh_bool" type_code="1">false</item>
+                    <item name="StreamDestination" type_name="gh_string" type_code="10"></item>
+                  </items>
+                  <chunks count="1">
+                    <chunk name="Attributes">
+                      <items count="6">
+                        <item name="CustomBackColour" type_name="gh_drawing_color" type_code="36">
+                          <ARGB>255;255;250;90</ARGB>
+                        </item>
+                        <item name="MarginTop" type_name="gh_int32" type_code="3">0</item>
+                        <item name="MarginLeft" type_name="gh_int32" type_code="3">0</item>
+                        <item name="MarginRight" type_name="gh_int32" type_code="3">0</item>
+                        <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
+                          <X>47.6182</X>
+                          <Y>1054.484</Y>
+                        </item>
+                        <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
+                          <X>47</X>
+                          <Y>1054</Y>
+                          <W>108</W>
+                          <H>68</H>
                         </item>
                       </items>
                     </chunk>
