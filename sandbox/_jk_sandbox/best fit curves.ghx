@@ -48,8 +48,8 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>-8</X>
-                  <Y>-344</Y>
+                  <X>-40</X>
+                  <Y>-332</Y>
                 </item>
                 <item name="Zoom" type_name="gh_single" type_code="5">1</item>
               </items>
@@ -324,7 +324,6 @@ b.put(leastSquaresLine(pts))</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">055983b7-9353-4c00-8254-8cc4039b722a</item>
                     <item name="HideInput" type_name="gh_bool" type_code="1">true</item>
                     <item name="CodeInput" type_name="gh_string" type_code="10">#Returns a best fit line defined by ordinary least squares
-#TODO - implement exception eg. xsq_m == x_m*x*m
 
 
 def leastSquaresLine(pts_in):
@@ -350,7 +349,9 @@ def leastSquaresLine(pts_in):
         y_coeff = y_m - m*x_m
         p_ls = Point(0, y_coeff)
         u_ls = Vec(1, m).normalized()
-    else: print "yikes"
+    else:
+        p_ls = Point(x_m, 0)
+        n_ls = Vec(1,0)
         
     d_min = Vec(pts_in[0]-p_ls).dot(u_ls)
     d_max = d_min
@@ -1146,7 +1147,7 @@ a.put(leastSquaresCircle)</item>
                   </items>
                   <chunks count="2">
                     <chunk name="Attributes">
-                      <items count="3">
+                      <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>358</X>
                           <Y>658</Y>
@@ -1157,7 +1158,6 @@ a.put(leastSquaresCircle)</item>
                           <W>85</W>
                           <H>68</H>
                         </item>
-                        <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                       </items>
                     </chunk>
                     <chunk name="ParameterData">
@@ -1185,7 +1185,7 @@ a.put(leastSquaresCircle)</item>
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="3">
+                              <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>327.5</X>
                                   <Y>658</Y>
@@ -1196,7 +1196,6 @@ a.put(leastSquaresCircle)</item>
                                   <W>34</W>
                                   <H>64</H>
                                 </item>
-                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -1213,7 +1212,7 @@ a.put(leastSquaresCircle)</item>
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="3">
+                              <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>381.5</X>
                                   <Y>642</Y>
@@ -1224,7 +1223,6 @@ a.put(leastSquaresCircle)</item>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
-                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -1240,7 +1238,7 @@ a.put(leastSquaresCircle)</item>
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="3">
+                              <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>381.5</X>
                                   <Y>674</Y>
@@ -1251,7 +1249,6 @@ a.put(leastSquaresCircle)</item>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
-                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
