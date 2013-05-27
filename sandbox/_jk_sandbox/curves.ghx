@@ -48,8 +48,8 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>-34</X>
-                  <Y>-946</Y>
+                  <X>-341</X>
+                  <Y>-892</Y>
                 </item>
                 <item name="Zoom" type_name="gh_single" type_code="5">1</item>
               </items>
@@ -1540,7 +1540,7 @@ a.put(pt_out)</item>
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">0</item>
+                        <item name="Value" type_name="gh_double" type_code="6">0.984</item>
                         <item name="Min" type_name="gh_double" type_code="6">0</item>
                         <item name="Max" type_name="gh_double" type_code="6">1</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">3</item>
@@ -4387,7 +4387,7 @@ f.put(cs_out)
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">4f754d31-9947-494c-a5ca-11dca3537a72</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">true</item>
                             <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
-                            <item name="Source" index="0" type_name="gh_guid" type_code="9">e41a4ebe-82f5-4279-8b5a-78147acd6f62</item>
+                            <item name="Source" index="0" type_name="gh_guid" type_code="9">85e4858f-b3ec-4231-8ef1-0e47668788a8</item>
                             <item name="TypeHintID" type_name="gh_guid" type_code="9">35915213-5534-4277-81b8-1bdc9e7383d2</item>
                             <item name="ShowTypeHints" type_name="gh_bool" type_code="1">true</item>
                             <item name="AllowTreeAccess" type_name="gh_bool" type_code="1">false</item>

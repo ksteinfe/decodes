@@ -351,7 +351,7 @@ def leastSquaresLine(pts_in):
         u_ls = Vec(1, m).normalized()
     else:
         p_ls = Point(x_m, 0)
-        n_ls = Vec(1,0)
+        u_ls = Vec(0,1)
         
     d_min = Vec(pts_in[0]-p_ls).dot(u_ls)
     d_max = d_min
@@ -822,7 +822,6 @@ b.put(bestFit(pts_curve))</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">e5e7e2a7-7176-4371-a335-7e61715601b8</item>
                     <item name="HideInput" type_name="gh_bool" type_code="1">true</item>
                     <item name="CodeInput" type_name="gh_string" type_code="10">#Returns a best fit line defined by total least squares
-#TODO - implement exception eg. xy_m == x_m*y*m
 
 
 import math
@@ -865,7 +864,9 @@ def leastSquaresLineTotal(pts_in):
         else: i_min = 1
         p_ls = p[i_min]
         u_ls = Vec(1, m[i_min]).normalized()
-    else: print "yikes"
+    else:
+        p_ls = Point(x_m, 0)
+        u_ls = Vec(0,1)
         
     d_min = Vec(pts_in[0]-p_ls).dot(u_ls)
     d_max = d_min
@@ -885,7 +886,7 @@ a.put(leastSquaresLineTotal)</item>
                   </items>
                   <chunks count="2">
                     <chunk name="Attributes">
-                      <items count="2">
+                      <items count="3">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>322</X>
                           <Y>542</Y>
@@ -896,6 +897,7 @@ a.put(leastSquaresLineTotal)</item>
                           <W>48</W>
                           <H>68</H>
                         </item>
+                        <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                       </items>
                     </chunk>
                     <chunk name="ParameterData">
@@ -918,7 +920,7 @@ a.put(leastSquaresLineTotal)</item>
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>345.5</X>
                                   <Y>526</Y>
@@ -929,6 +931,7 @@ a.put(leastSquaresLineTotal)</item>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -944,7 +947,7 @@ a.put(leastSquaresLineTotal)</item>
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>345.5</X>
                                   <Y>558</Y>
@@ -955,6 +958,7 @@ a.put(leastSquaresLineTotal)</item>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
