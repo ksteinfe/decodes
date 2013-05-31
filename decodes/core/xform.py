@@ -69,7 +69,7 @@ class Xform(object):
         return xf
 
     @staticmethod
-    def scale(factor):
+    def scale(factor, origin=None):
         """Scales an object by a given factor.
 
             :param factor: Factor to scale by
@@ -77,13 +77,24 @@ class Xform(object):
             :result: Scaled object.
             :rtype: Geometry
         """
-        #TODO: add scaling about a given point
-        xf = Xform()
-        xf.m00 = factor
-        xf.m11 = factor
-        xf.m22 = factor
-        return xf
-        
+        if not origin:
+            xf = Xform()
+            xf.m00 = factor
+            xf.m11 = factor
+            xf.m22 = factor
+            return xf
+        else:
+            xf = Xform()
+            xf.m00 = factor
+            xf.m11 = factor
+            xf.m22 = factor
+
+            xf.m02 = (1-factor)*origin.x
+            xf.m03 = (1-factor)*origin.x
+            xf.m13 = (1-factor)*origin.y
+            xf.m14 = (1-factor)*origin.z
+            return xf
+
     @staticmethod
     def mirror(plane="world_xy"):
         """Produces mirror transform. Can pass in "world_xy", "world_yz", or "world_xz". Or, pass in an arbitrary cs (produces mirror about XYplane of CS)
@@ -256,7 +267,7 @@ class Xform(object):
             tup[0] * self._m[8] + tup[1] * self._m[9] + tup[2] * self._m[10]    + self._m[11]
             )
     
-    @property
+    @property 
     def m00(self): return self._m[0]
     @m00.setter
     def m00(self,value): self._m[0] = value
