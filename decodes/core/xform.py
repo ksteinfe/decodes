@@ -89,10 +89,9 @@ class Xform(object):
             xf.m11 = factor
             xf.m22 = factor
 
-            xf.m02 = (1-factor)*origin.x
             xf.m03 = (1-factor)*origin.x
             xf.m13 = (1-factor)*origin.y
-            xf.m14 = (1-factor)*origin.z
+            xf.m23 = (1-factor)*origin.z
             return xf
 
     @staticmethod
