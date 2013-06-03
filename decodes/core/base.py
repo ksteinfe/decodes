@@ -70,7 +70,13 @@ class Geometry(object):
         if not hasattr(self, 'props') : self.props = {}
         if isinstance(a, (Color) ) : self.props['color'] = a
         else : self.props['color'] = Color(a,b,c)
-
+        
+    def get_color(self):
+        # TODO: test if object has props
+        # TODO: test if props dict contains entry for color
+        if hasattr(self, 'props') : return self.props['color']
+        return False
+        
     def set_name(self,str):
         """Sets the geometry's name
 
