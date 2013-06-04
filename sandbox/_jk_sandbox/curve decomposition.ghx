@@ -48,10 +48,10 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>-129</X>
-                  <Y>-523</Y>
+                  <X>35</X>
+                  <Y>-335</Y>
                 </item>
-                <item name="Zoom" type_name="gh_single" type_code="5">1.27346158</item>
+                <item name="Zoom" type_name="gh_single" type_code="5">1</item>
               </items>
             </chunk>
             <chunk name="Views">
@@ -555,7 +555,7 @@ b.put(PLine(pts_keep))
                   </items>
                   <chunks count="2">
                     <chunk name="Attributes">
-                      <items count="3">
+                      <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>562</X>
                           <Y>503</Y>
@@ -566,7 +566,6 @@ b.put(PLine(pts_keep))
                           <W>104</W>
                           <H>68</H>
                         </item>
-                        <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                       </items>
                     </chunk>
                     <chunk name="ParameterData">
@@ -597,7 +596,7 @@ b.put(PLine(pts_keep))
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="3">
+                              <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>522</X>
                                   <Y>487</Y>
@@ -608,7 +607,6 @@ b.put(PLine(pts_keep))
                                   <W>53</W>
                                   <H>32</H>
                                 </item>
-                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -629,7 +627,7 @@ b.put(PLine(pts_keep))
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="3">
+                              <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>522</X>
                                   <Y>519</Y>
@@ -640,7 +638,6 @@ b.put(PLine(pts_keep))
                                   <W>53</W>
                                   <H>32</H>
                                 </item>
-                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -657,7 +654,7 @@ b.put(PLine(pts_keep))
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="3">
+                              <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>585.5</X>
                                   <Y>481.6667</Y>
@@ -668,7 +665,6 @@ b.put(PLine(pts_keep))
                                   <W>17</W>
                                   <H>21</H>
                                 </item>
-                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -684,7 +680,7 @@ b.put(PLine(pts_keep))
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="3">
+                              <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>585.5</X>
                                   <Y>503</Y>
@@ -695,7 +691,6 @@ b.put(PLine(pts_keep))
                                   <W>17</W>
                                   <H>21</H>
                                 </item>
-                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -711,7 +706,7 @@ b.put(PLine(pts_keep))
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="3">
+                              <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>585.5</X>
                                   <Y>524.3334</Y>
@@ -722,7 +717,6 @@ b.put(PLine(pts_keep))
                                   <W>17</W>
                                   <H>22</H>
                                 </item>
-                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -2284,7 +2278,7 @@ a.put(Circle)</item>
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">0.699</item>
+                        <item name="Value" type_name="gh_double" type_code="6">0.628</item>
                         <item name="Min" type_name="gh_double" type_code="6">0.1</item>
                         <item name="Max" type_name="gh_double" type_code="6">1</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">3</item>
