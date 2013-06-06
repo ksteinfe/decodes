@@ -129,7 +129,6 @@ class Curve(HasBasis):
         
         #transform result to curve basis
         if not self.is_baseless:
-            print "a based curve!"
             #pt.basis = self.basis
             #pt = pt.basis_applied()
             pt = pt * self.basis.xform
