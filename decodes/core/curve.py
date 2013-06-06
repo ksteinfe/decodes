@@ -5,7 +5,7 @@ if VERBOSE_FS: print "curve.py loaded"
 import math
 
 
-class Curve(Geometry):
+class Curve(HasBasis):
     """
     a simple curve class
 
@@ -14,7 +14,7 @@ class Curve(Geometry):
 
     """
     
-    def __init__(self, function=None, domain=Interval(0,1), tolerance=None):
+    def __init__(self, function=None, domain=Interval(0,1), tolerance=None, basis=None):
         """ Constructs a Curve object. If tolerance is None, Curve.tol = tol_max().
         
             :param function: A function returning points.
@@ -30,6 +30,7 @@ class Curve(Geometry):
         self._domain = domain
         self._tol = self.tol_max
         if tolerance is not None : self.tol = tolerance
+        if basis is not None : self.basis = basis
 
         if not isinstance(self.func(self.domain.a), Point) : raise GeometricError("Curve not valid: The given function does not return a point at parameter %s"%(self.domain.a))
         if not isinstance(self.func(self.domain.b), Point) : raise GeometricError("Curve not valid: The given function does not return a point at parameter %s"%(self.domain.b))
@@ -125,7 +126,15 @@ class Curve(Geometry):
         tv = t + nudge
         if tv > self.domain.b :  vec = Vec(pt, self._func(t - nudge)).inverted()
         else : vec = Vec(pt, self._func(tv))
-
+        
+        #transform result to curve basis
+        if not self.is_baseless:
+            print "a based curve!"
+            #pt.basis = self.basis
+            #pt = pt.basis_applied()
+            pt = pt * self.basis.xform
+            vec = vec * self.basis.xform.strip_translation()
+        
         return Plane(pt, vec)
 
     def eval(self,t):
