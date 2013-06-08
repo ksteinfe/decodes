@@ -84,7 +84,7 @@ class Curve(HasBasis):
     
     @property
     def tol(self): 
-        """the tolerence of this curve expressed in domain space
+        """the tolerance of this curve expressed in domain space
         for example, given an interval of 0->1, a tol of 0.1 will result in a curve constructed of 10 segments, evaulated with t-values 0.1 apart
         given an interval 0->PI, a tol of 0.1 will result in a curve constructed of 32 segments, evaluated with t-values less than 0.1 apart
             :result: Sets the distance between point of a curve.
