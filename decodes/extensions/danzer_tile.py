@@ -1,4 +1,3 @@
-# FGC Part 4
 # danzerTile.py
 # provides classes that support danzer tile inflation
 import decodes.core as dc
