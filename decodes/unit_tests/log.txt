@@ -5,7 +5,7 @@ test_empty_constructor (decodes.unit_tests.test_pgon.Tests) ... ok
 test_segs_and_edges (decodes.unit_tests.test_pgon.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.290s
+Ran 2 tests in 0.292s
 
 OK
 
@@ -15,7 +15,7 @@ test_empty_constructor (decodes.unit_tests.test_pline.Tests) ... ok
 test_segs_and_edges (decodes.unit_tests.test_pline.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.642s
+Ran 2 tests in 0.647s
 
 OK
 
@@ -27,7 +27,7 @@ test_face_access (decodes.unit_tests.test_mesh.Tests) ... ok
 test_simple_constructor (decodes.unit_tests.test_mesh.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.047s
+Ran 4 tests in 0.046s
 
 OK
 
@@ -40,7 +40,7 @@ test_empty_constructor (decodes.unit_tests.test_point.Tests) ... ok
 test_nearest_point (decodes.unit_tests.test_point.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.046s
+Ran 5 tests in 0.048s
 
 OK
 
@@ -53,81 +53,23 @@ test_item_access (decodes.unit_tests.test_has_pts.Tests) ... ok
 test_manipulating_points (decodes.unit_tests.test_has_pts.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.080s
+Ran 5 tests in 0.079s
 
 OK
 
 
 == TEST_CURVE ==
-test_bezier (decodes.unit_tests.test_curve.Tests) ... ERROR
+test_bezier (decodes.unit_tests.test_curve.Tests) ... ok
 test_constructor (decodes.unit_tests.test_curve.Tests) ... ok
-test_division (decodes.unit_tests.test_curve.Tests) ... ERROR
-test_far (decodes.unit_tests.test_curve.Tests) ... ERROR
-test_hermite (decodes.unit_tests.test_curve.Tests) ... ERROR
+test_division (decodes.unit_tests.test_curve.Tests) ... ok
+test_far (decodes.unit_tests.test_curve.Tests) ... ok
+test_hermite (decodes.unit_tests.test_curve.Tests) ... ok
 test_subdivide (decodes.unit_tests.test_curve.Tests) ... ok
 
-======================================================================
-ERROR: test_bezier (decodes.unit_tests.test_curve.Tests)
 ----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "G:\git\decodes\decodes\unit_tests\test_curve.py", line 81, in test_bezier
-    self.assertEqual(crv.eval(0),pt_a,"Curve.eval(0) returns first control point")
-  File "C:\Python27\lib\unittest\case.py", line 509, in assertEqual
-    assertion_func(first, second, msg=msg)
-  File "C:\Python27\lib\unittest\case.py", line 499, in _baseAssertEqual
-    if not first == second:
-  File "G:\git\decodes\decodes\core\dc_plane.py", line 37, in __eq__
-    return self.is_identical(other)
-  File "G:\git\decodes\decodes\core\dc_plane.py", line 109, in is_identical
-    return all([self.x==other.x,self.y==other.y,self.z==other.z,self.vec.x==other.vec.x,self.vec.y==other.vec.y,self.vec.z==other.vec.z])
-AttributeError: 'Point' object has no attribute 'vec'
+Ran 6 tests in 0.823s
 
-======================================================================
-ERROR: test_division (decodes.unit_tests.test_curve.Tests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "G:\git\decodes\decodes\unit_tests\test_curve.py", line 29, in test_division
-    for n, pt in enumerate(div_pts) : self.assertEqual(pt,Point(n,n**2))
-  File "C:\Python27\lib\unittest\case.py", line 509, in assertEqual
-    assertion_func(first, second, msg=msg)
-  File "C:\Python27\lib\unittest\case.py", line 499, in _baseAssertEqual
-    if not first == second:
-  File "G:\git\decodes\decodes\core\dc_plane.py", line 37, in __eq__
-    return self.is_identical(other)
-  File "G:\git\decodes\decodes\core\dc_plane.py", line 109, in is_identical
-    return all([self.x==other.x,self.y==other.y,self.z==other.z,self.vec.x==other.vec.x,self.vec.y==other.vec.y,self.vec.z==other.vec.z])
-AttributeError: 'Point' object has no attribute 'vec'
-
-======================================================================
-ERROR: test_far (decodes.unit_tests.test_curve.Tests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "G:\git\decodes\decodes\unit_tests\test_curve.py", line 72, in test_far
-    far_pt, far_t, dist = crv.far(Point(0,1)) #near() returns a tuple containing two values (Point, float)
-  File "G:\git\decodes\decodes\core\dc_curve.py", line 239, in far
-    return(result,t,pt.distance(result.origin))
-NameError: global name 'result' is not defined
-
-======================================================================
-ERROR: test_hermite (decodes.unit_tests.test_curve.Tests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "G:\git\decodes\decodes\unit_tests\test_curve.py", line 90, in test_hermite
-    self.assertEqual(crv.eval(0),pt_a,"Curve.eval(0) returns first control point")
-  File "C:\Python27\lib\unittest\case.py", line 509, in assertEqual
-    assertion_func(first, second, msg=msg)
-  File "C:\Python27\lib\unittest\case.py", line 499, in _baseAssertEqual
-    if not first == second:
-  File "G:\git\decodes\decodes\core\dc_plane.py", line 37, in __eq__
-    return self.is_identical(other)
-  File "G:\git\decodes\decodes\core\dc_plane.py", line 109, in is_identical
-    return all([self.x==other.x,self.y==other.y,self.z==other.z,self.vec.x==other.vec.x,self.vec.y==other.vec.y,self.vec.z==other.vec.z])
-AttributeError: 'Point' object has no attribute 'vec'
-
-----------------------------------------------------------------------
-Ran 6 tests in 0.581s
-
-FAILED (errors=4)
+OK
 
 
 == TEST_PLANE ==
@@ -174,7 +116,7 @@ test_properties (decodes.unit_tests.test_vec.Tests) ... ok
 test_static (decodes.unit_tests.test_vec.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.011s
+Ran 7 tests in 0.010s
 
 OK
 

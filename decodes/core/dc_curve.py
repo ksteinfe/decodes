@@ -235,7 +235,9 @@ class Curve(HasBasis):
             :result: Tuple containing a Plane, a t-value associated with this point, and the distance from this Point to the given Point.
             :rtype: (Plane, float, float)
         """
-
+        if tolerance is None : tolerance = self.tol/10.0
+        t = self._nearfar(Point.far_index,pt,tolerance,max_recursion)
+        result = self.deval(t)
         return(result,t,pt.distance(result.origin))
 
     def far_pt(self,pt,tolerance=None,max_recursion=20):
