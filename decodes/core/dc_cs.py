@@ -1,5 +1,5 @@
 from decodes.core import *
-from . import base, vec, point #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
+from . import dc_base, dc_vec, dc_point #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
 if VERBOSE_FS: print "cs.py loaded"
 import math, copy, collections
 
@@ -54,12 +54,12 @@ class CS(Geometry, IsBasis):
 
     @property
     def xform(self):
-        from .xform import Xform
+        from .dc_xform import Xform
         return Xform.change_basis(CS(), self)
         
     @property
     def ixform(self): 
-        from .xform import Xform
+        from .dc_xform import Xform
         return Xform.change_basis(self, CS())
     
 

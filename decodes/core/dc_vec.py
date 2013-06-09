@@ -1,5 +1,5 @@
 from decodes.core import *
-from . import base #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
+from . import dc_base #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
 
 import math, random
 if VERBOSE_FS: print "vec.py loaded"
@@ -136,7 +136,7 @@ class Vec(Geometry):
             :result: New vec.
             :rtype: Vec
         """  
-        from .xform import Xform
+        from .dc_xform import Xform
         if isinstance(other, Xform) :
             return other*self
         else : 

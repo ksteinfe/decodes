@@ -1,6 +1,6 @@
 from .. import *
 from ..core import *
-from ..core import base, vec, point, cs, line, mesh, pgon
+from ..core import dc_base, dc_vec, dc_point, dc_cs, dc_line, dc_mesh, dc_pgon
 from . import outie
 if VERBOSE_FS: print "svg_out loaded"
 

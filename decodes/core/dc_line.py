@@ -1,6 +1,6 @@
 from decodes.core import *
 
-from . import base, vec, point #here we may only import modules that have been loaded before this one.  see core/__init__.py for proper order
+from . import dc_base, dc_vec, dc_point #here we may only import modules that have been loaded before this one.  see core/__init__.py for proper order
 if VERBOSE_FS: print "line.py loaded"
 
 #from SYMPY

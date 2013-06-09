@@ -42,7 +42,7 @@ class Geometry(object):
             :result: New geometry.
             :rtype: Geometry
         """
-        from .xform import Xform
+        from .dc_xform import Xform
         if isinstance(other, Xform) :
             return other*self
     
@@ -66,7 +66,7 @@ class Geometry(object):
             :result: Sets the geometry's color.
             :rtype: Geometry
         """
-        from .color import Color
+        from .dc_color import Color
         if not hasattr(self, 'props') : self.props = {}
         if isinstance(a, (Color) ) : self.props['color'] = a
         else : self.props['color'] = Color(a,b,c)
@@ -111,7 +111,7 @@ class Geometry(object):
             :result: Sets the geometry's fill.
             :rtype: Geometry
         """
-        from .color import Color
+        from .dc_color import Color
         if not hasattr(self, 'props') : self.props = {}
         if isinstance(a, (Color) ) : self.props['fill'] = a
         else : self.props['fill'] = Color(a,b,c)

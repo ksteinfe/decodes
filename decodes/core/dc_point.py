@@ -1,5 +1,5 @@
 from decodes.core import *
-from . import base, vec #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
+from . import dc_base, dc_vec #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
 import math, random, warnings, copy
 if VERBOSE_FS: print "point.py loaded"
 
@@ -168,7 +168,7 @@ class Point(Vec,HasBasis):
             :result: New point.
             :rtype: Point
         """
-        from .xform import Xform
+        from .dc_xform import Xform
         if isinstance(other, Xform) :
             return other*self
         else : 
