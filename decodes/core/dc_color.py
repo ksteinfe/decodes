@@ -1,3 +1,6 @@
+from decodes.core import *
+from . import dc_interval #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
+
 import colorsys
 
 class Color():
@@ -97,3 +100,125 @@ class Color():
         
     def __repr__(self):
         return "color[{0},{1},{2}]".format(self.r,self.g,self.b)
+
+class PixelGrid(object):
+    """
+    an abstract class for storing information in a raster grid format.
+    """
+    
+    @property
+    def width(self):
+        return int(self._size.a)
+
+    @property
+    def height(self):
+        return int(self._size.b)
+
+    @property
+    def dimensions(self):
+        return self._size
+
+    def get(self,x,y):
+        return self._pixels[y*self._size.a+x]
+
+    def set(self,x,y,value):
+        self._pixels[y*self.width+x] = value
+
+class ValueField(PixelGrid):
+    """
+    a raster grid of floating point values
+    each pixel contains a floating point number
+    """
+    def __init__(self, dimensions=Interval(20,20), initial_value = 0.0):
+        self._size = Interval(int(dimensions.a),int(dimensions.b))
+        self._pixels = [initial_value]*(self.width*self.height)
+        
+        self._max_value = initial_value
+        self._min_value = initial_value
+
+    def set(self,x,y,value):
+        super(ValueField,self).set(x,y,value)
+        if value > self._max_value : self._max_value = value
+        if value < self._min_value : self._min_value = value
+
+    @property
+    def max_value(self):
+        return self._max_value
+
+    @property
+    def min_value(self):
+        return self._min_value
+
+    def to_image(self,min_color,max_color,value_range=None):
+        from .dc_interval import Interval
+        if value_range is None : value_range = Interval(self.min_value,self.max_value)
+        img = Image(self.dimensions)
+        for n, val in enumerate(self._pixels):
+            t = value_range.deval(val)
+            img._pixels[n] = Color.interpolate(min_color,max_color,t)
+        return img
+
+class BoolField(PixelGrid):
+    """
+    a raster grid of boolean values
+    each pixel contains a True or a False
+    """
+    def __init__(self, dimensions=Interval(20,20), initial_value = False):
+        self._size = Interval(int(dimensions.a),int(dimensions.b))
+        self._pixels = [initial_value]*(self.width*self.height)
+
+
+
+
+
+class Image(PixelGrid):
+    """
+    a raster grid of Colors
+    each pixel contains a Color with normalized R,G,B values
+    """
+    def __init__(self, dimensions=Interval(20,20), initial_color = Color()):
+        self._size = Interval(int(dimensions.a),int(dimensions.b))
+        self._pixels = [initial_color]*(self.width*self.height)
+
+    def save(self, filename, path=False):
+        import os, struct, array
+        if path==False : path = os.path.expanduser("~") + os.sep + filename + ".tga"
+        else : path = path + os.sep + filename + ".tga"
+
+        ## begin tga header fields:
+        ## structure seen at 
+        ## http://gpwiki.org/index.php/TGA, 2009-09-20
+        Offset = 0
+        ColorType = 0
+        ImageType = 2
+        PaletteStart = 0
+        PaletteLen = 0
+        PalBits = 8
+        XOrigin = 0
+        YOrigin = 0
+        Width = int(self.width)
+        Height = int(self.height)
+        BPP = 24
+        Orientation = 0
+
+        # (c 'short' stays for 16 bit data)
+        StructFmt = "<BBBHHBHHhhBB"
+
+        header = struct.pack(StructFmt, Offset, ColorType, ImageType,
+                                        PaletteStart, PaletteLen, PalBits,
+                                        XOrigin, YOrigin, Width, Height,
+                                        BPP, Orientation)
+
+        # Array mdule and format documentation at:  http://docs.python.org/library/array.html
+        data = array.array("B", (255 for i in xrange(self.width * self.height * 3)))
+
+        for n,clr in enumerate(self._pixels):
+            data[n * 3] = int(clr.b*255)
+            data[n * 3 + 1] = int(clr.g*255)
+            data[n * 3 + 2] = int(clr.r*255)
+        
+        print "saving image to ",path
+        datafile = open(path, "wb")
+        datafile.write(header)
+        data.write(datafile)
+        datafile.close()
