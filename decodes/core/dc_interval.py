@@ -165,6 +165,7 @@ class Interval():
             >>1.5
 
         """ 
+        if self.delta == 0 : raise ZeroDivisionError("This interval cannot be devaluated because the delta is zero")
         return (number-self.a) / self.delta
         
     def eval(self, t):

@@ -124,6 +124,29 @@ class PixelGrid(object):
     def set(self,x,y,value):
         self._pixels[y*self.width+x] = value
 
+    def neighbors_of(self,x,y,include_corners=False,wrap=True):
+        ret = []
+        #left
+        if x > 0 : ret.append(self.get(x-1,y))
+        if wrap and x == 0 : ret.append(self.get(self.width-1,y))
+        
+        #up
+        if y < self.height-1 : ret.append(self.get(x,y+1))
+        if wrap and y == self.height-1 : ret.append(self.get(x,0))
+
+        #right
+        if x < self.width-1 : ret.append(self.get(x+1,y))
+        if wrap and x == self.width-1 : ret.append(self.get(0,y))
+
+        #down
+        if y > 0 : ret.append(self.get(x,y-1))
+        if wrap and y == 0 : ret.append(self.get(x,self.height-1))
+
+        if include_corners:
+            raise NotImplementedError("no corners yet")
+
+        return ret
+
 class ValueField(PixelGrid):
     """
     a raster grid of floating point values
@@ -132,29 +155,24 @@ class ValueField(PixelGrid):
     def __init__(self, dimensions=Interval(20,20), initial_value = 0.0):
         self._size = Interval(int(dimensions.a),int(dimensions.b))
         self._pixels = [initial_value]*(self.width*self.height)
-        
-        self._max_value = initial_value
-        self._min_value = initial_value
-
-    def set(self,x,y,value):
-        super(ValueField,self).set(x,y,value)
-        if value > self._max_value : self._max_value = value
-        if value < self._min_value : self._min_value = value
 
     @property
     def max_value(self):
-        return self._max_value
+        return max(self._pixels)
 
     @property
     def min_value(self):
-        return self._min_value
+        return min(self._pixels)
 
     def to_image(self,min_color,max_color,value_range=None):
         from .dc_interval import Interval
         if value_range is None : value_range = Interval(self.min_value,self.max_value)
         img = Image(self.dimensions)
         for n, val in enumerate(self._pixels):
-            t = value_range.deval(val)
+            try: 
+                t = value_range.deval(val)
+            except :
+                t = 0.0
             img._pixels[n] = Color.interpolate(min_color,max_color,t)
         return img
 
@@ -180,10 +198,15 @@ class Image(PixelGrid):
         self._size = Interval(int(dimensions.a),int(dimensions.b))
         self._pixels = [initial_color]*(self.width*self.height)
 
-    def save(self, filename, path=False):
+    def save(self, filename, path=False, verbose=False):
         import os, struct, array
-        if path==False : path = os.path.expanduser("~") + os.sep + filename + ".tga"
-        else : path = path + os.sep + filename + ".tga"
+        if path==False : path = os.path.expanduser("~")
+        filename = filename + ".tga"
+
+        if verbose:
+            print "saving image to ",os.path.join(path, filename)
+            from time import time
+            t0 = time()
 
         ## begin tga header fields:
         ## structure seen at 
@@ -216,9 +239,20 @@ class Image(PixelGrid):
             data[n * 3] = int(clr.b*255)
             data[n * 3 + 1] = int(clr.g*255)
             data[n * 3 + 2] = int(clr.r*255)
+
+        if verbose: 
+            t1 = time()
+            print 'packing data took: %f' %(t1-t0)
+
+        if not os.path.exists(path):
+            if verbose : print "creating folder",path
+            os.makedirs(path)
         
-        print "saving image to ",path
-        datafile = open(path, "wb")
+        datafile = open(os.path.join(path, filename), "wb")
         datafile.write(header)
         data.write(datafile)
         datafile.close()
+
+        if verbose: 
+            t2 = time()
+            print 'writing file took: %f' %(t2-t1)
