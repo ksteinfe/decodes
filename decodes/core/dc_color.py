@@ -107,33 +107,29 @@ class PixelGrid(object):
     """
     
     def __init__(self,include_corners=False):
-        w = self.width
+        w = self.px_width
         self._neiidx = [-1,1,-w,w]
         if include_corners : self._neiidx.extend ([-w-1,w+1,-w+1,w-1])
 
     @property
-    def width(self):
-        return int(self._size.a)
+    def px_width(self):
+        return int(self._res.a)
 
     @property
-    def height(self):
-        return int(self._size.b)
-
-    @property
-    def dimensions(self):
-        return self._size
+    def px_height(self):
+        return int(self._res.b)
 
     def get(self,x,y):
-        return self._pixels[y*self._size.a+x]
+        return self._pixels[y*self._res.a+x]
 
     def set(self,x,y,value):
-        self._pixels[y*self.width+x] = value
+        self._pixels[y*self.px_width+x] = value
 
     def neighbors_of(self,x,y,wrap=False):
         ret = []
         for i in self._neiidx:
-            if (i < 0 or i > self.width):
-                if wrap: ret.append(self._pixels[i % self.width]) 
+            if (i < 0 or i > self.px_width):
+                if wrap: ret.append(self._pixels[i % self.px_width]) 
             else: ret.append(self._pixels[i])
         return ret
 
@@ -142,9 +138,9 @@ class ValueField(PixelGrid):
     a raster grid of floating point values
     each pixel contains a floating point number
     """
-    def __init__(self, dimensions=Interval(20,20), initial_value = 0.0,include_corners=False,wrap=True):
-        self._size = Interval(int(dimensions.a),int(dimensions.b))
-        self._pixels = [initial_value]*(self.width*self.height)
+    def __init__(self, pixel_res=Interval(20,20), initial_value = 0.0,include_corners=False,wrap=True):
+        self._res = Interval(int(pixel_res.a),int(pixel_res.b))
+        self._pixels = [initial_value]*(self.px_width*self.px_height)
         super(ValueField,self).__init__(include_corners)
 
     @property
@@ -172,9 +168,9 @@ class BoolField(PixelGrid):
     a raster grid of boolean values
     each pixel contains a True or a False
     """
-    def __init__(self, dimensions=Interval(20,20), initial_value = False,include_corners=False,wrap=True):
-        self._size = Interval(int(dimensions.a),int(dimensions.b))
-        self._pixels = [initial_value]*(self.width*self.height)
+    def __init__(self, pixel_res=Interval(20,20), initial_value = False,include_corners=False,wrap=True):
+        self._res = Interval(int(pixel_res.a),int(pixel_res.b))
+        self._pixels = [initial_value]*(self.px_width*self.px_height)
         super(BoolField,self).__init__(include_corners)
 
     def to_image(self,false_color=Color(0.0),true_color=Color(1.0)):
@@ -194,9 +190,9 @@ class Image(PixelGrid):
     a raster grid of Colors
     each pixel contains a Color with normalized R,G,B values
     """
-    def __init__(self, dimensions=Interval(20,20), initial_color = Color(),include_corners=False,wrap=True):
-        self._size = Interval(int(dimensions.a),int(dimensions.b))
-        self._pixels = [initial_color]*(self.width*self.height)
+    def __init__(self, pixel_res=Interval(20,20), initial_color = Color(),include_corners=False,wrap=True):
+        self._res = Interval(int(pixel_res.a),int(pixel_res.b))
+        self._pixels = [initial_color]*(self.px_width*self.px_height)
         super(Image,self).__init__(include_corners)
 
     def save(self, filename, path=False, verbose=False):
@@ -220,8 +216,8 @@ class Image(PixelGrid):
         PalBits = 8
         XOrigin = 0
         YOrigin = 0
-        Width = int(self.width)
-        Height = int(self.height)
+        Width = int(self.px_width)
+        Height = int(self.px_height)
         BPP = 24
         Orientation = 0
 
@@ -234,7 +230,7 @@ class Image(PixelGrid):
                                         BPP, Orientation)
 
         # Array mdule and format documentation at:  http://docs.python.org/library/array.html
-        data = array.array("B", (255 for i in xrange(self.width * self.height * 3)))
+        data = array.array("B", (255 for i in xrange(self.width * self.px_height * 3)))
 
         for n,clr in enumerate(self._pixels):
             data[n * 3] = int(clr.b*255)
