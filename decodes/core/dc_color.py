@@ -185,6 +185,14 @@ class BoolField(PixelGrid):
         self._size = Interval(int(dimensions.a),int(dimensions.b))
         self._pixels = [initial_value]*(self.width*self.height)
 
+    def to_image(self,false_color=Color(0.0),true_color=Color(1.0)):
+
+        img = Image(self.dimensions,false_color)
+        for n in self._pixels:
+            if n : img._pixels[n] = true_color
+
+        return img
+
 
 
 
