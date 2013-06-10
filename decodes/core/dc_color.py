@@ -106,6 +106,11 @@ class PixelGrid(object):
     an abstract class for storing information in a raster grid format.
     """
     
+    def __init__(self,include_corners=False):
+        w = self.width
+        self._neiidx = [-1,1,-w,w]
+        if include_corners : self._neiidx.extend ([-w-1,w+1,-w+1,w-1])
+
     @property
     def width(self):
         return int(self._size.a)
@@ -124,27 +129,12 @@ class PixelGrid(object):
     def set(self,x,y,value):
         self._pixels[y*self.width+x] = value
 
-    def neighbors_of(self,x,y,include_corners=False,wrap=True):
+    def neighbors_of(self,x,y,wrap=False):
         ret = []
-        #left
-        if x > 0 : ret.append(self.get(x-1,y))
-        if wrap and x == 0 : ret.append(self.get(self.width-1,y))
-        
-        #up
-        if y < self.height-1 : ret.append(self.get(x,y+1))
-        if wrap and y == self.height-1 : ret.append(self.get(x,0))
-
-        #right
-        if x < self.width-1 : ret.append(self.get(x+1,y))
-        if wrap and x == self.width-1 : ret.append(self.get(0,y))
-
-        #down
-        if y > 0 : ret.append(self.get(x,y-1))
-        if wrap and y == 0 : ret.append(self.get(x,self.height-1))
-
-        if include_corners:
-            raise NotImplementedError("no corners yet")
-
+        for i in self._neiidx:
+            if (i < 0 or i > self.width):
+                if wrap: ret.append(self._pixels[i % self.width]) 
+            else: ret.append(self._pixels[i])
         return ret
 
 class ValueField(PixelGrid):
@@ -152,9 +142,10 @@ class ValueField(PixelGrid):
     a raster grid of floating point values
     each pixel contains a floating point number
     """
-    def __init__(self, dimensions=Interval(20,20), initial_value = 0.0):
+    def __init__(self, dimensions=Interval(20,20), initial_value = 0.0,include_corners=False,wrap=True):
         self._size = Interval(int(dimensions.a),int(dimensions.b))
         self._pixels = [initial_value]*(self.width*self.height)
+        super(ValueField,self).__init__(include_corners)
 
     @property
     def max_value(self):
@@ -181,9 +172,10 @@ class BoolField(PixelGrid):
     a raster grid of boolean values
     each pixel contains a True or a False
     """
-    def __init__(self, dimensions=Interval(20,20), initial_value = False):
+    def __init__(self, dimensions=Interval(20,20), initial_value = False,include_corners=False,wrap=True):
         self._size = Interval(int(dimensions.a),int(dimensions.b))
         self._pixels = [initial_value]*(self.width*self.height)
+        super(BoolField,self).__init__(include_corners)
 
     def to_image(self,false_color=Color(0.0),true_color=Color(1.0)):
 
@@ -202,9 +194,10 @@ class Image(PixelGrid):
     a raster grid of Colors
     each pixel contains a Color with normalized R,G,B values
     """
-    def __init__(self, dimensions=Interval(20,20), initial_color = Color()):
+    def __init__(self, dimensions=Interval(20,20), initial_color = Color(),include_corners=False,wrap=True):
         self._size = Interval(int(dimensions.a),int(dimensions.b))
         self._pixels = [initial_color]*(self.width*self.height)
+        super(Image,self).__init__(include_corners)
 
     def save(self, filename, path=False, verbose=False):
         import os, struct, array

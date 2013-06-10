@@ -5,7 +5,7 @@ print "cellular_automata.py loaded"
 
 class CA (object):
 
-    def __init__(self, dimensions=Interval(20,20)):
+    def __init__(self, dimensions=Interval(20,20),include_corners=False):
         self.width = dimensions.a
         self.height = dimensions.b
 
@@ -33,7 +33,7 @@ class CA (object):
         return x,y
 
     def clear(self):
-        self._uvals = BoolField(Interval(self.width,self.height))
+        self._uvals = BoolField(Interval(self.width,self.height),include_corners)
         self.step_count = 0
         self.hist_u = []
         
@@ -65,7 +65,7 @@ class CA (object):
         for x in range(0,self.width):
             for y in range(0,self.height):
                 cur_u = self._uvals.get(x,y)
-                #neighbors_u = self._uvals.neighbors_of(x,y)
+                neighbors_u = self._uvals.neighbors_of(x,y)
                 nxt_u = cur_u
                 nxt_uvals.set(x,y,nxt_u)
  #               self.log_u(nxt_u)
