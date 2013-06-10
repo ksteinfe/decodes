@@ -1,9 +1,9 @@
 import decodes as dc
 from decodes.core import *
-from decodes.extensions.lsystem import *
 
 
-
+vf = VecField(Interval(4,4),Point(1,1))
+print vf
 
 
 

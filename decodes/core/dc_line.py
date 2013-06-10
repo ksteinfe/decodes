@@ -1,6 +1,6 @@
 from decodes.core import *
 
-from . import dc_base, dc_vec, dc_point #here we may only import modules that have been loaded before this one.  see core/__init__.py for proper order
+from . import dc_base, dc_interval, dc_color, dc_vec, dc_point #here we may only import modules that have been loaded before this one.  see core/__init__.py for proper order
 if VERBOSE_FS: print "line.py loaded"
 
 #from SYMPY
@@ -283,3 +283,21 @@ class Segment(LinearEntity):
       return Point.interpolate(self.spt, self.ept)
 
 
+class VecField(PixelGrid):
+    """
+    a raster grid of vectors
+    each pixel contains a positioned 3d vector (a Ray)
+    """
+    def __init__(self, pixel_res=Interval(8,8), spatial_origin=Point(), spatial_dim=Interval(2,2), initial_value = Vec(),include_corners=False,wrap=True):
+        self._size = Interval(int(pixel_res.a),int(pixel_res.b))
+        self._pixels = [initial_value]*(self.width*self.height)
+        self._sp_org = spatial_origin
+        self._sp_dim = spatial_dim
+        super(VecField,self).__init__(include_corners)
+
+        self._ival_x = Interval(self._sp_org.x - self._sp_dim.a/2, self._sp_org.x + self._sp_dim.a/2)
+        self._ival_y = Interval(self._sp_org.y - self._sp_dim.b/2, self._sp_org.y + self._sp_dim.b/2)
+        self._base_pts = []
+
+    def to_rays(self):
+        pass
