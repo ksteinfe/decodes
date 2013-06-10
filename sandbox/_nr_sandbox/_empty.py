@@ -7,10 +7,13 @@ import os
 path = os.path.expanduser("~") + os.sep + "_decodes_export"
 
 def func(a,b):
-    return random.choice([0,1]) == 0
+    return True
 
-width = 4
-height = 4
+for k in range(100):
+    print func(1,2)
+
+width = 2
+height = 2
 test = CA(Interval(width,height))
 test.set_rule(func)
 
