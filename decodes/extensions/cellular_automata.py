@@ -18,7 +18,7 @@ class CA (object):
         self._uvals.set(x,y,val)
 
 
-    def set_rule(self,func=eval("def func(a,b): return a")):
+    def set_rule(self,func=False):
         self.rule = func
 
 
