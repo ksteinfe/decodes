@@ -6,11 +6,13 @@ import random
 import os
 path = os.path.expanduser("~") + os.sep + "_decodes_export"
 
-def func(a,b): return a
+def func(a,b):
+    return random.choice([0,1]) == 0
 
-width = 100
-height = 100
+width = 4
+height = 4
 test = CA(Interval(width,height))
+test.set_rule(func)
 
 for n in range(10):
     print "step",n
