@@ -5,15 +5,21 @@ print "cellular_automata.py loaded"
 
 class CA (object):
 
-    def __init__(self, dimensions=Interval(20,20),include_corners=False):
+    def __init__(self, dimensions=Interval(20,20),include_corners=False,wrap=False):
         self.width = dimensions.a
         self.height = dimensions.b
+        self.include_corners = include_corners
+        self.wrap = False
 
         self.clear()
     
     def set_u(self,x,y,val):
         x,y = self._reframe(x,y)
         self._uvals.set(x,y,val)
+
+
+    def set_rule(self,func=eval("def func(a,b): return a")):
+        self.rule = func
 
 
     def get_u(self,x,y): return self._uvals.get(x,y)
@@ -33,7 +39,7 @@ class CA (object):
         return x,y
 
     def clear(self):
-        self._uvals = BoolField(Interval(self.width,self.height),include_corners)
+        self._uvals = BoolField(Interval(self.width,self.height),self.include_corners)
         self.step_count = 0
         self.hist_u = []
         
@@ -54,7 +60,6 @@ class CA (object):
         return imgs
 
 
-
     def log_u(self,u):
         if u > self.max_recorded_u : self.max_recorded_u = u
         if u < self.min_recorded_u : self.min_recorded_u = u
@@ -66,7 +71,7 @@ class CA (object):
             for y in range(0,self.height):
                 cur_u = self._uvals.get(x,y)
                 neighbors_u = self._uvals.neighbors_of(x,y)
-                nxt_u = cur_u
+                nxt_u = self.rule(cur_u, neighbors_u)
                 nxt_uvals.set(x,y,nxt_u)
  #               self.log_u(nxt_u)
         

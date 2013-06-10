@@ -6,6 +6,8 @@ import random
 import os
 path = os.path.expanduser("~") + os.sep + "_decodes_export"
 
+def func(a,b): return a
+
 width = 100
 height = 100
 test = CA(Interval(width,height))
