@@ -105,6 +105,12 @@ class Interval():
         """
         return float(self.b - self.a)
 
+    @property
+    def mid(self):
+        """
+        """
+        return self.eval(0.5)
+
     def order(self):
         """Returns a copy of this interval with ordered values, such that a < b
         
