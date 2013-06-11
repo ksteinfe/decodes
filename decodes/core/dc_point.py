@@ -444,8 +444,6 @@ class Point(Vec,HasBasis):
             return culled_pts
 
 
-
-
 class HasPts(HasBasis):
     """
     A base class for anything that contains a list of vertices.
@@ -556,3 +554,57 @@ class HasPts(HasBasis):
              return Vec(other)
         if self.basis is other.basis : return Vec(other._x,other._y,other._z) # if we share a basis, then use the local coordinates of the other
         raise BasisError("The basis for this Geometry and the point you're adding do not match. Try applying or stripping the point of its basis, or describing the point in terms of this Geometry's basis")
+
+
+class QuadTree():
+    def __init__ (self, capacity, bounds):
+        self.cap = capacity
+        self.bnd = bounds
+        self.pts = []
+        
+    @property
+    def has_children(self):
+        if hasattr(self,'children'):return True 
+        return False
+        
+    def append(self, pt) :
+        if not self.contains(pt) : return False
+        if not self.has_children and len(self.pts) < self.cap:
+            self.pts.append(pt)
+            return True
+        else :
+            if not self.has_children : self.divide()
+            for child in self.children:
+                if child.append : return True
+            return False
+        
+    def divide(self) :
+        """
+        divides self into sub regions.
+        starts at bottom left and moves clockwise
+        """
+        if self.has_children: return False
+        from .dc_pgon import Bounds
+        
+        cpts = self.bnd.corners
+        ivals_x = self.bnd.iterval_x/4
+        ivals_y = self.bnd.iterval_y/4
+        
+        cpts = []
+        cpts.append(Point(ivals_x[1],ivals_y[1]))
+        cpts.append(Point(ivals_x[1],ivals_y[3]))
+        cpts.append(Point(ivals_x[3],ivals_y[3]))
+        cpts.append(Point(ivals_x[3],ivals_y[1]))
+        
+        self.children = [QuadTree(self.cap,Bounds(pt,self.bnd.w2,self.bnd.h2)) for pt in cpts]
+        for pt in self.pts : self.append(pt)
+        self.pts = None
+        return True
+    
+    def contains(self,pt):
+        if self.has_children:
+            return any([child.contains(pt) for child in self.children])
+        else:
+            return self.bnd.contains(pt)
+            
+

@@ -138,15 +138,15 @@ class Bounds(Geometry):
     """
     def __init__ (self, center, w, h):
         self.cpt = center
-        self._halfwidth = w/2
-        self._halfheight = h/2
+        self.w2 = w/2
+        self.h2 = h/2
         
     @property
-    def iterval_x():
-        return Interval(self.cpt.x-(self._halfwidth),self.cpt.x+(self._halfwidth))
+    def iterval_x(self):
+        return Interval(self.cpt.x-(self.w2),self.cpt.x+(self.w2))
     @property
-    def iterval_y():
-        return Interval(self.cpt.y-(self._halfheight),self.cpt.y+(self._halfheight))
+    def iterval_y(self):
+        return Interval(self.cpt.y-(self.h2),self.cpt.y+(self.h2))
 
     @property
     def corners(self):
@@ -154,18 +154,18 @@ class Bounds(Geometry):
         starts at bottom left and moves clockwise
         """
         cpts = []
-        cpts.append(Point(self.cpt.x-(self._halfwidth),self.cpt.y-(self._halfheight)))
-        cpts.append(Point(self.cpt.x-(self._halfwidth),self.cpt.y+(self._halfheight)))
-        cpts.append(Point(self.cpt.x+(self._halfwidth),self.cpt.y+(self._halfheight)))
-        cpts.append(Point(self.cpt.x+(self._halfwidth),self.cpt.y-(self._halfheight)))
+        cpts.append(Point(self.cpt.x-(self.w2),self.cpt.y-(self.h2)))
+        cpts.append(Point(self.cpt.x-(self.w2),self.cpt.y+(self.h2)))
+        cpts.append(Point(self.cpt.x+(self.w2),self.cpt.y+(self.h2)))
+        cpts.append(Point(self.cpt.x+(self.w2),self.cpt.y-(self.h2)))
         return cpts
         
     def contains(self, pt):
-        lbx = self.cpt.x - self._halfwidth
-        ubx = self.cpt.x + self._halfwidth
-        lby = self.cpt.y - self._halfheight
-        uby = self.cpt.y + self._halfheight
-        if lbx < pt.x < ubx and lby < pt.y < uby : return True
+        lbx = self.cpt.x - self.w2
+        ubx = self.cpt.x + self.w2
+        lby = self.cpt.y - self.h2
+        uby = self.cpt.y + self.h2
+        if lbx <= pt.x < ubx and lby <= pt.y < uby : return True
         else:return False
     
     def intersects(self, other) :
@@ -174,3 +174,4 @@ class Bounds(Geometry):
         for p in self.corners :
             if other.contains(p) : return True
         return False
+        
