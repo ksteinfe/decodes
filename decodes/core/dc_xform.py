@@ -141,7 +141,26 @@ class Xform(object):
 
         try:
             if all (k in kargs for k in ("angle","axis")) and not "center" in kargs :
-                raise
+                xf = Xform()
+                axis = kargs["axis"].normalized()
+                u,v,w = axis.x,axis.y,axis.z
+                uv,uw,vw = u*v,u*w,v*w
+                u2,v2,w2 = u**2,v**2,w**2
+                cost = math.cos(kargs["angle"])
+                sint = math.sin(kargs["angle"])
+
+                xf.m00 = u2+(1-u2)*cost
+                xf.m01 = uv*(1-cost)- w * sint
+                xf.m02 = uw*(1-cost)+ v * sint
+
+                xf.m10 = uv*(1-cost)+ w * sint
+                xf.m11 = v2+(1-v2) * cost
+                xf.m12 = vw*(1-cost)- u * sint
+
+                xf.m20 = uw*(1-cost)- v * sint
+                xf.m21 = vw*(1-cost)+ u * sint
+                xf.m22 = w2+(1-w2)*cost
+                return xf
             else:
                 raise
         except:
