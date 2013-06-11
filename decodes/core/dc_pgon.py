@@ -132,7 +132,7 @@ class PGon(HasPts):
         for t in angle_interval.invert().divide(res,True):pts.append(cyl_pt(radius_interval.b,t))
         return PGon(pts)
 
-class Bounds2d(Geometry):
+class Bounds(Geometry):
     """
     A 2d rectangular boudary class with centerpoint, width and height
     """
