@@ -575,7 +575,7 @@ class QuadTree():
         else :
             if not self.has_children : self._divide()
             for child in self.children:
-                if child.append : return True
+                if child.append(pt) : return True
             return False
         
     def _divide(self) :
@@ -618,11 +618,10 @@ class QuadTree():
         finds all points that fall within a given bounds
         """
         if not self.bnd.overlaps(bounds) : return []
-        pts = []
+        ret_pts = []
         if not self.has_children :
             for pt in self.pts :
-                if bounds.contains(pt) : pts.append(pt)
+                if bounds.contains(pt) : ret_pts.append(pt)
         else :
-            for child in self.children: pts.extend(child.pts_in_bounds(bounds))
-        return pts
-
+            for child in self.children: ret_pts.extend(child.pts_in_bounds(bounds))
+        return ret_pts
