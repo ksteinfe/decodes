@@ -5,7 +5,6 @@ import copy
 print "lsystem.py loaded"
 
 
-
 class LEngine(object):
 
     def __init__(self,axiom):
@@ -14,7 +13,7 @@ class LEngine(object):
         self.clear()
 
     def add_rule(self,rulething):
-        # check on structure of rulething and convert
+        # check on structure of rulething and convert to tuple
         rule = rulething
         try:
             rule.strip()
@@ -58,7 +57,7 @@ class LTurtle(object):
 
     def go(self):
         lines = []
-        while len(self.inst)>0:
+        while len(self.inst)>0:gr
             chr = self.inst[0]
             # move the turtle based on the current string character
             if chr == '-': #yaw right
@@ -66,29 +65,26 @@ class LTurtle(object):
             elif chr == '+': #yaw left
                 self.do_xform(self.css[-1].zAxis,-self.angle)
             elif chr == '^': #pitch up
-                self.do_xform(self.css[-1].xAxis,self.angle)
-            elif chr == '&': #pitch down
                 self.do_xform(self.css[-1].xAxis,-self.angle)
-            elif chr == '>': #roll right
+            elif chr == '&': #pitch down
+                self.do_xform(self.css[-1].xAxis,self.angle)
+            elif chr == '}': #roll right
                 self.do_xform(self.css[-1].yAxis,self.angle)
-            elif chr == '<': # roll left
+            elif chr == '{': # roll left
                 self.do_xform(self.css[-1].yAxis,-self.angle)
             elif chr == 'F': # draw line
                 nxt_pt = self.pts[-1] + (self.css[-1].yAxis * self.step_size)
-                self.pts.append(nxt_pt)
                 lines.append(Segment(self.pts[-1],nxt_pt))
-                #self.pts[-1] = nxt_pt
-
-            print self.inst
-            print self.css[-1]
+                self.pts[-1] = nxt_pt
+            elif chr == '[': #push the stack
+                self.push(self.pts[-1], self.css[-1])
+            elif chr == ']': #pop the stack
+                self.pop() 
             self.inst = self.inst[1:]
-
-        print "done"
         return lines
 
     def do_xform(self,axis,angle):
         xf = Xform.rotation(axis=axis,angle=angle)
-        #xf = Xform.translation(Vec(0,0,1))
         self.css[-1] = self.css[-1] * xf
         pass
 
