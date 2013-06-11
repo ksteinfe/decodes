@@ -75,8 +75,9 @@ class LTurtle(object):
                 self.do_xform(self.css[-1].yAxis,-self.angle)
             elif chr == 'F': # draw line
                 nxt_pt = self.pts[-1] + (self.css[-1].yAxis * self.step_size)
+                self.pts.append(nxt_pt)
                 lines.append(Segment(self.pts[-1],nxt_pt))
-                self.pts[-1] = nxt_pt
+                #self.pts[-1] = nxt_pt
 
             print self.inst
             print self.css[-1]
@@ -99,54 +100,5 @@ class LTurtle(object):
         self.pts = self.pts[:-1]
         self.css = self.css[:-1]
 
-class LTurtleXXX(object):
 
-    def __init__(self, production):
-        self.production = production
-        self.angle = radians(15) # default for now
-        
-        turtle_matrix = [0,0,0] #[yaw,pitch,roll]
-        turtleCS = CS(Point(0,0,0), Vec())
-    
-    def step(self):
-        for char in self.production:
-            turtled = self.move(char)
-            if turtled[0] == True: pass # push the stack
-            if turtled[1] == True: pass  # pop the stack
-
-    def move(self, chr):
-        push = False
-        pop = False
-        
-        # move the turtle based on the current string character
-        if chr == '-': #yaw right
-            self.yaw += angle
-        if chr == '+': #yaw left
-            self.yaw -= angle
-        if chr == '^': #pitch up
-            self.pitch += angle
-        if chr == '&': #pitch down
-            self.pitch -= angle
-        if chr == '>': #roll right
-            self.roll += angle
-        if chr == '<': # roll left
-            self.roll -= angle
-        
-        # update the CS
-        
-        # add a new turtle
-        
-        # handle branching
-        if chr == '[': #branch
-            push == True
-        if chr == ']': #endbranch
-            pop == True
-        return push,pop
-        
-        
-        
-            
-        
-        
-        
         
