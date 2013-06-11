@@ -108,10 +108,7 @@ class PixelGrid(object):
     
     def __init__(self,include_corners=False):
         w = self.px_width
-        self._neiidx = [-1,1,-w,w]
-        if include_corners : 
-            self.include_corners = True
-            self._neiidx.extend ([-w-1,w+1,-w+1,w-1])
+        self.include_corners = include_corners
 
     @property
     def px_width(self):
@@ -127,36 +124,24 @@ class PixelGrid(object):
     def set(self,x,y,value):
         self._pixels[y*self.px_width+x] = value
 
+# finds neighbors, taking into account both the type of neighborhood and whether there is wrapping or not
     def neighbors_of(self,x,y,wrap=False):
         m = self.px_width
         n = self.px_height
-        m_domain = range(m)
-        n_domain = range(n)
         ret=[]
         for di in [-1,0,1]:
             for dj in [-1,0,1]:
                 if (abs(di)+abs(dj)) > 0:
                     if wrap :          # wrap is true
-                        new_index = n_domain[(y+dj)%n]*m+m_domain[(x+di)%m]
-                        if (di == 0) or (dj == 0): ret.append(self._pixels[new_index])
-                        elif self.include_corners :ret.append(self._pixels[new_index])
+                        new_index = ((y+dj)%n)*m+((x+di)%m)
+                        if (di == 0) or (dj == 0) : ret.append(self._pixels[new_index])
+                        elif self.include_corners : ret.append(self._pixels[new_index])
                     else:           # wrap is false
-                        if ((x+di) in m_domain) and ((y+dj) in n_domain):
-                            new_index = n_domain[(y+dj)%n]*m+m_domain[(x+di)%m]
+                        if ((x+di) in range(m)) and ((y+dj) in range(n)):
+                            new_index = ((y+dj)%n)*m+((x+di)%m)
                             if (di == 0) or (dj == 0) : ret.append(self._pixels[new_index])
                             elif self.include_corners : ret.append(self._pixels[new_index])
         return ret
-
-        '''
-        ret = []
-        j = x+y*self.px_width
-        for i in self._neiidx:
-            if ((j+i) < 0) or ((j+i) > self.px_width):
-                if wrap: ret.append(self._pixels[(j+i) % self.px_width]) 
-            else: 
-                ret.append(self._pixels[(j+i) % self.px_width])
-        return ret
-        '''
 
 
 class ValueField(PixelGrid):

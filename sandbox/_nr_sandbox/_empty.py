@@ -5,60 +5,69 @@ import random
 
 import os
 path = os.path.expanduser("~") + os.sep + "_decodes_export"
-
-def func1():
-    return (random.choice([0,1]) == 0)
-
-def func3(a,b):
-    return True
-
-def func2(a,b):
-    count = 0
-    for i in b:
-        if i : count += 1
-    if count == 3 : return True
-    if count > 4: return False
-    return a
-
+f_prefix = "test_"
 random.seed(0.2)
 
 
-width = 30
-height = 30
-test = CA(Interval(width,height),True,False)
-test.set_rule(func2)
+# Function to be used to initialize a random boolean field
+def random_values():
+    return (random.choice([0,1]) == 0)
 
+# Function to create a maze out of an random boolean field
+# based on algorithm published by Kostas Terzidis,"Algorithms for Visual Design", pp. 168-171
+def maze(home,neighbors):
+    count = 0
+    for i in neighbors:
+        if i : count += 1
+    if count == 3 : return True
+    if count > 4: return False
+    return home
+
+# Function to perform Conway's Game of Life
+def life(home,neighbors):
+    count = 0
+    for i in neighbors:
+        if i : count += 1
+    if home:
+        if (count < 2) or (count >3) :
+            return False
+        else:
+            return True
+    else:
+        if (count == 3):
+            return True
+        else:
+            return False
+
+# Initialize CA model
+
+width = 3
+height = 3
+my_CA = CA(Interval(width,height),True,False)
+my_CA.set_rule(maze)
+
+# Create a starting position
 init = []
 for i in range(width*height):
-    init.append(func1())
+    init.append(random_values())
+my_CA.start(init)
 
-test.start(init)
-s = 30
+print "testing neighborhood: ", my_CA._uvals.neighbors_of(2,1,False)
 
-for n in range(s):
+# Run the CA
+gen = 1
+stepsize = 1
+
+for n in range(gen):
     print "step",n
-    for m in range(1): test.step()
-    test.record()
+    for m in range(stepsize): my_CA.step()
+    my_CA.record()
 
-for n in range(s):
-    img = test.hist_u[n].to_image()
-    img.save("img_"+str(n), path, True)
-
-'''
-n = 0
-for img in test.to_image_sequence():
-    img.save("img_"+str(n), path, True)
-    n+=1
+# create output
+for n in range(len(my_CA.hist_u)):
+    img = my_CA.hist_u[n].to_image()
+    img.save(f_prefix+str(n), path, True)
 
 
-vfield = ValueField(Interval(100,100))
-
-for n in range(3):
-    vfield.set(1,1,10.0)
-    vfield.set(1,2,8.0)
-    vfield.set(3,n,8.0)
-    img = vfield.to_image(Color(1.0),Color(1.0,0,0))
-    img.save("img_"+str(n), path)
-'''
 
 raw_input("press enter...")
