@@ -573,12 +573,12 @@ class QuadTree():
             self.pts.append(pt)
             return True
         else :
-            if not self.has_children : self.divide()
+            if not self.has_children : self._divide()
             for child in self.children:
                 if child.append : return True
             return False
         
-    def divide(self) :
+    def _divide(self) :
         """
         divides self into sub regions.
         starts at bottom left and moves clockwise
@@ -607,4 +607,16 @@ class QuadTree():
         else:
             return self.bnd.contains(pt)
             
+    def pts_in_bounds(self,bounds):
+        """
+        finds all points that fall within a given bounds
+        """
+        if not self.bnd.overlaps(bounds) : return []
+        pts = []
+        if not self.has_children :
+            for pt in self.pts :
+                if bounds.contains(pt) : pts.append(pt)
+        else :
+            for child in self.children: pts.extend(child.pts_in_bounds(bounds))
+        return pts
 

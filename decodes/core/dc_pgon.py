@@ -138,8 +138,8 @@ class Bounds(Geometry):
     """
     def __init__ (self, center, w, h):
         self.cpt = center
-        self.w2 = w/2
-        self.h2 = h/2
+        self.w2 = w/2.0
+        self.h2 = h/2.0
         
     @property
     def iterval_x(self):
@@ -168,7 +168,7 @@ class Bounds(Geometry):
         if lbx <= pt.x < ubx and lby <= pt.y < uby : return True
         else:return False
     
-    def intersects(self, other) :
+    def overlaps(self, other) :
         for p in other.corners :
             if self.contains(p) : return True
         for p in self.corners :
