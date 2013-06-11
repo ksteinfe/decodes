@@ -597,7 +597,13 @@ class QuadTree():
         cpts.append(Point(ivals_x[3],ivals_y[1]))
         
         self.children = [QuadTree(self.cap,Bounds(pt,self.bnd.w2,self.bnd.h2)) for pt in cpts]
-        for pt in self.pts : self.append(pt)
+        for pt in self.pts : 
+            if self.children[0].append(pt) : continue
+            if self.children[1].append(pt) : continue
+            if self.children[2].append(pt) : continue
+            if self.children[3].append(pt) : continue
+            print "no child accepted this point!"
+            
         self.pts = None
         return True
     
