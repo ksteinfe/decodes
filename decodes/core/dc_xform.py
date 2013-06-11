@@ -138,19 +138,29 @@ class Xform(object):
             :result: Rotated object.
             :rtype: Geometry
         """
-        import Rhino
-        from ..io.rhino_out import to_rgvec, to_rgpt
-        from ..io.rhino_in import from_rgtransform
-        if all (k in kargs for k in ("angle","axis")) :
-            # rotation by center, rotation angle, and rotation axis
-            center = to_rgpt(kargs["center"]) if "center" in kargs else to_rgpt(Point(0,0,0))
-            rh_xform = Rhino.Geometry.Transform.Rotation(kargs["angle"],to_rgvec(kargs["axis"]),center)
-        elif all (k in kargs for k in ("center","angle")) :
-            # rotation by center and rotation angle
-            rh_xform = Rhino.Geometry.Transform.Rotation(kargs["angle"],to_rgpt(kargs["center"]))
-        else :
-            return False
-        return from_rgtransform(rh_xform)
+
+        try:
+            if all (k in kargs for k in ("angle","axis")) and not "center" in kargs :
+                raise
+            else:
+                raise
+        except:
+            if all (k in kargs for k in ("angle","axis","center")) :
+                # rotation by center, rotation angle, and rotation axis
+                import Rhino
+                from ..io.rhino_out import to_rgvec, to_rgpt
+                from ..io.rhino_in import from_rgtransform
+                center = to_rgpt(kargs["center"]) if "center" in kargs else to_rgpt(Point(0,0,0))
+                rh_xform = Rhino.Geometry.Transform.Rotation(kargs["angle"],to_rgvec(kargs["axis"]),center)
+            elif all (k in kargs for k in ("center","angle")) :
+                # rotation by center and rotation angle
+                import Rhino
+                from ..io.rhino_out import to_rgvec, to_rgpt
+                from ..io.rhino_in import from_rgtransform
+                rh_xform = Rhino.Geometry.Transform.Rotation(kargs["angle"],to_rgpt(kargs["center"]))
+            else :
+                return False
+            return from_rgtransform(rh_xform)
             
     @staticmethod
     def change_basis(csSource,csTarget):
