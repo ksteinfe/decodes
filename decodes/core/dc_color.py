@@ -109,7 +109,9 @@ class PixelGrid(object):
     def __init__(self,include_corners=False):
         w = self.px_width
         self._neiidx = [-1,1,-w,w]
-        if include_corners : self._neiidx.extend ([-w-1,w+1,-w+1,w-1])
+        if include_corners : 
+            self.include_corners = True
+            self._neiidx.extend ([-w-1,w+1,-w+1,w-1])
 
     @property
     def px_width(self):
@@ -126,12 +128,36 @@ class PixelGrid(object):
         self._pixels[y*self.px_width+x] = value
 
     def neighbors_of(self,x,y,wrap=False):
-        ret = []
-        for i in self._neiidx:
-            if (i < 0 or i > self.px_width):
-                if wrap: ret.append(self._pixels[i % self.px_width]) 
-            else: ret.append(self._pixels[i])
+        m = self.px_width
+        n = self.px_height
+        m_domain = range(m)
+        n_domain = range(n)
+        ret=[]
+        for di in [-1,0,1]:
+            for dj in [-1,0,1]:
+                if (abs(di)+abs(dj)) > 0:
+                    if wrap :          # wrap is true
+                        new_index = n_domain[(y+dj)%n]*m+m_domain[(x+di)%m]
+                        if (di == 0) or (dj == 0): ret.append(self._pixels[new_index])
+                        elif self.include_corners :ret.append(self._pixels[new_index])
+                    else:           # wrap is false
+                        if ((x+di) in m_domain) and ((y+dj) in n_domain):
+                            new_index = n_domain[(y+dj)%n]*m+m_domain[(x+di)%m]
+                            if (di == 0) or (dj == 0) : ret.append(self._pixels[new_index])
+                            elif self.include_corners : ret.append(self._pixels[new_index])
         return ret
+
+        '''
+        ret = []
+        j = x+y*self.px_width
+        for i in self._neiidx:
+            if ((j+i) < 0) or ((j+i) > self.px_width):
+                if wrap: ret.append(self._pixels[(j+i) % self.px_width]) 
+            else: 
+                ret.append(self._pixels[(j+i) % self.px_width])
+        return ret
+        '''
+
 
 class ValueField(PixelGrid):
     """
@@ -168,16 +194,15 @@ class BoolField(PixelGrid):
     a raster grid of boolean values
     each pixel contains a True or a False
     """
-    def __init__(self, pixel_res=Interval(20,20), initial_value = False,include_corners=False,wrap=True):
+    def __init__(self, pixel_res=Interval(20,20), initial_value = False,ic=False,wrap=True):
         self._res = Interval(int(pixel_res.a),int(pixel_res.b))
         self._pixels = [initial_value]*(self.px_width*self.px_height)
-        super(BoolField,self).__init__(include_corners)
+        super(BoolField,self).__init__(ic)
 
-    def to_image(self,false_color=Color(0.0),true_color=Color(1.0)):
-
-        img = Image(self.dimensions,false_color)
-        for n in self._pixels:
-            if n : img._pixels[n] = true_color
+    def to_image(self,false_color=Color(1.0),true_color=Color(0.0)):
+        img = Image(self._res,false_color)
+        for n, bool in enumerate(self._pixels):
+            if bool : img._pixels[n] = true_color
 
         return img
 
@@ -230,7 +255,7 @@ class Image(PixelGrid):
                                         BPP, Orientation)
 
         # Array mdule and format documentation at:  http://docs.python.org/library/array.html
-        data = array.array("B", (255 for i in xrange(self.width * self.px_height * 3)))
+        data = array.array("B", (255 for i in xrange(self.px_width * self.px_height * 3)))
 
         for n,clr in enumerate(self._pixels):
             data[n * 3] = int(clr.b*255)
