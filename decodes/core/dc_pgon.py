@@ -131,3 +131,46 @@ class PGon(HasPts):
         for t in angle_interval.divide(res,True):pts.append(cyl_pt(radius_interval.a,t))
         for t in angle_interval.invert().divide(res,True):pts.append(cyl_pt(radius_interval.b,t))
         return PGon(pts)
+
+class Bounds2d(Geometry):
+    """
+    A 2d rectangular boudary class with centerpoint, width and height
+    """
+    def __init__ (self, center, w, h):
+        self.cpt = center
+        self._halfwidth = w/2
+        self._halfheight = h/2
+        
+    @property
+    def iterval_x():
+        return Interval(self.cpt.x-(self._halfwidth),self.cpt.x+(self._halfwidth))
+    @property
+    def iterval_y():
+        return Interval(self.cpt.y-(self._halfheight),self.cpt.y+(self._halfheight))
+
+    @property
+    def corners(self):
+        """
+        starts at bottom left and moves clockwise
+        """
+        cpts = []
+        cpts.append(Point(self.cpt.x-(self._halfwidth),self.cpt.y-(self._halfheight)))
+        cpts.append(Point(self.cpt.x-(self._halfwidth),self.cpt.y+(self._halfheight)))
+        cpts.append(Point(self.cpt.x+(self._halfwidth),self.cpt.y+(self._halfheight)))
+        cpts.append(Point(self.cpt.x+(self._halfwidth),self.cpt.y-(self._halfheight)))
+        return cpts
+        
+    def contains(self, pt):
+        lbx = self.cpt.x - self._halfwidth
+        ubx = self.cpt.x + self._halfwidth
+        lby = self.cpt.y - self._halfheight
+        uby = self.cpt.y + self._halfheight
+        if lbx < pt.x < ubx and lby < pt.y < uby : return True
+        else:return False
+    
+    def intersects(self, other) :
+        for p in other.corners :
+            if self.contains(p) : return True
+        for p in self.corners :
+            if other.contains(p) : return True
+        return False
