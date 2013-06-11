@@ -38,13 +38,9 @@ class CA (object):
 
     def record(self):
         self.hist_u.append(self._uvals)
-'''
-    def log_u(self,u):
-        if u > self.max_recorded_u : self.max_recorded_u = u
-        if u < self.min_recorded_u : self.min_recorded_u = u
-'''
 
 # makes a new generation by calling the function stored in self.rule
+
     def step(self, t=1.0):
         nxt_uvals = BoolField(Interval(self.width,self.height),False,self.include_corners)
         t = max(min(1.0,t),0.0)

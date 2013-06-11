@@ -5,7 +5,7 @@ import random
 
 import os
 path = os.path.expanduser("~") + os.sep + "_decodes_export"
-f_prefix = "test_"
+f_prefix = "maze_"
 random.seed(0.2)
 
 
@@ -41,8 +41,8 @@ def life(home,neighbors):
 
 # Initialize CA model
 
-width = 3
-height = 3
+width = 200
+height = 200
 my_CA = CA(Interval(width,height),True,False)
 my_CA.set_rule(maze)
 
@@ -52,10 +52,8 @@ for i in range(width*height):
     init.append(random_values())
 my_CA.start(init)
 
-print "testing neighborhood: ", my_CA._uvals.neighbors_of(2,1,False)
-
 # Run the CA
-gen = 1
+gen = 40
 stepsize = 1
 
 for n in range(gen):
@@ -67,7 +65,6 @@ for n in range(gen):
 for n in range(len(my_CA.hist_u)):
     img = my_CA.hist_u[n].to_image()
     img.save(f_prefix+str(n), path, True)
-
 
 
 raw_input("press enter...")
