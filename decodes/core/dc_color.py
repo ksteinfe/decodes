@@ -106,9 +106,9 @@ class PixelGrid(object):
     an abstract class for storing information in a raster grid format.
     """
     
-    def __init__(self,include_corners=False):
-        w = self.px_width
+    def __init__(self,include_corners=False,wrap=False):
         self.include_corners = include_corners
+        self.wrap = wrap
 
     @property
     def px_width(self):
@@ -125,14 +125,14 @@ class PixelGrid(object):
         self._pixels[y*self.px_width+x] = value
 
 # finds neighbors, taking into account both the type of neighborhood and whether there is wrapping or not
-    def neighbors_of(self,x,y,wrap=False):
+    def neighbors_of(self,x,y):
         m = self.px_width
         n = self.px_height
         ret=[]
         for di in [-1,0,1]:
             for dj in [-1,0,1]:
                 if (abs(di)+abs(dj)) > 0:
-                    if wrap :          # wrap is true
+                    if self.wrap :          # wrap is true
                         new_index = ((y+dj)%n)*m+((x+di)%m)
                         if (di == 0) or (dj == 0) : ret.append(self._pixels[new_index])
                         elif self.include_corners : ret.append(self._pixels[new_index])

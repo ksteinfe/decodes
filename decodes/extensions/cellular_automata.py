@@ -8,13 +8,16 @@ class CA (object):
     def __init__(self,pixel_res=Interval(20,20),include_corners=False,wrap=False):
         self.width = pixel_res.a
         self.height = pixel_res.b
-        self.include_corners = include_corners
-        self.wrap = wrap
-        self.clear()
+        self.clear(include_corners,wrap)
     
-    def set_u(self,x,y,val):
+    def set_cell(self,x,y,val):
         x,y = self._reframe(x,y)
-        self._uvals.set(x,y,val)
+        self.cells.set(x,y,val)
+
+# sets the entire field. Expects a list of booleans
+    def set_cells(self, initial_cell=False):
+        for n, bool in enumerate(initial_cell):
+            self.cells._pixels[n] = bool
 
 # pass a function to be used for each iteration of the automata
 # assumes that function takes the status of the home cell, and a list of the statuses of the neighbors
@@ -22,7 +25,9 @@ class CA (object):
     def set_rule(self,func=False):
         self.rule = func
 
-    def get_u(self,x,y): return self._uvals.get(x,y)
+    def get_cell(self,x,y): return self.cells.get(x,y)
+
+    def get_cells(self) : return self.cells
 
     def _reframe(self,x,y):
         while x > self.width -1 : x = x - self.width
@@ -31,34 +36,29 @@ class CA (object):
         while y < 0 : y = self.height + y
         return x,y
 
-    def clear(self):
-        self._uvals = BoolField(Interval(self.width,self.height),False,self.include_corners)
+    def clear(self,include_corners,wrap):
+        self.cells = BoolField(Interval(self.width,self.height),wrap,include_corners)
         self.step_count = 0
-        self.hist_u = []
+        self.hist = []
 
     def record(self):
-        self.hist_u.append(self._uvals)
+        self.hist.append(self.cells)
 
 # makes a new generation by calling the function stored in self.rule
 
     def step(self, t=1.0):
-        nxt_uvals = BoolField(Interval(self.width,self.height),False,self.include_corners)
+        nxt_cells = BoolField(Interval(self.width,self.height),self.cells.wrap,self.cells.include_corners)
         t = max(min(1.0,t),0.0)
         for x in range(0,self.width):
             for y in range(0,self.height):
-                cur_u = self._uvals.get(x,y)
-                neighbors_u = self._uvals.neighbors_of(x,y)
-                nxt_u = self.rule(cur_u, neighbors_u)
-                nxt_uvals.set(x,y,nxt_u)
- #               self.log_u(nxt_u)
- #       self.hist_u.append(self._uvals)
-        self._uvals = nxt_uvals
+                cur_cell = self.cells.get(x,y)
+                neighbor_cells = self.cells.neighbors_of(x,y)
+                nxt_cell = self.rule(cur_cell, neighbor_cells)
+                nxt_cells.set(x,y,nxt_cell)
+        self.cells = nxt_cells
         self.step_count += 1
 
-# sets the initial condition for the CA. Expects a list of booleans
-    def start(self, initial_uvals=False):
-        for n, bool in enumerate(initial_uvals):
-            self._uvals._pixels[n] = bool
+
 
 
         
