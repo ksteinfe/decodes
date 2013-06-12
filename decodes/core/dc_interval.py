@@ -48,7 +48,6 @@ class Interval():
     def __contains__(self, number):
         """
         overloads the containment **(in)** operator
-        calls Interval.subinterval(other)
         """
         ival = self.order()
         return (ival.a <= number) and (ival.b >= number)
@@ -227,62 +226,3 @@ class Interval():
             :rtype: Interval
         """
         return Interval(0,math.pi)
-
-class Bounds(Geometry):
-    """
-    A 2d or 3d boudary class
-    """
-    def __init__ (self, **kargs):
-        """
-        a Bounds may be constructed two ways: By setting "center", "dim_x", "dim_y", and optionally "dim_z" OR by setting "ival_x", "ival_y", and optionally "ival_z"
-        """
-        try:
-            self.cpt = center
-            self.w2 = width/2.0
-            self.h2 = height/2.0
-        except:
-            try:
-                print kargs['ival_x']
-
-            except:
-                raise AttributeError
-
-    @property
-    def ival_x(self):
-        return Interval(self.cpt.x-(self.w2),self.cpt.x+(self.w2))
-    @property
-    def ival_y(self):
-        return Interval(self.cpt.y-(self.h2),self.cpt.y+(self.h2))
-
-    @property
-    def cpt(): 
-        return Point()
-
-
-    @property
-    def corners(self):
-        """
-        starts at bottom left and moves clockwise
-        """
-        cpts = []
-        cpts.append(Point(self.cpt.x-(self.w2),self.cpt.y-(self.h2)))
-        cpts.append(Point(self.cpt.x-(self.w2),self.cpt.y+(self.h2)))
-        cpts.append(Point(self.cpt.x+(self.w2),self.cpt.y+(self.h2)))
-        cpts.append(Point(self.cpt.x+(self.w2),self.cpt.y-(self.h2)))
-        return cpts
-        
-    def contains(self, pt):
-        lbx = self.cpt.x - self.w2
-        ubx = self.cpt.x + self.w2
-        lby = self.cpt.y - self.h2
-        uby = self.cpt.y + self.h2
-        if lbx <= pt.x < ubx and lby <= pt.y < uby : return True
-        else:return False
-    
-    def overlaps(self, other) :
-        for p in other.corners :
-            if self.contains(p) : return True
-        for p in self.corners :
-            if other.contains(p) : return True
-        return False
-        
