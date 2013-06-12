@@ -443,7 +443,6 @@ class Point(Vec,HasBasis):
                 if is_good: culled_pts.append(pt)
             return culled_pts
 
-
 class HasPts(HasBasis):
     """
     A base class for anything that contains a list of vertices.
@@ -555,7 +554,6 @@ class HasPts(HasBasis):
         if self.basis is other.basis : return Vec(other._x,other._y,other._z) # if we share a basis, then use the local coordinates of the other
         raise BasisError("The basis for this Geometry and the point you're adding do not match. Try applying or stripping the point of its basis, or describing the point in terms of this Geometry's basis")
 
-
 class QuadTree():
     def __init__ (self, capacity, bounds):
         self.cap = capacity
@@ -584,11 +582,11 @@ class QuadTree():
         starts at bottom left and moves clockwise
         """
         if self.has_children: return False
-        from .dc_pgon import Bounds
+        from .dc_interval import Bounds
         
         cpts = self.bnd.corners
-        ivals_x = self.bnd.iterval_x/4
-        ivals_y = self.bnd.iterval_y/4
+        ivals_x = self.bnd.ival_x/4
+        ivals_y = self.bnd.ival_y/4
         
         cpts = []
         cpts.append(Point(ivals_x[1],ivals_y[1]))
