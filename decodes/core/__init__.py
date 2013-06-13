@@ -16,6 +16,7 @@ from dc_plane import *
 from dc_cs import *
 
 from dc_line import *
+from dc_circle import *
 
 from dc_pline import *
 from dc_mesh import *

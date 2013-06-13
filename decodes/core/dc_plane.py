@@ -4,7 +4,7 @@ if VERBOSE_FS: print "plane.py loaded"
 import math
 
 
-class Plane(Vec):
+class Plane(Geometry):
     """
     a simple plane class
 
@@ -22,7 +22,11 @@ class Plane(Vec):
             :rtype: Plane
         """
         if normal.length == 0 : raise GeometricError("Cannot construct a plane with a normal vector of length zero: %s"%(normal))
-        super(Plane,self).__init__(point)
+        # super(Plane,self).__init__(point) Plane class used to override Vec class
+        o = Vec(point)
+        self.x = o.x
+        self.y = o.y
+        self.z = o.z
         self._vec = normal.normalized()
 
     def __eq__(self, other):
@@ -36,8 +40,10 @@ class Plane(Vec):
         """    
         return self.is_identical(other)
 
-    def __repr__(self): return "pln[{0},{1},{2},{3},{4},{5}]".format(self.x,self.y,self.z,self.vec.x,self.vec.y,self.vec.z)
+    def __repr__(self): return "pln[{0},{1},{2},{3},{4},{5}]".format(self.x,self.y,self.z,self._vec.x,self._vec.y,self._vec.z)
 
+    '''
+    DEPRECIATED
     @property
     def vec(self): 
         """ Returns the plane's vector.
@@ -56,6 +62,7 @@ class Plane(Vec):
             :rtype: Plane
         """
         self._vec = v.normalized()
+    '''
 
     @property
     def normal(self): 
@@ -106,7 +113,7 @@ class Plane(Vec):
             :result: Boolean result of comparison.
             :rtype: bool
         """   
-        return all([self.x==other.x,self.y==other.y,self.z==other.z,self.vec.x==other.vec.x,self.vec.y==other.vec.y,self.vec.z==other.vec.z])
+        return all([self.x==other.x,self.y==other.y,self.z==other.z,self._vec.x==other._vec.x,self._vec.y==other._vec.y,self._vec.z==other._vec.z])
 
     def is_coplanar(self,other,tolerence=0.000001): 
         """Returns True if the planes are co-planar within a given tolerence.
@@ -127,9 +134,9 @@ class Plane(Vec):
             :rtype: (Point, float, float)
         """
         from .dc_line import Line
-        line = Line(self.origin, self.vec)
+        line = Line(self.origin, self._vec)
         t = line.near(p)[1]
-        tvec = self.vec*-t
+        tvec = self._vec*-t
         point = p + tvec
         return (point,t) 
 

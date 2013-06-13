@@ -43,6 +43,11 @@ class GrasshopperIn():
             return Segment(Point(gh_in.PointAtStart.X,gh_in.PointAtStart.Y,gh_in.PointAtStart.Z),Point(gh_in.PointAtEnd.X,gh_in.PointAtEnd.Y,gh_in.PointAtEnd.Z))
         elif type(gh_in) is System.Drawing.Color : 
             return Color(float(gh_in.R)/255,float(gh_in.G)/255,float(gh_in.B)/255)
+
+        elif type(gh_in)is rg.Circle :
+            pln = Plane( from_rgpt(gh_in.Center), from_rgvec(gh_in.Normal))
+            return Circle(pln,gh_in.Radius)
+
         elif type(gh_in) is rg.PolylineCurve: 
             ispolyline, gh_polyline = gh_in.TryGetPolyline()
             if (ispolyline) : return from_rgpolyline(gh_polyline)

@@ -74,10 +74,7 @@ class GrasshopperOut(outie.Outie):
                 else : self._add_branch(i,tree,tree_p, npath)
             return True
         
-        if isinstance(g, Plane) : 
-            tree.Add(self._drawPlane(g),path)
-            tree_p.Add(extract_props(g), path)
-            return True
+
         if isinstance(g, Point) : 
             tree.Add(self._drawPoint(g),path)
             tree_p.Add(extract_props(g), path)
@@ -105,7 +102,17 @@ class GrasshopperOut(outie.Outie):
             tree.Add(self._drawPLine(g),path)
             tree_p.Add(extract_props(g), path)
             return True
-        
+
+        if isinstance(g, Circle) : 
+            tree.Add(self._drawCircle(g),path)
+            tree_p.Add(extract_props(g), path)
+            return True
+
+        if isinstance(g, Plane) : 
+            tree.Add(self._drawPlane(g),path)
+            tree_p.Add(extract_props(g), path)
+            return True
+
         if isinstance(g, PGon) : 
             tree.Add(self._drawPGon(g),path)
             tree_p.Add(extract_props(g), path)
@@ -161,6 +168,9 @@ class GrasshopperOut(outie.Outie):
     
     def _drawPLine(self, pline):
         return to_rgpolyline(pline)
+
+    def _drawCircle(self, circ):
+        return to_rgcircle(circ)
             
     def _drawPGon(self, pgon):
         return to_rgpolyline(pgon)

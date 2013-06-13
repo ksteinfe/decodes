@@ -143,6 +143,10 @@ def to_rgpolyline(other):
     return Rhino.Geometry.Polyline(verts)
 
 
+def to_rgcircle(circ):
+    rh_plane = to_rgplane(circ.plane)
+    return Rhino.Geometry.Circle(rh_plane,circ.rad)
+
 def to_rgplane(other):
     if isinstance(other, CS) : 
         return Rhino.Geometry.Plane(to_rgpt(other.origin),to_rgvec(other.xAxis),to_rgvec(other.yAxis))

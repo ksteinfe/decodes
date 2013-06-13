@@ -5,7 +5,7 @@ test_empty_constructor (decodes.unit_tests.test_pgon.Tests) ... ok
 test_segs_and_edges (decodes.unit_tests.test_pgon.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.289s
+Ran 2 tests in 0.287s
 
 OK
 
@@ -15,7 +15,7 @@ test_empty_constructor (decodes.unit_tests.test_pline.Tests) ... ok
 test_segs_and_edges (decodes.unit_tests.test_pline.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.637s
+Ran 2 tests in 0.632s
 
 OK
 
@@ -27,7 +27,7 @@ test_face_access (decodes.unit_tests.test_mesh.Tests) ... ok
 test_simple_constructor (decodes.unit_tests.test_mesh.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.045s
+Ran 4 tests in 0.044s
 
 OK
 
@@ -40,7 +40,7 @@ test_empty_constructor (decodes.unit_tests.test_point.Tests) ... ok
 test_nearest_point (decodes.unit_tests.test_point.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.046s
+Ran 5 tests in 0.045s
 
 OK
 
@@ -53,7 +53,7 @@ test_item_access (decodes.unit_tests.test_has_pts.Tests) ... ok
 test_manipulating_points (decodes.unit_tests.test_has_pts.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.079s
+Ran 5 tests in 0.097s
 
 OK
 
@@ -67,7 +67,7 @@ test_hermite (decodes.unit_tests.test_curve.Tests) ... ok
 test_subdivide (decodes.unit_tests.test_curve.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 6 tests in 0.820s
+Ran 6 tests in 0.805s
 
 OK
 
@@ -101,7 +101,7 @@ test_ray (decodes.unit_tests.test_line.Tests) ... ok
 test_segment (decodes.unit_tests.test_line.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.019s
+Ran 4 tests in 0.020s
 
 OK
 
@@ -127,6 +127,6 @@ test_scale (decodes.unit_tests.test_xform.Tests) ... ok
 test_translation (decodes.unit_tests.test_xform.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.009s
+Ran 3 tests in 0.010s
 
 OK
