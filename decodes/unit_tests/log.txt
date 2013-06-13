@@ -5,7 +5,7 @@ test_empty_constructor (decodes.unit_tests.test_pgon.Tests) ... ok
 test_segs_and_edges (decodes.unit_tests.test_pgon.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.287s
+Ran 2 tests in 0.318s
 
 OK
 
@@ -15,7 +15,7 @@ test_empty_constructor (decodes.unit_tests.test_pline.Tests) ... ok
 test_segs_and_edges (decodes.unit_tests.test_pline.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.632s
+Ran 2 tests in 0.692s
 
 OK
 
@@ -27,7 +27,7 @@ test_face_access (decodes.unit_tests.test_mesh.Tests) ... ok
 test_simple_constructor (decodes.unit_tests.test_mesh.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.044s
+Ran 4 tests in 0.048s
 
 OK
 
@@ -40,7 +40,7 @@ test_empty_constructor (decodes.unit_tests.test_point.Tests) ... ok
 test_nearest_point (decodes.unit_tests.test_point.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.045s
+Ran 5 tests in 0.050s
 
 OK
 
@@ -53,32 +53,99 @@ test_item_access (decodes.unit_tests.test_has_pts.Tests) ... ok
 test_manipulating_points (decodes.unit_tests.test_has_pts.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.097s
+Ran 5 tests in 0.108s
 
 OK
 
 
 == TEST_CURVE ==
-test_bezier (decodes.unit_tests.test_curve.Tests) ... ok
-test_constructor (decodes.unit_tests.test_curve.Tests) ... ok
-test_division (decodes.unit_tests.test_curve.Tests) ... ok
-test_far (decodes.unit_tests.test_curve.Tests) ... ok
-test_hermite (decodes.unit_tests.test_curve.Tests) ... ok
-test_subdivide (decodes.unit_tests.test_curve.Tests) ... ok
+test_bezier (decodes.unit_tests.test_curve.Tests) ... ERROR
+test_constructor (decodes.unit_tests.test_curve.Tests) ... ERROR
+test_division (decodes.unit_tests.test_curve.Tests) ... ERROR
+test_far (decodes.unit_tests.test_curve.Tests) ... ERROR
+test_hermite (decodes.unit_tests.test_curve.Tests) ... ERROR
+test_subdivide (decodes.unit_tests.test_curve.Tests) ... ERROR
+
+======================================================================
+ERROR: test_bezier (decodes.unit_tests.test_curve.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\git\decodes\decodes\unit_tests\test_curve.py", line 80, in test_bezier
+    crv = Curve.bezier([pt_a,pt_b,pt_c])
+  File "G:\git\decodes\decodes\core\dc_curve.py", line 362, in bezier
+    return Curve(func)
+  File "G:\git\decodes\decodes\core\dc_curve.py", line 147, in __init__
+    self._rebuild_surrogate()
+TypeError: _rebuild_surrogate() takes no arguments (1 given)
+
+======================================================================
+ERROR: test_constructor (decodes.unit_tests.test_curve.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\git\decodes\decodes\unit_tests\test_curve.py", line 12, in test_constructor
+    crv = Curve(func,Interval(0,math.pi*2))
+  File "G:\git\decodes\decodes\core\dc_curve.py", line 147, in __init__
+    self._rebuild_surrogate()
+TypeError: _rebuild_surrogate() takes no arguments (1 given)
+
+======================================================================
+ERROR: test_division (decodes.unit_tests.test_curve.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\git\decodes\decodes\unit_tests\test_curve.py", line 25, in test_division
+    crv = Curve(func,Interval(0,10))
+  File "G:\git\decodes\decodes\core\dc_curve.py", line 147, in __init__
+    self._rebuild_surrogate()
+TypeError: _rebuild_surrogate() takes no arguments (1 given)
+
+======================================================================
+ERROR: test_far (decodes.unit_tests.test_curve.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\git\decodes\decodes\unit_tests\test_curve.py", line 71, in test_far
+    crv = Curve.circle(Point(),10)
+  File "G:\git\decodes\decodes\core\dc_curve.py", line 325, in circle
+    return Curve(func,Interval(0,math.pi*2))
+  File "G:\git\decodes\decodes\core\dc_curve.py", line 147, in __init__
+    self._rebuild_surrogate()
+TypeError: _rebuild_surrogate() takes no arguments (1 given)
+
+======================================================================
+ERROR: test_hermite (decodes.unit_tests.test_curve.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\git\decodes\decodes\unit_tests\test_curve.py", line 89, in test_hermite
+    crv = Curve.hermite([pt_a,pt_b,pt_c])
+  File "G:\git\decodes\decodes\core\dc_curve.py", line 418, in hermite
+    return Curve(func)
+  File "G:\git\decodes\decodes\core\dc_curve.py", line 147, in __init__
+    self._rebuild_surrogate()
+TypeError: _rebuild_surrogate() takes no arguments (1 given)
+
+======================================================================
+ERROR: test_subdivide (decodes.unit_tests.test_curve.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\git\decodes\decodes\unit_tests\test_curve.py", line 38, in test_subdivide
+    crv = Curve(func,Interval(0,10))
+  File "G:\git\decodes\decodes\core\dc_curve.py", line 147, in __init__
+    self._rebuild_surrogate()
+TypeError: _rebuild_surrogate() takes no arguments (1 given)
 
 ----------------------------------------------------------------------
-Ran 6 tests in 0.805s
+Ran 6 tests in 0.016s
 
-OK
+FAILED (errors=6)
 
 
 == TEST_PLANE ==
 test_copy_constructors (decodes.unit_tests.test_plane.Tests) ... ok
 test_empty_constructor (decodes.unit_tests.test_plane.Tests) ... ok
 test_near (decodes.unit_tests.test_plane.Tests) ... ok
+test_xform (decodes.unit_tests.test_plane.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.010s
+Ran 4 tests in 11.479s
 
 OK
 
@@ -116,7 +183,7 @@ test_properties (decodes.unit_tests.test_vec.Tests) ... ok
 test_static (decodes.unit_tests.test_vec.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.011s
+Ran 7 tests in 0.010s
 
 OK
 
@@ -127,6 +194,6 @@ test_scale (decodes.unit_tests.test_xform.Tests) ... ok
 test_translation (decodes.unit_tests.test_xform.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.010s
+Ran 3 tests in 0.011s
 
 OK

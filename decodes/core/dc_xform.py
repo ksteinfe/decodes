@@ -286,6 +286,26 @@ class Xform(object):
             vec.copy_props(other)
             return vec
         
+        if isinstance(other, Circle) :
+            pln = other.plane * self
+            cir = Circle(pln,other.rad)
+            cir.copy_props(other)
+            return cir 
+
+        if isinstance(other, Plane) : 
+            pln = other
+            tup = self._xform_tuple(pln.origin.to_tuple())
+            origin = Point(tup[0],tup[1],tup[2])
+            
+            xf = self.strip_translation()
+            tup = xf._xform_tuple(pln.normal.to_tuple())
+            normal = Vec(tup[0],tup[1],tup[2]).normalized()
+            
+            pln = Plane(origin, normal)
+            pln.copy_props(other)
+            return pln
+
+
         raise Exception("can't xform that thing")
 
     def _xform_tuple(self,tup):

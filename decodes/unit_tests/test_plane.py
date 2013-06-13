@@ -38,3 +38,24 @@ class Tests(unittest.TestCase):
         self.assertEqual(Point(1,1,2),pln.near_pt(pt_a),"behind plane")
         self.assertEqual(Point(1,1,2),pln.near_pt(pt_a),"in front of plane")
         self.assertEqual(Point(2,2,2),pln.near_pt(pt_c),"on plane at center point")
+
+
+    def test_xform(self):
+        pa = Point(2,2,2)
+        va = Vec(1,0,0)
+        pln = Plane(pa,va)
+
+        xf = Xform.scale(2.0)
+        pln_scaled = pln * xf
+        self.assertEqual(Point(4,4,4),pln_scaled.origin,"scaling transforms plane origin")
+        self.assertEqual(Vec(1,0,0),pln_scaled.normal,"scaling does not transform plane normal")
+
+        xf = Xform.rotation(axis=Vec(0,0,1),angle=math.pi/2)
+        pln_rotated = pln * xf
+        self.AssertPointsAlmostEqual(Point(-2.0,2.0,2.0),pln_rotated.origin)
+        self.AssertPointsAlmostEqual(Vec(0,1,0),pln_rotated.normal)
+
+    def AssertPointsAlmostEqual(self,pa,pb,places=4):
+        self.assertAlmostEqual(pa.x,pb.x,places)
+        self.assertAlmostEqual(pa.y,pb.y,places)
+        self.assertAlmostEqual(pa.z,pb.z,places)
