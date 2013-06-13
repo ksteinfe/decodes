@@ -48,10 +48,10 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>49</X>
-                  <Y>-288</Y>
+                  <X>89</X>
+                  <Y>-298</Y>
                 </item>
-                <item name="Zoom" type_name="gh_single" type_code="5">1.27346158</item>
+                <item name="Zoom" type_name="gh_single" type_code="5">1.29736352</item>
               </items>
             </chunk>
             <chunk name="Views">
@@ -279,11 +279,11 @@ a.put(crv_out)</item>
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>209.4569</X>
+                          <X>215.739</X>
                           <Y>345.168</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>209</X>
+                          <X>215</X>
                           <Y>345</Y>
                           <W>160</W>
                           <H>20</H>
@@ -292,7 +292,7 @@ a.put(crv_out)</item>
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">0.67</item>
+                        <item name="Value" type_name="gh_double" type_code="6">0.12</item>
                         <item name="Min" type_name="gh_double" type_code="6">0</item>
                         <item name="Max" type_name="gh_double" type_code="6">1</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">2</item>
@@ -318,7 +318,7 @@ a.put(crv_out)</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">ccb102d1-5eb7-4f8c-8bfd-723d76df5393</item>
                     <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                     <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
-                    <item name="UserText" type_name="gh_string" type_code="10">Blob-shaped curve family.  For fixed rad, all the curves have the same area.  </item>
+                    <item name="UserText" type_name="gh_string" type_code="10">Blob-shaped curve family.  All curves corresponding to fixed rad  have the same area.  </item>
                     <item name="MultilineData" type_name="gh_bool" type_code="1">true</item>
                     <item name="WrapItems" type_name="gh_bool" type_code="1">true</item>
                     <item name="EntryNumbers" type_name="gh_bool" type_code="1">true</item>
@@ -329,7 +329,7 @@ a.put(crv_out)</item>
                   </items>
                   <chunks count="1">
                     <chunk name="Attributes">
-                      <items count="7">
+                      <items count="6">
                         <item name="CustomBackColour" type_name="gh_drawing_color" type_code="36">
                           <ARGB>255;255;250;90</ARGB>
                         </item>
@@ -337,16 +337,15 @@ a.put(crv_out)</item>
                         <item name="MarginLeft" type_name="gh_int32" type_code="3">0</item>
                         <item name="MarginRight" type_name="gh_int32" type_code="3">0</item>
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>52.69974</X>
-                          <Y>320.6626</Y>
+                          <X>30.79075</X>
+                          <Y>336.1805</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>52</X>
-                          <Y>320</Y>
-                          <W>144</W>
-                          <H>100</H>
+                          <X>30</X>
+                          <Y>336</Y>
+                          <W>143</W>
+                          <H>72</H>
                         </item>
-                        <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                       </items>
                     </chunk>
                   </chunks>
@@ -372,12 +371,12 @@ a.put(crv_out)</item>
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>214.2327</X>
-                          <Y>381.983</Y>
+                          <X>211.429</X>
+                          <Y>379.738</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>214</X>
-                          <Y>381</Y>
+                          <X>211</X>
+                          <Y>379</Y>
                           <W>160</W>
                           <H>20</H>
                         </item>
@@ -385,7 +384,7 @@ a.put(crv_out)</item>
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">0.36</item>
+                        <item name="Value" type_name="gh_double" type_code="6">0</item>
                         <item name="Min" type_name="gh_double" type_code="6">0</item>
                         <item name="Max" type_name="gh_double" type_code="6">1</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">2</item>

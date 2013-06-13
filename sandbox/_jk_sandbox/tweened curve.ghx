@@ -48,8 +48,8 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>-101</X>
-                  <Y>-420</Y>
+                  <X>-83</X>
+                  <Y>-423</Y>
                 </item>
                 <item name="Zoom" type_name="gh_single" type_code="5">1</item>
               </items>
@@ -804,16 +804,15 @@ a.put(func)
                       </items>
                     </chunk>
                     <chunk name="ParameterData">
-                      <items count="7">
-                        <item name="InputCount" type_name="gh_int32" type_code="3">3</item>
+                      <items count="6">
+                        <item name="InputCount" type_name="gh_int32" type_code="3">2</item>
                         <item name="OutputCount" type_name="gh_int32" type_code="3">2</item>
                         <item name="InputId" index="0" type_name="gh_guid" type_code="9">84fa917c-1ed8-4db3-8be1-7bdc4a6495a2</item>
                         <item name="InputId" index="1" type_name="gh_guid" type_code="9">84fa917c-1ed8-4db3-8be1-7bdc4a6495a2</item>
-                        <item name="InputId" index="2" type_name="gh_guid" type_code="9">84fa917c-1ed8-4db3-8be1-7bdc4a6495a2</item>
                         <item name="OutputId" index="0" type_name="gh_guid" type_code="9">3ede854e-c753-40eb-84cb-b48008f14fd4</item>
                         <item name="OutputId" index="1" type_name="gh_guid" type_code="9">8ec86459-bf01-4409-baee-174d0d2b13d0</item>
                       </items>
-                      <chunks count="5">
+                      <chunks count="4">
                         <chunk name="InputParam" index="0">
                           <items count="11">
                             <item name="Name" type_name="gh_string" type_code="10">len_x</item>
@@ -833,13 +832,13 @@ a.put(func)
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>358.5</X>
-                                  <Y>756.6667</Y>
+                                  <Y>762</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>341</X>
                                   <Y>746</Y>
                                   <W>32</W>
-                                  <H>21</H>
+                                  <H>32</H>
                                 </item>
                               </items>
                             </chunk>
@@ -864,43 +863,13 @@ a.put(func)
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>358.5</X>
+                                  <Y>794</Y>
+                                </item>
+                                <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
+                                  <X>341</X>
                                   <Y>778</Y>
-                                </item>
-                                <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>341</X>
-                                  <Y>767</Y>
                                   <W>32</W>
-                                  <H>21</H>
-                                </item>
-                              </items>
-                            </chunk>
-                          </chunks>
-                        </chunk>
-                        <chunk name="InputParam" index="2">
-                          <items count="10">
-                            <item name="Name" type_name="gh_string" type_code="10">m</item>
-                            <item name="NickName" type_name="gh_string" type_code="10">m</item>
-                            <item name="Description" type_name="gh_string" type_code="10">Script variable Decodes</item>
-                            <item name="InstanceGuid" type_name="gh_guid" type_code="9">f311fd95-5ddf-433c-9ec5-13ad69b6741c</item>
-                            <item name="Optional" type_name="gh_bool" type_code="1">true</item>
-                            <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
-                            <item name="TypeHintID" type_name="gh_guid" type_code="9">35915213-5534-4277-81b8-1bdc9e7383d2</item>
-                            <item name="ShowTypeHints" type_name="gh_bool" type_code="1">true</item>
-                            <item name="AllowTreeAccess" type_name="gh_bool" type_code="1">false</item>
-                            <item name="ScriptParamAccess" type_name="gh_int32" type_code="3">0</item>
-                          </items>
-                          <chunks count="1">
-                            <chunk name="Attributes">
-                              <items count="2">
-                                <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>358.5</X>
-                                  <Y>799.3334</Y>
-                                </item>
-                                <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>341</X>
-                                  <Y>788</Y>
-                                  <W>32</W>
-                                  <H>22</H>
+                                  <H>32</H>
                                 </item>
                               </items>
                             </chunk>
@@ -1056,7 +1025,7 @@ a.put(crv_out)
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">1dbb8f5a-e46d-4165-8780-f9719358fe6c</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">true</item>
                             <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
-                            <item name="Source" index="0" type_name="gh_guid" type_code="9">06a838af-7a6d-455d-aa4d-a4bebad61e82</item>
+                            <item name="Source" index="0" type_name="gh_guid" type_code="9">d81082ba-e99a-4187-9455-75e421aabddb</item>
                             <item name="TypeHintID" type_name="gh_guid" type_code="9">35915213-5534-4277-81b8-1bdc9e7383d2</item>
                             <item name="ShowTypeHints" type_name="gh_bool" type_code="1">true</item>
                             <item name="AllowTreeAccess" type_name="gh_bool" type_code="1">false</item>
@@ -1186,7 +1155,7 @@ a.put(crv_out)
                   </items>
                   <chunks count="2">
                     <chunk name="Attributes">
-                      <items count="3">
+                      <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>617.387</X>
                           <Y>542.1641</Y>
@@ -1197,12 +1166,11 @@ a.put(crv_out)
                           <W>160</W>
                           <H>20</H>
                         </item>
-                        <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                       </items>
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">1</item>
+                        <item name="Value" type_name="gh_double" type_code="6">0</item>
                         <item name="Min" type_name="gh_double" type_code="6">0</item>
                         <item name="Max" type_name="gh_double" type_code="6">1</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">3</item>
