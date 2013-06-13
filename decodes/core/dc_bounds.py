@@ -161,12 +161,13 @@ class QuadTree():
         
         sub_bnds = self.bnd//2
         self.children = [QuadTree(self.cap,sub_bnd) for sub_bnd in sub_bnds]
+
         for pt in self.pts : 
             if self.children[0].append(pt) : continue
             if self.children[1].append(pt) : continue
             if self.children[2].append(pt) : continue
             if self.children[3].append(pt) : continue
-            print "no child accepted this point!c"
+            print "no child accepted this point!"
             
         self.pts = None
         return True
