@@ -48,7 +48,6 @@ class Interval():
     def __contains__(self, number):
         """
         overloads the containment **(in)** operator
-        calls Interval.subinterval(other)
         """
         ival = self.order()
         return (ival.a <= number) and (ival.b >= number)
@@ -227,6 +226,3 @@ class Interval():
             :rtype: Interval
         """
         return Interval(0,math.pi)
-
-
-

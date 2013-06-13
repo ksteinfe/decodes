@@ -9,6 +9,9 @@ from dc_color import *
 from dc_base import *
 from dc_vec import *
 from dc_point import *
+
+from dc_bounds import *
+
 from dc_plane import *
 from dc_cs import *
 
