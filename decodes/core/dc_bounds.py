@@ -89,6 +89,7 @@ class Bounds(Geometry):
         if not (pt.y in self.ival_y) : return False
         try:
             if not (pt.z in self.ival_z) : return False
+            return True
         except:
             return True
     
@@ -125,6 +126,10 @@ class Bounds(Geometry):
 
         return ret
 
+    def to_polyline(self):
+        from .dc_pline import *
+        return PLine(self.corners+[self.corners[0]])
+
 class QuadTree():
     def __init__ (self, capacity, bounds):
         self.cap = capacity
@@ -154,23 +159,14 @@ class QuadTree():
         """
         if self.has_children: return False
         
-        cpts = self.bnd.corners
-        ivals_x = self.bnd.ival_x/4
-        ivals_y = self.bnd.ival_y/4
-        
-        cpts = []
-        cpts.append(Point(ivals_x[1],ivals_y[1]))
-        cpts.append(Point(ivals_x[1],ivals_y[3]))
-        cpts.append(Point(ivals_x[3],ivals_y[3]))
-        cpts.append(Point(ivals_x[3],ivals_y[1]))
-        
-        self.children = [QuadTree(self.cap,Bounds(pt,self.bnd.dim_x/2,self.bnd.dim_y/2)) for pt in cpts]
+        sub_bnds = self.bnd//2
+        self.children = [QuadTree(self.cap,sub_bnd) for sub_bnd in sub_bnds]
         for pt in self.pts : 
             if self.children[0].append(pt) : continue
             if self.children[1].append(pt) : continue
             if self.children[2].append(pt) : continue
             if self.children[3].append(pt) : continue
-            print "no child accepted this point!"
+            print "no child accepted this point!c"
             
         self.pts = None
         return True

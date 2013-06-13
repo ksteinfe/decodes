@@ -57,7 +57,7 @@ class LTurtle(object):
 
     def go(self):
         lines = []
-        while len(self.inst)>0:gr
+        while len(self.inst)>0:
             chr = self.inst[0]
             # move the turtle based on the current string character
             if chr == '-': #yaw right
