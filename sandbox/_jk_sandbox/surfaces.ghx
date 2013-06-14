@@ -48,8 +48,8 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>-228</X>
-                  <Y>-897</Y>
+                  <X>-436</X>
+                  <Y>-239</Y>
                 </item>
                 <item name="Zoom" type_name="gh_single" type_code="5">0.7852613</item>
               </items>
@@ -119,12 +119,12 @@ a.put(func)</item>
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>817</X>
-                          <Y>930</Y>
+                          <X>826</X>
+                          <Y>926</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>758</X>
-                          <Y>896</Y>
+                          <X>767</X>
+                          <Y>892</Y>
                           <W>93</W>
                           <H>68</H>
                         </item>
@@ -160,12 +160,12 @@ a.put(func)</item>
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>782.5</X>
-                                  <Y>914</Y>
+                                  <X>791.5</X>
+                                  <Y>910</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>760</X>
-                                  <Y>898</Y>
+                                  <X>769</X>
+                                  <Y>894</Y>
                                   <W>42</W>
                                   <H>32</H>
                                 </item>
@@ -192,12 +192,12 @@ a.put(func)</item>
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>782.5</X>
-                                  <Y>946</Y>
+                                  <X>791.5</X>
+                                  <Y>942</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>760</X>
-                                  <Y>930</Y>
+                                  <X>769</X>
+                                  <Y>926</Y>
                                   <W>42</W>
                                   <H>32</H>
                                 </item>
@@ -220,12 +220,12 @@ a.put(func)</item>
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>840.5</X>
-                                  <Y>914</Y>
+                                  <X>849.5</X>
+                                  <Y>910</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>832</X>
-                                  <Y>898</Y>
+                                  <X>841</X>
+                                  <Y>894</Y>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
@@ -247,12 +247,12 @@ a.put(func)</item>
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>840.5</X>
-                                  <Y>946</Y>
+                                  <X>849.5</X>
+                                  <Y>942</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>832</X>
-                                  <Y>930</Y>
+                                  <X>841</X>
+                                  <Y>926</Y>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
@@ -1005,7 +1005,7 @@ a.put(func)</item>
                   </items>
                   <chunks count="2">
                     <chunk name="Attributes">
-                      <items count="2">
+                      <items count="3">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>1017.409</X>
                           <Y>409.0253</Y>
@@ -1016,6 +1016,7 @@ a.put(func)</item>
                           <W>160</W>
                           <H>20</H>
                         </item>
+                        <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                       </items>
                     </chunk>
                     <chunk name="Slider">
@@ -1049,7 +1050,7 @@ a.put(func)</item>
                   </items>
                   <chunks count="2">
                     <chunk name="Attributes">
-                      <items count="2">
+                      <items count="3">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>1017.145</X>
                           <Y>432.3126</Y>
@@ -1060,6 +1061,7 @@ a.put(func)</item>
                           <W>160</W>
                           <H>20</H>
                         </item>
+                        <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                       </items>
                     </chunk>
                     <chunk name="Slider">
@@ -1326,7 +1328,7 @@ a.put(func)</item>
                   </items>
                   <chunks count="2">
                     <chunk name="Attributes">
-                      <items count="2">
+                      <items count="3">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>797</X>
                           <Y>765</Y>
@@ -1337,6 +1339,7 @@ a.put(func)</item>
                           <W>48</W>
                           <H>68</H>
                         </item>
+                        <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                       </items>
                     </chunk>
                     <chunk name="ParameterData">
@@ -1359,7 +1362,7 @@ a.put(func)</item>
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>820.5</X>
                                   <Y>749</Y>
@@ -1370,6 +1373,7 @@ a.put(func)</item>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -1385,7 +1389,7 @@ a.put(func)</item>
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>820.5</X>
                                   <Y>781</Y>
@@ -1396,6 +1400,7 @@ a.put(func)</item>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -1801,12 +1806,11 @@ a.put(func)</item>
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="5">
+                  <items count="4">
                     <item name="Name" type_name="gh_string" type_code="10">Sine</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Sin</item>
                     <item name="Description" type_name="gh_string" type_code="10">Compute the sine of a value</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">c23c6b6e-6b4d-423e-956d-c9b79f03fb3e</item>
-                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                   </items>
                   <chunks count="3">
                     <chunk name="Attributes">
@@ -1824,12 +1828,11 @@ a.put(func)</item>
                       </items>
                     </chunk>
                     <chunk name="param_input" index="0">
-                      <items count="8">
+                      <items count="7">
                         <item name="Name" type_name="gh_string" type_code="10">Value</item>
                         <item name="NickName" type_name="gh_string" type_code="10">x</item>
                         <item name="Description" type_name="gh_string" type_code="10">Input value</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">ffe64310-e2a5-42db-9205-7ea0a584d325</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                         <item name="Source" index="0" type_name="gh_guid" type_code="9">f5c3ca74-84ba-4231-9214-cb0c4dbcb620</item>
@@ -1852,12 +1855,11 @@ a.put(func)</item>
                       </chunks>
                     </chunk>
                     <chunk name="param_output" index="0">
-                      <items count="7">
+                      <items count="6">
                         <item name="Name" type_name="gh_string" type_code="10">Result</item>
                         <item name="NickName" type_name="gh_string" type_code="10">y</item>
                         <item name="Description" type_name="gh_string" type_code="10">Output value</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">1cac53d1-9696-457e-985a-264d6b56f0ef</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                       </items>
@@ -1889,12 +1891,11 @@ a.put(func)</item>
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="5">
+                  <items count="4">
                     <item name="Name" type_name="gh_string" type_code="10">Range</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Range</item>
                     <item name="Description" type_name="gh_string" type_code="10">Create a range of numbers.</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">a25aa831-153d-4753-bc30-f41285c8e4e3</item>
-                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                   </items>
                   <chunks count="4">
                     <chunk name="Attributes">
@@ -1912,12 +1913,11 @@ a.put(func)</item>
                       </items>
                     </chunk>
                     <chunk name="param_input" index="0">
-                      <items count="8">
+                      <items count="7">
                         <item name="Name" type_name="gh_string" type_code="10">Domain</item>
                         <item name="NickName" type_name="gh_string" type_code="10">D</item>
                         <item name="Description" type_name="gh_string" type_code="10">Domain of numeric range</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">f48d2cef-afbd-4034-8d59-a7234062600b</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                         <item name="Source" index="0" type_name="gh_guid" type_code="9">414d918c-35db-4d27-b4fe-71dcc612ba88</item>
@@ -1963,12 +1963,11 @@ a.put(func)</item>
                       </chunks>
                     </chunk>
                     <chunk name="param_input" index="1">
-                      <items count="7">
+                      <items count="6">
                         <item name="Name" type_name="gh_string" type_code="10">Steps</item>
                         <item name="NickName" type_name="gh_string" type_code="10">N</item>
                         <item name="Description" type_name="gh_string" type_code="10">Number of steps</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">d7487feb-6b39-406b-939d-42dfac402506</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                       </items>
@@ -2010,12 +2009,11 @@ a.put(func)</item>
                       </chunks>
                     </chunk>
                     <chunk name="param_output" index="0">
-                      <items count="8">
+                      <items count="7">
                         <item name="Name" type_name="gh_string" type_code="10">Range</item>
                         <item name="NickName" type_name="gh_string" type_code="10">R</item>
                         <item name="Description" type_name="gh_string" type_code="10">Range of numbers</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">f5c3ca74-84ba-4231-9214-cb0c4dbcb620</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Access" type_name="gh_int32" type_code="3">1</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
@@ -2048,12 +2046,11 @@ a.put(func)</item>
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="5">
+                  <items count="4">
                     <item name="Name" type_name="gh_string" type_code="10">Point XYZ</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Pt</item>
                     <item name="Description" type_name="gh_string" type_code="10">Create a point from {xyz} coordinates.</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">2c1d1c7a-8301-4b95-8997-2a876cb53df5</item>
-                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                   </items>
                   <chunks count="6">
                     <chunk name="Attributes">
@@ -2071,12 +2068,11 @@ a.put(func)</item>
                       </items>
                     </chunk>
                     <chunk name="param_input" index="0">
-                      <items count="8">
+                      <items count="7">
                         <item name="Name" type_name="gh_string" type_code="10">X component</item>
                         <item name="NickName" type_name="gh_string" type_code="10">X</item>
                         <item name="Description" type_name="gh_string" type_code="10">{x} component</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">a150b321-ace6-41fc-b452-79db65dd3277</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                         <item name="Source" index="0" type_name="gh_guid" type_code="9">4a32ee6e-6057-41f9-bc25-26ed78e70a7a</item>
@@ -2119,12 +2115,11 @@ a.put(func)</item>
                       </chunks>
                     </chunk>
                     <chunk name="param_input" index="1">
-                      <items count="7">
+                      <items count="6">
                         <item name="Name" type_name="gh_string" type_code="10">Y component</item>
                         <item name="NickName" type_name="gh_string" type_code="10">Y</item>
                         <item name="Description" type_name="gh_string" type_code="10">{y} component</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">04e7529b-962f-4799-8fbe-9e4488d93557</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                       </items>
@@ -2166,12 +2161,11 @@ a.put(func)</item>
                       </chunks>
                     </chunk>
                     <chunk name="param_input" index="2">
-                      <items count="8">
+                      <items count="7">
                         <item name="Name" type_name="gh_string" type_code="10">Z component</item>
                         <item name="NickName" type_name="gh_string" type_code="10">Z</item>
                         <item name="Description" type_name="gh_string" type_code="10">{z} component</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">0d0299b9-5500-4891-b7f0-29a935510b69</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                         <item name="Source" index="0" type_name="gh_guid" type_code="9">e76e8fd6-4bc5-4723-8bfe-cd1374d6ce49</item>
@@ -2214,13 +2208,12 @@ a.put(func)</item>
                       </chunks>
                     </chunk>
                     <chunk name="param_input" index="3">
-                      <items count="8">
+                      <items count="7">
                         <item name="Name" type_name="gh_string" type_code="10">System</item>
                         <item name="NickName" type_name="gh_string" type_code="10">S</item>
                         <item name="Description" type_name="gh_string" type_code="10">Coordinate system for point</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">16a747c2-2926-448f-b2fc-a4ff9168c4f8</item>
                         <item name="Hidden" type_name="gh_bool" type_code="1">true</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                       </items>
@@ -2272,12 +2265,11 @@ a.put(func)</item>
                       </chunks>
                     </chunk>
                     <chunk name="param_output" index="0">
-                      <items count="7">
+                      <items count="6">
                         <item name="Name" type_name="gh_string" type_code="10">Point</item>
                         <item name="NickName" type_name="gh_string" type_code="10">Pt</item>
                         <item name="Description" type_name="gh_string" type_code="10">Point coordinate</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">63dad7ff-6f00-4c67-b6d4-48595d287a62</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                       </items>
@@ -2309,12 +2301,11 @@ a.put(func)</item>
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="5">
+                  <items count="4">
                     <item name="Name" type_name="gh_string" type_code="10">Pi</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Pi</item>
                     <item name="Description" type_name="gh_string" type_code="10">Returns a factor of Pi.</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">30648a82-6600-4033-8c0d-179d6d2ccf9a</item>
-                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                   </items>
                   <chunks count="3">
                     <chunk name="Attributes">
@@ -2332,12 +2323,11 @@ a.put(func)</item>
                       </items>
                     </chunk>
                     <chunk name="param_input" index="0">
-                      <items count="8">
+                      <items count="7">
                         <item name="Name" type_name="gh_string" type_code="10">Factor</item>
                         <item name="NickName" type_name="gh_string" type_code="10">N</item>
                         <item name="Description" type_name="gh_string" type_code="10">Factor to be multiplied by Pi</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">2df8b170-2981-4301-8272-4763243e41d2</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                         <item name="Source" index="0" type_name="gh_guid" type_code="9">90e102cb-0ec0-4e97-bd1c-758877357184</item>
@@ -2380,12 +2370,11 @@ a.put(func)</item>
                       </chunks>
                     </chunk>
                     <chunk name="param_output" index="0">
-                      <items count="7">
+                      <items count="6">
                         <item name="Name" type_name="gh_string" type_code="10">Output</item>
                         <item name="NickName" type_name="gh_string" type_code="10">y</item>
                         <item name="Description" type_name="gh_string" type_code="10">Output value</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">414d918c-35db-4d27-b4fe-71dcc612ba88</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                       </items>
@@ -2417,12 +2406,11 @@ a.put(func)</item>
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="7">
+                  <items count="6">
                     <item name="Name" type_name="gh_string" type_code="10">Number Slider</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Slider</item>
                     <item name="Description" type_name="gh_string" type_code="10">Numeric slider for single values</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">90e102cb-0ec0-4e97-bd1c-758877357184</item>
-                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                     <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                     <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                   </items>
@@ -2462,12 +2450,11 @@ a.put(func)</item>
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="5">
+                  <items count="4">
                     <item name="Name" type_name="gh_string" type_code="10">Point XYZ</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Pt</item>
                     <item name="Description" type_name="gh_string" type_code="10">Create a point from {xyz} coordinates.</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">4c934b30-d76c-4b69-a9f1-5d0c9126c881</item>
-                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                   </items>
                   <chunks count="6">
                     <chunk name="Attributes">
@@ -2485,12 +2472,11 @@ a.put(func)</item>
                       </items>
                     </chunk>
                     <chunk name="param_input" index="0">
-                      <items count="7">
+                      <items count="6">
                         <item name="Name" type_name="gh_string" type_code="10">X component</item>
                         <item name="NickName" type_name="gh_string" type_code="10">X</item>
                         <item name="Description" type_name="gh_string" type_code="10">{x} component</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">739db920-7a5f-4a6a-8cab-dedc04eb9335</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                       </items>
@@ -2532,12 +2518,11 @@ a.put(func)</item>
                       </chunks>
                     </chunk>
                     <chunk name="param_input" index="1">
-                      <items count="8">
+                      <items count="7">
                         <item name="Name" type_name="gh_string" type_code="10">Y component</item>
                         <item name="NickName" type_name="gh_string" type_code="10">Y</item>
                         <item name="Description" type_name="gh_string" type_code="10">{y} component</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">2d04144a-c474-4809-8616-f6d0d6733c36</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                         <item name="Source" index="0" type_name="gh_guid" type_code="9">4a32ee6e-6057-41f9-bc25-26ed78e70a7a</item>
@@ -2580,12 +2565,11 @@ a.put(func)</item>
                       </chunks>
                     </chunk>
                     <chunk name="param_input" index="2">
-                      <items count="8">
+                      <items count="7">
                         <item name="Name" type_name="gh_string" type_code="10">Z component</item>
                         <item name="NickName" type_name="gh_string" type_code="10">Z</item>
                         <item name="Description" type_name="gh_string" type_code="10">{z} component</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">07198fa4-9d1b-4170-95dc-6a7088a5bc88</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                         <item name="Source" index="0" type_name="gh_guid" type_code="9">e76e8fd6-4bc5-4723-8bfe-cd1374d6ce49</item>
@@ -2628,13 +2612,12 @@ a.put(func)</item>
                       </chunks>
                     </chunk>
                     <chunk name="param_input" index="3">
-                      <items count="8">
+                      <items count="7">
                         <item name="Name" type_name="gh_string" type_code="10">System</item>
                         <item name="NickName" type_name="gh_string" type_code="10">S</item>
                         <item name="Description" type_name="gh_string" type_code="10">Coordinate system for point</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">de777477-3d8c-4419-862d-85435a5801e4</item>
                         <item name="Hidden" type_name="gh_bool" type_code="1">true</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                       </items>
@@ -2686,12 +2669,11 @@ a.put(func)</item>
                       </chunks>
                     </chunk>
                     <chunk name="param_output" index="0">
-                      <items count="7">
+                      <items count="6">
                         <item name="Name" type_name="gh_string" type_code="10">Point</item>
                         <item name="NickName" type_name="gh_string" type_code="10">Pt</item>
                         <item name="Description" type_name="gh_string" type_code="10">Point coordinate</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">381315a7-a0c1-4765-8b28-f50a9bdb1d8c</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                       </items>
@@ -2723,12 +2705,11 @@ a.put(func)</item>
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="5">
+                  <items count="4">
                     <item name="Name" type_name="gh_string" type_code="10">Remap Numbers</item>
                     <item name="NickName" type_name="gh_string" type_code="10">ReMap</item>
                     <item name="Description" type_name="gh_string" type_code="10">Remap numbers into a new numeric domain</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">a985f652-1ce4-4ea1-8628-1999fadf56aa</item>
-                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                   </items>
                   <chunks count="5">
                     <chunk name="Attributes">
@@ -2746,12 +2727,11 @@ a.put(func)</item>
                       </items>
                     </chunk>
                     <chunk name="param_input" index="0">
-                      <items count="8">
+                      <items count="7">
                         <item name="Name" type_name="gh_string" type_code="10">Value</item>
                         <item name="NickName" type_name="gh_string" type_code="10">V</item>
                         <item name="Description" type_name="gh_string" type_code="10">Value to remap</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">255bf13b-9c6c-40b4-ac66-901844917af1</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                         <item name="Source" index="0" type_name="gh_guid" type_code="9">1cac53d1-9696-457e-985a-264d6b56f0ef</item>
@@ -2774,12 +2754,11 @@ a.put(func)</item>
                       </chunks>
                     </chunk>
                     <chunk name="param_input" index="1">
-                      <items count="8">
+                      <items count="7">
                         <item name="Name" type_name="gh_string" type_code="10">Source</item>
                         <item name="NickName" type_name="gh_string" type_code="10">S</item>
                         <item name="Description" type_name="gh_string" type_code="10">Optional source domain.</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">2432e610-d383-4206-ade6-610e7973008f</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                         <item name="Source" index="0" type_name="gh_guid" type_code="9">239573ac-330d-4d53-93b8-124fbd648cef</item>
@@ -2825,12 +2804,11 @@ a.put(func)</item>
                       </chunks>
                     </chunk>
                     <chunk name="param_input" index="2">
-                      <items count="7">
+                      <items count="6">
                         <item name="Name" type_name="gh_string" type_code="10">Target</item>
                         <item name="NickName" type_name="gh_string" type_code="10">T</item>
                         <item name="Description" type_name="gh_string" type_code="10">Target domain</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">d027579f-80bd-49a6-95a5-1b9057db11b3</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                       </items>
@@ -2875,12 +2853,11 @@ a.put(func)</item>
                       </chunks>
                     </chunk>
                     <chunk name="param_output" index="0">
-                      <items count="7">
+                      <items count="6">
                         <item name="Name" type_name="gh_string" type_code="10">Result</item>
                         <item name="NickName" type_name="gh_string" type_code="10">R</item>
                         <item name="Description" type_name="gh_string" type_code="10">Remapped number.</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">e76e8fd6-4bc5-4723-8bfe-cd1374d6ce49</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                       </items>
@@ -2912,12 +2889,11 @@ a.put(func)</item>
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="5">
+                  <items count="4">
                     <item name="Name" type_name="gh_string" type_code="10">Bounds</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Bnd</item>
                     <item name="Description" type_name="gh_string" type_code="10">Create a numeric domain which encompasses a list of numbers.</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">3c3690c8-f8d3-43a0-9ce5-5e4d4f7db42b</item>
-                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                   </items>
                   <chunks count="3">
                     <chunk name="Attributes">
@@ -2935,12 +2911,11 @@ a.put(func)</item>
                       </items>
                     </chunk>
                     <chunk name="param_input" index="0">
-                      <items count="9">
+                      <items count="8">
                         <item name="Name" type_name="gh_string" type_code="10">Numbers</item>
                         <item name="NickName" type_name="gh_string" type_code="10">N</item>
                         <item name="Description" type_name="gh_string" type_code="10">Numbers to include in Bounds</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">50930df0-8f86-4eb7-a9f7-f56014ef9d37</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Access" type_name="gh_int32" type_code="3">1</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
@@ -2964,12 +2939,11 @@ a.put(func)</item>
                       </chunks>
                     </chunk>
                     <chunk name="param_output" index="0">
-                      <items count="7">
+                      <items count="6">
                         <item name="Name" type_name="gh_string" type_code="10">Domain</item>
                         <item name="NickName" type_name="gh_string" type_code="10">I</item>
                         <item name="Description" type_name="gh_string" type_code="10">Numeric Domain between the lowest and highest numbers in {N}</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">239573ac-330d-4d53-93b8-124fbd648cef</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                       </items>
@@ -3001,12 +2975,11 @@ a.put(func)</item>
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="5">
+                  <items count="4">
                     <item name="Name" type_name="gh_string" type_code="10">Range</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Range</item>
                     <item name="Description" type_name="gh_string" type_code="10">Create a range of numbers.</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">675e4bff-58f8-477c-ba8b-6091775b54df</item>
-                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                   </items>
                   <chunks count="4">
                     <chunk name="Attributes">
@@ -3024,12 +2997,11 @@ a.put(func)</item>
                       </items>
                     </chunk>
                     <chunk name="param_input" index="0">
-                      <items count="7">
+                      <items count="6">
                         <item name="Name" type_name="gh_string" type_code="10">Domain</item>
                         <item name="NickName" type_name="gh_string" type_code="10">D</item>
                         <item name="Description" type_name="gh_string" type_code="10">Domain of numeric range</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">afd8763b-bb00-48b7-a359-cb2106cb11c7</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                       </items>
@@ -3074,12 +3046,11 @@ a.put(func)</item>
                       </chunks>
                     </chunk>
                     <chunk name="param_input" index="1">
-                      <items count="7">
+                      <items count="6">
                         <item name="Name" type_name="gh_string" type_code="10">Steps</item>
                         <item name="NickName" type_name="gh_string" type_code="10">N</item>
                         <item name="Description" type_name="gh_string" type_code="10">Number of steps</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">f3943981-cc9c-4812-927e-d091d0a7db99</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                       </items>
@@ -3121,12 +3092,11 @@ a.put(func)</item>
                       </chunks>
                     </chunk>
                     <chunk name="param_output" index="0">
-                      <items count="8">
+                      <items count="7">
                         <item name="Name" type_name="gh_string" type_code="10">Range</item>
                         <item name="NickName" type_name="gh_string" type_code="10">R</item>
                         <item name="Description" type_name="gh_string" type_code="10">Range of numbers</item>
                         <item name="InstanceGuid" type_name="gh_guid" type_code="9">4a32ee6e-6057-41f9-bc25-26ed78e70a7a</item>
-                        <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                         <item name="Access" type_name="gh_int32" type_code="3">1</item>
                         <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                         <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
@@ -3160,13 +3130,12 @@ a.put(func)</item>
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="9">
+                  <items count="8">
                     <item name="props_visible" type_name="gh_bool" type_code="1">false</item>
                     <item name="Name" type_name="gh_string" type_code="10">Decodes Python Script</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Decodes</item>
                     <item name="Description" type_name="gh_string" type_code="10">A python scriptable component that implements the Decodes library</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">8b7aa3e6-aef8-48c9-915f-1f2b5da90c62</item>
-                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                     <item name="HideInput" type_name="gh_bool" type_code="1">true</item>
                     <item name="CodeInput" type_name="gh_string" type_code="10">def func(u,v):
     rail = Curve.bezier(rail_pts)
@@ -3204,12 +3173,11 @@ a.put(func)</item>
                       </items>
                       <chunks count="4">
                         <chunk name="InputParam" index="0">
-                          <items count="13">
+                          <items count="12">
                             <item name="Name" type_name="gh_string" type_code="10">crv_pts</item>
                             <item name="NickName" type_name="gh_string" type_code="10">crv_pts</item>
                             <item name="Description" type_name="gh_string" type_code="10">Script variable Decodes</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">912030f9-b043-429d-b766-ae514cfecab6</item>
-                            <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                             <item name="Access" type_name="gh_int32" type_code="3">1</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">true</item>
                             <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
@@ -3237,12 +3205,11 @@ a.put(func)</item>
                           </chunks>
                         </chunk>
                         <chunk name="InputParam" index="1">
-                          <items count="13">
+                          <items count="12">
                             <item name="Name" type_name="gh_string" type_code="10">rail_pts</item>
                             <item name="NickName" type_name="gh_string" type_code="10">rail_pts</item>
                             <item name="Description" type_name="gh_string" type_code="10">Script variable Decodes</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">4bb9865c-47df-49d8-ac49-e23add032b02</item>
-                            <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                             <item name="Access" type_name="gh_int32" type_code="3">1</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">true</item>
                             <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
@@ -3270,13 +3237,12 @@ a.put(func)</item>
                           </chunks>
                         </chunk>
                         <chunk name="OutputParam" index="0">
-                          <items count="8">
+                          <items count="7">
                             <item name="Name" type_name="gh_string" type_code="10">console</item>
                             <item name="NickName" type_name="gh_string" type_code="10">...</item>
                             <item name="Description" type_name="gh_string" type_code="10">The execution information, as output and error streams</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">1d4b02a3-1158-49b7-ba1e-28ac9172f290</item>
                             <item name="Mutable" type_name="gh_bool" type_code="1">false</item>
-                            <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                             <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                           </items>
@@ -3298,12 +3264,11 @@ a.put(func)</item>
                           </chunks>
                         </chunk>
                         <chunk name="OutputParam" index="1">
-                          <items count="7">
+                          <items count="6">
                             <item name="Name" type_name="gh_string" type_code="10">a</item>
                             <item name="NickName" type_name="gh_string" type_code="10">a</item>
                             <item name="Description" type_name="gh_string" type_code="10">Contains the translated geometry found in outie a</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">14c0b443-c0af-4311-aa26-7c1f561a9ca8</item>
-                            <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                             <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                           </items>
@@ -5680,7 +5645,7 @@ a.put(msh)</item>
                   </items>
                   <chunks count="2">
                     <chunk name="Attributes">
-                      <items count="2">
+                      <items count="3">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>1301</X>
                           <Y>699</Y>
@@ -5691,6 +5656,7 @@ a.put(msh)</item>
                           <W>83</W>
                           <H>68</H>
                         </item>
+                        <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                       </items>
                     </chunk>
                     <chunk name="ParameterData">
@@ -5705,13 +5671,14 @@ a.put(msh)</item>
                       </items>
                       <chunks count="5">
                         <chunk name="InputParam" index="0">
-                          <items count="10">
+                          <items count="11">
                             <item name="Name" type_name="gh_string" type_code="10">func</item>
                             <item name="NickName" type_name="gh_string" type_code="10">func</item>
                             <item name="Description" type_name="gh_string" type_code="10">Script variable Decodes</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">eef8e252-317f-4c9a-993e-036069b12168</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">true</item>
-                            <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
+                            <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
+                            <item name="Source" index="0" type_name="gh_guid" type_code="9">d36bf826-9139-4fa9-8ada-65b90305c112</item>
                             <item name="TypeHintID" type_name="gh_guid" type_code="9">35915213-5534-4277-81b8-1bdc9e7383d2</item>
                             <item name="ShowTypeHints" type_name="gh_bool" type_code="1">true</item>
                             <item name="AllowTreeAccess" type_name="gh_bool" type_code="1">false</item>
@@ -5719,7 +5686,7 @@ a.put(msh)</item>
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>1271.5</X>
                                   <Y>677.6667</Y>
@@ -5730,6 +5697,7 @@ a.put(msh)</item>
                                   <W>32</W>
                                   <H>21</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -5750,7 +5718,7 @@ a.put(msh)</item>
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>1271.5</X>
                                   <Y>699</Y>
@@ -5761,6 +5729,7 @@ a.put(msh)</item>
                                   <W>32</W>
                                   <H>21</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -5781,7 +5750,7 @@ a.put(msh)</item>
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>1271.5</X>
                                   <Y>720.3334</Y>
@@ -5792,6 +5761,7 @@ a.put(msh)</item>
                                   <W>32</W>
                                   <H>22</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -5808,7 +5778,7 @@ a.put(msh)</item>
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>1324.5</X>
                                   <Y>683</Y>
@@ -5819,6 +5789,7 @@ a.put(msh)</item>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -5834,7 +5805,7 @@ a.put(msh)</item>
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>1324.5</X>
                                   <Y>715</Y>
@@ -5845,6 +5816,7 @@ a.put(msh)</item>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -6475,7 +6447,8 @@ a.put(msh)</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">ed741480-e91e-4276-acf0-6011579db3e0</item>
                     <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                     <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
-                    <item name="UserText" type_name="gh_string" type_code="10">Rotational Surface</item>
+                    <item name="UserText" type_name="gh_string" type_code="10">Rotational Surface Example
+</item>
                     <item name="MultilineData" type_name="gh_bool" type_code="1">true</item>
                     <item name="WrapItems" type_name="gh_bool" type_code="1">true</item>
                     <item name="EntryNumbers" type_name="gh_bool" type_code="1">true</item>
@@ -6494,14 +6467,14 @@ a.put(msh)</item>
                         <item name="MarginLeft" type_name="gh_int32" type_code="3">0</item>
                         <item name="MarginRight" type_name="gh_int32" type_code="3">0</item>
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>754.4498</X>
-                          <Y>846.9775</Y>
+                          <X>764.4498</X>
+                          <Y>839.2568</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>754</X>
-                          <Y>846</Y>
+                          <X>764</X>
+                          <Y>839</Y>
                           <W>94</W>
-                          <H>35</H>
+                          <H>45</H>
                         </item>
                       </items>
                     </chunk>
@@ -6516,14 +6489,15 @@ a.put(msh)</item>
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="14">
+                  <items count="15">
                     <item name="Name" type_name="gh_string" type_code="10">Panel</item>
                     <item name="NickName" type_name="gh_string" type_code="10"></item>
                     <item name="Description" type_name="gh_string" type_code="10">A panel for custom notes and String values</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">596b37f4-3259-4f19-8361-1b825d0ea65e</item>
+                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                     <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                     <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
-                    <item name="UserText" type_name="gh_string" type_code="10">Translational Surface</item>
+                    <item name="UserText" type_name="gh_string" type_code="10">Translational Surface Example </item>
                     <item name="MultilineData" type_name="gh_bool" type_code="1">true</item>
                     <item name="WrapItems" type_name="gh_bool" type_code="1">true</item>
                     <item name="EntryNumbers" type_name="gh_bool" type_code="1">true</item>
@@ -6543,13 +6517,13 @@ a.put(msh)</item>
                         <item name="MarginRight" type_name="gh_int32" type_code="3">0</item>
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>774.7671</X>
-                          <Y>1131.604</Y>
+                          <Y>1131.777</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                           <X>774</X>
                           <Y>1131</Y>
                           <W>106</W>
-                          <H>35</H>
+                          <H>45</H>
                         </item>
                       </items>
                     </chunk>
