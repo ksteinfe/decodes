@@ -302,7 +302,7 @@ class Curve(HasBasis,IsParametrized):
         return PLine([self.deval(t) for t in self.domain.divide(int(math.ceil(self.domain.delta/self.tol)),True)])
 
 
-    def _rebuild_surrogate():
+    def _rebuild_surrogate(self):
         self._surrogate = self._to_pline()
 
 

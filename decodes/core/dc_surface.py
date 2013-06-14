@@ -26,14 +26,16 @@ class Surface(IsParametrized):
             :rtype: Surface
         """
         if function is not None : self._func = function
-        self._dom = ival_u, ival_v
+        self._dom = dom_u, dom_v
         self._tol = self.tol_max
         if tolerance is not None : self.tol = tolerance
 
-        if not isinstance(self.func(self.domain.a), Point) : raise GeometricError("Curve not valid: The given function does not return a point at parameter %s"%(self.domain.a))
-        if not isinstance(self.func(self.domain.b), Point) : raise GeometricError("Curve not valid: The given function does not return a point at parameter %s"%(self.domain.b))
-
-        self._surrogate = self._to_pline()
+        if not isinstance(self.func(self.u0,self.v0), Point) : raise GeometricError("Surface not valid: The given function does not return a point at parameter %s, %s"%(self.u0,self.v0))
+        if not isinstance(self.func(self.u0,self.v1), Point) : raise GeometricError("Surface not valid: The given function does not return a point at parameter %s, %s"%(self.u0,self.v1))
+        if not isinstance(self.func(self.u1,self.v1), Point) : raise GeometricError("Surface not valid: The given function does not return a point at parameter %s, %s"%(self.u1,self.v1))
+        if not isinstance(self.func(self.u1,self.v0), Point) : raise GeometricError("Surface not valid: The given function does not return a point at parameter %s, %s"%(self.u1,self.v0))
+        
+        self._rebuild_surrogate()
 
 
     @property
@@ -88,6 +90,19 @@ class Surface(IsParametrized):
         """
         return self._dom[0].delta / 10.0, self._dom[1].delta / 10.0
 
+    @property
+    def tol_u(self):
+        """
+        """
+        return self._tol[0]
+
+    @property
+    def tol_v(self):
+        """
+        """
+        return self._tol[1]
+
+
     def deval(self,u,v):
         """ Evaluates this Surface and returns a Plane.
         T is a float value that falls within the defined domain of this Curve.
@@ -101,27 +116,28 @@ class Surface(IsParametrized):
             :rtype: Plane
         """
         # some rounding errors require something like this:
-        if u < self.u0 and u > self.u0-self.tol : u = self.domain_u.a
-        if u > self.domain.b and u < self.domain_u.b+self.tol : u = self.domain_u.b
+        if u < self.u0 and u > self.u0-self.tol_u : u = u0
+        if u > self.u1 and u < self.u1+self.tol_u : u = u1
+        if v < self.v0 and v > self.v0-self.tol_v : v = v0
+        if v > self.v1 and v < self.v1+self.tol_v : v = v1
 
-        if t<self.domain.a or t>self.domain.b : raise DomainError("Curve evaluated outside the bounds of its domain: deval(%s) %s"%(t,self.domain))
-        pt = self._func(t)
+        if u<self.u0 or u>self.u1 : raise DomainError("Surface evaluated outside the bounds of its u-domain: deval(%s) %s"%(u,self.domain_u))
+        if v<self.v0 or v>self.v1 : raise DomainError("Surface evaluated outside the bounds of its v-domain: deval(%s) %s"%(v,self.domain_v))
+        pt = self._func(u,v)
         
-        nudge = self.tol/100
-        tv = t + nudge
-        if tv > self.domain.b :  vec = Vec(pt, self._func(t - nudge)).inverted()
-        else : vec = Vec(pt, self._func(tv))
+        nudge = 100
+        uu = u + self.tol_u/nudge
+        vv = v + self.tol_v/nudge
+        if uu > self.u1 :  vec_u = Vec(pt, self._func(u - self.tol_u/nudge,v)).inverted()
+        else : vec_u = Vec(pt, self._func(uu,v))
+        if vv > self.v1 :  vec_v = Vec(pt, self._func(u,v - self.tol_v/nudge)).inverted()
+        else : vec_v = Vec(pt, self._func(u,vv))
         
-        #transform result to curve basis
-        if not self.is_baseless:
-            #pt.basis = self.basis
-            #pt = pt.basis_applied()
-            pt = pt * self.basis.xform
-            vec = vec * self.basis.xform.strip_translation()
-        
+        vec = vec_u.cross(vec_v)
+
         return Plane(pt, vec)
 
-    def eval(self,t):
+    def eval(self,u,v):
         """ Evaluates this Curve and returns a Plane.
         T is a normalized float value (0->1) which will be remapped to the domain defined by this Curve.
         equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain))
@@ -130,5 +146,54 @@ class Surface(IsParametrized):
             :result: Plane.
             :rtype: Plane
         """
-        if t<0 or t>1 : raise DomainError("eval() must be called with a number between 0->1: eval(%s)"%t)
-        return self.deval(Interval.remap(t,Interval(),self.domain))
+        if u<0 or u>1 : raise DomainError("u out of bounds.  eval() must be called numbers between 0->1: eval(%s)"%u)
+        if v<0 or v>1 : raise DomainError("v out of bounds.  eval() must be called numbers between 0->1: eval(%s)"%v)
+        return self.deval(Interval.remap(u,Interval(),self.domain_u),Interval.remap(v,Interval(),self.domain_v))
+
+
+    def _rebuild_surrogate(self):
+        self._surrogate = self.to_mesh()
+
+    def to_mesh(self,do_close=False):
+        msh = Mesh()
+        u_vals = self.domain_u.divide(int(math.ceil(self.domain_u.delta/self.tol_u)),True)
+        v_vals = self.domain_v.divide(int(math.ceil(self.domain_v.delta/self.tol_v)),True)
+
+        
+        for v in v_vals:
+            for u in u_vals:
+                msh.append(self.deval(u,v))
+        '''
+        for j in range(len(v_vals)):
+            row = j*(len(u_vals)+1)
+            for i in range(len(u_vals)):
+                pi_0 = row+i
+                pi_1 = row+i+1
+                pi_2 = row+i+len(u_vals)+2
+                pi_3 = row+i+len(u_vals)+1
+                msh.add_face(pi_0,pi_1,pi_2)
+                msh.add_face(pi_0, pi_2, pi_3)
+        '''
+        res_u = len(u_vals)
+        # simple triangulation style
+        for v in range(len(v_vals)):
+            row = v*res_u
+            for u in range(len(u_vals)-1):
+                pi_0 = row+u
+                pi_1 = row+u+1
+                pi_2 = row+u+res_u+1
+                pi_3 = row+u+res_u
+                msh.add_face(pi_0,pi_1,pi_2,pi_3)
+            if do_close:
+                #last two faces in the row
+                pi_0 = row+res_u-1
+                pi_1 = row+0
+                pi_2 = row+res_u
+                pi_3 = row+res_u-1+res_u
+                msh.add_face(pi_0,pi_1,pi_2,pi_3)
+        
+        return msh
+
+
+
+
