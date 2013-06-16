@@ -12,6 +12,8 @@ for x in range(4):
     argon = argon.inflate()
     
 
+argon = RGon.from_edge(Segment(Point(0,0),Point(0,1)),3)
+
 
 pass
 

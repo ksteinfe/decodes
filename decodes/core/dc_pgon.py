@@ -236,3 +236,15 @@ class RGon(PGon):
         y = self.basis.zAxis.cross(x)
         basis = CS(o,x,y)
         return RGon(self._nos,basis=basis,apothem=self.radius)
+
+    @staticmethod
+    def from_edge(segment,num_of_sides,normal=Vec(0,0,1)):
+        """
+        constructs a regular polygon given a line segment describing one edge.
+        the side of the edge that the center of the resulting polygon falls is determined by taking the cross product of the given edge vector and the given normal vector
+        """
+        apothem = segment.length / (2.0 * math.tan(math.pi/num_of_sides))
+        print apothem
+        cpt = segment.midpoint + segment.vec.cross(normal).normalized(apothem)
+        cs = CS(cpt,Vec(cpt,segment.spt),segment.vec.cross(normal))
+        return RGon(num_of_sides,apothem=apothem, basis=cs)
