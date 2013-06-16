@@ -61,6 +61,27 @@ class CS(Geometry, IsBasis):
     def ixform(self): 
         from .dc_xform import Xform
         return Xform.change_basis(self, CS())
+
+    @property
+    def xy_plane(self):
+        return Plane(self.origin,self.zAxis)
+
+    @property
+    def xz_plane(self):
+        return Plane(self.origin,self.yAxis)
+
+    @property
+    def yz_plane(self):
+        return Plane(self.origin,self.xAxis)
+
+
+    @staticmethod
+    def on_xy(x=0,y=0,rotation=0):
+        """
+        returns a coordinate system on the xy plane at a given rotation about the z-axis
+        """
+        x_vec = Vec(math.cos(rotation),math.sin(rotation))
+        return CS(Point(x,y),x_vec,x_vec.cross(Vec(0,0,-1)))
     
 
 class CylCS(Geometry, IsBasis):

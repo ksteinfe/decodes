@@ -1,7 +1,5 @@
-# danzerTile.py
-# provides classes that support danzer tile inflation
-import decodes.core as dc
-from decodes.core import *
+from ..core import *
+from ..core import dc_base, dc_vec, dc_point, dc_cs, dc_line, dc_mesh, dc_pgon, dc_xform
 import math
 
 # according to Danzer, the basic tile set contains tets with 

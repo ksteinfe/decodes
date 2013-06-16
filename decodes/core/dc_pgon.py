@@ -21,7 +21,7 @@ class PGon(HasPts):
             :returns: PGon object. 
             :rtype: PGon
         """ 
-        #TODO: if i pass in verices but no basis, try and figure out what the CS should be and project all points to plane
+        #TODO: if i pass in verices but no basis, try and figure out what the CS should be and project all points to the proper plane
 
         super(PGon,self).__init__() #HasPts constructor initializes list of verts and an empty basis
         self.basis = CS() if (basis is None) else basis
@@ -132,3 +132,107 @@ class PGon(HasPts):
         for t in angle_interval.invert().divide(res,True):pts.append(cyl_pt(radius_interval.b,t))
         return PGon(pts)
 
+class RGon(PGon):
+    '''
+    A Regular Polygon Class
+    '''
+    def __init__(self, num_of_sides, radius=None, basis=None, edge_length=None, apothem=None):
+        """ RGon Constructor.
+        
+        """ 
+        if num_of_sides < 3 : raise GeometricError("Cannot create a regular polygon with fewer than three sides.")
+        if radius is None and edge_length is None and apothem is None : raise GeometricError("You must specify one and only one of the following: radius, edge length, apothem")
+        if radius is not None and edge_length is not None  and apothem is not None : raise GeometricError("You must specify one and only one of the following: radius, edge length, apothem")
+        self._nos = num_of_sides
+
+        if edge_length is not None: 
+            if edge_length <= 0 : raise GeometricError("edge_length must be greater than zero")
+            self._edge_length = edge_length
+            self._radius = edge_length / (2.0 * math.sin(math.pi/self._nos))
+        elif apothem is not None: 
+            if apothem <= 0 : raise GeometricError("apothem must be greater than zero")
+            self._apothem = apothem
+            self._radius = apothem / math.cos(math.pi/self._nos)
+        elif radius is not None: 
+            if radius <= 0 : raise GeometricError("radius must be greater than zero")
+            self._radius = radius
+        else:
+            raise GeometricError("You must specify one and only one of the following: radius, edge length, in_radius")
+
+        step = math.pi*2.0/num_of_sides
+        verts = [Point( self.radius * math.cos(step*n), self.radius * math.sin(step*n))  for n in range(num_of_sides) ]
+
+        super(RGon,self).__init__(verts, basis)
+
+    @property
+    def radius(self):
+        return self._radius
+
+    @property
+    def num_of_sides(self):
+        return self._nos
+
+    @property
+    def area(self):
+        try:
+            return self._area
+        except:
+            self._area = 0.5 * self._nos * math.sin(math.pi*2.0/self._nos) * (self.radius ** 2)
+            return self._inradius
+
+    @property
+    def apothem(self):
+        '''
+        the distance from the center to the midpoint of any side
+        '''
+        try:
+            return self._apothem
+        except:
+            self._apothem = Vec.interpolate(self._verts[0],self._verts[1]).length
+            return self._apothem
+
+    @property
+    def edge_length(self):
+        '''
+        the length of any edge
+        '''
+        try:
+            return self._edge_length
+        except:
+            self._edge_length = 2 * self.radius * math.sin(math.pi/self._nos)
+            return self._edge_length
+
+    @property
+    def circle_inscr(self):
+        '''
+        returns the inscribed circle of this RGon
+        '''
+        return Circle(self.basis.xy_plane,self.radius)
+
+    @property
+    def circle_cirscr(self):
+        '''
+        returns the circumscribed circle of this RGon
+        '''
+        return Circle(self.basis.xy_plane,self.apothem)
+
+
+    def inflate(self):
+        '''
+        returns a regular polygon inscribed inside this one while maintaining the same number of sides
+        '''
+        o = self.basis.origin
+        x = Vec(o,Point.interpolate(self.pts[0],self.pts[1]))
+        y = self.basis.zAxis.cross(x)
+        basis = CS(o,x,y)
+        return RGon(self._nos,self.apothem,basis)
+
+    def deflate(self):
+        '''
+        returns a regular polygon that circumscribes this one while maintaining the same number of sides
+        '''
+        o = self.basis.origin
+        x = Vec(o,Point.interpolate(self.pts[0],self.pts[1]))
+        y = self.basis.zAxis.cross(x)
+        basis = CS(o,x,y)
+        return RGon(self._nos,basis=basis,apothem=self.radius)

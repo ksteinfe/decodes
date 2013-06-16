@@ -370,7 +370,9 @@ class Point(Vec,HasBasis):
             :result: Interpolated point.
             :rtype: Point
         """
-        if p0.basis is p1.basis : 
+        #TODO this method used to maintain basis for same-based points, but this seemed to fuck things up in the rgon.inflate method.
+        #if p0.basis is p1.basis : 
+        if False : 
             v = Vec.interpolate(p0,p1,t)
             return Point(v.x,v.y,v.z,p0.basis)
         else : 
