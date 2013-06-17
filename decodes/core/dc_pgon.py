@@ -216,6 +216,15 @@ class RGon(PGon):
         '''
         return Circle(self.basis.xy_plane,self.apothem)
 
+    @property
+    def interior_angle(self):
+        try:
+            return self._iangle
+        except:
+            self._iangle = (self._nos-2) * math.pi/self._nos
+            return self._iangle
+        
+
 
     def inflate(self):
         '''
@@ -244,7 +253,6 @@ class RGon(PGon):
         the side of the edge that the center of the resulting polygon falls is determined by taking the cross product of the given edge vector and the given normal vector
         """
         apothem = segment.length / (2.0 * math.tan(math.pi/num_of_sides))
-        print apothem
         cpt = segment.midpoint + segment.vec.cross(normal).normalized(apothem)
         cs = CS(cpt,Vec(cpt,segment.spt),segment.vec.cross(normal))
         return RGon(num_of_sides,apothem=apothem, basis=cs)

@@ -231,6 +231,7 @@ class LinearEntity(Geometry):
             :rtype: Point
         """
         return self.spt+(self.vec.normalized(self.vec.length*t))
+
     
 
 class Line(LinearEntity):
@@ -281,6 +282,14 @@ class Segment(LinearEntity):
     def midpoint(self): 
       """Returns the midpoint of this segment"""
       return Point.interpolate(self.spt, self.ept)
+
+    def inverted(self):
+        """Return a new Segment between the ept and spt of this Segment, but pointing in the opposite direction
+        
+            :result: Inverted vector.
+            :rtype: Vec
+        """ 
+        return Segment(self.ept,self._vec.inverted())
 
 
 class VecField(PixelGrid):
