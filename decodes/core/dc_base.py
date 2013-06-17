@@ -165,8 +165,3 @@ class HasBasis(Geometry):
 
 
 
-sin_pi = math.sin(math.pi)
-
-
-
-

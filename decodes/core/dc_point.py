@@ -517,6 +517,8 @@ class HasPts(HasBasis):
         """
         return Point._centroid(self.pts) 
     
+    def reverse(self):
+        self._verts.reverse
 
     def basis_applied(self): 
         """Returns a new Geometry with basis applied. Coords will be interpreted in world space, appearing in the same position when drawn
