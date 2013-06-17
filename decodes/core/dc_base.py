@@ -163,3 +163,10 @@ class HasBasis(Geometry):
         """ 
         raise NotImplementedError("basis_stripped not implimented.    I am a BAD HasBasis!")
 
+
+
+sin_pi = math.sin(math.pi)
+
+
+
+
