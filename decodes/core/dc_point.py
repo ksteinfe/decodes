@@ -520,6 +520,16 @@ class HasPts(HasBasis):
     def reverse(self):
         self._verts.reverse
 
+    def rotate(self,n):
+        """
+        rotates the vertices in this object.
+        in the case of a PGon, this resets which pt is the first point
+        """
+        if n > len(self._verts): n =  n%len(self._verts)
+        if n < -len(self._verts): n =  -abs(n)%len(self._verts)
+        self._verts = self._verts[n:] + self._verts[:n]
+
+
     def basis_applied(self): 
         """Returns a new Geometry with basis applied. Coords will be interpreted in world space, appearing in the same position when drawn
         

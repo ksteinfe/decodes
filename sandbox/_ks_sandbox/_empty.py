@@ -3,14 +3,12 @@ from decodes.core import *
 #import decodes.unit_tests
 
 cs = CS()
-size = 1.2
+size = 1.0
 
 
 argon = RGon(4,size)
+print argon
 
-for x in range(4):
-    argon = argon.inflate()
-   
 '''
 import time
 t0 = time.time()

@@ -154,10 +154,12 @@ class Surface(IsParametrized):
     def _rebuild_surrogate(self):
         self._surrogate = self.to_mesh()
 
-    def to_mesh(self,do_close=False):
+    def to_mesh(self,do_close=False,divs_u=False,divs_v=False):
         msh = Mesh()
-        u_vals = self.domain_u.divide(int(math.ceil(self.domain_u.delta/self.tol_u)),True)
-        v_vals = self.domain_v.divide(int(math.ceil(self.domain_v.delta/self.tol_v)),True)
+        if not divs_u : divs_u = int(math.ceil(self.domain_u.delta/self.tol_u))
+        if not divs_v : divs_v = int(math.ceil(self.domain_v.delta/self.tol_v))
+        u_vals = self.domain_u.divide((divs_u),True)
+        v_vals = self.domain_v.divide((divs_v),True)
 
         
         for v in v_vals:
