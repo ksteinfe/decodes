@@ -13,7 +13,7 @@ class Surface(IsParametrized):
 
     """
     
-    def __init__(self, function=None, dom_u=Interval(0,1), dom_v=Interval(0,1), tolerance=None):
+    def __init__(self, function=None, dom_u=Interval(0,1), dom_v=Interval(0,1), tol_u=None, tol_v=None):
         """ Constructs a Curve object. If tolerance is None, Curve.tol = tol_max().
         
             :param function: A function returning points.
@@ -28,12 +28,13 @@ class Surface(IsParametrized):
         if function is not None : self._func = function
         self._dom = dom_u, dom_v
         self._tol = self.tol_max
-        if tolerance is not None : self.tol = tolerance
+        if tol_u is not None : self.tol_u = tol_u
+        if tol_v is not None : self.tol_v = tol_v
 
-        if not isinstance(self.func(self.u0,self.v0), Point) : raise GeometricError("Surface not valid: The given function does not return a point at parameter %s, %s"%(self.u0,self.v0))
-        if not isinstance(self.func(self.u0,self.v1), Point) : raise GeometricError("Surface not valid: The given function does not return a point at parameter %s, %s"%(self.u0,self.v1))
-        if not isinstance(self.func(self.u1,self.v1), Point) : raise GeometricError("Surface not valid: The given function does not return a point at parameter %s, %s"%(self.u1,self.v1))
-        if not isinstance(self.func(self.u1,self.v0), Point) : raise GeometricError("Surface not valid: The given function does not return a point at parameter %s, %s"%(self.u1,self.v0))
+        if not isinstance(self.func(self.u0,self.v0), Vec) : raise GeometricError("Surface not valid: The given function does not return a point at parameter %s, %s"%(self.u0,self.v0))
+        if not isinstance(self.func(self.u0,self.v1), Vec) : raise GeometricError("Surface not valid: The given function does not return a point at parameter %s, %s"%(self.u0,self.v1))
+        if not isinstance(self.func(self.u1,self.v1), Vec) : raise GeometricError("Surface not valid: The given function does not return a point at parameter %s, %s"%(self.u1,self.v1))
+        if not isinstance(self.func(self.u1,self.v0), Vec) : raise GeometricError("Surface not valid: The given function does not return a point at parameter %s, %s"%(self.u1,self.v0))
         
         self._rebuild_surrogate()
 
@@ -88,7 +89,7 @@ class Surface(IsParametrized):
     def tol_max(self):
         """Determines the maximium tolerance as Surface.domain_u.delta / 10 , Surface.domain_v.delta / 10
         """
-        return self._dom[0].delta / 10.0, self._dom[1].delta / 10.0
+        return [self._dom[0].delta / 10.0, self._dom[1].delta / 10.0]
 
     @property
     def tol_u(self):
@@ -96,11 +97,23 @@ class Surface(IsParametrized):
         """
         return self._tol[0]
 
+    @tol_u.setter
+    def tol_u(self, tolerance):
+        self._tol[0] = tolerance
+        if self._tol[0] > self.tol_max[0] :  self._tol[0] = self.tol_max[0]
+        self._rebuild_surrogate()
+
     @property
     def tol_v(self):
         """
         """
         return self._tol[1]
+
+    @tol_v.setter
+    def tol_v(self, tolerance):
+        self._tol[1] = tolerance
+        if self._tol[1] > self.tol_max[1] :  self._tol[1] = self.tol_max[1]
+        self._rebuild_surrogate()
 
 
     def deval(self,u,v):
@@ -164,18 +177,8 @@ class Surface(IsParametrized):
         
         for v in v_vals:
             for u in u_vals:
-                msh.append(self.deval(u,v))
-        '''
-        for j in range(len(v_vals)):
-            row = j*(len(u_vals)+1)
-            for i in range(len(u_vals)):
-                pi_0 = row+i
-                pi_1 = row+i+1
-                pi_2 = row+i+len(u_vals)+2
-                pi_3 = row+i+len(u_vals)+1
-                msh.add_face(pi_0,pi_1,pi_2)
-                msh.add_face(pi_0, pi_2, pi_3)
-        '''
+                msh.append(self._func(u,v))
+        
         res_u = len(u_vals)
         # simple triangulation style
         for v in range(len(v_vals)):

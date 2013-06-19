@@ -5,7 +5,7 @@ from decodes.core import *
 
 class Tests(unittest.TestCase):
 
-    def test_constructor(self):
+    def _test_constructor(self):
 
         def func(u,v):
             return Point(u,v,math.sin(u+v))
@@ -33,18 +33,44 @@ class Tests(unittest.TestCase):
         with self.assertRaises(DomainError):  surf.deval(0.5,-10) # this test succeeds if a domain error is raised in the contained block of code
         with self.assertRaises(DomainError):  surf.deval(0.5,10) # this test succeeds if a domain error is raised in the contained block of code
 
-    def test_division(self):
+    def _test_division(self):
         pass
 
-    def test_subdivide(self):
+    def _test_subdivide(self):
         pass
 
-    def test_meshing(self):
+    def _test_meshing(self):
         def func(u,v):
-            return Point(u,v,math.sin(u+v))
-        twopi = Interval.twopi()
-        surf = Surface(func,twopi,twopi)
-
+            return Point(0,u,v)
+        surf = Surface(func)
         msh = surf.to_mesh()
+        #TODO: really test this mesh
 
-        print msh
+    def test_tolerance(self):
+        def func(u,v):
+            return Point(0,u,v)
+
+        srf = Surface(func)
+        divs_u = 10  # default tol is 1/10th the domain
+        divs_v = 10  # default tol is 1/10th the domain
+        for v in range(divs_v+1):
+            row = v*(divs_u+1)
+            for u in range(divs_u+1):
+                pt = Point(0,float(u)/divs_u,float(v)/divs_v)
+                pt_s = srf.surrogate.pts[row+u]
+                self.AssertPointsAlmostEqual(pt_s,pt)
+        
+        srf = Surface(func,tol_u = 0.05)
+        srf.tol_u = 0.05 # a tol of 0.05 on a domain of 0->1 is 1/20th the domain
+        divs_u = 20
+        for v in range(divs_v+1):
+            row = v*(divs_u+1)
+            for u in range(divs_u+1):
+                pt = Point(0,float(u)/divs_u,float(v)/divs_v)
+                pt_s = srf.surrogate.pts[row+u]
+                self.AssertPointsAlmostEqual(pt_s,pt)
+
+    def AssertPointsAlmostEqual(self,pa,pb,places=4):
+        self.assertAlmostEqual(pa.x,pb.x,places)
+        self.assertAlmostEqual(pa.y,pb.y,places)
+        self.assertAlmostEqual(pa.z,pb.z,places)

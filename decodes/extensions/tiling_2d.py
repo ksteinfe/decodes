@@ -176,7 +176,7 @@ class AmmannA3TileB(AmmannA3Tile):
             Point((2*(tau**2))-1, tau+tau**2),
             Point((2*(tau**2))-1-tau, tau+tau**2),
             Point((2*(tau**2))-1-tau, tau**2),
-            Point(tau**2-tau, tau**2)
+            Point(tau**2-tau, tau**2),
             Point(0, tau**2)
             ]
     def inflate(self):
