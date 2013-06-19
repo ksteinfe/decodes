@@ -499,9 +499,9 @@ class HasPts(HasBasis):
             :type pts: Point or [Point]
             :result: Modfies this geometry by adding items to the stored list of points
         """
-        if isinstance(pts, collections.Iterable) : 
+        try : 
             for p in pts : self.append(p)
-        else : 
+        except : 
             self._verts.append(self._compatible_vec(pts))
     
     def clear(self):

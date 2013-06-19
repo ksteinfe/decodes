@@ -29,13 +29,13 @@
             <item name="PreviewSelected" type_name="gh_drawing_color" type_code="36">
               <ARGB>100;0;150;0</ARGB>
             </item>
-            <item name="Preview" type_name="gh_string" type_code="10">Shaded</item>
+            <item name="Preview" type_name="gh_string" type_code="10">Disabled</item>
             <item name="PreviewMeshType" type_name="gh_int32" type_code="3">1</item>
           </items>
         </chunk>
         <chunk name="DefinitionProperties">
           <items count="3">
-            <item name="Name" type_name="gh_string" type_code="10">rotational surfaces2.ghx</item>
+            <item name="Name" type_name="gh_string" type_code="10">rotational surfaces_ned.ghx</item>
             <item name="Description" type_name="gh_string" type_code="10"></item>
             <item name="Date" type_name="gh_date" type_code="8">635011386469857864</item>
           </items>
@@ -48,10 +48,10 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>287</X>
-                  <Y>-54</Y>
+                  <X>-2476</X>
+                  <Y>-2411</Y>
                 </item>
-                <item name="Zoom" type_name="gh_single" type_code="5">0.64</item>
+                <item name="Zoom" type_name="gh_single" type_code="5">1.953125</item>
               </items>
             </chunk>
             <chunk name="Views">
@@ -268,11 +268,12 @@ a.put(func)</item>
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="7">
+                  <items count="8">
                     <item name="Name" type_name="gh_string" type_code="10">Point</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Pts</item>
                     <item name="Description" type_name="gh_string" type_code="10">Represents a collection of 3D Points</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">04ca7785-e263-4528-9470-c480af07bbd0</item>
+                    <item name="Hidden" type_name="gh_bool" type_code="1">true</item>
                     <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                     <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                     <item name="Source" index="0" type_name="gh_guid" type_code="9">ad6e9ad3-6095-485f-a3ee-80de92df896f</item>
@@ -795,7 +796,7 @@ a.put(func)</item>
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">3.06</item>
+                        <item name="Value" type_name="gh_double" type_code="6">4.1</item>
                         <item name="Min" type_name="gh_double" type_code="6">0</item>
                         <item name="Max" type_name="gh_double" type_code="6">6.28</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">2</item>
@@ -839,7 +840,7 @@ a.put(func)</item>
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">5</item>
+                        <item name="Value" type_name="gh_double" type_code="6">5.4</item>
                         <item name="Min" type_name="gh_double" type_code="6">0</item>
                         <item name="Max" type_name="gh_double" type_code="6">6.28</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">2</item>
@@ -883,7 +884,7 @@ a.put(func)</item>
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">19</item>
+                        <item name="Value" type_name="gh_double" type_code="6">12</item>
                         <item name="Min" type_name="gh_double" type_code="6">4</item>
                         <item name="Max" type_name="gh_double" type_code="6">50</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">3</item>
@@ -927,7 +928,7 @@ a.put(func)</item>
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">15</item>
+                        <item name="Value" type_name="gh_double" type_code="6">16</item>
                         <item name="Min" type_name="gh_double" type_code="6">2</item>
                         <item name="Max" type_name="gh_double" type_code="6">20</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">3</item>
@@ -2481,12 +2482,11 @@ for ival_v in Interval()//res:
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="8">
+                  <items count="7">
                     <item name="Name" type_name="gh_string" type_code="10">Circle</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Circle</item>
                     <item name="Description" type_name="gh_string" type_code="10">Represents a collection of 3D Circles</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">a9a1b997-56e0-4895-bdc9-ec6ab6173ee2</item>
-                    <item name="Hidden" type_name="gh_bool" type_code="1">true</item>
                     <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                     <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                     <item name="Source" index="0" type_name="gh_guid" type_code="9">2ff0fe08-dc64-45a2-a5a3-5b8268d1051c</item>
@@ -2531,12 +2531,12 @@ for ival_v in Interval()//res:
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>722.1689</X>
-                          <Y>1228.993</Y>
+                          <X>751.7689</X>
+                          <Y>1164.993</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>671</X>
-                          <Y>1218</Y>
+                          <X>700</X>
+                          <Y>1154</Y>
                           <W>102</W>
                           <H>20</H>
                         </item>
@@ -2797,12 +2797,13 @@ for ival_v in Interval()//res:
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="5">
+                  <items count="6">
                     <item name="MaintainPaths" type_name="gh_bool" type_code="1">true</item>
                     <item name="Name" type_name="gh_string" type_code="10">Tree Branch</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Branch</item>
                     <item name="Description" type_name="gh_string" type_code="10">Retrieve a specific branch from a data tree.</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">503a9d5c-a319-4e6f-9b49-dd63c65ab9b9</item>
+                    <item name="Hidden" type_name="gh_bool" type_code="1">true</item>
                   </items>
                   <chunks count="4">
                     <chunk name="Attributes">
@@ -2956,11 +2957,12 @@ for ival_v in Interval()//res:
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="7">
+                  <items count="8">
                     <item name="Name" type_name="gh_string" type_code="10">Geometry</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Geo</item>
                     <item name="Description" type_name="gh_string" type_code="10">Represents a collection of 3D Geometry</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">b09dc785-784c-4fed-9c38-825f779af750</item>
+                    <item name="Hidden" type_name="gh_bool" type_code="1">true</item>
                     <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                     <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                     <item name="Source" index="0" type_name="gh_guid" type_code="9">99a79767-64c8-4ae5-a445-79c6c5891ba9</item>
@@ -3646,11 +3648,12 @@ for ival_v in Interval()//res:
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="4">
+                  <items count="5">
                     <item name="Name" type_name="gh_string" type_code="10">Line</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Ln</item>
                     <item name="Description" type_name="gh_string" type_code="10">Create a line between two points.</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">a00d1381-e51c-4bf2-9921-955d2d9ad773</item>
+                    <item name="Hidden" type_name="gh_bool" type_code="1">true</item>
                   </items>
                   <chunks count="4">
                     <chunk name="Attributes">
@@ -3758,11 +3761,12 @@ for ival_v in Interval()//res:
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="4">
+                  <items count="5">
                     <item name="Name" type_name="gh_string" type_code="10">List Item</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Item</item>
                     <item name="Description" type_name="gh_string" type_code="10">Retrieve a specific item from a list.</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">ec11d936-0749-40bd-bc96-3a52a8c7fd5e</item>
+                    <item name="Hidden" type_name="gh_bool" type_code="1">true</item>
                   </items>
                   <chunks count="5">
                     <chunk name="Attributes">
@@ -3982,12 +3986,13 @@ for ival_v in Interval()//res:
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="8">
+                  <items count="9">
                     <item name="props_visible" type_name="gh_bool" type_code="1">false</item>
                     <item name="Name" type_name="gh_string" type_code="10">Decodes Python Script</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Decodes</item>
                     <item name="Description" type_name="gh_string" type_code="10">A python scriptable component that implements the Decodes library</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">a8e2d489-1f17-4d77-a5ed-808405abaf43</item>
+                    <item name="Hidden" type_name="gh_bool" type_code="1">true</item>
                     <item name="HideInput" type_name="gh_bool" type_code="1">true</item>
                     <item name="CodeInput" type_name="gh_string" type_code="10">#IN:   a function f(u,v) describing a parametric surface on the domain [0,1]x[0,1]
 #OUT:  Surface expressed as a mesh aligned with isocurves for u, v determined by res_u and res_v 
