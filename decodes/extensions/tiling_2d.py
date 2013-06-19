@@ -102,11 +102,121 @@ class PinwheelTile(object):
         
         return [tile0,tile1,tile2,tile3,tile4]
 
-
+        
+tau = (1 + math.sqrt(5)) / 2         #= 1.61803399
+taui = 1/tau    #= 0.618033989
 
 class AmmannA3Tile(object):
     '''
     Ammann A3
     http://tilings.math.uni-bielefeld.de/substitution_rules/ammann_a3
     '''
+    
+    def __init__(self,xf=Xform(), lineage="RT"):
+        self.lineage = lineage
+        self.xf = xf
 
+        self._xf_scale = Xform.scale(1/tau) #the amount to scale down at each inflation = 0.447213595
+    
+    def _cs_from_base_pts(self,pt_o=0,pt_x=1,pt_y=2):
+        '''
+        Returns a CS oriented to an idealized tile's base points.  
+        Multiply result by this_tile.xf and you'll get a coordinate system oriented to the postition of this tile in the world
+        pt_0: index of origin point
+        pt_x: index of a point on the desired x-axis
+        pt_y: index of a point on the desired y-axis
+        '''
+        return CS(self._base_pts[pt_o],self._base_pts[pt_x]-self._base_pts[pt_o],self._base_pts[pt_y]-self._base_pts[pt_o])
+    
+    @property
+    def base_pts(self):
+        '''
+        world base points for this tile
+        returns the ideal Ammann Tile's base points transformed by this tile's xform
+        '''
+        return [p*self.xf for p in self._base_pts]
+        
+    def to_pgon(self):
+        pg = PGon(self.base_pts)
+        pg.name = self.lineage
+        return pg
+        
+class AmmannA3TileA(AmmannA3Tile):
+    @property
+    def _base_pts(self):
+        return [ 
+            Point(0.0, 0.0),
+            Point(tau**3, 0.0),
+            Point(tau**3, tau**2),
+            Point(tau**3-tau**2, tau**2),
+            Point(tau**3-tau**2, tau),
+            Point(0, tau)
+            ]
+            
+    def inflate(self):
+        
+        cs = self._cs_from_base_pts(0,1,5)
+        b0 = AmmannA3TileB(self.xf * cs.xform * self._xf_scale,self.lineage+",b0")
+        
+        cs = self._cs_from_base_pts(1,2,0)
+        a0 = AmmannA3TileA(self.xf * cs.xform * self._xf_scale,self.lineage+",a0")
+        
+        return [b0,a0]
+        
+class AmmannA3TileB(AmmannA3Tile):
+    @property
+    def _base_pts(self):
+        return [ 
+            Point(0.0, 0.0),
+            Point(tau**2-tau,0),
+            Point(2*tau**2-(tau+1), 0.0),
+            Point(2*tau**2, 0.0),
+            Point(2*(tau**2), tau),
+            Point((2*(tau**2))-1, tau),
+            Point((2*(tau**2))-1, tau+tau**2),
+            Point((2*(tau**2))-1-tau, tau+tau**2),
+            Point((2*(tau**2))-1-tau, tau**2),
+            Point(tau**2-tau, tau**2)
+            Point(0, tau**2)
+            ]
+    def inflate(self):
+        
+        cs = self._cs_from_base_pts(10,0,9)
+        a0 = AmmannA3TileA(self.xf * cs.xform * self._xf_scale,self.lineage+",a0")
+        
+        cs = self._cs_from_base_pts(2,3,8)
+        a1 = AmmannA3TileA(self.xf * cs.xform * self._xf_scale,self.lineage+",a1")
+        
+        cs = self._cs_from_base_pts(5,6,11)
+        a2 = AmmannA3TileA(self.xf * cs.xform * self._xf_scale,self.lineage+",a2")
+        
+        cs = self._cs_from_base_pts(9,8,1)
+        c0 = AmmannA3TileC(self.xf * cs.xform * self._xf_scale,self.lineage+",c0")
+        
+        return [b0,a0]
+
+class AmmannA3TileC(AmmannA3Tile):
+    @property
+    def _base_pts(self):
+        return [ 
+            Point(1+tau**2, 0.0),
+            Point(1+tau**2, tau),
+            Point((1+tau**2)-1, tau),
+            Point((1+tau**2)-1, tau+tau**2),
+            Point((1+tau**2)-1-tau, tau+tau**2),
+            Point((1+tau**2)-1-tau, tau+1),
+            Point(1-tau, tau+1),
+            Point(1-tau, tau),
+            Point(0, tau),
+            Point(0.0, 0.0),
+            Point((1+tau**2)-(tau+1),0)
+                ]
+                
+        cs = self._cs_from_base_pts(10,0,5)
+        a0 = AmmannA3TileA(self.xf * cs.xform * self._xf_scale,self.lineage+",a0")
+        
+        cs = self._cs_from_base_pts(2,3,7)
+        a1 = AmmannA3TileA(self.xf * cs.xform * self._xf_scale,self.lineage+",a1")
+               
+        cs = self._cs_from_base_pts(6,5,7)
+        c0 = AmmannA3TileC(self.xf * cs.xform * self._xf_scale,self.lineage+",c0")
