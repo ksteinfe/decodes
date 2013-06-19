@@ -49,7 +49,7 @@ class SVGOut(outie.Outie):
         # here we sort out what type of geometry we're dealing with, and call the proper draw functions
         # MUST LOOK FOR CHILD CLASSES BEFORE PARENT CLASSES (points before vecs)
         if isinstance(g,Curve): g = g.surrogate
-        
+
         g = self._flip_geom(g)
 
         if isinstance(g, Point) : return self._drawPoint(g)
