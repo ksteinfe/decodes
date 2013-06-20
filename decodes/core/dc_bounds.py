@@ -187,7 +187,7 @@ class QuadTree():
         ret_pts = []
         if not self.has_children :
             for pt in self.pts :
-                if bounds.contains(pt) : ret_pts.append(pt)
+                if pt in bounds :  ret_pts.append(pt)
         else :
             for child in self.children: ret_pts.extend(child.pts_in_bounds(bounds))
         return ret_pts
