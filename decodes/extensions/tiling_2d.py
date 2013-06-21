@@ -102,16 +102,189 @@ class PinwheelTile(object):
         
         return [tile0,tile1,tile2,tile3,tile4]
 
+#= 1.61803399
+tau = (1 + math.sqrt(5)) / 2   
+class AmmannA3Tile(object):
+    """
+    Ammann A3
+    http://tilings.math.uni-bielefeld.de/substitution_rules/ammann_a3
+    """
+    
+    # Initiate the Ammann object
+    def __init__(self,xf=Xform(), lineage="RT",scale=None):
+        # Assign lineage to object
+        self.lineage = lineage
+        # Assign a xform to the object
+        self.xf = xf
+        #the amount to scale down at each inflation = 0.618033989
+        self._xf_scale = Xform.scale(1/tau) 
+        self.scale = scale
+    
+    def _cs_from_base_pts(self,pt_o=0,pt_x=1,pt_y=2):
+        """
+        Returns a CS oriented to an idealized tile's base points.  
+        Multiply result by this_tile.xf and you'll get a coordinate system oriented to the postition of this tile in the world
+        pt_0: index of origin point
+        pt_x: index of a point on the desired x-axis
+        pt_y: index of a point on the desired y-axis
+        """
+        return CS(self._base_pts[pt_o],self._base_pts[pt_x]-self._base_pts[pt_o],self._base_pts[pt_y]-self._base_pts[pt_o])
+    
+    @property
+    def base_pts(self):
+        """
+        world base points for this tile
+        returns the ideal Ammann Tile's base points transformed by this tile's xform
+        """
+        return [p*self.xf for p in self._base_pts]
         
-tau = (1 + math.sqrt(5)) / 2         #= 1.61803399
-taui = 1/tau    #= 0.618033989
+class AmmannA3TileA(AmmannA3Tile):
+    # Set the ideal base points for Ammann tile A
+    @property
+    def _base_pts(self):
+        return [ 
+            Point(0.0, 0.0),
+            Point(tau**3, 0.0),
+            Point(tau**3, tau**2),
+            Point(tau**3-tau**2, tau**2),
+            Point(tau**3-tau**2, tau),
+            Point(0, tau),
+            Point(tau**3-tau*tau,0)
+            ]
+            
+    # Inflate the tile, scaling it down and subdividing into TileA and TileB
+    def inflate(self):
+        # TileB has its origin CS on _base_pts[0], the XAxis points towards _base_pts[1], and the YAxis points towards _base_pts[5]
+        cs = self._cs_from_base_pts(0,1,5)
+        # Create a TileB on the new CS and scale it down
+        b0 = AmmannA3TileB(self.xf * cs.xform * self._xf_scale,self.lineage+",b0")
+        
+        # TileA has its origin CS on _base_pts[1], the XAxis points towards _base_pts[2], and the YAxis points towards _base_pts[0]
+        cs = self._cs_from_base_pts(1,2,0)
+        # Create a TileA on the new CS and scale it down
+        a0 = AmmannA3TileA(self.xf * cs.xform * self._xf_scale,self.lineage+",a0")
+        return [b0,a0]
+        
+    # Draw a PGon from the points
+    def to_pgon(self):
+        pg = PGon(self.base_pts[:6])
+        pg.name = self.lineage
+        return pg
+    
+    def to_lines(self):
+        pg = PLine([self.base_pts[5],self.base_pts[6],self.base_pts[2]])
+        return pg
 
+class AmmannA3TileB(AmmannA3Tile):
+    # Set the ideal base points for Ammann tile B
+    @property
+    def _base_pts(self):
+        return [ 
+            Point(0.0, 0.0),
+            Point(tau**2-tau,0),
+            Point(2*tau**2-(tau+1), 0.0),
+            Point(2*tau**2, 0.0),
+            Point(2*(tau**2), tau),
+            Point((2*(tau**2))-1, tau),
+            Point((2*(tau**2))-1, tau+tau**2),
+            Point((2*(tau**2))-1-tau, tau+tau**2),
+            Point((2*(tau**2))-1-tau, tau**2),
+            Point(tau**2-tau, tau**2),
+            Point(0, tau**2),
+            Point(0,tau),
+            Point(tau**2+tau-1, tau**2)
+            ]
+            
+    # Inflate the tile, scaling it down and subdividing into TileA and TileB
+    def inflate(self):
+        # TileA0 has its origin CS on _base_pts[10], the XAxis points towards _base_pts[0], and the YAxis points towards _base_pts[9]
+        cs = self._cs_from_base_pts(10,0,9)
+        # Create a TileA0 on the new CS and scale it down
+        a0 = AmmannA3TileA(self.xf * cs.xform * self._xf_scale,self.lineage+",a0")
+        
+        # TileA1 has its origin CS on _base_pts[2], the XAxis points towards _base_pts[3], and the YAxis points towards _base_pts[8]
+        cs = self._cs_from_base_pts(2,3,8)
+        # Create a Tile1A on the new CS and scale it down
+        a1 = AmmannA3TileA(self.xf * cs.xform * self._xf_scale,self.lineage+",a1")
+        
+        # TileA2 has its origin CS on _base_pts[5], the XAxis points towards _base_pts[6], and the YAxis points towards _base_pts[11]
+        cs = self._cs_from_base_pts(5,6,11)
+        # Create a TileA2 on the new CS and scale it down
+        a2 = AmmannA3TileA(self.xf * cs.xform * self._xf_scale,self.lineage+",a2")
+        
+        # TileC0 has its origin CS on _base_pts[12], the XAxis points towards _base_pts[10], and the YAxis points towards _base_pts[1]
+        cs = self._cs_from_base_pts(12,10,1)
+        # Create a TileC0 on the new CS and scale it down
+        c0 = AmmannA3TileC(self.xf * cs.xform * self._xf_scale,self.lineage+",c0")
+        return [a0,a1,a2,c0]
+        
+    # Draw a PGon from the points
+    def to_pgon(self):
+        pg = PGon(self.base_pts[:11])
+        pg.name = self.lineage
+        return pg
+        
+    def to_lines(self):
+        pg = [Segment(self.base_pts[0],self.base_pts[6]),Segment(self.base_pts[3],self.base_pts[8])]
+        return pg
+
+class AmmannA3TileC(AmmannA3Tile):
+    # Set the ideal base points for Ammann tile B
+    @property
+    def _base_pts(self):
+        
+        return [ 
+            Point(1+tau**2, 0.0),
+            Point(1+tau**2, tau),
+            Point((1+tau**2)-1, tau),
+            Point((1+tau**2)-1, tau+tau**2),
+            Point((1+tau**2)-1-tau, tau+tau**2),
+            Point((1+tau**2)-1-tau, tau+1),
+            Point(1-tau, tau+1),
+            Point(1-tau, tau),
+            Point(0, tau),
+            Point(0.0, 0.0),
+            Point((1+tau**2)-(tau+1),0),
+            Point((1+tau**2)-(tau+1)+(tau-1),tau+1)
+                ]
+                
+    # Inflate the tile, scaling it down and subdividing into TileA and TileB
+    def inflate(self):
+        # TileA0 has its origin CS on _base_pts[10], the XAxis points towards _base_pts[0], and the YAxis points towards _base_pts[5]
+        cs = self._cs_from_base_pts(10,0,5)
+        # Create a TileA0 on the new CS and scale it down
+        a0 = AmmannA3TileA(self.xf * cs.xform * self._xf_scale,self.lineage+",a0")
+        
+        # TileA1 has its origin CS on _base_pts[2], the XAxis points towards _base_pts[3], and the YAxis points towards _base_pts[7]
+        cs = self._cs_from_base_pts(2,3,7)
+        # Create a TileA1 on the new CS and scale it down
+        a1 = AmmannA3TileA(self.xf * cs.xform * self._xf_scale,self.lineage+",a1")
+               
+        # TileC0 has its origin CS on _base_pts[11], the XAxis points towards _base_pts[5], and the YAxis points towards _base_pts[10]
+        cs = self._cs_from_base_pts(11,5,10)
+        # Create a TileC0 on the new CS and scale it down
+        c0 = AmmannA3TileC(self.xf * cs.xform * self._xf_scale,self.lineage+",c0")
+        
+        return [a0,a1,c0]
+        
+    # Draw a PGon from the points
+    def to_pgon(self):
+        pg = PGon(self.base_pts[:10])
+        pg.name = self.lineage
+        return pg
+        
+    def to_lines(self):
+        pg = [Segment(self.base_pts[0],self.base_pts[5]),Segment(self.base_pts[8],self.base_pts[3])]
+        return pg
+"""
 class AmmannA3Tile(object):
     '''
     Ammann A3
     http://tilings.math.uni-bielefeld.de/substitution_rules/ammann_a3
     '''
     
+    tau = (1 + math.sqrt(5)) / 2         #= 1.61803399
+
     def __init__(self,xf=Xform(), lineage="RT"):
         self.lineage = lineage
         self.xf = xf
@@ -136,11 +309,6 @@ class AmmannA3Tile(object):
         '''
         return [p*self.xf for p in self._base_pts]
         
-    def to_pgon(self):
-        pg = PGon(self.base_pts)
-        pg.name = self.lineage
-        return pg
-        
 class AmmannA3TileA(AmmannA3Tile):
     @property
     def _base_pts(self):
@@ -163,6 +331,11 @@ class AmmannA3TileA(AmmannA3Tile):
         
         return [b0,a0]
         
+    def to_pgon(self):
+        pg = PGon(self.base_pts)
+        pg.name = self.lineage
+        return pg
+        
 class AmmannA3TileB(AmmannA3Tile):
     @property
     def _base_pts(self):
@@ -177,7 +350,9 @@ class AmmannA3TileB(AmmannA3Tile):
             Point((2*(tau**2))-1-tau, tau+tau**2),
             Point((2*(tau**2))-1-tau, tau**2),
             Point(tau**2-tau, tau**2),
-            Point(0, tau**2)
+            Point(0, tau**2),
+            Point(0,tau),
+            Point(tau**2+tau-1, tau**2)
             ]
     def inflate(self):
         
@@ -190,14 +365,20 @@ class AmmannA3TileB(AmmannA3Tile):
         cs = self._cs_from_base_pts(5,6,11)
         a2 = AmmannA3TileA(self.xf * cs.xform * self._xf_scale,self.lineage+",a2")
         
-        cs = self._cs_from_base_pts(9,8,1)
+        cs = self._cs_from_base_pts(12,10,1)
         c0 = AmmannA3TileC(self.xf * cs.xform * self._xf_scale,self.lineage+",c0")
         
-        return [b0,a0]
+        return [a0,a1,a2,c0]
+        
+    def to_pgon(self):
+        pg = PGon(self.base_pts[:11])
+        pg.name = self.lineage
+        return pg
 
 class AmmannA3TileC(AmmannA3Tile):
     @property
     def _base_pts(self):
+        
         return [ 
             Point(1+tau**2, 0.0),
             Point(1+tau**2, tau),
@@ -209,14 +390,25 @@ class AmmannA3TileC(AmmannA3Tile):
             Point(1-tau, tau),
             Point(0, tau),
             Point(0.0, 0.0),
-            Point((1+tau**2)-(tau+1),0)
+            Point((1+tau**2)-(tau+1),0),
+            Point((1+tau**2)-(tau+1)+(tau-1),tau+1)
                 ]
                 
+    def inflate(self):
+    
         cs = self._cs_from_base_pts(10,0,5)
         a0 = AmmannA3TileA(self.xf * cs.xform * self._xf_scale,self.lineage+",a0")
         
         cs = self._cs_from_base_pts(2,3,7)
         a1 = AmmannA3TileA(self.xf * cs.xform * self._xf_scale,self.lineage+",a1")
                
-        cs = self._cs_from_base_pts(6,5,7)
+        cs = self._cs_from_base_pts(11,5,10)
         c0 = AmmannA3TileC(self.xf * cs.xform * self._xf_scale,self.lineage+",c0")
+        
+        return [a0,a1,c0]
+        
+    def to_pgon(self):
+        pg = PGon(self.base_pts[:10])
+        pg.name = self.lineage
+        return pg
+"""
