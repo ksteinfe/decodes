@@ -31,9 +31,10 @@ import math
 # t/2 =         0.809016995 
 # ti/2 =         0.309016994
 
+tau = (1 + math.sqrt(5)) / 2         #= 1.61803399
+taui = 1/tau    #= 0.618033989
+
 class DzTile(object):
-    tau = (1 + math.sqrt(5)) / 2         #= 1.61803399
-    taui = 1/tau    #= 0.618033989
         
     def __init__(self,lineage="RT",**kargs):
         self.lineage = lineage
@@ -41,21 +42,20 @@ class DzTile(object):
         self.xf = kargs["xf"] if "xf" in kargs else Xform() #the transformation of this tile    (ignores scale)
         self.flip = kargs["flip"] if "flip" in kargs else False #is this tile flipped?
         
-    def _tilePts(self):
-        #pts = map(lambda pt:pt*self.xf,self.basePts)
-        factor = math.pow(DzTile.taui,self.rlvl)
+    def _tile_pts(self):
+        #pts = map(lambda pt:pt*self.xf,self.base_pts)
+        factor = math.pow(taui,self.rlvl)
         xf_scale = Xform.scale(factor)
-        return map(lambda pt:(pt*xf_scale)*self.xf,self.basePts)
+        return map(lambda pt:(pt*xf_scale)*self.xf,self.base_pts)
     
-    def _scaledBasePts(self,rlvl):
-        #return map(lambda pt: pt*(1/DzTile.tau),self.basePts)
-        factor = math.pow(DzTile.taui,rlvl)
+    def _scaled_base_pts(self,rlvl):
+        factor = math.pow(taui,rlvl)
         xf_scale = Xform.scale(factor)
-        return map(lambda pt: pt*xf_scale,self.basePts)
+        return map(lambda pt: pt*xf_scale,self.base_pts)
         
-    def toMesh(self):
+    def to_mesh(self):
         msh = Mesh()
-        for v in self._tilePts() : msh.append(v)
+        for v in self._tile_pts() : msh.append(v)
         if self.flip : 
             msh.add_face(0,1,2)
             msh.add_face(1,3,2)
@@ -68,16 +68,16 @@ class DzTile(object):
             msh.add_face(3,0,1)
         return msh
         
-    def draw(self,drawCS=False):
-        msh = self.toMesh()
+    def draw(self,draw_cs=False):
+        msh = self.to_mesh()
         msh.name = self.lineage
         
         cs = CS()*self.xf
         cs.name = self.lineage
-        if drawCS : return msh,cs
+        if draw_cs : return msh,cs
         return msh
         
-    def _PositionByChildAndParentCS(self,childTile,csChild,csParent,flip):
+    def _position_by_child_parent(self,childTile,csChild,csParent,flip):
         '''
         Finds the proper XForm for a child tile given:
         csChild : a source CS positioned on child's base points at rlvl = 1
@@ -94,20 +94,20 @@ class DzTile(object):
         childTile.rlvl = self.rlvl + 1
         return childTile
 
-    def _PositionByParentCS(self,childTile,csParent,flip):
+    def _position_by_parent(self,childTile,csParent,flip):
         '''
         Finds the proper XForm for a child tile given:
         childTile: a child tile (using default construction, ex: DxTileA()
         csParent : a target CS positioned on parent's base points at rlvl = 0
         flip: flip this child tile?
         '''
-        cbPts = childTile._scaledBasePts(self.rlvl+1) # child's base points (inflated to rlvl+1)
+        cbPts = childTile._scaled_base_pts(self.rlvl+1) # child's base points (inflated to rlvl+1)
         csChild = CS()
-        childTile = self._PositionByChildAndParentCS(childTile,csChild,csParent,flip)
+        childTile = self._position_by_child_parent(childTile,csChild,csParent,flip)
         return childTile
     
     @classmethod
-    def _CSFromBasePts(cls,rlvl,oPt,xPt,yPt,flipBase=False):
+    def _cs_from_base_pts(cls,rlvl,oPt,xPt,yPt,flipBase=False):
         '''
         Returns a CS oriented to a scaled version of this tile's base points
         rlvl: the recursion level to scale the base points to
@@ -116,13 +116,13 @@ class DzTile(object):
         yPt: index of a point on the desired y-axis
         flipBase: useful when trying to orient a flipped tile
         '''
-        sbasePts = cls()._scaledBasePts(rlvl)
-        if flipBase : sbasePts[3] = Point(sbasePts[3].x,sbasePts[3].y,-sbasePts[3].z)
-        return CS(sbasePts[oPt],sbasePts[xPt]-sbasePts[oPt],sbasePts[yPt]-sbasePts[oPt])
+        pts = cls()._scaled_base_pts(rlvl)
+        if flipBase : pts[3] = Point(pts[3].x,pts[3].y,-pts[3].z)
+        return CS(pts[oPt],pts[xPt]-pts[oPt],pts[yPt]-pts[oPt])
  
  
 class DzTileA(DzTile):
-    basePts= ( 
+    base_pts= ( 
             Point(0.0             , 0.0                    , 0.0     ),
             Point(0.9510565        , 0.0                 , 0.0     ),
             Point(0.6881910 , 1.3763819 , 0.0     ),
@@ -131,59 +131,59 @@ class DzTileA(DzTile):
             
     def inflate(self):
         #DzTileB by orienting defined CS on child to defined CS on parent
-        csChild = DzTileB()._CSFromBasePts(self.rlvl+1,    2,1,0 )
-        csParent = DzTileA()._CSFromBasePts(self.rlvl,    0,1,3 )
-        tileB0 = self._PositionByChildAndParentCS(DzTileB(self.lineage+",B0"),csChild,csParent,flip=self.flip) # same handedness as parent
+        csChild = DzTileB()._cs_from_base_pts(self.rlvl+1,    2,1,0 )
+        csParent = DzTileA()._cs_from_base_pts(self.rlvl,    0,1,3 )
+        tileB0 = self._position_by_child_parent(DzTileB(self.lineage+",B0"),csChild,csParent,flip=self.flip) # same handedness as parent
 
         #DzTileC by orienting defined CS on child to defined CS on parent
-        csChild = DzTileC()._CSFromBasePts(self.rlvl+1,    1,2,0 )
-        csParent = DzTileA()._CSFromBasePts(self.rlvl,    3,2,1 )
-        tileC0 = self._PositionByChildAndParentCS(DzTileC(self.lineage+",C0"),csChild,csParent,flip=self.flip) # same handedness as parent
+        csChild = DzTileC()._cs_from_base_pts(self.rlvl+1,    1,2,0 )
+        csParent = DzTileA()._cs_from_base_pts(self.rlvl,    3,2,1 )
+        tileC0 = self._position_by_child_parent(DzTileC(self.lineage+",C0"),csChild,csParent,flip=self.flip) # same handedness as parent
         
         #DzTileC by orienting defined CS on child to defined CS on parent
-        csChild = DzTileC()._CSFromBasePts(self.rlvl+1,    2,3,1, True )
-        csParent = DzTileA()._CSFromBasePts(self.rlvl,    2,0,1 )
-        tileC1 = self._PositionByChildAndParentCS(DzTileC(self.lineage+",C1"),csChild,csParent,flip=not self.flip) # opposite handedness as parent
+        csChild = DzTileC()._cs_from_base_pts(self.rlvl+1,    2,3,1, True )
+        csParent = DzTileA()._cs_from_base_pts(self.rlvl,    2,0,1 )
+        tileC1 = self._position_by_child_parent(DzTileC(self.lineage+",C1"),csChild,csParent,flip=not self.flip) # opposite handedness as parent
         
         #DzTileK by orienting defined CS on child to defined CS on parent
-        csChild = DzTileK()._CSFromBasePts(self.rlvl+1,    2,0,3, True)
-        csParent = DzTileA()._CSFromBasePts(self.rlvl,    3,1,0 )
-        tileK0 = self._PositionByChildAndParentCS(DzTileK(self.lineage+",K0"),csChild,csParent,flip=not self.flip) # opposite handedness as parent
+        csChild = DzTileK()._cs_from_base_pts(self.rlvl+1,    2,0,3, True)
+        csParent = DzTileA()._cs_from_base_pts(self.rlvl,    3,1,0 )
+        tileK0 = self._position_by_child_parent(DzTileK(self.lineage+",K0"),csChild,csParent,flip=not self.flip) # opposite handedness as parent
         #DzTileK by mirroring the previous tile
-        cs = CS(tileK0._tilePts()[0],tileK0._tilePts()[1]-tileK0._tilePts()[0],tileK0._tilePts()[3]-tileK0._tilePts()[0])
+        cs = CS(tileK0._tile_pts()[0],tileK0._tile_pts()[1]-tileK0._tile_pts()[0],tileK0._tile_pts()[3]-tileK0._tile_pts()[0])
         xf_mir = Xform.mirror(cs)
         tileK1 = DzTileK(self.lineage+",K1",xf=xf_mir*tileK0.xf,rlvl=self.rlvl+1,flip=self.flip)    # opposite handedness as parent
         
         #DzTileB by orienting defined CS on child to defined CS on parent
-        csChild = DzTileB()._CSFromBasePts(self.rlvl+1,    2,3,1 )
-        csParent = DzTileA()._CSFromBasePts(self.rlvl,    0,3,2 )
-        tileB1 = self._PositionByChildAndParentCS(DzTileB(self.lineage+",B1"),csChild,csParent,flip=self.flip) # same handedness as parent
-        tileB2 = self._PositionByChildAndParentCS(DzTileB(self.lineage+",B2"),csChild,csParent,flip=not self.flip) # opposite handedness as parent
+        csChild = DzTileB()._cs_from_base_pts(self.rlvl+1,    2,3,1 )
+        csParent = DzTileA()._cs_from_base_pts(self.rlvl,    0,3,2 )
+        tileB1 = self._position_by_child_parent(DzTileB(self.lineage+",B1"),csChild,csParent,flip=self.flip) # same handedness as parent
+        tileB2 = self._position_by_child_parent(DzTileB(self.lineage+",B2"),csChild,csParent,flip=not self.flip) # opposite handedness as parent
         
         #DzTileK by orienting defined CS on child to defined CS on parent
-        csChild = DzTileK()._CSFromBasePts(self.rlvl+1,    1,0,2, True)
-        csParent = DzTileA()._CSFromBasePts(self.rlvl,    1,3,2 )
-        tileK2 = self._PositionByChildAndParentCS(DzTileK(self.lineage+",K2"),csChild,csParent,flip=not self.flip) # opposite handedness as parent
+        csChild = DzTileK()._cs_from_base_pts(self.rlvl+1,    1,0,2, True)
+        csParent = DzTileA()._cs_from_base_pts(self.rlvl,    1,3,2 )
+        tileK2 = self._position_by_child_parent(DzTileK(self.lineage+",K2"),csChild,csParent,flip=not self.flip) # opposite handedness as parent
         #DzTileK by mirroring the previous tile
-        cs = CS(tileK2._tilePts()[0],tileK2._tilePts()[1]-tileK2._tilePts()[0],tileK2._tilePts()[3]-tileK2._tilePts()[0])
+        cs = CS(tileK2._tile_pts()[0],tileK2._tile_pts()[1]-tileK2._tile_pts()[0],tileK2._tile_pts()[3]-tileK2._tile_pts()[0])
         xf_mir = Xform.mirror(cs)
         tileK3 = DzTileK(self.lineage+",K3",xf=xf_mir*tileK2.xf,rlvl=self.rlvl+1,flip=self.flip)    # same handedness as parent
         
         #2 DzTileK's by mirroring the previous two
-        cs = CS(tileK2._tilePts()[0],tileK2._tilePts()[2]-tileK2._tilePts()[0],tileK2._tilePts()[3]-tileK2._tilePts()[0])
+        cs = CS(tileK2._tile_pts()[0],tileK2._tile_pts()[2]-tileK2._tile_pts()[0],tileK2._tile_pts()[3]-tileK2._tile_pts()[0])
         xf_mir = Xform.mirror(cs)
         tileK4 = DzTileK(self.lineage+",K4",xf=xf_mir*tileK2.xf,rlvl=self.rlvl+1,flip=self.flip)    # same handedness as parent
         tileK5 = DzTileK(self.lineage+",K5",xf=xf_mir*tileK3.xf,rlvl=self.rlvl+1,flip=not self.flip)    # same handedness as parent
         
         #2 DzTileKs by rotation the previous two tiles
-        #xf_rot = Xform.rotation(center=tileK2._tilePts()[0], angle=math.pi, axis=tileK2._tilePts()[3]-tileK2._tilePts()[0])
+        #xf_rot = Xform.rotation(center=tileK2._tile_pts()[0], angle=math.pi, axis=tileK2._tile_pts()[3]-tileK2._tile_pts()[0])
         #tileK4 = DzTileK(self.lineage+",K4",xf=xf_rot*tileK2.xf,rlvl=self.rlvl+1,flip=not self.flip)    # opposite handedness as parent
         #tileK5 = DzTileK(self.lineage+",K5",xf=xf_rot*tileK3.xf,rlvl=self.rlvl+1,flip=self.flip)    # same handedness as parent
         
         return [tileB0,tileC0,tileC1,tileK0,tileK1,tileB1,tileB2,tileK2,tileK3,tileK4,tileK5]
          
 class DzTileB(DzTile):
-    basePts= ( 
+    base_pts= ( 
             Point(0.0             , 0.0                    , 0.0     ),
             Point(0.9510565        , 0.0                 , 0.0     ),
             Point(0.2628656 , 1.3763819        , 0.0     ),
@@ -192,44 +192,44 @@ class DzTileB(DzTile):
         
     def inflate(self):
         #DzTileB by orienting child origin to defined CS on parent
-        csParent = DzTileB()._CSFromBasePts(self.rlvl,    3,0,1 )
-        tileB0 = self._PositionByParentCS(DzTileB(self.lineage+",B0"),csParent,not self.flip)    # opposite handdeness as parent
+        csParent = DzTileB()._cs_from_base_pts(self.rlvl,    3,0,1 )
+        tileB0 = self._position_by_parent(DzTileB(self.lineage+",B0"),csParent,not self.flip)    # opposite handdeness as parent
         
         #DzTileK by orienting child origin to defined CS on parent
-        csParent = DzTileB()._CSFromBasePts(self.rlvl,    3,0,2 )
-        tileK0 = self._PositionByParentCS(DzTileK(self.lineage+",K0"),csParent,self.flip)# same handedness as parent
+        csParent = DzTileB()._cs_from_base_pts(self.rlvl,    3,0,2 )
+        tileK0 = self._position_by_parent(DzTileK(self.lineage+",K0"),csParent,self.flip)# same handedness as parent
         #DzTileK by rotating the previous tile
-        #xf_rot = Xform.rotation(center=tileK0._tilePts()[0], angle=math.pi, axis=tileK0._tilePts()[3]-tileK0._tilePts()[0])
+        #xf_rot = Xform.rotation(center=tileK0._tile_pts()[0], angle=math.pi, axis=tileK0._tile_pts()[3]-tileK0._tile_pts()[0])
         #tileK1 = DzTileK(self.lineage+",K1",xf=xf_rot*tileK0.xf,rlvl=self.rlvl+1,flip=self.flip)# same handedness as parent
         
         #DzTileK by orienting defined CS on child to defined CS on parent
-        csChild = DzTileK()._CSFromBasePts(self.rlvl+1,    1,0,3 )
-        csParent = DzTileB()._CSFromBasePts(self.rlvl,    0,3,1 )
-        tileK1 = self._PositionByChildAndParentCS(DzTileK(self.lineage+",K2"),csChild,csParent,flip=not self.flip) # opposite handedness as parent
+        csChild = DzTileK()._cs_from_base_pts(self.rlvl+1,    1,0,3 )
+        csParent = DzTileB()._cs_from_base_pts(self.rlvl,    0,3,1 )
+        tileK1 = self._position_by_child_parent(DzTileK(self.lineage+",K2"),csChild,csParent,flip=not self.flip) # opposite handedness as parent
         #DzTileK by rotating the previous tile
-        #xf_rot = Xform.rotation(center=tileK2._tilePts()[0], angle=math.pi, axis=tileK2._tilePts()[3]-tileK2._tilePts()[0])
+        #xf_rot = Xform.rotation(center=tileK2._tile_pts()[0], angle=math.pi, axis=tileK2._tile_pts()[3]-tileK2._tile_pts()[0])
         #tileK3 = DzTileK(self.lineage+",K3",xf=xf_rot*tileK2.xf,rlvl=self.rlvl+1,flip=not self.flip)    # opposite handedness as parent
         
         #2 DzTileK's by mirroring the previous two
-        cs = CS(tileK0._tilePts()[0],tileK0._tilePts()[2]-tileK0._tilePts()[0],tileK0._tilePts()[3]-tileK0._tilePts()[0])
+        cs = CS(tileK0._tile_pts()[0],tileK0._tile_pts()[2]-tileK0._tile_pts()[0],tileK0._tile_pts()[3]-tileK0._tile_pts()[0])
         xf_mir = Xform.mirror(cs)
         tileK2 = DzTileK(self.lineage+",K4",xf=xf_mir*tileK0.xf,rlvl=self.rlvl+1,flip=not self.flip)    # same handedness as parent
         tileK3 = DzTileK(self.lineage+",K5",xf=xf_mir*tileK1.xf,rlvl=self.rlvl+1,flip=self.flip)    # same handedness as parent        
         
         #DzTileB by orienting defined CS on child to defined CS on parent
-        csChild = DzTileB()._CSFromBasePts(self.rlvl+1,    2,0,1 )
-        csParent = DzTileB()._CSFromBasePts(self.rlvl,    1,3,2 )
-        tileB1 = self._PositionByChildAndParentCS(DzTileB(self.lineage+",B1"),csChild,csParent,flip=self.flip) # same handedness as parent
+        csChild = DzTileB()._cs_from_base_pts(self.rlvl+1,    2,0,1 )
+        csParent = DzTileB()._cs_from_base_pts(self.rlvl,    1,3,2 )
+        tileB1 = self._position_by_child_parent(DzTileB(self.lineage+",B1"),csChild,csParent,flip=self.flip) # same handedness as parent
         
         #DzTileC by orienting child origin to defined CS on parent
-        csChild = DzTileC()._CSFromBasePts(self.rlvl+1,    2,1,3 )
-        csParent = DzTileB()._CSFromBasePts(self.rlvl,    2,0,1 )
-        tileC0 = self._PositionByChildAndParentCS(DzTileC(self.lineage+",C0"),csChild,csParent,flip=self.flip) # same handedness as parent
+        csChild = DzTileC()._cs_from_base_pts(self.rlvl+1,    2,1,3 )
+        csParent = DzTileB()._cs_from_base_pts(self.rlvl,    2,0,1 )
+        tileC0 = self._position_by_child_parent(DzTileC(self.lineage+",C0"),csChild,csParent,flip=self.flip) # same handedness as parent
         
         return [tileB0,tileK0,tileK1,tileK2,tileK3,tileB1,tileC0]
 
 class DzTileC(DzTile):
-    basePts= (
+    base_pts= (
             Point(0.0             , 0.0                    , 0.0     ),
             Point(0.5877853        , 0.0                 , 0.0     ),
             Point(0.8506509 , 1.3763819        , 0.0     ),
@@ -238,31 +238,31 @@ class DzTileC(DzTile):
         
     def inflate(self):
         #DzTileA by orienting child origin to defined CS on parent
-        csParent = DzTileA()._CSFromBasePts(self.rlvl,    0,1,3 )
-        tileA0 = self._PositionByParentCS(DzTileA(self.lineage+",A0"),csParent,not self.flip)    # opposite handdeness as parent
+        csParent = DzTileA()._cs_from_base_pts(self.rlvl,    0,1,3 )
+        tileA0 = self._position_by_parent(DzTileA(self.lineage+",A0"),csParent,not self.flip)    # opposite handdeness as parent
         
         #DzTileK by orienting defined CS on child to defined CS on parent
-        csChild = DzTileK()._CSFromBasePts(self.rlvl+1,    1,0,2)
-        csParent = DzTileC()._CSFromBasePts(self.rlvl,    2,3,1 )
-        tileK0 = self._PositionByChildAndParentCS(DzTileK(self.lineage+",K0"),csChild,csParent,flip=self.flip) # same handedness as parent
+        csChild = DzTileK()._cs_from_base_pts(self.rlvl+1,    1,0,2)
+        csParent = DzTileC()._cs_from_base_pts(self.rlvl,    2,3,1 )
+        tileK0 = self._position_by_child_parent(DzTileK(self.lineage+",K0"),csChild,csParent,flip=self.flip) # same handedness as parent
         #DzTileK by mirroring the previous tile
-        cs = CS(tileK0._tilePts()[0],tileK0._tilePts()[2]-tileK0._tilePts()[0],tileK0._tilePts()[3]-tileK0._tilePts()[0])
+        cs = CS(tileK0._tile_pts()[0],tileK0._tile_pts()[2]-tileK0._tile_pts()[0],tileK0._tile_pts()[3]-tileK0._tile_pts()[0])
         xf_mir = Xform.mirror(cs)
         tileK1 = DzTileK(self.lineage+",K1",xf=xf_mir*tileK0.xf,rlvl=self.rlvl+1,flip=not self.flip)    # opposite handedness as parent
         
         #DzTileC by orienting defined CS on child to defined CS on parent
-        csChild = DzTileC()._CSFromBasePts(self.rlvl+1,    1,2,0)
-        csParent = DzTileC()._CSFromBasePts(self.rlvl,    3,1,2 )
-        tileC0 = self._PositionByChildAndParentCS(DzTileC(self.lineage+",C0"),csChild,csParent,flip=not self.flip) # opposite handedness as parent
+        csChild = DzTileC()._cs_from_base_pts(self.rlvl+1,    1,2,0)
+        csParent = DzTileC()._cs_from_base_pts(self.rlvl,    3,1,2 )
+        tileC0 = self._position_by_child_parent(DzTileC(self.lineage+",C0"),csChild,csParent,flip=not self.flip) # opposite handedness as parent
         #DzTileC by mirroring the previous tile
-        cs = CS(tileC0._tilePts()[0],tileC0._tilePts()[2]-tileC0._tilePts()[0],tileC0._tilePts()[3]-tileC0._tilePts()[0])
+        cs = CS(tileC0._tile_pts()[0],tileC0._tile_pts()[2]-tileC0._tile_pts()[0],tileC0._tile_pts()[3]-tileC0._tile_pts()[0])
         xf_mir = Xform.mirror(cs)
         tileC1 = DzTileC(self.lineage+",C1",xf=xf_mir*tileC0.xf,rlvl=self.rlvl+1,flip=self.flip)    # same handedness as parent
         
         return [tileA0,tileK0,tileK1,tileC0,tileC1]
 
 class DzTileK(DzTile):
-    basePts= ( 
+    base_pts= ( 
         Point(0.0             , 0.0                    , 0.0     ),
         Point(0.9510565        , 0.0                 , 0.0     ),
         Point(0.2628656 , 0.5257311 , 0.0     ),
@@ -272,13 +272,13 @@ class DzTileK(DzTile):
 
     def inflate(self):
         #DzTileK by orienting defined CS on child to defined CS on parent
-        csChild = DzTileK()._CSFromBasePts(self.rlvl+1,    3,1,0)
-        csParent = DzTileK()._CSFromBasePts(self.rlvl,    3,0,2 )
-        tileK0 = self._PositionByChildAndParentCS(DzTileK(self.lineage+",K0"),csChild,csParent,flip=self.flip) # same handedness as parent
+        csChild = DzTileK()._cs_from_base_pts(self.rlvl+1,    3,1,0)
+        csParent = DzTileK()._cs_from_base_pts(self.rlvl,    3,0,2 )
+        tileK0 = self._position_by_child_parent(DzTileK(self.lineage+",K0"),csChild,csParent,flip=self.flip) # same handedness as parent
         
         #DzTileB by orienting child origin to defined CS on parent
-        csParent = DzTileK()._CSFromBasePts(self.rlvl,    2,0,1 )
-        tileB0 = self._PositionByParentCS(DzTileB(self.lineage+",B0"),csParent,self.flip)    # opposite handdeness as parent
+        csParent = DzTileK()._cs_from_base_pts(self.rlvl,    2,0,1 )
+        tileB0 = self._position_by_parent(DzTileB(self.lineage+",B0"),csParent,self.flip)    # opposite handdeness as parent
         
         return [tileK0,tileB0]
 
