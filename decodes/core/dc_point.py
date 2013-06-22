@@ -482,7 +482,7 @@ class HasPts(HasBasis):
     @pts.setter
     def pts(self, pts): 
         """Sets the points contained within this geometry.  
-        The list of vectors currently stored within this geometry are cleared, and the given points are each appended in sequence, following the uusual rules regarding bases
+        The list of vectors currently stored within this geometry are cleared, and the given points are each appended in sequence, following the usual rules regarding bases
 
             :param pts: Point(s) to store
             :type pts: Point or [Point]
