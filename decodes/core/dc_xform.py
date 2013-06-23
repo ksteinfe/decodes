@@ -140,9 +140,13 @@ class Xform(object):
         """
 
         try:
-            if all (k in kargs for k in ("angle","axis")) and not "center" in kargs :
-                xf = Xform()
+            try:
                 axis = kargs["axis"].normalized()
+            except:
+                axis = Vec(0,0,1)
+
+            if "angle" in kargs and not "center" in kargs :
+                xf = Xform()
                 u,v,w = axis.x,axis.y,axis.z
                 uv,uw,vw = u*v,u*w,v*w
                 u2,v2,w2 = u**2,v**2,w**2
@@ -178,7 +182,7 @@ class Xform(object):
                 from ..io.rhino_in import from_rgtransform
                 rh_xform = Rhino.Geometry.Transform.Rotation(kargs["angle"],to_rgpt(kargs["center"]))
             else :
-                return False
+                raise AttributeError("Could not construct a rotation transfer with these arguments")
             return from_rgtransform(rh_xform)
             
     @staticmethod
@@ -253,12 +257,12 @@ class Xform(object):
             origin = Point(tup[0],tup[1],tup[2])
             
             xf = self.strip_translation()
-            tup = xf._xform_tuple(cs.xAxis.to_tuple())
-            xAxis = Vec(tup[0],tup[1],tup[2])
-            tup = xf._xform_tuple(cs.yAxis.to_tuple())
-            yAxis = Vec(tup[0],tup[1],tup[2])
+            tup = xf._xform_tuple(cs.x_axis.to_tuple())
+            x_axis = Vec(tup[0],tup[1],tup[2])
+            tup = xf._xform_tuple(cs.y_axis.to_tuple())
+            y_axis = Vec(tup[0],tup[1],tup[2])
             
-            cs = CS(origin, xAxis, yAxis)
+            cs = CS(origin, x_axis, y_axis)
             cs.copy_props(other)
             return cs
             

@@ -56,6 +56,14 @@ class PGon(HasPts):
             edges.append(self.seg(n))
         return edges
         
+    @property
+    def area(self):
+        a = 0
+        for n in range(len(self._verts)): a += (self._verts[n-1].x + self._verts[n].x) * (self._verts[n-1].y - self._verts[n].y)
+        return abs(a / 2.0)
+
+
+
     def near(self, p):
         """Returns a tuple of the closest point to a given PGon, the index of the closest segment and the distance from the Point to the near Point.
        

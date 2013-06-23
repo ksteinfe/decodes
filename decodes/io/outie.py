@@ -23,6 +23,7 @@ class Outie(object):
         if self._allow_foreign : 
             self.geom.append(copy.deepcopy(ngeom)) # if we allow foreigners, just put in whatever they gave us
         else:
+            if ngeom is None : return
             if isinstance(ngeom, (Geometry) ) :
                 if isinstance(ngeom, (HasBasis) ) and ngeom.do_translate : ngeom = ngeom.basis_applied()
                 self.geom.append(copy.deepcopy(ngeom))

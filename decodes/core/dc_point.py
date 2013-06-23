@@ -471,6 +471,90 @@ class HasPts(HasBasis):
     
     def __len__(self): return len(self._verts)
 
+
+
+    def __add__(self, vec):
+        """Overloads the addition **(+)** operator. 
+        Adds the given vector to each vertex in this Geometry
+        
+            :param vec: Vec to be added.
+            :type vec: Vec
+            :result: None
+            :rtype: None
+        """    
+        for v in _verts: v = v + vec
+
+    '''
+    def __sub__(self, vec): 
+        """Overloads the addition **(-)** operator. 
+        Returns a new vector that results from subtracting this vector's world coordinates to the other vector's world coordinates.
+        
+            :param vec: Vec to be subtracted.
+            :type vec: Vec
+            :result: New vec.
+            :rtype: Vec
+        """    
+        return Vec(self.x-vec.x , self.y-vec.y, self.z-vec.z)
+    def __truediv__(self,other): 
+        return self.__div__(other)
+    def __div__(self, scalar): 
+        """Overloads the addition **(/)** operator. 
+        Returns a new vector that results from dividing this vector's world coordinates by a given scalar.
+        
+            :param scalar: number to divide by
+            :type scalar: Float
+            :result: New vec.
+            :rtype: Vec
+        """  
+        return Vec(self.x/float(scalar), self.y/float(scalar), self.z/float(scalar))
+    def __invert__(self): 
+        """Overloads the inversion **(~vec)** operator. 
+        Inverts the direction of the vector
+        Returns a new inverted vector.
+        
+            :result: Inverted Vec.
+            :rtype: Vec
+        """  
+        return self.inverted()
+
+    def __neg__(self): 
+        """Overloads the arithmetic negation **(-vec)** operator. 
+        Inverts the direction of the vector
+        Returns a new inverted vector.
+        
+            :result: Inverted Vec.
+            :rtype: Vec
+        """  
+        return self.inverted()
+'''
+    def __mul__(self, other):
+        """Overloads the addition **(*)** operator. 
+        If given a scalar, multiplys each vertex in this Geometry by the given scalar
+        If given an Xform, applies the given transformation to the basis of this Geometry
+        
+            :param vec: Object to be multiplied.
+            :type vec: Vec or Xform
+            :result: New vec.
+            :rtype: Vec
+        """  
+        from .dc_xform import Xform
+        if isinstance(other, Xform) :
+            self.basis = self.basis * other
+            return self
+        else : 
+            for n in range(len(self._verts)): self._verts[n] = self._verts[n] * other
+
+
+
+
+
+
+
+
+
+
+
+
     @property
     def pts(self): 
         """Returns the points contained within this geometry.
@@ -480,7 +564,7 @@ class HasPts(HasBasis):
         return [Point(vec,basis=self.basis) for vec in self._verts]
     
     @pts.setter
-    def pts(self, pts): 
+    def pts(self, verts): 
         """Sets the points contained within this geometry.  
         The list of vectors currently stored within this geometry are cleared, and the given points are each appended in sequence, following the usual rules regarding bases
 
@@ -519,6 +603,7 @@ class HasPts(HasBasis):
     
     def reverse(self):
         self._verts.reverse
+        return self
 
     def rotate(self,n):
         """
@@ -528,6 +613,7 @@ class HasPts(HasBasis):
         if n > len(self._verts): n =  n%len(self._verts)
         if n < -len(self._verts): n =  -abs(n)%len(self._verts)
         self._verts = self._verts[n:] + self._verts[:n]
+        return self
 
 
     def basis_applied(self): 
