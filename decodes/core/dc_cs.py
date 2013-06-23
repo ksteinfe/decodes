@@ -15,12 +15,12 @@ class CS(Geometry, IsBasis):
         .. todo:: write docstring detailing the different ways of constructing a CS
         """
         #TODO: make axes priviate and provide getters and setters that maintain orthagonality and right-handedness
-        pt,vecX,vecY = Point(), Vec(1,0), Vec(0,1)
+        pt,vec_x,vec_y = Point(), Vec(1,0), Vec(0,1)
         if all( hasattr(a,i) for i in ['x','y','z'] ) :
             # a is something that acts like a point
             pt=a
-            if b is not None : vecX = b
-            if c is not None : vecY = c
+            if b is not None : vec_x = b
+            if c is not None : vec_y = c
             #TODO: handle situation when we've been passed three points
         else :
             # a cannont act like a point, let's try to make a point out of a,b,c
@@ -29,15 +29,15 @@ class CS(Geometry, IsBasis):
         try: self.origin = pt.basis_applied()
         except : self.origin = pt
 
-        if vecX.length == 0 : raise GeometricError("vecX is a Vector of length 0")
-        if vecY.length == 0 : raise GeometricError("vecY is a Vector of length 0")
+        if vec_x.length == 0 : raise GeometricError("vec_x is a Vec of length 0")
+        if vec_y.length == 0 : raise GeometricError("vec_y is a Vec of length 0")
 
-        self.xAxis = vecX.normalized()
-        self.zAxis = self.xAxis.cross(vecY).normalized()
-        self.yAxis = self.zAxis.cross(self.xAxis).normalized()
+        self.x_axis = vec_x.normalized()
+        self.z_axis = self.x_axis.cross(vec_y).normalized()
+        self.y_axis = self.z_axis.cross(self.x_axis).normalized()
 
     def __repr__(self):
-        return "cs o[{0},{1},{2}] n[{3},{4},{5}]".format(self.origin.x,self.origin.y,self.origin.z,self.zAxis.x,self.zAxis.y,self.zAxis.z)
+        return "cs o[{0},{1},{2}] n[{3},{4},{5}]".format(self.origin.x,self.origin.y,self.origin.z,self.z_axis.x,self.z_axis.y,self.z_axis.z)
 
     """a CS can act as a basis for a point"""
     def eval(self,a=0,b=0,c=0):
@@ -50,7 +50,7 @@ class CS(Geometry, IsBasis):
             x = a
             y = b
             z = c
-        return self.origin + ((self.xAxis*x)+(self.yAxis*y)+(self.zAxis*z))
+        return self.origin + ((self.x_axis*x)+(self.y_axis*y)+(self.z_axis*z))
 
     @property
     def xform(self):
@@ -64,15 +64,40 @@ class CS(Geometry, IsBasis):
 
     @property
     def xy_plane(self):
-        return Plane(self.origin,self.zAxis)
+        return Plane(self.origin,self.z_axis)
 
     @property
     def xz_plane(self):
-        return Plane(self.origin,self.yAxis)
+        return Plane(self.origin,self.y_axis)
 
     @property
     def yz_plane(self):
-        return Plane(self.origin,self.xAxis)
+        return Plane(self.origin,self.x_axis)
+
+
+    @property
+    def xAxis(self): 
+        """
+        depreciated
+        """
+        print "please use CS.x_axis instead"
+        return self.x_axis
+
+    @property
+    def yAxis(self): 
+        """
+        depreciated
+        """
+        print "please use CS.y_axis instead"
+        return self.y_axis
+
+    @property
+    def zAxis(self): 
+        """
+        depreciated
+        """
+        print "please use CS.z_axis instead"
+        return self.z_axis
 
 
     @staticmethod
@@ -93,14 +118,21 @@ class CylCS(Geometry, IsBasis):
             return "cylcs o[{0},{1},{2}]".format(self.origin.x,self.origin.y,self.origin.z)
 
     """a CylCS can act as a basis for a point"""
-    def eval(self,other):
+    def eval(self,a,b,c=0):
         try:
-            radius = other.x
-            radians = other.y
-            z = other.z
-        except TypeError:
-            print("mallard can't quack()")
+            radius = a.x
+            radians = a.y
+            z = a.z
+            pt = Point( radius * math.cos(radians), radius * math.sin(radians), z) + self.origin
+        except:
+            try:
+                radius = a
+                radians = b
+                z = c
+                pt = Point( radius * math.cos(radians), radius * math.sin(radians), z) + self.origin
+            except:
+                raise AttributeError("either pass me a point or three numbers please")
                 
-        return Point( radius * math.cos(radians), radius * math.sin(radians), z) + self.origin
+        return pt
         
         
