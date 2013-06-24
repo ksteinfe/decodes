@@ -107,6 +107,11 @@ class GrasshopperOut(outie.Outie):
             tree.Add(self._drawCircle(g),path)
             tree_p.Add(extract_props(g), path)
             return True
+            
+        if isinstance(g, Arc) : 
+            tree.Add(self._drawArc(g),path)
+            tree_p.Add(extract_props(g), path)
+            return True
 
         if isinstance(g, Plane) : 
             tree.Add(self._drawPlane(g),path)
@@ -171,6 +176,9 @@ class GrasshopperOut(outie.Outie):
 
     def _drawCircle(self, circ):
         return to_rgcircle(circ)
+        
+    def _drawArc(self, circ):
+        return to_rgarc(circ)
             
     def _drawPGon(self, pgon):
         return to_rgpolyline(pgon)

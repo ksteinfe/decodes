@@ -49,4 +49,24 @@ class Circle(Plane):
         vec = Vec(self.cpt,pt).cross(self.pln.vec).normalized(h)
         return [pt - vec, pt + vec]
       
+class Arc(CS):
+    """
+    a circle class
+    inherits all properties of the Plane class
+    """
     
+    def __init__(self,cs,radius,sweep_angle):
+        self.origin = cs.origin
+        self.x_axis = cs.x_axis
+        self.y_axis = cs.y_axis
+        self.z_axis = cs.z_axis
+        self.rad = radius
+        self.angle = sweep_angle
+        
+    def eval(self, t):
+        return False
+        
+    def __repr__(self): return "arc[{0},r:{1},sweep angle{2}]".format(self.origin,self.radius,self.sweep_angle)
+
+
+
