@@ -46,7 +46,7 @@ class PLine(HasPts):
         
     def reverse(self) :
         pts = []
-        for pt in reversed (self): pts.append(pt)
+        for pt in reversed(self): pts.append(pt)
         rpline = PLine(pts)
         return rpline
 
@@ -71,7 +71,7 @@ class PLine(HasPts):
             return jpline
             
         elif self [0].is_identical(other[0],tol) : 
-            other = other.reverse
+            other = other.reverse()
             pts = []
             for o in other : pts.append(o)
             for s in self : pts.append(s)
@@ -80,7 +80,7 @@ class PLine(HasPts):
             return jpline
             
         elif self [-1].is_identical(other[-1],tol) :
-            other = other.reverse
+            other = other.reverse()
             pts = []
             for s in self : pts.append(s)
             for o in other : pts.append(o)
