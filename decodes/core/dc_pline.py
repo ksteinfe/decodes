@@ -43,7 +43,59 @@ class PLine(HasPts):
             :rtype: float
         """
         return sum([edge.length for edge in self.edges])
+        
+    def reverse(self) :
+        pts = []
+        for pt in reversed (self): pts.append(pt)
+        rpline = PLine(pts)
+        return rpline
 
+
+    def join (self, other, tol=False) :
+        
+        if self[-1].is_identical(other[0],tol) :
+            pts = []
+            for s in self : pts.append(s)
+            for o in other : pts.append(o)
+            pts.pop(len(self))
+            print len(self)
+            jpline= PLine(pts)
+            return jpline
+            
+        elif self[0].is_identical(other[-1],tol) :
+            pts = []
+            for o in other : pts.append(o)
+            for s in self : pts.append(s)
+            pts.pop(len(other))
+            jpline= PLine(pts)
+            return jpline
+            
+        elif self [0].is_identical(other[0],tol) : 
+            other = other.reverse
+            pts = []
+            for o in other : pts.append(o)
+            for s in self : pts.append(s)
+            pts.pop(len(other))
+            jpline= PLine(pts)
+            return jpline
+            
+        elif self [-1].is_identical(other[-1],tol) :
+            other = other.reverse
+            pts = []
+            for s in self : pts.append(s)
+            for o in other : pts.append(o)
+            pts.pop(len(self))
+            jpline= PLine(pts)
+            return jpline
+            
+        else :
+            pts = []
+            for s in self : pts.append(s)
+            for o in other : pts.append(o)
+            jpline= PLine(pts)
+            print "new segment created"
+            return jpline
+            
     def seg(self,index):
         """ Returns a segment of this polyline
        
