@@ -118,7 +118,7 @@ class CylCS(Geometry, IsBasis):
             return "cylcs o[{0},{1},{2}]".format(self.origin.x,self.origin.y,self.origin.z)
 
     """a CylCS can act as a basis for a point"""
-    def eval(self,a,b,c=0):
+    def eval(self,a,b=None,c=0):
         try:
             radius = a.x
             radians = a.y
