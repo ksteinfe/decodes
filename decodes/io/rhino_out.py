@@ -99,11 +99,11 @@ class RhinoOut(outie.Outie):
         c = sDocObj.AddCircle(rh_circ,obj_attr)
         
         obj_attr.ObjectColor = System.Drawing.Color.FromArgb(255,0,0)    
-        x = sDocObj.AddLine(to_rgpt(cs.origin), to_rgpt(cs.origin+(cs.xAxis*self.iconscale)),obj_attr)
+        x = sDocObj.AddLine(to_rgpt(cs.origin), to_rgpt(cs.origin+(cs.x_axis*self.iconscale)),obj_attr)
         obj_attr.ObjectColor = System.Drawing.Color.FromArgb(0,255,0)
-        y = sDocObj.AddLine(to_rgpt(cs.origin), to_rgpt(cs.origin+(cs.yAxis*self.iconscale)),obj_attr)
+        y = sDocObj.AddLine(to_rgpt(cs.origin), to_rgpt(cs.origin+(cs.y_axis*self.iconscale)),obj_attr)
         obj_attr.ObjectColor = System.Drawing.Color.FromArgb(0,0,255)
-        z = sDocObj.AddLine(to_rgpt(cs.origin), to_rgpt(cs.origin+(cs.zAxis*0.5*self.iconscale)),obj_attr)
+        z = sDocObj.AddLine(to_rgpt(cs.origin), to_rgpt(cs.origin+(cs.z_axis*0.5*self.iconscale)),obj_attr)
         obj_attr.ObjectColor = System.Drawing.Color.FromArgb(255,255,255)
         o = sDocObj.AddPoint(to_rgpt(cs.origin),obj_attr)
         scriptcontext.doc.Groups.Add([c,o,x,y,z])
@@ -153,7 +153,7 @@ def to_rgarc(arc):
 
 def to_rgplane(other):
     if isinstance(other, CS) : 
-        return Rhino.Geometry.Plane(to_rgpt(other.origin),to_rgvec(other.xAxis),to_rgvec(other.yAxis))
+        return Rhino.Geometry.Plane(to_rgpt(other.origin),to_rgvec(other.x_axis),to_rgvec(other.y_axis))
     if isinstance(other, Plane) : 
         return Rhino.Geometry.Plane(to_rgpt(other.origin),to_rgvec(other.normal))
 
