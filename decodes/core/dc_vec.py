@@ -211,7 +211,7 @@ class Vec(Geometry):
         """
         return self.length2 >= other.length2
     
-    def is_identical(self,other): 
+    def is_identical(self,other,tol=False): 
         """Returns True if the vectors are equal.
         
             :param other: Vec to be compared.
@@ -219,7 +219,11 @@ class Vec(Geometry):
             :result: Boolean result of comparison.
             :rtype: bool
         """   
-        return all([self.x==other.x,self.y==other.y,self.z==other.z])
+        if not tol:
+            return all([self.x==other.x,self.y==other.y,self.z==other.z])
+        else :
+            return all([abs(self.x-other.x)<tol,abs(self.y-other.y)<tol,abs(self.z-other.z)<tol])
+			
     def is_coincident(self,other): 
         """Returns True if the vectors have equal direction.
         
