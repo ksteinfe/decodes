@@ -62,7 +62,7 @@ class GrayScott (object):
         self.hist_u.append(self._uvals)
         self.hist_v.append(self._vvals)
 
-    def to_image_sequence(self, v_color = Color(0.0), u_color = Color(1.0), base_color = Color(1.0)):
+    def to_image_sequence(self, v_color = Color(0.0), u_color = Color(1.0), base_color = Color(1.0), power = False):
         ival_u = Interval(self.min_recorded_u,self.max_recorded_u)
         ival_v = Interval(self.min_recorded_v,self.max_recorded_v)
         uv_color = Color.interpolate(u_color,v_color)        
@@ -73,9 +73,14 @@ class GrayScott (object):
             for px in range(len(img._pixels)):
                 ut = ival_u.deval(self.hist_u[n]._pixels[px])
                 vt = ival_v.deval(self.hist_v[n]._pixels[px])
-                c0 = Color.interpolate(base_color,u_color,ut)
-                c1 = Color.interpolate(v_color,uv_color,ut)
-                c = Color.interpolate(c0,c1,vt)
+                if power:
+                    c0 = Color.interpolate(base_color,u_color,ut**power)
+                    c1 = Color.interpolate(v_color,uv_color,ut**power)
+                    c = Color.interpolate(c0,c1,vt**power)
+                else:
+                    c0 = Color.interpolate(base_color,u_color,ut)
+                    c1 = Color.interpolate(v_color,uv_color,ut)
+                    c = Color.interpolate(c0,c1,vt)
                 img._pixels[px]= c
 
             imgs.append(img)
