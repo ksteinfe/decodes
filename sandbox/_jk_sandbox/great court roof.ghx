@@ -48,10 +48,10 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>-12</X>
-                  <Y>-712</Y>
+                  <X>234</X>
+                  <Y>-222</Y>
                 </item>
-                <item name="Zoom" type_name="gh_single" type_code="5">1</item>
+                <item name="Zoom" type_name="gh_single" type_code="5">0.6166352</item>
               </items>
             </chunk>
             <chunk name="Views">
@@ -79,10 +79,39 @@
         </chunk>
         <chunk name="DefinitionObjects">
           <items count="1">
-            <item name="ObjectCount" type_name="gh_int32" type_code="3">31</item>
+            <item name="ObjectCount" type_name="gh_int32" type_code="3">32</item>
           </items>
-          <chunks count="31">
+          <chunks count="32">
             <chunk name="Object" index="0">
+              <items count="2">
+                <item name="GUID" type_name="gh_guid" type_code="9">c552a431-af5b-46a9-a8a4-0fcbc27ef596</item>
+                <item name="Name" type_name="gh_string" type_code="10">Group</item>
+              </items>
+              <chunks count="1">
+                <chunk name="Container">
+                  <items count="12">
+                    <item name="Colour" type_name="gh_drawing_color" type_code="36">
+                      <ARGB>150;170;135;255</ARGB>
+                    </item>
+                    <item name="Border" type_name="gh_int32" type_code="3">1</item>
+                    <item name="ID_Count" type_name="gh_int32" type_code="3">5</item>
+                    <item name="ID" index="0" type_name="gh_guid" type_code="9">cb96ea5a-5d19-46c8-93a8-7a4443281276</item>
+                    <item name="ID" index="1" type_name="gh_guid" type_code="9">7ce30232-8986-4446-aad8-65a0b7787fa8</item>
+                    <item name="ID" index="2" type_name="gh_guid" type_code="9">69e018f5-75b2-4694-bb8a-061328214c60</item>
+                    <item name="ID" index="3" type_name="gh_guid" type_code="9">b8af54c3-7fd1-4ac0-b7b1-7229d6f2934c</item>
+                    <item name="ID" index="4" type_name="gh_guid" type_code="9">bfe99cc2-dbc4-41d5-bf6f-43436cc303f9</item>
+                    <item name="Name" type_name="gh_string" type_code="10">Group</item>
+                    <item name="NickName" type_name="gh_string" type_code="10">Tweened curves</item>
+                    <item name="Description" type_name="gh_string" type_code="10">A group of Grasshopper objects</item>
+                    <item name="InstanceGuid" type_name="gh_guid" type_code="9">ab59f08b-e9f1-4b27-ac74-42d44d876c1c</item>
+                  </items>
+                  <chunks count="1">
+                    <chunk name="Attributes" />
+                  </chunks>
+                </chunk>
+              </chunks>
+            </chunk>
+            <chunk name="Object" index="1">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">57da07bd-ecab-415d-9d86-af36d7073abc</item>
                 <item name="Name" type_name="gh_string" type_code="10">Number Slider</item>
@@ -126,7 +155,7 @@
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="1">
+            <chunk name="Object" index="2">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">57da07bd-ecab-415d-9d86-af36d7073abc</item>
                 <item name="Name" type_name="gh_string" type_code="10">Number Slider</item>
@@ -170,7 +199,7 @@
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="2">
+            <chunk name="Object" index="3">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">57da07bd-ecab-415d-9d86-af36d7073abc</item>
                 <item name="Name" type_name="gh_string" type_code="10">Number Slider</item>
@@ -214,7 +243,7 @@
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="3">
+            <chunk name="Object" index="4">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">57da07bd-ecab-415d-9d86-af36d7073abc</item>
                 <item name="Name" type_name="gh_string" type_code="10">Number Slider</item>
@@ -258,7 +287,7 @@
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="4">
+            <chunk name="Object" index="5">
               <items count="3">
                 <item name="GUID" type_name="gh_guid" type_code="9">fccad19e-dcb6-44ab-8edb-54dd6ab7e966</item>
                 <item name="Name" type_name="gh_string" type_code="10">Decodes Python Script</item>
@@ -453,7 +482,7 @@ a.put(func)</item>
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="5">
+            <chunk name="Object" index="6">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">59e0b89a-e487-49f8-bab8-b5bab16be14c</item>
                 <item name="Name" type_name="gh_string" type_code="10">Panel</item>
@@ -501,7 +530,7 @@ a.put(func)</item>
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="6">
+            <chunk name="Object" index="7">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">57da07bd-ecab-415d-9d86-af36d7073abc</item>
                 <item name="Name" type_name="gh_string" type_code="10">Number Slider</item>
@@ -545,7 +574,7 @@ a.put(func)</item>
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="7">
+            <chunk name="Object" index="8">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">57da07bd-ecab-415d-9d86-af36d7073abc</item>
                 <item name="Name" type_name="gh_string" type_code="10">Number Slider</item>
@@ -589,7 +618,7 @@ a.put(func)</item>
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="8">
+            <chunk name="Object" index="9">
               <items count="3">
                 <item name="GUID" type_name="gh_guid" type_code="9">fccad19e-dcb6-44ab-8edb-54dd6ab7e966</item>
                 <item name="Name" type_name="gh_string" type_code="10">Decodes Python Script</item>
@@ -845,7 +874,7 @@ a.put(msh)</item>
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="9">
+            <chunk name="Object" index="10">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">59e0b89a-e487-49f8-bab8-b5bab16be14c</item>
                 <item name="Name" type_name="gh_string" type_code="10">Panel</item>
@@ -893,7 +922,7 @@ a.put(msh)</item>
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="10">
+            <chunk name="Object" index="11">
               <items count="3">
                 <item name="GUID" type_name="gh_guid" type_code="9">fccad19e-dcb6-44ab-8edb-54dd6ab7e966</item>
                 <item name="Name" type_name="gh_string" type_code="10">Decodes Python Script</item>
@@ -1149,7 +1178,7 @@ a.put(msh)</item>
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="11">
+            <chunk name="Object" index="12">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">59e0b89a-e487-49f8-bab8-b5bab16be14c</item>
                 <item name="Name" type_name="gh_string" type_code="10">Panel</item>
@@ -1197,7 +1226,7 @@ a.put(msh)</item>
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="12">
+            <chunk name="Object" index="13">
               <items count="3">
                 <item name="GUID" type_name="gh_guid" type_code="9">fccad19e-dcb6-44ab-8edb-54dd6ab7e966</item>
                 <item name="Name" type_name="gh_string" type_code="10">Decodes Python Script</item>
@@ -1402,7 +1431,7 @@ a.put(crv_out)
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="13">
+            <chunk name="Object" index="14">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">57da07bd-ecab-415d-9d86-af36d7073abc</item>
                 <item name="Name" type_name="gh_string" type_code="10">Number Slider</item>
@@ -1446,7 +1475,7 @@ a.put(crv_out)
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="14">
+            <chunk name="Object" index="15">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">59e0b89a-e487-49f8-bab8-b5bab16be14c</item>
                 <item name="Name" type_name="gh_string" type_code="10">Panel</item>
@@ -1494,7 +1523,7 @@ a.put(crv_out)
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="15">
+            <chunk name="Object" index="16">
               <items count="3">
                 <item name="GUID" type_name="gh_guid" type_code="9">fccad19e-dcb6-44ab-8edb-54dd6ab7e966</item>
                 <item name="Name" type_name="gh_string" type_code="10">Decodes Python Script</item>
@@ -1635,7 +1664,7 @@ a.put(func)</item>
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="16">
+            <chunk name="Object" index="17">
               <items count="3">
                 <item name="GUID" type_name="gh_guid" type_code="9">fccad19e-dcb6-44ab-8edb-54dd6ab7e966</item>
                 <item name="Name" type_name="gh_string" type_code="10">Decodes Python Script</item>
@@ -1827,7 +1856,7 @@ a.put(crv)
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="17">
+            <chunk name="Object" index="18">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">59e0b89a-e487-49f8-bab8-b5bab16be14c</item>
                 <item name="Name" type_name="gh_string" type_code="10">Panel</item>
@@ -1875,7 +1904,7 @@ a.put(crv)
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="18">
+            <chunk name="Object" index="19">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">59e0b89a-e487-49f8-bab8-b5bab16be14c</item>
                 <item name="Name" type_name="gh_string" type_code="10">Panel</item>
@@ -1923,7 +1952,7 @@ a.put(crv)
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="19">
+            <chunk name="Object" index="20">
               <items count="3">
                 <item name="GUID" type_name="gh_guid" type_code="9">fccad19e-dcb6-44ab-8edb-54dd6ab7e966</item>
                 <item name="Name" type_name="gh_string" type_code="10">Decodes Python Script</item>
@@ -2189,7 +2218,7 @@ domain.put([0,2*math.pi, 0, 1])</item>
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="20">
+            <chunk name="Object" index="21">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">59e0b89a-e487-49f8-bab8-b5bab16be14c</item>
                 <item name="Name" type_name="gh_string" type_code="10">Panel</item>
@@ -2237,7 +2266,7 @@ domain.put([0,2*math.pi, 0, 1])</item>
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="21">
+            <chunk name="Object" index="22">
               <items count="3">
                 <item name="GUID" type_name="gh_guid" type_code="9">fccad19e-dcb6-44ab-8edb-54dd6ab7e966</item>
                 <item name="Name" type_name="gh_string" type_code="10">Decodes Python Script</item>
@@ -2537,7 +2566,7 @@ domain.put([0,2*math.pi, 0, 1])</item>
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="22">
+            <chunk name="Object" index="23">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">59e0b89a-e487-49f8-bab8-b5bab16be14c</item>
                 <item name="Name" type_name="gh_string" type_code="10">Panel</item>
@@ -2585,7 +2614,7 @@ domain.put([0,2*math.pi, 0, 1])</item>
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="23">
+            <chunk name="Object" index="24">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">59e0b89a-e487-49f8-bab8-b5bab16be14c</item>
                 <item name="Name" type_name="gh_string" type_code="10">Panel</item>
@@ -2634,7 +2663,7 @@ domain.put([0,2*math.pi, 0, 1])</item>
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="24">
+            <chunk name="Object" index="25">
               <items count="3">
                 <item name="GUID" type_name="gh_guid" type_code="9">fccad19e-dcb6-44ab-8edb-54dd6ab7e966</item>
                 <item name="Name" type_name="gh_string" type_code="10">Decodes Python Script</item>
@@ -2866,7 +2895,7 @@ domain.put([0,2*math.pi, 0, 1])</item>
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="25">
+            <chunk name="Object" index="26">
               <items count="3">
                 <item name="GUID" type_name="gh_guid" type_code="9">fccad19e-dcb6-44ab-8edb-54dd6ab7e966</item>
                 <item name="Name" type_name="gh_string" type_code="10">Decodes Python Script</item>
@@ -3006,7 +3035,7 @@ a.put(func)</item>
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="26">
+            <chunk name="Object" index="27">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">57da07bd-ecab-415d-9d86-af36d7073abc</item>
                 <item name="Name" type_name="gh_string" type_code="10">Number Slider</item>
@@ -3050,7 +3079,7 @@ a.put(func)</item>
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="27">
+            <chunk name="Object" index="28">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">57da07bd-ecab-415d-9d86-af36d7073abc</item>
                 <item name="Name" type_name="gh_string" type_code="10">Number Slider</item>
@@ -3094,7 +3123,7 @@ a.put(func)</item>
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="28">
+            <chunk name="Object" index="29">
               <items count="3">
                 <item name="GUID" type_name="gh_guid" type_code="9">fccad19e-dcb6-44ab-8edb-54dd6ab7e966</item>
                 <item name="Name" type_name="gh_string" type_code="10">Decodes Python Script</item>
@@ -3239,7 +3268,7 @@ a.put(func)</item>
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="29">
+            <chunk name="Object" index="30">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">57da07bd-ecab-415d-9d86-af36d7073abc</item>
                 <item name="Name" type_name="gh_string" type_code="10">Number Slider</item>
@@ -3283,7 +3312,7 @@ a.put(func)</item>
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="30">
+            <chunk name="Object" index="31">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">59e0b89a-e487-49f8-bab8-b5bab16be14c</item>
                 <item name="Name" type_name="gh_string" type_code="10">Panel</item>
