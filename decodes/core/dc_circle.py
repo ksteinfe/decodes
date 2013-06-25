@@ -68,5 +68,61 @@ class Arc(CS):
         
     def __repr__(self): return "arc[{0},r:{1},sweep angle{2}]".format(self.origin,self.radius,self.sweep_angle)
 
+    #Returns a best fit arc using the modified least squares method
+    @staticmethod
+    def arc_from_pts(pts_in):
+        # Get the number of input points
+        cnt = len(pts_in)
+        # An Arc needs at least 3 points
+        if len(pts_in) < 2 :
+            raise GeometricError("Please provide more points") 
+        x, y, x, xsq, ysq, xy, xysq, xsqy, xcube, ycube = [0]*10
+        
+        # Get new point values for the center point of the arc
+        for pt in pts_in :
+            x += pt.x 
+            y += pt.y
+            xsq += pt.x*pt.x
+            ysq += pt.y*pt.y
+            xy += pt.x*pt.y
+            xysq += pt.x*pt.y*pt.y
+            xsqy += pt.x*pt.x*pt.y
+            xcube += pt.x*pt.x*pt.x
+            ycube += pt.y*pt.y*pt.y
+        
+        # Get the center point for the arc
+        A = cnt*xsq - x*x
+        B = cnt*xy - x*y
+        C = cnt*ysq - y*y
+        D = 0.5*(cnt*xysq - x*ysq + cnt*xcube - x*xsq)
+        E = 0.5*(cnt*xsqy - y*xsq + cnt*ycube - y*ysq)
+        
+        denom = A*C - B*B
+        if (denom != 0):
+            center = Point((D*C - B*E)/denom, (A*E - B*D)/denom)
+        else: 
+             raise GeometricError("A*C == B*B ... I Cannot find center of this Arc") 
+        
+        # Get the radius of the arc by getting the average distance from the points to the center
+        rad = sum([pt._distance(center) for pt in pts_in])/cnt
+        
+        # Create segments between all the points and the center
+        segs = [Segment(center,pt) for pt in pts_in]
+        # The reference segment will be the first segment
+        ref_vec = segs[0].vec
+        for seg in segs:
+            # Get the angle between all the segments and the reference segment
+            seg.angle = ref_vec.angle(seg.vec)
+            # Make sure the ange is not negative
+            if ref_vec.cross(seg.vec).z < 0 : seg.angle = - seg.angle
+            
+        # Sort the segments by angle
+        segs = sorted(segs, key=lambda seg: seg.angle)
+        # Get the sweep angle
+        sweep = segs[-1].angle - segs[0].angle
+        
+        # Orient the CS with the segment with the smallest angle
+        cs = CS(center,segs[0].vec,segs[1].vec)
+        return Arc(cs,rad,sweep)
 
 
