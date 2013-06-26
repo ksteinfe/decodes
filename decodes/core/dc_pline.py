@@ -107,6 +107,19 @@ class PLine(HasPts):
         if index >= len(self) : raise IndexError()
         return Segment(self.pts[index],self.pts[index+1])
         
+    def eval(self,t):
+        """
+        evaluates this HasPts at the specified parameter t
+        a t-value of 0 will result in a point conincident with HasPts[0]
+        a t-value of 1 will result in a point conincident with HasPts[-1]
+        """
+        if t > 1 : t = t%1.0
+        if t < 0 : t = 1.0 - abs(t)%1.0
+        for n, ival in enumerate(Interval()//(len(self)-1)):
+            if t in ival:
+                pa = self.pts[n]
+                pb = self.pts[n+1]
+                return Point.interpolate(pa,pb,ival.deval(t))
         
     def near(self, p):
         """Returns a tuple of the closest point to a given PLine, the index of the closest segment and the distance from the Point to the near Point.

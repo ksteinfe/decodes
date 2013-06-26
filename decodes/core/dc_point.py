@@ -603,6 +603,7 @@ class HasPts(HasBasis):
         if n < -len(self._verts): n =  -abs(n)%len(self._verts)
         self._verts = self._verts[n:] + self._verts[:n]
         return self
+        
 
 
     def basis_applied(self): 
