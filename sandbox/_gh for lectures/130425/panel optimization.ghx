@@ -48,10 +48,10 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>-98</X>
-                  <Y>-1184</Y>
+                  <X>-1348</X>
+                  <Y>-718</Y>
                 </item>
-                <item name="Zoom" type_name="gh_single" type_code="5">0.8</item>
+                <item name="Zoom" type_name="gh_single" type_code="5">1</item>
               </items>
             </chunk>
             <chunk name="Views">
@@ -1736,12 +1736,13 @@ for x in Interval().divide(count,include_last = True):
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="8">
+                  <items count="9">
                     <item name="props_visible" type_name="gh_bool" type_code="1">false</item>
                     <item name="Name" type_name="gh_string" type_code="10">Decodes Python Script</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Decodes</item>
                     <item name="Description" type_name="gh_string" type_code="10">A python scriptable component that implements the Decodes library</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">d7b259a7-a6f8-41e3-866e-c4b70ad96436</item>
+                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                     <item name="HideInput" type_name="gh_bool" type_code="1">true</item>
                     <item name="CodeInput" type_name="gh_string" type_code="10">
 
@@ -1823,11 +1824,12 @@ a.put(QPanel)
                       </items>
                       <chunks count="3">
                         <chunk name="InputParam" index="0">
-                          <items count="11">
+                          <items count="12">
                             <item name="Name" type_name="gh_string" type_code="10">similarity_tol</item>
                             <item name="NickName" type_name="gh_string" type_code="10">similarity_tol</item>
                             <item name="Description" type_name="gh_string" type_code="10">Script variable Decodes</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">56b548e4-3a0d-4022-be40-ff785d1e8183</item>
+                            <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">true</item>
                             <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                             <item name="Source" index="0" type_name="gh_guid" type_code="9">c67c6791-d7ad-43a3-acb0-35af65c10544</item>
@@ -1854,12 +1856,13 @@ a.put(QPanel)
                           </chunks>
                         </chunk>
                         <chunk name="OutputParam" index="0">
-                          <items count="7">
+                          <items count="8">
                             <item name="Name" type_name="gh_string" type_code="10">console</item>
                             <item name="NickName" type_name="gh_string" type_code="10">...</item>
                             <item name="Description" type_name="gh_string" type_code="10">The execution information, as output and error streams</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">4b535a42-8449-43c4-b683-a83c99a4c7d9</item>
                             <item name="Mutable" type_name="gh_bool" type_code="1">false</item>
+                            <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                             <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                           </items>
@@ -1881,11 +1884,12 @@ a.put(QPanel)
                           </chunks>
                         </chunk>
                         <chunk name="OutputParam" index="1">
-                          <items count="6">
+                          <items count="7">
                             <item name="Name" type_name="gh_string" type_code="10">a</item>
                             <item name="NickName" type_name="gh_string" type_code="10">a</item>
                             <item name="Description" type_name="gh_string" type_code="10">Contains the translated geometry found in outie a</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">ff88bae4-6eaa-4411-afec-117a0ab7a2c6</item>
+                            <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                             <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                           </items>
@@ -2393,7 +2397,7 @@ b.put(rb_pgons)
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                           <X>626</X>
                           <Y>1898</Y>
-                          <W>109</W>
+                          <W>96</W>
                           <H>68</H>
                         </item>
                       </items>
@@ -2486,13 +2490,13 @@ b.put(rb_pgons)
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>718</X>
+                                  <X>711.5</X>
                                   <Y>1910.667</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>703</X>
                                   <Y>1900</Y>
-                                  <W>30</W>
+                                  <W>17</W>
                                   <H>21</H>
                                 </item>
                               </items>
@@ -2512,13 +2516,13 @@ b.put(rb_pgons)
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>718</X>
+                                  <X>711.5</X>
                                   <Y>1932</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>703</X>
                                   <Y>1921</Y>
-                                  <W>30</W>
+                                  <W>17</W>
                                   <H>21</H>
                                 </item>
                               </items>
@@ -2538,13 +2542,13 @@ b.put(rb_pgons)
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>718</X>
+                                  <X>711.5</X>
                                   <Y>1953.333</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>703</X>
                                   <Y>1942</Y>
-                                  <W>30</W>
+                                  <W>17</W>
                                   <H>22</H>
                                 </item>
                               </items>
@@ -6204,11 +6208,12 @@ for panel in panels:
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="7">
+                  <items count="8">
                     <item name="Name" type_name="gh_string" type_code="10">Data</item>
                     <item name="NickName" type_name="gh_string" type_code="10">QPanel</item>
                     <item name="Description" type_name="gh_string" type_code="10">Represents a collection of generic data</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">4e1bc948-c2fc-447c-9ef8-e531e3234a29</item>
+                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                     <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                     <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                     <item name="Source" index="0" type_name="gh_guid" type_code="9">ff88bae4-6eaa-4411-afec-117a0ab7a2c6</item>
@@ -6275,11 +6280,12 @@ for panel in panels:
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="6">
+                  <items count="7">
                     <item name="Name" type_name="gh_string" type_code="10">Number Slider</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Slider</item>
                     <item name="Description" type_name="gh_string" type_code="10">Numeric slider for single values</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">c67c6791-d7ad-43a3-acb0-35af65c10544</item>
+                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                     <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                     <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                   </items>
@@ -6458,7 +6464,7 @@ for panel in panels:
                   <items count="7">
                     <item name="PreviewDocument" type_name="gh_bool" type_code="1">false</item>
                     <item name="ClusterDocument" type_name="gh_bytearray" type_code="20">
-                      <stream length="2276">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</stream>
+                      <stream length="2277">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</stream>
                     </item>
                     <item name="Name" type_name="gh_string" type_code="10">Cluster</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Cluster</item>

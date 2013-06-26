@@ -48,10 +48,10 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>-241</X>
-                  <Y>-403</Y>
+                  <X>-434</X>
+                  <Y>-603</Y>
                 </item>
-                <item name="Zoom" type_name="gh_single" type_code="5">0.7852612</item>
+                <item name="Zoom" type_name="gh_single" type_code="5">1</item>
               </items>
             </chunk>
             <chunk name="Views">
@@ -256,13 +256,12 @@
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="9">
+                  <items count="8">
                     <item name="props_visible" type_name="gh_bool" type_code="1">false</item>
                     <item name="Name" type_name="gh_string" type_code="10">Decodes Python Script</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Decodes</item>
                     <item name="Description" type_name="gh_string" type_code="10">A python scriptable component that implements the Decodes library</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">37eedab0-794c-40c9-a5a7-e610ca364e36</item>
-                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                     <item name="HideInput" type_name="gh_bool" type_code="1">true</item>
                     <item name="CodeInput" type_name="gh_string" type_code="10">"""
 Ring Torus - standard parametrization as a surface of revolution 
@@ -296,7 +295,7 @@ domain.put([0, 2*math.pi, 0, 2*math.pi])
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                           <X>762</X>
                           <Y>656</Y>
-                          <W>95</W>
+                          <W>102</W>
                           <H>68</H>
                         </item>
                       </items>
@@ -313,12 +312,11 @@ domain.put([0, 2*math.pi, 0, 2*math.pi])
                       </items>
                       <chunks count="5">
                         <chunk name="InputParam" index="0">
-                          <items count="12">
+                          <items count="11">
                             <item name="Name" type_name="gh_string" type_code="10">r</item>
                             <item name="NickName" type_name="gh_string" type_code="10">r</item>
                             <item name="Description" type_name="gh_string" type_code="10">Script variable Decodes</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">b21bce89-edb1-40d4-8688-ebe03a360593</item>
-                            <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">true</item>
                             <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                             <item name="Source" index="0" type_name="gh_guid" type_code="9">aaf3743a-fccf-4c4f-b309-91da423ac107</item>
@@ -345,12 +343,11 @@ domain.put([0, 2*math.pi, 0, 2*math.pi])
                           </chunks>
                         </chunk>
                         <chunk name="InputParam" index="1">
-                          <items count="12">
+                          <items count="11">
                             <item name="Name" type_name="gh_string" type_code="10">R</item>
                             <item name="NickName" type_name="gh_string" type_code="10">R</item>
                             <item name="Description" type_name="gh_string" type_code="10">Script variable Decodes</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">4bf66740-4b53-480a-bc46-e9238bdff8e1</item>
-                            <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">true</item>
                             <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
                             <item name="Source" index="0" type_name="gh_guid" type_code="9">2473c59f-6e6a-49c0-8847-a54d142382f1</item>
@@ -377,13 +374,12 @@ domain.put([0, 2*math.pi, 0, 2*math.pi])
                           </chunks>
                         </chunk>
                         <chunk name="OutputParam" index="0">
-                          <items count="8">
+                          <items count="7">
                             <item name="Name" type_name="gh_string" type_code="10">console</item>
                             <item name="NickName" type_name="gh_string" type_code="10">...</item>
                             <item name="Description" type_name="gh_string" type_code="10">The execution information, as output and error streams</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">200f7ccd-2234-4b3e-a4b8-bb05069e6e87</item>
                             <item name="Mutable" type_name="gh_bool" type_code="1">false</item>
-                            <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                             <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                           </items>
@@ -391,13 +387,13 @@ domain.put([0, 2*math.pi, 0, 2*math.pi])
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>831.5</X>
+                                  <X>835</X>
                                   <Y>668.6667</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>808</X>
                                   <Y>658</Y>
-                                  <W>47</W>
+                                  <W>54</W>
                                   <H>21</H>
                                 </item>
                               </items>
@@ -405,12 +401,11 @@ domain.put([0, 2*math.pi, 0, 2*math.pi])
                           </chunks>
                         </chunk>
                         <chunk name="OutputParam" index="1">
-                          <items count="7">
+                          <items count="6">
                             <item name="Name" type_name="gh_string" type_code="10">a</item>
                             <item name="NickName" type_name="gh_string" type_code="10">a</item>
                             <item name="Description" type_name="gh_string" type_code="10">Contains the translated geometry found in outie a</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">0373169f-8176-4fea-8b12-b17c7be529a1</item>
-                            <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                             <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                           </items>
@@ -418,13 +413,13 @@ domain.put([0, 2*math.pi, 0, 2*math.pi])
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>831.5</X>
+                                  <X>835</X>
                                   <Y>690</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>808</X>
                                   <Y>679</Y>
-                                  <W>47</W>
+                                  <W>54</W>
                                   <H>21</H>
                                 </item>
                               </items>
@@ -432,12 +427,11 @@ domain.put([0, 2*math.pi, 0, 2*math.pi])
                           </chunks>
                         </chunk>
                         <chunk name="OutputParam" index="2">
-                          <items count="7">
+                          <items count="6">
                             <item name="Name" type_name="gh_string" type_code="10">domain</item>
                             <item name="NickName" type_name="gh_string" type_code="10">domain</item>
                             <item name="Description" type_name="gh_string" type_code="10">Contains the translated geometry found in outie domain</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">840db8d3-13d7-4199-b694-0845be118017</item>
-                            <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                             <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
                           </items>
@@ -445,13 +439,13 @@ domain.put([0, 2*math.pi, 0, 2*math.pi])
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>831.5</X>
+                                  <X>835</X>
                                   <Y>711.3334</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
                                   <X>808</X>
                                   <Y>700</Y>
-                                  <W>47</W>
+                                  <W>54</W>
                                   <H>22</H>
                                 </item>
                               </items>
@@ -663,17 +657,18 @@ circles.put(circ4*rot_theta)
                   </items>
                   <chunks count="2">
                     <chunk name="Attributes">
-                      <items count="2">
+                      <items count="3">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>800</X>
+                          <X>793</X>
                           <Y>880</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>763</X>
+                          <X>756</X>
                           <Y>846</Y>
                           <W>100</W>
                           <H>68</H>
                         </item>
+                        <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                       </items>
                     </chunk>
                     <chunk name="ParameterData">
@@ -704,17 +699,18 @@ circles.put(circ4*rot_theta)
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>776.5</X>
+                                  <X>769.5</X>
                                   <Y>858.6667</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>765</X>
+                                  <X>758</X>
                                   <Y>848</Y>
                                   <W>20</W>
                                   <H>21</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -735,17 +731,18 @@ circles.put(circ4*rot_theta)
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>776.5</X>
+                                  <X>769.5</X>
                                   <Y>880</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>765</X>
+                                  <X>758</X>
                                   <Y>869</Y>
                                   <W>20</W>
                                   <H>21</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -766,17 +763,18 @@ circles.put(circ4*rot_theta)
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>776.5</X>
+                                  <X>769.5</X>
                                   <Y>901.3334</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>765</X>
+                                  <X>758</X>
                                   <Y>890</Y>
                                   <W>20</W>
                                   <H>22</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -793,17 +791,18 @@ circles.put(circ4*rot_theta)
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>838</X>
+                                  <X>831</X>
                                   <Y>858.6667</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>815</X>
+                                  <X>808</X>
                                   <Y>848</Y>
                                   <W>46</W>
                                   <H>21</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -819,17 +818,18 @@ circles.put(circ4*rot_theta)
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>838</X>
+                                  <X>831</X>
                                   <Y>880</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>815</X>
+                                  <X>808</X>
                                   <Y>869</Y>
                                   <W>46</W>
                                   <H>21</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -845,17 +845,18 @@ circles.put(circ4*rot_theta)
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>838</X>
+                                  <X>831</X>
                                   <Y>901.3334</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>815</X>
+                                  <X>808</X>
                                   <Y>890</Y>
                                   <W>46</W>
                                   <H>22</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -1394,8 +1395,8 @@ a.put(msh)</item>
                 <chunk name="Container">
                   <items count="11">
                     <item name="slider_value" type_name="gh_point3d" type_code="51">
-                      <X>0.754202121641577</X>
-                      <Y>0.211500586532965</Y>
+                      <X>1</X>
+                      <Y>0</Y>
                       <Z>0.5</Z>
                     </item>
                     <item name="x_domain" type_name="gh_interval1d" type_code="60">
@@ -1661,7 +1662,7 @@ domain.put([0, 2*pi, 0, 2*pi])
                                   <X>791</X>
                                   <Y>1083</Y>
                                   <W>54</W>
-                                  <H>21</H>
+                                  <H>22</H>
                                 </item>
                               </items>
                             </chunk>
