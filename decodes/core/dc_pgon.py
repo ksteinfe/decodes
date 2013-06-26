@@ -68,9 +68,10 @@ class PGon(HasPts):
         a t-value of 0 will result in a point conincident with PGon[0]
         a t-value of 1 will result in a point conincident with PGon[-1]
         """
+        if t > 0 : t = t%1.0
+        if t < 0 : t = 1.0 - abs(t)%1.0
         for n, ival in enumerate(Interval()//len(self)):
             if t in ival:
-                print n, ival
                 pa = self.pts[n]
                 try:
                     pb = self.pts[n+1]
