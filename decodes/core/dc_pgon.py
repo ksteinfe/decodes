@@ -62,7 +62,21 @@ class PGon(HasPts):
         for n in range(len(self._verts)): a += (self._verts[n-1].x + self._verts[n].x) * (self._verts[n-1].y - self._verts[n].y)
         return abs(a / 2.0)
 
-
+    def eval(self,t):
+        """
+        evaluates this polygon at the specified parameter t
+        a t-value of 0 will result in a point conincident with PGon[0]
+        a t-value of 1 will result in a point conincident with PGon[-1]
+        """
+        for n, ival in enumerate(Interval()//len(self)):
+            if t in ival:
+                print n, ival
+                pa = self.pts[n]
+                try:
+                    pb = self.pts[n+1]
+                except:
+                    pb = self.pts[0]
+                return Point.interpolate(pa,pb,ival.deval(t))
 
     def near(self, p):
         """Returns a tuple of the closest point to a given PGon, the index of the closest segment and the distance from the Point to the near Point.
