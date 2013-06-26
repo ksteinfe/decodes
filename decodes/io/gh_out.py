@@ -188,8 +188,8 @@ class GrasshopperOut(outie.Outie):
 
     def _drawCS(self, cs):
         o = rg.Point3d(cs.origin.x,cs.origin.y,cs.origin.z)
-        x = rg.Vector3d(cs.xAxis.x,cs.xAxis.y,cs.xAxis.z) 
-        y = rg.Vector3d(cs.yAxis.x,cs.yAxis.y,cs.yAxis.z) 
+        x = rg.Vector3d(cs.x_axis.x,cs.x_axis.y,cs.x_axis.z) 
+        y = rg.Vector3d(cs.y_axis.x,cs.y_axis.y,cs.y_axis.z) 
         return rg.Plane(o,x,y)
 
     def _drawColor(self, c): 

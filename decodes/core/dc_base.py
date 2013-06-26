@@ -14,20 +14,6 @@ class BasisError(GeometricError):
 class DomainError(GeometricError):
     pass
 
-class IsBasis(object):
-    """
-    A base class for anything that wants to call itself a basis. Bases must impliment the folloiwng methods:
-    """
-    
-    def eval(self,other):
-        """Other should be any object with either "x,y,z" attributes, "x,y" attributes, or a single "t" attribute which may be interpreted by the basis in order to generate a valid baseless point in R3
-            
-            :param other: Object with "x,y,z" attributes, "x,y" attributes, or a single "t". 
-            :type other: Basis
-            :result: Basis object.
-            :rtype: Basis
-        """
-        raise NotImplementedError("Evalutate not implimented.    I am a BAD basis!")
 
 class Geometry(object):
     """
@@ -135,9 +121,21 @@ class Geometry(object):
         return self.objCS.ixform
  
 
+class Basis(object):
+    """
+    A base class for anything that wants to call itself a basis. Bases must impliment the folloiwng methods:
+    """
+    
+    def eval(self):
+        raise NotImplementedError("Evalutate not implimented.    I am a BAD basis!")
+
+    def deval(self, world_point):
+        raise NotImplementedError("Devalutate not implimented.    I am a BAD basis!")
+
+
 class HasBasis(Geometry):
     """
-    A base class for anything that wants to define a basis for itself. Bases must impliment the following methods:
+    A base class for anything that wants to define a basis for itself. Bases must implement the following methods:
     """
     
     @property

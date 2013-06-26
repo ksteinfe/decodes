@@ -42,6 +42,25 @@ class Tests(unittest.TestCase):
         
         self.assertEqual(ln1,ln2)
 
+    def test_xform_hasbasis(self):
+        pts = [Point(),Point(1,1),Point(2,2)]
+        cs = CS(Point(0,0,-2))
+        pl  = PLine(pts)
+        pl.basis = cs
+
+        vec = Vec(0,0,1)
+        xf = Xform.translation(vec)
+
+        pl *= xf
+        self.assertTrue(pl.is_baseless)
+        self.AssertPointsAlmostEqual(Point(0,0,-1),pl.pts[0])
+
+
+
+    def AssertPointsAlmostEqual(self,pa,pb,places=4):
+        self.assertAlmostEqual(pa.x,pb.x,places)
+        self.assertAlmostEqual(pa.y,pb.y,places)
+        self.assertAlmostEqual(pa.z,pb.z,places)
 
 '''
 CAN'T DO THIS ONE WITHOUT RHINO

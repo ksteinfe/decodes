@@ -3,7 +3,7 @@ from . import dc_base, dc_vec, dc_point #here we may only import modules that ha
 if VERBOSE_FS: print "cs.py loaded"
 import math, copy, collections
 
-class CS(Geometry, IsBasis):
+class CS(Geometry, Basis):
     """a ortho coordinate system class"""
     """a simple orthonormal cs floating around in R3"""
     """can describe any translation and rigid-body manipulation of the R3"""
@@ -109,7 +109,7 @@ class CS(Geometry, IsBasis):
         return CS(Point(x,y),x_vec,x_vec.cross(Vec(0,0,-1)))
     
 
-class CylCS(Geometry, IsBasis):
+class CylCS(Geometry, Basis):
     """a cylindrical coordinate system"""
     def __init__(self,pt=Point(0,0)):
         self.origin = pt

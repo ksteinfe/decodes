@@ -29,6 +29,7 @@ class LinearEntity(Geometry):
         elif isinstance(b,Vec) : self._vec = b
         else : raise TypeError("Incorrect parameters provided to %s constructor" % self.__class__.__name__)
     
+
     @property
     def spt(self): 
         """Returns the starting Point of a LinearEntity

@@ -169,10 +169,9 @@ class Point(Vec,HasBasis):
             :rtype: Point
         """
         from .dc_xform import Xform
-        if isinstance(other, Xform) :
-            return other*self
+        if isinstance(other, Xform) : return other*self
         else : 
-            return Xform.scale(other) * self
+            return Point(self.x * other, self.y * other, self.z * other)
 
     def __repr__(self):
         #TODO: provide mechanism to print basis info if desired
@@ -538,19 +537,9 @@ class HasPts(HasBasis):
             :rtype: Vec
         """  
         from .dc_xform import Xform
-        if isinstance(other, Xform) :
-            self.basis = self.basis * other
-            return self
+        if isinstance(other, Xform) : return other * self
         else : 
             for n in range(len(self._verts)): self._verts[n] = self._verts[n] * other
-
-
-
-
-
-
-
-
 
 
 
@@ -651,5 +640,6 @@ class HasPts(HasBasis):
              # we'll try and warn them.
              #warnings.warn("You've just added a baseless point to a based object.  The world coordinates of the point have been interpreted as local coordinates of the object.  Is this what you wanted?")
              return Vec(other)
+
         if self.basis is other.basis : return Vec(other._x,other._y,other._z) # if we share a basis, then use the local coordinates of the other
         raise BasisError("The basis for this Geometry and the point you're adding do not match. Try applying or stripping the point of its basis, or describing the point in terms of this Geometry's basis")

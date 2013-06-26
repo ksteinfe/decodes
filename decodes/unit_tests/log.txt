@@ -5,7 +5,7 @@ test_empty_constructor (decodes.unit_tests.test_pgon.Tests) ... ok
 test_segs_and_edges (decodes.unit_tests.test_pgon.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.285s
+Ran 2 tests in 0.391s
 
 OK
 
@@ -15,7 +15,7 @@ test_empty_constructor (decodes.unit_tests.test_pline.Tests) ... ok
 test_segs_and_edges (decodes.unit_tests.test_pline.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.631s
+Ran 2 tests in 0.697s
 
 OK
 
@@ -27,7 +27,7 @@ test_face_access (decodes.unit_tests.test_mesh.Tests) ... ok
 test_simple_constructor (decodes.unit_tests.test_mesh.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.041s
+Ran 4 tests in 0.046s
 
 OK
 
@@ -40,7 +40,7 @@ test_empty_constructor (decodes.unit_tests.test_point.Tests) ... ok
 test_nearest_point (decodes.unit_tests.test_point.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.046s
+Ran 5 tests in 0.052s
 
 OK
 
@@ -53,7 +53,7 @@ test_item_access (decodes.unit_tests.test_has_pts.Tests) ... ok
 test_manipulating_points (decodes.unit_tests.test_has_pts.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.082s
+Ran 5 tests in 0.090s
 
 OK
 
@@ -67,16 +67,15 @@ test_subdivide (decodes.unit_tests.test_curve.Tests) ... ok
 test_tolerance (decodes.unit_tests.test_curve.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 6 tests in 0.772s
+Ran 6 tests in 0.855s
 
 OK
 
 
 == TEST_SURFACE ==
-test_tolerance (decodes.unit_tests.test_surface.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 1 test in 7.544s
+Ran 0 tests in 0.000s
 
 OK
 
@@ -88,7 +87,7 @@ test_near (decodes.unit_tests.test_plane.Tests) ... ok
 test_xform (decodes.unit_tests.test_plane.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.014s
+Ran 4 tests in 0.016s
 
 OK
 
@@ -99,7 +98,7 @@ test_operations (decodes.unit_tests.test_interval.Tests) ... ok
 test_properties (decodes.unit_tests.test_interval.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.002s
+Ran 3 tests in 0.003s
 
 OK
 
@@ -111,7 +110,7 @@ test_ray (decodes.unit_tests.test_line.Tests) ... ok
 test_segment (decodes.unit_tests.test_line.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.020s
+Ran 4 tests in 0.022s
 
 OK
 
@@ -126,7 +125,7 @@ test_properties (decodes.unit_tests.test_vec.Tests) ... ok
 test_static (decodes.unit_tests.test_vec.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.010s
+Ran 7 tests in 0.011s
 
 OK
 
@@ -135,8 +134,9 @@ OK
 test_mirror (decodes.unit_tests.test_xform.Tests) ... ok
 test_scale (decodes.unit_tests.test_xform.Tests) ... ok
 test_translation (decodes.unit_tests.test_xform.Tests) ... ok
+test_xform_hasbasis (decodes.unit_tests.test_xform.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.010s
+Ran 4 tests in 0.024s
 
 OK

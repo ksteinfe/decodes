@@ -232,18 +232,19 @@ class Xform(object):
             ]
             return xf
         
+
+        # HASPTS GEOMETRY
+        # applies transformation to the verts
+        if isinstance(other, HasPts) : 
+            other._verts = [v*self for v in other._verts]
+            return other
+
         # BASED GEOMETRY
-        # all objects that have a basis defined must apply their basis before transforming points
+        # all objects that are not HASPTS but have a basis defined must apply their basis before transforming points
         if isinstance(other, HasBasis) and (not other.is_baseless): 
             o = other.basis_applied()
             o.copy_props(other)
             other = o
-
-        if isinstance(other, HasPts) : 
-            verts = [Vec(pt*self) for pt in other.pts]
-            other.clear()
-            other._verts = verts
-            return other
                
         if isinstance(other, LinearEntity) : 
             other._pt = other._pt*self
