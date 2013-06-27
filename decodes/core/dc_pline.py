@@ -1,5 +1,5 @@
 from decodes.core import *
-from . import dc_base, dc_vec, dc_point #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
+from . import dc_base, dc_vec, dc_point, dc_has_pts #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
 if VERBOSE_FS: print "pline.py loaded"
 
 import copy, collections
@@ -115,12 +115,12 @@ class PLine(HasPts):
         
     def eval(self,t):
         """
-        evaluates this HasPts at the specified parameter t
-        a t-value of 0 will result in a point conincident with HasPts[0]
-        a t-value of 1 will result in a point conincident with HasPts[-1]
+        evaluates this PLine at the specified parameter t
+        a t-value of 0 will result in a point conincident with PLine.pts[0]
+        a t-value of 1 will result in a point conincident with PLine.pts[-1]
         """
-        if t > 1 : t = t%1.0
-        if t < 0 : t = 1.0 - abs(t)%1.0
+        if t > 1 : raise IndexError("Plines must be evaluated with t <= 1.0")
+        if t < 0 : raise IndexError("Plines must be evaluated with t >= 0.0")
         for n, ival in enumerate(Interval()//(len(self)-1)):
             if t in ival:
                 pa = self.pts[n]

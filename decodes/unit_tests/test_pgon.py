@@ -29,3 +29,21 @@ class Tests(unittest.TestCase):
         func(2,Segment(Point(1,1,3),Point(0,1,3)))
         func(3,Segment(Point(0,1,3),Point(0,0,3)))
         
+
+    def test_rgon_construction(self):
+        argon = RGon.from_edge(Segment.by_coords2d(0,0,0,1),3)
+        self.AssertPointsAlmostEqual( argon.pts[0] , Point() )
+        self.AssertPointsAlmostEqual( argon.pts[-1] , Point(0,1) )
+
+
+    def test_rgon_to_pgon(self):
+        rgon = RGon(3,1.0)
+        pgon = rgon.to_pgon()
+
+        self.assertFalse(isinstance(pgon, RGon))
+        for n in range(len(rgon)) : self.assertEqual(rgon.pts[n],pgon.pts[n])
+
+    def AssertPointsAlmostEqual(self,pa,pb,places=4):
+        self.assertAlmostEqual(pa.x,pb.x,places)
+        self.assertAlmostEqual(pa.y,pb.y,places)
+        self.assertAlmostEqual(pa.z,pb.z,places)

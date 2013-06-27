@@ -74,6 +74,11 @@ class Vec(Geometry):
     @z.setter
     def z(self,value): self._z = value
 
+
+    @property
+    def tup(self):
+        return self._x,self._y,self._z
+
     def __add__(self, vec):
         """Overloads the addition **(+)** operator. 
         Returns a new vector that results from adding this vector's world coordinates to the other vector's world coordinates.

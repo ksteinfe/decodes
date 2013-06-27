@@ -233,7 +233,11 @@ class LinearEntity(Geometry):
         """
         return self.spt+(self.vec.normalized(self.vec.length*t))
 
-    
+    @staticmethod
+    def by_coords2d(x0=0.0,y0=0.0,x1=1.0,y1=1.0): return Segment(Point(x0,y0),Point(x1,y1))
+
+    @staticmethod
+    def by_coords3d(x0=0.0,y0=0.0,z0=0.0,x1=1.0,y1=1.0,z1=1.0): return Segment(Point(x0,y0,z0),Point(x1,y1,z1))
 
 class Line(LinearEntity):
     """A line in space."""

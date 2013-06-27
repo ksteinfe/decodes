@@ -145,10 +145,16 @@ class HasBasis(Geometry):
     """
     
     @property
+    def basis(self): return self._basis
+
+    @basis.setter
+    def basis(self, basis): self._basis = basis
+
+    @property
     def is_baseless(self):
         """Tells us if a basis has been defined
         """
-        return (not hasattr(self, 'basis')) or self.basis is None
+        return (not hasattr(self, '_basis')) or self._basis is None
 
 
     def basis_applied(self, copy_children=True):

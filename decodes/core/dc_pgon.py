@@ -1,5 +1,5 @@
 from decodes.core import *
-from . import dc_base, dc_interval, dc_vec, dc_point, dc_cs #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
+from . import dc_base, dc_interval, dc_vec, dc_point, dc_cs, dc_has_pts #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
 if VERBOSE_FS: print "polygon.py loaded"
 
 import copy, collections
@@ -10,7 +10,8 @@ class PGon(HasPts):
     a very simple 2d polygon class
     Polygons limit their vertices to x and y dimensions, and enforce that they employ a basis.    Transformations of a polygon should generally be applied to the basis.    Any tranfromations of the underlying vertices should ensure that the returned vectors are limited to x and y dimensions
     """
-    
+    subclass_attr = ['_edges'] # this list of props is unset anytime this HasPts object changes
+
     def __init__(self, vertices=None, basis=None):
         """ PGon Constructor.
         
@@ -62,8 +63,8 @@ class PGon(HasPts):
     def eval(self,t):
         """
         evaluates this polygon at the specified parameter t
-        a t-value of 0 will result in a point conincident with PGon[0]
-        a t-value of 1 will result in a point conincident with PGon[-1]
+        a t-value of 0 will result in a point conincident with PGon.pts[0]
+        a t-value of 1 will result in a point conincident with PGon.pts[-1]
         """
         if t > 1 : t = t%1.0
         if t < 0 : t = 1.0 - abs(t)%1.0
@@ -75,6 +76,7 @@ class PGon(HasPts):
                 except:
                     pb = self.pts[0]
                 return Point.interpolate(pa,pb,ival.deval(t))
+
 
     def near(self, p):
         """Returns a tuple of the closest point to a given PGon, the index of the closest segment and the distance from the Point to the near Point.
@@ -156,10 +158,13 @@ class RGon(PGon):
     '''
     A Regular Polygon Class
     '''
+    subclass_attr = ['_edges'] # this list of props is unset anytime this HasPts object changes
+
     def __init__(self, num_of_sides, radius=None, basis=None, edge_length=None, apothem=None):
         """ RGon Constructor.
         
         """ 
+        self._in_init = True
         if num_of_sides < 3 : raise GeometricError("Cannot create a regular polygon with fewer than three sides.")
         if radius is None and edge_length is None and apothem is None : raise GeometricError("You must specify one and only one of the following: radius, edge length, apothem")
         if radius is not None and edge_length is not None  and apothem is not None : raise GeometricError("You must specify one and only one of the following: radius, edge length, apothem")
@@ -183,6 +188,8 @@ class RGon(PGon):
         verts = [Point( self.radius * math.cos(step*n), self.radius * math.sin(step*n))  for n in range(num_of_sides) ]
 
         super(RGon,self).__init__(verts, basis)
+        self._in_init = False
+
 
     @property
     def radius(self):
@@ -245,7 +252,6 @@ class RGon(PGon):
             return self._iangle
         
 
-
     def inflate(self):
         '''
         returns a regular polygon inscribed inside this one while maintaining the same number of sides
@@ -265,6 +271,12 @@ class RGon(PGon):
         y = self.basis.zAxis.cross(x)
         basis = CS(o,x,y)
         return RGon(self._nos,basis=basis,apothem=self.radius)
+
+    def to_pgon(self):
+        return PGon(self._verts,self.basis)
+
+    def _vertices_changed(self):
+        if not self._in_init : raise GeometricError("I cannot manipulate the vertices of this PGon.  Convert to PGon using RGon.to_pgon()")
 
     @staticmethod
     def from_edge(segment,num_of_sides,normal=Vec(0,0,1)):

@@ -4,6 +4,8 @@ import decodes.unit_tests
 
 #outie = dc.makeOut(dc.Outies.SVG, "svg_out", canvas_dimensions=Interval(1000,500), flip_y = True)
 
+
+'''
 pts = [Point(),Point(0,1),Point(2,0)]
 pl  = PLine(pts)
 a = 1
@@ -13,7 +15,7 @@ a = 1
 print pl.edges
 
 
-'''
+
 
 pts = [Point(),Point(1,1),Point(2,2)]
 cs = CS(Point(0,0,-2))

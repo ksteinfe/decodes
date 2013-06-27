@@ -1,5 +1,5 @@
 from decodes.core import *
-from . import dc_base, dc_vec, dc_point #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
+from . import dc_base, dc_vec, dc_point, dc_has_pts #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
 if VERBOSE_FS: print "mesh.py loaded"
 
 import copy, collections
@@ -8,7 +8,7 @@ class Mesh(HasPts):
     """
     a very simple mesh class
     """
-    ## TODO: make mesh only triangles
+    subclass_attr = [] # this list of props is unset anytime this HasPts object changes
     
     def __init__(self, vertices=None, faces=None, basis=None):
         """Mesh Constructor
