@@ -258,7 +258,7 @@ class RGon(PGon):
         '''
         o = self.basis.origin
         x = Vec(o,Point.interpolate(self.pts[0],self.pts[1]))
-        y = self.basis.zAxis.cross(x)
+        y = self.basis.z_axis.cross(x)
         basis = CS(o,x,y)
         return RGon(self._nos,self.apothem,basis)
 
