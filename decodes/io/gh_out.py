@@ -12,7 +12,8 @@ import Rhino.Geometry as rg
 
 class GrasshopperOut(outie.Outie):
     """outie for pushing stuff to grasshopper"""
-    
+    raw_types = ["Curve","Surface"]
+
     def __init__(self, name):
         super(GrasshopperOut,self).__init__()
         self._allow_foreign = True
@@ -74,6 +75,11 @@ class GrasshopperOut(outie.Outie):
                 else : self._add_branch(i,tree,tree_p, npath)
             return True
         
+        # ADD ANY RAW TYPES DIRECTLY
+        if any(p in str(type(g)) for p in GrasshopperOut.raw_types) : 
+            tree.Add(g,path)
+            tree_p.Add(extract_props(g), path)
+            return True
 
         if isinstance(g, Point) : 
             tree.Add(self._drawPoint(g),path)

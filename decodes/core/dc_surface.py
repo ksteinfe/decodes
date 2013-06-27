@@ -31,11 +31,15 @@ class Surface(IsParametrized):
         if tol_u is not None : self.tol_u = tol_u
         if tol_v is not None : self.tol_v = tol_v
 
-        if not isinstance(self.func(self.u0,self.v0), Vec) : raise GeometricError("Surface not valid: The given function does not return a point at parameter %s, %s"%(self.u0,self.v0))
-        if not isinstance(self.func(self.u0,self.v1), Vec) : raise GeometricError("Surface not valid: The given function does not return a point at parameter %s, %s"%(self.u0,self.v1))
-        if not isinstance(self.func(self.u1,self.v1), Vec) : raise GeometricError("Surface not valid: The given function does not return a point at parameter %s, %s"%(self.u1,self.v1))
-        if not isinstance(self.func(self.u1,self.v0), Vec) : raise GeometricError("Surface not valid: The given function does not return a point at parameter %s, %s"%(self.u1,self.v0))
-        
+        for u,v in [(self.u0,self.v0),(self.u0,self.v1),(self.u1,self.v1),(self.u1,self.v0)]:
+            try:
+                pt = self.func(u,v)
+                pt.x
+                pt.y
+                pt.z
+            except:
+                raise GeometricError("Surface not valid: The given function does not return a point at parameter %s, %s"%(u,v))
+                    
         self._rebuild_surrogate()
 
 
