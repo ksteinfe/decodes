@@ -39,18 +39,31 @@ class CS(Geometry, Basis):
     def __repr__(self):
         return "cs o[{0},{1},{2}] n[{3},{4},{5}]".format(self.origin.x,self.origin.y,self.origin.z,self.z_axis.x,self.z_axis.y,self.z_axis.z)
 
-    """a CS can act as a basis for a point"""
-    def eval(self,a=0,b=0,c=0):
+    def eval(self,a,b=0,c=0):
+        """
+        evaluates a point in CS coordinates and returns a Point containing the coordinates of a corresponding Point defined in World coordinates
+        """
         try:
-            # try using a as a point
-            x = a.x
-            y = a.y
-            z = a.z
+            x,y,z = a.x,a.y,a.z
         except:
-            x = a
-            y = b
-            z = c
-        return self.origin + ((self.x_axis*x)+(self.y_axis*y)+(self.z_axis*z))
+            x,y,z = a,b,c
+        return Point(self.origin + ((self.x_axis*x)+(self.y_axis*y)+(self.z_axis*z)))
+
+    def deval(self,a,b=0,c=0):
+        """
+        evaluates a point in World coordinates and returns a Point containing the coordinates of a corresponding Point defined in CS coordinates
+        """
+        from .dc_line import Line  
+        try:
+            x,y,z = a.x,a.y,a.z
+        except:
+            x,y,z = a,b,c
+        
+        pt = Point(x,y,z)
+        xx = Line(self.origin,self.x_axis).near(pt)[1]
+        yy = Line(self.origin,self.y_axis).near(pt)[1]
+        zz = Line(self.origin,self.z_axis).near(pt)[1]
+        return Vec(xx,yy,zz)
 
     @property
     def xform(self):

@@ -5,7 +5,7 @@ test_empty_constructor (decodes.unit_tests.test_pgon.Tests) ... ok
 test_segs_and_edges (decodes.unit_tests.test_pgon.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.391s
+Ran 2 tests in 0.117s
 
 OK
 
@@ -15,7 +15,7 @@ test_empty_constructor (decodes.unit_tests.test_pline.Tests) ... ok
 test_segs_and_edges (decodes.unit_tests.test_pline.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.697s
+Ran 2 tests in 0.045s
 
 OK
 
@@ -27,7 +27,7 @@ test_face_access (decodes.unit_tests.test_mesh.Tests) ... ok
 test_simple_constructor (decodes.unit_tests.test_mesh.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.046s
+Ran 4 tests in 0.029s
 
 OK
 
@@ -49,13 +49,44 @@ OK
 test_appending_points (decodes.unit_tests.test_has_pts.Tests) ... ok
 test_basis_applied_and_stripped (decodes.unit_tests.test_has_pts.Tests) ... ok
 test_centroid (decodes.unit_tests.test_has_pts.Tests) ... ok
-test_item_access (decodes.unit_tests.test_has_pts.Tests) ... ok
-test_manipulating_points (decodes.unit_tests.test_has_pts.Tests) ... ok
+test_item_access (decodes.unit_tests.test_has_pts.Tests) ... ERROR
+test_manipulating_points (decodes.unit_tests.test_has_pts.Tests) ... FAIL
+test_swap_basis (decodes.unit_tests.test_has_pts.Tests) ... FAIL
+
+======================================================================
+ERROR: test_item_access (decodes.unit_tests.test_has_pts.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\git\decodes\decodes\unit_tests\test_has_pts.py", line 16, in test_item_access
+    self.assertRaises(TypeError,func) # confirms that an error is raised when this we try to set a point using slicing syntax
+  File "C:\Python27\lib\unittest\case.py", line 471, in assertRaises
+    callableObj(*args, **kwargs)
+  File "G:\git\decodes\decodes\unit_tests\test_has_pts.py", line 15, in func
+    def func(): pline[0:2] = Point()
+  File "G:\git\decodes\decodes\core\dc_point.py", line 471, in __setitem__
+    self._unset_props()
+AttributeError: 'PLine' object has no attribute '_unset_props'
+
+======================================================================
+FAIL: test_manipulating_points (decodes.unit_tests.test_has_pts.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\git\decodes\decodes\unit_tests\test_has_pts.py", line 56, in test_manipulating_points
+    self.assertEqual(Point(1,0,-1),pgon.pts[1],"access via the pts function returns a list of point objects, which does not permit manipulation")
+AssertionError: access via the pts function returns a list of point objects, which does not permit manipulation
+
+======================================================================
+FAIL: test_swap_basis (decodes.unit_tests.test_has_pts.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\git\decodes\decodes\unit_tests\test_has_pts.py", line 27, in test_swap_basis
+    self.assertEqual(Point( math.cos(val), math.sin(val), val) ,pl.pts[n])
+AssertionError: pt[1.0,0.0,0.0] != pt[1.0,0.0,-1.0]
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.090s
+Ran 6 tests in 0.117s
 
-OK
+FAILED (failures=2, errors=1)
 
 
 == TEST_CURVE ==
@@ -67,7 +98,7 @@ test_subdivide (decodes.unit_tests.test_curve.Tests) ... ok
 test_tolerance (decodes.unit_tests.test_curve.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 6 tests in 0.855s
+Ran 6 tests in 0.911s
 
 OK
 
@@ -98,7 +129,7 @@ test_operations (decodes.unit_tests.test_interval.Tests) ... ok
 test_properties (decodes.unit_tests.test_interval.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.003s
+Ran 3 tests in 0.002s
 
 OK
 
@@ -110,7 +141,7 @@ test_ray (decodes.unit_tests.test_line.Tests) ... ok
 test_segment (decodes.unit_tests.test_line.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.022s
+Ran 4 tests in 0.023s
 
 OK
 
@@ -125,7 +156,7 @@ test_properties (decodes.unit_tests.test_vec.Tests) ... ok
 test_static (decodes.unit_tests.test_vec.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.011s
+Ran 7 tests in 0.012s
 
 OK
 
@@ -137,6 +168,6 @@ test_translation (decodes.unit_tests.test_xform.Tests) ... ok
 test_xform_hasbasis (decodes.unit_tests.test_xform.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.024s
+Ran 4 tests in 0.019s
 
 OK

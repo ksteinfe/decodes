@@ -14,11 +14,12 @@ class Tests(unittest.TestCase):
         self.assertEqual(len(pl.edges),10,"len(PLine.edges) returns the number of segments in the Pline")
         self.assertEqual(len(pl),11,"len(PLine) returns the number of verts in the Pline")
         
+        
         for n,ival in enumerate(Interval(0,10)//10):
           seg = Segment(Point(ival.a,ival.a),Point(ival.b,ival.b))
           self.assertEqual(seg.spt,pl.seg(n).spt)
           self.assertEqual(seg.ept,pl.seg(n).ept)
           self.assertEqual(seg.spt,pl.edges[n].spt)
           self.assertEqual(seg.ept,pl.edges[n].ept)
-
+          
         

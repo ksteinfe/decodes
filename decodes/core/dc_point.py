@@ -449,9 +449,14 @@ class HasPts(HasBasis):
     A base class for anything that contains a list of vertices.
     All HasPts classes also have bases
     """
-    def __init__(self):
+    class_attr = ['_pts','_edges'] # this list of props is unset anytime this HasPts object changes
+
+    def __init__(self, vertices=None,basis=None):
         self._verts = [] # a list of vecs that represent the local coordinates of this object's points
-        self.basis = None
+        if (vertices is not None) : 
+            for v in vertices: self.append(v)
+        self.basis = basis # set the basis after appending the points
+
 
     def __getitem__(self,slice):
         sliced = self._verts[slice] # may return a singleton or list
@@ -463,6 +468,7 @@ class HasPts(HasBasis):
             #return Point(sliced)
     
     def __setitem__(self,index,other):
+        self._unset_props() # call this when any of storable properties (subclass_attr or class_attr) changes
         try:
             self._verts[index] = self._compatible_vec(other)
         except TypeError, e:
@@ -481,6 +487,7 @@ class HasPts(HasBasis):
             :result: None
             :rtype: None
         """    
+        self._unset_attr()  # call this when any of storable properties (subclass_attr or class_attr) changes
         for v in _verts: v = v + vec
 
     '''
@@ -536,6 +543,7 @@ class HasPts(HasBasis):
             :result: New vec.
             :rtype: Vec
         """  
+        self._unset_attr() # call this when any of storable properties (subclass_attr or class_attr) changes
         from .dc_xform import Xform
         if isinstance(other, Xform) : return other * self
         else : 
@@ -550,7 +558,13 @@ class HasPts(HasBasis):
 
             :rtype: Point or [Point]
         """
-        return [Point(vec,basis=self.basis) for vec in self._verts]
+        try:
+            return self._pts
+        except:
+            if self.is_baseless : self._pts =  [Point(vec) for vec in self._verts]
+            else : self._pts =  [self.basis.eval(vec) for vec in self._verts]
+            return self._pts
+
     
     @pts.setter
     def pts(self, verts): 
@@ -561,6 +575,7 @@ class HasPts(HasBasis):
             :type pts: Point or [Point]
             :result: Modfies this geometry by redefining the stored list of points
         """
+        self._unset_attr() # call this when any of storable properties (subclass_attr or class_attr) changes
         self._verts = []
         self.append(verts)
         
@@ -572,6 +587,7 @@ class HasPts(HasBasis):
             :type pts: Point or [Point]
             :result: Modfies this geometry by adding items to the stored list of points
         """
+        self._unset_attr()
         try : 
             for p in pts : self.append(p)
         except : 
@@ -579,6 +595,7 @@ class HasPts(HasBasis):
     
     def clear(self):
         """Clears this Geometry of all the Points contained within it"""
+        self._unset_attr() # call this when any of storable properties (subclass_attr or class_attr) changes
         del self._verts[:]
 
     @property
@@ -588,9 +605,11 @@ class HasPts(HasBasis):
             :returns: Centroid (point).
             :rtype: Point
         """
+        # TODO, make this unsettable
         return Point._centroid(self.pts) 
     
     def reverse(self):
+        self._unset_attr() # call this when any of storable properties (subclass_attr or class_attr) changes
         self._verts.reverse
         return self
 
@@ -599,6 +618,7 @@ class HasPts(HasBasis):
         rotates the vertices in this object.
         in the case of a PGon, this resets which pt is the first point
         """
+        self._unset_attr() # call this when any of storable properties (subclass_attr or class_attr) changes
         if n > len(self._verts): n =  n%len(self._verts)
         if n < -len(self._verts): n =  -abs(n)%len(self._verts)
         self._verts = self._verts[n:] + self._verts[:n]
@@ -612,9 +632,11 @@ class HasPts(HasBasis):
             :result: Object with basis applied.
             :rtype: Object
         """
+        # TODO: copy properties over
         clone = copy.copy(self)
         clone._verts = [Vec(pt.basis_applied()) for pt in self.pts]
         clone.basis = None
+        clone._unset_attr()  # call this when any of storable properties (subclass_attr or class_attr) changes
         return clone
     
     def basis_stripped(self): 
@@ -623,24 +645,40 @@ class HasPts(HasBasis):
             :result: Object with basis stripped.
             :rtype: Object
         """
+        # TODO: copy properties over
         clone = copy.copy(self)
-        clone._verts = [Vec(pt.basis_stripped()) for pt in self.pts]
         clone.basis = None
+        clone._unset_attr()  # call this when any of storable properties (subclass_attr or class_attr) changes
         return clone
 
 
     def _compatible_vec(self,other):
         """ Returns a vector compatible with the collection of vectors in this object if possible
         """
-        if self.is_baseless: return Vec(other) # if this object is baseless, then use the world coordinates of the other
-        if (not hasattr(other, 'basis')) or other.basis is None : 
-             # if the other is baseless, then use its world coordinates.  
-             # we assume here that the user is describing the point within this object's basis.
-             # they may, however, be trying to add a "world" point to a mesh with a defined basis
-             # if this is the case, we would have to describe this world point in terms of this object's basis... which isn't always possible
-             # we'll try and warn them.
-             #warnings.warn("You've just added a baseless point to a based object.  The world coordinates of the point have been interpreted as local coordinates of the object.  Is this what you wanted?")
-             return Vec(other)
+        if isinstance(other, Point):
+            if self.is_baseless: return Vec(other) # if this object is baseless, then use the world coordinates of the other
+            if (not hasattr(other, 'basis')) or other.basis is None : 
+                 # if the other is baseless, then devaluate the point so that it is described in terms of this object's basis.
+                 return Vec(self.basis.deval(other))
 
-        if self.basis is other.basis : return Vec(other._x,other._y,other._z) # if we share a basis, then use the local coordinates of the other
-        raise BasisError("The basis for this Geometry and the point you're adding do not match. Try applying or stripping the point of its basis, or describing the point in terms of this Geometry's basis")
+            if self.basis is other.basis : return Vec(other._x,other._y,other._z) # if we share a basis, then use the local coordinates of the other
+            raise BasisError("The basis for this Geometry and the point you're adding do not match. Try applying or stripping the point of its basis, or describing the point in terms of this Geometry's basis")
+        else:
+            try:
+                # Vecs (and anything else from which we can read x,y,z values) are interpreted in local coordinates
+                return Vec(other.x,other.y,other.z)
+            except:
+                raise GeometricError("Cannot find a representation of this thing that is compatible with a HasPts Geometry: "+str(other))
+
+    def _unset_attr(self):
+        for attr in self.class_attr : 
+            try: delattr(self, attr)
+            except:
+                #print "can't unset ",attr
+                pass
+        if hasattr(self, 'subclass_attr'):
+            for attr in self.subclass_attr : 
+                try: delattr(self, attr)
+                except:
+                    #print "can't unset ",attr
+                    pass

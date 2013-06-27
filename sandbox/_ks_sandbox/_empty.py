@@ -1,11 +1,16 @@
 import decodes as dc
 from decodes.core import *
-#import decodes.unit_tests
+import decodes.unit_tests
 
 #outie = dc.makeOut(dc.Outies.SVG, "svg_out", canvas_dimensions=Interval(1000,500), flip_y = True)
 
-
-
+pts = [Point(),Point(0,1),Point(2,0)]
+pl  = PLine(pts)
+a = 1
+print pl.edges
+pl.rotate(-1)
+a = 1
+print pl.edges
 
 
 '''
@@ -32,4 +37,6 @@ print pg.area
 
 pg.reverse().rotate(-1)
 '''
-raw_input("press enter...")
+
+
+#raw_input("press enter...")

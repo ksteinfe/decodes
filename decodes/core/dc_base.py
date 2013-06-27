@@ -126,11 +126,17 @@ class Basis(object):
     A base class for anything that wants to call itself a basis. Bases must impliment the folloiwng methods:
     """
     
-    def eval(self):
-        raise NotImplementedError("Evalutate not implimented.    I am a BAD basis!")
+    def eval(self,a,b=0,c=0):
+        """
+        evaluates a point in Basis coordinates and returns a Vec containing the coordinates of a corresponding Point defined in World coordinates
+        """
+        raise NotImplementedError("Evalutate not implemented.    I am a BAD basis!")
 
-    def deval(self, world_point):
-        raise NotImplementedError("Devalutate not implimented.    I am a BAD basis!")
+    def deval(self,a,b=0,c=0):
+        """
+        evaluates a point in World coordinates and returns a Vec containing the coordinates of a corresponding Point defined in Basis coordinates
+        """
+        raise NotImplementedError("Devalutate not implemented.    I am a BAD basis!")
 
 
 class HasBasis(Geometry):

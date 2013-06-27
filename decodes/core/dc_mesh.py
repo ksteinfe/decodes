@@ -22,10 +22,7 @@ class Mesh(HasPts):
             :result: Mesh object.
             :rtype: Mesh
         """
-        super(Mesh,self).__init__() #HasPts constructor initializes list of verts and an empty basis
-        self.basis = basis
-        if (vertices is not None) : 
-            for p in vertices: self.append(p)
+        super(Mesh,self).__init__(vertices,basis) #HasPts constructor handles initalization of verts and basis
         self._faces = [] if (faces is None) else faces
 
         

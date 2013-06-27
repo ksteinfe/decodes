@@ -8,8 +8,9 @@ class PLine(HasPts):
     """
     a simple polyline class
     """
-    
-    def __init__(self, vertices=None):
+    subclass_attr = ['_edges','_length'] # this list of props is unset anytime this HasPts object changes
+
+    def __init__(self, vertices=None, basis=None):
         """Polyline constructor.
         
             :param vertices: Vertices to build the pline.
@@ -19,10 +20,9 @@ class PLine(HasPts):
 
         .todo: check if passed an empty array of points
         """
-        super(PLine,self).__init__() #HasPts constructor initializes list of verts and an empty basis
-        if (vertices is not None) : 
-            for v in vertices: self.append(v)
-    
+        super(PLine,self).__init__(vertices,basis) #HasPts constructor handles initalization of verts and basis
+        self.basis = CS() if (basis is None) else basis # set the basis after appending the points
+
     @property
     def edges(self):
         """Returns the edges of a PLine.
@@ -30,10 +30,11 @@ class PLine(HasPts):
             :result: List of edges of a PLine
             :rtype: [Segment]
         """
-        edges = []
-        for n in range(len(self)-1):
-            edges.append(self.seg(n))
-        return edges
+        try:
+            return self._edges
+        except:
+            self._edges = [ self.seg(n) for n in range(len(self._verts)-1) ]
+            return self._edges
 
     @property
     def length(self):
@@ -42,9 +43,14 @@ class PLine(HasPts):
             :result: Length of this PLine
             :rtype: float
         """
-        return sum([edge.length for edge in self.edges])
+        try:
+            return self._length
+        except:
+            self._length = sum([self.pts[n].distance(self.pts[n+1]) for n in range(-1,len(self.pts)-1) ] )
+            return self._length
         
     def reverse(self) :
+        self._unset_attr() # call this when any of storable properties (subclass_attr or class_attr) changes
         pts = []
         for pt in reversed(self): pts.append(pt)
         rpline = PLine(pts)
@@ -52,7 +58,7 @@ class PLine(HasPts):
 
 
     def join (self, other, tol=False) :
-        
+        self._unset_attr() # call this when any of storable properties (subclass_attr or class_attr) changes
         if self[-1].is_identical(other[0],tol) :
             pts = []
             for s in self : pts.append(s)
@@ -104,7 +110,7 @@ class PLine(HasPts):
             :result: Line segment
             :rtype: Segment
         """
-        if index >= len(self) : raise IndexError()
+        if index >= len(self._verts) : raise IndexError()
         return Segment(self.pts[index],self.pts[index+1])
         
     def eval(self,t):

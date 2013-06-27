@@ -234,7 +234,7 @@ class Xform(object):
         
 
         # HASPTS GEOMETRY
-        # applies transformation to the verts
+        # applies transformation to the verts, leaving the basis intact
         if isinstance(other, HasPts) : 
             other._verts = [v*self for v in other._verts]
             return other

@@ -15,6 +15,19 @@ class Tests(unittest.TestCase):
         def func(): pline[0:2] = Point()
         self.assertRaises(TypeError,func) # confirms that an error is raised when this we try to set a point using slicing syntax
 
+    def test_swap_basis(self):
+        vecs = [Vec(1.0,n,n) for n in Interval(0,math.pi)/10]
+        cs_a = CS(0,0,-1)
+
+        pl = PLine(vecs,basis=cs_a)
+        for n, val in enumerate(Interval(0,math.pi)/10): self.assertEqual(Point(1.0,val,val-1),pl.pts[n])
+
+        pl.basis = CylCS()
+        for n, val in enumerate(Interval(0,math.pi)/10): 
+            self.assertEqual(Point( math.cos(val), math.sin(val), val) ,pl.pts[n])
+
+
+
     def test_appending_points(self):
         pts = [Point(x,0,0) for x in range(10)]
         pgon = PGon(pts,basis=CS(Point(0,0,-1))) # the pts here are interpreted in local coordinates
@@ -22,9 +35,13 @@ class Tests(unittest.TestCase):
         self.assertEqual(Point(0,0,-1),pgon.pts[0],"when constructing with a defined basis, the given points are interpreted in local coordinates")
 
         pgon = PGon(basis=CS(1,2,3))
+        pgon.append(Point())
+        self.assertEqual(Vec(-1,-2,-3),pgon[0],"Points appended to a object with an already defined basis will be interpreted in world coordinates")
+        self.assertEqual(Point(0,0,0),pgon.pts[0],"Points appended to a object with an already defined basis will be interpreted in world coordinates")
+
         pgon.append(Vec())
-        self.assertEqual(Vec(),pgon[0],"new points appended to a object with an already defined basis will be interpreted in local coordinates")
-        self.assertEqual(Point(1,2,3),pgon.pts[0],"new points appended to a object with an already defined basis will be interpreted in local coordinates")
+        self.assertEqual(Vec(0,0,0),pgon[1],"Vecs appended to a object with an already defined basis will be interpreted in local coordinates")
+        self.assertEqual(Point(1,2,3),pgon.pts[1],"Vecs appended to a object with an already defined basis will be interpreted in local coordinates")
 
         #todo: replace an existing point
 
