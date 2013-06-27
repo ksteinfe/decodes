@@ -43,6 +43,14 @@ class Tests(unittest.TestCase):
         self.assertFalse(isinstance(pgon, RGon))
         for n in range(len(rgon)) : self.assertEqual(rgon.pts[n],pgon.pts[n])
 
+    def test_inflation(self):
+        tri_a = RGon(3,1.0)
+        tri_b = tri_a.inflate()
+
+        self.AssertPointsAlmostEqual( tri_b.pts[0] , tri_a.edges[0].midpoint )        
+
+
+
     def AssertPointsAlmostEqual(self,pa,pb,places=4):
         self.assertAlmostEqual(pa.x,pb.x,places)
         self.assertAlmostEqual(pa.y,pb.y,places)
