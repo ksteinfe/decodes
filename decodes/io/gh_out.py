@@ -145,7 +145,6 @@ class GrasshopperOut(outie.Outie):
         return rg.Vector3d(vec.x,vec.y,vec.z)
 
     def _drawPoint(self, pt):
-        pt = pt.basis_applied()
         return rg.Point3d(pt.x,pt.y,pt.z)
         
     def _drawPlane(self, pln):
