@@ -1,9 +1,18 @@
 import decodes as dc
 from decodes.core import *
-import decodes.unit_tests
+#import decodes.unit_tests
 
 #outie = dc.makeOut(dc.Outies.SVG, "svg_out", canvas_dimensions=Interval(1000,500), flip_y = True)
 
+pts = [Point(-6.0191,-6.1502,0.0), Point(-1.2203,-6.0208,0.0), Point(-6.1704,11.5784,0.0)]
+t = 1.0
+
+curve = Curve.bezier(pts)
+cv = curve.eval_curvature(t)
+print cv[1]
+
+
+print cv
 
 '''
 pts = [Point(),Point(0,1),Point(2,0)]

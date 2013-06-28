@@ -222,15 +222,31 @@ class Curve(HasBasis,IsParametrized):
         # caluculates approximate curvature
         # returns curvature value and osc circle
         pt, vec_pos, vec_neg = self._neighborhood(t)
+
+        # if given a curve endpoint, nudge vectors a bit so we don't get zero curvature, but leave origin the same
+        nudge = self.tol/100
+        if (t-nudge <= self.domain.a):
+            nhood = self._neighborhood(nudge)
+            vec_pos = nhood[1]
+            vec_neg = nhood[2]
+        if (t+nudge >= self.domain.b):
+            nhood = self._neighborhood(1.0-nudge)
+            vec_pos = nhood[1]
+            vec_neg = nhood[2]
+
         pt_plus = pt + vec_pos
         pt_minus = pt + vec_neg
 
-        v1 = vec_pos.inverted()
-        v2 = vec_neg.inverted()
+        v1 = vec_pos
+        v2 = vec_neg
         v3 = Vec(vec_pos - vec_neg)
 
-        rad_osc = 0.5*v1.length*v2.length*v3.length/(v1*v3).length
-        denom = 2*(v1.cross(v3).length)*(v1.cross(v3).length)
+        xl = v1.cross(v3).length
+        if xl == 0 :
+            return 0,Ray(pt,vec_pos)
+
+        rad_osc = 0.5*v1.length*v2.length*v3.length/xl
+        denom = 2*xl*xl
         a1 = v3.length*v3.length*v1.dot(v2)/denom
         a2 = v2.length*v2.length*v1.dot(v3)/denom
         a3 = v1.length*v1.length*(-v2.dot(v3))/denom
@@ -259,8 +275,8 @@ class Curve(HasBasis,IsParametrized):
         if (t-nudge >= self.domain.a): vec_minus = Vec(pt_t,self.func(t - nudge))
         if (t+nudge <= self.domain.b): vec_plus = Vec(pt_t,self.func(t + nudge))
 
-        if not vec_plus: vec_plus = pt_t + vec_minus.inverted()
-        if not vec_minus: vec_minus = pt_t + vec_plus.inverted()
+        if not vec_plus: vec_plus = vec_minus.inverted()
+        if not vec_minus: vec_minus = vec_plus.inverted()
 
         return pt_t,vec_plus,vec_minus
 
