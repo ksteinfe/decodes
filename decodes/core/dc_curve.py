@@ -205,21 +205,66 @@ class Curve(HasBasis,IsParametrized):
         if t > self.domain.b and t < self.domain.b+self.tol : t = self.domain.b
 
         if t<self.domain.a or t>self.domain.b : raise DomainError("Curve evaluated outside the bounds of its domain: deval(%s) %s"%(t,self.domain))
-        pt = self._func(t)
         
-        nudge = self.tol/100
-        tv = t + nudge
-        if tv > self.domain.b :  vec = Vec(pt, self._func(t - nudge)).inverted()
-        else : vec = Vec(pt, self._func(tv))
+        pt, vec, neg_vec = self._neighborhood(t)
         
         #transform result to curve basis
         if not self.is_baseless:
             #pt.basis = self.basis
             #pt = pt.basis_applied()
+            # TODO: evaluate basis instead... not all bases will have xforms!
             pt = pt * self.basis.xform
             vec = vec * self.basis.xform.strip_translation()
         
         return Plane(pt, vec)
+
+    def deval_curvature(self,t):
+        # caluculates approximate curvature
+        # returns curvature value and osc circle
+        pt, vec_pos, vec_neg = self._neighborhood(t)
+        pt_plus = pt + vec_pos
+        pt_minus = pt + vec_neg
+
+        v1 = vec_pos.inverted()
+        v2 = vec_neg.inverted()
+        v3 = Vec(vec_pos - vec_neg)
+
+        rad_osc = 0.5*v1.length*v2.length*v3.length/(v1*v3).length
+        denom = 2*(v1.cross(v3).length)*(v1.cross(v3).length)
+        a1 = v3.length*v3.length*v1.dot(v2)/denom
+        a2 = v2.length*v2.length*v1.dot(v3)/denom
+        a3 = v1.length*v1.length*(-v2.dot(v3))/denom
+        center_osc = pt*a1 + pt_plus*a2 + pt_minus*a3
+
+        pln_out = Plane(center_osc, v1.cross(v2))
+        circ_out = Circle(pln_out,rad_osc)
+        print "deval_curvature not working right"
+        return (1/rad_osc, circ_out)
+
+    def eval_curvature(self,t):
+        """
+        """
+        if t<0 or t>1 : raise DomainError("eval_curvature() must be called with a number between 0->1: eval(%s)"%t)
+        return self.deval_curvature(Interval.remap(t,Interval(),self.domain))
+
+    def _neighborhood(self,t):
+        #nearest neighbors of a point t; used for discrete approximations calculations 
+        if t<self.domain.a or t>self.domain.b : raise DomainError("Curve evaluated outside the bounds of its domain: deval(%s) %s"%(t,self.domain))
+
+        nudge = self.tol/100
+        pt_t = self.func(t)
+        vec_minus = False
+        vec_plus = False
+
+        if (t-nudge >= self.domain.a): vec_minus = Vec(pt_t,self.func(t - nudge))
+        if (t+nudge <= self.domain.b): vec_plus = Vec(pt_t,self.func(t + nudge))
+
+        if not vec_plus: vec_plus = pt_t + vec_minus.inverted()
+        if not vec_minus: vec_minus = pt_t + vec_plus.inverted()
+
+        return pt_t,vec_plus,vec_minus
+
+
 
     def eval(self,t):
         """ Evaluates this Curve and returns a Plane.
