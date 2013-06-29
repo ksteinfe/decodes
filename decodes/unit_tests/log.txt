@@ -8,7 +8,7 @@ test_rgon_to_pgon (decodes.unit_tests.test_pgon.Tests) ... ok
 test_segs_and_edges (decodes.unit_tests.test_pgon.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.093s
+Ran 5 tests in 0.155s
 
 OK
 
@@ -18,7 +18,7 @@ test_empty_constructor (decodes.unit_tests.test_pline.Tests) ... ok
 test_segs_and_edges (decodes.unit_tests.test_pline.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.080s
+Ran 2 tests in 0.079s
 
 OK
 
@@ -30,7 +30,7 @@ test_face_access (decodes.unit_tests.test_mesh.Tests) ... ok
 test_simple_constructor (decodes.unit_tests.test_mesh.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.040s
+Ran 4 tests in 0.031s
 
 OK
 
@@ -43,7 +43,7 @@ test_empty_constructor (decodes.unit_tests.test_point.Tests) ... ok
 test_nearest_point (decodes.unit_tests.test_point.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.029s
+Ran 5 tests in 0.030s
 
 OK
 
@@ -58,7 +58,7 @@ test_swap_basis (decodes.unit_tests.test_has_pts.Tests) ... ok
 test_unsetting (decodes.unit_tests.test_has_pts.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.172s
+Ran 7 tests in 0.161s
 
 OK
 
@@ -72,15 +72,16 @@ test_subdivide (decodes.unit_tests.test_curve.Tests) ... ok
 test_tolerance (decodes.unit_tests.test_curve.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 6 tests in 1.045s
+Ran 6 tests in 1.051s
 
 OK
 
 
 == TEST_SURFACE ==
+test_curvature (decodes.unit_tests.test_surface.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 0 tests in 0.000s
+Ran 1 test in 0.113s
 
 OK
 
@@ -115,7 +116,7 @@ test_ray (decodes.unit_tests.test_line.Tests) ... ok
 test_segment (decodes.unit_tests.test_line.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.016s
+Ran 4 tests in 0.015s
 
 OK
 
@@ -130,7 +131,7 @@ test_properties (decodes.unit_tests.test_vec.Tests) ... ok
 test_static (decodes.unit_tests.test_vec.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.012s
+Ran 7 tests in 0.011s
 
 OK
 

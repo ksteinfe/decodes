@@ -70,6 +70,42 @@ class Tests(unittest.TestCase):
                 pt_s = srf.surrogate.pts[row+u]
                 self.AssertPointsAlmostEqual(pt_s,pt)
 
+
+    def _test_isocurves(self):
+        def func(u,v):
+            return Point(0,u,v)
+
+        srf = Surface(func)
+        iso_u = srf.isocurve(u_val=0.5)
+        iso_v = srf.isocurve(v_val=0.5)
+
+        self.assertEqual(iso_u.eval(0.25).origin,Point(0,0.5,0.25))
+        self.assertEqual(iso_v.eval(0.25).origin,Point(0,0.25,0.5))
+
+        with self.assertRaises(AttributeError):  iso_fail = srf.isocurve()
+        with self.assertRaises(DomainError):  iso_fail = srf.isocurve(u_val=2.5)
+        with self.assertRaises(AttributeError):  iso_fail = srf.isocurve(u_val=0.5,v_val=0.5)
+
+    def test_curvature(self):
+        def func(u,v):
+            return Point(0,u,v)
+
+        srf = Surface(func)
+        for u,v in [(0,0),(0,1),(0.5,0.5),(1,0),(1,1)]:
+            crvtr = srf.eval_curvature(0,0,True)
+            self.assertEqual(crvtr[0],0.0)
+            self.assertEqual(crvtr[1][0],0.0)
+            self.assertEqual(crvtr[1][1],0.0)
+
+
+        def func(u,v):
+            return Point(u,v,math.sin(u+v))
+        twopi = Interval.twopi()
+        srf = Surface(func,twopi,twopi)
+
+        crvtr = srf.eval_curvature(0.25,0.5, True)
+
+
     def AssertPointsAlmostEqual(self,pa,pb,places=4):
         self.assertAlmostEqual(pa.x,pb.x,places)
         self.assertAlmostEqual(pa.y,pb.y,places)

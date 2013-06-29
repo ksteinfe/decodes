@@ -38,7 +38,7 @@ class Surface(IsParametrized):
                 pt.y
                 pt.z
             except:
-                raise GeometricError("Surface not valid: The given function does not return a point at parameter %s, %s"%(u,v))
+                raise GeometricError("Surface not valid: The given function does not return a point or plane at parameter %s, %s"%(u,v))
                     
         self._rebuild_surrogate()
 
@@ -108,6 +108,10 @@ class Surface(IsParametrized):
         self._rebuild_surrogate()
 
     @property
+    def tol_u_nudge(self):
+        return self.tol_u/100.0
+
+    @property
     def tol_v(self):
         """
         """
@@ -118,6 +122,10 @@ class Surface(IsParametrized):
         self._tol[1] = tolerance
         if self._tol[1] > self.tol_max[1] :  self._tol[1] = self.tol_max[1]
         self._rebuild_surrogate()
+
+    @property
+    def tol_v_nudge(self):
+        return self.tol_v/100.0
 
 
     def deval(self,u,v):
@@ -132,24 +140,17 @@ class Surface(IsParametrized):
             :result: Plane.
             :rtype: Plane
         """
+        '''
         # some rounding errors require something like this:
         if u < self.u0 and u > self.u0-self.tol_u : u = u0
         if u > self.u1 and u < self.u1+self.tol_u : u = u1
         if v < self.v0 and v > self.v0-self.tol_v : v = v0
         if v > self.v1 and v < self.v1+self.tol_v : v = v1
-
+        '''
         if u<self.u0 or u>self.u1 : raise DomainError("Surface evaluated outside the bounds of its u-domain: deval(%s) %s"%(u,self.domain_u))
         if v<self.v0 or v>self.v1 : raise DomainError("Surface evaluated outside the bounds of its v-domain: deval(%s) %s"%(v,self.domain_v))
-        pt = self._func(u,v)
         
-        nudge = 100
-        uu = u + self.tol_u/nudge
-        vv = v + self.tol_v/nudge
-        if uu > self.u1 :  vec_u = Vec(pt, self._func(u - self.tol_u/nudge,v)).inverted()
-        else : vec_u = Vec(pt, self._func(uu,v))
-        if vv > self.v1 :  vec_v = Vec(pt, self._func(u,v - self.tol_v/nudge)).inverted()
-        else : vec_v = Vec(pt, self._func(u,vv))
-        
+        pt,vec_u,vec_v = self._nudged(u,v)
         vec = vec_u.cross(vec_v)
 
         return Plane(pt, vec)
@@ -166,6 +167,92 @@ class Surface(IsParametrized):
         if u<0 or u>1 : raise DomainError("u out of bounds.  eval() must be called numbers between 0->1: eval(%s)"%u)
         if v<0 or v>1 : raise DomainError("v out of bounds.  eval() must be called numbers between 0->1: eval(%s)"%v)
         return self.deval(Interval.remap(u,Interval(),self.domain_u),Interval.remap(v,Interval(),self.domain_v))
+
+
+
+
+    def deval_curvature(self,u,v,calc_extras=False):
+        # returns curvature values and osc circles
+        pt, u_pos, u_neg, v_pos, v_neg = self._nudged(u,v,True)
+
+        # if given a surface edge, nudge vectors a bit so we don't get zero curvature, but leave origin the same
+        if (u-self.tol_u_nudge <= self.domain_u.a):
+            nudged = self._nudged(self.tol_u_nudge,v,True)
+            u_pos = nudged[1]
+            u_neg = nudged[2]
+        if (u+self.tol_u_nudge >= self.domain_u.b):
+            nudged = self._nudged(self.domain_u.b-self.tol_u_nudge,v,True)
+            u_pos = nudged[1]
+            u_neg = nudged[2]
+
+        if (v-self.tol_v_nudge <= self.domain_v.a):
+            nudged = self._nudged(u,self.tol_v_nudge,True)
+            v_pos = nudged[3]
+            v_neg = nudged[4]
+        if (v+self.tol_v_nudge >= self.domain_v.b):
+            nudged = self._nudged(u,self.domain_v.b-self.tol_v_nudge,True)
+            v_pos = nudged[3]
+            v_neg = nudged[4]
+
+        crv_u = Curve._curvature_from_vecs(pt,u_pos,u_neg,calc_extras)
+        crv_v = Curve._curvature_from_vecs(pt,v_pos,v_neg,calc_extras)
+        
+        if calc_extras : return crv_u[0]*crv_v[0], (crv_u[0],crv_v[0]),(crv_u[1],crv_v[1])
+        return crv_u,crv_v
+
+
+    def eval_curvature(self,u,v,calc_extras=False):
+        """
+        """
+        if u<0 or u>1 : raise DomainError("u out of bounds.  eval_curvature() must be called numbers between 0->1: eval(%s)"%u)
+        if v<0 or v>1 : raise DomainError("v out of bounds.  eval_curvature() must be called numbers between 0->1: eval(%s)"%v)
+        return self.deval_curvature(Interval.remap(u,Interval(),self.domain_u),Interval.remap(v,Interval(),self.domain_v),calc_extras)
+
+    def deval_gauss(self,u,v):
+        crvtr = self.deval_curvature(u,v)
+        return crvtr[0] * crvtr[1]
+
+    def eval_gauss(self,u,v):
+        """
+        """
+        if u<0 or u>1 : raise DomainError("u out of bounds.  eval_gauss() must be called numbers between 0->1: eval(%s)"%u)
+        if v<0 or v>1 : raise DomainError("v out of bounds.  eval_gauss() must be called numbers between 0->1: eval(%s)"%v)
+        return self.deval_gauss(Interval.remap(u,Interval(),self.domain_u),Interval.remap(v,Interval(),self.domain_v))
+
+
+    def _nudged(self,u,v,include_negs = False):
+        #nearest neighbors along u and v axis of point(u,v); used for discrete approximations calculations 
+        if u<self.domain_u.a or u>self.domain_u.b : raise DomainError("Curve evaluated outside the bounds of its u domain: deval(%s) %s"%(u,self.domain_u))
+        if v<self.domain_v.a or v>self.domain_v.b : raise DomainError("Curve evaluated outside the bounds of its v domain: deval(%s) %s"%(v,self.domain_v))
+        pt = Point(self.func(u,v))
+        
+        vec_u = False
+        vec_ui = False
+        if (u+self.tol_u_nudge <= self.domain_u.b): 
+            vec_u = Vec(pt,self.func(u + self.tol_u_nudge,v))
+        else:
+            vec_ui = Vec(pt,self.func(u - self.tol_u_nudge,v))
+            vec_u = vec_ui.inverted()
+
+        vec_v = False
+        vec_vi = False
+        if (v+self.tol_v_nudge <= self.domain_v.b): 
+            vec_v = Vec(pt,self.func(u,v + self.tol_v_nudge))
+        else:
+            vec_vi = Vec(pt,self.func(u,v - self.tol_v_nudge))
+            vec_v = vec_vi.inverted()
+
+        if not include_negs : return pt,vec_u,vec_v
+
+        if not vec_ui: 
+            if (u-self.tol_u_nudge >= self.domain_u.a): vec_ui = Vec(pt,self.func(u - self.tol_u_nudge,v))
+            else : vec_ui = vec_u.inverted()
+        if not vec_vi: 
+            if (v-self.tol_v_nudge >= self.domain_v.a): vec_vi = Vec(pt,self.func(u,v - self.tol_v_nudge))
+            else : vec_vi = vec_v.inverted()
+
+        return pt,vec_u,vec_ui,vec_v,vec_vi
+
 
 
     def _rebuild_surrogate(self):
@@ -203,6 +290,15 @@ class Surface(IsParametrized):
         
         return msh
 
+    def isocurve(self, u_val=None, v_val=None):
+        if u_val is None and v_val is None: raise AttributeError("Surface.isocurve requires either u_val OR v_val to be set")
+        if u_val is not None and v_val is not None: raise AttributeError("u_val AND v_val cannot both be set when generating a Surface.isocurve")
 
-
-
+        if v_val is None:
+            if u_val<self.u0 or u_val>self.u1 : raise DomainError("Isocurve cannot be generated outside the bounds of this Surface's u-domain (%s) %s"%(u_val,self.domain_u))
+            def iso_func(t):  return Point(self.func(u_val,t))
+            return Curve(iso_func,self.domain_u,self.tol_u)
+        else :
+            if v_val<self.v0 or v_val>self.v1 : raise DomainError("Isocurve cannot be generated outside the bounds of this Surface's v-domain (%s) %s"%(v_val,self.domain_v))
+            def iso_func(t): return Point(self.func(t,v_val))
+            return Curve(iso_func,self.domain_v,self.tol_v)

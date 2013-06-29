@@ -1,18 +1,37 @@
 import decodes as dc
 from decodes.core import *
-#import decodes.unit_tests
+import decodes.unit_tests
 
 #outie = dc.makeOut(dc.Outies.SVG, "svg_out", canvas_dimensions=Interval(1000,500), flip_y = True)
 
-pts = [Point(-6.0191,-6.1502,0.0), Point(-1.2203,-6.0208,0.0), Point(-6.1704,11.5784,0.0)]
-t = 1.0
+'''
+crv_a = Curve.bezier([Point(0,0),Point(0,1)])
+crv_b = Curve.bezier([Point(0,0,1),Point(0,1,1)])
+crv_c = Curve.bezier([Point(0,0,2),Point(0,1,2)])
 
-curve = Curve.bezier(pts)
-cv = curve.eval_curvature(t)
-print cv[1]
+def func(u,v):
+    pts = [crv.eval(u) for crv in [crv_a,crv_b,crv_c]]
+    return Curve.bezier(pts).eval(v)
+
+surf = Surface(func)
 
 
-print cv
+
+u = 0.5
+v = 0.5
+
+
+iso_u = surf.isocurve(u_val=u)
+iso_v = surf.isocurve(v_val=v)
+
+#iso_u.tol *= 0.25
+#iso_v.tol *= 0.25
+
+
+
+curv_u = iso_u.eval_curvature(v)
+curv_v = iso_v.eval_curvature(u)
+'''
 
 '''
 pts = [Point(),Point(0,1),Point(2,0)]

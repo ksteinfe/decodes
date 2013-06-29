@@ -141,8 +141,14 @@ class Curve(HasBasis,IsParametrized):
         if tolerance is not None : self.tol = tolerance
         if basis is not None : self.basis = basis
 
-        if not isinstance(self.func(self.domain.a), Point) : raise GeometricError("Curve not valid: The given function does not return a point at parameter %s"%(self.domain.a))
-        if not isinstance(self.func(self.domain.b), Point) : raise GeometricError("Curve not valid: The given function does not return a point at parameter %s"%(self.domain.b))
+        for t in [0,1]:
+            try:
+                pt = self.func(t)
+                pt.x
+                pt.y
+                pt.z
+            except:
+                raise GeometricError("Surface not valid: The given function does not return a point or plane at parameter %s, %s"%(u,v))
 
         self._rebuild_surrogate()
 
@@ -188,7 +194,9 @@ class Curve(HasBasis,IsParametrized):
             #warnings.warn("Curve tolerance too high relative to curve domain - Resetting.  tolerance (%s) > Curve.max_tol(%s)"%(tolerance,self.tol_max))
         self._rebuild_surrogate()
 
-
+    @property
+    def tol_nudge(self):
+        return self.tol/100.0
 
     def deval(self,t):
         """ Evaluates this Curve and returns a Plane.
@@ -200,13 +208,15 @@ class Curve(HasBasis,IsParametrized):
             :result: Plane.
             :rtype: Plane
         """
+        '''
         # some rounding errors require something like this:
         if t < self.domain.a and t > self.domain.a-self.tol : t = self.domain.a
         if t > self.domain.b and t < self.domain.b+self.tol : t = self.domain.b
+        '''
 
         if t<self.domain.a or t>self.domain.b : raise DomainError("Curve evaluated outside the bounds of its domain: deval(%s) %s"%(t,self.domain))
         
-        pt, vec, neg_vec = self._neighborhood(t)
+        pt, vec, neg_vec = self._nudged(t)
         
         #transform result to curve basis
         if not self.is_baseless:
@@ -221,41 +231,19 @@ class Curve(HasBasis,IsParametrized):
     def deval_curvature(self,t):
         # caluculates approximate curvature
         # returns curvature value and osc circle
-        pt, vec_pos, vec_neg = self._neighborhood(t)
+        pt, vec_pos, vec_neg = self._nudged(t)
 
         # if given a curve endpoint, nudge vectors a bit so we don't get zero curvature, but leave origin the same
-        nudge = self.tol/100
-        if (t-nudge <= self.domain.a):
-            nhood = self._neighborhood(nudge)
+        if (t-self.tol_nudge <= self.domain.a):
+            nhood = self._nudged(self.tol_nudge)
             vec_pos = nhood[1]
             vec_neg = nhood[2]
-        if (t+nudge >= self.domain.b):
-            nhood = self._neighborhood(1.0-nudge)
+        if (t+self.tol_nudge >= self.domain.b):
+            nhood = self._nudged(self.domain.b-self.tol_nudge)
             vec_pos = nhood[1]
             vec_neg = nhood[2]
 
-        pt_plus = pt + vec_pos
-        pt_minus = pt + vec_neg
-
-        v1 = vec_pos
-        v2 = vec_neg
-        v3 = Vec(vec_pos - vec_neg)
-
-        xl = v1.cross(v3).length
-        if xl == 0 :
-            return 0,Ray(pt,vec_pos)
-
-        rad_osc = 0.5*v1.length*v2.length*v3.length/xl
-        denom = 2*xl*xl
-        a1 = v3.length*v3.length*v1.dot(v2)/denom
-        a2 = v2.length*v2.length*v1.dot(v3)/denom
-        a3 = v1.length*v1.length*(-v2.dot(v3))/denom
-        center_osc = pt*a1 + pt_plus*a2 + pt_minus*a3
-
-        pln_out = Plane(center_osc, v1.cross(v2))
-        circ_out = Circle(pln_out,rad_osc)
-        print "deval_curvature not working right"
-        return (1/rad_osc, circ_out)
+        return Curve._curvature_from_vecs(pt,vec_pos,vec_neg)
 
     def eval_curvature(self,t):
         """
@@ -263,17 +251,42 @@ class Curve(HasBasis,IsParametrized):
         if t<0 or t>1 : raise DomainError("eval_curvature() must be called with a number between 0->1: eval(%s)"%t)
         return self.deval_curvature(Interval.remap(t,Interval(),self.domain))
 
-    def _neighborhood(self,t):
+    @staticmethod
+    def _curvature_from_vecs(pt, vec_pos, vec_neg, calc_circles=False):
+        pt_plus = pt + vec_pos
+        pt_minus = pt + vec_neg
+        
+        v1 = vec_pos
+        v2 = vec_neg
+        v3 = Vec(vec_pos - vec_neg)
+        
+        xl = v1.cross(v3).length
+        if xl == 0 : return 0,Ray(pt,vec_pos)
+        
+        rad_osc = 0.5*v1.length*v2.length*v3.length/xl
+        if not calc_circles: return 1/rad_osc
+        
+        denom = 2*xl*xl
+        a1 = v3.length*v3.length*v1.dot(v2)/denom
+        a2 = v2.length*v2.length*v1.dot(v3)/denom
+        a3 = v1.length*v1.length*(-v2.dot(v3))/denom
+        center_osc = pt*a1 + pt_plus*a2 + pt_minus*a3
+        
+        pln_out = Plane(center_osc, v1.cross(v2))
+        circ_out = Circle(pln_out,rad_osc)
+        return (1/rad_osc, circ_out)
+
+
+    def _nudged(self,t):
         #nearest neighbors of a point t; used for discrete approximations calculations 
         if t<self.domain.a or t>self.domain.b : raise DomainError("Curve evaluated outside the bounds of its domain: deval(%s) %s"%(t,self.domain))
 
-        nudge = self.tol/100
         pt_t = self.func(t)
         vec_minus = False
         vec_plus = False
 
-        if (t-nudge >= self.domain.a): vec_minus = Vec(pt_t,self.func(t - nudge))
-        if (t+nudge <= self.domain.b): vec_plus = Vec(pt_t,self.func(t + nudge))
+        if (t-self.tol_nudge >= self.domain.a): vec_minus = Vec(pt_t,self.func(t - self.tol_nudge))
+        if (t+self.tol_nudge <= self.domain.b): vec_plus = Vec(pt_t,self.func(t + self.tol_nudge))
 
         if not vec_plus: vec_plus = vec_minus.inverted()
         if not vec_minus: vec_minus = vec_plus.inverted()
