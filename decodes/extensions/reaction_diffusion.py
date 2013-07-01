@@ -62,26 +62,44 @@ class GrayScott (object):
         self.hist_u.append(self._uvals)
         self.hist_v.append(self._vvals)
 
-    def to_image_sequence(self, v_color = Color(0.0), u_color = Color(1.0), base_color = Color(1.0), power = False):
+    def to_image(self, v_color = Color(0.0), u_color = Color(1.0), base_color = Color(1.0), power = False, uv_flag = 'uv', gen = 0):
         ival_u = Interval(self.min_recorded_u,self.max_recorded_u)
         ival_v = Interval(self.min_recorded_v,self.max_recorded_v)
         uv_color = Color.interpolate(u_color,v_color)        
         imgs = []
-        for n in range(len(self.hist_u)):
-            img = Image(Interval(self.width,self.height),base_color)
 
-            for px in range(len(img._pixels)):
-                ut = ival_u.deval(self.hist_u[n]._pixels[px])
-                vt = ival_v.deval(self.hist_v[n]._pixels[px])
-                if power:
+        img = Image(Interval(self.width,self.height),base_color)
+
+        for px in range(len(img._pixels)):
+            ut = ival_u.deval(self.hist_u[gen]._pixels[px])
+            vt = ival_v.deval(self.hist_v[gen]._pixels[px])
+            if power:
+                if uv_flag == 'uv':
                     c0 = Color.interpolate(base_color,u_color,ut**power)
                     c1 = Color.interpolate(v_color,uv_color,ut**power)
                     c = Color.interpolate(c0,c1,vt**power)
-                else:
+                elif uv_flag == 'u':
+                    c = Color.interpolate(base_color,u_color,ut**power)
+                elif uv_flag == 'v':
+                    c = Color.interpolate(base_color,v_color,vt**power)
+            else:
+                if uv_flag == 'uv':
                     c0 = Color.interpolate(base_color,u_color,ut)
                     c1 = Color.interpolate(v_color,uv_color,ut)
                     c = Color.interpolate(c0,c1,vt)
-                img._pixels[px]= c
+                elif uv_flag == 'u':
+                    c = Color.interpolate(base_color,u_color,ut)
+                elif uv_flag == 'v':
+                    c = Color.interpolate(base_color,v_color,vt)
+            img._pixels[px]= c
+
+        return img
+
+    def to_image_sequence(self, v_color = Color(0.0), u_color = Color(1.0), base_color = Color(1.0), power = False, uv_flag = 'uv'):
+    
+        imgs = []
+        for n in range(len(self.hist_u)):
+            img = self.to_image(v_color, u_color, base_color, power, uv_flag, n)
 
             imgs.append(img)
         return imgs
