@@ -57,7 +57,7 @@ def from_rgpolyline(gh_polyline):
         if not isplanar : raise GeometricError("Cannot import non-planar polylines as polygons.  Did you give me degenerate geometry?")
         cs = from_rgplane(plane)
         w_verts = [from_rgpt(gh_polyline[i]) for i in range(len(gh_polyline))]
-        verts = [ (pt*cs.ixform).set_basis(cs) for pt in w_verts ]
+        verts = [ Vec(pt*cs.ixform) for pt in w_verts ]
         if (verts[0]==verts[-1]) : del verts[-1] #remove last vert if a duplicate
         return PGon(verts,cs)
     
