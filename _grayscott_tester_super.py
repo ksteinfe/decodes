@@ -16,7 +16,7 @@ x_interval = Interval(0,size.a)
 y_interval = Interval(0,size.b)
 gen = 1200
 stepsize = 10
-attempts = 30
+attempts = 28
 max_rects = 10
 
 
@@ -41,7 +41,7 @@ def rand_interval(ival = Interval(0.0,1.0), divs = 1):
 
 
 for n in range(attempts):
-    print "Iteration "+str(n)
+    print "Variation "+str(n)
 
     f_name = f_prefix+'_%02d'% n
 
@@ -90,6 +90,8 @@ for n in range(attempts):
     if not(os.path.exists(path)):
         os.mkdir(path)
 
+    t3 = time()
+
     print "writing uv images to "+path+" ",
     imgs = scott.to_image_sequence(u0v1,u1v0,u0v0,0.5)
     
@@ -114,6 +116,9 @@ for n in range(attempts):
         print ".",
         img.save(f_name+"_v_%03d"%i, path)
     print
+
+    t4 = time()
+    print " took: %f" %(t4-t3)
 
 
 
