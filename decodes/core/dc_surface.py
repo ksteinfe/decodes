@@ -104,7 +104,9 @@ class Surface(IsParametrized):
     @tol_u.setter
     def tol_u(self, tolerance):
         self._tol[0] = tolerance
-        if self._tol[0] > self.tol_max[0] :  self._tol[0] = self.tol_max[0]
+        if self._tol[0] > self.tol_max[0] :  
+            warnings.warn("Surface u tolerance too high relative to u domain - Resetting to max tol.  tol_u (%s) > Surface.max_tol(%s)"%(tolerance,self.tol_max))
+            self._tol[0] = self.tol_max[0]
         self._rebuild_surrogate()
 
     @property
@@ -120,7 +122,9 @@ class Surface(IsParametrized):
     @tol_v.setter
     def tol_v(self, tolerance):
         self._tol[1] = tolerance
-        if self._tol[1] > self.tol_max[1] :  self._tol[1] = self.tol_max[1]
+        if self._tol[1] > self.tol_max[1] :  
+            warnings.warn("Surface v tolerance too high relative to v domain - Resetting to max tol.  tol_v (%s) > Surface.max_tol(%s)"%(tolerance,self.tol_max))
+            self._tol[1] = self.tol_max[1]
         self._rebuild_surrogate()
 
     @property
@@ -272,7 +276,7 @@ class Surface(IsParametrized):
         
         res_u = len(u_vals)
         # simple triangulation style
-        for v in range(len(v_vals)):
+        for v in range(len(v_vals)-1):
             row = v*res_u
             for u in range(len(u_vals)-1):
                 pi_0 = row+u
