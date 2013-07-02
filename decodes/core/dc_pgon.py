@@ -114,6 +114,16 @@ class PGon(HasPts):
         clone.basis = CS()
         return clone
 
+
+    def inflate(self):
+        '''
+        returns a polygon inscribed inside this one.
+        each vertex of the returned polygon will lie on the midpoint of one of this polygon's edges
+        ''' 
+        ipts = [Vec.interpolate(self._verts[n-1],self._verts[n],0.5) for n in range(len(self._verts))]
+        return PGon(ipts,self.basis)
+
+
     @staticmethod
     def rectangle(cpt, w, h):
         """ Constructs a rectangle based on a center point, a width, and a height.
