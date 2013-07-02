@@ -150,8 +150,23 @@ class Interval():
             :rtype: list
         """
         return [Interval(n,n+self.delta/float(divs)) for n in self.divide(divs)]
-    
+
+    def rand_interval(self, divs):
+        """ Divides an interval into a list of randomly sized subintervals(interval objects).
         
+            :param divs: Number of subintervals.
+            :type divs: int
+            :returns: List of subintervals (interval objects). 
+            :rtype: list
+        """
+        if divs < 1 : return ival
+        result = []
+        r_list = [self.a,self.b]
+        r_list.extend(self.eval(random.random()) for k in range(divs-1)) 
+        r_list.sort()
+
+        return [Interval(r_list[n],r_list[n+1]) for n in range(divs)]
+           
     def deval(self, number): 
         """ 
         Returns a parameter cooresponding to the position of the given number within this Interval.
@@ -190,7 +205,7 @@ class Interval():
 
         """  
         return self.delta * t + self.a
-    
+
 
     
     def __repr__(self): return "ival[{0},{1}]".format(self.a,self.b)

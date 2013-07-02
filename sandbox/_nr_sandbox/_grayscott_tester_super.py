@@ -32,14 +32,17 @@ def rand_interval(ival = Interval(0.0,1.0), divs = 1):
     if divs < 1 : return ival
     result = []
     r_list = [ival.a,ival.b]
-    for k in range(divs-1):
-        r_list.append(ival.eval(random.random()))  
+#    for k in range(divs-1):
+    r_list.extend(ival.eval(random.random()) for k in range(divs-1)) 
     r_list.sort()
 
     return [Interval(r_list[n],r_list[n+1]) for n in range(divs)]
 
 
-print rand_interval(ival = Interval(0.0,10.0), divs = 2)
+print rand_interval(ival = Interval(0.0,10.0), divs = 4)
+
+t= Interval(0.0,20.0)
+print t.rand_interval(10)
 
 for n in range(attempts):
     print "Iteration "+str(n)
