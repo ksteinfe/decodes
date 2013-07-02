@@ -43,8 +43,10 @@ class Mesh(HasPts):
             :returns: Modifies list of faces.
         """
         #TODO: add lists of faces just the same
-        if (d>=0) : self._faces.append([a,b,c,d])
-        else: self._faces.append([a,b,c])
+        
+        if max(a,b,c,d) < len(self.pts):
+            if (d>=0) : self._faces.append([a,b,c,d])
+            else: self._faces.append([a,b,c])
     
     def face_pts(self,index):
         """Returns the points of a given face.
