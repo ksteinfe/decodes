@@ -191,7 +191,7 @@ class Curve(HasBasis,IsParametrized):
         self._tol = tolerance
         if self._tol > self.tol_max : 
             self._tol = self.tol_max
-            #warnings.warn("Curve tolerance too high relative to curve domain - Resetting.  tolerance (%s) > Curve.max_tol(%s)"%(tolerance,self.tol_max))
+            warnings.warn("Curve tolerance too high relative to curve domain - Resetting to max tol.  tolerance (%s) > Curve.max_tol(%s)"%(tolerance,self.tol_max))
         self._rebuild_surrogate()
 
     @property
