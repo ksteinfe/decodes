@@ -4,20 +4,12 @@ from decodes.core import *
 
 #outie = dc.makeOut(dc.Outies.SVG, "svg_out", canvas_dimensions=Interval(1000,500), flip_y = True)
 
+def func(u,v):
+    return Point(u,v,math.sin(u+v))
+twopi = Interval.twopi()
+surf = Surface(func,twopi,twopi)
 
-pts = [
-       Point(0,0),
-       Point(1,0),
-       Point(1,2),
-       Point(0,2)
-       ]
-
-pg = PGon(pts)
-print pg.area
-
-pg = pg.inflate()
-
-
+pl = surf.isopolyline(u_val=0.5)
 
 
 raw_input("press enter...")
