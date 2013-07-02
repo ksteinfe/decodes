@@ -68,6 +68,7 @@ class PGon(HasPts):
         """
         if t > 1 : t = t%1.0
         if t < 0 : t = 1.0 - abs(t)%1.0
+        if t == 0.0 or t == 1.0 : return self.pts[0]
         for n, ival in enumerate(Interval()//len(self)):
             if t in ival:
                 pa = self.pts[n]
@@ -115,12 +116,14 @@ class PGon(HasPts):
         return clone
 
 
-    def inflate(self):
+    def inflate(self, rotation=0.5):
         '''
         returns a polygon inscribed inside this one.
         each vertex of the returned polygon will lie on the midpoint of one of this polygon's edges
+
+        optionally, you may set the rotation 0->1
         ''' 
-        ipts = [Vec.interpolate(self._verts[n-1],self._verts[n],0.5) for n in range(len(self._verts))]
+        ipts = [Vec.interpolate(self._verts[n],self._verts[n-1],rotation) for n in range(len(self._verts))]
         return PGon(ipts,self.basis)
 
 

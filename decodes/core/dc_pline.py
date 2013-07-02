@@ -121,6 +121,9 @@ class PLine(HasPts):
         """
         if t > 1 : raise IndexError("Plines must be evaluated with t <= 1.0")
         if t < 0 : raise IndexError("Plines must be evaluated with t >= 0.0")
+        if t == 0.0 : return self.pts[0]
+        if t == 1.0 : return self.pts[-1]
+
         for n, ival in enumerate(Interval()//(len(self)-1)):
             if t in ival:
                 pa = self.pts[n]
