@@ -275,24 +275,7 @@ class Surface(IsParametrized):
                 msh.append(self._func(u,v))
         
         res_u = len(u_vals)
-<<<<<<< HEAD
 
-        for v in range(len(v_vals)-1):
-            row = v*res_u
-            for u in range(len(u_vals)-1):
-                pi_0 = row+u
-                pi_1 = row+u+1
-                pi_2 = row+u+res_u+1
-                pi_3 = row+u+res_u
-                msh.add_face(pi_0,pi_1,pi_2,pi_3)
-            if do_close:
-                #last two faces in the row
-                pi_0 = row+res_u-1
-                pi_1 = row+0
-                pi_2 = row+res_u
-                pi_3 = row+res_u-1+res_u
-                msh.add_face(pi_0,pi_1,pi_2,pi_3)
-=======
         
         if tris is False:
             # simple quadrangulation style
@@ -331,7 +314,6 @@ class Surface(IsParametrized):
                     pi_3 = row+res_u-1+res_u
                     msh.add_face(pi_0,pi_1,pi_2)
                     msh.add_face(pi_0,pi_2,pi_3)
->>>>>>> added mesh triangulation
         
         return msh
 
