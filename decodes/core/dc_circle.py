@@ -65,6 +65,10 @@ class Arc(CS):
         
     def eval(self, t):
         return False
+
+    @property
+    def length(self):
+        return self.rad * self.angle
         
     def __repr__(self): return "arc[{0},r:{1},sweep angle{2}]".format(self.origin,self.radius,self.sweep_angle)
 
