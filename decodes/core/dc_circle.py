@@ -70,6 +70,23 @@ class Arc(CS):
     def length(self):
         return self.rad * self.angle
         
+    @property
+    def epts(self):
+        from .dc_xform import Xform
+        
+        vec = self.x_axis * self.rad
+        xform = Xform.rotation(axis=self.z_axis,center=self.origin,angle=self.angle)
+        spt = self.origin + vec
+        return spt, spt*xform 
+        
+    @property
+    def spt(self):
+        return self.epts[0]
+        
+    @property
+    def ept(self):
+        return self.epts[1]
+        
     def __repr__(self): return "arc[{0},r:{1},sweep angle{2}]".format(self.origin,self.radius,self.sweep_angle)
 
     #Returns a best fit arc using the modified least squares method
