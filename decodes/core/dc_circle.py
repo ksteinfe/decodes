@@ -64,28 +64,32 @@ class Arc(CS):
         self.angle = sweep_angle
         
     def eval(self, t):
-        return False
-
+        from .dc_xform import Xform
+        
+        vec = self.x_axis * self.rad
+        xform = Xform.rotation(axis=self.z_axis,center=self.origin,angle=Interval(0,self.angle).eval(t))
+        spt = self.origin + vec
+        return spt*xform 
+        
     @property
     def length(self):
         return self.rad * self.angle
         
     @property
     def epts(self):
-        from .dc_xform import Xform
-        
-        vec = self.x_axis * self.rad
-        xform = Xform.rotation(axis=self.z_axis,center=self.origin,angle=self.angle)
-        spt = self.origin + vec
-        return spt, spt*xform 
+        return self.eval(0), self.eval(1) 
         
     @property
     def spt(self):
-        return self.epts[0]
+        return self.eval(0)
         
     @property
     def ept(self):
-        return self.epts[1]
+        return self.eval(1) 
+        
+    def rotate(self, angle):
+        from .dc_xform import Xform
+        return Xform.rotation(axis=self.z_axis,center=self.origin,angle=angle)
         
     def __repr__(self): return "arc[{0},r:{1},sweep angle{2}]".format(self.origin,self.radius,self.sweep_angle)
 
