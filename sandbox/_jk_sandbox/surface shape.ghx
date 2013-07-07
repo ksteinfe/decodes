@@ -48,8 +48,8 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>-772</X>
-                  <Y>-401</Y>
+                  <X>-696</X>
+                  <Y>-384</Y>
                 </item>
                 <item name="Zoom" type_name="gh_single" type_code="5">1</item>
               </items>
@@ -3467,8 +3467,10 @@ IN:
 
 OUT:
 The following geometric entities describing the shape of the surface at a given point:  
-- normal vector / tangent plane
-- principal curvatures and directions
+- normal vector
+- principal directions (expressed as a coordinate system)
+- curvatures: principal curvatures (min/max), Gaussian curvature (K), Mean Curvature (H)
+
 Note: All quantities at a given point are computed using nearest neighbors on a mesh.  
 For the case of a parametrized surface, we take the mesh to be a quad mesh aligned 
 with the isocurves and nearest neighbors to be surrounding vertices at a resolution 
@@ -3550,7 +3552,7 @@ if (u_minus &gt; u0) and (u_plus &lt; u1) and (v_minus &gt; v0) and (v_minus &lt
 else:
     print "Deal with later"
 
-#stores the sum of the face areas for faces touching at given vertex and p_uv
+#weights stores the sum of the face areas for faces touching at given vertex and p_uv
 #used for creating the matrix needed for the calculation of the principals
 weights = [0]*len(ngbr) 
 
@@ -3564,7 +3566,6 @@ for k in range(len(ngbr.faces)):
         weights[i] += face_area
 N_vec = N_vec.normalized()
 tangent_plane = Plane(pt_uv, N_vec)
-#c.put(tangent_plane)
 c.put(N_vec)
 
 #Compute the principal curvatures and directions at the point pt_uv (*)
@@ -3660,12 +3661,21 @@ T2_test = matrix_mult(M_mat, T2)
 print T2_test[0][0]/T2[0][0], T2_test[1][0]/T2[1][0], T2_test[2][0]/T2[2][0]
 """ 
 
-#T1 and T2 are the principal directions.  Compute the principal curvatures
+#T1 and T2 are the principal directions.  Form a coordinate system aligned with these directions.
 cs_principal = CS(pt_uv, T1_vec, T2_vec)
 d.put(cs_principal)
+
+#Compute all the curvature quantities: principal curvatures, Gaussian, Mean
 k1 = 3*d1 - d2
 k2 = 3*d2 - d1
-e.put([k1, k2])
+K = k1*k2
+H = k1 + k2
+e.put([k1, k2, K, H])
+print ("Min Principal Curvature = %.3f" % k1)
+print ("Max Principal Curvature = %.3f" % k2)
+print ("Gaussian Curvature = %.3f" % K)
+print ("Mean Curvature = %.3f" % H) 
+
 
 
    
@@ -4357,8 +4367,8 @@ domain.put([0, 2*math.pi, 0, 2*math.pi])
                 <chunk name="Container">
                   <items count="11">
                     <item name="slider_value" type_name="gh_point3d" type_code="51">
-                      <X>0.639066370522103</X>
-                      <Y>0.737254259062976</Y>
+                      <X>0.127847438905297</X>
+                      <Y>0.426317168445122</Y>
                       <Z>0.5</Z>
                     </item>
                     <item name="x_domain" type_name="gh_interval1d" type_code="60">
@@ -4438,7 +4448,7 @@ domain.put([0, 2*math.pi, 0, 2*math.pi])
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">f8c9d371-a3da-404b-b8db-6f5488c6b7ad</item>
                     <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                     <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
-                    <item name="Source" index="0" type_name="gh_guid" type_code="9">ffee8d3b-60fe-421d-ac58-5ab91a8924c0</item>
+                    <item name="Source" index="0" type_name="gh_guid" type_code="9">f8f56bb1-cbfe-404a-b52c-a399cb535710</item>
                     <item name="UserText" type_name="gh_string" type_code="10">Double click to edit panel content…</item>
                     <item name="MultilineData" type_name="gh_bool" type_code="1">true</item>
                     <item name="WrapItems" type_name="gh_bool" type_code="1">true</item>
@@ -4458,14 +4468,14 @@ domain.put([0, 2*math.pi, 0, 2*math.pi])
                         <item name="MarginLeft" type_name="gh_int32" type_code="3">0</item>
                         <item name="MarginRight" type_name="gh_int32" type_code="3">0</item>
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>1266.298</X>
-                          <Y>811.3936</Y>
+                          <X>1240.129</X>
+                          <Y>716.0197</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>1266</X>
-                          <Y>811</Y>
-                          <W>108</W>
-                          <H>76</H>
+                          <X>1240</X>
+                          <Y>716</Y>
+                          <W>247</W>
+                          <H>130</H>
                         </item>
                       </items>
                     </chunk>
