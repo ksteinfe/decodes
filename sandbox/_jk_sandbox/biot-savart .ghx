@@ -48,10 +48,10 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>-246</X>
-                  <Y>-277</Y>
+                  <X>-3</X>
+                  <Y>-86</Y>
                 </item>
-                <item name="Zoom" type_name="gh_single" type_code="5">1</item>
+                <item name="Zoom" type_name="gh_single" type_code="5">0.7852612</item>
               </items>
             </chunk>
             <chunk name="Views">
@@ -881,12 +881,12 @@ for n in range(0,len(shape.pts)):
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>410</X>
-                          <Y>773</Y>
+                          <X>517</X>
+                          <Y>782</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>357</X>
-                          <Y>739</Y>
+                          <X>464</X>
+                          <Y>748</Y>
                           <W>87</W>
                           <H>68</H>
                         </item>
@@ -920,12 +920,12 @@ for n in range(0,len(shape.pts)):
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>378.5</X>
-                                  <Y>773</Y>
+                                  <X>485.5</X>
+                                  <Y>782</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>359</X>
-                                  <Y>741</Y>
+                                  <X>466</X>
+                                  <Y>750</Y>
                                   <W>36</W>
                                   <H>64</H>
                                 </item>
@@ -948,12 +948,12 @@ for n in range(0,len(shape.pts)):
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>433.5</X>
-                                  <Y>757</Y>
+                                  <X>540.5</X>
+                                  <Y>766</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>425</X>
-                                  <Y>741</Y>
+                                  <X>532</X>
+                                  <Y>750</Y>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
@@ -975,12 +975,12 @@ for n in range(0,len(shape.pts)):
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>433.5</X>
-                                  <Y>789</Y>
+                                  <X>540.5</X>
+                                  <Y>798</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>425</X>
-                                  <Y>773</Y>
+                                  <X>532</X>
+                                  <Y>782</Y>
                                   <W>17</W>
                                   <H>32</H>
                                 </item>
@@ -1014,12 +1014,12 @@ for n in range(0,len(shape.pts)):
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>301.3354</X>
-                          <Y>774.9349</Y>
+                          <X>369.447</X>
+                          <Y>784.6652</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>276</X>
-                          <Y>764</Y>
+                          <X>344</X>
+                          <Y>774</Y>
                           <W>50</W>
                           <H>20</H>
                         </item>
@@ -1108,7 +1108,7 @@ def func(u,v):
         for i in range(len(poly.pts)-1):
             seg = poly.edges[i]
             this_magnetic_field  += magnetic_field(Point(x,y), seg)
-        if this_magnetic_field &gt; 0:      
+        if this_magnetic_field &gt; zero:      
             z = 2.0/this_magnetic_field
         else: z = 0
     else: z = 0
@@ -1122,7 +1122,7 @@ a.put(srf.surrogate)
                   </items>
                   <chunks count="2">
                     <chunk name="Attributes">
-                      <items count="2">
+                      <items count="3">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>503</X>
                           <Y>532</Y>
@@ -1133,6 +1133,7 @@ a.put(srf.surrogate)
                           <W>90</W>
                           <H>68</H>
                         </item>
+                        <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                       </items>
                     </chunk>
                     <chunk name="ParameterData">
@@ -1161,7 +1162,7 @@ a.put(srf.surrogate)
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>472.5</X>
                                   <Y>516</Y>
@@ -1172,6 +1173,7 @@ a.put(srf.surrogate)
                                   <W>34</W>
                                   <H>32</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -1192,7 +1194,7 @@ a.put(srf.surrogate)
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>472.5</X>
                                   <Y>548</Y>
@@ -1203,6 +1205,7 @@ a.put(srf.surrogate)
                                   <W>34</W>
                                   <H>32</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -1219,7 +1222,7 @@ a.put(srf.surrogate)
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>529</X>
                                   <Y>516</Y>
@@ -1230,6 +1233,7 @@ a.put(srf.surrogate)
                                   <W>22</W>
                                   <H>32</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -1245,7 +1249,7 @@ a.put(srf.surrogate)
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>529</X>
                                   <Y>548</Y>
@@ -1256,6 +1260,7 @@ a.put(srf.surrogate)
                                   <W>22</W>
                                   <H>32</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>

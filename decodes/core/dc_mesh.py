@@ -83,10 +83,7 @@ class Mesh(HasPts):
             v1 = Vec(verts[2],verts[3]).cross(Vec(verts[2],verts[1])).normalized()
             return Vec.bisector(v0,v1).normalized()
     
-    
-    def __repr__(self):
-        return "msh[{0}v,{1}f]".format(len(self._verts),len(self._faces))
-    
+   
     
     @staticmethod
     def explode(msh):

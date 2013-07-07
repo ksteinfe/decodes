@@ -48,10 +48,10 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>-264</X>
-                  <Y>-582</Y>
+                  <X>-361</X>
+                  <Y>-355</Y>
                 </item>
-                <item name="Zoom" type_name="gh_single" type_code="5">1</item>
+                <item name="Zoom" type_name="gh_single" type_code="5">0.7852612</item>
               </items>
             </chunk>
             <chunk name="Views">
@@ -573,7 +573,6 @@ given a point defined by parameters phi (in [0, 2pi]), theta, R(major
 radius) and r(tube or minor radius).   
 func1-4 are parametrizations for a coordinate system with x-axis through the point in question
 ref: 
-http://kurtnalty.com/Villarceau.pdf 
 Weisstein, Eric W. "Villarceau Circles." From MathWorld--A Wolfram Web Resource. http://mathworld.wolfram.com/VillarceauCircles.html
 """
 
@@ -1393,8 +1392,8 @@ a.put(msh)</item>
                 <chunk name="Container">
                   <items count="11">
                     <item name="slider_value" type_name="gh_point3d" type_code="51">
-                      <X>0.727193320669778</X>
-                      <Y>0.221231972298971</Y>
+                      <X>0.739388442620998</X>
+                      <Y>0.379768557664825</Y>
                       <Z>0.5</Z>
                     </item>
                     <item name="x_domain" type_name="gh_interval1d" type_code="60">
