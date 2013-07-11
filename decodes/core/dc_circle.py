@@ -21,6 +21,7 @@ class Circle(Plane):
     @property
     def plane(self):
         return Plane(Point(self.x,self.y,self.z),self._vec)
+
         
     def __repr__(self): return "circ[{0},{1},{2},{3},{4},{5} r:{6}]".format(self.x,self.y,self.z,self._vec.x,self._vec.y,self._vec.z,self.rad)
 
@@ -28,13 +29,13 @@ class Circle(Plane):
         '''
         returns intersections with another circle
         '''
-        # TODO: this func currently assumes a circle on the xy axis?
+        # TODO: this func currently only works on co-planar circles
         # TODO: move this functionality to the intersections class
-        if not self.pln.is_coplanar( other.pln ) : 
-            print self.pln.near(other.pln.origin)[0].distance(other.pln.origin)
+        if not self.plane.is_coplanar( other.plane ) : 
+            print self.plane.near(other.plane.origin)[0].distance(other.plane.origin)
             print 'circles not coplanar'
             return False
-        d = self.cpt.distance(other.cpt)
+        d = self.origin.distance(other.origin)
         if d == 0 : 
             print 'circles share a center point'
             return False
@@ -44,9 +45,9 @@ class Circle(Plane):
             print 'what, huh?'
             return False
         h = math.sqrt(h2)
-        pt = ( other.cpt - self.cpt ) * (a/d) + self.cpt
+        pt = ( other.origin - self.origin ) * (a/d) + self.origin
         if h == 0 : return pt
-        vec = Vec(self.cpt,pt).cross(self.pln.vec).normalized(h)
+        vec = Vec(self.origin,pt).cross(self.plane.normal).normalized(h)
         return [pt - vec, pt + vec]
       
 class Arc(CS):
