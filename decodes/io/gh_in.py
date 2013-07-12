@@ -45,8 +45,15 @@ class GrasshopperIn():
             return Color(float(gh_in.R)/255,float(gh_in.G)/255,float(gh_in.B)/255)
 
         elif type(gh_in)is rg.Circle :
-            pln = Plane( from_rgpt(gh_in.Center), from_rgvec(gh_in.Normal))
-            return Circle(pln,gh_in.Radius)
+            pln = Plane( from_rgpt(gh_in.Center), from_rgvec(gh_in.Plane.Normal))
+            return Arc(pln,gh_in.Radius)
+            
+        elif type(gh_in)is rg.Arc :
+            x_axis = Vec(from_rgpt(gh_in.Center),from_rgpt(gh_in.StartPoint))
+            y_axis = from_rgvec(gh_in.Plane.Normal).cross(x_axis)
+            cs = CS( from_rgpt(gh_in.Center), x_axis, y_axis )
+            swp_ang = abs(gh_in.EndAngle - gh_in.StartAngle)
+            return Arc(cs,gh_in.Radius,swp_ang)
 
         elif type(gh_in) is rg.PolylineCurve: 
             ispolyline, gh_polyline = gh_in.TryGetPolyline()
