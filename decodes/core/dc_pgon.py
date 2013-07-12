@@ -218,7 +218,7 @@ class RGon(PGon):
             return self._area
         except:
             self._area = 0.5 * self._nos * math.sin(math.pi*2.0/self._nos) * (self.radius ** 2)
-            return self._inradius
+            return self._area
 
     @property
     def apothem(self):

@@ -13,8 +13,7 @@ class HasPts(HasBasis):
 
     def __init__(self, vertices=None,basis=None):
         self._verts = [] # a list of vecs that represent the local coordinates of this object's points
-        if (vertices is not None) : 
-            for v in vertices: self.append(v)
+        if vertices is not None: self.append(vertices)
         self.basis = basis # set the basis after appending the points
 
 
@@ -148,7 +147,7 @@ class HasPts(HasBasis):
         """
         self._unset_attr()
         try : 
-            for p in pts : self.append(p)
+            for p in pts : self._verts.append(self._compatible_vec(p))
         except : 
             self._verts.append(self._compatible_vec(pts))
         self._vertices_changed() # call to trigger subclass handling of vertex manipulation

@@ -32,10 +32,6 @@ class IsParametrized(Geometry):
     @property
     def func(self): return self._func
 
-    @property
-    def surrogate(self): return self._surrogate
-
-
 
     def near(self,pt,tolerance=None,max_recursion=20):
         """ Finds a location on this curve which is nearest to the given Point.
@@ -152,6 +148,9 @@ class Curve(HasBasis,IsParametrized):
 
         self._rebuild_surrogate()
 
+
+    @property
+    def surrogate(self): return self._surrogate
 
     @property
     def appx_length(self): 

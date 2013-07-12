@@ -40,7 +40,23 @@ class Surface(IsParametrized):
             except:
                 raise GeometricError("Surface not valid: The given function does not return a point or plane at parameter %s, %s"%(u,v))
                     
-        self._rebuild_surrogate()
+
+
+    @property
+    def surrogate(self): return self._surrogate
+
+    @property
+    def surrogate(self):
+        try:
+            return self._surrogate
+        except:
+            self._surrogate = self.to_mesh()
+            return self._surrogate
+
+    def _rebuild_surrogate(self):
+        try: delattr(self, "_surrogate")
+        except:
+            pass
 
 
     @property
@@ -259,24 +275,25 @@ class Surface(IsParametrized):
 
 
 
-    def _rebuild_surrogate(self):
-        self._surrogate = self.to_mesh()
+
 
     def to_mesh(self,do_close=False,tris=False,divs_u=False,divs_v=False):
-        msh = Mesh()
+        
         if not divs_u : divs_u = int(math.ceil(self.domain_u.delta/self.tol_u))
         if not divs_v : divs_v = int(math.ceil(self.domain_v.delta/self.tol_v))
         u_vals = self.domain_u.divide((divs_u),True)
         v_vals = self.domain_v.divide((divs_v),True)
 
-        
+        pts = [self._func(u,v) for v in v_vals for u in u_vals]
+        '''
+        equiv to
         for v in v_vals:
             for u in u_vals:
-                msh.append(self._func(u,v))
-        
-        res_u = len(u_vals)
+                pts.append(self._func(u,v))
+        '''
+        msh = Mesh(pts)
 
-        
+        res_u = len(u_vals)
         if tris is False:
             # simple quadrangulation style
             for v in range(len(v_vals)):
