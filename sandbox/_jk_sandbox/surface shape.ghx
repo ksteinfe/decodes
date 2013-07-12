@@ -48,8 +48,8 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>-744</X>
-                  <Y>-478</Y>
+                  <X>-881</X>
+                  <Y>-614</Y>
                 </item>
                 <item name="Zoom" type_name="gh_single" type_code="5">1</item>
               </items>
@@ -4541,8 +4541,8 @@ import math
 
 
 pi = math.pi
-u = u0 + 2*pi*dom_pt.x
-v = v0 + 2*pi*dom_pt.y
+u = 2*pi*dom_pt.x
+v = 2*pi*dom_pt.y
 
 
 #Compute all the curvature quantities: principal curvatures, Gaussian, Mean
