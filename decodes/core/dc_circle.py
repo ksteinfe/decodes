@@ -32,17 +32,16 @@ class Circle(Plane):
         # TODO: this func currently only works on co-planar circles
         # TODO: move this functionality to the intersections class
         if not self.plane.is_coplanar( other.plane ) : 
-            print self.plane.near(other.plane.origin)[0].distance(other.plane.origin)
-            print 'circles not coplanar'
+            warnings.warn("Circles are not coplanar. Try checking the normal direction of the circle base planes.")
             return False
         d = self.origin.distance(other.origin)
         if d == 0 : 
-            print 'circles share a center point'
+            warnings.warn("Coplanar circles share a center point - no intersections found.")
             return False
         a = (self.rad**2 - other.rad**2 + d**2)/(2*d)
         h2 = self.rad**2 - a**2
         if h2 < 0 : 
-            print 'what, huh?'
+            warnings.warn("Coplanar circles do not intersect.")
             return False
         h = math.sqrt(h2)
         pt = ( other.origin - self.origin ) * (a/d) + self.origin
