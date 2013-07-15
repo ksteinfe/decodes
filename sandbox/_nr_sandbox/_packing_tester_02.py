@@ -5,48 +5,87 @@ from time import time
 
 import os,cStringIO
 path = os.path.expanduser("~") + os.sep + "_decodes_export"
-f_prefix = "pack_05_"
+f_prefix = "pack_08_n_"
 random.seed(0)
 
 
 class Bin():
 
-    def __init__(self, cpt, w, h, filled = 'open'):
+    def __init__(self, cpt, w, h, filled = False, div_type = 'n'):
+        """Creates a Bin object that contains filled areas and open sub-bins.
+        
+            :param cpt: Corner point
+            :type cpt: Point
+            :param w: Width of Bin
+            :type w: float
+            :param h: Height of Bin
+            :type h: float
+            :param filled: Is this Bin currently filled?
+            :type filled: boolean
+            :param div_type: how to divide Bin object:
+            :               'width' or 'w'  make sub-Bin with largest width
+            :               'height' or 'h' make sub-Bin with largest height
+            :               'area' or 'a'   make sub-Bin with largest area
+            :               'max' or 'x'    make sub-Bin with maximum aspect ratio
+            :               'min' or 'n'    make sub-Bin with minimum aspect ratio
+            :type div_type: string       
+        """
 
         self.cpt = cpt
         self.w = w
         self.h = h
         self.filled = filled
-        self.boundary = PGon.rectangle(Point(cpt.x+w/2.0, cpt.y+h/2.0), w, h)
+        self.div = div_type
+        self.boundary = Bounds(center = Point(cpt.x+w/2.0, cpt.y+h/2.0), dim_x =w, dim_y = h)
         self.filling = []
 
-    def put_item(self, rect):
-#        size = rect[2] - rect[0]
-        
-        result = [Bin(self.cpt, size.x, size.y, 'filled')]
-        if self.w > size.x: result.append(Bin(self.cpt + Vec(size.x,0), self.w - size.x, self.h))
-        if self.h > size.y: result.append(Bin(self.cpt + Vec(0,size.y), size.x, self.h - size.y))
+    def put_item(self, box):        
+        result = [Bin(self.cpt, box.dim_x, box.dim_y, filled = True)]
+        rem_x = self.boundary.dim_x - box.dim_x
+        rem_y = self.boundary.dim_y - box.dim_y
+        if rem_x <= 0: 
+            if rem_y > 0 :result.append(Bin(self.cpt + Vec(0,box.dim_y), self.boundary.dim_x, rem_y))
+        elif rem_y <= 0: result.append(Bin(self.cpt + Vec(box.dim_x,0), rem_x, self.boundary.dim_y))
+        else:
+            divide_w = False
+            divide_h = False
+            if self.div == 'w' : divide_w = True
+            if self.div == 'h' : divide_h = True
+            if self.div == 'a' :
+                divide_w = ((self.boundary.dim_x * rem_y) > (rem_x * self.boundary.dim_y))
+                divide_h = not(divide_w)
+            if self.div == 'n':
+                divide_w = ((self.boundary.dim_x / rem_y) < (self.boundary.dim_y / rem_x))
+                divide_h = not(divide_w)
+            if self.div == 'x':
+                divide_w = ((self.boundary.dim_x / rem_y) > (self.boundary.dim_y / rem_x))
+                divide_h = not(divide_w)
+            if divide_w :
+                result.append(Bin(self.cpt + Vec(box.dim_x,0), rem_x, box.dim_y))
+                result.append(Bin(self.cpt + Vec(0,box.dim_y), self.boundary.dim_x, rem_y))
+            if divide_h :
+                result.append(Bin(self.cpt + Vec(box.dim_x,0), rem_x, self.boundary.dim_y))
+                result.append(Bin(self.cpt + Vec(0,box.dim_y), box.dim_x, rem_y))
         self.filling = result
 
-    def can_fit(self, rect):
+    def can_fit(self, box):
         #full bin?
         if len(self.filling) == 0:
-            size = rect[2] - rect[0]
-            if (size.x <= self.w) and (size.y <= self.h): return self
+            if (box.dim_x <= self.w) and (box.dim_y <= self.h): return self
         else:
             for i in range(1,len(self.filling)) :
-                result = self.filling[i].can_fit(rect)
+                result = self.filling[i].can_fit(box)
                 if  result<> None : return result
         return None
 
     def svg_code(self):
-        if self.filled == 'filled':
-            point_string = " ".join([str(v.x)+","+str(v.y) for v in self.boundary.pts])
+        if self.filled:
+            point_string = " ".join([str(v.x)+","+str(v.y) for v in self.boundary.corners])
             style = 'fill:rgb(120,120,120);stroke-width:1;stroke:rgb(0,0,0)'
             atts = 'points="'+point_string+'"'
             return '<polygon '+atts+' style="'+style+'"/>\n'
         if len(self.filling) == 0:
-            point_string = " ".join([str(v.x)+","+str(v.y) for v in self.boundary.pts])
+            point_string = " ".join([str(v.x)+","+str(v.y) for v in self.boundary.corners])
             style = 'fill:rgb(255,255,255);stroke-width:.5;stroke:rgb(128,128,128)'
             atts = 'points="'+point_string+'"'
             return '<polygon '+atts+' style="'+style+'"/>\n'
@@ -70,16 +109,15 @@ class Bin():
 
         buffer.write('<svg '+svg_size+' xmlns="http://www.w3.org/2000/svg" version="1.1">\n')
 
-        # write outline of sheet
-        point_string = " ".join([str(v.x)+","+str(v.y) for v in self.boundary.pts])
-        style = 'fill:rgb(255,255,255);stroke-width:3;stroke:rgb(0,0,0)'
-        atts = 'points="'+point_string+'"'
-        buffer.write('<polygon '+atts+' style="'+style+'"/>\n')
-
         #write filled pieces
         svg_code = self.svg_code()
         buffer.write(svg_code)
 
+        # write outline of sheet
+        point_string = " ".join([str(v.x)+","+str(v.y) for v in self.boundary.corners])
+        style = 'fill:none;stroke-width:3;stroke:rgb(0,0,0)'
+        atts = 'points="'+point_string+'"'
+        buffer.write('<polygon '+atts+' style="'+style+'"/>\n')
 
         buffer.write('</svg>')
 
@@ -88,6 +126,8 @@ class Bin():
         fo.write( buffer.getvalue() )
         fo.close()
         buffer.close()
+
+
 
 
 
@@ -102,12 +142,11 @@ for i in range(no_rects):
     else:
         r_size = Interval(random.randrange(20,sheet_size.a/10,10), random.randrange(20,sheet_size.b/10,10))
     if r_size.is_ordered : r_size = Interval(r_size.b, r_size.a)
-#    rect.append(PGon.rectangle(Point(0,0), r_size.a, r_size.b))
-    rect.append(Bounds(Point(0,0), r_size.a, r_size.b))
+    rect.append(Bounds(center=Point(0,0), dim_x = r_size.a, dim_y = r_size.b))
 
 # sort them by width
 a = rect
-rect.sort(key=lambda r: (r.edges[0].length), reverse=True)
+rect.sort(key=lambda r: (r.dim_x), reverse=True)
 
 # initialize
 sheets = [Bin(Point(0,0), sheet_size.a, sheet_size.b)]
