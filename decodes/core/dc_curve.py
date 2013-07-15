@@ -190,7 +190,7 @@ class Curve(HasBasis,IsParametrized):
         self._tol = tolerance
         if self._tol > self.tol_max : 
             self._tol = self.tol_max
-            warnings.warn("Curve tolerance too high relative to curve domain - Resetting to max tol.  tolerance (%s) > Curve.max_tol(%s)"%(tolerance,self.tol_max))
+            warnings.warn("Curve tolerance too high relative to curve domain - Resetting to max tol.  tolerance (%s) > Curve.max_tol(%s)"%(tolerance,self.tol_max),stacklevel=4)
         self._rebuild_surrogate()
 
     @property
@@ -328,17 +328,18 @@ class Curve(HasBasis,IsParametrized):
             :rtype: [Curve]
         """
         curves = []
-        for subd in self.domain//divs: curves.append(self.subcurve(subd))
+        for subd in self.domain//divs: curves.append(self.subcurve(subd,self.tol/divs))
         return curves
 
-    def subcurve(self,domain):
+    def subcurve(self,domain,tol=None):
         """Returns a new Curve which is a copy of this Curve with the given Interval as the domain
             :param domain: New curve with a new given interval.
             :type domain: Interval
             :result: Copy of curve with new domain.
             :rtype: Curve
         """
-        return Curve(self.func,domain,self.tol)
+        if tol is None: tol = self.tol
+        return Curve(self.func,domain,tol)
 
     def _nearfar(self,func_nf,pt,tolerance,max_recursion):
         def sub(crv):

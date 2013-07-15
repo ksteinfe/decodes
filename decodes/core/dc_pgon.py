@@ -41,6 +41,11 @@ class PGon(HasPts):
         #TODO: handle negative indices
         return Segment(self.pts[index],self.pts[index+1])
         
+    def __contains__(self, pt):
+        """
+        overloads the containment **(in)** operator
+        """
+        return self.contains_pt(pt)
 
     @property
     def edges(self):
@@ -59,6 +64,19 @@ class PGon(HasPts):
         a = 0
         for n in range(len(self._verts)): a += (self._verts[n-1].x + self._verts[n].x) * (self._verts[n-1].y - self._verts[n].y)
         return abs(a / 2.0)
+
+    @property
+    def bounds(self):
+        '''
+        returns the bounding box of this polygon, aligned to the basis of this polygon
+        '''
+
+        xx = [vec.x for vec in self._verts]
+        yy = [vec.y for vec in self._verts]
+        ivx = Interval(min(xx),max(xx))
+        ivy = Interval(min(yy),max(yy))
+
+        return Bounds(ival_x = ivx, ival_y = ivy)
 
     def eval(self,t):
         """
@@ -87,7 +105,7 @@ class PGon(HasPts):
             :result: Tuple of near point on PGon, index of near segment and distance from point to near point.
             :rtype: (Point, integer, float)
         """
-        #KS: this does not function as advertised, after narrowing down to the nearest segment we need to project the given point
+        #KS: this does not function as advertised, after narrowing down to the nearest segment we need to ` the given point
         return False
         npts = [seg.near(p) for seg in self.edges]
         ni = Point.near_index(p,[npt[0] for npt in npts])
@@ -125,6 +143,39 @@ class PGon(HasPts):
         ''' 
         ipts = [Vec.interpolate(self._verts[n],self._verts[n-1],rotation) for n in range(len(self._verts))]
         return PGon(ipts,self.basis)
+
+    def contains_pt(self, pt):
+        '''
+        tests if this polygon contains the given point.
+        the given point must lie on the plane of this polygon.
+        '''
+        pt = Point(self.basis.deval(pt))
+        if pt.z != 0 : 
+            warnings.warn("Given point does not lie on the same plane as this polygon.")
+            return False
+
+        if not pt in self.bounds : return False
+
+        
+
+        #TODO: maybe move this intersection routine to intersection class
+        '''
+        for seg in self.edges:
+            ln = Segment(seg.spt,pt)
+            if ln.vec.is_coincident(seg.vec) and ln.vec.length2 <= seg.vec.length2 : return True
+        '''
+        icnt = 0
+        ray = Ray(pt,Vec(1,0))
+        for n in range(len(self._verts)-1):
+            seg = Segment(Point(self._verts[n]),Point(self._verts[n+1]))
+            if seg.is_parallel(ray) : continue
+            num =  (ray.vec.x * ray.spt.y + ray.vec.y *(seg.spt.x - ray.spt.x)) -(ray.vec.x * seg.ept.y) 
+            den = ray.vec.y * (seg.spt.x + seg.ept.x) -ray.vec.x * (seg.spt.y + seg.ept.y)
+            if den != 0 :
+                t = num / den
+                if t >= 0.0 and t <= 1.0 : icnt += 1
+
+        return icnt%2!=0
 
 
     @staticmethod

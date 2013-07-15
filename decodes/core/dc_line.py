@@ -111,15 +111,9 @@ class LinearEntity(Geometry):
             :result: True if parallel.
             :rtype: bool
         
-            .. todo:: Implement this method.
+            
         """
-        raise NotImplementedError()
-        try:
-            a1,b1,c1 = l1.coefficients
-            a2,b2,c2 = l2.coefficients
-            return bool(simplify(a1*b2 - b1*a2) == 0)
-        except AttributeError:
-            return False
+        return l1.vec.is_coincident(l2.vec) or l1.vec.is_coincident(l2.vec.inverted())
 
     def is_perpendicular(l1, l2):
         """Returns True if l1 and l2 are perpendicular, False otherwise

@@ -51,6 +51,33 @@ class Tests(unittest.TestCase):
 
 
 
+    def test_bounds(self):
+        p0 = Point(1,1)
+        p1 = Point(2,1)
+        p2 = Point(2,2)
+        p3 = Point(1,2)
+        pgon = PGon([p0,p1,p2,p3],CS(Point(0,0,2)) )
+        
+        self.assertEqual(pgon.bounds.cpt,Point(1.5,1.5))
+
+
+    def test_containment(self):
+        p0 = Point(1,1)
+        p1 = Point(2,1)
+        p2 = Point(2,2)
+        p3 = Point(1,2)
+        p4 = Point(1.5,1.5)
+        pgon = PGon([p0,p1,p2,p3,p4],CS(Point(0,0,2)) )
+        
+        #self.assertFalse(pgon.contains_pt(Point()))
+
+        self.assertTrue( Point(1.75,1.50,2) in pgon )
+        #self.assertTrue( Point(1.25,1.01,2) in pgon )
+        #self.assertFalse(Point(3.00,1.50,2) in pgon )
+        #self.assertFalse(Point(0.00,0.00,2) in pgon )
+        #self.assertFalse( Point(1.20,1.50,2) in pgon )
+
+
     def AssertPointsAlmostEqual(self,pa,pb,places=4):
         self.assertAlmostEqual(pa.x,pb.x,places)
         self.assertAlmostEqual(pa.y,pb.y,places)
