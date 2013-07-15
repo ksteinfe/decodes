@@ -102,7 +102,6 @@ class Bounds(Geometry):
 
     def overlaps(self, other) :
         return any([pt in self for pt in other.corners] + [pt in other for pt in self.corners])
-        return False
 
     def subbounds(self,divs):
         """

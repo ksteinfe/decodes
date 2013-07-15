@@ -159,24 +159,41 @@ class PGon(HasPts):
         
 
         #TODO: maybe move this intersection routine to intersection class
-        '''
+        
         for seg in self.edges:
             ln = Segment(seg.spt,pt)
             if ln.vec.is_coincident(seg.vec) and ln.vec.length2 <= seg.vec.length2 : return True
-        '''
+        
         icnt = 0
-        ray = Ray(pt,Vec(1,0))
+        ray = Ray(pt,Vec(0,1))
         for n in range(len(self._verts)-1):
             seg = Segment(Point(self._verts[n]),Point(self._verts[n+1]))
             if seg.is_parallel(ray) : continue
-            num =  (ray.vec.x * ray.spt.y + ray.vec.y *(seg.spt.x - ray.spt.x)) -(ray.vec.x * seg.ept.y) 
-            den = ray.vec.y * (seg.spt.x + seg.ept.x) -ray.vec.x * (seg.spt.y + seg.ept.y)
-            if den != 0 :
-                t = num / den
-                if t >= 0.0 and t <= 1.0 : icnt += 1
+            try:
+                slope = (seg.ept.y - seg.spt.y) / (seg.ept.x - seg.spt.x)
+                cond1 = (seg.spt.x <= pt.x) and (pt.x < seg.ept.x)
+                cond2 = (seg.ept.x <= pt.x) and (pt.x < seg.spt.x)
+                above = (pt.y < slope * (pt.x - seg.spt.x) + seg.spt.y)
+                if ((cond1 or cond2) and above ) : icnt += 1
+            except:
+                pass
 
         return icnt%2!=0
 
+    def overlaps(self, other) :
+        """
+        tests for overlap with another polygon
+        returns true if these two polygons share a common plane, and if they overlap or if one is completely contained within another.
+        """
+        if not self.basis.xy_plane.is_coplanar(other.basis.xy_plane): return False
+
+        for pt in other.pts: 
+            if self.contains_pt(pt) : return True
+
+        for pt in self.pts: 
+            if other.contains_pt(pt) : return True
+
+        return False
 
     @staticmethod
     def rectangle(cpt, w, h):

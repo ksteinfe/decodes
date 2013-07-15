@@ -69,13 +69,14 @@ class Tests(unittest.TestCase):
         p4 = Point(1.5,1.5)
         pgon = PGon([p0,p1,p2,p3,p4],CS(Point(0,0,2)) )
         
-        #self.assertFalse(pgon.contains_pt(Point()))
-
+        self.assertTrue( Point(1.5,1,2) in pgon )
         self.assertTrue( Point(1.75,1.50,2) in pgon )
-        #self.assertTrue( Point(1.25,1.01,2) in pgon )
-        #self.assertFalse(Point(3.00,1.50,2) in pgon )
-        #self.assertFalse(Point(0.00,0.00,2) in pgon )
-        #self.assertFalse( Point(1.20,1.50,2) in pgon )
+        self.assertTrue( Point(1.50,1.01,2) in pgon )
+        self.assertFalse(Point(3.00,1.50,2) in pgon )
+        self.assertFalse(Point(0.00,0.00,2) in pgon )
+        self.assertFalse( Point(1.20,1.50,2) in pgon )
+
+
 
 
     def AssertPointsAlmostEqual(self,pa,pb,places=4):
