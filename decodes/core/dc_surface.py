@@ -170,10 +170,15 @@ class Surface(IsParametrized):
         if u<self.u0 or u>self.u1 : raise DomainError("Surface evaluated outside the bounds of its u-domain: deval(%s) %s"%(u,self.domain_u))
         if v<self.v0 or v>self.v1 : raise DomainError("Surface evaluated outside the bounds of its v-domain: deval(%s) %s"%(v,self.domain_v))
         
+        return Point(self.func(u,v))
+        
+        '''
+        TODO: deal with consequences of this
         pt,vec_u,vec_v = self._nudged(u,v)
         vec = vec_u.cross(vec_v)
 
         return Plane(pt, vec)
+        '''
 
     def eval(self,u,v):
         """ Evaluates this Curve and returns a Plane.
