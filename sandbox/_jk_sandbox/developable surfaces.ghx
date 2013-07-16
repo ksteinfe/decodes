@@ -48,10 +48,10 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>188</X>
-                  <Y>75</Y>
+                  <X>7</X>
+                  <Y>-259</Y>
                 </item>
-                <item name="Zoom" type_name="gh_single" type_code="5">0.4842197</item>
+                <item name="Zoom" type_name="gh_single" type_code="5">0.7852612</item>
               </items>
             </chunk>
             <chunk name="Views">
@@ -640,10 +640,10 @@ a.put(srf_mesh)
 #Pulls the curve onto the surface by normal projection
 crv = Curve.bezier(crv_pts)
 crv_count = rule_number*2
-#crv_val = Interval().divide(crv_count-1,True)
-crv_val = [0.5]
-#for k in range(len(srf_mesh.faces)):
-for k in range(3,4):
+crv_val = Interval().divide(crv_count-1,True)
+#crv_val = [0.5]
+for k in range(len(srf_mesh.faces)):
+#for k in range(3,4):
     verts = srf_mesh.face_pts(k)
     base_pt = verts[0]
     normal = srf_mesh.face_normal(k)
