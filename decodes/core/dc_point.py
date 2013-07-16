@@ -93,10 +93,13 @@ class Point(Vec):
             :result: Boolean result of comparison
             :rtype: bool
         """
-        if self.z < other.z : return True
-        if self.z == other.z and self.y < other.y : return True
-        if self.z == other.z and self.y == other.y and self.x < other.x : return True
-        return False
+        try:
+            if self.z < other.z : return True
+            if self.z == other.z and self.y < other.y : return True
+            if self.z == other.z and self.y == other.y and self.x < other.x : return True
+            return False
+        except:
+            return False
         
     def __gt__(self, other): 
         """Overloads the greater than **(>)** operator.
@@ -106,11 +109,14 @@ class Point(Vec):
             :result: Boolean result of comparison
             :rtype: bool
         """
-        if self.z > other.z : return True
-        if self.z == other.z and self.y > other.y : return True
-        if self.z == other.z and self.y == other.y and self.x > other.x : return True
-        return False
-            
+        try:
+            if self.z > other.z : return True
+            if self.z == other.z and self.y > other.y : return True
+            if self.z == other.z and self.y == other.y and self.x > other.x : return True
+            return False
+        except:
+            return False
+
     def __le__(self, other): 
         """Overloads the less or equal **(<=)** operator.
         
@@ -129,8 +135,11 @@ class Point(Vec):
             :result: Boolean result of comparison
             :rtype: bool
         """
-        return all([self.x==other.x,self.y==other.y,self.z==other.z])
-        
+        try:
+            return all([self.x==other.x,self.y==other.y,self.z==other.z])
+        except:
+            return False
+
     def __ne__(self, other): 
         """Overloads the nor equal **(!=)** operator.
         
@@ -139,8 +148,11 @@ class Point(Vec):
             :result: Boolean result of comparison
             :rtype: bool
         """
-        return not all([self.x==other.x,self.y==other.y,self.z==other.z])
-        
+        try:
+            return not all([self.x==other.x,self.y==other.y,self.z==other.z])
+        except:
+            return False
+
     def __ge__(self, other): 
         """Overloads the greater or equal **(>=)** operator.
         

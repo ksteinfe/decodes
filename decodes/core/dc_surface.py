@@ -38,7 +38,7 @@ class Surface(IsParametrized):
                 pt.y
                 pt.z
             except:
-                raise GeometricError("Surface not valid: The given function does not return a point or plane at parameter %s, %s"%(u,v))
+                raise GeometricError("Surface not valid: The given function does not return a point at parameter %s, %s"%(u,v))
                     
 
 
@@ -399,3 +399,5 @@ class Surface(IsParametrized):
             if dom is None : dom = self.domain_u
             if res is None : res = int(dom.delta / self.tol_u)
             return PLine([self.deval(u,v_val) for u in dom.divide(res,True)])
+
+

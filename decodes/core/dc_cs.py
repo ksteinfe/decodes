@@ -87,6 +87,17 @@ class CS(Geometry, Basis):
     def yz_plane(self):
         return Plane(self.origin,self.x_axis)
 
+    @property
+    def x_ray(self):
+        return Ray(self.origin,self.x_axis)
+
+    @property
+    def y_ray(self):
+        return Ray(self.origin,self.y_axis)
+
+    @property
+    def z_ray(self):
+        return Ray(self.origin,self.z_axis)
 
     @property
     def xAxis(self): 
@@ -111,6 +122,8 @@ class CS(Geometry, Basis):
         """
         print "please use CS.z_axis instead"
         return self.z_axis
+
+
 
 
     @staticmethod

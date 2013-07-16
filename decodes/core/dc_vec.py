@@ -224,11 +224,14 @@ class Vec(Geometry):
             :result: Boolean result of comparison.
             :rtype: bool
         """   
-        if not tol:
-            return all([self.x==other.x,self.y==other.y,self.z==other.z])
-        else :
-            return all([abs(self.x-other.x)<tol,abs(self.y-other.y)<tol,abs(self.z-other.z)<tol])
-    
+        try:
+            if not tol:
+                return all([self.x==other.x,self.y==other.y,self.z==other.z])
+            else :
+                return all([abs(self.x-other.x)<tol,abs(self.y-other.y)<tol,abs(self.z-other.z)<tol])
+        except:
+            return False
+            
     def is_coincident(self,other): 
         """Returns True if the vectors have equal direction.
         
@@ -464,5 +467,20 @@ class Vec(Geometry):
         """
         return math.degrees(self.angle(other))
 
+    def to_ray(self,pt=None):
+        """
+        Returns a ray from a given point along this vector
+        """
+        from .dc_line import Ray
+        from .dc_point import Point
+        if pt is None: pt = Point()
+        return Ray(pt,Vec(self))
     
-    
+    def to_line(self,pt=None):
+        """
+        Returns a ray from a given point along this vector
+        """
+        from .dc_line import Line
+        from .dc_point import Point
+        if pt is None: pt = Point()
+        return Line(pt,Vec(self))

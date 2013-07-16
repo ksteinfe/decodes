@@ -1,5 +1,24 @@
 
 
+== TEST_CLASSICAL_SURFACE ==
+test_rotational (decodes.unit_tests.test_classical_surface.Tests) ... ERROR
+
+======================================================================
+ERROR: test_rotational (decodes.unit_tests.test_classical_surface.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\git\decodes\decodes\unit_tests\test_classical_surface.py", line 13, in test_rotational
+    rot_surf = RotationalSurface(cs,crv)
+  File "G:\git\decodes\decodes\extensions\classical_surfaces.py", line 50, in __init__
+    dom_u = curve.domain
+AttributeError: 'CS' object has no attribute 'domain'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.008s
+
+FAILED (errors=1)
+
+
 == TEST_PGON ==
 test_bounds (decodes.unit_tests.test_pgon.Tests) ... ok
 test_containment (decodes.unit_tests.test_pgon.Tests) ... ok
@@ -10,7 +29,7 @@ test_rgon_to_pgon (decodes.unit_tests.test_pgon.Tests) ... ok
 test_segs_and_edges (decodes.unit_tests.test_pgon.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.169s
+Ran 7 tests in 0.180s
 
 OK
 
@@ -20,7 +39,7 @@ test_empty_constructor (decodes.unit_tests.test_pline.Tests) ... ok
 test_segs_and_edges (decodes.unit_tests.test_pline.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.078s
+Ran 2 tests in 0.079s
 
 OK
 
@@ -32,7 +51,7 @@ test_face_access (decodes.unit_tests.test_mesh.Tests) ... ok
 test_simple_constructor (decodes.unit_tests.test_mesh.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.029s
+Ran 4 tests in 0.030s
 
 OK
 
@@ -45,7 +64,7 @@ test_empty_constructor (decodes.unit_tests.test_point.Tests) ... ok
 test_nearest_point (decodes.unit_tests.test_point.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.029s
+Ran 5 tests in 0.030s
 
 OK
 
@@ -60,7 +79,7 @@ test_swap_basis (decodes.unit_tests.test_has_pts.Tests) ... ok
 test_unsetting (decodes.unit_tests.test_has_pts.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.153s
+Ran 7 tests in 0.156s
 
 OK
 
@@ -76,7 +95,7 @@ test_subdivide (decodes.unit_tests.test_curve.Tests) ... ok
 test_tolerance (decodes.unit_tests.test_curve.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 8 tests in 0.872s
+Ran 8 tests in 0.879s
 
 OK
 
@@ -85,7 +104,7 @@ OK
 test_curvature (decodes.unit_tests.test_surface.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.034s
+Ran 1 test in 0.035s
 
 OK
 
@@ -135,7 +154,7 @@ test_properties (decodes.unit_tests.test_vec.Tests) ... ok
 test_static (decodes.unit_tests.test_vec.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.012s
+Ran 7 tests in 0.011s
 
 OK
 
@@ -147,6 +166,6 @@ test_translation (decodes.unit_tests.test_xform.Tests) ... ok
 test_xform_hasbasis (decodes.unit_tests.test_xform.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.017s
+Ran 4 tests in 0.016s
 
 OK
