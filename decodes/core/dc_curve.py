@@ -144,7 +144,7 @@ class Curve(HasBasis,IsParametrized):
                 pt.y
                 pt.z
             except:
-                raise GeometricError("Surface not valid: The given function does not return a point or plane at parameter %s, %s"%(u,v))
+                raise GeometricError("Curve not valid: The given function does not return a point or plane at parameter %s"%(t))
 
         self._rebuild_surrogate()
 
@@ -457,6 +457,7 @@ class Curve(HasBasis,IsParametrized):
             :param cpts: List of points the bezier curve is going to be built with.
             :type cpts: [Point]
         """
+        if len(cpts) <= 1 : raise GeometricError("Curve not valid: A Bezier requires a minimum of two points.  You gave me %s"%(len(cpts)))
         def func(t):
             pts = cpts
             while len(pts) > 1: pts = [Point.interpolate(pts[n],pts[n+1],t) for n in range(len(pts)-1)]
@@ -473,6 +474,7 @@ class Curve(HasBasis,IsParametrized):
             :rtype: Curve
         """
         # from http://paulbourke.net/miscellaneous/interpolation/
+        if len(cpts) <= 1 : raise GeometricError("Curve not valid: A Hermite requires a minimum of two points.  You gave me %s"%(len(cpts)))
         def hermite_interpolate(y0,y1,y2,y3,mu,tension,bias):
             mu2 = mu * mu
             mu3 = mu2 * mu

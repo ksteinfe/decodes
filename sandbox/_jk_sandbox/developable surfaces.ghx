@@ -48,10 +48,10 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>7</X>
-                  <Y>-259</Y>
+                  <X>-42</X>
+                  <Y>-446</Y>
                 </item>
-                <item name="Zoom" type_name="gh_single" type_code="5">0.7852612</item>
+                <item name="Zoom" type_name="gh_single" type_code="5">1.25</item>
               </items>
             </chunk>
             <chunk name="Views">
@@ -654,7 +654,7 @@ for k in range(len(srf_mesh.faces)):
     b.put(poly_xy)
     #Pull curve points onto each face
     for t in crv_val:
-        pt = crv.eval(t).origin
+        pt = crv.eval(t)
         b.put(pt)       
         vec_to_proj = Vec(pt - base_pt)       
         pt_proj = pt - normal*(vec_to_proj.dot(normal))
@@ -958,7 +958,7 @@ for k in range(len(srf_mesh.faces)):
                           <chunks count="1">
                             <chunk name="Item" index="0">
                               <items count="2">
-                                <item name="RefID" type_name="gh_guid" type_code="9">4d1a2f46-ddc7-4c19-af16-26c28c968c1c</item>
+                                <item name="RefID" type_name="gh_guid" type_code="9">f2624831-5df1-4afa-81a3-340341dc7ff5</item>
                                 <item name="EdgeIndex" type_name="gh_int32" type_code="3">-1</item>
                               </items>
                             </chunk>
