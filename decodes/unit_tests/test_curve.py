@@ -46,7 +46,7 @@ class Tests(unittest.TestCase):
 
         div_pts = crv.divide(10)
         self.assertEqual(len(div_pts),10+1,"crv.divide(n) results in n+1 Points")
-        for n, pln in enumerate(div_pts) : self.assertEqual(pln.origin,Point(n,n**2))
+        for n, pt in enumerate(div_pts) : self.assertEqual(pt,Point(n,n**2))
 
         div_pts_op = crv/10
         self.assertEqual(len(div_pts_op),10+1,"crv/10 results in n+1 Points")
@@ -65,7 +65,7 @@ class Tests(unittest.TestCase):
         for n,ival in enumerate(crv.domain//10) : 
             self.assertEqual(subcrvs[n].domain,ival,"")
 
-    def _test_near(self):
+    def test_near(self):
         #NOTE: this test takes 1 sec.  disabled for now.
         def func(t):
             return Point(t,t)
@@ -84,14 +84,14 @@ class Tests(unittest.TestCase):
         
         for t in Interval.twopi()/4:
             pt = Point(t,math.sin(t))
-            near_pln, near_t, dist = crv.near(pt,0.01)
-            self.AssertPointsAlmostEqual(pt,near_pln.origin)
+            near_pt, near_t, dist = crv.near(pt,0.01)
+            self.AssertPointsAlmostEqual(pt,near_pt)
 
-    def _test_far(self):
+    def test_far(self):
         #NOTE: this test takes a long time.  disabled for now.
         crv = Curve.circle(Point(),10)
-        far_pln, far_t, dist = crv.far(Point(0,1)) #far() returns a tuple containing three values (Plane, float)
-        self.AssertPointsAlmostEqual(Point(0,-10),far_pln.origin)
+        far_pt, far_t, dist = crv.far(Point(0,1)) #far() returns a tuple containing three values (Plane, float)
+        self.AssertPointsAlmostEqual(Point(0,-10),far_pt)
 
 
     def test_bezier(self):
@@ -99,8 +99,8 @@ class Tests(unittest.TestCase):
         pt_b = Point(1,0)
         pt_c = Point(1,1)
         crv = Curve.bezier([pt_a,pt_b,pt_c])
-        self.assertEqual(crv.eval(0).origin,pt_a,"Curve.eval(0) returns first control point")
-        self.assertEqual(crv.eval(1).origin,pt_c,"Curve.eval(1) returns last control point")
+        self.assertEqual(crv.eval(0),pt_a,"Curve.eval(0) returns first control point")
+        self.assertEqual(crv.eval(1),pt_c,"Curve.eval(1) returns last control point")
         #TODO: evaluate point in the middle somehow
 
     def test_hermite(self):
@@ -108,8 +108,8 @@ class Tests(unittest.TestCase):
         pt_b = Point(1,0)
         pt_c = Point(1,1)
         crv = Curve.hermite([pt_a,pt_b,pt_c])
-        self.assertEqual(crv.eval(0).origin,pt_a,"Curve.eval(0) returns first control point")
-        self.assertEqual(crv.eval(1).origin,pt_c,"Curve.eval(1) returns last control point")
+        self.assertEqual(crv.eval(0),pt_a,"Curve.eval(0) returns first control point")
+        self.assertEqual(crv.eval(1),pt_c,"Curve.eval(1) returns last control point")
         #TODO: evaluate point in the middle somehow
 
     def AssertPointsAlmostEqual(self,pa,pb,places=4):

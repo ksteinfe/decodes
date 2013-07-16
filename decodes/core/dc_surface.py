@@ -149,16 +149,15 @@ class Surface(IsParametrized):
 
 
     def deval(self,u,v):
-        """ Evaluates this Surface and returns a Plane.
+        """ Evaluates this Surface and returns a Point.
         T is a float value that falls within the defined domain of this Curve.
-        Tangent vector determined by a nearest neighbor at distance Curve.tol/100
 
             :param u: U-value to evaluate the Surface at.
             :type t: float
             :param v: V-value to evaluate the Surface at.
             :type t: float
-            :result: Plane.
-            :rtype: Plane
+            :result: a Point on this Surface.
+            :rtype: Point
         """
         '''
         # some rounding errors require something like this:
@@ -171,32 +170,38 @@ class Surface(IsParametrized):
         if v<self.v0 or v>self.v1 : raise DomainError("Surface evaluated outside the bounds of its v-domain: deval(%s) %s"%(v,self.domain_v))
         
         return Point(self.func(u,v))
-        
+
+
+    def deval_pln(self,u,v):
+        """ Evaluates this Surface and returns a Plane.
+        T is a float value that falls within the defined domain of this Curve.
+        Tangent vector determined by a nearest neighbor at distance Curve.tol/100
+
+            :param u: U-value to evaluate the Surface at.
+            :type t: float
+            :param v: V-value to evaluate the Surface at.
+            :type t: float
+            :result: a Plane on this Surface.
+            :rtype: Plane
+        """
         '''
-        TODO: deal with consequences of this
+        # some rounding errors require something like this:
+        if u < self.u0 and u > self.u0-self.tol_u : u = u0
+        if u > self.u1 and u < self.u1+self.tol_u : u = u1
+        if v < self.v0 and v > self.v0-self.tol_v : v = v0
+        if v > self.v1 and v < self.v1+self.tol_v : v = v1
+        '''
+        if u<self.u0 or u>self.u1 : raise DomainError("Surface evaluated outside the bounds of its u-domain: deval(%s) %s"%(u,self.domain_u))
+        if v<self.v0 or v>self.v1 : raise DomainError("Surface evaluated outside the bounds of its v-domain: deval(%s) %s"%(v,self.domain_v))
+
         pt,vec_u,vec_v = self._nudged(u,v)
         vec = vec_u.cross(vec_v)
 
         return Plane(pt, vec)
-        '''
-
-    def eval(self,u,v):
-        """ Evaluates this Curve and returns a Plane.
-        T is a normalized float value (0->1) which will be remapped to the domain defined by this Curve.
-        equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain))
-            :param t: Normalized value between 0 and 1, to evaluate a curve.
-            :type t: float
-            :result: Plane.
-            :rtype: Plane
-        """
-        if u<0 or u>1 : raise DomainError("u out of bounds.  eval() must be called numbers between 0->1: eval(%s)"%u)
-        if v<0 or v>1 : raise DomainError("v out of bounds.  eval() must be called numbers between 0->1: eval(%s)"%v)
-        return self.deval(Interval.remap(u,Interval(),self.domain_u),Interval.remap(v,Interval(),self.domain_v))
+        
 
 
-
-
-    def deval_curvature(self,u,v,calc_extras=False):
+    def deval_curv(self,u,v,calc_extras=False):
         # returns curvature values and osc circles
         pt, u_pos, u_neg, v_pos, v_neg = self._nudged(u,v,True)
 
@@ -225,17 +230,43 @@ class Surface(IsParametrized):
         if calc_extras : return crv_u[0]*crv_v[0], (crv_u[0],crv_v[0]),(crv_u[1],crv_v[1])
         return crv_u,crv_v
 
+    def deval_gauss(self,u,v):
+        crvtr = self.deval_curv(u,v)
+        return crvtr[0] * crvtr[1]
 
-    def eval_curvature(self,u,v,calc_extras=False):
+
+    def eval(self,u,v):
+        """ Evaluates this Curve and returns a Point.
+        T is a normalized float value (0->1) which will be remapped to the domain defined by this Curve.
+        equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain))
+            :param t: Normalized value between 0 and 1, to evaluate a curve.
+            :type t: float
+            :result: a Point on this Surface.
+            :rtype: Point
+        """
+        if u<0 or u>1 : raise DomainError("u out of bounds.  eval() must be called numbers between 0->1: eval(%s)"%u)
+        if v<0 or v>1 : raise DomainError("v out of bounds.  eval() must be called numbers between 0->1: eval(%s)"%v)
+        return self.deval(Interval.remap(u,Interval(),self.domain_u),Interval.remap(v,Interval(),self.domain_v))
+
+    def eval_pln(self,u,v):
+        """ Evaluates this Curve and returns a Plane.
+        T is a normalized float value (0->1) which will be remapped to the domain defined by this Curve.
+        equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain))
+            :param t: Normalized value between 0 and 1, to evaluate a curve.
+            :type t: float
+            :result: a Plane on this Surface.
+            :rtype: Plane
+        """
+        if u<0 or u>1 : raise DomainError("u out of bounds.  eval() must be called numbers between 0->1: eval(%s)"%u)
+        if v<0 or v>1 : raise DomainError("v out of bounds.  eval() must be called numbers between 0->1: eval(%s)"%v)
+        return self.deval_pln(Interval.remap(u,Interval(),self.domain_u),Interval.remap(v,Interval(),self.domain_v))
+
+    def eval_curv(self,u,v,calc_extras=False):
         """
         """
         if u<0 or u>1 : raise DomainError("u out of bounds.  eval_curvature() must be called numbers between 0->1: eval(%s)"%u)
         if v<0 or v>1 : raise DomainError("v out of bounds.  eval_curvature() must be called numbers between 0->1: eval(%s)"%v)
-        return self.deval_curvature(Interval.remap(u,Interval(),self.domain_u),Interval.remap(v,Interval(),self.domain_v),calc_extras)
-
-    def deval_gauss(self,u,v):
-        crvtr = self.deval_curvature(u,v)
-        return crvtr[0] * crvtr[1]
+        return self.deval_curv(Interval.remap(u,Interval(),self.domain_u),Interval.remap(v,Interval(),self.domain_v),calc_extras)
 
     def eval_gauss(self,u,v):
         """

@@ -92,7 +92,7 @@ class Tests(unittest.TestCase):
 
         srf = Surface(func)
         for u,v in [(0,0),(0,1),(0.5,0.5),(1,0),(1,1)]:
-            crvtr = srf.eval_curvature(0,0,True)
+            crvtr = srf.eval_curv(0,0,True)
             self.assertEqual(crvtr[0],0.0)
             self.assertEqual(crvtr[1][0],0.0)
             self.assertEqual(crvtr[1][1],0.0)
@@ -103,7 +103,7 @@ class Tests(unittest.TestCase):
         twopi = Interval.twopi()
         srf = Surface(func,twopi,twopi)
 
-        crvtr = srf.eval_curvature(0.25,0.5, True)
+        crvtr = srf.eval_curv(0.25,0.5, True)
 
 
     def AssertPointsAlmostEqual(self,pa,pb,places=4):

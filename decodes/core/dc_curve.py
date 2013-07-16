@@ -51,7 +51,7 @@ class IsParametrized(Geometry):
         if tolerance is None : tolerance = self.tol/10.0
         t = self._nearfar(Point.near_index,pt,tolerance,max_recursion)
         result = self.deval(t)
-        return(result,t,pt.distance(result.origin))
+        return(result,t,pt.distance(result))
 
     def near_pt(self,pt,tolerance=None,max_recursion=20):
         """ Finds a location on this curve which is nearest to the given Point.
@@ -88,7 +88,7 @@ class IsParametrized(Geometry):
         if tolerance is None : tolerance = self.tol/10.0
         t = self._nearfar(Point.far_index,pt,tolerance,max_recursion)
         result = self.deval(t)
-        return(result,t,pt.distance(result.origin))
+        return(result,t,pt.distance(result))
 
     def far_pt(self,pt,tolerance=None,max_recursion=20):
         """ Finds a location on this curve which is furthest to the given Point.
@@ -198,23 +198,39 @@ class Curve(HasBasis,IsParametrized):
         return self.tol/100.0
 
     def deval(self,t):
-        """ Evaluates this Curve and returns a Plane.
+        """ Evaluates this Curve and returns a Point.
         T is a float value that falls within the defined domain of this Curve.
         Tangent vector determined by a nearest neighbor at distance Curve.tol/100
 
             :param t: Value to evaluate the curve at.
             :type t: float
-            :result: Plane.
-            :rtype: Plane
+            :result: Point on the Curve.
+            :rtype: Point
         """
-        '''
-        # some rounding errors require something like this:
-        if t < self.domain.a and t > self.domain.a-self.tol : t = self.domain.a
-        if t > self.domain.b and t < self.domain.b+self.tol : t = self.domain.b
-        '''
-
         if t<self.domain.a or t>self.domain.b : raise DomainError("Curve evaluated outside the bounds of its domain: deval(%s) %s"%(t,self.domain))
+        pt = self.func(t)
+
+        #transform result to curve basis
+        if not self.is_baseless:
+            #pt.basis = self.basis
+            #pt = pt.basis_applied()
+            # TODO: evaluate basis instead... not all bases will have xforms!
+            pt = pt * self.basis.xform
         
+        return pt
+
+    def deval_pln(self,t):
+        """ Evaluates this Curve and returns a Point.
+        T is a float value that falls within the defined domain of this Curve.
+        Tangent vector determined by a nearest neighbor at distance Curve.tol/100
+
+            :param t: Value to evaluate the curve at.
+            :type t: float
+            :result: Point on the Curve.
+            :rtype: Point
+        """
+        if t<self.domain.a or t>self.domain.b : raise DomainError("Curve evaluated outside the bounds of its domain: deval(%s) %s"%(t,self.domain))
+
         pt, vec, neg_vec = self._nudged(t)
         
         #transform result to curve basis
@@ -225,9 +241,10 @@ class Curve(HasBasis,IsParametrized):
             pt = pt * self.basis.xform
             vec = vec * self.basis.xform.strip_translation()
         
-        return Plane(pt, vec)
+        return Plane(pt,vec)
 
-    def deval_curvature(self,t):
+
+    def deval_crv(self,t):
         # caluculates approximate curvature
         # returns curvature value and osc circle
         pt, vec_pos, vec_neg = self._nudged(t)
@@ -244,7 +261,31 @@ class Curve(HasBasis,IsParametrized):
 
         return Curve._curvature_from_vecs(pt,vec_pos,vec_neg)
 
-    def eval_curvature(self,t):
+    def eval(self,t):
+        """ Evaluates this Curve and returns a Point.
+        T is a normalized float value (0->1) which will be remapped to the domain defined by this Curve.
+        equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain))
+            :param t: Normalized value between 0 and 1, to evaluate a curve.
+            :type t: float
+            :result: a Point on the Curve.
+            :rtype: Point
+        """
+        if t<0 or t>1 : raise DomainError("eval() must be called with a number between 0->1: eval(%s)"%t)
+        return self.deval(Interval.remap(t,Interval(),self.domain))
+
+    def eval_pln(self,t):
+        """ Evaluates this Curve and returns a Plane.
+        T is a normalized float value (0->1) which will be remapped to the domain defined by this Curve.
+        equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain))
+            :param t: Normalized value between 0 and 1, to evaluate a curve.
+            :type t: float
+            :result: a Plane on the Curve.
+            :rtype: Plane
+        """
+        if t<0 or t>1 : raise DomainError("eval() must be called with a number between 0->1: eval(%s)"%t)
+        return self.deval_pln(Interval.remap(t,Interval(),self.domain))
+
+    def eval_crv(self,t):
         """
         """
         if t<0 or t>1 : raise DomainError("eval_curvature() must be called with a number between 0->1: eval(%s)"%t)
@@ -293,19 +334,6 @@ class Curve(HasBasis,IsParametrized):
         return pt_t,vec_plus,vec_minus
 
 
-
-    def eval(self,t):
-        """ Evaluates this Curve and returns a Plane.
-        T is a normalized float value (0->1) which will be remapped to the domain defined by this Curve.
-        equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain))
-            :param t: Normalized value between 0 and 1, to evaluate a curve.
-            :type t: float
-            :result: Plane.
-            :rtype: Plane
-        """
-        if t<0 or t>1 : raise DomainError("eval() must be called with a number between 0->1: eval(%s)"%t)
-        return self.deval(Interval.remap(t,Interval(),self.domain))
-
     def divide(self, divs=10, include_last=True):
         """Divides this Curve into a list of evaluated Planes equally spaced between Curve.domain.a and Curve.domain.b.
         If include_last is True (by default), returned list will contain divs+1 Points.
@@ -339,13 +367,14 @@ class Curve(HasBasis,IsParametrized):
             :rtype: Curve
         """
         if tol is None: tol = self.tol
+        if tol > domain.delta/10.0 : tol = domain.delta/10.0
         return Curve(self.func,domain,tol)
 
     def _nearfar(self,func_nf,pt,tolerance,max_recursion):
         def sub(crv):
             divs = 8 # number of divisions to cut the given curve into
             buffer = 1.5 # multiplier for resulting area
-            ni = func_nf(pt,[pln.origin for pln in crv/divs]) # divide the curve and find the nearest or furthest point (depending on the function that was provided)
+            ni = func_nf(pt,crv/divs) # divide the curve and find the nearest or furthest point (depending on the function that was provided)
             nd = crv.domain.eval(ni/float(divs)) # find the domain value associated with this point
             domain = Interval( nd-(buffer*crv.domain.delta/divs), nd+(buffer*crv.domain.delta/divs) ) #  create a new domain that may contain the nearest point
             if domain.a < crv.domain.a : domain.a = crv.domain.a
