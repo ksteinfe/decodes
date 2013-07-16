@@ -2,16 +2,17 @@ import decodes as dc
 from decodes.core import *
 import random
 from time import time
+import math
 
 import os,cStringIO
 path = os.path.expanduser("~") + os.sep + "_decodes_export"
-f_prefix = "pack_09_"
+f_prefix = "pack_16_"
 random.seed(0)
 
 
 class Bin():
 
-    def __init__(self, cpt, w, h, filled = False, div_type = 'n'):
+    def __init__(self, cpt, w, h, filled = False, div_type = 'a'):
         """Creates a Bin object that contains filled areas and open sub-bins.
         
             :param cpt: Corner point
@@ -39,13 +40,15 @@ class Bin():
         self.boundary = Bounds(center = Point(cpt.x+w/2.0, cpt.y+h/2.0), dim_x =w, dim_y = h)
         self.filling = []
 
-    def put_item(self, box):        
-        result = [Bin(self.cpt, box.dim_x, box.dim_y, filled = True)]
-        rem_x = self.boundary.dim_x - box.dim_x
-        rem_y = self.boundary.dim_y - box.dim_y
+    def put_item(self, shape):     
+        c = CS(self.cpt - shape.bounds.corners[0])
+        shape.basis = c   
+        result = [Bin(self.cpt, shape.bounds.dim_x, shape.bounds.dim_y, filled = shape)]
+        rem_x = self.boundary.dim_x - shape.bounds.dim_x
+        rem_y = self.boundary.dim_y - shape.bounds.dim_y
         if rem_x <= 0: 
-            if rem_y > 0 :result.append(Bin(self.cpt + Vec(0,box.dim_y), self.boundary.dim_x, rem_y))
-        elif rem_y <= 0: result.append(Bin(self.cpt + Vec(box.dim_x,0), rem_x, self.boundary.dim_y))
+            if rem_y > 0 :result.append(Bin(self.cpt + Vec(0,shape.bounds.dim_y), self.boundary.dim_x, rem_y))
+        elif rem_y <= 0: result.append(Bin(self.cpt + Vec(shape.bounds.dim_x,0), rem_x, self.boundary.dim_y))
         else:
             divide_w = False
             divide_h = False
@@ -61,36 +64,39 @@ class Bin():
                 divide_w = ((self.boundary.dim_x / rem_y) > (self.boundary.dim_y / rem_x))
                 divide_h = not(divide_w)
             if divide_w :
-                result.append(Bin(self.cpt + Vec(box.dim_x,0), rem_x, box.dim_y))
-                result.append(Bin(self.cpt + Vec(0,box.dim_y), self.boundary.dim_x, rem_y))
+                result.append(Bin(self.cpt + Vec(shape.bounds.dim_x,0), rem_x, shape.bounds.dim_y))
+                result.append(Bin(self.cpt + Vec(0,shape.bounds.dim_y), self.boundary.dim_x, rem_y))
             if divide_h :
-                result.append(Bin(self.cpt + Vec(box.dim_x,0), rem_x, self.boundary.dim_y))
-                result.append(Bin(self.cpt + Vec(0,box.dim_y), box.dim_x, rem_y))
+                result.append(Bin(self.cpt + Vec(shape.bounds.dim_x,0), rem_x, self.boundary.dim_y))
+                result.append(Bin(self.cpt + Vec(0,shape.bounds.dim_y), shape.bounds.dim_x, rem_y))
         self.filling = result
 
-    def can_fit(self, box):
+    def can_fit(self, shape):
         #full bin?
         if len(self.filling) == 0:
-            if (box.dim_x <= self.w) and (box.dim_y <= self.h): return self
+            if (shape.bounds.dim_x <= self.w) and (shape.bounds.dim_y <= self.h): return self
         else:
             for i in range(1,len(self.filling)) :
-                result = self.filling[i].can_fit(box)
+                result = self.filling[i].can_fit(shape)
                 if  result<> None : return result
         return None
 
     def get_polygons(self):
-        if self.filled:
-
-            return '<polygon '+atts+' style="'+style+'"/>\n'
+        if isinstance(self.filled, PGon):
+            return [self.filled]
         if len(self.filling) == 0:
-            point_string = " ".join([str(v.x)+","+str(v.y) for v in self.boundary.corners])
-            style = 'fill:rgb(255,255,255);stroke-width:.5;stroke:rgb(128,128,128)'
-            atts = 'points="'+point_string+'"'
-            return '<polygon '+atts+' style="'+style+'"/>\n'
-        code = ''
+            e_list = []
+            for i in range(0,4):
+                e = Segment(self.boundary.corners[i],self.boundary.corners[(i+1)%4])
+                e.set_color(.5,.5,.5)
+                e.set_weight(1)
+                e_list.append(e)
+            return e_list
+        p_list = []
         for i in range(len(self.filling)) :
-            code = code + self.filling[i].svg_code()
-        return code
+            p = self.filling[i].get_polygons()
+            if p is not None: p_list.extend(p)
+        return p_list
 
 
     def svg_code(self):
@@ -152,26 +158,25 @@ def bin_polygons(shapes = [], sheet_size = Interval(100,100),sort_type = 'w', re
             :               'ratio' or 'r'  sort based on aspect ratio
             :type sort_type: string   
         """
-        # put shapes into list of Bounds objects
-        b_list = [s.bounds for s in shapes]
+        global no_sheets
 
         # create value field
-        for i,b in enumerate(b_list):
-            b.p_list = i
-            if sort_type == 'w' : b.val = b.dim_x
-            if sort_type == 'h' : b.val = b.dim_y
-            if sort_type == 'a' : b.val = b.dim_x * b.dim_y
+        for i,s in enumerate(shapes):
+            if sort_type == 'w' : s.val = s.bounds.dim_x
+            if sort_type == 'h' : s.val = s.bounds.dim_y
+            if sort_type == 'a' : s.val = s.bounds.dim_x * s.bounds.dim_y
             if sort_type == 'r' :
-                if b.dim_y != 0 : b.val = b.dim_x / b.dim_y
-                else: b.val = 0
+                if s.bounds.dim_y != 0 : s.val = s.bounds.dim_x / s.bounds.dim_y
+                else: s.val = 0
 
         # sort list
-        b_list.sort(key=lambda b: (b.val), reverse=reverse_list)
+        shapes.sort(key=lambda s: (s.val), reverse=reverse_list)
 
         # initialize
         sheets = [Bin(Point(0,0), sheet_size.a, sheet_size.b)]
+        #no_sheets = 1
 
-        for i, r in enumerate(b_list):
+        for i, r in enumerate(shapes):
             # see if rectangle fits into one of the sheets
             print "looking at item ",i
             flag = False
@@ -185,106 +190,73 @@ def bin_polygons(shapes = [], sheet_size = Interval(100,100),sort_type = 'w', re
             # if we get here we have not placed the rectangle
             # so we need to add a new one
             if not flag:
-                sheets.append(Bin(Point(0,0), sheet_size.a, sheet_size.b))
-                sheets[-1].put_item(r)
-                print "adding bin ", len(sheets)-1
+                sheets.append(Bin(Point(no_sheets*sheet_size.a,0), sheet_size.a, sheet_size.b))
+                no_sheets += 1
+                sheets[no_sheets-1].put_item(r)
+                print "adding bin ", no_sheets-1
 
         # create files
+        #for j,s in enumerate(sheets):
+        #    s.write_svg(f_prefix+'%03d'%j, path)
+
+        # create list
+        out_list = []
         for j,s in enumerate(sheets):
-            s.write_svg(f_prefix+'%03d'%j, path)
+            out_list.extend(s.get_polygons())
+            border = PGon(s.boundary.corners).edges
+            for b in border:
+                b.set_color(.5,.5,.5)
+                b.set_weight(3)
+            out_list.append(border)
 
         # return list
-        return b_list
+        return out_list
 
+def rand_points(n,size):
+    r_int = Interval(0,2*math.pi)
+
+    r_ints = r_int.rand_interval(n)
+    pts = []
+    for i in range(n):
+        dist = random.uniform(1,size)
+        pts.append(CylCS().eval(dist, r_ints[i].b))
+    return pts
 
 # initialize parameters
-sheet_size = Interval(960,480)
-no_rects = 5
+print rand_points(10,100)
 
+sheet_size = Interval(240,240)
+no_rects = 40
+no_sheets = 1
+'''
 rect = []
 for i in range(no_rects):
     if random.random() > .75:
-        r_size = Interval(random.randrange(20,sheet_size.a,10), random.randrange(20,sheet_size.b,10))
+        r_size = Interval(random.randrange(5,sheet_size.a,5), random.randrange(5,sheet_size.b,5))
     else:
-        r_size = Interval(random.randrange(20,sheet_size.a/10,10), random.randrange(20,sheet_size.b/10,10))
+        r_size = Interval(random.randrange(5,sheet_size.a/5,5), random.randrange(5,sheet_size.b/5,5))
     if r_size.is_ordered : r_size = Interval(r_size.b, r_size.a)
     rect.append(PGon.rectangle(Point(0,0), r_size.a, r_size.b))
 
-new_list = bin_polygons(rect,sheet_size, 'r', reverse_list = True)
-
-for n,i in enumerate(new_list):
-    print 'item ',n,' : = ',i.dim_x,", ",i.dim_y
-
-    
-raw_input("press enter...")
-stop   
-            
-         
-
-# initialize parameters
-sheet_size = Interval(960,480)
-no_rects = 100
-
-rect = []
+new_list = bin_polygons(rect,sheet_size, 'w', reverse_list = True)
+'''
+shapes = []
 for i in range(no_rects):
-    if random.random() > .75:
-        r_size = Interval(random.randrange(20,sheet_size.a,10), random.randrange(20,sheet_size.b,10))
-    else:
-        r_size = Interval(random.randrange(20,sheet_size.a/10,10), random.randrange(20,sheet_size.b/10,10))
-    if r_size.is_ordered : r_size = Interval(r_size.b, r_size.a)
-    rect.append(Bounds(center=Point(0,0), dim_x = r_size.a, dim_y = r_size.b))
+    shapes.append(PGon(rand_points(random.randint(3,10),random.randint(1,sheet_size.a))))
 
-# sort them by width
-a = rect
-rect.sort(key=lambda r: (r.dim_x), reverse=True)
-
-# initialize
-sheets = [Bin(Point(0,0), sheet_size.a, sheet_size.b)]
-
-for i, r in enumerate(rect):
-    # see if rectangle fits into one of the sheets
-    print "looking at item ",i
-    flag = False
-    for j, s in enumerate(sheets):
-        test_bin = s.can_fit(r)
-        if test_bin <> None:
-            test_bin.put_item(r)
-            print "packing into bin ",j
-            flag = True
-            break
-    # if we get here we have not placed the rectangle
-    # so we need to add a new one
-    if not flag:
-        sheets.append(Bin(Point(0,0), sheet_size.a, sheet_size.b))
-        sheets[-1].put_item(r)
-        print "adding bin ", len(sheets)-1
-
-# create files
-for j,s in enumerate(sheets):
-    s.write_svg(f_prefix+'%03d'%j, path)
+new_list = bin_polygons(shapes,sheet_size, 'w', reverse_list = True)
 
 
-
-'''
-the_rect = PGon.rectangle(Point(0,0),50.0,70.0)
-
-
-test = Bin(Point(0,0), 500.0,500.0)
+#for n,i in enumerate(new_list):
+#    print 'item ',n,' : = ',i.pts
 
 
-test.put_item(the_rect)
+outie = dc.makeOut(dc.Outies.SVG, f_prefix, canvas_dimensions=Interval(no_sheets * sheet_size.a,sheet_size.b), flip_y = True)
+scale = 1
 
-new_bin = test.can_fit(the_rect)
-
-if new_bin <> None:
-    new_bin.put_item(the_rect)
-
-
-test.write_svg(f_prefix, path)
-'''
-
-
-
-
-
+for x in new_list:
+    outie.put(x)
+    
+outie.draw()
+    
 raw_input("press enter...")
