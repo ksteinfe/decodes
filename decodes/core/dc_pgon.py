@@ -78,6 +78,12 @@ class PGon(HasPts):
 
         return Bounds(ival_x = ivx, ival_y = ivy)
 
+    def rotated_to_min_bounds(self, n = 10 , m = 4):
+        '''
+        creates a copy of a polygon rotated to its best-fit bounding box
+        '''
+
+
     def eval(self,t):
         """
         evaluates this polygon at the specified parameter t
