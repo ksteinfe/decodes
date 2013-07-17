@@ -49,27 +49,38 @@ class Circle(Plane):
         vec = Vec(self.origin,pt).cross(self.plane.normal).normalized(h)
         return [pt - vec, pt + vec]
       
-class Arc(CS):
+class Arc(Geometry):
     """
     a circle class
-    inherits all properties of the Plane class
     """
     
     def __init__(self,cs,radius,sweep_angle):
-        self.origin = cs.origin
-        self.x_axis = cs.x_axis
-        self.y_axis = cs.y_axis
-        self.z_axis = cs.z_axis
+        self.cs = cs
         self.rad = radius
         self.angle = sweep_angle
         
-    def eval(self, t):
-        from .dc_xform import Xform
+    def eval(self,t):
+        """ Evaluates this Arc and returns a Point.
+            :param t: Normalized value between 0 and 1
+            :type t: float
+            :result: a Point on the Arc.
+            :rtype: Point
+        """
+        x = self.rad * math.cos(t*self.angle)
+        y = self.rad * math.sin(t*self.angle)
+        return self.cs.eval(x,y)
+
+    def eval_pln(self,t):
+        """ Evaluates this Arc and returns a Plane.
+            :param t: Normalized value between 0 and 1
+            :type t: float
+            :result: a Plane on the Arc.
+            :rtype: Plane
+        """
+        pt = self.eval(t)
+        return Plane(pt,Vec(self.origin,pt).cross(self.cs.z_axis))
         
-        vec = self.x_axis * self.rad
-        xform = Xform.rotation(axis=self.z_axis,center=self.origin,angle=Interval(0,self.angle).eval(t))
-        spt = self.origin + vec
-        return spt*xform 
+
         
     @property
     def length(self):
@@ -86,10 +97,10 @@ class Arc(CS):
     @property
     def ept(self):
         return self.eval(1) 
-        
-    def rotate(self, angle):
-        from .dc_xform import Xform
-        return Xform.rotation(axis=self.z_axis,center=self.origin,angle=angle)
+
+    @property
+    def origin(self):
+        return self.cs.origin
         
     def __repr__(self): return "arc[{0},r:{1},sweep angle{2}]".format(self.origin,self.radius,self.sweep_angle)
 

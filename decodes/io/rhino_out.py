@@ -148,7 +148,7 @@ def to_rgcircle(circ):
     return Rhino.Geometry.Circle(rh_plane,circ.rad)
     
 def to_rgarc(arc):
-    rh_plane = to_rgplane(arc)
+    rh_plane = to_rgplane(arc.cs)
     return Rhino.Geometry.Arc(rh_plane,arc.rad,arc.angle)
 
 def to_rgplane(other):
