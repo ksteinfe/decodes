@@ -133,17 +133,29 @@ class QuadTree():
     def __init__ (self, capacity, bounds):
         self.cap = capacity
         self.bnd = bounds
-        self.pts = []
+        self._pts = []
         
     @property
     def has_children(self):
         if hasattr(self,'children'):return True 
         return False
         
+    @property
+    def pts(self):
+        """
+        recursively returns all the points in this quadtree
+        """
+        ret_pts = []
+        if not self.has_children :
+            ret_pts = [Point(pt) for pt in self._pts]
+        else :
+            for child in self.children: ret_pts.extend(child.pts)
+        return ret_pts
+
     def append(self, pt) :
         if not self.contains(pt) : return False
-        if not self.has_children and len(self.pts) < self.cap:
-            self.pts.append(pt)
+        if not self.has_children and len(self._pts) < self.cap:
+            self._pts.append(pt)
             return True
         else :
             if not self.has_children : self._divide()
@@ -161,7 +173,7 @@ class QuadTree():
         sub_bnds = self.bnd//2
         self.children = [QuadTree(self.cap,sub_bnd) for sub_bnd in sub_bnds]
 
-        for pt in self.pts : 
+        for pt in self._pts : 
             accepted = False
             for child in self.children:
                 if child.append(pt) : 
@@ -169,7 +181,7 @@ class QuadTree():
                     break
             if not accepted : "no child accepted this point!"
             
-        self.pts = None
+        self._pts = None
         return True
     
     def contains(self,pt):
@@ -185,7 +197,7 @@ class QuadTree():
         if not self.bnd.overlaps(bounds) : return []
         ret_pts = []
         if not self.has_children :
-            for pt in self.pts :
+            for pt in self._pts :
                 if pt in bounds :  ret_pts.append(pt)
         else :
             for child in self.children: ret_pts.extend(child.pts_in_bounds(bounds))
