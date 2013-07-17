@@ -162,8 +162,6 @@ class PGon(HasPts):
 
         if not pt in self.bounds : return False
 
-        
-
         #TODO: maybe move this intersection routine to intersection class
         
         for seg in self.edges:
@@ -172,8 +170,12 @@ class PGon(HasPts):
         
         icnt = 0
         ray = Ray(pt,Vec(0,1))
-        for n in range(len(self._verts)-1):
-            seg = Segment(Point(self._verts[n]),Point(self._verts[n+1]))
+        for n in range(len(self._verts)):
+            try:
+                seg = Segment(Point(self._verts[n]),Point(self._verts[n+1]))
+            except:
+                seg = Segment(Point(self._verts[n]),Point(self._verts[0]))
+
             if seg.is_parallel(ray) : continue
             try:
                 slope = (seg.ept.y - seg.spt.y) / (seg.ept.x - seg.spt.x)
