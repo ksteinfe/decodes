@@ -48,10 +48,10 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>-881</X>
-                  <Y>-614</Y>
+                  <X>-549</X>
+                  <Y>-299</Y>
                 </item>
-                <item name="Zoom" type_name="gh_single" type_code="5">1</item>
+                <item name="Zoom" type_name="gh_single" type_code="5">0.7852613</item>
               </items>
             </chunk>
             <chunk name="Views">
@@ -3498,12 +3498,11 @@ The following geometric entities describing the shape of the surface at a given 
 - curvatures: principal curvatures (min/max), Gaussian curvature (K), Mean Curvature (H)
 
 Note: All quantities at a given point are computed using nearest neighbors on a mesh.  
-For the case of a parametrized surface, we take the mesh to be a quad mesh aligned 
-with the isocurves and nearest neighbors to be surrounding vertices at a resolution 
-given by tol_nudge. These calculations are good for any mesh on the surface;  all 
-that would need to change for another type of mesh is (1) the construction of the 
-mesh of nearest neighbors around the surface point in question (2) the calculation 
-of the areas of the faces and the weighted face areas
+For the case of a parametrized surface, we take a mesh of nearest neighbors with vertices
+given by the isocurves at a resolution tol_nudge. These calculations are good for any mesh 
+on a surface;  all that would need to change for another type of mesh is 
+(1) the construction of the mesh of nearest neighbors around the surface point in question 
+(2) the calculation of the areas of the faces and the weighted face areas
 ref: 
 Taubin, Gabriel, Estimating the Tensor of Curvature of a Surface from a Polyhedral
 Approximation, http://pdf.aminer.org/000/234/737/curvature_approximation_for_triangulated_surfaces.pdf
@@ -3561,8 +3560,8 @@ u_plus = u + tol_u_nudge
 u_minus = u - tol_u_nudge
 v_plus = v + tol_v_nudge
 v_minus = v - tol_v_nudge
+ngbr.append(func(u,v))
 if (u_minus &gt; u0) and (u_plus &lt; u1) and (v_minus &gt; v0) and (v_minus &lt; v1):
-    ngbr.append(func(u,v))
     ngbr.append(func(u_plus, v))
     ngbr.append(func(u_plus, v_plus))
     ngbr.append(func(u, v_plus))
@@ -3571,10 +3570,22 @@ if (u_minus &gt; u0) and (u_plus &lt; u1) and (v_minus &gt; v0) and (v_minus &lt
     ngbr.append(func(u_minus, v_minus))
     ngbr.append(func(u, v_minus))
     ngbr.append(func(u_plus, v_minus))
+    
+    #Quad mesh
     ngbr.add_face(0,1,2,3)
     ngbr.add_face(0,3,4,5)
     ngbr.add_face(0,5,6,7)
     ngbr.add_face(0,7,8,1)
+   
+    """
+    #Triangular mesh
+    ngbr.add_face(0,1,2)
+    ngbr.add_face(0,2,3)
+    ngbr.add_face(0,3,5)
+    ngbr.add_face(0,5,6)
+    ngbr.add_face(0,6,7)
+    ngbr.add_face(0,7,1)
+    """
 else:
     print "Deal with later"
 
@@ -3586,7 +3597,13 @@ weights = [0]*len(ngbr)
 N_vec = Vec(0,0,0)
 for k in range(len(ngbr.faces)):
     verts = ngbr.face_pts(k)
+
+    #Quad face area
     face_area = Vec(verts[0],verts[1]).cross(Vec(verts[0],verts[2])).length
+
+    #Triangular face area
+    #face_area = 0.5*Vec(verts[0],verts[1]).cross(Vec(verts[0],verts[2])).length
+
     N_vec = N_vec + ngbr.face_normal(k)*face_area
     for i in ngbr.faces[k]:
         weights[i] += face_area
@@ -4394,8 +4411,8 @@ domain.put([0, 2*math.pi, 0, 2*math.pi])
                 <chunk name="Container">
                   <items count="11">
                     <item name="slider_value" type_name="gh_point3d" type_code="51">
-                      <X>0.420703422732469</X>
-                      <Y>0.483789583531821</Y>
+                      <X>0.564295326791159</X>
+                      <Y>0.746618875643102</Y>
                       <Z>0.5</Z>
                     </item>
                     <item name="x_domain" type_name="gh_interval1d" type_code="60">
@@ -4422,12 +4439,12 @@ domain.put([0, 2*math.pi, 0, 2*math.pi])
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>796.7117</X>
-                          <Y>446.9438</Y>
+                          <X>818.699</X>
+                          <Y>437.5206</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>796</X>
-                          <Y>446</Y>
+                          <X>818</X>
+                          <Y>437</Y>
                           <W>200</W>
                           <H>200</H>
                         </item>
