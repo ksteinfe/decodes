@@ -267,11 +267,27 @@ class Xform(object):
             tup = xf._xform_tuple(cs.y_axis.to_tuple())
             y_axis = Vec(tup[0],tup[1],tup[2])
             
-            if isinstance(other, Arc) : ret = Arc(CS(origin, x_axis, y_axis),other.rad,other.angle)
-            else : ret = CS(origin, x_axis, y_axis)
+            
+            ret = CS(origin, x_axis, y_axis)
             ret.copy_props(other)
             return ret
+        
+        if isinstance(other, Arc) : 
+        
+            cs = other._basis
+            tup = self._xform_tuple(cs.origin.to_tuple())
+            origin = Point(tup[0],tup[1],tup[2])
+            xf = self.strip_translation()
+            tup = xf._xform_tuple(cs.x_axis.to_tuple())
+            x_axis = Vec(tup[0],tup[1],tup[2])
+            tup = xf._xform_tuple(cs.y_axis.to_tuple())
+            y_axis = Vec(tup[0],tup[1],tup[2])
             
+            
+            ret = Arc(CS(origin, x_axis, y_axis),other.rad,other.angle)
+            ret.copy_props(other)
+            return ret
+        
         if isinstance(other, Point) : 
             tup = self._xform_tuple(other.to_tuple())
             pt = Point(tup[0],tup[1],tup[2])
