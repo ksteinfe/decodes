@@ -47,15 +47,31 @@ class RotationalSurface(ClassicalSurface):
             xf = Xform.rotation(angle=v,axis=self.axis)
             return pt*xf
 
-        dom_u = self.genx.domain
-        tol_u = self.genx.tol
+        try:
+            dom_u = self.genx.domain
+            tol_u = self.genx.tol
+        except:
+            # we may have been passed a non-curve genx, such as an arc
+            # todo, make a way to set the tolerence of this arc
+            dom_u = Interval()
+            tol_u = 1.0/10.0
+
         super(RotationalSurface,self).__init__(func,dom_u,dom_v,tol_u,tol_v)
 
-    def deval_pln(self,u,v):
+    def deval_pln(self,u,v,flip_ang_tol=0.0001):
         xf = Xform.rotation(angle=v,axis=self.axis)
         pln_crv = self.genx.deval_pln(u) * xf
-        pt = Point(self.axis.to_line().near_pt(pln_crv.origin))
-        return Plane(pln_crv.origin, pln_crv.normal.cross(pt).cross(pln_crv.normal))
+        axis_pt = Point(self.axis.to_line().near_pt(pln_crv.origin))
+
+        try:
+            pln = Plane(pln_crv.origin, pln_crv.normal.cross(axis_pt).cross(pln_crv.normal))
+            # doesn't work in all situations
+            # if self.axis.angle(axis_pt) < flip_ang_tol : pln.normal = pln.normal.inverted()
+        except:
+            # seems to only happen when evaluated point lies at (0,0), but may happen when evaluated pt lies on axis
+            return super(ClassicalSurface,self).deval_pln(u,v)
+
+        return pln
 
     def deval_crv(self,u,v):
         # we could re-implement deval_crv here in the context of this classical surface type, or we could pass the buck to our general Surface class
@@ -70,20 +86,27 @@ class RotationalSurface(ClassicalSurface):
             pt_0 = self.genx.deval(u_val)
             pt_1 = self.axis.to_line().near_pt(pt_0)
             rad = pt_0.distance(pt_1)
-            cs = CS(pt_1,Vec(pt_0,pt_1),Vec(pt_0,pt_1).cross(self.axis))
+            cs = CS(pt_1,Vec(pt_1,pt_0),Vec(pt_0,pt_1).cross(self.axis))
 
             return Arc(cs,rad,self.domain_v.delta)
         else :
              # we're plotting a v-iso, return our curve
              iso = copy.copy(self.genx)
-             iso.basis = CS()*Xform.rotation(angle=v_val,axis=self.axis)
-             iso._rebuild_surrogate()
+             if iso.is_baseless:
+                iso.basis = CS()*Xform.rotation(angle=v_val,axis=self.axis)
+             else:
+                 iso.basis = iso.basis*Xform.rotation(angle=v,axis=surf.axis)
+
+             try:
+                 iso._rebuild_surrogate()
+             except:
+                 pass
              return iso
 
         
 class TranslationalSurface(ClassicalSurface):
     
-    def __init__(self, generatrix, axis=Vec(1,0), dom_u=Interval(0,1), dom_v=Interval(0,1), tol_u=None, tol_v=None):
+    def __init__(self, generatrix, axis=Vec(1,0), dom_v=Interval(0,1), tol_v=None):
         '''
         the given generatrix curve will be translated along the given axis
         '''
@@ -95,14 +118,23 @@ class TranslationalSurface(ClassicalSurface):
             vec = Vec(axis)*v
             return pt+vec
 
-        dom_u = self.genx.domain
-        tol_u = self.genx.tol
+        try:
+            dom_u = self.genx.domain
+            tol_u = self.genx.tol
+        except:
+            # we may have been passed a non-curve genx, such as an arc
+            # todo, make a way to set the tolerence of this arc
+            dom_u = Interval()
+            tol_u = 1.0/10.0
+
         super(TranslationalSurface,self).__init__(func,dom_u,dom_v,tol_u,tol_v)
 
     def deval_pln(self,u,v):
         pln_crv = self.genx.deval_pln(u)
+
         pt = self._func(u,v)
         return Plane(pt, pln_crv.normal.cross(self.axis))
+
 
     def deval_crv(self,u,v):
         # we could re-implement deval_crv here in the context of this classical surface type, or we could pass the buck to our general Surface class
@@ -119,70 +151,3 @@ class TranslationalSurface(ClassicalSurface):
              pass
 
         return super(ClassicalSurface,self).isocurve(u_val,v_val)
-        
-
-
-class RotationalSurface_Depreciated(ClassicalSurface):
-    # rotational surfaces are currently constrained to rotational axis that pass thru the world origin
-    
-    def __init__(self, cs, curve, dom_v=Interval(0,math.pi), tol_v=None):
-        '''
-        the given curve will be evaluated using the given cs as a basis
-        and then rotated about a the x_axis of this cs
-        '''
-
-        self.curve = curve
-        self.basis = cs
-
-        self.axis = Vec(1,0)
-
-        def func(u,v):
-            pt = self.curve.deval(u)
-            xf = Xform.rotation(angle=v,axis=self.axis)
-            return self.basis.eval(pt*xf)
-
-        dom_u = curve.domain
-        tol_u = curve.tol
-        super(RotationalSurface,self).__init__(func,dom_u,dom_v,tol_u,tol_v)
-
-    def deval_pln(self,u,v):
-        # don't forget that rotational surfaces are BASED... points need to be processed through self.basis as we go
-        xf = Xform.rotation(angle=v,axis=self.axis)
-        pln_crv = self.curve.deval_pln(u) * xf
-        pt = self.basis.eval(pln_crv.origin)
-        crv_vec = Vec(pt,self.basis.eval(pln_crv.origin + pln_crv.normal))
-        
-        vec = Vec(pt,self.basis.origin)
-        if vec.length == 0 : vec = Vec(pt,self.basis.origin+self.axis)
-        vec = vec.cross(crv_vec)
-        vec = vec.cross(crv_vec)
-
-        return Plane(pt,vec)
-
-    def deval_crv(self,u,v):
-        # we could re-implement deval_crv here in the context of this classical surface type, or we could pass the buck to our general Surface class
-        # don't forget that rotational surfaces are BASED... points need to be processed through self.basis as we go
-        return super(ClassicalSurface,self).deval_crv(u,v)
-
-    def isocurve(self, u_val=None, v_val=None):
-        if u_val is None and v_val is None: raise AttributeError("Surface.isocurve requires either u_val OR v_val to be set")
-        if u_val is not None and v_val is not None: raise AttributeError("u_val AND v_val cannot both be set when generating a Surface.isocurve")
-
-        if v_val is None:
-            # we're plotting a u-iso, return an Arc
-            pt_0 = self.curve.deval(u_val)
-            pt_1 = Point(pt_0.x)
-            rad = pt_0.distance(pt_1)
-            cs = CS(self.basis.eval(pt_0.x,0,0),Vec(pt_1,pt_0),self.basis.z_axis)
-
-            return Arc(cs,rad,math.pi)
-        else :
-             # we're plotting a v-iso, return our curve
-             xf = Xform.rotation(angle=v_val,axis=self.axis)
-             iso = self.curve
-             y_pt = self.basis.eval(0,1)*xf
-             cs = CS(self.basis.origin,self.basis.x_axis,y_pt)
-             iso.basis = cs
-             iso._rebuild_surrogate()
-             return iso
-        

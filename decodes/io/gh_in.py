@@ -46,7 +46,7 @@ class GrasshopperIn():
 
         elif type(gh_in)is rg.Circle :
             pln = Plane( from_rgpt(gh_in.Center), from_rgvec(gh_in.Plane.Normal))
-            return Arc(pln,gh_in.Radius)
+            return Circle(pln,gh_in.Radius)
             
         elif type(gh_in)is rg.Arc :
             x_axis = Vec(from_rgpt(gh_in.Center),from_rgpt(gh_in.StartPoint))

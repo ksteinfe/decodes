@@ -49,13 +49,13 @@ class Circle(Plane):
         vec = Vec(self.origin,pt).cross(self.plane.normal).normalized(h)
         return [pt - vec, pt + vec]
       
-class Arc(Geometry):
+class Arc(HasBasis):
     """
     a circle class
     """
     
     def __init__(self,cs,radius,sweep_angle):
-        self.cs = cs
+        self._basis = cs
         self.rad = radius
         self.angle = sweep_angle
         
@@ -68,7 +68,7 @@ class Arc(Geometry):
         """
         x = self.rad * math.cos(t*self.angle)
         y = self.rad * math.sin(t*self.angle)
-        return self.cs.eval(x,y)
+        return self._basis.eval(x,y)
 
     def eval_pln(self,t):
         """ Evaluates this Arc and returns a Plane.
@@ -78,9 +78,15 @@ class Arc(Geometry):
             :rtype: Plane
         """
         pt = self.eval(t)
-        return Plane(pt,Vec(self.origin,pt).cross(self.cs.z_axis))
+        return Plane(pt,Vec(self.origin,pt).cross(self._basis.z_axis))
         
+    def deval(self,t):
+        # only here so that we may use arcs as curves
+        return self.eval(t)
 
+    def deval_pln(self,t):
+        # only here so that we may use arcs as curves
+        return self.eval_pln(t)
         
     @property
     def length(self):
@@ -100,7 +106,7 @@ class Arc(Geometry):
 
     @property
     def origin(self):
-        return self.cs.origin
+        return self._basis.origin
         
     def __repr__(self): return "arc[{0},r:{1},sweep angle{2}]".format(self.origin,self.radius,self.sweep_angle)
 

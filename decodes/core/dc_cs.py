@@ -89,14 +89,17 @@ class CS(Geometry, Basis):
 
     @property
     def x_ray(self):
+        from .dc_line import Ray
         return Ray(self.origin,self.x_axis)
 
     @property
     def y_ray(self):
+        from .dc_line import Ray
         return Ray(self.origin,self.y_axis)
 
     @property
     def z_ray(self):
+        from .dc_line import Ray
         return Ray(self.origin,self.z_axis)
 
     @property
@@ -124,16 +127,60 @@ class CS(Geometry, Basis):
         return self.z_axis
 
 
+    @staticmethod
+    def on_xy(x=0,y=0,x_vec=None,rot=None):
+        """
+        returns a coordinate system on the world xy plane
+        optionally, one may define the origin_x and origin_y of the resulting CS
+        one may also define ONE (but not both) of the following: 
+        * a vector that controls the rotation of the resulting CS on the xy_plane. the z coordinate of this vector will be ignored.
+        * a rotation value (0->2PI) that does the same thing
+        """
 
+        if x_vec is not None and rot is not None : raise GeometricError("You may specify *only* one of the following: x_vec, rotation")
+        if rot is not None:
+            x_vec = Vec(math.cos(rot),math.sin(rot))
+        if x_vec is None:
+            x_vec = Vec(1,0)
+        x_vec.z = 0
+        return CS(Point(x,y,0),x_vec,x_vec.cross(Vec(0,0,-1)))
+    
+    @staticmethod
+    def on_xz(x=0,z=0,x_vec=None,rot=None):
+        """
+        returns a coordinate system on the world xy plane
+        optionally, one may define the origin_x and origin_z of the resulting CS
+        one may also define ONE (but not both) of the following: 
+        * a vector that controls the rotation of the resulting CS on the xy_plane. the y coordinate of this vector will be ignored.
+        * a rotation value (0->2PI) that does the same thing
+        """
+
+        if x_vec is not None and rot is not None : raise GeometricError("You may specify *only* one of the following: x_vec, rotation")
+        if rot is not None:
+            x_vec = Vec(math.cos(rot),0,math.sin(rot))
+        if x_vec is None:
+            x_vec = Vec(1,0)
+        x_vec.y = 0
+        return CS(Point(x,0,z),x_vec,x_vec.cross(Vec(0,1,0)))
 
     @staticmethod
-    def on_xy(x=0,y=0,rotation=0):
+    def on_yz(y=0,z=0,x_vec=None,rot=None):
         """
-        returns a coordinate system on the xy plane at a given rotation about the z-axis
+        returns a coordinate system on the world xy plane
+        optionally, one may define the origin_x and origin_y of the resulting CS
+        one may also define ONE (but not both) of the following: 
+        * a vector that controls the rotation of the resulting CS on the xy_plane. the x coordinate of this vector will be ignored.
+        * a rotation value (0->2PI) that does the same thing
         """
-        x_vec = Vec(math.cos(rotation),math.sin(rotation))
-        return CS(Point(x,y),x_vec,x_vec.cross(Vec(0,0,-1)))
-    
+
+        if x_vec is not None and rot is not None : raise GeometricError("You may specify *only* one of the following: x_vec, rotation")
+        if rot is not None:
+            x_vec = Vec(0,math.cos(rot),math.sin(rot))
+        if x_vec is None:
+            x_vec = Vec(1,0)
+        x_vec.x = 0
+        return CS(Point(0,y,z),x_vec,x_vec.cross(Vec(-1,0,0)))
+
 
 class CylCS(Geometry, Basis):
     """a cylindrical coordinate system"""
