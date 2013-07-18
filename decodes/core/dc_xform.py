@@ -240,12 +240,16 @@ class Xform(object):
             return other
 
         # BASED GEOMETRY
-        # all objects that are not HASPTS but have a basis defined must apply their basis before transforming points
+        # all objects that are not HASPTS but have a basis defined and are capable of applying their basis must do so before transforming points
+        # this condition only applies to Based Points at the moment
         if isinstance(other, HasBasis) and (not other.is_baseless): 
-            o = other.basis_applied()
-            o.copy_props(other)
-            other = o
-               
+            try:
+                o = other.basis_applied()
+                o.copy_props(other)
+                other = o
+            except:
+                pass
+
         if isinstance(other, LinearEntity) : 
             other._pt = other._pt*self
             xf = self.strip_translation()
