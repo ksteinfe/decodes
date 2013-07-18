@@ -95,7 +95,7 @@ class RotationalSurface(ClassicalSurface):
              if iso.is_baseless:
                 iso.basis = CS()*Xform.rotation(angle=v_val,axis=self.axis)
              else:
-                 iso.basis = iso.basis*Xform.rotation(angle=v,axis=surf.axis)
+                 iso.basis = iso.basis*Xform.rotation(angle=v_val,axis=surf.axis)
 
              try:
                  iso._rebuild_surrogate()
