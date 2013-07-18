@@ -135,7 +135,7 @@ class Curve(HasBasis,IsParametrized):
         self._dom = domain
         self._tol = self.tol_max
         if tolerance is not None : self.tol = tolerance
-        if basis is not None : self.basis = basis
+        if basis is not None : self._basis = basis
 
         for t in [0,1]:
             try:

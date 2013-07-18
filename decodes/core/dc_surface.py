@@ -201,7 +201,8 @@ class Surface(IsParametrized):
         
 
 
-    def deval_curv(self,u,v,calc_extras=False):
+    def deval_curviso(self,u,v,calc_extras=False):
+        # calculates the curvature of the isoparms of this surfaces
         # returns curvature values and osc circles
         pt, u_pos, u_neg, v_pos, v_neg = self._nudged(u,v,True)
 
@@ -229,6 +230,194 @@ class Surface(IsParametrized):
         
         if calc_extras : return crv_u[0]*crv_v[0], (crv_u[0],crv_v[0]),(crv_u[1],crv_v[1])
         return crv_u,crv_v
+
+    def deval_curv(self,u,v,calc_extras=False):
+        """
+        IN:  
+        - a point dom_pt (given on this surface domain) referring to a point on the surface 
+
+        OUT:
+        The following geometric entities describing the shape of the surface at a given point:
+        - principal directions (expressed as a coordinate system)
+        - curvatures: principal curvatures (min/max), Gaussian curvature (K), Mean Curvature (H)
+
+        Note: All quantities at a given point are computed using nearest neighbors on a mesh.  
+        For the case of a parametrized surface, we take a mesh of nearest neighbors with vertices
+        given by the isocurves at a resolution tol_nudge. These calculations are good for any mesh 
+        on a surface;  all that would need to change for another type of mesh is 
+        (1) the construction of the mesh of nearest neighbors around the surface point in question 
+        (2) the calculation of the areas of the faces and the weighted face areas
+        ref: 
+        Taubin, Gabriel, Estimating the Tensor of Curvature of a Surface from a Polyhedral
+        Approximation, http://pdf.aminer.org/000/234/737/curvature_approximation_for_triangulated_surfaces.pdf
+
+        Note: we can define projection onto a surface by computing the normal on the surrogate)
+        """
+        # * eliminate when we have a matrix class or can import numpy
+        def matrix_mult(matrix1,matrix2):
+            if len(matrix1[0]) != len(matrix2):
+                print "Matrices can't be multiplied!"
+            else:
+                m = len(matrix1)
+                n = len(matrix1[0])
+                p = len(matrix2[0])
+                new_matrix = [[0 for row in range(p)] for col in range(m)]
+                for i in range(m):
+                    for j in range(p):
+                        for k in range(n):
+                            new_matrix[i][j] += matrix1[i][k]*matrix2[k][j]
+                return new_matrix
+
+        ret = []
+        pt_uv = self.func(u,v)
+        ret.append(pt_uv)
+
+        #construct mesh of nearest neighbors, with 0 indexing p_uv and neighbors indexed counterclockwise 
+        ngbr = Mesh()
+        pt, u_pos, u_neg, v_pos, v_neg = self._nudged(u,v,True)
+        ngbr.append(pt_uv)
+        ngbr.append(pt_uv +  u_pos )
+        ngbr.append(pt_uv +  u_pos  +  v_pos)
+        ngbr.append(pt_uv +  v_pos )
+        ngbr.append(pt_uv +  u_neg  +  v_pos)
+        ngbr.append(pt_uv +  u_neg )
+        ngbr.append(pt_uv +  u_neg  +  v_neg)
+        ngbr.append(pt_uv +  v_neg )
+        ngbr.append(pt_uv +  u_pos  +  v_neg)
+    
+        #Triangular mesh
+        ngbr.add_face(0,1,2)
+        ngbr.add_face(0,2,3)
+        ngbr.add_face(0,3,5)
+        ngbr.add_face(0,5,6)
+        ngbr.add_face(0,6,7)
+        ngbr.add_face(0,7,1)
+
+        #weights stores the sum of the face areas for faces touching at given vertex and p_uv
+        #used for creating the matrix needed for the calculation of the principals
+        weights = [0]*len(ngbr) 
+
+        #Compute the normal vector and tangent plane at the point pt_uv
+        N_vec = Vec(0,0,0)
+        for k in range(len(ngbr.faces)):
+            verts = ngbr.face_pts(k)
+            face_area = 0.5*Vec(verts[0],verts[1]).cross(Vec(verts[0],verts[2])).length #Triangular face area
+            N_vec = N_vec + ngbr.face_normal(k)*face_area
+            for i in ngbr.faces[k]:
+                weights[i] += face_area
+        N_vec = N_vec.normalized()
+        tangent_plane = Plane(pt_uv, N_vec)
+
+        #Compute the principal curvatures and directions at the point pt_uv (*)
+
+        #Form the matrix needed for the calculation of the principal curvatures/directions
+        M_mat = [[0 for row in range(3)] for col in range(3)]
+        weights_sum = sum(weights)
+        for k in range(1,len(ngbr)):
+            vec_k = Vec(ngbr[k] - pt_uv) 
+            #T_k is normalized projecton of vec_k onto the tangent plane
+            T_k = (vec_k - N_vec*(vec_k.dot(N_vec))).normalized().to_tuple()
+            #kappa_k is the approximate directional curvature at ngbr[k]
+            kappa_k = 2*N_vec.dot(vec_k)/vec_k.length2
+            w_k =  weights[k]/weights_sum
+            factor = kappa_k*w_k  
+            for row in range(3):
+               for col in range(3):
+                   M_mat[row][col] += factor * T_k[row] * T_k[col]
+ 
+        """
+        #Check that N_vec is an eigenvector of M_mat (with eigenvalue 0)
+        N = [[N_vec.x], [N_vec.y], [N_vec.z]]
+        print matrix_mult(M_mat, N)
+        """
+
+        #Form matrix for Householder transformation(reflection matrix Q = I - 2*W*transpose(W))
+        E_vec = Vec(1,0,0)
+        if (E_vec - N_vec).length2 > (E_vec + N_vec).length2:
+            W_vec = (Vec(1,0,0) - N_vec).normalized().to_tuple()
+        else:
+            W_vec = (Vec(1,0,0) + N_vec).normalized().to_tuple()
+    
+        I_mat = [[1,0,0], [0,1,0], [0,0,1]] 
+        Q_mat = [[0 for row in range(3)] for col in range(3)]
+
+        for row in range(3):
+            for col in range(3):
+                Q_mat[row][col] = I_mat[row][col] - 2 * W_vec[row] * W_vec[col]
+
+        """
+        #Check that +- N_vec is the first column of Q
+        print N_vec, Q_mat
+        """
+
+        T1_tilde = Vec(Q_mat[0][1], Q_mat[1][1], Q_mat[2][1])
+        T2_tilde = Vec(Q_mat[0][2], Q_mat[1][2], Q_mat[2][2])
+        """
+        #Check that these vectors are orthonormal
+        print T1_tilde.length, T2_tilde.length, T1_tilde.dot(T2_tilde)
+        """
+
+        #Apply Householder transformation by forming matrix : transpose(Q)*M*Q = Q*M*Q
+        #Note: Q_mat_transpose = transpose(Q_mat)
+        M_s =  matrix_mult(matrix_mult(Q_mat, M_mat), Q_mat)
+        m11 = M_s[1][1]
+        m12 = M_s[1][2]
+        m21 = M_s[2][1]
+        m22 = M_s[2][2]
+        M_s_restricted = [[m11, m12],[m21 , m22]]
+
+        """
+        #Check that M_s_rectricted (restriction of M_s on tangent space) is symmetric
+        print "Matrix to be diagonalized", M_s_restricted
+        """
+
+        #Calculate the Givens rotation angle
+        theta = 0.5*math.atan2(2*m12, m22-m11)
+        cos = math.cos(theta)
+        sin = math.sin(theta)
+
+        """
+        #Check that transpose(Rot)*M_s_restricted*Rot is diagonal
+        Rot_mat = [[cos, sin],[-sin, cos]]
+        print matrix_mult(matrix_mult(transpose(Rot_mat), M_s_restricted), Rot_mat)
+        """
+
+        #Calculate the eigenvectors and eigenvalues of M_mat
+        T1_vec = T1_tilde*cos - T2_tilde*sin
+        T2_vec = T1_tilde*sin + T2_tilde*cos
+        d1 = cos*cos*m11 - 2*cos*sin*m12 + sin*sin*m22 
+        d2 = sin*sin*m11 + 2*cos*sin*m12 + cos*cos*m22
+
+
+        """
+        #Check that T1, T2 are eigenvectors of M_mat
+        T1 = [[T1_vec.x], [T1_vec.y], [T1_vec.z]]
+        T2 = [[T2_vec.x], [T2_vec.y], [T2_vec.z]]
+        T1_test = matrix_mult(M_mat, T1)
+        #These should all equal d1
+        print T1_test[0][0]/T1[0][0], T1_test[1][0]/T1[1][0], T1_test[2][0]/T1[2][0]
+        T2_test = matrix_mult(M_mat, T2)
+        #These should all equal d2
+        print T2_test[0][0]/T2[0][0], T2_test[1][0]/T2[1][0], T2_test[2][0]/T2[2][0]
+        """ 
+
+        #T1 and T2 are the principal directions.  Form a coordinate system aligned with these directions.
+        cs_principal = CS(pt_uv, T1_vec, T2_vec)
+
+        #Compute all the curvature quantities: principal curvatures, Gaussian, Mean
+        k1 = 3*d1 - d2
+        k2 = 3*d2 - d1
+        K = k1*k2
+        H = (k1 + k2)*0.5
+        if k1 == k2 : 
+            if not calc_extras : return False
+            return False, k1, k2, K, H
+
+        if not calc_extras : return cs_principal
+        return cs_principal, k1, k2, K, H
+
+
+
 
     def deval_gauss(self,u,v):
         crvtr = self.deval_curv(u,v)
@@ -260,6 +449,13 @@ class Surface(IsParametrized):
         if u<0 or u>1 : raise DomainError("u out of bounds.  eval() must be called numbers between 0->1: eval(%s)"%u)
         if v<0 or v>1 : raise DomainError("v out of bounds.  eval() must be called numbers between 0->1: eval(%s)"%v)
         return self.deval_pln(Interval.remap(u,Interval(),self.domain_u),Interval.remap(v,Interval(),self.domain_v))
+
+    def eval_curviso(self,u,v,calc_extras=False):
+        """
+        """
+        if u<0 or u>1 : raise DomainError("u out of bounds.  eval_curvature() must be called numbers between 0->1: eval(%s)"%u)
+        if v<0 or v>1 : raise DomainError("v out of bounds.  eval_curvature() must be called numbers between 0->1: eval(%s)"%v)
+        return self.deval_curviso(Interval.remap(u,Interval(),self.domain_u),Interval.remap(v,Interval(),self.domain_v),calc_extras)
 
     def eval_curv(self,u,v,calc_extras=False):
         """

@@ -86,17 +86,32 @@ class Tests(unittest.TestCase):
         with self.assertRaises(DomainError):  iso_fail = srf.isocurve(u_val=2.5)
         with self.assertRaises(AttributeError):  iso_fail = srf.isocurve(u_val=0.5,v_val=0.5)
 
-    def test_curvature(self):
+    def test_iso_curvature(self):
         def func(u,v):
-            return Point(0,u,v)
+            return Point(u,v)
 
         srf = Surface(func)
         for u,v in [(0,0),(0,1),(0.5,0.5),(1,0),(1,1)]:
-            crvtr = srf.eval_curv(0,0,True)
+            crvtr = srf.eval_curviso(u,v,True)
             self.assertEqual(crvtr[0],0.0)
             self.assertEqual(crvtr[1][0],0.0)
             self.assertEqual(crvtr[1][1],0.0)
 
+
+        def func(u,v):
+            return Point(u,v,math.sin(u+v))
+        twopi = Interval.twopi()
+        srf = Surface(func,twopi,twopi)
+
+        crvtr = srf.eval_curviso(0.25,0.5, True)
+
+    def test_curvature(self):
+        def func(u,v):
+            return Point(u,v)
+
+        srf = Surface(func)
+        for u,v in [(0,0),(0,1),(0.5,0.5),(1,0),(1,1)]:
+            crvtr = srf.eval_curv(u,v,True)
 
         def func(u,v):
             return Point(u,v,math.sin(u+v))

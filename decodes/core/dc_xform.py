@@ -242,6 +242,7 @@ class Xform(object):
         # BASED GEOMETRY
         # all objects that are not HASPTS but have a basis defined and are capable of applying their basis must do so before transforming points
         # this condition only applies to Based Points at the moment
+        # TODO: move this functionality down to Based Points
         if isinstance(other, HasBasis) and (not other.is_baseless): 
             try:
                 o = other.basis_applied()

@@ -145,7 +145,9 @@ class HasBasis(Geometry):
     """
     
     @property
-    def basis(self): return self._basis
+    def basis(self): 
+        if self.is_baseless: return None
+        return self._basis
 
     @basis.setter
     def basis(self, basis): self._basis = basis

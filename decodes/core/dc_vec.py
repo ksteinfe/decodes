@@ -409,7 +409,7 @@ class Vec(Geometry):
             :result: Projected vector length.
             :rtype: float
         """
-        return self.dot(other.normalized)
+        return self.dot(other.normalized())
 
     def projected(self,other): 
         """Returns a new vector projected onto a destination vector
