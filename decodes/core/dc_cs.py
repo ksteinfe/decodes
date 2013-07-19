@@ -107,7 +107,7 @@ class CS(Geometry, Basis):
         """
         depreciated
         """
-        print "please use CS.x_axis instead"
+        warnings.warn("cs.xAxis depreciated. please use CS.x_axis instead")
         return self.x_axis
 
     @property
@@ -115,7 +115,7 @@ class CS(Geometry, Basis):
         """
         depreciated
         """
-        print "please use CS.y_axis instead"
+        warnings.warn("cs.yAxis depreciated. please use CS.y_axis instead")
         return self.y_axis
 
     @property
@@ -123,7 +123,7 @@ class CS(Geometry, Basis):
         """
         depreciated
         """
-        print "please use CS.z_axis instead"
+        warnings.warn("cs.zAxis depreciated. please use CS.z_axis instead")
         return self.z_axis
 
 

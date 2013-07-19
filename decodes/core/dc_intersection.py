@@ -18,8 +18,14 @@ class XSec(object):
         self._geom.append(item)
 
     def __len__(self): return len(self._geom)
-
-
+'''
+TODO: move interseect function into XSec class, such that
+intersection = XSec() # this could be secretly pre-loaded when module loads
+if intersection.of(a,b):
+    b.put(intersection.geom)
+else:
+    print "no intersections"
+'''
 
 def intersect(a,b,xsec,**kargs):
     """
@@ -45,6 +51,14 @@ def intersect(a,b,xsec,**kargs):
         if type_other == Ray : return _xsect_ray_plane(other,plane,xsec,ignore_backface)
         if type_other == Line : return _xsect_line_plane(other,plane,xsec,ignore_backface)
         raise NotImplementedError("I don't know how to intersect a Plane with a %s"%(type_other.__name__))
+
+    # INTERSECTIONS WITH A CIRCLE
+    if any(item == Circle for item in [type_a,type_b]) : 
+        if type_a == Circle : circ,other,type_other = a,b,type_b
+        else: circ,other,type_other = b,a,type_a
+
+        if type_other == Circle : return _xsect_circle_circle(other,circ,xsec)
+
     
     raise NotImplementedError("I don't know how to intersect a %s with a %s"%(type_a.__name__,type_b.__name__))
 
@@ -71,4 +85,34 @@ def _xsect_line_plane(line,plane,xsec,ignore_backface=False):
     xsec.dist = (plane.origin - line.spt).dot(pln_norm) / denom # t < 0 indicates plane behind ray
     
     xsec.append(line.spt + line_vec.normalized(xsec.dist))
+    return True
+
+
+
+def _xsect_circle_circle(cir_a,cir_b,xsec):
+    '''
+    upon success, the xsec.dist property will be set to the distance between the pair of points of intersection
+    dist of zero when circles intersect at just one point
+    '''
+    # TODO: this func currently only works on co-planar circles
+    # TODO: move this functionality to the intersections class
+    if not cir_a.plane.is_coplanar( cir_b.plane ) : 
+        warnings.warn("Circles are not coplanar. Try checking the normal direction of the circle base planes, as these must align in order to be coplanar.")
+        return False
+    d = cir_a.origin.distance(cir_b.origin)
+    if d == 0 : 
+        warnings.warn("Coplanar circles share a center point - no intersections possible.")
+        return False
+    a = (cir_a.rad**2 - cir_b.rad**2 + d**2)/(2*d)
+    h2 = cir_a.rad**2 - a**2
+    if h2 < 0 : 
+        #warnings.warn("Coplanar circles do not intersect.")
+        return False
+    xsec.dist = math.sqrt(h2)
+    pt = ( cir_b.origin - cir_a.origin ) * (a/d) + cir_a.origin
+    if xsec.dist == 0 : xsec.append(pt)
+    else:
+        vec = Vec(cir_a.origin,pt).cross(cir_a.plane.normal).normalized(xsec.dist)
+        xsec.append(pt - vec)
+        xsec.append(pt + vec)
     return True

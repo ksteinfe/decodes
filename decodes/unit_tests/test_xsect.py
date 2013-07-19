@@ -52,3 +52,10 @@ class Tests(unittest.TestCase):
         results = XSec()
         self.assertEqual(intersect(line,pln,results),True)
         self.assertEqual(results[0],Point(2,2,0))
+
+    def test_circ_circ(self):
+        circ_a = Circle(CS().xy_plane,1.0)
+        circ_b = Circle(CS.on_xy(1,0).xy_plane,1.0)
+        results = XSec()
+        self.assertEqual(intersect(circ_a,circ_b,results),True)
+        print results[0]

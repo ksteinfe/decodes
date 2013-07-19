@@ -2,11 +2,12 @@
 
 == TEST_XSECT ==
 test_bad_combonations (decodes.unit_tests.test_xsect.Tests) ... ok
+test_circ_circ (decodes.unit_tests.test_xsect.Tests) ... ok
 test_line_plane (decodes.unit_tests.test_xsect.Tests) ... ok
 test_ray_plane (decodes.unit_tests.test_xsect.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.133s
+Ran 4 tests in 25.170s
 
 OK
 
@@ -40,7 +41,7 @@ test_rgon_to_pgon (decodes.unit_tests.test_pgon.Tests) ... ok
 test_segs_and_edges (decodes.unit_tests.test_pgon.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.160s
+Ran 7 tests in 0.157s
 
 OK
 
@@ -50,7 +51,7 @@ test_empty_constructor (decodes.unit_tests.test_pline.Tests) ... ok
 test_segs_and_edges (decodes.unit_tests.test_pline.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.070s
+Ran 2 tests in 0.069s
 
 OK
 
@@ -90,7 +91,7 @@ test_swap_basis (decodes.unit_tests.test_has_pts.Tests) ... ok
 test_unsetting (decodes.unit_tests.test_has_pts.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.133s
+Ran 7 tests in 0.131s
 
 OK
 
@@ -106,7 +107,7 @@ test_subdivide (decodes.unit_tests.test_curve.Tests) ... ok
 test_tolerance (decodes.unit_tests.test_curve.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 8 tests in 0.773s
+Ran 8 tests in 0.754s
 
 OK
 
@@ -116,7 +117,7 @@ test_curvature (decodes.unit_tests.test_surface.Tests) ... ok
 test_iso_curvature (decodes.unit_tests.test_surface.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.303s
+Ran 2 tests in 0.300s
 
 OK
 
@@ -166,7 +167,7 @@ test_properties (decodes.unit_tests.test_vec.Tests) ... ok
 test_static (decodes.unit_tests.test_vec.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.011s
+Ran 7 tests in 0.010s
 
 OK
 

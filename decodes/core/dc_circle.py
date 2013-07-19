@@ -29,25 +29,12 @@ class Circle(Plane):
         '''
         returns intersections with another circle
         '''
-        # TODO: this func currently only works on co-planar circles
-        # TODO: move this functionality to the intersections class
-        if not self.plane.is_coplanar( other.plane ) : 
-            warnings.warn("Circles are not coplanar. Try checking the normal direction of the circle base planes.")
-            return False
-        d = self.origin.distance(other.origin)
-        if d == 0 : 
-            warnings.warn("Coplanar circles share a center point - no intersections found.")
-            return False
-        a = (self.rad**2 - other.rad**2 + d**2)/(2*d)
-        h2 = self.rad**2 - a**2
-        if h2 < 0 : 
-            warnings.warn("Coplanar circles do not intersect.")
-            return False
-        h = math.sqrt(h2)
-        pt = ( other.origin - self.origin ) * (a/d) + self.origin
-        if h == 0 : return pt
-        vec = Vec(self.origin,pt).cross(self.plane.normal).normalized(h)
-        return [pt - vec, pt + vec]
+        warnings.warn("circle.intersections depreciated. please intersection instead")
+        results = XSec()
+        if intersect(self,other,results):
+            return results._geom
+        return False
+
       
 class Arc(HasBasis):
     """
