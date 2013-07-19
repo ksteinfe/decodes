@@ -48,8 +48,8 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>167</X>
-                  <Y>-95</Y>
+                  <X>146</X>
+                  <Y>84</Y>
                 </item>
                 <item name="Zoom" type_name="gh_single" type_code="5">0.8</item>
               </items>
@@ -498,7 +498,7 @@ else:
                   </items>
                   <chunks count="2">
                     <chunk name="Attributes">
-                      <items count="2">
+                      <items count="3">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>448</X>
                           <Y>696</Y>
@@ -509,6 +509,7 @@ else:
                           <W>80</W>
                           <H>68</H>
                         </item>
+                        <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                       </items>
                     </chunk>
                     <chunk name="ParameterData">
@@ -539,7 +540,7 @@ else:
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>423</X>
                                   <Y>674.6667</Y>
@@ -550,6 +551,7 @@ else:
                                   <W>23</W>
                                   <H>21</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -570,7 +572,7 @@ else:
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>423</X>
                                   <Y>696</Y>
@@ -581,6 +583,7 @@ else:
                                   <W>23</W>
                                   <H>21</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -601,7 +604,7 @@ else:
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>423</X>
                                   <Y>717.3334</Y>
@@ -612,6 +615,7 @@ else:
                                   <W>23</W>
                                   <H>22</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -628,7 +632,7 @@ else:
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>474.5</X>
                                   <Y>674.6667</Y>
@@ -639,6 +643,7 @@ else:
                                   <W>23</W>
                                   <H>21</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -654,7 +659,7 @@ else:
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>474.5</X>
                                   <Y>696</Y>
@@ -665,6 +670,7 @@ else:
                                   <W>23</W>
                                   <H>21</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -680,7 +686,7 @@ else:
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>474.5</X>
                                   <Y>717.3334</Y>
@@ -691,6 +697,7 @@ else:
                                   <W>23</W>
                                   <H>22</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
