@@ -29,10 +29,10 @@ class Circle(Plane):
         '''
         returns intersections with another circle
         '''
-        warnings.warn("circle.intersections depreciated. please intersection instead")
-        results = XSec()
-        if intersect(self,other,results):
-            return results._geom
+        warnings.warn("circle.intersections depreciated. please Intersector() instead")
+        xsec = Intersector()
+        if xsec.of(self,other):
+            return xsec._geom
         return False
 
       
