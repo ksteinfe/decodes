@@ -416,14 +416,6 @@ class Surface(IsParametrized):
         if not calc_extras : return cs_principal
         return cs_principal, k1, k2, K, H
 
-
-
-
-    def deval_gauss(self,u,v):
-        crvtr = self.deval_curv(u,v)
-        return crvtr[0] * crvtr[1]
-
-
     def eval(self,u,v):
         """ Evaluates this Curve and returns a Point.
         T is a normalized float value (0->1) which will be remapped to the domain defined by this Curve.
@@ -464,14 +456,6 @@ class Surface(IsParametrized):
         if v<0 or v>1 : raise DomainError("v out of bounds.  eval_curvature() must be called numbers between 0->1: eval(%s)"%v)
         return self.deval_curv(Interval.remap(u,Interval(),self.domain_u),Interval.remap(v,Interval(),self.domain_v),calc_extras)
 
-    def eval_gauss(self,u,v):
-        """
-        """
-        if u<0 or u>1 : raise DomainError("u out of bounds.  eval_gauss() must be called numbers between 0->1: eval(%s)"%u)
-        if v<0 or v>1 : raise DomainError("v out of bounds.  eval_gauss() must be called numbers between 0->1: eval(%s)"%v)
-        return self.deval_gauss(Interval.remap(u,Interval(),self.domain_u),Interval.remap(v,Interval(),self.domain_v))
-
-
     def _nudged(self,u,v,include_negs = False):
         #nearest neighbors along u and v axis of point(u,v); used for discrete approximations calculations 
         if u<self.domain_u.a or u>self.domain_u.b : raise DomainError("Curve evaluated outside the bounds of its u domain: deval(%s) %s"%(u,self.domain_u))
@@ -504,9 +488,6 @@ class Surface(IsParametrized):
             else : vec_vi = vec_v.inverted()
 
         return pt,vec_u,vec_ui,vec_v,vec_vi
-
-
-
 
 
     def to_mesh(self,do_close=False,tris=False,divs_u=False,divs_v=False):
