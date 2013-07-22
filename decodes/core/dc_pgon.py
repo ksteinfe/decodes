@@ -78,10 +78,46 @@ class PGon(HasPts):
 
         return Bounds(ival_x = ivx, ival_y = ivy)
 
-    def rotated_to_min_bounds(self, n = 10 , m = 4):
+    def rotated_to_min_bounds(self, divs = 4 , levels = 2, min_a = 0, max_a =.5 * math.pi ):
         '''
         creates a copy of a polygon rotated to its best-fit bounding box
         '''
+        from .dc_xform import *
+    
+        delta_a = (max_a - min_a) / divs
+
+        t_list = []
+
+        # make a copy and rotate into initial position
+        t = copy.deepcopy(self)
+        xf = Xform.rotation(angle = (min_a - delta_a))
+        t._verts = [v * xf for v in t._verts]
+
+
+        # make transform for incremental rotations
+        xf = Xform.rotation(angle = delta_a)
+
+        for i in range(divs+1):
+            t._verts = [v * xf for v in t._verts]
+            b_area = t.bounds.dim_x * t.bounds.dim_y
+            t_list.append([min_a + i*delta_a,b_area])
+
+        min_vals = min(t_list, key=lambda s: (s[1]))
+#        print "Iteration :", levels
+#        print t_list
+#        print "Minimum values : ",min_vals
+
+        if levels == 0 :
+            t = copy.deepcopy(self)
+            xf = Xform.rotation(angle = min_vals[0])
+            t._verts = [v * xf for v in t._verts]
+            return t
+        else:
+            min_a = min_vals[0] - delta_a
+            max_a = min_vals[0] + delta_a
+            levels -= 1
+            return self.rotated_to_min_bounds(divs, levels, min_a, max_a)
+
 
 
     def eval(self,t):

@@ -102,7 +102,7 @@ class Bin():
 
 
 
-def sort_polygons(shapes = [], sort_type = 'w', reverse_list = False):
+def sort_polygons(shapes_in = [], sort_type = 'w', reverse_list = False):
         """Sorts polygons into Bins.
             :param sort_type: how to sort polygons:
             :               'width' or 'w'  sort based on width
@@ -112,8 +112,13 @@ def sort_polygons(shapes = [], sort_type = 'w', reverse_list = False):
             :type sort_type: string   
         """
 
+        # first, rotate into minimum bounds
+        shapes = [s.rotated_to_min_bounds() for s in shapes_in]
+
         # create value field
         for i,s in enumerate(shapes):
+
+            # now perform sort
             if sort_type == 'w' : s.val = s.bounds.dim_x
             if sort_type == 'h' : s.val = s.bounds.dim_y
             if sort_type == 'a' : s.val = s.bounds.dim_x * s.bounds.dim_y
@@ -140,13 +145,13 @@ def bin_polygons(shapes = [], sheet_size = Interval(100,100)):
 
         for i, r in enumerate(shapes):
             # see if rectangle fits into one of the sheets
-            print "looking at item ",i
+#            print "looking at item ",i
             flag = False
             for j, s in enumerate(sheets):
                 test_bin = s.can_fit(r)
                 if test_bin <> None:
                     test_bin.put_item(r)
-                    print "packing into bin ",j
+#                    print "packing into bin ",j
                     flag = True
                     break
             # if we get here we have not placed the rectangle
@@ -155,7 +160,7 @@ def bin_polygons(shapes = [], sheet_size = Interval(100,100)):
                 sheets.append(Bin(Point(no_sheets*sheet_size.a,0), sheet_size.a, sheet_size.b))
                 no_sheets += 1
                 sheets[no_sheets-1].put_item(r)
-                print "adding bin ", no_sheets-1
+#                print "adding bin ", no_sheets-1
 
         return sheets
 

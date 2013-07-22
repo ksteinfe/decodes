@@ -7,7 +7,7 @@ import math
 
 import os,cStringIO
 path = os.path.expanduser("~") + os.sep + "_decodes_export"
-f_prefix = "pack_19_"
+f_prefix = "pack_21_"
 random.seed(0)
 
 
@@ -24,10 +24,13 @@ for i in range(no_rects):
     shapes.append(PGon(packing.rand_points(random.randint(3,10),random.randint(1,min(sheet_size.a,sheet_size.b)/3))))
 
 # sort, bin and extract the polygons
-shapes_sorted = packing.sort_polygons(shapes, 'w', reverse_list = True)
+print "sorting..."
+shapes_sorted = packing.sort_polygons(shapes, 'a', reverse_list = True)
 
+print "packing..."
 sheets_filled = packing.bin_polygons(shapes_sorted, sheet_size)
 
+print "extracting..."
 shapes_packed = packing.extract_polygons(sheets_filled)
 
 no_sheets = len(sheets_filled)

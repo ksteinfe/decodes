@@ -22,7 +22,12 @@ m = 10
 min_a = 0
 max_a = .5 * math.pi
 
+trial = shape.rotated_to_min_bounds(n,m)
 
+print trial, trial.bounds.dim_x * trial.bounds.dim_y
+
+
+'''
 for j in range(m):
     
     delta_a = (max_a - min_a) / n
@@ -54,5 +59,6 @@ for j in range(m):
 
 
 print
+'''
 
 raw_input("press enter...")
