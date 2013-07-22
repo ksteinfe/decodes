@@ -149,3 +149,12 @@ class Plane(Geometry):
             :rtype: Point
         """
         return self.near(p)[0]
+
+    @staticmethod
+    def from_pts(pt_a,pt_b,pt_c):
+        pt = Point.centroid([pt_a,pt_b,pt_c])
+        try:
+            nml = Vec(pt_a,pt_b).cross(Vec(pt_a,pt_c))
+        except:
+            raise GeometricError("Cannot create a Plane from colinear Points.")
+        return Plane(pt,nml)

@@ -53,6 +53,7 @@ class Intersector(object):
             if type_other == Line : return self._line_plane(other,plane,ignore_backface)
             if type_other == Ray : return self._ray_plane(other,plane,ignore_backface)
             if type_other == Segment : return self._seg_plane(other,plane)
+
             raise NotImplementedError("I don't know how to intersect a Plane with a %s"%(type_other.__name__))
 
         # INTERSECTIONS WITH A CIRCLE
@@ -62,8 +63,45 @@ class Intersector(object):
 
             if type_other == Circle : return self._circle_circle(other,circ)
 
-    
+
+
+            
+        # INTERSECTIONS WITH A PGON
+        if any(item == RGon for item in [type_a,type_b]) : 
+            if type_a == RGon : type_a = PGon
+            else: type_b = PGon
+
+        if any(item == PGon for item in [type_a,type_b]) : 
+            if type_a == PGon : pgon,other,type_other = a,b,type_b
+            else: pgon,other,type_other = b,a,type_a
+
+            ignore_backface = False
+            if "ignore_backface" in kargs: ignore_backface = kargs['ignore_backface']
+
+            # if intersecting with a linear entity, first intersect with this pgon's basis
+            xsec = Intersector()
+            basis_success = xsec.of(pgon.basis.xy_plane,other,ignore_backface = ignore_backface)
+            if not basis_success : 
+                self.log = xsec.log + " of Pgon"
+                return False
+            
+            if pgon.contains_pt(xsec._geom[0]):
+                self._geom = xsec._geom
+                self.dist = xsec.dist
+                return True
+            else:
+                self.log = "Intersection of PGon.basis and LinearEntity does not lie within PGon."
+                return False
+
         raise NotImplementedError("I don't know how to intersect a %s with a %s"%(type_a.__name__,type_b.__name__))
+
+
+    def _pgon_plane(self,line,plane,ignore_backface=False):
+        """
+        upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection
+        """
+        
+        return False
 
 
     def _line_plane(self,line,plane,ignore_backface=False):
@@ -74,10 +112,10 @@ class Intersector(object):
         line_vec = line.vec.normalized()
         denom = pln_norm.dot(line_vec) # note, plane normal faces outward in the direction of the 'front' of the plane.  this may not be standard. 
         if ignore_backface and denom >= 0 : 
-            self.log = "LinearEntity lies behind plane and backfaces ignored."
+            self.log = "Backfaces ingored. LinearEntity lies behind Plane"
             return False # pos denom indicates ray behind plane
         if denom == 0 : 
-            self.log = "LinearEntity does not intersect Plane."
+            self.log = "LinearEntity does not intersect Plane"
             return False # denom of zero indicates no intersection
         self.dist = (plane.origin - line.spt).dot(pln_norm) / denom # t < 0 indicates plane behind ray
     
@@ -91,7 +129,7 @@ class Intersector(object):
             self.log = xsec.log
             return False
         if xsec.dist < 0 : 
-            self.log = "Ray is directed away from Plane."
+            self.log = "Ray is directed away from Plane"
             return False
         self._geom = xsec._geom
         self.dist = xsec.dist
@@ -104,10 +142,10 @@ class Intersector(object):
             self.log = xsec.log
             return False
         if xsec.dist < 0 : 
-            self.log = "Segment does not span across Plane. Plane in direction of Segment spt."
+            self.log = "While pointing in the right direction, this Segment does not span across Plane"
             return False
         if xsec.dist > seg.length : 
-            self.log = "Segment does not span across Plane. Plane in direction of Segment ept."
+            self.log = "Segment points in the wrong direction, and does not span across Plane"
             return False
         self._geom = xsec._geom
         self.dist = xsec.dist

@@ -92,3 +92,30 @@ class Tests(unittest.TestCase):
         circ_b = Circle(CS.on_xy(1,0).xy_plane,1.0)
         self.assertEqual(xsec.of(circ_a,circ_b),True)
         
+    def test_ray_pgon(self):
+        xsec = Intersector()
+        pgon = RGon(4, radius=1.0)
+        
+        ray = Ray(Point(0.5,0.5,1),Vec(0,0,-1)) # ray intersects pgon
+        self.assertEqual(xsec.of(ray,pgon),True)
+        self.assertEqual(xsec[0],Point(0.5,0.5,0))
+
+        ray = Ray(Point(2,2,1),Vec(0,0,-1)) # ray intersects plane of pgon, but misses pgon
+        self.assertEqual(xsec.of(ray,pgon),False)
+        self.assertIsNotNone(xsec.log)
+
+
+        ray = Ray(Point(0.5,0.5,-1),Vec(0,0,1)) # ray behind pgon
+        self.assertEqual(xsec.of(ray,pgon),True)
+        self.assertEqual(xsec[0],Point(0.5,0.5,0))
+        
+        self.assertEqual(xsec.of(ray,pgon,ignore_backface=True),False) # ray behind pgon, ignoring backfaces
+        self.assertEqual(len(xsec),0)
+        self.assertIsNotNone(xsec.log)
+
+
+        ray = Ray(Point(0,0,1),Vec(0,0.25,-0.75)) # results in a pt slightly off of base plane, tests for tolerence of pgon.contains point
+        pgon = RGon(4,1.0)
+        test = xsec.of(ray,pgon)
+        self.assertEqual(xsec.of(ray,pgon),True)
+

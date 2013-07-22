@@ -186,16 +186,16 @@ class PGon(HasPts):
         ipts = [Vec.interpolate(self._verts[n],self._verts[n-1],rotation) for n in range(len(self._verts))]
         return PGon(ipts,self.basis)
 
-    def contains_pt(self, pt):
+    def contains_pt(self, pt,tolerence=0.000001):
         '''
         tests if this polygon contains the given point.
         the given point must lie on the plane of this polygon.
         '''
         pt = Point(self.basis.deval(pt))
-        if pt.z != 0 : 
+        if abs(pt.z) > tolerence : 
             warnings.warn("Given point does not lie on the same plane as this polygon.")
             return False
-
+        pt.z = 0
         if not pt in self.bounds : return False
 
         #TODO: maybe move this intersection routine to intersection class
@@ -238,6 +238,19 @@ class PGon(HasPts):
             if other.contains_pt(pt) : return True
 
         return False
+
+    @staticmethod
+    def triangle(pt_a,pt_b,pt_c):
+        """
+        Constructs a triangular polygon from three points.
+        Resulting PGon will have a basis at the centroid of the three points, with the x_axis pointing toward pt_a
+        """
+        cen = Point.centroid([pt_a,pt_b,pt_c])
+        cs = CS(cen,Vec(cen,pt_a),Vec(cen,pt_b))
+        pts = [cs.deval(pt) for pt in [pt_a,pt_b,pt_c]]
+        return PGon(pts,cs)
+        #pln = Plane.from_pts(pt_a,pt_b,pt_c)
+        
 
     @staticmethod
     def rectangle(cpt, w, h):
@@ -376,6 +389,7 @@ class RGon(PGon):
             self._iangle = (self._nos-2) * math.pi/self._nos
             return self._iangle
         
+    def __repr__(self): return "rgon[{0}]".format(self.num_of_sides)
 
     def inflate(self):
         '''
