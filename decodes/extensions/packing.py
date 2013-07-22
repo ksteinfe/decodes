@@ -2,6 +2,118 @@ import decodes.core as dc
 from decodes.core import *
 import math
 
+class Strip():
+
+    def __init__(self, start, length, filled = False):
+        """Creates a Strip object that contains filled areas and open sub-strips.
+        
+            :param start: start of Strip
+            :type start: integer
+            :param length: Length of Strip
+            :type length: float
+            :param filled: Is this Strip currently filled?
+            :type filled: boolean   
+        """
+        self.boundary = Interval(start, start+length)
+        self.filled = filled
+        self.filling = None
+        self.remainder = None
+
+    def put_item(self, length):
+        self.filled = True    
+        self.filling =  Strip(self.boundary.a,length, filled = True)
+        remainder = self.boundary.length - length
+        if remainder > 0:
+            self.remainder = Strip(self.boundary.a + length, remainder, filled = False)
+
+    def can_fit(self, length):
+        if self.filled == False:
+            if length <= self.boundary.length: return self
+            else: return None
+        else:
+            if self.remainder != None : return self.remainder.can_fit(length)
+            return None
+
+    def get_filled(self):
+        result = []
+        if self.filled:
+            result.append(self.filling.boundary)
+            if self.remainder != None : 
+                r = self.remainder.get_filled()
+                if r <> [] : result.extend(r)
+        return result
+
+
+def bin_strips(lengths = [], stock_size = Interval(100,100)):
+        """Places sorted lengths into Strips.
+            :param lengths  : material lengths to be placed
+            :type lengths   : list of float 
+            :returns        : Bins with the polygons within them
+            :rtype          : list of Bins
+        """
+
+        # initialize
+        strips = [Strip(stock_size.a,stock_size.b)]
+        no_strips = 1
+
+        for i, r in enumerate(lengths):
+            flag = False
+            for j, s in enumerate(strips):
+                test_strip = s.can_fit(r)
+                if test_strip <> None:
+                    test_strip.put_item(r)
+                    print "packing into strip ",j
+                    flag = True
+                    break
+            # if we get here we have not placed the rectangle
+            # so we need to add a new one
+            if not flag:
+                strips.append(Strip(no_strips*stock_size.a, stock_size.b))
+                no_strips += 1
+                strips[no_strips-1].put_item(r)
+                print "adding strip ", no_strips-1
+
+        return strips
+
+def extract_strips(strips = [], border_color = Color(.5), strip_filled = Color(0), border_edges = Color(1), height = 10):
+    """Creates a list of polygons that represents polygons and/or Bins.
+        :param strips: strips with polygons
+        :type strips : list
+        :param border : color of strips borders (or None)
+        :type border : Color
+        :returns: list of edges and polygons
+        :rtype: list
+    """ 
+    # create list
+    out_list = []
+    for j,s in enumerate(strips):
+        y = j * height
+        if border_color != None:
+            stock = PGon.rectangle(Point(s.boundary.eval(.5), y+height/2.0), s.boundary.length, height)
+            stock.set_color(border_color)
+            stock.set_weight(height/4)
+            out_list.append(stock)
+
+            for e in stock.edges:
+                e.set_color(border_edges)
+                e.set_weight(3)
+                out_list.append(e)
+
+        lines = s.get_filled()
+        for line in lines:
+            rect = PGon.rectangle(Point(line.eval(.5), y+height/2.0), line.length, height)
+            rect.set_color(strip_filled)
+            out_list.append(rect)
+            for e in rect.edges:
+                e.set_color(border_edges)
+                e.set_weight(3)
+                out_list.append(e)
+
+
+    # return list
+    return out_list
+
+
 
 class Bin():
 
