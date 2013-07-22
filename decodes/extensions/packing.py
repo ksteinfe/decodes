@@ -96,7 +96,7 @@ def extract_strips(strips = [], border_color = Color(.5), strip_filled = Color(0
 
             for e in stock.edges:
                 e.set_color(border_edges)
-                e.set_weight(3)
+                e.set_weight(1)
                 out_list.append(e)
 
         lines = s.get_filled()
@@ -106,7 +106,7 @@ def extract_strips(strips = [], border_color = Color(.5), strip_filled = Color(0
             out_list.append(rect)
             for e in rect.edges:
                 e.set_color(border_edges)
-                e.set_weight(3)
+                e.set_weight(1)
                 out_list.append(e)
 
 
