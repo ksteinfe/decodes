@@ -107,7 +107,7 @@ class CS(Geometry, Basis):
         """
         depreciated
         """
-        print "please use CS.x_axis instead"
+        warnings.warn("cs.xAxis depreciated. please use CS.x_axis instead")
         return self.x_axis
 
     @property
@@ -115,7 +115,7 @@ class CS(Geometry, Basis):
         """
         depreciated
         """
-        print "please use CS.y_axis instead"
+        warnings.warn("cs.yAxis depreciated. please use CS.y_axis instead")
         return self.y_axis
 
     @property
@@ -123,7 +123,7 @@ class CS(Geometry, Basis):
         """
         depreciated
         """
-        print "please use CS.z_axis instead"
+        warnings.warn("cs.zAxis depreciated. please use CS.z_axis instead")
         return self.z_axis
 
 
@@ -180,6 +180,12 @@ class CS(Geometry, Basis):
             x_vec = Vec(1,0)
         x_vec.x = 0
         return CS(Point(0,y,z),x_vec,x_vec.cross(Vec(-1,0,0)))
+
+
+class ShearedCS(Geometry, Basis):
+    def __init__(self,pt=Point(0,0),x_axis=Vec(1,0),y_axis=Vec(1,0),z_axis=None):
+        self.origin = pt
+
 
 
 class CylCS(Geometry, Basis):

@@ -125,9 +125,36 @@ class Bounds(Geometry):
 
         return ret
 
+    def near_pt(self, p):
+        """Returns the closest point to this Bounds.  If the point in within the bounds, simply returns the point
+        """
+        if p in self : return p
+        if p.x < self.ival_x.a : p.x = self.ival_x.a
+        if p.x > self.ival_x.b : p.x = self.ival_x.b
+        if p.y < self.ival_y.a : p.y = self.ival_y.a
+        if p.y > self.ival_y.b : p.y = self.ival_y.b
+
+        if self.is_2d:
+            p.z = 0
+        else:
+            if p.z < self.ival_z.a : p.z = self.ival_z.a
+            if p.z > self.ival_z.b : p.z = self.ival_z.b
+
+        return p
+
+
     def to_polyline(self):
         from .dc_pline import *
         return PLine(self.corners+[self.corners[0]])
+
+
+    @staticmethod
+    def unit_square():
+        return Bounds(ival_x=Interval(),ival_y=Interval())
+
+    @staticmethod
+    def unit_cube():
+        return Bounds(ival_x=Interval(),ival_y=Interval(),ival_z=Interval())
 
 class QuadTree():
     def __init__ (self, capacity, bounds):

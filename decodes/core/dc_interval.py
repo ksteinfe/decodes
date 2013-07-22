@@ -17,8 +17,8 @@ class Interval():
             :returns: Interval Object.
             :rtype: Interval.
         """
-        self.a = a
-        self.b = b
+        self.a = float(a)
+        self.b = float(b)
     
     def __truediv__(self,divs): return self.__div__(divs)
     def __div__(self, divs): 
@@ -188,9 +188,10 @@ class Interval():
         if self.delta == 0 : raise ZeroDivisionError("This interval cannot be devaluated because the delta is zero")
         return (number-self.a) / self.delta
         
-    def eval(self, t):
+    def eval(self, t,limited=False):
         """ Evaluates a given parameter within this interval.
             For example, given an Interval(0->2*math.pi): eval(0.5) == math.pi
+             Optionally, you may limit the resulting output to this interval
             :param t: Number to evaluate.
             :type t: float
             :returns: Evalauted number. 
@@ -204,17 +205,25 @@ class Interval():
             >>25.0
 
         """  
-        return self.delta * t + self.a
+        ret = self.delta * t + self.a
+        if not limited : return ret
+        return self.limit_val(ret)
 
-
+    def limit_val(self, n):
+        """
+        Limits a given value to the min and max of this Interval
+        """
+        if n < self.a : return self.a
+        if n > self.b : return self.b
+        return n
     
     def __repr__(self): return "ival[{0},{1}]".format(self.a,self.b)
 
 
 
     @staticmethod
-    def remap(val, source_interval, target_interval=None): 
-        """ Translates a number from its position within the source interval to its relative position in the target interval.
+    def remap(val, source_interval, target_interval=None, limited=False): 
+        """ Translates a number from its position within the source interval to its relative position in the target interval.  Optionally, you may limit the resulting output to the target interval
         
             :param val: Number to remap.
             :type val: float
@@ -224,7 +233,7 @@ class Interval():
         if target_interval is None: target_interval = Interval(0,1)
 
         t = source_interval.deval(val)
-        return target_interval.eval(t)
+        return target_interval.eval(t,limited)
 
     @staticmethod
     def twopi():

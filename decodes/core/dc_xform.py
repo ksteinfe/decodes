@@ -333,7 +333,7 @@ class Xform(object):
             return pln
 
 
-        raise Exception("can't xform that thing")
+        raise NotImplementedError("can't xform that thing")
 
     def _xform_tuple(self,tup):
         return (
