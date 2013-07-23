@@ -34,25 +34,28 @@ class SolarGeom():
         all output in radians
         """
         alpha = self.alphas[day_of_year]
-        alpha_rad = math.radians(alpha)
         obliquity_rad = math.radians(23.44)
         #calc delta = declination angle 
-        delta_rad = math.asin(math.sin(alpha_rad)*math.sin(obliquity_rad))
-        #delta = math.degrees(delta_rad)
+        delta_rad = math.asin(math.sin(alpha)*math.sin(obliquity_rad))
     
         #calc omega = hour angle, angle between local longitude and solar noon
-        ET = (0.0172 + 0.4281*math.cos(alpha_rad)-7.3515*math.sin(alpha_rad)-3.3495*math.cos(2*alpha_rad) - 9.3619*math.sin(2*alpha_rad))/60
+        ET = (0.0172 + 0.4281*math.cos(alpha)-7.3515*math.sin(alpha)-3.3495*math.cos(2*alpha) - 9.3619*math.sin(2*alpha))/60
         omega = 15*(hour_of_day + self.lat/15 - self.tmz + ET - 12)
         omega_rad = math.radians(omega)
     
         #calc altitude
         phi_rad = math.radians(self.lat)
         altitude_rad =  math.asin(math.cos(delta_rad)*math.cos(phi_rad)*math.cos(omega_rad) + math.sin(delta_rad)*math.sin(phi_rad))
-        #altitude = math.degrees(altitude_rad)
         #calc azimuth 
         azimuth_rad = math.acos((math.sin(delta_rad)*math.cos(phi_rad) - math.cos(delta_rad)*math.sin(phi_rad)*math.cos(omega_rad))/    math.cos(altitude_rad))
-        if omega_rad > 0:
-            azimuth_rad = math.pi-azimuth_rad
+        
+        #KS MOD
+        #if omega_rad > math.pi or o < 0:
+        #    azimuth_rad = math.pi*2-azimuth_rad
+        
+        #JK ORIG
+        #if omega_rad > 0:
+        #    azimuth_rad = math.pi-azimuth_rad
         
         return altitude_rad, azimuth_rad, delta_rad, omega_rad
 
@@ -76,7 +79,7 @@ class SolarGeom():
             alphaOut = 180+90*(day_in-septemberEquinox)/(decemberSolstice-septemberEquinox)
         else:
             alphaOut = 270+90*(day_in + 365 - decemberSolstice)/(marchEquinox + 365-decemberSolstice)
-        return alphaOut
+        return math.radians(alphaOut)
     
     @staticmethod
     def str_to_day_of_year(date_in):
