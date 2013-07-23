@@ -4,7 +4,7 @@ import math
 
 class Strip():
 
-    def __init__(self, start, length, filled = False):
+    def __init__(self, start, length, filled = None):
         """Creates a Strip object that contains filled areas and open sub-strips.
         
             :param start: start of Strip
@@ -15,29 +15,39 @@ class Strip():
             :type filled: boolean   
         """
         self.boundary = Interval(start, start+length)
-        self.filled = filled
-        self.filling = None
-        self.remainder = None
+        if filled is None:
+            self.filling = None
+            self.remainder = None
+        else:
+            self.filling = Interval(start, start+filled)
+            self.remainder = Strip(start+filled, start+length-filled)
+
+    @property
+    def filled(self):
+        return not(self.filling is None)
 
     def put_item(self, length):
-        self.filled = True    
-        self.filling =  Strip(self.boundary.a,length, filled = True)
-        remainder = self.boundary.length - length
-        if remainder > 0:
-            self.remainder = Strip(self.boundary.a + length, remainder, filled = False)
+        # Note - if you call can_fill, self.filled should be False
+        if self.filled:
+            self.remainder.put_item(length)
+        else:
+            if length > self.boundary.length : 
+                return False
+            self.filling = Interval(self.boundary.a, self.boundary.a + length)
+            self.remainder = Strip(self.boundary.a + length, self.boundary.length - length)
+            return True
 
     def can_fit(self, length):
-        if self.filled == False:
+        if self.filled:
+            return self.remainder.can_fit(length)
+        else:
             if length <= self.boundary.length: return self
             else: return None
-        else:
-            if self.remainder != None : return self.remainder.can_fit(length)
-            return None
 
     def get_filled(self):
         result = []
         if self.filled:
-            result.append(self.filling.boundary)
+            result.append(self.filling)
             if self.remainder != None : 
                 r = self.remainder.get_filled()
                 if r <> [] : result.extend(r)

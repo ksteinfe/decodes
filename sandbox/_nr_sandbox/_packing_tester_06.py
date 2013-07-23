@@ -7,9 +7,11 @@ import math
 
 import os,cStringIO
 path = os.path.expanduser("~") + os.sep + "_decodes_export"
-f_prefix = "pack_23_"
+f_prefix = "pack_24_"
 random.seed(0)
 
+b = packing.Strip(0,200,50)
+b.put_item(200)
 
 # initialize parameters
 
