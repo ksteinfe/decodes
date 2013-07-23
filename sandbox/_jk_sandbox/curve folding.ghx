@@ -48,10 +48,10 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>-455</X>
-                  <Y>-302</Y>
+                  <X>62</X>
+                  <Y>-345</Y>
                 </item>
-                <item name="Zoom" type_name="gh_single" type_code="5">1</item>
+                <item name="Zoom" type_name="gh_single" type_code="5">0.7852613</item>
               </items>
             </chunk>
             <chunk name="Views">
@@ -306,11 +306,11 @@ a.put(func)
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>325</X>
+                          <X>358</X>
                           <Y>519</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>276</X>
+                          <X>309</X>
                           <Y>485</Y>
                           <W>83</W>
                           <H>68</H>
@@ -345,11 +345,11 @@ a.put(func)
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>295.5</X>
+                                  <X>328.5</X>
                                   <Y>503</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>278</X>
+                                  <X>311</X>
                                   <Y>487</Y>
                                   <W>32</W>
                                   <H>32</H>
@@ -376,11 +376,11 @@ a.put(func)
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>295.5</X>
+                                  <X>328.5</X>
                                   <Y>535</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>278</X>
+                                  <X>311</X>
                                   <Y>519</Y>
                                   <W>32</W>
                                   <H>32</H>
@@ -403,11 +403,11 @@ a.put(func)
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>348.5</X>
+                                  <X>381.5</X>
                                   <Y>503</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>340</X>
+                                  <X>373</X>
                                   <Y>487</Y>
                                   <W>17</W>
                                   <H>32</H>
@@ -429,11 +429,11 @@ a.put(func)
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>348.5</X>
+                                  <X>381.5</X>
                                   <Y>535</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>340</X>
+                                  <X>373</X>
                                   <Y>519</Y>
                                   <W>17</W>
                                   <H>32</H>
@@ -467,12 +467,12 @@ a.put(func)
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>8.533924</X>
-                          <Y>551.6182</Y>
+                          <X>44.78498</X>
+                          <Y>550.0477</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>8</X>
-                          <Y>551</Y>
+                          <X>44</X>
+                          <Y>550</Y>
                           <W>158</W>
                           <H>20</H>
                         </item>
@@ -480,9 +480,9 @@ a.put(func)
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">0.75</item>
+                        <item name="Value" type_name="gh_double" type_code="6">0.74</item>
                         <item name="Min" type_name="gh_double" type_code="6">0</item>
-                        <item name="Max" type_name="gh_double" type_code="6">0.98</item>
+                        <item name="Max" type_name="gh_double" type_code="6">0.99</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">2</item>
                         <item name="Interval" type_name="gh_int32" type_code="3">0</item>
                         <item name="GripDisplay" type_name="gh_int32" type_code="3">1</item>
@@ -519,7 +519,7 @@ pi = math.pi
 
 def func(u,v):
     curv = bend/w
-    if curv != 0:
+    if curv  &gt;  0:
         rad = 1.0/curv
         z0 = -math.sqrt(rad*rad - w*w)  
         w_b = w*(1-bend)
@@ -553,11 +553,11 @@ a.put(func)
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>329</X>
+                          <X>362</X>
                           <Y>702</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>280</X>
+                          <X>313</X>
                           <Y>668</Y>
                           <W>83</W>
                           <H>68</H>
@@ -592,11 +592,11 @@ a.put(func)
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>299.5</X>
+                                  <X>332.5</X>
                                   <Y>686</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>282</X>
+                                  <X>315</X>
                                   <Y>670</Y>
                                   <W>32</W>
                                   <H>32</H>
@@ -623,11 +623,11 @@ a.put(func)
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>299.5</X>
+                                  <X>332.5</X>
                                   <Y>718</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>282</X>
+                                  <X>315</X>
                                   <Y>702</Y>
                                   <W>32</W>
                                   <H>32</H>
@@ -650,11 +650,11 @@ a.put(func)
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>352.5</X>
+                                  <X>385.5</X>
                                   <Y>686</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>344</X>
+                                  <X>377</X>
                                   <Y>670</Y>
                                   <W>17</W>
                                   <H>32</H>
@@ -676,11 +676,11 @@ a.put(func)
                             <chunk name="Attributes">
                               <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                                  <X>352.5</X>
+                                  <X>385.5</X>
                                   <Y>718</Y>
                                 </item>
                                 <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                                  <X>344</X>
+                                  <X>377</X>
                                   <Y>702</Y>
                                   <W>17</W>
                                   <H>32</H>
@@ -714,12 +714,12 @@ a.put(func)
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>-0.9335332</X>
-                          <Y>578.8699</Y>
+                          <X>42.36418</X>
+                          <Y>589.0576</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>-1</X>
-                          <Y>578</Y>
+                          <X>42</X>
+                          <Y>589</Y>
                           <W>158</W>
                           <H>20</H>
                         </item>
@@ -727,7 +727,7 @@ a.put(func)
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">5.389</item>
+                        <item name="Value" type_name="gh_double" type_code="6">4.823</item>
                         <item name="Min" type_name="gh_double" type_code="6">1</item>
                         <item name="Max" type_name="gh_double" type_code="6">10</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">3</item>
@@ -802,7 +802,100 @@ a.put(func)
                     <item name="Description" type_name="gh_string" type_code="10">A python scriptable component that implements the Decodes library</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">23ea8112-81e1-491b-a29d-10694cccb70c</item>
                     <item name="HideInput" type_name="gh_bool" type_code="1">true</item>
-                    <item name="CodeInput" type_name="gh_string" type_code="10">rule_number = int(num_rulings)
+                    <item name="CodeInput" type_name="gh_string" type_code="10">
+#Intersects 2 planes (p1, N1), (p2, N2) and gives the coefficients for the
+# intersecting line given by l(t) = c1 * N1 + c2 * N2 + t *(N1 x N2)
+def plane_plane_intersect(pln1, pln2):   
+    N1 = pln1.normal
+    N2 = pln2.normal
+    #if planes are not parallel
+    if abs(N1.cross(N2).length) &gt; 0:
+        p1 = Vec(pln1.origin)
+        p2 = Vec(pln2.origin)
+        d1 = N1.dot(p1)
+        d2 = N2.dot(p2)
+        N1_sqd = N1.length2
+        N2_sqd = N2.length2
+        N1_dot_N2 = N1.dot(N2)
+        det = N1_sqd*N2_sqd - (N1_dot_N2)*(N1_dot_N2)
+        c1 = (d1*N2_sqd - d2*N1_dot_N2)/det
+        c2 = (d2*N1_sqd - d1*N1_dot_N2)/det
+        return [N1.cross(N2).normalized(), c1, c2]
+    else:
+        return [0,0,0]
+
+        
+       
+"""
+Reflects the surface (a set of normals defining the tangent planes)
+across a crease fold (a set of point along the rulings)
+Both are specfied along rule lines so must be the same length list.
+
+Current implementation needs a boundary helper input which are nearest
+neighbor points used to compute the osculating circle at the boundary.  
+"""
+def crease_reflect(crease, tangent_pln, bdry_help):
+    reflected_pln = []
+    n = len(crease)
+    #use the property that the osculating plane is a bisector of the two 
+    #surface tangents along the ruling to find the plane of each ruling 
+    #for the folded surface through crease points
+    for i in range(n):
+        if (i == 0):
+            pt_minus = Vec(crease[0])
+            pt = Vec(bdry_help[0])
+            pt_plus = Vec(bdry_help[1])
+        elif (i == n - 1):
+            pt_minus = Vec(bdry_help[2])
+            pt = Vec(bdry_help[3])
+            pt_plus = Vec(crease[n-1])
+        else:
+            pt = Vec(crease[i])
+            pt_plus = Vec(crease[i+1])
+            pt_minus = Vec(crease[i-1])
+        osc = Plane(crease[i], (pt_plus - pt).cross(pt_minus - pt))
+        reflected_pln.append(Plane(crease[i], osc.normal*2 - tangent_pln[i]))
+        if test:
+            #test_out.put(Segment(crease[i], osc.normal*4))
+            test_out.put(Segment(crease[i], tangent_pln[i]*4))
+            #test_out.put(Segment(crease[i], reflected_pln[i].normal*4))
+    #intersect neighboring planes to get the ruling lines for the
+    #folded surface
+    for i in range(1, n):
+        plane1 = reflected_pln[i-1]
+        plane2 = reflected_pln[i]
+        [rule_dir, c1,c2] = plane_plane_intersect(plane1, plane2)
+        if test:
+            Nvec1 = plane1.normal
+            Nvec2 = plane2.normal
+            pt_int = Point(Nvec1*c1 + Nvec2*c2)
+            test_out.put(pt_int)
+            test_out.put(Segment(pt_int - rule_dir*4, pt_int + rule_dir*2))
+        
+    
+    
+            
+"""
+Finds the crease point along a ruling,where the x-y value is defined by crv_in_plane
+"""
+def crease_pt_along_rule(ruling):
+    spt = ruling.spt
+    ept = ruling.ept
+    ruling_proj = Line(Point(spt.x, spt.y, 0), Point(ept.x, ept.y,0))
+    pt_xy = crv_in_plane(ruling_proj)
+    #project back up to ruling (straight up in z-direction)
+    p1 = spt
+    v1 = ruling.vec
+    if (abs(v1.y) &gt; 0.0) :
+        t = (pt_xy.y - p1.y)/v1.y
+    else:
+        t = (pt_xy.x - p1.x)/v1.x
+    return Point(p1.x + t*v1.x, p1.y + t*v1.y, p1.z + t*v1.z)
+    
+
+
+
+rule_number = int(num_rulings)
 rule_val = Interval().divide(rule_number-1,True)
 
 #Generate rulings with start point on the side of the surface that stays fixed 
@@ -821,8 +914,9 @@ for i in range(rule_number-1):
 a.put(srf_mesh)
 
 
-# Generate the normals corresponding to the rulings 
-# construction by weighted average of the neighboring face normals
+# Generate the normals corresponding to the rulings.
+# Construction is by weighted average of the neighboring face normals
+# (note: equivalent to finite differences except at edges)
 N_vec = []
 N_vec.append(srf_mesh.face_normal(0).normalized())
 for i in range(1,rule_number-1):
@@ -835,27 +929,26 @@ for i in range(1,rule_number-1):
     N_vec.append((srf_mesh.face_normal(i-1)*w1 + srf_mesh.face_normal(i)*w2).normalized())
 N_vec.append(srf_mesh.face_normal(i).normalized())
 
-# Generates the curve points (x,y defined by crv_in_plane) along the rulings
+# Generates the crease points along the rulings
 pt_crease = []
-for i in range(rule_number):   
-    spt = rulings[i].spt
-    ept = rulings[i].ept
-    ruling_proj = Line(Point(spt.x, spt.y, 0), Point(ept.x, ept.y,0))
-    pt_xy = crv_in_plane(ruling_proj)
-    #project back up to ruling (straight up in z-direction)
-    p1 = rulings[i].spt
-    v1 = rulings[i].vec
-    if (abs(v1.y) &gt; 0.0) :
-        t = (pt_xy.y - p1.y)/v1.y
-    else:
-        t = (pt_xy.x - p1.x)/v1.x
-    pt_crv = Point(p1.x + t*v1.x, p1.y + t*v1.y, p1.z + t*v1.z)
-    pt_crease.append(pt_crv)
-    if test:
-        test_out.put(Segment(pt_crv, pt_xy + N_vec[i]*5))
-    
+for i in range(rule_number):
+    pt_crease.append(crease_pt_along_rule(rulings[i]))
 b.put(pt_crease) 
-</item>
+
+
+#Generates some "helper" points to handle the crease reflection at the
+# boundary (an osculating plane is calculated along the crease so for 
+# the boundary, this is calculated using three very close points rather
+# than the nearest crease points - try to find a way around)
+tol_nudge = (rule_val[1]-rule_val[0])/100.0
+rule_nudge = [0.5*tol_nudge, tol_nudge, 1 - tol_nudge, 1 - 0.5*tol_nudge]
+boundary_helper = []
+for rule in rule_nudge:
+    rule_line = Line(surf_func(rule,0), surf_func(rule,1))
+    boundary_helper.append(crease_pt_along_rule(rule_line))
+
+
+crease_reflect(pt_crease, N_vec, boundary_helper)</item>
                     <item name="HideOutput" type_name="gh_bool" type_code="1">false</item>
                   </items>
                   <chunks count="2">
@@ -1181,9 +1274,9 @@ b.put(pt_crease)
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">12</item>
-                        <item name="Min" type_name="gh_double" type_code="6">2</item>
-                        <item name="Max" type_name="gh_double" type_code="6">20</item>
+                        <item name="Value" type_name="gh_double" type_code="6">34</item>
+                        <item name="Min" type_name="gh_double" type_code="6">4</item>
+                        <item name="Max" type_name="gh_double" type_code="6">40</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">3</item>
                         <item name="Interval" type_name="gh_int32" type_code="3">1</item>
                         <item name="GripDisplay" type_name="gh_int32" type_code="3">1</item>
@@ -1867,7 +1960,7 @@ a.put(intersect_line)
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">0.373</item>
+                        <item name="Value" type_name="gh_double" type_code="6">0.876</item>
                         <item name="Min" type_name="gh_double" type_code="6">0</item>
                         <item name="Max" type_name="gh_double" type_code="6">1</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">3</item>
