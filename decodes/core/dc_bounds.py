@@ -99,6 +99,10 @@ class Bounds(Geometry):
         """
         return self.subbounds(other)
 
+    def eval(self,x,y,z=0):
+        if self.is_2d:
+            return Point(self.ival_x.eval(x),self.ival_y.eval(y))
+        return Point(self.ival_x.eval(x),self.ival_y.eval(y),self.ival_z.eval(z))
 
     def overlaps(self, other) :
         return any([pt in self for pt in other.corners] + [pt in other for pt in self.corners])

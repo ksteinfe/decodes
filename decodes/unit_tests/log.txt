@@ -1,5 +1,15 @@
 
 
+== TEST_VOXEL ==
+test_bounds_and_cpt (decodes.unit_tests.test_voxel.Tests) ... ok
+test_constructor (decodes.unit_tests.test_voxel.Tests) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.004s
+
+OK
+
+
 == TEST_XSECT ==
 test_bad_combonations (decodes.unit_tests.test_xsect.Tests) ... ok
 test_circ_circ (decodes.unit_tests.test_xsect.Tests) ... ok
@@ -9,7 +19,7 @@ test_ray_plane (decodes.unit_tests.test_xsect.Tests) ... ok
 test_seg_plane (decodes.unit_tests.test_xsect.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 6 tests in 3.973s
+Ran 6 tests in 0.138s
 
 OK
 
@@ -21,14 +31,14 @@ test_rotational (decodes.unit_tests.test_classical_surface.Tests) ... ERROR
 ERROR: test_rotational (decodes.unit_tests.test_classical_surface.Tests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "G:\git\decodes\decodes\unit_tests\test_classical_surface.py", line 19, in test_rotational
+  File "C:\Git\decodes\decodes\unit_tests\test_classical_surface.py", line 19, in test_rotational
     iso = rot_surf.isocurve(u_val=0.25)
-  File "G:\git\decodes\decodes\extensions\classical_surfaces.py", line 87, in isocurve
+  File "C:\Git\decodes\decodes\extensions\classical_surfaces.py", line 87, in isocurve
     pt_1 = self.axis.to_line().near_pt(pt_0)
 AttributeError: 'Curve' object has no attribute 'to_line'
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.025s
+Ran 1 test in 0.022s
 
 FAILED (errors=1)
 
@@ -43,7 +53,7 @@ test_rgon_to_pgon (decodes.unit_tests.test_pgon.Tests) ... ok
 test_segs_and_edges (decodes.unit_tests.test_pgon.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.180s
+Ran 7 tests in 0.159s
 
 OK
 
@@ -53,7 +63,7 @@ test_empty_constructor (decodes.unit_tests.test_pline.Tests) ... ok
 test_segs_and_edges (decodes.unit_tests.test_pline.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.079s
+Ran 2 tests in 0.069s
 
 OK
 
@@ -65,7 +75,7 @@ test_face_access (decodes.unit_tests.test_mesh.Tests) ... ok
 test_simple_constructor (decodes.unit_tests.test_mesh.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.030s
+Ran 4 tests in 0.027s
 
 OK
 
@@ -78,7 +88,7 @@ test_empty_constructor (decodes.unit_tests.test_point.Tests) ... ok
 test_nearest_point (decodes.unit_tests.test_point.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.030s
+Ran 5 tests in 0.026s
 
 OK
 
@@ -93,7 +103,7 @@ test_swap_basis (decodes.unit_tests.test_has_pts.Tests) ... ok
 test_unsetting (decodes.unit_tests.test_has_pts.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.150s
+Ran 7 tests in 0.134s
 
 OK
 
@@ -109,7 +119,7 @@ test_subdivide (decodes.unit_tests.test_curve.Tests) ... ok
 test_tolerance (decodes.unit_tests.test_curve.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 8 tests in 0.897s
+Ran 8 tests in 0.758s
 
 OK
 
@@ -119,7 +129,7 @@ test_curvature (decodes.unit_tests.test_surface.Tests) ... ok
 test_iso_curvature (decodes.unit_tests.test_surface.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.344s
+Ran 2 tests in 0.302s
 
 OK
 
@@ -131,7 +141,7 @@ test_near (decodes.unit_tests.test_plane.Tests) ... ok
 test_xform (decodes.unit_tests.test_plane.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.014s
+Ran 4 tests in 0.012s
 
 OK
 
@@ -142,7 +152,7 @@ test_operations (decodes.unit_tests.test_interval.Tests) ... ok
 test_properties (decodes.unit_tests.test_interval.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.003s
+Ran 3 tests in 0.002s
 
 OK
 
@@ -169,7 +179,7 @@ test_properties (decodes.unit_tests.test_vec.Tests) ... ok
 test_static (decodes.unit_tests.test_vec.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.012s
+Ran 7 tests in 0.011s
 
 OK
 
@@ -181,6 +191,6 @@ test_translation (decodes.unit_tests.test_xform.Tests) ... ok
 test_xform_hasbasis (decodes.unit_tests.test_xform.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.017s
+Ran 4 tests in 0.015s
 
 OK
