@@ -48,10 +48,10 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>-203</X>
-                  <Y>-595</Y>
+                  <X>39</X>
+                  <Y>-943</Y>
                 </item>
-                <item name="Zoom" type_name="gh_single" type_code="5">1.24999976</item>
+                <item name="Zoom" type_name="gh_single" type_code="5">1.5625</item>
               </items>
             </chunk>
             <chunk name="Views">
@@ -4903,7 +4903,7 @@ for i, pt in enumerate(pts):
     new_pgon = PGon(pgon._verts,CS(pt,new_vecs[i],vecs[i]))
     new_pgons.append(new_pgon)
 
-scales = [1.6, 1.6, 1, 1, 1, 1, 1, 1]
+scales = [2, 2, .9, .9, .9, .9, .9, .9]
 scales[kiosk] = 3
 sc_pgons = []
 for i, pg in enumerate(new_pgons):
@@ -4914,7 +4914,7 @@ for i, pg in enumerate(new_pgons):
                   </items>
                   <chunks count="2">
                     <chunk name="Attributes">
-                      <items count="2">
+                      <items count="3">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>279</X>
                           <Y>713</Y>
@@ -4925,6 +4925,7 @@ for i, pg in enumerate(new_pgons):
                           <W>105</W>
                           <H>144</H>
                         </item>
+                        <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                       </items>
                     </chunk>
                     <chunk name="ParameterData">
@@ -4958,7 +4959,7 @@ for i, pg in enumerate(new_pgons):
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>243</X>
                                   <Y>653</Y>
@@ -4969,6 +4970,7 @@ for i, pg in enumerate(new_pgons):
                                   <W>45</W>
                                   <H>20</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -4989,7 +4991,7 @@ for i, pg in enumerate(new_pgons):
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>243</X>
                                   <Y>673</Y>
@@ -5000,6 +5002,7 @@ for i, pg in enumerate(new_pgons):
                                   <W>45</W>
                                   <H>20</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -5020,7 +5023,7 @@ for i, pg in enumerate(new_pgons):
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>243</X>
                                   <Y>693</Y>
@@ -5031,6 +5034,7 @@ for i, pg in enumerate(new_pgons):
                                   <W>45</W>
                                   <H>20</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -5051,7 +5055,7 @@ for i, pg in enumerate(new_pgons):
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>243</X>
                                   <Y>713</Y>
@@ -5062,6 +5066,7 @@ for i, pg in enumerate(new_pgons):
                                   <W>45</W>
                                   <H>20</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -5082,7 +5087,7 @@ for i, pg in enumerate(new_pgons):
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>243</X>
                                   <Y>733</Y>
@@ -5093,6 +5098,7 @@ for i, pg in enumerate(new_pgons):
                                   <W>45</W>
                                   <H>20</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -5113,7 +5119,7 @@ for i, pg in enumerate(new_pgons):
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>243</X>
                                   <Y>753</Y>
@@ -5124,6 +5130,7 @@ for i, pg in enumerate(new_pgons):
                                   <W>45</W>
                                   <H>20</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -5144,7 +5151,7 @@ for i, pg in enumerate(new_pgons):
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>243</X>
                                   <Y>773</Y>
@@ -5155,6 +5162,7 @@ for i, pg in enumerate(new_pgons):
                                   <W>45</W>
                                   <H>20</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -5171,7 +5179,7 @@ for i, pg in enumerate(new_pgons):
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>307</X>
                                   <Y>678</Y>
@@ -5182,6 +5190,7 @@ for i, pg in enumerate(new_pgons):
                                   <W>26</W>
                                   <H>70</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -5197,7 +5206,7 @@ for i, pg in enumerate(new_pgons):
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="2">
+                              <items count="3">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>307</X>
                                   <Y>748</Y>
@@ -5208,6 +5217,7 @@ for i, pg in enumerate(new_pgons):
                                   <W>26</W>
                                   <H>70</H>
                                 </item>
+                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -6817,7 +6827,7 @@ for i, pg in enumerate(new_pgons):
                   </items>
                   <chunks count="1">
                     <chunk name="Attributes">
-                      <items count="3">
+                      <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>1332.5</X>
                           <Y>1097.5</Y>
@@ -6828,7 +6838,6 @@ for i, pg in enumerate(new_pgons):
                           <W>50</W>
                           <H>20</H>
                         </item>
-                        <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                       </items>
                     </chunk>
                   </chunks>
