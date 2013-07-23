@@ -48,10 +48,10 @@
             <chunk name="Projection">
               <items count="2">
                 <item name="Target" type_name="gh_drawing_point" type_code="30">
-                  <X>39</X>
-                  <Y>-943</Y>
+                  <X>79</X>
+                  <Y>-388</Y>
                 </item>
-                <item name="Zoom" type_name="gh_single" type_code="5">1.5625</item>
+                <item name="Zoom" type_name="gh_single" type_code="5">0.7999999</item>
               </items>
             </chunk>
             <chunk name="Views">
@@ -4875,12 +4875,13 @@ d.put([roof_mesh,roof_mesh1,roof_mesh2,roof_mesh3, roof_mesh4, roof_mesh5])</ite
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="8">
+                  <items count="9">
                     <item name="props_visible" type_name="gh_bool" type_code="1">false</item>
                     <item name="Name" type_name="gh_string" type_code="10">Decodes Python Script</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Decodes</item>
                     <item name="Description" type_name="gh_string" type_code="10">A python scriptable component that implements the Decodes library</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">23f4988c-8ce8-4d3b-9ff0-c7f62c1be4f0</item>
+                    <item name="Hidden" type_name="gh_bool" type_code="1">true</item>
                     <item name="HideInput" type_name="gh_bool" type_code="1">true</item>
                     <item name="CodeInput" type_name="gh_string" type_code="10">edges = rec.edges
 edges.sort(key=lambda Segment: Segment.length)
@@ -4903,8 +4904,8 @@ for i, pt in enumerate(pts):
     new_pgon = PGon(pgon._verts,CS(pt,new_vecs[i],vecs[i]))
     new_pgons.append(new_pgon)
 
-scales = [2, 2, .9, .9, .9, .9, .9, .9]
-scales[kiosk] = 3
+scales = [1.5, 1.5, .8, .8, .8, .8, .8, .8]
+scales[kiosk] = 2.8
 sc_pgons = []
 for i, pg in enumerate(new_pgons):
     if scales[i] != 1:
@@ -4914,7 +4915,7 @@ for i, pg in enumerate(new_pgons):
                   </items>
                   <chunks count="2">
                     <chunk name="Attributes">
-                      <items count="3">
+                      <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                           <X>279</X>
                           <Y>713</Y>
@@ -4925,7 +4926,6 @@ for i, pg in enumerate(new_pgons):
                           <W>105</W>
                           <H>144</H>
                         </item>
-                        <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                       </items>
                     </chunk>
                     <chunk name="ParameterData">
@@ -4959,7 +4959,7 @@ for i, pg in enumerate(new_pgons):
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="3">
+                              <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>243</X>
                                   <Y>653</Y>
@@ -4970,7 +4970,6 @@ for i, pg in enumerate(new_pgons):
                                   <W>45</W>
                                   <H>20</H>
                                 </item>
-                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -4991,7 +4990,7 @@ for i, pg in enumerate(new_pgons):
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="3">
+                              <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>243</X>
                                   <Y>673</Y>
@@ -5002,7 +5001,6 @@ for i, pg in enumerate(new_pgons):
                                   <W>45</W>
                                   <H>20</H>
                                 </item>
-                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -5023,7 +5021,7 @@ for i, pg in enumerate(new_pgons):
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="3">
+                              <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>243</X>
                                   <Y>693</Y>
@@ -5034,7 +5032,6 @@ for i, pg in enumerate(new_pgons):
                                   <W>45</W>
                                   <H>20</H>
                                 </item>
-                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -5055,7 +5052,7 @@ for i, pg in enumerate(new_pgons):
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="3">
+                              <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>243</X>
                                   <Y>713</Y>
@@ -5066,7 +5063,6 @@ for i, pg in enumerate(new_pgons):
                                   <W>45</W>
                                   <H>20</H>
                                 </item>
-                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -5087,7 +5083,7 @@ for i, pg in enumerate(new_pgons):
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="3">
+                              <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>243</X>
                                   <Y>733</Y>
@@ -5098,7 +5094,6 @@ for i, pg in enumerate(new_pgons):
                                   <W>45</W>
                                   <H>20</H>
                                 </item>
-                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -5119,7 +5114,7 @@ for i, pg in enumerate(new_pgons):
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="3">
+                              <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>243</X>
                                   <Y>753</Y>
@@ -5130,7 +5125,6 @@ for i, pg in enumerate(new_pgons):
                                   <W>45</W>
                                   <H>20</H>
                                 </item>
-                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -5151,7 +5145,7 @@ for i, pg in enumerate(new_pgons):
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="3">
+                              <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>243</X>
                                   <Y>773</Y>
@@ -5162,7 +5156,6 @@ for i, pg in enumerate(new_pgons):
                                   <W>45</W>
                                   <H>20</H>
                                 </item>
-                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -5179,7 +5172,7 @@ for i, pg in enumerate(new_pgons):
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="3">
+                              <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>307</X>
                                   <Y>678</Y>
@@ -5190,7 +5183,6 @@ for i, pg in enumerate(new_pgons):
                                   <W>26</W>
                                   <H>70</H>
                                 </item>
-                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -5206,7 +5198,7 @@ for i, pg in enumerate(new_pgons):
                           </items>
                           <chunks count="1">
                             <chunk name="Attributes">
-                              <items count="3">
+                              <items count="2">
                                 <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
                                   <X>307</X>
                                   <Y>748</Y>
@@ -5217,7 +5209,6 @@ for i, pg in enumerate(new_pgons):
                                   <W>26</W>
                                   <H>70</H>
                                 </item>
-                                <item name="Selected" type_name="gh_bool" type_code="1">true</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -5260,9 +5251,9 @@ for i, pg in enumerate(new_pgons):
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">0.41</item>
-                        <item name="Min" type_name="gh_double" type_code="6">0</item>
-                        <item name="Max" type_name="gh_double" type_code="6">1</item>
+                        <item name="Value" type_name="gh_double" type_code="6">0.4</item>
+                        <item name="Min" type_name="gh_double" type_code="6">0.4</item>
+                        <item name="Max" type_name="gh_double" type_code="6">0.6</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">2</item>
                         <item name="Interval" type_name="gh_int32" type_code="3">0</item>
                         <item name="GripDisplay" type_name="gh_int32" type_code="3">1</item>
@@ -5304,9 +5295,9 @@ for i, pg in enumerate(new_pgons):
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">0.47</item>
-                        <item name="Min" type_name="gh_double" type_code="6">0</item>
-                        <item name="Max" type_name="gh_double" type_code="6">1</item>
+                        <item name="Value" type_name="gh_double" type_code="6">0.42</item>
+                        <item name="Min" type_name="gh_double" type_code="6">0.3</item>
+                        <item name="Max" type_name="gh_double" type_code="6">0.7</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">2</item>
                         <item name="Interval" type_name="gh_int32" type_code="3">0</item>
                         <item name="GripDisplay" type_name="gh_int32" type_code="3">1</item>
@@ -5348,8 +5339,8 @@ for i, pg in enumerate(new_pgons):
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">1.5</item>
-                        <item name="Min" type_name="gh_double" type_code="6">1</item>
+                        <item name="Value" type_name="gh_double" type_code="6">1.41</item>
+                        <item name="Min" type_name="gh_double" type_code="6">1.25</item>
                         <item name="Max" type_name="gh_double" type_code="6">2</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">2</item>
                         <item name="Interval" type_name="gh_int32" type_code="3">0</item>
@@ -5379,12 +5370,12 @@ for i, pg in enumerate(new_pgons):
                     <chunk name="Attributes">
                       <items count="2">
                         <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>8.069145</X>
-                          <Y>756.6102</Y>
+                          <X>6.81305</X>
+                          <Y>759.1102</Y>
                         </item>
                         <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>8</X>
-                          <Y>756</Y>
+                          <X>6</X>
+                          <Y>759</Y>
                           <W>168</W>
                           <H>20</H>
                         </item>
@@ -5392,8 +5383,8 @@ for i, pg in enumerate(new_pgons):
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">1.12</item>
-                        <item name="Min" type_name="gh_double" type_code="6">0</item>
+                        <item name="Value" type_name="gh_double" type_code="6">0.88</item>
+                        <item name="Min" type_name="gh_double" type_code="6">0.7</item>
                         <item name="Max" type_name="gh_double" type_code="6">2</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">2</item>
                         <item name="Interval" type_name="gh_int32" type_code="3">0</item>
@@ -5853,41 +5844,6 @@ for i, pg in enumerate(new_pgons):
             </chunk>
             <chunk name="Object" index="62">
               <items count="2">
-                <item name="GUID" type_name="gh_guid" type_code="9">ac2bc2cb-70fb-4dd5-9c78-7e1ea97fe278</item>
-                <item name="Name" type_name="gh_string" type_code="10">Geometry</item>
-              </items>
-              <chunks count="1">
-                <chunk name="Container">
-                  <items count="7">
-                    <item name="Name" type_name="gh_string" type_code="10">Geometry</item>
-                    <item name="NickName" type_name="gh_string" type_code="10">Geo</item>
-                    <item name="Description" type_name="gh_string" type_code="10">Represents a collection of 3D Geometry</item>
-                    <item name="InstanceGuid" type_name="gh_guid" type_code="9">a7769742-8cf8-4796-aa0b-29bfb21902fc</item>
-                    <item name="Optional" type_name="gh_bool" type_code="1">false</item>
-                    <item name="SourceCount" type_name="gh_int32" type_code="3">1</item>
-                    <item name="Source" index="0" type_name="gh_guid" type_code="9">5c2f9c93-2004-48c0-a4b5-c58a6caf8436</item>
-                  </items>
-                  <chunks count="1">
-                    <chunk name="Attributes">
-                      <items count="2">
-                        <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
-                          <X>418.4</X>
-                          <Y>816.8</Y>
-                        </item>
-                        <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
-                          <X>393</X>
-                          <Y>806</Y>
-                          <W>50</W>
-                          <H>20</H>
-                        </item>
-                      </items>
-                    </chunk>
-                  </chunks>
-                </chunk>
-              </chunks>
-            </chunk>
-            <chunk name="Object" index="63">
-              <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">57da07bd-ecab-415d-9d86-af36d7073abc</item>
                 <item name="Name" type_name="gh_string" type_code="10">Number Slider</item>
               </items>
@@ -5930,7 +5886,7 @@ for i, pg in enumerate(new_pgons):
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="64">
+            <chunk name="Object" index="63">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">46b5564d-d3eb-4bf1-ae16-15ed132cfd88</item>
                 <item name="Name" type_name="gh_string" type_code="10">Ellipse</item>
@@ -6202,7 +6158,7 @@ for i, pg in enumerate(new_pgons):
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="65">
+            <chunk name="Object" index="64">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">fc6979e4-7e91-4508-8e05-37c680779751</item>
                 <item name="Name" type_name="gh_string" type_code="10">Evaluate Curve</item>
@@ -6372,7 +6328,7 @@ for i, pg in enumerate(new_pgons):
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="66">
+            <chunk name="Object" index="65">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">59e0b89a-e487-49f8-bab8-b5bab16be14c</item>
                 <item name="Name" type_name="gh_string" type_code="10">Panel</item>
@@ -6387,10 +6343,10 @@ for i, pg in enumerate(new_pgons):
                     <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                     <item name="Optional" type_name="gh_bool" type_code="1">false</item>
                     <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
-                    <item name="UserText" type_name="gh_string" type_code="10">(0.125)
-(0.425)
-(0.575)
-(0.925)</item>
+                    <item name="UserText" type_name="gh_string" type_code="10">(0.105)
+(0.475)
+(0.585)
+(0.825)</item>
                     <item name="MultilineData" type_name="gh_bool" type_code="1">false</item>
                     <item name="WrapItems" type_name="gh_bool" type_code="1">true</item>
                     <item name="EntryNumbers" type_name="gh_bool" type_code="1">true</item>
@@ -6424,7 +6380,7 @@ for i, pg in enumerate(new_pgons):
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="67">
+            <chunk name="Object" index="66">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">71b5b089-500a-4ea6-81c5-2f960441a0e8</item>
                 <item name="Name" type_name="gh_string" type_code="10">PolyLine</item>
@@ -6560,7 +6516,7 @@ for i, pg in enumerate(new_pgons):
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="68">
+            <chunk name="Object" index="67">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">4bc9dbbf-fec8-4348-a3af-e33e7edc8e7b</item>
                 <item name="Name" type_name="gh_string" type_code="10">Mesh Join</item>
@@ -6649,7 +6605,7 @@ for i, pg in enumerate(new_pgons):
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="69">
+            <chunk name="Object" index="68">
               <items count="3">
                 <item name="GUID" type_name="gh_guid" type_code="9">f1f51397-fc4b-44cf-b4b0-0ab80a80a6e1</item>
                 <item name="Name" type_name="gh_string" type_code="10">Mesh WeldVertices</item>
@@ -6809,7 +6765,7 @@ for i, pg in enumerate(new_pgons):
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="70">
+            <chunk name="Object" index="69">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">1e936df3-0eea-4246-8549-514cb8862b7a</item>
                 <item name="Name" type_name="gh_string" type_code="10">Mesh</item>
@@ -6844,7 +6800,7 @@ for i, pg in enumerate(new_pgons):
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="71">
+            <chunk name="Object" index="70">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">cb4ca22c-3419-4962-a078-ad4ff7f1f929</item>
                 <item name="Name" type_name="gh_string" type_code="10">Face Normals</item>
@@ -6957,7 +6913,7 @@ for i, pg in enumerate(new_pgons):
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="72">
+            <chunk name="Object" index="71">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">4c619bc9-39fd-4717-82a6-1e07ea237bbe</item>
                 <item name="Name" type_name="gh_string" type_code="10">Line SDL</item>
@@ -7139,7 +7095,7 @@ for i, pg in enumerate(new_pgons):
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="73">
+            <chunk name="Object" index="72">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">57da07bd-ecab-415d-9d86-af36d7073abc</item>
                 <item name="Name" type_name="gh_string" type_code="10">Number Slider</item>
@@ -7172,7 +7128,7 @@ for i, pg in enumerate(new_pgons):
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">77</item>
+                        <item name="Value" type_name="gh_double" type_code="6">92</item>
                         <item name="Min" type_name="gh_double" type_code="6">0</item>
                         <item name="Max" type_name="gh_double" type_code="6">100</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">3</item>
@@ -7184,7 +7140,7 @@ for i, pg in enumerate(new_pgons):
                 </chunk>
               </chunks>
             </chunk>
-            <chunk name="Object" index="74">
+            <chunk name="Object" index="73">
               <items count="2">
                 <item name="GUID" type_name="gh_guid" type_code="9">57da07bd-ecab-415d-9d86-af36d7073abc</item>
                 <item name="Name" type_name="gh_string" type_code="10">Number Slider</item>
@@ -7217,13 +7173,71 @@ for i, pg in enumerate(new_pgons):
                     </chunk>
                     <chunk name="Slider">
                       <items count="6">
-                        <item name="Value" type_name="gh_double" type_code="6">28</item>
+                        <item name="Value" type_name="gh_double" type_code="6">34</item>
                         <item name="Min" type_name="gh_double" type_code="6">0</item>
                         <item name="Max" type_name="gh_double" type_code="6">100</item>
                         <item name="Digits" type_name="gh_int32" type_code="3">3</item>
                         <item name="Interval" type_name="gh_int32" type_code="3">1</item>
                         <item name="GripDisplay" type_name="gh_int32" type_code="3">1</item>
                       </items>
+                    </chunk>
+                  </chunks>
+                </chunk>
+              </chunks>
+            </chunk>
+            <chunk name="Object" index="74">
+              <items count="2">
+                <item name="GUID" type_name="gh_guid" type_code="9">1e936df3-0eea-4246-8549-514cb8862b7a</item>
+                <item name="Name" type_name="gh_string" type_code="10">Mesh</item>
+              </items>
+              <chunks count="1">
+                <chunk name="Container">
+                  <items count="6">
+                    <item name="Name" type_name="gh_string" type_code="10">Mesh</item>
+                    <item name="NickName" type_name="gh_string" type_code="10">parbaked</item>
+                    <item name="Description" type_name="gh_string" type_code="10">Represents a collection of 3D Polygon Meshes</item>
+                    <item name="InstanceGuid" type_name="gh_guid" type_code="9">1425572f-dfb9-4775-bfda-54094789e077</item>
+                    <item name="Optional" type_name="gh_bool" type_code="1">false</item>
+                    <item name="SourceCount" type_name="gh_int32" type_code="3">0</item>
+                  </items>
+                  <chunks count="2">
+                    <chunk name="Attributes">
+                      <items count="3">
+                        <item name="Pivot" type_name="gh_drawing_pointf" type_code="31">
+                          <X>1337.5</X>
+                          <Y>1166.25</Y>
+                        </item>
+                        <item name="Bounds" type_name="gh_drawing_rectanglef" type_code="35">
+                          <X>1300</X>
+                          <Y>1156</Y>
+                          <W>75</W>
+                          <H>20</H>
+                        </item>
+                        <item name="Selected" type_name="gh_bool" type_code="1">true</item>
+                      </items>
+                    </chunk>
+                    <chunk name="PersistentData">
+                      <items count="1">
+                        <item name="Count" type_name="gh_int32" type_code="3">1</item>
+                      </items>
+                      <chunks count="1">
+                        <chunk name="Branch" index="0">
+                          <items count="2">
+                            <item name="Path" type_name="gh_string" type_code="10">{0}</item>
+                            <item name="Count" type_name="gh_int32" type_code="3">1</item>
+                          </items>
+                          <chunks count="1">
+                            <chunk name="Item" index="0">
+                              <items count="2">
+                                <item name="RefID" type_name="gh_guid" type_code="9">00000000-0000-0000-0000-000000000000</item>
+                                <item name="ON_Data" type_name="gh_bytearray" type_code="20">
+                                  <stream length="6748">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</stream>
+                                </item>
+                              </items>
+                            </chunk>
+                          </chunks>
+                        </chunk>
+                      </chunks>
                     </chunk>
                   </chunks>
                 </chunk>
