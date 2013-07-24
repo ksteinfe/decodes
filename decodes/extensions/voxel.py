@@ -8,7 +8,7 @@ class VoxelField(Geometry):
     
     """
     def __init__(self, boundary, res_x, res_y, res_z, initial_value = 0.0):
-        self.bounds = boundary
+        self.bnds = boundary
         self._res_x = res_x 
         self._res_y = res_y 
         self._res_z = res_z
@@ -27,21 +27,21 @@ class VoxelField(Geometry):
         return self._res_z
 
     @property
-    def bounds(self):
-        return self._bounds
+    def bnds(self):
+        return self._bnds
 
-    @bounds.setter
-    def bounds(self,value): 
+    @bnds.setter
+    def bnds(self,value): 
         self._dim_pixel = None
         self._dim_pixel2 = None
-        self._bounds = value
+        self._bnds = value
 
     @property
     def dim_pixel(self):
         """
         returns the spatial dimensions of a single pixel of this voxel grid as a vector
         """
-        if self._dim_pixel is None : self._dim_pixel = Vec(self.bounds.dim_x / self._res_x , self.bounds.dim_y / self._res_y, self.bounds.dim_z / self._res_z)
+        if self._dim_pixel is None : self._dim_pixel = Vec(self.bnds.dim_x / self._res_x , self.bnds.dim_y / self._res_y, self.bnds.dim_z / self._res_z)
         return self._dim_pixel
 
     @property
@@ -49,7 +49,7 @@ class VoxelField(Geometry):
         """
         returns the spatial dimensions of HALF OF a single pixel of this voxel grid as a tuple
         """
-        if self._dim_pixel2 is None : self._dim_pixel2 = self._dim_pixel / 2.0
+        if self._dim_pixel2 is None : self._dim_pixel2 = self._dim_pixel = Vec(self.bnds.dim_x / self._res_x , self.bnds.dim_y / self._res_y, self.bnds.dim_z / self._res_z) / 2.0
         return self._dim_pixel2
 
     @property
@@ -79,7 +79,7 @@ class VoxelField(Geometry):
         if x<0 or x>self._res_x-1 : raise IndexError("x out of bounds. this voxel field has %s pixels in the x direction and you asked for %s"%(self._res_x,x))
         if y<0 or y>self._res_y-1 : raise IndexError("y out of bounds. this voxel field has %s pixels in the y direction and you asked for %s"%(self._res_y,y))
         if z<0 or z>self._res_z-1 : raise IndexError("z out of bounds. this voxel field has %s pixels in the z direction and you asked for %s"%(self._res_z,z))
-        pt = self.bounds.eval(x//self._res_x,y//self._res_y,z//self._res_z)
+        pt = self.bnds.eval(float(x)/float(self._res_x),float(y)/float(self._res_y),float(z)/float(self._res_z))
         pt = pt + self.dim_pixel2
         pt.val = self._stack[z]._pixels[int(self.res_y*y+x)]
         return pt
