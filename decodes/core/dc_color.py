@@ -112,14 +112,14 @@ class PixelGrid(object):
 
     @property
     def px_width(self):
-        return int(self._res.a)
+        return int(self._res[0])
 
     @property
     def px_height(self):
-        return int(self._res.b)
+        return int(self._res[1])
 
     def get(self,x,y):
-        return self._pixels[y*self._res.a+x]
+        return self._pixels[y*self._res[0]+x]
 
     def set(self,x,y,value):
         self._pixels[y*self.px_width+x] = value
@@ -150,7 +150,10 @@ class ValueField(PixelGrid):
     each pixel contains a floating point number
     """
     def __init__(self, pixel_res=Interval(20,20), initial_value = 0.0,include_corners=False,wrap=True):
-        self._res = Interval(int(pixel_res.a),int(pixel_res.b))
+        try:
+            self._res = (int(pixel_res.a),int(pixel_res.b))
+        except:
+            self._res = pixel_res
         self._pixels = [initial_value]*(self.px_width*self.px_height)
         super(ValueField,self).__init__(include_corners)
 
@@ -180,7 +183,10 @@ class BoolField(PixelGrid):
     each pixel contains a True or a False
     """
     def __init__(self, pixel_res=Interval(20,20), initial_value = False,ic=False,wrap=True):
-        self._res = Interval(int(pixel_res.a),int(pixel_res.b))
+        try:
+            self._res = (int(pixel_res.a),int(pixel_res.b))
+        except:
+            self._res = pixel_res
         self._pixels = [initial_value]*(self.px_width*self.px_height)
         super(BoolField,self).__init__(ic)
 
@@ -201,7 +207,10 @@ class Image(PixelGrid):
     each pixel contains a Color with normalized R,G,B values
     """
     def __init__(self, pixel_res=Interval(20,20), initial_color = Color(),include_corners=False,wrap=True):
-        self._res = Interval(int(pixel_res.a),int(pixel_res.b))
+        try:
+            self._res = (int(pixel_res.a),int(pixel_res.b))
+        except:
+            self._res = pixel_res
         self._pixels = [initial_color]*(self.px_width*self.px_height)
         super(Image,self).__init__(include_corners)
 

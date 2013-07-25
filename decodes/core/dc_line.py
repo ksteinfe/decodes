@@ -297,7 +297,10 @@ class VecField(PixelGrid):
     each pixel contains a positioned 3d vector (a Ray)
     """
     def __init__(self, pixel_res=Interval(8,8), spatial_origin=Point(), spatial_dim=Interval(4,4), initial_value = Vec(),include_corners=False,wrap=True):
-        self._res = Interval(int(pixel_res.a),int(pixel_res.b))
+        try:
+            self._res = (int(pixel_res.a),int(pixel_res.b))
+        except:
+            self._res = pixel_res
         self._pixels = [initial_value]*(self.px_width*self.px_height)
         self._sp_org = spatial_origin
         self._sp_dim = spatial_dim
@@ -306,8 +309,8 @@ class VecField(PixelGrid):
         self._sp_ival_x = Interval(self._sp_org.x - self._sp_dim.a/2, self._sp_org.x + self._sp_dim.a/2)
         self._sp_ival_y = Interval(self._sp_org.y - self._sp_dim.b/2, self._sp_org.y + self._sp_dim.b/2)
         self._base_pts = []
-        for ival_y in self._sp_ival_y//pixel_res.b:
-            for ival_x in self._sp_ival_x//pixel_res.a:
+        for ival_y in self._sp_ival_y//self._res[1]:
+            for ival_x in self._sp_ival_x//self._res[0]:
                 self._base_pts.append(Point(ival_x.mid, ival_y.mid)) 
 
     def to_rays(self):

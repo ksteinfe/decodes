@@ -484,3 +484,15 @@ class Vec(Geometry):
         from .dc_point import Point
         if pt is None: pt = Point()
         return Line(pt,Vec(self))
+
+    @staticmethod
+    def unit_x(length=1.0):
+        return Vec(length,0,0)
+
+    @staticmethod
+    def unit_y(length=1.0):
+        return Vec(0,length,0)
+
+    @staticmethod
+    def unit_z(length=1.0):
+        return Vec(0,0,length)
