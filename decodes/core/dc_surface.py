@@ -388,6 +388,9 @@ class Surface(IsParametrized):
         d1 = cos*cos*m11 - 2*cos*sin*m12 + sin*sin*m22 
         d2 = sin*sin*m11 + 2*cos*sin*m12 + cos*cos*m22
 
+        if d1 > d2:
+            d1,d2 = d2,d1
+            T1_vec, T2_vec = T2_vec, T1_vec
 
         """
         #Check that T1, T2 are eigenvectors of M_mat
@@ -407,7 +410,6 @@ class Surface(IsParametrized):
         #Compute all the curvature quantities: principal curvatures, Gaussian, Mean
         k1 = 3*d1 - d2
         k2 = 3*d2 - d1
-        #if k1>k2 : k1,k2 = k2,k1
         K = k1*k2
         H = (k1 + k2)*0.5
         if k1 == k2 : 
