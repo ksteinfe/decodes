@@ -96,10 +96,23 @@ class Arc(HasBasis):
         return self._basis.origin
         
     def __repr__(self): return "arc[{0},r:{1},sweep angle{2}]".format(self.origin,self.radius,self.sweep_angle)
-
+    
+    
+    # Returns an arc using a center, a start point and a sweep point
+    @staticmethod
+    def from_pts(center,start_pt,sweep_pt,is_major=False):
+        radius = center.distance(start_pt)
+        angle = Vec(center, start_pt).angle(Vec(center, sweep_pt))
+        if is_major:
+            angle = 2*math.pi - angle
+            cs = CS(center, Vec(center, start_pt), Vec(center, sweep_pt).inverted())
+        else:
+            cs = CS(center, Vec(center, start_pt), Vec(center, sweep_pt))    
+        return Arc(cs, radius, angle)
+    
     #Returns a best fit arc using the modified least squares method
     @staticmethod
-    def arc_from_pts(pts_in):
+    def thru_pts(pts_in):
         # Get the number of input points
         cnt = len(pts_in)
         # An Arc needs at least 3 points
