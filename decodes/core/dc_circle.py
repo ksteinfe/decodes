@@ -98,6 +98,16 @@ class Arc(HasBasis):
     def __repr__(self): return "arc[{0},r:{1},sweep angle{2}]".format(self.origin,self.radius,self.sweep_angle)
     
     
+    # Returns an arc using a start point, a sweep point and a tangent to the arc at the start point
+    @staticmethod
+    def from_tan(start_pt,sweep_pt,tan):
+        vec_ab = Vec(start_pt, sweep_pt)
+        vec_rad = tan.cross(tan.cross(vec_ab))
+        ang = vec_ab.angle(vec_rad)
+        rad = vec_ab.length/math.cos(ang)/2.0
+        center = Point(start_pt+vec_rad.normalized(rad))
+        return Arc.from_pts(center, start_pt, sweep_pt)   
+    
     # Returns an arc using a center, a start point and a sweep point
     @staticmethod
     def from_pts(center,start_pt,sweep_pt,is_major=False):
