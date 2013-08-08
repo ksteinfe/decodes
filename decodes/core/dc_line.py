@@ -295,6 +295,8 @@ class VecField(PixelGrid):
     """
     a raster grid of vectors
     each pixel contains a positioned 3d vector (a Ray)
+
+    TODO: allow to set vectors as "bidirectional", which would affect the behavior of average vectors, and would produce lines rather than rays
     """
     def __init__(self, pixel_res=Interval(8,8), spatial_origin=Point(), spatial_dim=Interval(4,4), initial_value = Vec(),include_corners=False,wrap=True):
         try:
@@ -306,8 +308,8 @@ class VecField(PixelGrid):
         self._sp_dim = spatial_dim
         super(VecField,self).__init__(include_corners)
 
-        self._sp_ival_x = Interval(self._sp_org.x - self._sp_dim.a/2, self._sp_org.x + self._sp_dim.a/2)
-        self._sp_ival_y = Interval(self._sp_org.y - self._sp_dim.b/2, self._sp_org.y + self._sp_dim.b/2)
+        self._sp_ival_x = Interval(self._sp_org.x - self._sp_dim.a/2, self._sp_org.x + self._sp_dim.a/2) # spatial interval x
+        self._sp_ival_y = Interval(self._sp_org.y - self._sp_dim.b/2, self._sp_org.y + self._sp_dim.b/2) # spatial interval y
         self._base_pts = []
         for ival_y in self._sp_ival_y//self._res[1]:
             for ival_x in self._sp_ival_x//self._res[0]:
@@ -316,11 +318,43 @@ class VecField(PixelGrid):
     def to_rays(self):
         return [Ray(pt,vec) for vec,pt in zip(self._pixels, self._base_pts )]
 
-    def vec_near(self,sample_pt):
-        x,y = self.address_near(sample_pt)
+    def get_cpt(self,x,y):
+        """
+        returns the center point of the cell associated with the given address
+        """
+        return self._base_pts[y*self._res[0]+x]
+
+    def vec_near(self,a,b=None):
+        """
+        may be passed either a point or an x,y coord
+        """
+        x,y = self.address_near(a,b)
         return self.get(x,y)
 
-    def address_near(self,sample_pt):
+    def cpt_near(self,a,b=None):
+        """
+        may be passed either a point or an x,y coord
+        """
+        x,y = self.address_near(a,b)
+        return self.get_cpt(x,y)
+
+    def vecs_near(self,a,b=None):
+        tups = self.addresses_near(a,b)
+        return [self.get(tup[0],tup[1]) for tup in tups]
+
+    def cpts_near(self,a,b=None):
+        tups = self.addresses_near(a,b)
+        return [self.get_cpt(tup[0],tup[1]) for tup in tups]
+
+    def address_near(self,a,b=None):
+        """
+        may be passed either a point or an x,y coord
+        """
+        try:
+            sample_pt = Point(a.x,a.y)
+        except:
+            sample_pt = Point(a,b)
+
         x = min(1.0,max(0.0,self._sp_ival_x.deval(sample_pt.x)))
         y = min(1.0,max(0.0,self._sp_ival_y.deval(sample_pt.y)))
 
@@ -329,3 +363,54 @@ class VecField(PixelGrid):
         if x == self.px_width : x = self.px_width-1
         if y == self.px_height : y = self.px_height-1
         return x,y
+
+    def addresses_near(self,a,b=None):
+        try:
+            sample_pt = Point(a.x,a.y)
+        except:
+            sample_pt = Point(a,b)
+    
+        dx2 = self._sp_ival_x.delta / self.px_width / 2
+        dy2 = self._sp_ival_y.delta / self.px_height / 2
+    
+        x = self._sp_ival_x.deval(sample_pt.x)
+        y = self._sp_ival_y.deval(sample_pt.y)
+    
+        x = Interval.remap(x,Interval(dx2,1-dx2),Interval(0,self.px_width-1))
+        y = Interval.remap(y,Interval(dy2,1-dy2),Interval(0,self.px_height-1))
+    
+        x_flr,y_flr = math.floor(x),math.floor(y)
+        x_cei,y_cei = math.ceil(x), math.ceil(y)
+    
+        x_flr = int(Interval(0,self.px_width-1).limit_val(x_flr))
+        y_flr = int(Interval(0,self.px_height-1).limit_val(y_flr))
+        x_cei = int(Interval(0,self.px_width-1).limit_val(x_cei))
+        y_cei = int(Interval(0,self.px_height-1).limit_val(y_cei))
+    
+        adds = []
+        for tup in [(x_flr,y_flr),(x_cei, y_flr),(x_cei, y_cei),(x_flr, y_cei)]:
+            if tup not in adds:
+                adds.append(tup)
+        return adds
+
+    def avg_vec_near(self,a,b=None):
+        try:
+            sample_pt = Point(a.x,a.y)
+        except:
+            sample_pt = Point(a,b)
+            
+        vecs = self.vecs_near(sample_pt)
+        cpts = self.cpts_near(sample_pt)
+        try:
+            dists = [1.0/sample_pt.distance2(cpt) for cpt in cpts]
+            tot = sum(dists)
+            weights = [dist/tot for dist in dists]
+            vec = Vec()
+            for n in range(len(vecs)):
+                vec = vec + vecs[n]* weights[n]
+            return vec
+        except:
+            # sample point is conincident with one of the near cpts
+            for n in range(len(cpts)):
+                if cpts[n] == sample_pt : return vecs[n]
+            raise GeometricError("sample point coincident with center point: %s"%(sample_pt))
