@@ -55,6 +55,14 @@ class Tests(unittest.TestCase):
         self.AssertPointsAlmostEqual(Point(-2.0,2.0,2.0),pln_rotated.origin)
         self.AssertPointsAlmostEqual(Vec(0,1,0),pln_rotated.normal)
 
+
+    def test_dist_from_origin(self):
+        pa = Point(2,2,2)
+        va = Vec(1,0,0)
+        pln = Plane(pa,va)
+
+        self.assertEqual( pln.d , 2.0 )
+
     def AssertPointsAlmostEqual(self,pa,pb,places=4):
         self.assertAlmostEqual(pa.x,pb.x,places)
         self.assertAlmostEqual(pa.y,pb.y,places)

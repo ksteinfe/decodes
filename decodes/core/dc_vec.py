@@ -242,6 +242,17 @@ class Vec(Geometry):
         """   
         return self.normalized().is_identical( other.normalized() )
     
+    def is_parallel(self,other): 
+        """Returns True if the vectors have equal or opposite direction.
+        
+            :param other: Vec to be compared.
+            :type other: Vec
+            :result: Boolean result of comparison.
+            :rtype: bool
+        """   
+        return self.is_coincident(other) or self.inverted().is_coincident(other)
+
+
     @property
     def is_2d(self): 
         """Returns True if the vector is 2d

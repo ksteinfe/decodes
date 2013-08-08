@@ -23,9 +23,11 @@ class PGon(HasPts):
             :rtype: PGon
         """ 
         #TODO: if i pass in verices but no basis, try and figure out what the CS should be and project all points to the proper plane
+        if basis is None and vertices is None : raise GeometricError("You must define both a basis and a list of vertices to construct a PGon")
 
         super(PGon,self).__init__(vertices,basis) #HasPts constructor handles initalization of verts and basis
         self.basis = CS() if (basis is None) else basis # set the basis after appending the points
+
         
     def seg(self,index):
         """ Returns a segment of this Polygon

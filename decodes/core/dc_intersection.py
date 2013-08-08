@@ -54,6 +54,8 @@ class Intersector(object):
             if type_other == Ray : return self._ray_plane(other,plane,ignore_backface)
             if type_other == Segment : return self._seg_plane(other,plane)
 
+            if type_other == Plane : return self._plane_plane(other,plane)
+
             raise NotImplementedError("I don't know how to intersect a Plane with a %s"%(type_other.__name__))
 
         # INTERSECTIONS WITH A CIRCLE
@@ -62,8 +64,6 @@ class Intersector(object):
             else: circ,other,type_other = b,a,type_a
 
             if type_other == Circle : return self._circle_circle(other,circ)
-
-
 
             
         # INTERSECTIONS WITH A PGON
@@ -92,6 +92,13 @@ class Intersector(object):
             else:
                 self.log = "Intersection of PGon.basis and LinearEntity does not lie within PGon."
                 return False
+
+
+        # INTERSECTIONS WITH A LINE
+        # last resort for Line-Line intersections
+        if all(item == Line for item in [type_a,type_b]) : 
+            return self._line_line(a,b)
+
 
         raise NotImplementedError("I don't know how to intersect a %s with a %s"%(type_a.__name__,type_b.__name__))
 
@@ -150,6 +157,66 @@ class Intersector(object):
         self._geom = xsec._geom
         self.dist = xsec.dist
         return True
+
+    def _plane_plane(self,pln_a,pln_b):
+        if pln_a.normal.is_parallel(pln_b.normal) :
+            self.log = "Planes are parallel, no intersection found."
+            return False
+        vec = pln_a.normal.cross(pln_b.normal)
+
+        a1,b1,c1 = pln_a.normal.x,pln_a.normal.y,pln_a.normal.z
+        a2,b2,c2 = pln_b.normal.x,pln_b.normal.y,pln_b.normal.z
+
+        x = 0
+        y = (-c1 -pln_a.d) / b1
+        z = ((b2/b1)*pln_a.d -pln_b.d)/(c2 - c1*b2/b1)
+        
+        self.append( Line(Point(x,y,z),vec) )
+        return True
+
+    def _line_line(self,ln_a,ln_b):
+        if ln_a.is_parallel(ln_b) :
+            self.log = "Lines are parallel, no intersection found."
+            return False
+        
+        p1 = Vec(float(ln_a.spt.x),float(ln_a.spt.y),float(ln_a.spt.z))
+        p2 = Vec(float(ln_a.ept.x),float(ln_a.ept.y),float(ln_a.ept.z))
+        p3 = Vec(float(ln_b.spt.x),float(ln_b.spt.y),float(ln_b.spt.z))
+        p4 = Vec(float(ln_b.ept.x),float(ln_b.ept.y),float(ln_b.ept.z))
+        p13 = p1 - p3
+        p43 = p4 - p3
+        tol = 0.00001
+
+        if (p43.length2 < tol): return False
+        p21 = p2 - p1
+        if (p21.length2 < tol): return False
+        
+        d1343 = p13.x * p43.x + p13.y * p43.y + p13.z * p43.z
+        d4321 = p43.x * p21.x + p43.y * p21.y + p43.z * p21.z
+        d1321 = p13.x * p21.x + p13.y * p21.y + p13.z * p21.z
+        d4343 = p43.x * p43.x + p43.y * p43.y + p43.z * p43.z
+        d2121 = p21.x * p21.x + p21.y * p21.y + p21.z * p21.z
+
+        denom = d2121 * d4343 - d4321 * d4321
+        numer = d1343 * d4321 - d1321 * d4343
+
+        mua = numer / denom
+        mub = (d1343 + d4321 * (mua)) / d4343
+        self.t = mua,mub
+
+        pa = Point(p1.x + mua * p21.x,p1.y + mua * p21.y,p1.z + mua * p21.z)
+        pb = Point(p3.x + mub * p43.x,p3.y + mub * p43.y,p3.z + mub * p43.z)
+        if pa == pb : 
+            self.log = "3d intersection found."
+            self.append(pa)
+            return True
+        else: 
+            self.log = "No intersection found in 3d, recording shortest Segment between these two lines."
+            self.append(Segment(pa,pb))
+            return False
+
+        
+
 
     def _circle_circle(self,cir_a,cir_b):
         '''

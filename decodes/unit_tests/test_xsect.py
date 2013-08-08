@@ -119,3 +119,42 @@ class Tests(unittest.TestCase):
         test = xsec.of(ray,pgon)
         self.assertEqual(xsec.of(ray,pgon),True)
 
+    def test_plane_plane(self):
+        xsec = Intersector()
+
+        pln_a = CS().xy_plane
+        pln_b = CS().xz_plane
+        self.assertEqual(xsec.of(pln_a,pln_b),True)
+        self.assertEqual(xsec[0]._vec,Vec(1,0,0))
+
+    def test_line_line(self):
+        xsec = Intersector()
+
+        ln_a = Line(Point(2,1),Vec(1,1))
+        ln_b = Line(Point(-1,0),Vec(2,0))
+        self.assertEqual(xsec.of(ln_a,ln_b),True)
+        self.assertEqual(xsec[0],Point(1,0))
+        self.assertEqual(ln_a.eval(xsec.t[0]),xsec[0])
+        self.assertEqual(ln_b.eval(xsec.t[1]),xsec[0])
+
+        ln_a = Line(Point(2,1),Vec(10,10))
+        ln_b = Line(Point(-1,0),Vec(2,0))
+        self.assertEqual(xsec.of(ln_a,ln_b),True)
+        self.assertEqual(xsec[0],Point(1,0))
+        self.assertEqual(ln_a.eval(xsec.t[0]),xsec[0])
+        self.assertEqual(ln_b.eval(xsec.t[1]),xsec[0])
+
+        ln_a = Line(Point(2,1),Vec(1,1))
+        ln_b = Line(Point(-1,0),Vec(20,0))
+        self.assertEqual(xsec.of(ln_a,ln_b),True)
+        self.assertEqual(xsec[0],Point(1,0))
+        self.assertEqual(ln_a.eval(xsec.t[0]),xsec[0])
+        self.assertEqual(ln_b.eval(xsec.t[1]),xsec[0])
+
+        ln_a = Line(Point(2,1),Vec(10,10))
+        ln_b = Line(Point(-1,0),Vec(20,0))
+        self.assertEqual(xsec.of(ln_a,ln_b),True)
+        self.assertEqual(xsec[0],Point(1,0))
+        self.assertEqual(ln_a.eval(xsec.t[0]),xsec[0])
+        self.assertEqual(ln_b.eval(xsec.t[1]),xsec[0])
+

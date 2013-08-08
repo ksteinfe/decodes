@@ -29,6 +29,17 @@ class Plane(Geometry):
         self.z = o.z
         self._vec = normal.normalized()
 
+    @property
+    def d(self):
+        """
+        the distance of this plane from the origin
+        """
+        from .dc_line import Line
+        line = Line(self.origin, self._vec)
+        t = line.near(Point())[1]
+        tvec = self._vec*-t
+        return tvec.length
+
     def __eq__(self, other):
         """Overloads the equal **(==)** operator for vector identity.
         
@@ -138,7 +149,7 @@ class Plane(Geometry):
         t = line.near(p)[1]
         tvec = self._vec*-t
         point = p + tvec
-        return (point,t) 
+        return (point,t,tvec.length) 
 
     def near_pt(self, p):
         """Returns the closest point to a given Plane.
