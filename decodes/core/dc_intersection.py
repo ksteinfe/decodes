@@ -202,7 +202,7 @@ class Intersector(object):
 
         mua = numer / denom
         mub = (d1343 + d4321 * (mua)) / d4343
-        self.t = mua,mub
+        self.ta, self.tb = mua,mub
 
         pa = Point(p1.x + mua * p21.x,p1.y + mua * p21.y,p1.z + mua * p21.z)
         pb = Point(p3.x + mub * p43.x,p3.y + mub * p43.y,p3.z + mub * p43.z)
