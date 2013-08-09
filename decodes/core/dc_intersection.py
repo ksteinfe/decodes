@@ -97,7 +97,7 @@ class Intersector(object):
 
         # INTERSECTIONS WITH A LINE
         # last resort for Line-Line intersections
-        if all(item == Line for item in [type_a,type_b]) : 
+        if all(isinstance(item,LinearEntity) for item in [a,b]) : 
             return self._line_line(a,b)
 
 

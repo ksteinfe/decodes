@@ -29,6 +29,17 @@ class LinearEntity(Geometry):
         elif isinstance(b,Vec) : self._vec = b
         else : raise TypeError("Incorrect parameters provided to %s constructor" % self.__class__.__name__)
     
+    def __add__(self, other): 
+        """Overloads the addition **(+)** operator. 
+        Adds the given vector to LinearEntity._pt, effectively translating this LinearEntity
+        
+            :param other: Vec to be added.
+            :type other: Vec
+            :result: LinearEntity
+            :rtype: LinearEntity
+        """
+        self._pt = self._pt + other
+        return self
 
     @property
     def spt(self): 
