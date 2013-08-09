@@ -160,11 +160,21 @@ class Intersector(object):
         return True
 
     def _plane_plane(self,pln_a,pln_b):
+
         if pln_a.normal.is_parallel(pln_b.normal) :
             self.log = "Planes are parallel, no intersection found."
             return False
         vec = pln_a.normal.cross(pln_b.normal)
-
+    
+        ldir = pln_b.normal.cross(vec)
+        denom = pln_a.normal.dot(ldir)
+        tvec = pln_a.origin - pln_b.origin
+        t = pln_a.normal.dot(tvec) / denom
+        pt = pln_b.origin + ldir * t
+    
+        self.append( Line(pt,vec) )
+        return True
+        """
         a1,b1,c1 = pln_a.normal.x,pln_a.normal.y,pln_a.normal.z
         a2,b2,c2 = pln_b.normal.x,pln_b.normal.y,pln_b.normal.z
 
@@ -174,6 +184,7 @@ class Intersector(object):
         
         self.append( Line(Point(x,y,z),vec) )
         return True
+        """
 
     def _line_line(self,ln_a,ln_b):
         #TODO: test for lines on the xy plane, and do simpler intersection
@@ -200,6 +211,9 @@ class Intersector(object):
 
         denom = d2121 * d4343 - d4321 * d4321
         numer = d1343 * d4321 - d1321 * d4343
+        if denom == 0.0 :
+            self.log = "Division by Zero, no intersection found."
+            return False
 
         mua = numer / denom
         mub = (d1343 + d4321 * (mua)) / d4343

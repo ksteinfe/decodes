@@ -124,8 +124,18 @@ class Tests(unittest.TestCase):
 
         pln_a = CS().xy_plane
         pln_b = CS().xz_plane
+        ln = Line(Point(0,0,0),Vec(1,0,0))
         self.assertEqual(xsec.of(pln_a,pln_b),True)
-        self.assertEqual(xsec[0]._vec,Vec(1,0,0))
+        self.assertEqual(xsec[0].vec.is_parallel(ln.vec),True) # lines are parallel
+        self.assertEqual(xsec[0].near(ln.spt)[2],0) # lines are colinear
+
+        pln_a = CS().xy_plane
+        pln_b = Plane(Point(1,1),Vec(-1,-1))
+        ln = Line(Point(0,0,0),Vec(1,0,0))
+        self.assertEqual(xsec.of(pln_a,pln_b),True)
+        self.assertEqual(xsec[0].vec.is_parallel(ln.vec),True) # lines are parallel
+        self.assertEqual(xsec[0].near(ln.spt)[2],0) # lines are colinear
+
 
     def test_line_line(self):
         xsec = Intersector()
