@@ -11,6 +11,7 @@ class Intersector(object):
     def __init__(self):
         self._geom = []
         self.log = None
+        self.tol = 0.000001
 
     def __getitem__(self,slice):
         return self._geom[slice]
@@ -175,6 +176,7 @@ class Intersector(object):
         return True
 
     def _line_line(self,ln_a,ln_b):
+        #TODO: test for lines on the xy plane, and do simpler intersection
         if ln_a.is_parallel(ln_b) :
             self.log = "Lines are parallel, no intersection found."
             return False
@@ -185,11 +187,10 @@ class Intersector(object):
         p4 = Vec(float(ln_b.ept.x),float(ln_b.ept.y),float(ln_b.ept.z))
         p13 = p1 - p3
         p43 = p4 - p3
-        tol = 0.00001
 
-        if (p43.length2 < tol): return False
+        if (p43.length2 < self.tol): return False
         p21 = p2 - p1
-        if (p21.length2 < tol): return False
+        if (p21.length2 < self.tol): return False
         
         d1343 = p13.x * p43.x + p13.y * p43.y + p13.z * p43.z
         d4321 = p43.x * p21.x + p43.y * p21.y + p43.z * p21.z
@@ -206,7 +207,7 @@ class Intersector(object):
 
         pa = Point(p1.x + mua * p21.x,p1.y + mua * p21.y,p1.z + mua * p21.z)
         pb = Point(p3.x + mub * p43.x,p3.y + mub * p43.y,p3.z + mub * p43.z)
-        if pa == pb : 
+        if pa.is_identical(pb,self.tol) : 
             self.log = "3d intersection found."
             self.append(pa)
             return True

@@ -29,7 +29,7 @@ test_ray_plane (decodes.unit_tests.test_xsect.Tests) ... ok
 test_seg_plane (decodes.unit_tests.test_xsect.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 8 tests in 0.186s
+Ran 8 tests in 0.304s
 
 OK
 
@@ -73,7 +73,7 @@ Traceback (most recent call last):
 GeometricError: You must define both a basis and a list of vertices to construct a PGon
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.183s
+Ran 7 tests in 0.182s
 
 FAILED (errors=1)
 
@@ -83,7 +83,7 @@ test_empty_constructor (decodes.unit_tests.test_pline.Tests) ... ok
 test_segs_and_edges (decodes.unit_tests.test_pline.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.080s
+Ran 2 tests in 0.081s
 
 OK
 
@@ -95,7 +95,7 @@ test_face_access (decodes.unit_tests.test_mesh.Tests) ... ok
 test_simple_constructor (decodes.unit_tests.test_mesh.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.030s
+Ran 4 tests in 0.031s
 
 OK
 
@@ -123,7 +123,7 @@ test_swap_basis (decodes.unit_tests.test_has_pts.Tests) ... ok
 test_unsetting (decodes.unit_tests.test_has_pts.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.153s
+Ran 7 tests in 0.152s
 
 OK
 
@@ -139,7 +139,7 @@ test_subdivide (decodes.unit_tests.test_curve.Tests) ... ok
 test_tolerance (decodes.unit_tests.test_curve.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 8 tests in 0.894s
+Ran 8 tests in 0.891s
 
 OK
 
@@ -149,7 +149,7 @@ test_curvature (decodes.unit_tests.test_surface.Tests) ... ok
 test_iso_curvature (decodes.unit_tests.test_surface.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.352s
+Ran 2 tests in 0.349s
 
 OK
 
@@ -185,7 +185,7 @@ test_ray (decodes.unit_tests.test_line.Tests) ... ok
 test_segment (decodes.unit_tests.test_line.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.017s
+Ran 4 tests in 0.016s
 
 OK
 
@@ -212,6 +212,6 @@ test_translation (decodes.unit_tests.test_xform.Tests) ... ok
 test_xform_hasbasis (decodes.unit_tests.test_xform.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.016s
+Ran 4 tests in 0.017s
 
 OK
