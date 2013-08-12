@@ -6,8 +6,8 @@ print "cellular_automata.py loaded"
 class CA (object):
 
     def __init__(self,pixel_res=Interval(20,20),include_corners=False,wrap=False):
-        self.width = pixel_res.a
-        self.height = pixel_res.b
+        self.width = int(pixel_res.a)
+        self.height = int(pixel_res.b)
         self.clear(include_corners,wrap)
     
     def set_cell(self,x,y,val):
