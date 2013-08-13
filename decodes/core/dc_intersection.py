@@ -16,6 +16,10 @@ class Intersector(object):
     def __getitem__(self,slice):
         return self._geom[slice]
 
+    @property
+    def results(self):
+        return self._geom
+
     def append(self,item):
         self._geom.append(item)
 
@@ -55,7 +59,11 @@ class Intersector(object):
             if type_other == Ray : return self._ray_plane(other,plane,ignore_backface)
             if type_other == Segment : return self._seg_plane(other,plane)
 
+            if type_other == PLine : return self._pline_plane(other,plane)
+
             if type_other == Plane : return self._plane_plane(other,plane)
+
+
 
             raise NotImplementedError("I don't know how to intersect a Plane with a %s"%(type_other.__name__))
 
@@ -79,20 +87,7 @@ class Intersector(object):
             ignore_backface = False
             if "ignore_backface" in kargs: ignore_backface = kargs['ignore_backface']
 
-            # if intersecting with a linear entity, first intersect with this pgon's basis
-            xsec = Intersector()
-            basis_success = xsec.of(pgon.basis.xy_plane,other,ignore_backface = ignore_backface)
-            if not basis_success : 
-                self.log = xsec.log + " of Pgon"
-                return False
-            
-            if pgon.contains_pt(xsec._geom[0]):
-                self._geom = xsec._geom
-                self.dist = xsec.dist
-                return True
-            else:
-                self.log = "Intersection of PGon.basis and LinearEntity does not lie within PGon."
-                return False
+            if isinstance(other,LinearEntity) : return self._line_pgon(other,pgon,ignore_backface)
 
 
         # INTERSECTIONS WITH A LINE
@@ -108,8 +103,36 @@ class Intersector(object):
         """
         upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection
         """
-        
+        # TODO
         return False
+
+
+    def _line_pgon(self,line,pgon,ignore_backface=False):
+        """
+        upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection
+        """
+
+        # first intersect LinearEntity with this pgon's basis
+        xsec = Intersector()
+        basis_success = xsec.of(pgon.basis.xy_plane,line,ignore_backface = ignore_backface)
+        if not basis_success : 
+            # if no intersection found, test to see if LinearEntity lies within the plane of the pgon
+            pln = Plane.from_pts(line.spt,line.ept,line.spt+line.vec.cross(pgon.basis.z_axis))
+            if pln.is_coplanar(pgon.basis.xy_plane):
+                self.log = "Line in Plane of Pgon"
+                raise NotImplementedError("I don't know how to intersect a polygon with a line that lines in the plane of the polygon")
+                return False
+            else:
+                self.log = xsec.log + " of Pgon"
+                return False
+            
+        if pgon.contains_pt(xsec._geom[0]):
+            self._geom = xsec._geom
+            self.dist = xsec.dist
+            return True
+        else:
+            self.log = "Intersection of PGon.basis and LinearEntity does not lie within PGon."
+            return False
 
 
     def _line_plane(self,line,plane,ignore_backface=False):
@@ -158,6 +181,40 @@ class Intersector(object):
         self._geom = xsec._geom
         self.dist = xsec.dist
         return True
+
+    def _pline_plane(self,pline,plane):
+        """
+        self.edges
+        self.verts
+        """
+        self.edges = []
+        self.verts = []
+        xsec = Intersector()
+        pts = pline.pts
+        for pt in pts:
+            pt.side = 0
+            line = Line(plane.origin, plane.normal)
+            t = line.near(pt)[1]
+            if t < 0 : pt.side = -1
+            if t > 0 : pt.side = 1
+
+        ret = False
+        for n in range(len(pts)):
+            if n< len(pts)-1 and pts[n].side != pts[n+1].side and pts[n].side !=0 and pts[n+1].side !=0:
+                if xsec.of(pline.edges[n],plane):
+                    self.append(xsec[0])
+                    self.edges.append(n)
+                    self.verts.append(-1)
+                    ret = True
+            if pts[n].side == 0 :
+                #if self.log is None: self.log = ""
+                #self.log += "Found an intersection at a polyline vertex %s\n"%(n)
+                self.append(pts[n])
+                self.edges.append(-1)
+                self.verts.append(n)
+                ret = True
+
+        return ret
 
     def _plane_plane(self,pln_a,pln_b):
 

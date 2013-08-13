@@ -134,7 +134,7 @@ class Plane(Geometry):
             :result: Boolean result of comparison.
             :rtype: bool
         """   
-        return all([self.near(other.origin)[0].distance(other.origin)<tolerence,self._vec.x==other._vec.x,self._vec.y==other._vec.y,self._vec.z==other._vec.z])
+        return all([self.near(other.origin)[0].distance(other.origin)<tolerence,self._vec.is_parallel(other._vec)])
 
     def near(self, p):
         """Returns a tuple of the closest point to a given Plane, its t value and the distance from the given Point to the near Point.
