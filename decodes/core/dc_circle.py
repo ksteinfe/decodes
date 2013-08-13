@@ -34,6 +34,47 @@ class Circle(Plane):
         if xsec.of(self,other):
             return xsec._geom
         return False
+    
+    @staticmethod
+    def mutually_tangent(cir_a,cir_b,tangent_offset=0.0,calc_extras=False):
+        """
+        given two circles, returns a circle that is tangent to both of them.
+        by default, returns the smallest possible circle (where the points of tangency on each given circle lies along a single line), 
+        however, if the tan_offset parameter is set to a value other than zero, then the point of tangency may be explicitly set as a rotation from this smallest tangency point
+        the two given circles must be co-planar
+        calc_extras = True returns the points of tangency as well
+        """
+        if not cir_a.plane.is_coplanar(cir_b.plane):
+            raise GeometricError("Circles must be co-planar.")  
+        z_axis = cir_a.plane.normal
+
+        vec_rad = Vec(cir_a.origin,cir_b.origin).normalized(cir_a.rad)
+        pt_tan = cir_a.origin + vec_rad
+        if tangent_offset != 0.0:
+            cs = CS(cir_a.origin,vec_rad,vec_rad.cross(z_axis))
+            pt_tan = cs.eval(cir_a.rad * math.cos(tangent_offset),cir_a.rad * math.sin(tangent_offset))
+
+        pt_ff = pt_tan + Vec(pt_tan,cir_a.origin).normalized(cir_b.rad)
+        ln_f = Line(pt_ff,Vec(pt_ff,pt_tan))
+
+        pt_gg = Point.centroid([pt_ff,cir_b.plane.origin])
+        ln_g = Line(pt_gg , Vec(pt_ff,cir_b.plane.origin).cross(z_axis))
+
+        from .dc_intersection import Intersector 
+        xsec = Intersector()
+        if xsec.of(ln_g,ln_f):
+            rad = xsec[0].distance(pt_tan)
+            cir = Circle(Plane(xsec[0],z_axis),rad)
+            if calc_extras:
+                pt_tan_b = cir.plane.origin + Vec(cir.plane.origin,cir_b.plane.origin).normalized(cir.rad)
+                return cir,pt_tan,pt_tan_b
+            return cir
+        else:
+            raise GeometricError("Circle.mutually_tangent encountered a problem performing an intersection operation.")  
+    
+
+
+
 
       
 class Arc(HasBasis):
@@ -95,7 +136,7 @@ class Arc(HasBasis):
     def origin(self):
         return self._basis.origin
         
-    def __repr__(self): return "arc[{0},r:{1},sweep angle{2}]".format(self.origin,self.radius,self.sweep_angle)
+    def __repr__(self): return "arc[{0},r:{1},sweep angle{2}]".format(self.origin,self.rad,self.sweep_angle)
     
     
     # Returns an arc using a start point, a sweep point and a tangent to the arc at the start point
