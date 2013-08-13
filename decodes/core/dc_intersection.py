@@ -204,13 +204,13 @@ class Intersector(object):
                 if xsec.of(pline.edges[n],plane):
                     self.append(xsec[0])
                     self.edges.append(n)
-                    self.verts.append(-1)
+                    self.verts.append(False)
                     ret = True
             if pts[n].side == 0 :
                 #if self.log is None: self.log = ""
                 #self.log += "Found an intersection at a polyline vertex %s\n"%(n)
                 self.append(pts[n])
-                self.edges.append(-1)
+                self.edges.append(False)
                 self.verts.append(n)
                 ret = True
 
