@@ -151,3 +151,68 @@ class TranslationalSurface(ClassicalSurface):
              pass
 
         return super(ClassicalSurface,self).isocurve(u_val,v_val)
+
+class Torus(ClassicalSurface):
+    pi = math.pi
+    
+    def __init__(self, cs, major_radius, minor_radius, dom_u, dom_v, tol_u=None, tol_v=None,param_type=None):
+        self.cs = cs
+        self.major_radius = major_radius
+        self.minor_radius = minor_radius
+        self.param_type = param_type
+        def func(u,v):
+            if self.param_type == 1 or self.param_type == 2 or self.param_type == 3:
+                #Set v to phi which determines 2 V-circles.  Choose one and let
+                #u traverse pts on that circle
+                phi = v
+                cos_gamma = -self.minor_radius*math.sin(phi)/(self.major_radius*self.sin_alpha)
+                if (phi > 0.5*math.pi) and (phi < 1.5*math.pi):
+                    psi_v1 = math.atan2(-self.major_radius*math.sqrt(1-cos_gamma*cos_gamma) + self.minor_radius, self.major_radius*self.cos_alpha*cos_gamma)
+                else:
+                    psi_v1 = math.atan2(self.major_radius*math.sqrt(1-cos_gamma*cos_gamma) + self.minor_radius, self.major_radius*self.cos_alpha*cos_gamma)
+                #Villarceau #1  (t = "gamma")
+                if self.param_type == 1: return self.func_v1(u, psi_v1)
+                #Villarceau #2  (t = "gamma")
+                elif self.param_type == 2:return self.func_v2(u, psi_v1)
+                else: return self.func_v3(u, psi_v1)
+            else:
+                rho = self.major_radius + self.minor_radius*math.cos(v)
+                pt_out = self.cs.eval(Point(rho*math.cos(u), rho*math.sin(u), self.minor_radius*math.sin(v)))
+                return pt_out
+        super(Torus,self).__init__(func,dom_u,dom_v,tol_u,tol_v)
+        
+    @property
+    def alpha(self): return math.asin(self.minor_radius/self.major_radius)
+        
+    @property
+    def cos_alpha(self): return math.cos(self.alpha)
+        
+    @property
+    def sin_alpha(self): return math.sin(self.alpha)
+        
+    #Villarceau #1  (t = "gamma")
+    def func_v1(self, t, psi):
+        x1 = self.major_radius*self.cos_alpha*math.cos(t)
+        y1 = self.major_radius*math.sin(t) + self.minor_radius
+        z1 = -self.major_radius*self.sin_alpha*math.cos(t)
+        rot_psi = Xform.rotation(axis = Vec(0,0,1), angle = -psi)
+        pt_out = self.cs.eval(Point(x1,y1,z1)*rot_psi)
+        return pt_out
+    
+    #Villarceau #2  (t = "gamma")
+    def func_v2(self, t, psi):
+        x = self.major_radius*self.cos_alpha*math.cos(t)
+        y = self.major_radius*math.sin(t) - self.minor_radius
+        z = -self.major_radius*self.sin_alpha*math.cos(t)
+        rot_psi = Xform.rotation(axis = Vec(0,0,1), angle = -psi)
+        pt_out = self.cs.eval(Point(x,y,z)*rot_psi)
+        return pt_out
+    
+    #Villarceau #2  (t = "gamma")
+    def func_v3(self, t, psi):
+        x = self.major_radius*self.cos_alpha*math.cos(t)
+        y = self.major_radius*math.sin(t) - self.minor_radius
+        z = -self.major_radius*self.sin_alpha*math.cos(t)
+        rot_psi = Xform.rotation(axis = Vec(0,0,1), angle = -psi)
+        pt_out = self.cs.eval(Point(x,y,z)*rot_psi)
+        return pt_out
