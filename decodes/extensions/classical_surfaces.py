@@ -161,7 +161,7 @@ class Torus(ClassicalSurface):
         self.minor_radius = minor_radius
         self.param_type = param_type
         def func(u,v):
-            if self.param_type == 1 or self.param_type == 2 or self.param_type == 3:
+            if self.param_type == 1 or self.param_type == 2:
                 #Set v to phi which determines 2 V-circles.  Choose one and let
                 #u traverse pts on that circle
                 phi = v
@@ -173,8 +173,8 @@ class Torus(ClassicalSurface):
                 #Villarceau #1  (t = "gamma")
                 if self.param_type == 1: return self.func_v1(u, psi_v1)
                 #Villarceau #2  (t = "gamma")
-                elif self.param_type == 2:return self.func_v2(u, psi_v1)
-                else: return self.func_v3(u, psi_v1)
+                else:return self.func_v2(u, psi_v1)
+                
             else:
                 rho = self.major_radius + self.minor_radius*math.cos(v)
                 pt_out = self.cs.eval(Point(rho*math.cos(u), rho*math.sin(u), self.minor_radius*math.sin(v)))
@@ -208,11 +208,3 @@ class Torus(ClassicalSurface):
         pt_out = self.cs.eval(Point(x,y,z)*rot_psi)
         return pt_out
     
-    #Villarceau #2  (t = "gamma")
-    def func_v3(self, t, psi):
-        x = self.major_radius*self.cos_alpha*math.cos(t)
-        y = self.major_radius*math.sin(t) - self.minor_radius
-        z = -self.major_radius*self.sin_alpha*math.cos(t)
-        rot_psi = Xform.rotation(axis = Vec(0,0,1), angle = -psi)
-        pt_out = self.cs.eval(Point(x,y,z)*rot_psi)
-        return pt_out
