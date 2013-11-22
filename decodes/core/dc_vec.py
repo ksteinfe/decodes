@@ -147,8 +147,7 @@ class Vec(Geometry):
         else : 
             if isinstance(other, Vec) : return self.cross(other)
             return Vec(self.x * other, self.y * other, self.z * other)
-
-
+    
 
     def __repr__(self): return "vec[{0},{1},{2}]".format(self.x,self.y,self.z)
     def to_tuple(self): 
