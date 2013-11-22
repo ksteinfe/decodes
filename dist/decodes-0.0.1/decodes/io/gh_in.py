@@ -1,6 +1,6 @@
 from .. import *
 from ..core import *
-from ..core import color, base, vec, point, cs, line, mesh, pgon, xform, intersection
+from ..core import dc_color, dc_base, dc_vec, dc_point, dc_cs, dc_line, dc_mesh, dc_pgon, dc_xform, dc_intersection
 from .rhino_in import *
 if VERBOSE_FS: print "gh_in loaded"
 
@@ -43,6 +43,18 @@ class GrasshopperIn():
             return Segment(Point(gh_in.PointAtStart.X,gh_in.PointAtStart.Y,gh_in.PointAtStart.Z),Point(gh_in.PointAtEnd.X,gh_in.PointAtEnd.Y,gh_in.PointAtEnd.Z))
         elif type(gh_in) is System.Drawing.Color : 
             return Color(float(gh_in.R)/255,float(gh_in.G)/255,float(gh_in.B)/255)
+
+        elif type(gh_in)is rg.Circle :
+            pln = Plane( from_rgpt(gh_in.Center), from_rgvec(gh_in.Plane.Normal))
+            return Circle(pln,gh_in.Radius)
+            
+        elif type(gh_in)is rg.Arc :
+            x_axis = Vec(from_rgpt(gh_in.Center),from_rgpt(gh_in.StartPoint))
+            y_axis = from_rgvec(gh_in.Plane.Normal).cross(x_axis)
+            cs = CS( from_rgpt(gh_in.Center), x_axis, y_axis )
+            swp_ang = abs(gh_in.EndAngle - gh_in.StartAngle)
+            return Arc(cs,gh_in.Radius,swp_ang)
+
         elif type(gh_in) is rg.PolylineCurve: 
             ispolyline, gh_polyline = gh_in.TryGetPolyline()
             if (ispolyline) : return from_rgpolyline(gh_polyline)

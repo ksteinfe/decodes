@@ -5,7 +5,7 @@ from decodes.io.pyautocad import *
 
 acad = Autocad(False,  True)
 
-outie = dc.makeOut(dc.Outies.ACAD, "wayout")
+outie = dc.make_out(dc.Outies.ACAD, "wayout")
 
 # Surface Parameters
 rad_0 = 0.4

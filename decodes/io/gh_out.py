@@ -231,7 +231,7 @@ gh_outies = []
 for output in outputs :
         if output.Name != "console":
                 if not "_prop" in output.NickName :
-                    vars()[output.NickName] = makeOut(Outies.Grasshopper,output.NickName)
+                    vars()[output.NickName] = make_out(Outies.Grasshopper,output.NickName)
                     gh_outies.append(vars()[output.NickName])
 		
 """

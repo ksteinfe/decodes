@@ -1,6 +1,6 @@
 from .. import *
 from ..core import *
-from ..core import base, color
+from ..core import dc_base, dc_color
 
 if VERBOSE_FS: print "outie loaded"
 import copy, collections
@@ -23,9 +23,11 @@ class Outie(object):
         if self._allow_foreign : 
             self.geom.append(copy.deepcopy(ngeom)) # if we allow foreigners, just put in whatever they gave us
         else:
+            if ngeom is None : return
             if isinstance(ngeom, (Geometry) ) :
                 if isinstance(ngeom, (HasBasis) ) and ngeom.do_translate : ngeom = ngeom.basis_applied()
-                self.geom.append(copy.deepcopy(ngeom))
+#                self.geom.append(copy.deepcopy(ngeom))
+                self.geom.append(ngeom)
             elif isinstance(ngeom, collections.Iterable) : 
                 for g in ngeom : self.put(g)
             else : 

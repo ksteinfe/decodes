@@ -4,7 +4,7 @@ from decodes.core import *
 
 def main():
     print 'hello mains'
-    outie = makeOut(outies.Rhino, "linetest")
+    outie = make_out(outies.Rhino, "linetest")
     
     print "constructors"
     p = Point(1,1)

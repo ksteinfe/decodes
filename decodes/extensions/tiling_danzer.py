@@ -287,7 +287,7 @@ class DzTileK(DzTile):
 # This section may be deleted when file distributed
 
 def DanzerAxiom():
-    outie = dc.makeOut(dc.outies.Rhino, "axiom")
+    outie = dc.make_out(dc.outies.Rhino, "axiom")
     outie.iconscale = 0.1
     ta = DzTileA(xf=Xform.translation(Vec(1,0,0)),rlvl=1)
     tb = DzTileB(xf=Xform.translation(Vec(2,0,0)),rlvl=1)
@@ -351,15 +351,15 @@ def inflationK(out_0,out_1,out_2):
 # script instead of being used as a module by some other python script
 # This allows us to use the module which ever way we want.
 if __name__ == '__main__' :
-        out_0 = dc.makeOut(dc.outies.Rhino, "0")
+        out_0 = dc.make_out(dc.outies.Rhino, "0")
         out_0.set_color(0,0,0)
         out_0.iconscale = 0.2
         
-        out_1 = dc.makeOut(dc.outies.Rhino, "1")
+        out_1 = dc.make_out(dc.outies.Rhino, "1")
         out_1.set_color(0.5,0.5,1.0)
         out_1.iconscale = 0.1
     
-        out_2 = dc.makeOut(dc.outies.Rhino, "2")
+        out_2 = dc.make_out(dc.outies.Rhino, "2")
         out_2.set_color(1.0,0.5,1.0)
         out_2.iconscale = 0.05    
         

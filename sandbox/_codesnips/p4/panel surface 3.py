@@ -9,11 +9,11 @@ def main():
   given a mesh with only quad faces, we will generate a simple pyramid-like 
   component to take the place of each mesh face.
   """
-  outie = fp.makeOut(fp.outies.Rhino, "component")
+  outie = fp.make_out(fp.outies.Rhino, "component")
   outie.set_color(Color.RGB(0.75,0.5,1.0))
   
   # get user input
-  innie = fp.makeIn(fp.innies.Rhino)
+  innie = fp.make_in(fp.innies.Rhino)
   mymesh = innie.get_mesh()
   pathPrefix = "solarIncidence/"
   path = pathPrefix + "USA_CA_San.Francisco.Intl.AP.724940_TMY3.epw"

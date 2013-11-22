@@ -6,7 +6,7 @@ import getopt
 TOLERANCE = 1e-9
 BIG_FLOAT = 1e38
 
-outie = fp.makeOut(fp.outies.Rhino, "delaunay-fortune")
+outie = fp.make_out(fp.outies.Rhino, "delaunay-fortune")
 
 #------------------------------------------------------------------
 class Context( object ):

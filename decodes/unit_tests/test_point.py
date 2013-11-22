@@ -95,7 +95,7 @@ print "sort pts:  %s!" % [p.name for p in pts]
 #pts = [Point.random() for n in range(100)]
 #pts.sort()
 #rs.AddPolyline([p.to_tuple() for p in pts])
-#redoutie = dc.makeOut(dc.outies.Rhino, "redstuff")
+#redoutie = dc.make_out(dc.outies.Rhino, "redstuff")
 #redoutie.set_color(1.0,0,0)
 #redoutie.put(Point(pts[0]))
 #redoutie.draw()

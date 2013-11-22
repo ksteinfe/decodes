@@ -4,8 +4,8 @@ from decodes.core import *
 import math, copy
 
 
-outie = dc.makeOut(dc.outies.Rhino, "basistest")
-outie_red = dc.makeOut(dc.outies.Rhino, "redstuff")
+outie = dc.make_out(dc.outies.Rhino, "basistest")
+outie_red = dc.make_out(dc.outies.Rhino, "redstuff")
 outie_red.set_color(1.0,0,0)
 
 print "CS basis"

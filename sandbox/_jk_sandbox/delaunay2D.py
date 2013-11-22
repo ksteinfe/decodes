@@ -3,7 +3,7 @@ from fieldpack import *
 import math
 TOL = 1e-9
 
-outie = fp.makeOut(fp.outies.Rhino, "delaunay2Dtest")
+outie = fp.make_out(fp.outies.Rhino, "delaunay2Dtest")
 
     
 class Triangle():

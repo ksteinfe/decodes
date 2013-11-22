@@ -3,7 +3,7 @@ from fieldpack import *
 
 
 def main():
- outie = fp.makeOut(fp.outies.Rhino, "wayout")
+ outie = fp.make_out(fp.outies.Rhino, "wayout")
  
  epw = fake_epw_data()
  print epw

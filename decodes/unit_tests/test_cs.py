@@ -2,7 +2,7 @@
 import decodes.core as dc
 from decodes.core import *
 
-outie = dc.makeOut(dc.outies.Rhino, "wayout")
+outie = dc.make_out(dc.outies.Rhino, "wayout")
 
 o = Point(0,0,10)
 vx = Vec(0,0,10)

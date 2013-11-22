@@ -2,7 +2,7 @@ import decodes.core as dc
 from decodes.core import *
 
 def main():
-    outie = dc.makeOut(dc.outies.Rhino, "wayout")
+    outie = dc.make_out(dc.outies.Rhino, "wayout")
     epw = fake_epw_data()
     minHr = 0
     maxHr = 8760

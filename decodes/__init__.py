@@ -12,7 +12,7 @@ class Outies:
 
 
 # keep this up to date with what outies we support
-def makeOut(outtype, name="untitled", path=False, **kargs):
+def make_out(outtype, name="untitled", path=False, **kargs):
     """This function constructs a new outie of the given type.
     
         :param outtype: The type of outie to create
@@ -51,7 +51,7 @@ def makeOut(outtype, name="untitled", path=False, **kargs):
         return False
 
 # keep this up to date with what outies we support
-def makeIn(intype):
+def make_in(intype):
     if intype == innies.Rhino:
         return innies.RhinoIn()
     if intype == innies.Foo:

@@ -11,7 +11,7 @@ def recurse(tiles,rlvl=0):
     #for tile in tiles : outie.put(tile.draw()) 
     return [tile.draw() for tile in tiles]
 
-outie = fp.makeOut(fp.outies.Rhino, "tiles")
+outie = fp.make_out(fp.outies.Rhino, "tiles")
 outie.put( recurse([dt.DzTileK()]) ) 
 outie.draw()
 

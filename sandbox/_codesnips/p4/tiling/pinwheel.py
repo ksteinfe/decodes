@@ -9,7 +9,7 @@ def main():
  attractorTiling()
 
 def attractorTiling():
-  outie = fp.makeOut(fp.outies.Rhino, "tiles")
+  outie = fp.make_out(fp.outies.Rhino, "tiles")
   attPt = Point(0.666,0.333)
   
   maxRecursion = 6
@@ -33,7 +33,7 @@ def attractorTiling():
 
 
 def simpleTiling():
-  outie = fp.makeOut(fp.outies.Rhino, "tiles")
+  outie = fp.make_out(fp.outies.Rhino, "tiles")
   
   maxRecursion = 3
   def recurse(tiles,rlvl=0):

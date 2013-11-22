@@ -1,6 +1,6 @@
 from .. import *
 from ..core import *
-from ..core import base, vec, point, cs, line, mesh, pgon
+from ..core import dc_base, dc_vec, dc_point, dc_cs, dc_line, dc_mesh, dc_pgon
 from . import outie
 if VERBOSE_FS: print "svg_out loaded"
 
@@ -49,7 +49,7 @@ class SVGOut(outie.Outie):
         # here we sort out what type of geometry we're dealing with, and call the proper draw functions
         # MUST LOOK FOR CHILD CLASSES BEFORE PARENT CLASSES (points before vecs)
         if isinstance(g,Curve): g = g.surrogate
-        
+
         g = self._flip_geom(g)
 
         if isinstance(g, Point) : return self._drawPoint(g)

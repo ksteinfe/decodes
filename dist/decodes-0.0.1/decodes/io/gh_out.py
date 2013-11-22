@@ -1,6 +1,6 @@
 from .. import *
 from ..core import *
-from ..core import base, vec, point, cs, line, pline, mesh, pgon
+from ..core import dc_base, dc_vec, dc_point, dc_cs, dc_line, dc_pline, dc_mesh, dc_pgon
 from .rhino_out import *
 from . import outie
 if VERBOSE_FS: print "gh_out loaded"
@@ -12,7 +12,8 @@ import Rhino.Geometry as rg
 
 class GrasshopperOut(outie.Outie):
     """outie for pushing stuff to grasshopper"""
-    
+    raw_types = ["Curve","Surface"]
+
     def __init__(self, name):
         super(GrasshopperOut,self).__init__()
         self._allow_foreign = True
@@ -74,10 +75,12 @@ class GrasshopperOut(outie.Outie):
                 else : self._add_branch(i,tree,tree_p, npath)
             return True
         
-        if isinstance(g, Plane) : 
-            tree.Add(self._drawPlane(g),path)
+        # ADD ANY RAW TYPES DIRECTLY
+        if any(p in str(type(g)) for p in GrasshopperOut.raw_types) : 
+            tree.Add(g,path)
             tree_p.Add(extract_props(g), path)
             return True
+
         if isinstance(g, Point) : 
             tree.Add(self._drawPoint(g),path)
             tree_p.Add(extract_props(g), path)
@@ -105,7 +108,22 @@ class GrasshopperOut(outie.Outie):
             tree.Add(self._drawPLine(g),path)
             tree_p.Add(extract_props(g), path)
             return True
-        
+
+        if isinstance(g, Circle) : 
+            tree.Add(self._drawCircle(g),path)
+            tree_p.Add(extract_props(g), path)
+            return True
+            
+        if isinstance(g, Arc) : 
+            tree.Add(self._drawArc(g),path)
+            tree_p.Add(extract_props(g), path)
+            return True
+
+        if isinstance(g, Plane) : 
+            tree.Add(self._drawPlane(g),path)
+            tree_p.Add(extract_props(g), path)
+            return True
+
         if isinstance(g, PGon) : 
             tree.Add(self._drawPGon(g),path)
             tree_p.Add(extract_props(g), path)
@@ -133,7 +151,6 @@ class GrasshopperOut(outie.Outie):
         return rg.Vector3d(vec.x,vec.y,vec.z)
 
     def _drawPoint(self, pt):
-        pt = pt.basis_applied()
         return rg.Point3d(pt.x,pt.y,pt.z)
         
     def _drawPlane(self, pln):
@@ -161,6 +178,12 @@ class GrasshopperOut(outie.Outie):
     
     def _drawPLine(self, pline):
         return to_rgpolyline(pline)
+
+    def _drawCircle(self, circ):
+        return to_rgcircle(circ)
+        
+    def _drawArc(self, circ):
+        return to_rgarc(circ)
             
     def _drawPGon(self, pgon):
         return to_rgpolyline(pgon)
@@ -170,8 +193,8 @@ class GrasshopperOut(outie.Outie):
 
     def _drawCS(self, cs):
         o = rg.Point3d(cs.origin.x,cs.origin.y,cs.origin.z)
-        x = rg.Vector3d(cs.xAxis.x,cs.xAxis.y,cs.xAxis.z) 
-        y = rg.Vector3d(cs.yAxis.x,cs.yAxis.y,cs.yAxis.z) 
+        x = rg.Vector3d(cs.x_axis.x,cs.x_axis.y,cs.x_axis.z) 
+        y = rg.Vector3d(cs.y_axis.x,cs.y_axis.y,cs.y_axis.z) 
         return rg.Plane(o,x,y)
 
     def _drawColor(self, c): 

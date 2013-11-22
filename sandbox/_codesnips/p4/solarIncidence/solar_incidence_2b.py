@@ -11,7 +11,7 @@ def main():
   calculates the amount of radition striking the plane
   and produces a simple visualization.
   """
-  outie = fp.makeOut(fp.outies.Rhino, "solar incidence")
+  outie = fp.make_out(fp.outies.Rhino, "solar incidence")
   outie.set_color(Color(0.75))
   
   # getting user input
