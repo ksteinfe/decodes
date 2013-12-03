@@ -8,7 +8,6 @@ import scriptcontext
 import Rhino
 import System.Guid
 
-
 class RhinoOut(outie.Outie):
     """outie for pushing stuff to rhino"""
     
@@ -50,7 +49,11 @@ class RhinoOut(outie.Outie):
             return self._drawPoint(g,obj_attr)
         if isinstance(g, Vec) : 
             return self._drawVec(g,obj_attr)
-        
+        if isinstance(g, PLine) : 
+            return self._drawPline(g,obj_attr)
+        if isinstance(g, PGon) : 
+            return self._drawPGon(g,obj_attr)
+		
         return False
 
     def _drawVec(self, vec, obj_attr):
@@ -59,7 +62,7 @@ class RhinoOut(outie.Outie):
         return guid!=System.Guid.Empty
 
     def _drawPoint(self, pt, obj_attr):
-        pt = pt.basis_applied()
+        #pt = rg.Point3d(pt.X,pt.Y,pt.Z)
         guid = scriptcontext.doc.Objects.AddPoint(to_rgpt(pt),obj_attr)
         return guid!=System.Guid.Empty
 
@@ -88,7 +91,20 @@ class RhinoOut(outie.Outie):
             p = sDocObj.AddPoint(to_rgpt(ln.spt),obj_attr)
             l = sDocObj.AddLine(to_rgpt(ln.spt-ln.vec/2),to_rgpt(ln.spt+ln.vec/2),obj_attr)
             scriptcontext.doc.Groups.Add([p,l])
-                
+
+    def _drawPline(self, other, obj_attr):
+        verts = [Rhino.Geometry.Point3d(pt.x,pt.y,pt.z) for pt in other.pts]
+        new_pline = Rhino.Geometry.Polyline(verts)
+        guid = scriptcontext.doc.Objects.AddPolyline(new_pline,obj_attr)
+        return guid!=System.Guid.Empty
+             
+    def _drawPGon(self, other, obj_attr):
+        verts = [Rhino.Geometry.Point3d(pt.x,pt.y,pt.z) for pt in other.pts]
+        verts.append(verts[0])
+        new_pgon = Rhino.Geometry.Polyline(verts)
+        guid = scriptcontext.doc.Objects.AddPolyline(new_pgon,obj_attr)
+        return guid!=System.Guid.Empty
+             
     def _drawCS(self, cs, obj_attr):
         sDocObj = scriptcontext.doc.Objects
         
@@ -133,7 +149,6 @@ class RhinoOut(outie.Outie):
 def to_rgvec(vec):
     return Rhino.Geometry.Vector3d(vec.x,vec.y,vec.z)
     
-
 def to_rgpt(pt):
     return Rhino.Geometry.Point3d(pt.x,pt.y,pt.z)
     
@@ -141,7 +156,6 @@ def to_rgpolyline(other):
     verts = [to_rgpt(pt) for pt in other.pts]
     if isinstance(other, PGon) : verts.append(verts[0])
     return Rhino.Geometry.Polyline(verts)
-
 
 def to_rgcircle(circ):
     rh_plane = to_rgplane(circ.plane)
