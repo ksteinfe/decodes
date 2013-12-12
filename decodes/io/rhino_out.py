@@ -189,7 +189,7 @@ def makelayer(layer_name):
         if VERBOSE_FS: print "already have a layer called ", layer_name
         return layer_index
         
-    layer_index = scriptcontext.doc.Layers.Add(layer_name, System.Drawing.Color.Black)
+    layer_index = scriptcontext.doc.Layers.Add(layer_name, System.Drawing.Color.FromArgb(0,0,0))
     return layer_index
 
 def interpolated_curve(points):
