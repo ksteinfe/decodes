@@ -6,6 +6,8 @@ Contents:
 
 .. toctree::
    :maxdepth: 2
+   
+   base
 
 .. automodule:: decodes
    :members: 
@@ -19,137 +21,131 @@ This is something I want to say that is not in the docstring.
    :members: 
 
 
-base.py
---------------------------
-.. automodule:: decodes.core.base
-   :members: 
-   :special-members:
-   :private-members:
-   
-color.py
+
+dc_color.py
 --------------------------   
-.. automodule:: decodes.core.color
+.. automodule:: decodes.core.dc_color
    :members: 
    :special-members:
    :private-members:
    
 
 
-interval.py
+dc_interval.py
 --------------------------   
-.. automodule:: decodes.core.interval
+.. automodule:: decodes.core.dc_interval
    :members: 
    :special-members:
    :private-members:
    
 
 
-vec.py
+dc_vec.py
 --------------------------
-.. automodule:: decodes.core.vec
+.. automodule:: decodes.core.dc_vec
    :members: 
    :special-members:
    :private-members:
 
-point.py
+dc_point.py
 --------------------------  
-.. automodule:: decodes.core.point
+.. automodule:: decodes.core.dc_point
    :members: 
    :special-members:
    :private-members:
 
-mesh.py
+dc_mesh.py
 --------------------------   
-.. automodule:: decodes.core.mesh
+.. automodule:: decodes.core.dc_mesh
    :members: 
    :special-members:
    :private-members:
    
 
-pline.py
+dc_pline.py
 --------------------------   
-.. automodule:: decodes.core.pline
+.. automodule:: decodes.core.dc_pline
    :members: 
    :special-members:
    :private-members:
    
 
-pgon.py
+dc_pgon.py
 --------------------------   
-.. automodule:: decodes.core.pgon
+.. automodule:: decodes.core.dc_pgon
    :members: 
    :special-members:
    :private-members:
    
 
-cs.py
+dc_cs.py
 --------------------------   
-.. automodule:: decodes.core.cs
+.. automodule:: decodes.core.dc_cs
    :members: 
    :special-members:
    :private-members:
    
 
-line.py
+dc_line.py
 --------------------------   
-.. autoclass:: decodes.core.line.Line
+.. autoclass:: decodes.core.dc_line.Line
    :members: 
    :special-members:
    :private-members:
    
 
-.. autoclass:: decodes.core.line.Segment
+.. autoclass:: decodes.core.dc_line.Segment
    :members: 
    :special-members:
    :private-members:
    
 
-.. autoclass:: decodes.core.line.Ray
+.. autoclass:: decodes.core.dc_line.Ray
    :members: 
    :special-members:
    :private-members:
    
 
-.. autoclass:: decodes.core.line.LinearEntity
+.. autoclass:: decodes.core.dc_line.LinearEntity
    :members: 
    :special-members:
    :private-members:
    
 
-xform.py
+dc_xform.py
 --------------------------   
-.. automodule:: decodes.core.xform
+.. automodule:: decodes.core.dc_xform
    :members: 
    :special-members:
    :private-members:
    
 
-intersection.py
+dc_intersection.py
 --------------------------   
-.. automodule:: decodes.core.intersection
+.. automodule:: decodes.core.dc_intersection
    :members: 
    :special-members:
    :private-members:
    
-curve.py
+dc_curve.py
 --------------------------   
-.. automodule:: decodes.core.curve
+.. automodule:: decodes.core.dc_curve
    :members: 
    :special-members:
    :private-members:
 
 
-surface.py
+dc_surface.py
 --------------------------   
-.. automodule:: decodes.core.surface
+.. automodule:: decodes.core.dc_surface
    :members: 
    :special-members:
    :private-members:
 
 
-plane.py
+dc_plane.py
 --------------------------   
-.. automodule:: decodes.core.plane
+.. automodule:: decodes.core.dc_plane
    :members: 
    :special-members:
    :private-members:

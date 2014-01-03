@@ -219,7 +219,10 @@ class Interval():
     
     def __repr__(self): return "ival[{0},{1}]".format(self.a,self.b)
 
-
+    @staticmethod
+    def encompass(values):
+        pass
+        return Interval()
 
     @staticmethod
     def remap(val, source_interval, target_interval=None, limited=False): 
