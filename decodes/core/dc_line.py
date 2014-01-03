@@ -425,3 +425,22 @@ class VecField(PixelGrid):
             for n in range(len(cpts)):
                 if cpts[n] == sample_pt : return vecs[n]
             raise GeometricError("sample point coincident with center point: %s"%(sample_pt))
+            
+    def spin_pt(self,a,b=None):
+        try:
+            spin_pt = Point(a.x,a.y)
+        except:
+            spin_pt = Point(a,b)
+            
+        import math as m # import math library
+        # for every x value in the vector field:
+        for x in range(self.px_width):
+            # for every y value in the vector field
+            for y in range(self.px_height):
+                # create a new spin vector
+                v_x = y*(m.sin(spin_pt.y) + m.cos(spin_pt.x)) # vector x-component
+                v_y = x*(m.sin(spin_pt.x) - m.cos(spin_pt.y)) # vector y-component
+                new_vec = Vec(v_x, v_y) # construct new spin vector
+                # set vector at x,y to new spin vector
+                self.set(x,y,new_vec)
+            
