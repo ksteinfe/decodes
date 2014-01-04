@@ -156,8 +156,12 @@ class Bounds(Geometry):
     def encompass(pts = [Point()]):
         ix = Interval.encompass([p.x for p in pts])
         iy = Interval.encompass([p.y for p in pts])
-        return Bounds(ival_x = ix,ival_y = iy)
-        
+        try:
+            iz = Interval.encompass([p.z for p in pts])
+            return Bounds(ival_x = ix, ival_y = iy, ival_z = iz)
+        except:
+            return Bounds(ival_x = ix, ival_y = iy)
+                    
         
     @staticmethod
     def unit_square():
@@ -240,3 +244,10 @@ class QuadTree():
         else :
             for child in self.children: ret_pts.extend(child.pts_in_bounds(bounds))
         return ret_pts
+        
+    @staticmethod
+    def encompass(capacity = 4, pts = [Point()]):
+        q = QuadTree(capacity, Bounds.encompass(pts))
+        for p in pts : q.append(p)
+        return q
+        
