@@ -220,9 +220,11 @@ class Interval():
     def __repr__(self): return "ival[{0},{1}]".format(self.a,self.b)
 
     @staticmethod
-    def encompass(values):
-        pass
-        return Interval()
+    def encompass(values = [0]):
+        """
+        Returns an interval defined by the minumum and maximum of a list of values
+        """
+        return Interval(min(values), max(values))
 
     @staticmethod
     def remap(val, source_interval, target_interval=None, limited=False): 

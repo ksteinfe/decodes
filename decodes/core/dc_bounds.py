@@ -153,6 +153,13 @@ class Bounds(Geometry):
 
 
     @staticmethod
+    def encompass(pts = [Point()]):
+        ix = Interval.encompass([p.x for p in pts])
+        iy = Interval.encompass([p.y for p in pts])
+        return Bounds(ival_x = ix,ival_y = iy)
+        
+        
+    @staticmethod
     def unit_square():
         return Bounds(ival_x=Interval(),ival_y=Interval())
 
