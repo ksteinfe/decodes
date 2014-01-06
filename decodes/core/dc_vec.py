@@ -11,7 +11,7 @@ class Vec(Geometry):
     """
 
     def __init__(self, a=0, b=0, c=0):
-        """Vector Constructor
+        """Vector Constructor. 
 
             :param a: a value.
             :type a: float
@@ -452,9 +452,7 @@ class Vec(Geometry):
         )
 
     def angle(self,other):
-        """
-        Returns the angle in radians between this vector and the other vector 
-        return value is constrained to the range [-PI,PI].
+        """Returns the angle in radians between this vector and the other vector return value is constrained to the range [-PI,PI].
         
             :param other: Second vector to for angle calculation.
             :type other: Vec

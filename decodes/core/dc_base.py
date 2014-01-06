@@ -42,7 +42,7 @@ class Geometry(object):
     def set_color(self,a,b=None,c=None):
         """Sets the geometry's color
 
-            :param a: Color object to set the geometry's color, or number value (between 0 and 1) to create a new color. If only a is passed as a float, the color will be greyscale.
+            :param a: Color object to set the geometry's color, or number value (between 0 and 1) to create a new color. If only a is passed as a float, the color will be grayscale.
             :type a: Color or float
             :param b: If no color object is passed, the G value in an RGB scale.
             :type b: float
@@ -73,7 +73,7 @@ class Geometry(object):
             :param str: A str with the new geometry's name.
             :type str: str
             :result: Sets the geometry's name.
-            :rtype: Geometry
+            :rtype: str
         """
         if not hasattr(self, 'props') : self.props = {}
         self.props['name'] = str
@@ -83,8 +83,8 @@ class Geometry(object):
 
             :param num: A number with the new geometry's weight.
             :type num: float
-            :result: Sets the geometry's name.
-            :rtype: Geometry
+            :result: Sets the geometry's weight.
+            :rtype: float
         """
         if not hasattr(self, 'props') : self.props = {}
         self.props['weight'] = num
@@ -92,7 +92,7 @@ class Geometry(object):
     def set_fill(self,a,b=None,c=None):
         """Sets the geometry's fill
 
-            :param a: Color object to set the geometry's fill, or number value (between 0 and 1) to create a new color. If only a is passed as a float, the color will be greyscale.
+            :param a: Color object to set the geometry's fill, or number value (between 0 and 1) to create a new color. If only a is passed as a float, the color will be grayscale.
             :type a: Color or float
             :param b: If no color object is passed, the G value in an RGB scale.
             :type b: float
@@ -127,7 +127,7 @@ class Geometry(object):
 
 class Basis(object):
     """
-    A base class for anything that wants to call itself a basis. Bases must impliment the folloiwng methods:
+    A base class for anything that wants to call itself a basis. Bases must implement the following methods:
     """
     
     def eval(self,a,b=0,c=0):
@@ -144,17 +144,25 @@ class Basis(object):
 
 
 class HasBasis(Geometry):
-    """
-    A base class for anything that wants to define a basis for itself. Bases must implement the following methods:
+    """A base class for anything that wants to define a basis for itself. Bases must implement the following methods:
     """
     
     @property
-    def basis(self): 
+    def basis(self):
+        """Identifies the defined basis. If no basis is defined, returns None.
+        """    
         if self.is_baseless: return None
         return self._basis
 
     @basis.setter
-    def basis(self, basis): self._basis = basis
+    def basis(self, basis): 
+        """Sets basis.
+        
+            :param basis: Defined basis.
+            :result: Defined basis.
+            :rtype: Basis
+        """
+        self._basis = basis
 
     @property
     def is_baseless(self):
@@ -164,20 +172,20 @@ class HasBasis(Geometry):
 
 
     def basis_applied(self, copy_children=True):
-        """Returns a new object with basis applied. Copies of are created of any child objects by default. Take care to copy over props if appropriate.
+        """Returns a new object with basis applied. Copies are created of any child objects by default. Take care to copy over props if appropriate.
             
             :result: Object with basis applied.
             :rtype: Basis
         """
-        raise NotImplementedError("basis_applied not implimented.    I am a BAD HasBasis!")
+        raise NotImplementedError("basis_applied not implemented.    I am a BAD HasBasis!")
     
     def basis_stripped(self, copy_children=True): 
-        """Returns a new object stripped of any basis. Copies of are created of any child objects by default. Take care to copy over props if appropriate.
+        """Returns a new object stripped of any basis. Copies are created of any child objects by default. Take care to copy over props if appropriate.
             
             :result: Object with basis applied.
             :rtype: Basis
         """ 
-        raise NotImplementedError("basis_stripped not implimented.    I am a BAD HasBasis!")
+        raise NotImplementedError("basis_stripped not implemented.    I am a BAD HasBasis!")
 
 
 

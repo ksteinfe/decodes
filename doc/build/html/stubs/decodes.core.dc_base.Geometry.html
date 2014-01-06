@@ -24,10 +24,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="decodes .1 documentation" href="../index.html" />
-    <link rel="up" title="dc_base.py" href="../dc_base.html" />
-    <link rel="next" title="HasBasis" href="decodes.core.dc_base.HasBasis.html" />
-    <link rel="prev" title="Basis" href="decodes.core.dc_base.Basis.html" /> 
+    <link rel="top" title="decodes .1 documentation" href="../index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -36,14 +33,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="decodes.core.dc_base.HasBasis.html" title="HasBasis"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="decodes.core.dc_base.Basis.html" title="Basis"
-             accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
-          <li><a href="../dc_base.html" accesskey="U">dc_base.py</a> &raquo;</li> 
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -79,7 +69,18 @@
 <dl class="method">
 <dt id="decodes.core.dc_base.Geometry.get_color">
 <tt class="descname">get_color</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_base.Geometry.get_color" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Gets the geometry&#8217;s color</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Gets the geometry&#8217;s color.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Color</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_base.Geometry.ixform">
@@ -95,7 +96,7 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>a</strong> (<em>Color or float</em>) &#8211; Color object to set the geometry&#8217;s color, or number value (between 0 and 1) to create a new color. If only a is passed as a float, the color will be greyscale.</li>
+<li><strong>a</strong> (<em>Color or float</em>) &#8211; Color object to set the geometry&#8217;s color, or number value (between 0 and 1) to create a new color. If only a is passed as a float, the color will be grayscale.</li>
 <li><strong>b</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; If no color object is passed, the G value in an RGB scale.</li>
 <li><strong>c</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; If no color object is passed, the B value in an RGB scale.</li>
 </ul>
@@ -120,7 +121,7 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>a</strong> (<em>Color or float</em>) &#8211; Color object to set the geometry&#8217;s fill, or number value (between 0 and 1) to create a new color. If only a is passed as a float, the color will be greyscale.</li>
+<li><strong>a</strong> (<em>Color or float</em>) &#8211; Color object to set the geometry&#8217;s fill, or number value (between 0 and 1) to create a new color. If only a is passed as a float, the color will be grayscale.</li>
 <li><strong>b</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; If no color object is passed, the G value in an RGB scale.</li>
 <li><strong>c</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; If no color object is passed, the B value in an RGB scale.</li>
 </ul>
@@ -148,7 +149,7 @@
 </tr>
 <tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Sets the geometry&#8217;s name.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Geometry</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
 </tr>
 </tbody>
 </table>
@@ -164,9 +165,9 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>num</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; A number with the new geometry&#8217;s weight.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Sets the geometry&#8217;s name.</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Sets the geometry&#8217;s weight.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Geometry</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
 </tr>
 </tbody>
 </table>
@@ -192,14 +193,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="decodes.core.dc_base.HasBasis.html" title="HasBasis"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="decodes.core.dc_base.Basis.html" title="Basis"
-             >previous</a> |</li>
-        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
-          <li><a href="../dc_base.html" >dc_base.py</a> &raquo;</li> 
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
