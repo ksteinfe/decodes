@@ -6,7 +6,7 @@ dc_base.py
    :toctree: stubs
    :template: class.rst
 
-   Basis
-   Geometry
-   HasBasis
+   decodes.core.dc_base.Basis
+   decodes.core.dc_base.Geometry
+   decodes.core.dc_base.HasBasis
 

@@ -5,6 +5,6 @@ dc_pgon.py
    :toctree: stubs
    :template: class.rst
 
-   PGon
-   RGon
+   decodes.core.dc_pgon.PGon
+   decodes.core.dc_pgon.RGon
 

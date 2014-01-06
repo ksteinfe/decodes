@@ -5,6 +5,6 @@ dc_point.py
    :toctree: stubs
    :template: class.rst
 
-   BPoint
-   Point
+   decodes.core.dc_point.BPoint
+   decodes.core.dc_point.Point
    

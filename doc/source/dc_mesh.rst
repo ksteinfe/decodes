@@ -5,5 +5,5 @@ dc_mesh.py
    :toctree: stubs
    :template: class.rst
 
-   Mesh
+   decodes.core.dc_mesh.Mesh
    

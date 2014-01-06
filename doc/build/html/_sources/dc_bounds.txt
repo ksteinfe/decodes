@@ -5,4 +5,4 @@ dc_bounds.py
    :toctree: stubs
    :template: class.rst
 
-   Bounds
+   decodes.core.dc_bounds.Bounds

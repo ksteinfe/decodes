@@ -5,4 +5,4 @@ dc_pline.py
    :toctree: stubs
    :template: class.rst
 
-   PLine
+   decodes.core.dc_pline.PLine

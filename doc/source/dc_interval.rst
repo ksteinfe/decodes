@@ -5,5 +5,5 @@ dc_interval.py
    :toctree: stubs
    :template: class.rst
 
-   Interval
+   decodes.core.dc_interval.Interval
    

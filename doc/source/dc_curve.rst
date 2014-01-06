@@ -5,6 +5,6 @@ dc_curve.py
    :toctree: stubs
    :template: class.rst
 
-   Curve
-   IsParametrized
+   decodes.core.dc_curve.Curve
+   decodes.core.dc_curve.IsParametrized
    

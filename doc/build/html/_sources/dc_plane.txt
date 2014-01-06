@@ -5,4 +5,4 @@ dc_plane.py
    :toctree: stubs
    :template: class.rst
 
-   Plane
+   decodes.core.dc_plane.Plane

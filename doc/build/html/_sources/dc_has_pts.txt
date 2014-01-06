@@ -5,5 +5,5 @@ dc_has_pts.py
    :toctree: stubs
    :template: class.rst
 
-   HasPts
+   decodes.core.dc_has_pts.HasPts
    

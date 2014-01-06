@@ -5,6 +5,6 @@ dc_xform.py
    :toctree: stubs
    :template: class.rst
 
-   Xform
+   decodes.core.dc_xform.Xform
 
    

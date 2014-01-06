@@ -5,5 +5,5 @@ dc_cs.py
    :toctree: stubs
    :template: class.rst
 
-   CS
-   CylCS
+   decodes.core.dc_cs.CS
+   decodes.core.dc_cs.CylCS

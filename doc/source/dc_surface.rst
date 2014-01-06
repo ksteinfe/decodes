@@ -5,4 +5,4 @@ dc_surface.py
    :toctree: stubs
    :template: class.rst
 
-   Surface
+   decodes.core.dc_surface.Surface

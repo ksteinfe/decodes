@@ -5,4 +5,4 @@ dc_vec.py
    :toctree: stubs
    :template: class.rst
 
-   Vec
+   decodes.core.dc_vec.Vec

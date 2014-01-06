@@ -5,5 +5,5 @@ dc_circle.py
    :toctree: stubs
    :template: class.rst
 
-   Circle
-   Arc
+   decodes.core.dc_circle.Circle
+   decodes.core.dc_circle.Arc

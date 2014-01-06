@@ -5,9 +5,9 @@ dc_color.py
    :toctree: stubs
    :template: class.rst
 
-   BoolField
-   Color
-   Image
-   PixelGrid
-   ValueField
+   decodes.core.dc_color.BoolField
+   decodes.core.dc_color.Color
+   decodes.core.dc_color.Image
+   decodes.core.dc_color.PixelGrid
+   decodes.core.dc_color.ValueField
    

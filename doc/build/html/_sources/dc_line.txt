@@ -5,9 +5,9 @@ dc_line.py
    :toctree: stubs
    :template: class.rst
 
-   Line
-   Segment
-   Ray
-   LinearEntity
-   VecField
+   decodes.core.dc_line.Line
+   decodes.core.dc_line.Segment
+   decodes.core.dc_line.Ray
+   decodes.core.dc_line.LinearEntity
+   decodes.core.dc_line.VecField
 

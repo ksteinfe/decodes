@@ -5,6 +5,6 @@ dc_intersection.py
    :toctree: stubs
    :template: class.rst
 
-   Intersector
+   decodes.core.dc_intersection.Intersector
    
 
