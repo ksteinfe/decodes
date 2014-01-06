@@ -1,0 +1,109 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Basis &mdash; decodes .1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="decodes .1 documentation" href="../index.html" />
+    <link rel="up" title="dc_base.py" href="../dc_base.html" />
+    <link rel="next" title="Geometry" href="decodes.core.dc_base.Geometry.html" />
+    <link rel="prev" title="HasBasis" href="decodes.core.dc_base.HasBasis.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="decodes.core.dc_base.Geometry.html" title="Geometry"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="decodes.core.dc_base.HasBasis.html" title="HasBasis"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_base.html" accesskey="U">dc_base.py</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="basis">
+<h1>Basis<a class="headerlink" href="#basis" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="decodes.core.dc_base.Basis">
+<em class="property">class </em><tt class="descclassname">decodes.core.dc_base.</tt><tt class="descname">Basis</tt><a class="headerlink" href="#decodes.core.dc_base.Basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>A base class for anything that wants to call itself a basis. Bases must impliment the folloiwng methods:</p>
+<dl class="method">
+<dt id="decodes.core.dc_base.Basis.__init__">
+<tt class="descname">__init__</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_base.Basis.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_base.Basis.deval">
+<tt class="descname">deval</tt><big>(</big><em>a</em>, <em>b=0</em>, <em>c=0</em><big>)</big><a class="headerlink" href="#decodes.core.dc_base.Basis.deval" title="Permalink to this definition">¶</a></dt>
+<dd><p>evaluates a point in World coordinates and returns a Vec containing the coordinates of a corresponding Point defined in Basis coordinates</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_base.Basis.eval">
+<tt class="descname">eval</tt><big>(</big><em>a</em>, <em>b=0</em>, <em>c=0</em><big>)</big><a class="headerlink" href="#decodes.core.dc_base.Basis.eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>evaluates a point in Basis coordinates and returns a Vec containing the coordinates of a corresponding Point defined in World coordinates</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="decodes.core.dc_base.Geometry.html" title="Geometry"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="decodes.core.dc_base.HasBasis.html" title="HasBasis"
+             >previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_base.html" >dc_base.py</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Kyle Steinfeld.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

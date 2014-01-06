@@ -1,0 +1,166 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Arc &mdash; decodes .1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="decodes .1 documentation" href="../index.html" />
+    <link rel="up" title="dc_circle.py" href="../dc_circle.html" />
+    <link rel="next" title="dc_color.py" href="../dc_color.html" />
+    <link rel="prev" title="Circle" href="decodes.core.dc_circle.Circle.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../dc_color.html" title="dc_color.py"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="decodes.core.dc_circle.Circle.html" title="Circle"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_circle.html" accesskey="U">dc_circle.py</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="arc">
+<h1>Arc<a class="headerlink" href="#arc" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="decodes.core.dc_circle.Arc">
+<em class="property">class </em><tt class="descclassname">decodes.core.dc_circle.</tt><tt class="descname">Arc</tt><big>(</big><em>cs</em>, <em>radius</em>, <em>sweep_angle</em><big>)</big><a class="headerlink" href="#decodes.core.dc_circle.Arc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="decodes.core.dc_base.HasBasis.html#decodes.core.dc_base.HasBasis" title="decodes.core.dc_base.HasBasis"><tt class="xref py py-class docutils literal"><span class="pre">decodes.core.dc_base.HasBasis</span></tt></a></p>
+<p>a circle class</p>
+<dl class="method">
+<dt id="decodes.core.dc_circle.Arc.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>cs</em>, <em>radius</em>, <em>sweep_angle</em><big>)</big><a class="headerlink" href="#decodes.core.dc_circle.Arc.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_circle.Arc.deval">
+<tt class="descname">deval</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_circle.Arc.deval" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_circle.Arc.deval_pln">
+<tt class="descname">deval_pln</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_circle.Arc.deval_pln" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_circle.Arc.ept">
+<tt class="descname">ept</tt><a class="headerlink" href="#decodes.core.dc_circle.Arc.ept" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_circle.Arc.epts">
+<tt class="descname">epts</tt><a class="headerlink" href="#decodes.core.dc_circle.Arc.epts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_circle.Arc.eval">
+<tt class="descname">eval</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_circle.Arc.eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates this Arc and returns a Point.
+:param t: Normalized value between 0 and 1
+:type t: float
+:result: a Point on the Arc.
+:rtype: Point</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_circle.Arc.eval_pln">
+<tt class="descname">eval_pln</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_circle.Arc.eval_pln" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates this Arc and returns a Plane.
+:param t: Normalized value between 0 and 1
+:type t: float
+:result: a Plane on the Arc.
+:rtype: Plane</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_circle.Arc.from_pts">
+<em class="property">static </em><tt class="descname">from_pts</tt><big>(</big><em>center</em>, <em>start_pt</em>, <em>sweep_pt</em>, <em>is_major=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_circle.Arc.from_pts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_circle.Arc.from_tan">
+<em class="property">static </em><tt class="descname">from_tan</tt><big>(</big><em>start_pt</em>, <em>sweep_pt</em>, <em>tan</em><big>)</big><a class="headerlink" href="#decodes.core.dc_circle.Arc.from_tan" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_circle.Arc.length">
+<tt class="descname">length</tt><a class="headerlink" href="#decodes.core.dc_circle.Arc.length" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_circle.Arc.origin">
+<tt class="descname">origin</tt><a class="headerlink" href="#decodes.core.dc_circle.Arc.origin" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_circle.Arc.spt">
+<tt class="descname">spt</tt><a class="headerlink" href="#decodes.core.dc_circle.Arc.spt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_circle.Arc.thru_pts">
+<em class="property">static </em><tt class="descname">thru_pts</tt><big>(</big><em>pts_in</em><big>)</big><a class="headerlink" href="#decodes.core.dc_circle.Arc.thru_pts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../dc_color.html" title="dc_color.py"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="decodes.core.dc_circle.Circle.html" title="Circle"
+             >previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_circle.html" >dc_circle.py</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Kyle Steinfeld.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

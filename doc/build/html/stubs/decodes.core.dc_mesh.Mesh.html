@@ -1,0 +1,225 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Mesh &mdash; decodes .1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="decodes .1 documentation" href="../index.html" />
+    <link rel="up" title="dc_mesh.py" href="../dc_mesh.html" />
+    <link rel="next" title="dc_pgon.py" href="../dc_pgon.html" />
+    <link rel="prev" title="Mesh" href="" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../dc_pgon.html" title="dc_pgon.py"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="#" title="Mesh"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_mesh.html" accesskey="U">dc_mesh.py</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="mesh">
+<h1>Mesh<a class="headerlink" href="#mesh" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="decodes.core.dc_mesh.Mesh">
+<em class="property">class </em><tt class="descclassname">decodes.core.dc_mesh.</tt><tt class="descname">Mesh</tt><big>(</big><em>vertices=None</em>, <em>faces=None</em>, <em>basis=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_mesh.Mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="decodes.core.dc_has_pts.HasPts.html#decodes.core.dc_has_pts.HasPts" title="decodes.core.dc_has_pts.HasPts"><tt class="xref py py-class docutils literal"><span class="pre">decodes.core.dc_has_pts.HasPts</span></tt></a></p>
+<p>a very simple mesh class</p>
+<dl class="method">
+<dt id="decodes.core.dc_mesh.Mesh.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>vertices=None</em>, <em>faces=None</em>, <em>basis=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_mesh.Mesh.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mesh Constructor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>vertices</strong> (<em>[Point]</em>) &#8211; The vertices of the mesh</li>
+<li><strong>faces</strong> (<em>[int]</em>) &#8211; List of ordered faces.</li>
+<li><strong>basis</strong> (<em>Basis</em>) &#8211; The (optional) basis of the mesh.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Mesh object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Mesh</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_mesh.Mesh.add_face">
+<tt class="descname">add_face</tt><big>(</big><em>a</em>, <em>b</em>, <em>c</em>, <em>d=-1</em><big>)</big><a class="headerlink" href="#decodes.core.dc_mesh.Mesh.add_face" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a face to the mesh.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a,b,c,d</strong> (<em>int.</em>) &#8211; Face to be added to the list of faces.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Modifies list of faces.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_mesh.Mesh.explode">
+<em class="property">static </em><tt class="descname">explode</tt><big>(</big><em>msh</em><big>)</big><a class="headerlink" href="#decodes.core.dc_mesh.Mesh.explode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Explodes a mesh into individual faces.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>msh</strong> (<em>Mesh</em>) &#8211; Mesh to explode.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of meshes.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Type :</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_mesh.Mesh.face_centroid">
+<tt class="descname">face_centroid</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#decodes.core.dc_mesh.Mesh.face_centroid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the centroids of individual mesh faces.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Index of a face.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The centroid of a face.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_mesh.Mesh.face_normal">
+<tt class="descname">face_normal</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#decodes.core.dc_mesh.Mesh.face_normal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the normal vector of a face.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Index of a face.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Normal vector.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_mesh.Mesh.face_pts">
+<tt class="descname">face_pts</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#decodes.core.dc_mesh.Mesh.face_pts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the points of a given face.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Face&#8217;s index</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Vertice.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_mesh.Mesh.faces">
+<tt class="descname">faces</tt><a class="headerlink" href="#decodes.core.dc_mesh.Mesh.faces" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of mesh faces.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of mesh faces.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_mesh.Mesh.subclass_attr">
+<tt class="descname">subclass_attr</tt><em class="property"> = []</em><a class="headerlink" href="#decodes.core.dc_mesh.Mesh.subclass_attr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../dc_pgon.html" title="dc_pgon.py"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="#" title="Mesh"
+             >previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_mesh.html" >dc_mesh.py</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Kyle Steinfeld.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,373 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Surface &mdash; decodes .1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="decodes .1 documentation" href="../index.html" />
+    <link rel="up" title="dc_surface.py" href="../dc_surface.html" />
+    <link rel="next" title="dc_vec.py" href="../dc_vec.html" />
+    <link rel="prev" title="Surface" href="" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../dc_vec.html" title="dc_vec.py"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="#" title="Surface"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_surface.html" accesskey="U">dc_surface.py</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="surface">
+<h1>Surface<a class="headerlink" href="#surface" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="decodes.core.dc_surface.Surface">
+<em class="property">class </em><tt class="descclassname">decodes.core.dc_surface.</tt><tt class="descname">Surface</tt><big>(</big><em>function=None, dom_u=ival[0.0,1.0], dom_v=ival[0.0,1.0], tol_u=None, tol_v=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_surface.Surface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="decodes.core.dc_curve.IsParametrized.html#decodes.core.dc_curve.IsParametrized" title="decodes.core.dc_curve.IsParametrized"><tt class="xref py py-class docutils literal"><span class="pre">decodes.core.dc_curve.IsParametrized</span></tt></a></p>
+<p>a simple surface class</p>
+<p>to construct a surface, pass in a function and [optionally] two intervals that determine the a valid range of u&amp;v values
+the function should expect two parameters u and v (float), and return a Point.</p>
+<dl class="method">
+<dt id="decodes.core.dc_surface.Surface.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>function=None, dom_u=ival[0.0,1.0], dom_v=ival[0.0,1.0], tol_u=None, tol_v=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_surface.Surface.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a Curve object. If tolerance is None, Curve.tol = tol_max().</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>function</strong> (<em>function</em>) &#8211; A function returning points.</li>
+<li><strong>domain</strong> (<em>Interval</em>) &#8211; Domain for curve points.</li>
+<li><strong>tolerance</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; The tolerance of this Surface expressed in domain space</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Surface object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Surface</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_surface.Surface._nudged">
+<tt class="descname">_nudged</tt><big>(</big><em>u</em>, <em>v</em>, <em>include_negs=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_surface.Surface._nudged" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_surface.Surface._rebuild_surrogate">
+<tt class="descname">_rebuild_surrogate</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_surface.Surface._rebuild_surrogate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_surface.Surface.deval">
+<tt class="descname">deval</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="headerlink" href="#decodes.core.dc_surface.Surface.deval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates this Surface and returns a Point.
+T is a float value that falls within the defined domain of this Curve.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>u</strong> &#8211; U-value to evaluate the Surface at.</li>
+<li><strong>v</strong> &#8211; V-value to evaluate the Surface at.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">a Point on this Surface.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Point</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_surface.Surface.deval_curv">
+<tt class="descname">deval_curv</tt><big>(</big><em>u</em>, <em>v</em>, <em>calc_extras=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_surface.Surface.deval_curv" title="Permalink to this definition">¶</a></dt>
+<dd><p>IN:  
+- a point dom_pt (given on this surface domain) referring to a point on the surface</p>
+<p>OUT:
+The following geometric entities describing the shape of the surface at a given point:
+- principal directions (expressed as a coordinate system)
+- curvatures: principal curvatures (min/max), Gaussian curvature (K), Mean Curvature (H)</p>
+<p>Note: All quantities at a given point are computed using nearest neighbors on a mesh.  
+For the case of a parametrized surface, we take a mesh of nearest neighbors with vertices
+given by the isocurves at a resolution tol_nudge. These calculations are good for any mesh 
+on a surface;  all that would need to change for another type of mesh is 
+(1) the construction of the mesh of nearest neighbors around the surface point in question 
+(2) the calculation of the areas of the faces and the weighted face areas
+ref: 
+Taubin, Gabriel, Estimating the Tensor of Curvature of a Surface from a Polyhedral
+Approximation, <a class="reference external" href="http://pdf.aminer.org/000/234/737/curvature_approximation_for_triangulated_surfaces.pdf">http://pdf.aminer.org/000/234/737/curvature_approximation_for_triangulated_surfaces.pdf</a></p>
+<p>Note: we can define projection onto a surface by computing the normal on the surrogate)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_surface.Surface.deval_curviso">
+<tt class="descname">deval_curviso</tt><big>(</big><em>u</em>, <em>v</em>, <em>calc_extras=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_surface.Surface.deval_curviso" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_surface.Surface.deval_pln">
+<tt class="descname">deval_pln</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="headerlink" href="#decodes.core.dc_surface.Surface.deval_pln" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates this Surface and returns a Plane.
+T is a float value that falls within the defined domain of this Curve.
+Tangent vector determined by a nearest neighbor at distance Curve.tol/100</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param u:</th><td class="field-body">U-value to evaluate the Surface at.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type t:</th><td class="field-body">float</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">param v:</th><td class="field-body">V-value to evaluate the Surface at.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type t:</th><td class="field-body">float</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">a Plane on this Surface.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Plane</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_surface.Surface.domain_u">
+<tt class="descname">domain_u</tt><a class="headerlink" href="#decodes.core.dc_surface.Surface.domain_u" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Returns the Interval domain for the U-direction of this Surface</dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Domain of this Surface in the U-direction.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Interval</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_surface.Surface.domain_v">
+<tt class="descname">domain_v</tt><a class="headerlink" href="#decodes.core.dc_surface.Surface.domain_v" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Returns the Interval domain for the V-direction of this Surface</dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Domain of this Surface in the V-direction.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Interval</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_surface.Surface.eval">
+<tt class="descname">eval</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="headerlink" href="#decodes.core.dc_surface.Surface.eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates this Curve and returns a Point.
+T is a normalized float value (0-&gt;1) which will be remapped to the domain defined by this Curve.
+equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain))</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param t:</th><td class="field-body">Normalized value between 0 and 1, to evaluate a curve.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type t:</th><td class="field-body">float</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">a Point on this Surface.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_surface.Surface.eval_curv">
+<tt class="descname">eval_curv</tt><big>(</big><em>u</em>, <em>v</em>, <em>calc_extras=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_surface.Surface.eval_curv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_surface.Surface.eval_curviso">
+<tt class="descname">eval_curviso</tt><big>(</big><em>u</em>, <em>v</em>, <em>calc_extras=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_surface.Surface.eval_curviso" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_surface.Surface.eval_pln">
+<tt class="descname">eval_pln</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="headerlink" href="#decodes.core.dc_surface.Surface.eval_pln" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates this Curve and returns a Plane.
+T is a normalized float value (0-&gt;1) which will be remapped to the domain defined by this Curve.
+equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain))</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param t:</th><td class="field-body">Normalized value between 0 and 1, to evaluate a curve.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type t:</th><td class="field-body">float</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">a Plane on this Surface.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Plane</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_surface.Surface.isocurve">
+<tt class="descname">isocurve</tt><big>(</big><em>u_val=None</em>, <em>v_val=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_surface.Surface.isocurve" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_surface.Surface.isopolyline">
+<tt class="descname">isopolyline</tt><big>(</big><em>u_val=None</em>, <em>v_val=None</em>, <em>dom=None</em>, <em>res=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_surface.Surface.isopolyline" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_surface.Surface.surrogate">
+<tt class="descname">surrogate</tt><a class="headerlink" href="#decodes.core.dc_surface.Surface.surrogate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_surface.Surface.to_mesh">
+<tt class="descname">to_mesh</tt><big>(</big><em>do_close=False</em>, <em>tris=False</em>, <em>divs_u=False</em>, <em>divs_v=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_surface.Surface.to_mesh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_surface.Surface.tol_max">
+<tt class="descname">tol_max</tt><a class="headerlink" href="#decodes.core.dc_surface.Surface.tol_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines the maximium tolerance as Surface.domain_u.delta / 10 , Surface.domain_v.delta / 10</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_surface.Surface.tol_u">
+<tt class="descname">tol_u</tt><a class="headerlink" href="#decodes.core.dc_surface.Surface.tol_u" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_surface.Surface.tol_u_nudge">
+<tt class="descname">tol_u_nudge</tt><a class="headerlink" href="#decodes.core.dc_surface.Surface.tol_u_nudge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_surface.Surface.tol_v">
+<tt class="descname">tol_v</tt><a class="headerlink" href="#decodes.core.dc_surface.Surface.tol_v" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_surface.Surface.tol_v_nudge">
+<tt class="descname">tol_v_nudge</tt><a class="headerlink" href="#decodes.core.dc_surface.Surface.tol_v_nudge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_surface.Surface.u0">
+<tt class="descname">u0</tt><a class="headerlink" href="#decodes.core.dc_surface.Surface.u0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the minimum value for the U domain of this Surface</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_surface.Surface.u1">
+<tt class="descname">u1</tt><a class="headerlink" href="#decodes.core.dc_surface.Surface.u1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the maximum value for the U domain of this Surface</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_surface.Surface.v0">
+<tt class="descname">v0</tt><a class="headerlink" href="#decodes.core.dc_surface.Surface.v0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the minimum value for the U domain of this Surface</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_surface.Surface.v1">
+<tt class="descname">v1</tt><a class="headerlink" href="#decodes.core.dc_surface.Surface.v1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the maximum value for the U domain of this Surface</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../dc_vec.html" title="dc_vec.py"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="#" title="Surface"
+             >previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_surface.html" >dc_surface.py</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Kyle Steinfeld.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

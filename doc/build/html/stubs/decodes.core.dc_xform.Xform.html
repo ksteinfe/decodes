@@ -1,0 +1,320 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Xform &mdash; decodes .1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="decodes .1 documentation" href="../index.html" />
+    <link rel="up" title="dc_xform.py" href="../dc_xform.html" />
+    <link rel="prev" title="Xform" href="" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="#" title="Xform"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_xform.html" accesskey="U">dc_xform.py</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="xform">
+<h1>Xform<a class="headerlink" href="#xform" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="decodes.core.dc_xform.Xform">
+<em class="property">class </em><tt class="descclassname">decodes.core.dc_xform.</tt><tt class="descname">Xform</tt><big>(</big><em>value=1.0</em>, <em>matrix=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_xform.Xform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>A transformation matrix class.</p>
+<dl class="method">
+<dt id="decodes.core.dc_xform.Xform.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>value=1.0</em>, <em>matrix=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_xform.Xform.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>XForm Constructor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>value</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Transformation value (defaults to 1.0).</li>
+<li><strong>matrix</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; Matrix</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">XForm object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">XForm</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_xform.Xform._xform_tuple">
+<tt class="descname">_xform_tuple</tt><big>(</big><em>tup</em><big>)</big><a class="headerlink" href="#decodes.core.dc_xform.Xform._xform_tuple" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_xform.Xform.change_basis">
+<em class="property">static </em><tt class="descname">change_basis</tt><big>(</big><em>csSource</em>, <em>csTarget</em><big>)</big><a class="headerlink" href="#decodes.core.dc_xform.Xform.change_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Changes the plane basis of an object.
+.. warning:: This method currently relies on access to the Rhinocommon Kernel.    It will not work in other contexts.
+.. todo:: Re-implement this method without using the Rhinocommon Kernel.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param csSource:</th><td class="field-body">Plane source of the object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type csSource:</th><td class="field-body">Plane</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">param csTarget:</th><td class="field-body">Target plane of the object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type csTarget:</th><td class="field-body">Plane</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Object with new Plane basis.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Geometry</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_xform.Xform.eval">
+<tt class="descname">eval</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.dc_xform.Xform.eval" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_xform.Xform.m00">
+<tt class="descname">m00</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m00" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_xform.Xform.m01">
+<tt class="descname">m01</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m01" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_xform.Xform.m02">
+<tt class="descname">m02</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m02" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_xform.Xform.m03">
+<tt class="descname">m03</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m03" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_xform.Xform.m10">
+<tt class="descname">m10</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m10" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_xform.Xform.m11">
+<tt class="descname">m11</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m11" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_xform.Xform.m12">
+<tt class="descname">m12</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m12" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_xform.Xform.m13">
+<tt class="descname">m13</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m13" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_xform.Xform.m20">
+<tt class="descname">m20</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m20" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_xform.Xform.m21">
+<tt class="descname">m21</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m21" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_xform.Xform.m22">
+<tt class="descname">m22</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m22" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_xform.Xform.m23">
+<tt class="descname">m23</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m23" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_xform.Xform.m30">
+<tt class="descname">m30</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m30" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_xform.Xform.m31">
+<tt class="descname">m31</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m31" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_xform.Xform.m32">
+<tt class="descname">m32</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m32" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_xform.Xform.m33">
+<tt class="descname">m33</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m33" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_xform.Xform.mirror">
+<em class="property">static </em><tt class="descname">mirror</tt><big>(</big><em>plane='world_xy'</em><big>)</big><a class="headerlink" href="#decodes.core.dc_xform.Xform.mirror" title="Permalink to this definition">¶</a></dt>
+<dd><p>Produces mirror transform. Can pass in &#8220;world_xy&#8221;, &#8220;world_yz&#8221;, or &#8220;world_xz&#8221;. Or, pass in an arbitrary cs (produces mirror about XYplane of CS)</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">When mirroring about an arbitrary plane, this method currently relies on access to the Rhinocommon Kernel.  It will not work in other contexts.</p>
+</div>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p>Re-implement this method without using the Rhinocommon Kernel.</p>
+<table class="last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param plane:</th><td class="field-body">Plane to mirror the object with. Defaults to world XY plane.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type plane:</th><td class="field-body">Plane</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Mirrored object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Geometry</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_xform.Xform.rotation">
+<em class="property">static </em><tt class="descname">rotation</tt><big>(</big><em>**kargs</em><big>)</big><a class="headerlink" href="#decodes.core.dc_xform.Xform.rotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotates an object around by center and rotation angle, or by a center, an axis and a rotation angle. 
+.. warning:: This method currently relies on access to the Rhinocommon Kernel.    It will not work in other contexts.
+.. todo:: Re-implement this method without using the Rhinocommon Kernel.
+.. todo:: Rotation about an axis ought to take in a linear entitiy, not a vector</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param <a href="#id1"><span class="problematic" id="id2">**</span></a>kargs:</th><td class="field-body">Function that accepts multiple parameters to be passed. Parameters include center and axis of rotation and a rotation angle.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type <a href="#id3"><span class="problematic" id="id4">**</span></a>kargs:</th><td class="field-body">Point, Vec, float</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Rotated object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Geometry</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_xform.Xform.scale">
+<em class="property">static </em><tt class="descname">scale</tt><big>(</big><em>factor</em>, <em>origin=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_xform.Xform.scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scales an object by a given factor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>factor</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Factor to scale by</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Scaled object.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Geometry</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_xform.Xform.strip_translation">
+<tt class="descname">strip_translation</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_xform.Xform.strip_translation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_xform.Xform.translation">
+<em class="property">static </em><tt class="descname">translation</tt><big>(</big><em>vec</em><big>)</big><a class="headerlink" href="#decodes.core.dc_xform.Xform.translation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates a geometry by a given Vector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vec</strong> (<em>Vec</em>) &#8211; Vector to apply a translation</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Translates an object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Geometry</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="#" title="Xform"
+             >previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_xform.html" >dc_xform.py</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Kyle Steinfeld.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

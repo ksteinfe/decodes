@@ -1,0 +1,177 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Intersector &mdash; decodes .1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="decodes .1 documentation" href="../index.html" />
+    <link rel="up" title="dc_intersection.py" href="../dc_intersection.html" />
+    <link rel="next" title="dc_interval.py" href="../dc_interval.html" />
+    <link rel="prev" title="Intersector" href="" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../dc_interval.html" title="dc_interval.py"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="#" title="Intersector"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_intersection.html" accesskey="U">dc_intersection.py</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="intersector">
+<h1>Intersector<a class="headerlink" href="#intersector" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="decodes.core.dc_intersection.Intersector">
+<em class="property">class </em><tt class="descclassname">decodes.core.dc_intersection.</tt><tt class="descname">Intersector</tt><a class="headerlink" href="#decodes.core.dc_intersection.Intersector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>intersection results class</p>
+<dl class="method">
+<dt id="decodes.core.dc_intersection.Intersector.__init__">
+<tt class="descname">__init__</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_intersection.Intersector._circle_circle">
+<tt class="descname">_circle_circle</tt><big>(</big><em>cir_a</em>, <em>cir_b</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector._circle_circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>upon success, the Intersector.dist property will be set to the distance between the pair of points of intersection
+dist of zero when circles intersect at just one point</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_intersection.Intersector._line_line">
+<tt class="descname">_line_line</tt><big>(</big><em>ln_a</em>, <em>ln_b</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector._line_line" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_intersection.Intersector._line_pgon">
+<tt class="descname">_line_pgon</tt><big>(</big><em>line</em>, <em>pgon</em>, <em>ignore_backface=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector._line_pgon" title="Permalink to this definition">¶</a></dt>
+<dd><p>upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_intersection.Intersector._line_plane">
+<tt class="descname">_line_plane</tt><big>(</big><em>line</em>, <em>plane</em>, <em>ignore_backface=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector._line_plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_intersection.Intersector._pgon_plane">
+<tt class="descname">_pgon_plane</tt><big>(</big><em>line</em>, <em>plane</em>, <em>ignore_backface=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector._pgon_plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_intersection.Intersector._plane_plane">
+<tt class="descname">_plane_plane</tt><big>(</big><em>pln_a</em>, <em>pln_b</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector._plane_plane" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_intersection.Intersector._pline_plane">
+<tt class="descname">_pline_plane</tt><big>(</big><em>pline</em>, <em>plane</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector._pline_plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>self.edges
+self.verts</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_intersection.Intersector._ray_plane">
+<tt class="descname">_ray_plane</tt><big>(</big><em>ray</em>, <em>plane</em>, <em>ignore_backface=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector._ray_plane" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_intersection.Intersector._seg_plane">
+<tt class="descname">_seg_plane</tt><big>(</big><em>seg</em>, <em>plane</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector._seg_plane" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_intersection.Intersector.append">
+<tt class="descname">append</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector.append" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_intersection.Intersector.clear">
+<tt class="descname">clear</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector.clear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_intersection.Intersector.intersect">
+<tt class="descname">intersect</tt><big>(</big><em>a</em>, <em>b</em>, <em>**kargs</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector.intersect" title="Permalink to this definition">¶</a></dt>
+<dd><p>pass in two pieces of decodes geometry (a &amp; b), and i&#8217;ll have a go at intersecting them.
+results will be stored in this xsec object
+extras (such as distance to intersection points) will be assigned as attributes to this xsec object
+function returns success, True or False</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_intersection.Intersector.of">
+<tt class="descname">of</tt><big>(</big><em>a</em>, <em>b</em>, <em>**kargs</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector.of" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_intersection.Intersector.results">
+<tt class="descname">results</tt><a class="headerlink" href="#decodes.core.dc_intersection.Intersector.results" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../dc_interval.html" title="dc_interval.py"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="#" title="Intersector"
+             >previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_intersection.html" >dc_intersection.py</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Kyle Steinfeld.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

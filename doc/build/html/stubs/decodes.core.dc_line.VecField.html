@@ -1,0 +1,152 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>VecField &mdash; decodes .1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="decodes .1 documentation" href="../index.html" />
+    <link rel="up" title="dc_line.py" href="../dc_line.html" />
+    <link rel="next" title="dc_mesh.py" href="../dc_mesh.html" />
+    <link rel="prev" title="LinearEntity" href="decodes.core.dc_line.LinearEntity.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../dc_mesh.html" title="dc_mesh.py"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="decodes.core.dc_line.LinearEntity.html" title="LinearEntity"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_line.html" accesskey="U">dc_line.py</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="vecfield">
+<h1>VecField<a class="headerlink" href="#vecfield" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="decodes.core.dc_line.VecField">
+<em class="property">class </em><tt class="descclassname">decodes.core.dc_line.</tt><tt class="descname">VecField</tt><big>(</big><em>pixel_res=ival[8.0,8.0], spatial_origin=pt[0,0,0], spatial_dim=ival[4.0,4.0], initial_value=vec[0,0,0], include_corners=False, wrap=True</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.VecField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="decodes.core.dc_color.PixelGrid.html#decodes.core.dc_color.PixelGrid" title="decodes.core.dc_color.PixelGrid"><tt class="xref py py-class docutils literal"><span class="pre">decodes.core.dc_color.PixelGrid</span></tt></a></p>
+<p>a raster grid of vectors
+each pixel contains a positioned 3d vector (a Ray)</p>
+<p>TODO: allow to set vectors as &#8220;bidirectional&#8221;, which would affect the behavior of average vectors, and would produce lines rather than rays</p>
+<dl class="method">
+<dt id="decodes.core.dc_line.VecField.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>pixel_res=ival[8.0,8.0], spatial_origin=pt[0,0,0], spatial_dim=ival[4.0,4.0], initial_value=vec[0,0,0], include_corners=False, wrap=True</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.VecField.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_line.VecField.address_near">
+<tt class="descname">address_near</tt><big>(</big><em>a</em>, <em>b=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.VecField.address_near" title="Permalink to this definition">¶</a></dt>
+<dd><p>may be passed either a point or an x,y coord</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_line.VecField.addresses_near">
+<tt class="descname">addresses_near</tt><big>(</big><em>a</em>, <em>b=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.VecField.addresses_near" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_line.VecField.avg_vec_near">
+<tt class="descname">avg_vec_near</tt><big>(</big><em>a</em>, <em>b=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.VecField.avg_vec_near" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_line.VecField.cpt_near">
+<tt class="descname">cpt_near</tt><big>(</big><em>a</em>, <em>b=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.VecField.cpt_near" title="Permalink to this definition">¶</a></dt>
+<dd><p>may be passed either a point or an x,y coord</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_line.VecField.cpts_near">
+<tt class="descname">cpts_near</tt><big>(</big><em>a</em>, <em>b=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.VecField.cpts_near" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_line.VecField.get_cpt">
+<tt class="descname">get_cpt</tt><big>(</big><em>x</em>, <em>y</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.VecField.get_cpt" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the center point of the cell associated with the given address</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_line.VecField.spin_pt">
+<tt class="descname">spin_pt</tt><big>(</big><em>a</em>, <em>b=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.VecField.spin_pt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_line.VecField.to_rays">
+<tt class="descname">to_rays</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_line.VecField.to_rays" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_line.VecField.vec_near">
+<tt class="descname">vec_near</tt><big>(</big><em>a</em>, <em>b=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.VecField.vec_near" title="Permalink to this definition">¶</a></dt>
+<dd><p>may be passed either a point or an x,y coord</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_line.VecField.vecs_near">
+<tt class="descname">vecs_near</tt><big>(</big><em>a</em>, <em>b=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.VecField.vecs_near" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../dc_mesh.html" title="dc_mesh.py"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="decodes.core.dc_line.LinearEntity.html" title="LinearEntity"
+             >previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_line.html" >dc_line.py</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Kyle Steinfeld.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

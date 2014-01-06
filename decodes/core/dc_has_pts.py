@@ -10,7 +10,7 @@ class HasPts(HasBasis):
     All HasPts classes also have bases
     """
     class_attr = ['_pts','_centroid'] # this list of props is unset anytime this HasPts object changes
-
+    
     def __init__(self, vertices=None,basis=None):
         self._verts = [] # a list of vecs that represent the local coordinates of this object's points
         if vertices is not None: self.append(vertices)

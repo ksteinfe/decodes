@@ -1,0 +1,12 @@
+*************************************
+Base
+*************************************
+
+.. currentmodule:: decodes.core.dc_base
+.. autosummary::
+   :toctree: stubs
+   :template: class.rst
+
+   Geometry
+   Basis
+   

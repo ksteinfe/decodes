@@ -1,0 +1,402 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>LinearEntity &mdash; decodes .1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="decodes .1 documentation" href="../index.html" />
+    <link rel="up" title="dc_line.py" href="../dc_line.html" />
+    <link rel="next" title="VecField" href="decodes.core.dc_line.VecField.html" />
+    <link rel="prev" title="Ray" href="decodes.core.dc_line.Ray.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="decodes.core.dc_line.VecField.html" title="VecField"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="decodes.core.dc_line.Ray.html" title="Ray"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_line.html" accesskey="U">dc_line.py</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="linearentity">
+<h1>LinearEntity<a class="headerlink" href="#linearentity" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="decodes.core.dc_line.LinearEntity">
+<em class="property">class </em><tt class="descclassname">decodes.core.dc_line.</tt><tt class="descname">LinearEntity</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="decodes.core.dc_base.Geometry.html#decodes.core.dc_base.Geometry" title="decodes.core.dc_base.Geometry"><tt class="xref py py-class docutils literal"><span class="pre">decodes.core.dc_base.Geometry</span></tt></a></p>
+<p>A linear entity (line, ray, segment, etc) in space.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This is an abstract class and is not meant to be instantiated.</p>
+</div>
+<dl class="method">
+<dt id="decodes.core.dc_line.LinearEntity.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>LinearEntity Constructor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>Point</em>) &#8211; Starting point.</li>
+<li><strong>b</strong> (<em>Point or Vector</em>) &#8211; Second point or Vector.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">LinearEntity object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">LinearEntity</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_line.LinearEntity.angle_between">
+<tt class="descname">angle_between</tt><big>(</big><em>l1</em>, <em>l2</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.angle_between" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an angle formed between the two linear entities.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>Description of Method:</strong>  
+From the dot product of vectors v1 and v2 it is known that:</p>
+<div class="highlight-python"><pre>dot(v1, v2) = |v1|*|v2|*cos(A)</pre>
+</div>
+<p class="last">where A is the angle formed between the two vectors. We can
+get the directional vectors of the two lines and readily
+find the angle between the two using the above formula.</p>
+</div>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Implement this method.</p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_line.LinearEntity.by_coords2d">
+<em class="property">static </em><tt class="descname">by_coords2d</tt><big>(</big><em>x0=0.0</em>, <em>y0=0.0</em>, <em>x1=1.0</em>, <em>y1=1.0</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.by_coords2d" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_line.LinearEntity.by_coords3d">
+<em class="property">static </em><tt class="descname">by_coords3d</tt><big>(</big><em>x0=0.0</em>, <em>y0=0.0</em>, <em>z0=0.0</em>, <em>x1=1.0</em>, <em>y1=1.0</em>, <em>z1=1.0</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.by_coords3d" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_line.LinearEntity.coefficients">
+<tt class="descname">coefficients</tt><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.coefficients" title="Permalink to this definition">¶</a></dt>
+<dd><p>The coefficients (a,b,c) of this line for equation ax+by+c=0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_line.LinearEntity.ept">
+<tt class="descname">ept</tt><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.ept" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the end Point of a LinearEntity</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">End Point.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_line.LinearEntity.eval">
+<tt class="descname">eval</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates a LinearEntity at a given number.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Number between 0 and 1 to evaluate the LinearEntity at.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Evaluated Point on LinearEntity.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_line.LinearEntity.is_concurrent">
+<tt class="descname">is_concurrent</tt><big>(</big><em>*lines</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.is_concurrent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the set of linear entities are concurrent, False
+otherwise. Two or more linear entities are concurrent if they all
+intersect at a single point.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>Description of Method:</strong>  First, take the first 
+two lines and find their intersection. If there is no intersection, 
+then the first two lines were parallel and had no intersection so 
+concurrenecy is impossible amongst the whole set. Otherwise, check 
+to see if the intersection point of the first two lines is a member 
+on the rest of the lines. If so, the lines are concurrent.</p>
+</div>
+<div class="admonition-todo admonition" id="index-1">
+<p class="first admonition-title">Todo</p>
+<p class="last">Implement this method.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_line.LinearEntity.is_parallel">
+<tt class="descname">is_parallel</tt><big>(</big><em>l1</em>, <em>l2</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.is_parallel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if l1 and l2 are parallel, False otherwise</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>l1</strong> (<em>LinearEntity</em>) &#8211; First LinearEntity</li>
+<li><strong>l2</strong> (<em>LinearEntity</em>) &#8211; Second LinearEntity</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">True if parallel.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_line.LinearEntity.is_perpendicular">
+<tt class="descname">is_perpendicular</tt><big>(</big><em>l1</em>, <em>l2</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.is_perpendicular" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if l1 and l2 are perpendicular, False otherwise</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param l1:</th><td class="field-body">First LinearEntity</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type l1:</th><td class="field-body">LinearEntity</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">param l2:</th><td class="field-body">Second LinearEntity</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type l2:</th><td class="field-body">LinearEntity</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">True if perpendicular.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="admonition-todo admonition" id="index-2">
+<p class="first admonition-title">Todo</p>
+<p class="last">Implement this method.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_line.LinearEntity.near">
+<tt class="descname">near</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.near" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple of the closest point to a given LinearEntity, its t value and the distance from the Point to the near Point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>Point</em>) &#8211; Point to look for a near Point on the LinearEntity.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Tuple of near point on LinearEntity, t value and distance from point to near point.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(Point, float, float)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_line.LinearEntity.near_pt">
+<tt class="descname">near_pt</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.near_pt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the closest point to a given LinearEntity</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>Point</em>) &#8211; Point to look for a near Point on the LinearEntity.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Near point on LinearEntity.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_line.LinearEntity.parallel_line">
+<tt class="descname">parallel_line</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.parallel_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new Line which is parallel to this linear entity and passes through the specified point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>Point</em>) &#8211; Point that the LinearEntity will pass through.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">New LinearEntity.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">LinearEntity</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_line.LinearEntity.perpendicular_line">
+<tt class="descname">perpendicular_line</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.perpendicular_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new Line which is perpendicular to this linear entity and passes through the specified point.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param p:</th><td class="field-body">Point that the LinearEntity will pass through.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type p:</th><td class="field-body">Point</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">New LinearEntity.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">LinearEntity</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="admonition-todo admonition" id="index-3">
+<p class="first admonition-title">Todo</p>
+<p class="last">Implement this method.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_line.LinearEntity.perpendicular_segment">
+<tt class="descname">perpendicular_segment</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.perpendicular_segment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new Segment which connects p to a point on this linear entity and is also perpendicular to this line. Returns p itself if p is on this linear entity.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param p:</th><td class="field-body">Point that the LinearEntity will pass through.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type p:</th><td class="field-body">Point</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">New LinearEntity.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">LinearEntity</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="admonition-todo admonition" id="index-4">
+<p class="first admonition-title">Todo</p>
+<p class="last">Implement this method.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_line.LinearEntity.spt">
+<tt class="descname">spt</tt><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.spt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the starting Point of a LinearEntity</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Starting Point.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_line.LinearEntity.vec">
+<tt class="descname">vec</tt><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.vec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Vec direction of a LinearEntity</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Vector.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="decodes.core.dc_line.VecField.html" title="VecField"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="decodes.core.dc_line.Ray.html" title="Ray"
+             >previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_line.html" >dc_line.py</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Kyle Steinfeld.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

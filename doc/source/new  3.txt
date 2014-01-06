@@ -1,0 +1,17 @@
+.. autoclass:: decodes.core.dc_line.Line
+    :show-inheritance:
+    :undoc-members:
+    :members:
+    :private-members:
+    
+    .. automethod:: decodes.core.dc_line.Line.__init__
+   
+
+.. autoclass:: decodes.core.dc_line.Segment
+    :show-inheritance:
+    :undoc-members:
+    :members:
+    :private-members:
+    
+    .. automethod:: decodes.core.dc_line.Segment.__init__
+   

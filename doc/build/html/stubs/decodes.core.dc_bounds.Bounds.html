@@ -1,0 +1,178 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Bounds &mdash; decodes .1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="decodes .1 documentation" href="../index.html" />
+    <link rel="up" title="dc_bounds.py" href="../dc_bounds.html" />
+    <link rel="next" title="dc_circle.py" href="../dc_circle.html" />
+    <link rel="prev" title="Bounds" href="" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../dc_circle.html" title="dc_circle.py"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="#" title="Bounds"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_bounds.html" accesskey="U">dc_bounds.py</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="bounds">
+<h1>Bounds<a class="headerlink" href="#bounds" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="decodes.core.dc_bounds.Bounds">
+<em class="property">class </em><tt class="descclassname">decodes.core.dc_bounds.</tt><tt class="descname">Bounds</tt><big>(</big><em>**kargs</em><big>)</big><a class="headerlink" href="#decodes.core.dc_bounds.Bounds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="decodes.core.dc_base.Geometry.html#decodes.core.dc_base.Geometry" title="decodes.core.dc_base.Geometry"><tt class="xref py py-class docutils literal"><span class="pre">decodes.core.dc_base.Geometry</span></tt></a></p>
+<p>A 2d retangular or 3d cubic boudary class
+axis are oriented to world axes</p>
+<dl class="method">
+<dt id="decodes.core.dc_bounds.Bounds.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>**kargs</em><big>)</big><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>a Bounds may be constructed two ways: By setting &#8220;center&#8221;, &#8220;dim_x&#8221;, &#8220;dim_y&#8221;, and optionally &#8220;dim_z&#8221; OR by setting &#8220;ival_x&#8221;, &#8220;ival_y&#8221;, and optionally &#8220;ival_z&#8221;</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_bounds.Bounds.corners">
+<tt class="descname">corners</tt><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.corners" title="Permalink to this definition">¶</a></dt>
+<dd><p>moves counter clockwise, like so:
+(-,-)(+,-)(+,+)(-,+)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_bounds.Bounds.cpt">
+<tt class="descname">cpt</tt><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.cpt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_bounds.Bounds.dim_x">
+<tt class="descname">dim_x</tt><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.dim_x" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_bounds.Bounds.dim_y">
+<tt class="descname">dim_y</tt><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.dim_y" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_bounds.Bounds.dim_z">
+<tt class="descname">dim_z</tt><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.dim_z" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_bounds.Bounds.encompass">
+<em class="property">static </em><tt class="descname">encompass</tt><big>(</big><em>pts=[pt[0,0,0]]</em><big>)</big><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.encompass" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_bounds.Bounds.eval">
+<tt class="descname">eval</tt><big>(</big><em>x</em>, <em>y</em>, <em>z=0</em><big>)</big><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.eval" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_bounds.Bounds.is_2d">
+<tt class="descname">is_2d</tt><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.is_2d" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_bounds.Bounds.is_3d">
+<tt class="descname">is_3d</tt><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.is_3d" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_bounds.Bounds.near_pt">
+<tt class="descname">near_pt</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.near_pt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the closest point to this Bounds.  If the point in within the bounds, simply returns the point</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_bounds.Bounds.overlaps">
+<tt class="descname">overlaps</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.overlaps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_bounds.Bounds.subbounds">
+<tt class="descname">subbounds</tt><big>(</big><em>divs</em><big>)</big><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.subbounds" title="Permalink to this definition">¶</a></dt>
+<dd><p>produces subboundaries.
+starts at bottom left, moves from left to right and then bottom to top.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_bounds.Bounds.to_polyline">
+<tt class="descname">to_polyline</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.to_polyline" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_bounds.Bounds.unit_cube">
+<em class="property">static </em><tt class="descname">unit_cube</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.unit_cube" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_bounds.Bounds.unit_square">
+<em class="property">static </em><tt class="descname">unit_square</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.unit_square" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../dc_circle.html" title="dc_circle.py"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="#" title="Bounds"
+             >previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_bounds.html" >dc_bounds.py</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Kyle Steinfeld.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

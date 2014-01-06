@@ -1,0 +1,230 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plane &mdash; decodes .1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="decodes .1 documentation" href="../index.html" />
+    <link rel="up" title="dc_plane.py" href="../dc_plane.html" />
+    <link rel="next" title="dc_pline.py" href="../dc_pline.html" />
+    <link rel="prev" title="Plane" href="" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../dc_pline.html" title="dc_pline.py"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="#" title="Plane"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_plane.html" accesskey="U">dc_plane.py</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="plane">
+<h1>Plane<a class="headerlink" href="#plane" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="decodes.core.dc_plane.Plane">
+<em class="property">class </em><tt class="descclassname">decodes.core.dc_plane.</tt><tt class="descname">Plane</tt><big>(</big><em>point=pt[0,0,0], normal=vec[0,0,1]</em><big>)</big><a class="headerlink" href="#decodes.core.dc_plane.Plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="decodes.core.dc_base.Geometry.html#decodes.core.dc_base.Geometry" title="decodes.core.dc_base.Geometry"><tt class="xref py py-class docutils literal"><span class="pre">decodes.core.dc_base.Geometry</span></tt></a></p>
+<p>a simple plane class</p>
+<dl class="method">
+<dt id="decodes.core.dc_plane.Plane.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>point=pt[0,0,0], normal=vec[0,0,1]</em><big>)</big><a class="headerlink" href="#decodes.core.dc_plane.Plane.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plane constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>point</strong> (<em>Point</em>) &#8211; Base point for a plane.</li>
+<li><strong>normal</strong> (<em>Vec</em>) &#8211; Normal direction of the new Plane. Defaults to Vec(0,0,1)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Plane object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Plane</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_plane.Plane.d">
+<tt class="descname">d</tt><a class="headerlink" href="#decodes.core.dc_plane.Plane.d" title="Permalink to this definition">¶</a></dt>
+<dd><p>the distance of this plane from the origin</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_plane.Plane.from_pts">
+<em class="property">static </em><tt class="descname">from_pts</tt><big>(</big><em>pt_a</em>, <em>pt_b</em>, <em>pt_c</em><big>)</big><a class="headerlink" href="#decodes.core.dc_plane.Plane.from_pts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_plane.Plane.is_coplanar">
+<tt class="descname">is_coplanar</tt><big>(</big><em>other</em>, <em>tolerence=1e-06</em><big>)</big><a class="headerlink" href="#decodes.core.dc_plane.Plane.is_coplanar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the planes are co-planar within a given tolerence.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Plane</em>) &#8211; Plane to be compared.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Boolean result of comparison.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_plane.Plane.is_identical">
+<tt class="descname">is_identical</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.dc_plane.Plane.is_identical" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the planes are equal.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Plane</em>) &#8211; Plane to be compared.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Boolean result of comparison.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_plane.Plane.near">
+<tt class="descname">near</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.dc_plane.Plane.near" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple of the closest point to a given Plane, its t value and the distance from the given Point to the near Point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>Point</em>) &#8211; Point to look for a near Point on the Plane.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Tuple of near point on Plane, t value and distance from given point to near point.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(Point, float, float)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_plane.Plane.near_pt">
+<tt class="descname">near_pt</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.dc_plane.Plane.near_pt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the closest point to a given Plane.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>Point</em>) &#8211; Point to look for a near Point on the Plane.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Near point on Plane.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_plane.Plane.normal">
+<tt class="descname">normal</tt><a class="headerlink" href="#decodes.core.dc_plane.Plane.normal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the plane&#8217;s normal.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Plane&#8217;s normal.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_plane.Plane.origin">
+<tt class="descname">origin</tt><a class="headerlink" href="#decodes.core.dc_plane.Plane.origin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the plane&#8217;s origin point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Plane&#8217;s origin point.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../dc_pline.html" title="dc_pline.py"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="#" title="Plane"
+             >previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_plane.html" >dc_plane.py</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Kyle Steinfeld.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

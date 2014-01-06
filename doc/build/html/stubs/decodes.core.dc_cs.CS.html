@@ -1,0 +1,201 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>CS &mdash; decodes .1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="decodes .1 documentation" href="../index.html" />
+    <link rel="up" title="dc_cs.py" href="../dc_cs.html" />
+    <link rel="next" title="CylCS" href="decodes.core.dc_cs.CylCS.html" />
+    <link rel="prev" title="CylCS" href="decodes.core.dc_cs.CylCS.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="decodes.core.dc_cs.CylCS.html" title="CylCS"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="decodes.core.dc_cs.CylCS.html" title="CylCS"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_cs.html" accesskey="U">dc_cs.py</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="cs">
+<h1>CS<a class="headerlink" href="#cs" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="decodes.core.dc_cs.CS">
+<em class="property">class </em><tt class="descclassname">decodes.core.dc_cs.</tt><tt class="descname">CS</tt><big>(</big><em>a=None</em>, <em>b=None</em>, <em>c=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_cs.CS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="decodes.core.dc_base.Geometry.html#decodes.core.dc_base.Geometry" title="decodes.core.dc_base.Geometry"><tt class="xref py py-class docutils literal"><span class="pre">decodes.core.dc_base.Geometry</span></tt></a>, <a class="reference internal" href="decodes.core.dc_base.Basis.html#decodes.core.dc_base.Basis" title="decodes.core.dc_base.Basis"><tt class="xref py py-class docutils literal"><span class="pre">decodes.core.dc_base.Basis</span></tt></a></p>
+<p>a ortho coordinate system class</p>
+<dl class="method">
+<dt id="decodes.core.dc_cs.CS.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>a=None</em>, <em>b=None</em>, <em>c=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_cs.CS.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>CS Constructor.</p>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">write docstring detailing the different ways of constructing a CS</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_cs.CS.deval">
+<tt class="descname">deval</tt><big>(</big><em>a</em>, <em>b=0</em>, <em>c=0</em><big>)</big><a class="headerlink" href="#decodes.core.dc_cs.CS.deval" title="Permalink to this definition">¶</a></dt>
+<dd><p>evaluates a point in World coordinates and returns a Point containing the coordinates of a corresponding Point defined in CS coordinates</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_cs.CS.eval">
+<tt class="descname">eval</tt><big>(</big><em>a</em>, <em>b=0</em>, <em>c=0</em><big>)</big><a class="headerlink" href="#decodes.core.dc_cs.CS.eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>evaluates a point in CS coordinates and returns a Point containing the coordinates of a corresponding Point defined in World coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_cs.CS.ixform">
+<tt class="descname">ixform</tt><a class="headerlink" href="#decodes.core.dc_cs.CS.ixform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_cs.CS.on_xy">
+<em class="property">static </em><tt class="descname">on_xy</tt><big>(</big><em>x=0</em>, <em>y=0</em>, <em>x_vec=None</em>, <em>rot=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_cs.CS.on_xy" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a coordinate system on the world xy plane
+optionally, one may define the origin_x and origin_y of the resulting CS
+one may also define ONE (but not both) of the following: 
+* a vector that controls the rotation of the resulting CS on the xy_plane. the z coordinate of this vector will be ignored.
+* a rotation value (0-&gt;2PI) that does the same thing</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_cs.CS.on_xz">
+<em class="property">static </em><tt class="descname">on_xz</tt><big>(</big><em>x=0</em>, <em>z=0</em>, <em>x_vec=None</em>, <em>rot=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_cs.CS.on_xz" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a coordinate system on the world xy plane
+optionally, one may define the origin_x and origin_z of the resulting CS
+one may also define ONE (but not both) of the following: 
+* a vector that controls the rotation of the resulting CS on the xy_plane. the y coordinate of this vector will be ignored.
+* a rotation value (0-&gt;2PI) that does the same thing</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_cs.CS.on_yz">
+<em class="property">static </em><tt class="descname">on_yz</tt><big>(</big><em>y=0</em>, <em>z=0</em>, <em>x_vec=None</em>, <em>rot=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_cs.CS.on_yz" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a coordinate system on the world xy plane
+optionally, one may define the origin_x and origin_y of the resulting CS
+one may also define ONE (but not both) of the following: 
+* a vector that controls the rotation of the resulting CS on the xy_plane. the x coordinate of this vector will be ignored.
+* a rotation value (0-&gt;2PI) that does the same thing</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_cs.CS.xAxis">
+<tt class="descname">xAxis</tt><a class="headerlink" href="#decodes.core.dc_cs.CS.xAxis" title="Permalink to this definition">¶</a></dt>
+<dd><p>depreciated</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_cs.CS.x_ray">
+<tt class="descname">x_ray</tt><a class="headerlink" href="#decodes.core.dc_cs.CS.x_ray" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_cs.CS.xform">
+<tt class="descname">xform</tt><a class="headerlink" href="#decodes.core.dc_cs.CS.xform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_cs.CS.xy_plane">
+<tt class="descname">xy_plane</tt><a class="headerlink" href="#decodes.core.dc_cs.CS.xy_plane" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_cs.CS.xz_plane">
+<tt class="descname">xz_plane</tt><a class="headerlink" href="#decodes.core.dc_cs.CS.xz_plane" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_cs.CS.yAxis">
+<tt class="descname">yAxis</tt><a class="headerlink" href="#decodes.core.dc_cs.CS.yAxis" title="Permalink to this definition">¶</a></dt>
+<dd><p>depreciated</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_cs.CS.y_ray">
+<tt class="descname">y_ray</tt><a class="headerlink" href="#decodes.core.dc_cs.CS.y_ray" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_cs.CS.yz_plane">
+<tt class="descname">yz_plane</tt><a class="headerlink" href="#decodes.core.dc_cs.CS.yz_plane" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_cs.CS.zAxis">
+<tt class="descname">zAxis</tt><a class="headerlink" href="#decodes.core.dc_cs.CS.zAxis" title="Permalink to this definition">¶</a></dt>
+<dd><p>depreciated</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_cs.CS.z_ray">
+<tt class="descname">z_ray</tt><a class="headerlink" href="#decodes.core.dc_cs.CS.z_ray" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="decodes.core.dc_cs.CylCS.html" title="CylCS"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="decodes.core.dc_cs.CylCS.html" title="CylCS"
+             >previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_cs.html" >dc_cs.py</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Kyle Steinfeld.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

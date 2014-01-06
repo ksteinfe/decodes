@@ -1,0 +1,175 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>RGon &mdash; decodes .1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="decodes .1 documentation" href="../index.html" />
+    <link rel="up" title="dc_pgon.py" href="../dc_pgon.html" />
+    <link rel="next" title="dc_plane.py" href="../dc_plane.html" />
+    <link rel="prev" title="PGon" href="decodes.core.dc_pgon.PGon.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../dc_plane.html" title="dc_plane.py"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="decodes.core.dc_pgon.PGon.html" title="PGon"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_pgon.html" accesskey="U">dc_pgon.py</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="rgon">
+<h1>RGon<a class="headerlink" href="#rgon" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="decodes.core.dc_pgon.RGon">
+<em class="property">class </em><tt class="descclassname">decodes.core.dc_pgon.</tt><tt class="descname">RGon</tt><big>(</big><em>num_of_sides</em>, <em>radius=None</em>, <em>basis=None</em>, <em>edge_length=None</em>, <em>apothem=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.RGon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="decodes.core.dc_pgon.PGon.html#decodes.core.dc_pgon.PGon" title="decodes.core.dc_pgon.PGon"><tt class="xref py py-class docutils literal"><span class="pre">decodes.core.dc_pgon.PGon</span></tt></a></p>
+<p>A Regular Polygon Class</p>
+<dl class="method">
+<dt id="decodes.core.dc_pgon.RGon.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>num_of_sides</em>, <em>radius=None</em>, <em>basis=None</em>, <em>edge_length=None</em>, <em>apothem=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.RGon.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>RGon Constructor.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_pgon.RGon._vertices_changed">
+<tt class="descname">_vertices_changed</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.RGon._vertices_changed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_pgon.RGon.apothem">
+<tt class="descname">apothem</tt><a class="headerlink" href="#decodes.core.dc_pgon.RGon.apothem" title="Permalink to this definition">¶</a></dt>
+<dd><p>the distance from the center to the midpoint of any side</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_pgon.RGon.area">
+<tt class="descname">area</tt><a class="headerlink" href="#decodes.core.dc_pgon.RGon.area" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_pgon.RGon.circle_cirscr">
+<tt class="descname">circle_cirscr</tt><a class="headerlink" href="#decodes.core.dc_pgon.RGon.circle_cirscr" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the circumscribed circle of this RGon</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_pgon.RGon.circle_inscr">
+<tt class="descname">circle_inscr</tt><a class="headerlink" href="#decodes.core.dc_pgon.RGon.circle_inscr" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the inscribed circle of this RGon</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_pgon.RGon.deflate">
+<tt class="descname">deflate</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.RGon.deflate" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a regular polygon that circumscribes this one while maintaining the same number of sides</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_pgon.RGon.edge_length">
+<tt class="descname">edge_length</tt><a class="headerlink" href="#decodes.core.dc_pgon.RGon.edge_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>the length of any edge</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_pgon.RGon.from_edge">
+<em class="property">static </em><tt class="descname">from_edge</tt><big>(</big><em>segment, num_of_sides, normal=vec[0,0,1]</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.RGon.from_edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>constructs a regular polygon given a line segment describing one edge.
+the side of the edge that the center of the resulting polygon falls is determined by taking the cross product of the given edge vector and the given normal vector</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_pgon.RGon.inflate">
+<tt class="descname">inflate</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.RGon.inflate" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a regular polygon inscribed inside this one while maintaining the same number of sides</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_pgon.RGon.interior_angle">
+<tt class="descname">interior_angle</tt><a class="headerlink" href="#decodes.core.dc_pgon.RGon.interior_angle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_pgon.RGon.num_of_sides">
+<tt class="descname">num_of_sides</tt><a class="headerlink" href="#decodes.core.dc_pgon.RGon.num_of_sides" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_pgon.RGon.radius">
+<tt class="descname">radius</tt><a class="headerlink" href="#decodes.core.dc_pgon.RGon.radius" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_pgon.RGon.subclass_attr">
+<tt class="descname">subclass_attr</tt><em class="property"> = ['_edges']</em><a class="headerlink" href="#decodes.core.dc_pgon.RGon.subclass_attr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_pgon.RGon.to_pgon">
+<tt class="descname">to_pgon</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.RGon.to_pgon" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../dc_plane.html" title="dc_plane.py"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="decodes.core.dc_pgon.PGon.html" title="PGon"
+             >previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_pgon.html" >dc_pgon.py</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Kyle Steinfeld.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

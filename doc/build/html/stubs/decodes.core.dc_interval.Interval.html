@@ -1,0 +1,393 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Interval &mdash; decodes .1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="decodes .1 documentation" href="../index.html" />
+    <link rel="up" title="dc_interval.py" href="../dc_interval.html" />
+    <link rel="next" title="dc_line.py" href="../dc_line.html" />
+    <link rel="prev" title="Interval" href="" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../dc_line.html" title="dc_line.py"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="#" title="Interval"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_interval.html" accesskey="U">dc_interval.py</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="interval">
+<h1>Interval<a class="headerlink" href="#interval" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="decodes.core.dc_interval.Interval">
+<em class="property">class </em><tt class="descclassname">decodes.core.dc_interval.</tt><tt class="descname">Interval</tt><big>(</big><em>a=0</em>, <em>b=1</em><big>)</big><a class="headerlink" href="#decodes.core.dc_interval.Interval" title="Permalink to this definition">¶</a></dt>
+<dd><p>an interval class</p>
+<dl class="method">
+<dt id="decodes.core.dc_interval.Interval.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>a=0</em>, <em>b=1</em><big>)</big><a class="headerlink" href="#decodes.core.dc_interval.Interval.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interval Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; First number of the interval.</li>
+<li><strong>b</strong> &#8211; Second number of the interval.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Interval Object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Interval.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_interval.Interval.delta">
+<tt class="descname">delta</tt><a class="headerlink" href="#decodes.core.dc_interval.Interval.delta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the signed delta of the interval, calculated as b-a</p>
+<p>For an unsigned representation, use length</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body">Delta of an interval.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_interval.Interval.deval">
+<tt class="descname">deval</tt><big>(</big><em>number</em><big>)</big><a class="headerlink" href="#decodes.core.dc_interval.Interval.deval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a parameter cooresponding to the position of the given number within this Interval.
+Effectively, the opposite of eval()</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param number:</th><td class="field-body">Number to find the parameter of.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type number:</th><td class="field-body">float</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body">Parameter.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="highlight-python"><pre>print Interval(10,20).deval(12)
+&gt;&gt;0.2
+print Interval(10,20).deval(25)
+&gt;&gt;1.5</pre>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_interval.Interval.divide">
+<tt class="descname">divide</tt><big>(</big><em>divs=10</em>, <em>include_last=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_interval.Interval.divide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divides this interval into a list of values equally spaced between a and b.
+Unless include_last is set to True, returned list will not include Interval.b: the first value returned is Interval.a and the last is Interval.b-(Interval.delta/divs)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>divs</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of interval divisions.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of numbers in which a list is divided.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_interval.Interval.encompass">
+<em class="property">static </em><tt class="descname">encompass</tt><big>(</big><em>values=[0]</em><big>)</big><a class="headerlink" href="#decodes.core.dc_interval.Interval.encompass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an interval defined by the minumum and maximum of a list of values</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_interval.Interval.eval">
+<tt class="descname">eval</tt><big>(</big><em>t</em>, <em>limited=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_interval.Interval.eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates a given parameter within this interval.
+For example, given an Interval(0-&gt;2*math.pi): eval(0.5) == math.pi</p>
+<blockquote>
+<div><blockquote>
+<div>Optionally, you may limit the resulting output to this interval</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param t:</th><td class="field-body">Number to evaluate.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type t:</th><td class="field-body">float</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body">Evalauted number.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="highlight-python"><pre>print Interval(10,20).eval(0.2)
+&gt;&gt;12.0
+print Interval(10,20).deval(1.5)
+&gt;&gt;25.0</pre>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_interval.Interval.invert">
+<tt class="descname">invert</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_interval.Interval.invert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of this interval with swapped values.
+Such that this.a = new.b and this.b = new.a</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Interval object with swapped values.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Interval</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_interval.Interval.is_ordered">
+<tt class="descname">is_ordered</tt><a class="headerlink" href="#decodes.core.dc_interval.Interval.is_ordered" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the start value of the interval is smaller than the end value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Boolean value</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_interval.Interval.length">
+<tt class="descname">length</tt><a class="headerlink" href="#decodes.core.dc_interval.Interval.length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the absolute value of length of the interval.</p>
+<p>For a signed representation, use delta</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body">Absolute value of length of an interval.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_interval.Interval.limit_val">
+<tt class="descname">limit_val</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#decodes.core.dc_interval.Interval.limit_val" title="Permalink to this definition">¶</a></dt>
+<dd><p>Limits a given value to the min and max of this Interval</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_interval.Interval.list">
+<tt class="descname">list</tt><a class="headerlink" href="#decodes.core.dc_interval.Interval.list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of the interval&#8217;s start and end values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of interval&#8217;s components</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="decodes.core.dc_interval.Interval.mid">
+<tt class="descname">mid</tt><a class="headerlink" href="#decodes.core.dc_interval.Interval.mid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_interval.Interval.order">
+<tt class="descname">order</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_interval.Interval.order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of this interval with ordered values, such that a &lt; b</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Ordered copy of Interval object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Interval</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_interval.Interval.pi">
+<em class="property">static </em><tt class="descname">pi</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_interval.Interval.pi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an interval from 0-&gt;PI</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Interval</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_interval.Interval.rand_interval">
+<tt class="descname">rand_interval</tt><big>(</big><em>divs</em><big>)</big><a class="headerlink" href="#decodes.core.dc_interval.Interval.rand_interval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divides an interval into a list of randomly sized subintervals(interval objects).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>divs</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of subintervals.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of subintervals (interval objects).</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_interval.Interval.remap">
+<em class="property">static </em><tt class="descname">remap</tt><big>(</big><em>val</em>, <em>source_interval</em>, <em>target_interval=None</em>, <em>limited=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_interval.Interval.remap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates a number from its position within the source interval to its relative position in the target interval.  Optionally, you may limit the resulting output to the target interval</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>val</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Number to remap.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The given number remapped to the target interval.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_interval.Interval.subinterval">
+<tt class="descname">subinterval</tt><big>(</big><em>divs</em><big>)</big><a class="headerlink" href="#decodes.core.dc_interval.Interval.subinterval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divides an interval into a list of equal size subintervals(interval objects).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>divs</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of subintervals.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of subintervals (interval objects).</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="decodes.core.dc_interval.Interval.twopi">
+<em class="property">static </em><tt class="descname">twopi</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_interval.Interval.twopi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an interval from 0-&gt;2PI</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Interval</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../dc_line.html" title="dc_line.py"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="#" title="Interval"
+             >previous</a> |</li>
+        <li><a href="../index.html">decodes .1 documentation</a> &raquo;</li>
+          <li><a href="../dc_interval.html" >dc_interval.py</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Kyle Steinfeld.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
