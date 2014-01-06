@@ -14,7 +14,6 @@ class BasisError(GeometricError):
 class DomainError(GeometricError):
     pass
 
-
 class Geometry(object):
     """
     A base geometry class for all other geometry to inherit.
@@ -58,6 +57,11 @@ class Geometry(object):
         else : self.props['color'] = Color(a,b,c)
         
     def get_color(self):
+        """Gets the geometry's color
+
+            :result: Gets the geometry's color.
+            :rtype: Color
+        """
         # TODO: test if object has props
         # TODO: test if props dict contains entry for color
         if hasattr(self, 'props') : return self.props['color']
