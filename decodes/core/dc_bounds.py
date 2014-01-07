@@ -35,6 +35,7 @@ class Bounds(Geometry):
             return Point(self.ival_x.mid,self.ival_y.mid,self.ival_z.mid)
         except:
             return Point(self.ival_x.mid,self.ival_y.mid)
+            
     @property
     def dim_x(self):
         return self.ival_x.delta
