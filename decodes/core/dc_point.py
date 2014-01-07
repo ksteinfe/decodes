@@ -32,8 +32,8 @@ class Point(Vec):
     
     def __mul__(self, other):
         """Overloads the multiplication **(*)** operator.
-        If a transformation is provided, applies the transformation to this point in a way equivilent to the expression ``other * self``.
-        otherwise, returns a new point that results from multiplying each of this point's coordinates by the value provided.
+        If a transformation is provided, applies the transformation to this point in a way equivalent to the expression ``other * self``.
+        otherwise, returns a new point that results from multiplying each of the point's coordinates by the value provided.
         
             :param other: Point or Vec to be multiplied.
             :type other: Point or Vec
