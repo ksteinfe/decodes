@@ -59,7 +59,7 @@ class Point(Vec):
     
     def __sub__(self, other): 
         """Overloads the subtraction **(-)** operator
-        Returns a new point that results from subtracting the other point's (or vector's) worldcoordinates from this point's world coordinates.
+        Returns a new point that results from subtracting the other point's (or vector's) world coordinates from this point's world coordinates.
         No matter the basis of the inputs, the resulting point will have no basis.
 
             :param other: Point or Vec to be subtracted.
@@ -72,7 +72,7 @@ class Point(Vec):
     def __truediv__(self,other): return self.__div__(other)
     def __div__(self, other): 
         """Overloads the division **(/)** operator
-        Returns a new point that results from divding each of this point's world coordinates by the value provided.
+        Returns a new point that results from dividing each of this point's world coordinates by the value provided.
         No matter the basis of the inputs, the resulting point will have no basis.
         
             :param other: Point or Vec to be divided.
@@ -83,6 +83,13 @@ class Point(Vec):
         return Point(self.x/float(other), self.y/float(other), self.z/float(other))
 
     def __repr__(self):
+        """Prints point coordinates in the following format.
+        
+        ::
+        
+            pt[{x},{y},{z}]
+        
+        """
         return "pt[{0},{1},{2}]".format(self.x,self.y,self.z)
 
     def __lt__(self, other):
@@ -118,7 +125,7 @@ class Point(Vec):
             return False
 
     def __le__(self, other): 
-        """Overloads the less or equal **(<=)** operator.
+        """Overloads the less than or equal to **(<=)** operator.
         
             :param other: Point to be compared.
             :type other: Point
@@ -141,7 +148,7 @@ class Point(Vec):
             return False
 
     def __ne__(self, other): 
-        """Overloads the nor equal **(!=)** operator.
+        """Overloads the not equal **(!=)** operator.
         
             :param other: Point to be compared.
             :type other: Point
@@ -154,7 +161,7 @@ class Point(Vec):
             return False
 
     def __ge__(self, other): 
-        """Overloads the greater or equal **(>=)** operator.
+        """Overloads the greater than or equal to **(>=)** operator.
         
             :param other: Point to be compared.
             :type other: Point
@@ -164,7 +171,7 @@ class Point(Vec):
         return True if (self > other or self == other) else False 
     
     def distance2(self,other): 
-        """Returns the distance between this point and the other point in local space. Both points must use the same basis.
+        """Returns the distance squared between this point and the other point in local space. Both points must use the same basis.
         
             :param other: Point to calculate the distance from.
             :type other: Point
@@ -188,33 +195,33 @@ class Point(Vec):
         
             :param other: Destination vector.
             :type other: Vec
-            :result: A Point projected onto a Vector.
+            :result: A point projected onto a Vector.
             :rtype: Point
         """
         return Point( Vec(self.x,self.y,self.z).projected(other) )
 
     @staticmethod
     def near(pt, pts):
-        """ Returns a reference to a Point from the given list of Points which is nearest to the source Point.
+        """Returns a point from the given list of points which is nearest to the source point.
 
-            :param pt: Source Point
+            :param pt: Source point
             :type pt: Point
-            :param pt: A list of Points through which to search
-            :type pts: [Point]
-            :result: A reference to a Point from the list which is nearest to the source Point
+            :param pts: A list of points through which to search
+            :type pts: Point
+            :result: A point from the list which is nearest to the source point
             :rtype: Point
         """
         return pts[Point.near_index(pt,pts)]
 
     @staticmethod
     def near_index(pt, pts):
-        """ Returns the index of the Point within the given list of Points which is nearest to the source Point.
+        """ Returns the index of the point within the given list of points which is nearest to the source point.
 
-            :param pt: Source Point
+            :param pt: Source point
             :type pt: Point
-            :param pt: A list of Points through which to search
-            :type pts: [Point]
-            :result: The index of the nearest Point
+            :param pts: A list of points through which to search
+            :type pts: Point
+            :result: The index of the nearest point
             :rtype: int
         """
         dists = [pt.distance2(p) for p in pts]
@@ -222,26 +229,26 @@ class Point(Vec):
 
     @staticmethod
     def far(pt, pts):
-        """ Returns a reference to a Point from the given list of Points which is furthest from the source Point.
+        """ Returns a point from the given list of points which is furthest from the source point.
 
-            :param pt: Source Point
+            :param pt: Source point
             :type pt: Point
-            :param pt: A list of Points through which to search
-            :type pts: [Point]
-            :result: A reference to a Point from the list which is furthest from the source Point
+            :param pts: A list of points through which to search
+            :type pts: Point
+            :result: A point from the list which is furthest from the source point
             :rtype: Point
         """
         return pts[Point.far_index(pt,pts)]
 
     @staticmethod
     def far_index(pt, pts):
-        """ Returns the index of the Point within the given list of Points which is furthest from the source Point.
+        """ Returns the index of the point within the given list of points which is furthest from the source point.
 
-            :param pt: Source Point
+            :param pt: Source point
             :type pt: Point
-            :param pt: A list of Points through which to search
-            :type pts: [Point]
-            :result: The index of the furthest Point
+            :param pts: A list of points through which to search
+            :type pts: Point
+            :result: The index of the furthest point
             :rtype: int
         """
         dists = [pt.distance2(p) for p in pts]
@@ -249,14 +256,14 @@ class Point(Vec):
 
     @staticmethod
     def interpolate(p0,p1,t=0.5): 
-        """Returns a new point which is the result of an interpolation between the two given points at the given t-value
+        """Returns a new point which is the result of an interpolation between the two given points at the given t-value.
         
             :param p0: First point to interpolate.
             :type p0: Point
-            :param p0: Second point to interpolate.
-            :type p0: Point
-            :param p0: t-value of interpolation.
-            :type p0: float
+            :param p1: Second point to interpolate.
+            :type p1: Point
+            :param t: t-value of interpolation.
+            :type t: float
             :result: Interpolated point.
             :rtype: Point
         """
@@ -268,7 +275,7 @@ class Point(Vec):
         """Returns the centroid of a point cloud.
         
             :param points: Point cloud
-            :type p0: list
+            :type points: list
             :result: Centroid of point cloud.
             :rtype: Point
         """
@@ -276,13 +283,13 @@ class Point(Vec):
     
     @staticmethod
     def random(interval=None,constrain2d=False):
-        """Returns a random point within the given (optional) range
+        """Returns a random point within the given (optional) range.
         
-            :param interval: Range to get the random value from.
+            :param interval: Range to get the random value from
             :type interval: Interval
             :param constrain2d: Constrain the point to 2d space
             :type constrain2d: bool
-            :result: Random point.
+            :result: Random point
             :rtype: Point
         """
         if interval is None:
@@ -295,6 +302,8 @@ class Point(Vec):
         
     @staticmethod
     def cull_duplicates(pts, threshold = None):
+        """
+        """
         if threshold == None:
             culled_pts = []
             for pt in pts: 
