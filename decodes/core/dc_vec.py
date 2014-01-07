@@ -314,7 +314,7 @@ class Vec(Geometry):
     
     @staticmethod
     def interpolate(v0,v1,t=0.5):
-        """Interpolates between vectors v0 and v1 at param t
+        """Interpolates between vectors v0 and v1 at param t.
         
             :param v0: First Vec.
             :type v0: Vec
@@ -354,7 +354,7 @@ class Vec(Geometry):
 
     @staticmethod
     def average(vecs):
-        """Returns the average of a list of vectors
+        """Returns the average of a list of vectors.
         
             :param vecs: List of vectors to average. 
             :type vecs: list
@@ -369,7 +369,7 @@ class Vec(Geometry):
 
     @staticmethod
     def bisector(v0,v1): 
-        """Returns the normalized bisector of two vectors
+        """Returns the normalized bisector of two vectors.
         
             :param v0: First vector to get the bisector from.
             :type v0: Vec
@@ -381,7 +381,7 @@ class Vec(Geometry):
         return Vec.average([v0.normalized(),v1.normalized()])            
 
     def normalized(self, length=1.0):
-        """Return a new vector in the same direction, but given length (default 1.0)
+        """Return a new vector in the same direction, but given length (default 1.0).
         
             :param length: New length for the Vec (default 1.0)
             :type length: float
@@ -393,7 +393,7 @@ class Vec(Geometry):
         return Vec(self.x * factor, self.y * factor, self.z * factor)        
 
     def inverted(self):
-        """Return a new vector pointing in the opposite direction
+        """Return a new vector pointing in the opposite direction.
         
             :result: Inverted vector.
             :rtype: Vec
@@ -401,7 +401,7 @@ class Vec(Geometry):
         return Vec(-self.x,-self.y,-self.z)
     
     def rounded(self,n=0): 
-        """Returns a new vector with coords rounded to n-digits (defaults to 0 digits (nearest int) 
+        """Returns a new vector with coords rounded to n-digits (defaults to 0 digits (nearest int). 
         
             :param n: Number of digits to round the Vec's coordinates.
             :type n: int
@@ -411,7 +411,7 @@ class Vec(Geometry):
         return Vec(round(self.x,n),round(self.y,n),round(self.z,n))
     
     def limited(self,n=1.0): 
-        """Returns a new vector limited to a given length
+        """Returns a new vector limited to a given length.
         
             :param n: Value to limit the Vec's length.
             :type n: float
@@ -442,7 +442,7 @@ class Vec(Geometry):
         return self.dot(other.normalized())
 
     def projected(self,other): 
-        """Returns a new vector projected onto a destination vector
+        """Returns a new vector projected onto a destination vector.
         
             :param other: Destination vector.
             :type other: Vec
@@ -454,7 +454,7 @@ class Vec(Geometry):
     def cross(self, other):
         """Return a new vector, the cross product.
         a x b = (a2b3 - a3b2, a3b1 - a1b3, a1b2 - a2b1)
-        This will be at right angles to both self and other, with a length
+        This will be at right angles to both self and other, with a length.
         
             :param other: Second vector to calculate cross product. 
             :type other: Vec
