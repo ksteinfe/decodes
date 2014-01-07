@@ -214,6 +214,7 @@ class QuadTree():
         if self.has_children: return False
         
         sub_bnds = self.bnd//2
+        print sub_bnds
         self.children = [QuadTree(self.cap,sub_bnd) for sub_bnd in sub_bnds]
 
         for pt in self._pts : 
@@ -247,9 +248,12 @@ class QuadTree():
         return ret_pts
         
     @staticmethod
-    def encompass(capacity = 4, pts = [Point()]):
-        new_cap = capacity
-        q = QuadTree(capacity=new_cap, bounds=Bounds.encompass(pts))
-        for p in pts : q.append(p)
+    def encompass(pts = [Point()]):
+        print "creating QuadTree:"
+        q = QuadTree(5,Bounds.encompass(pts))
+        print "appending points:"
+        for p in pts : 
+            print p
+            q.append(p)
         return q
         
