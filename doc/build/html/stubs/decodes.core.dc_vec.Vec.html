@@ -86,12 +86,12 @@
 <dl class="method">
 <dt id="decodes.core.dc_vec.Vec.angle">
 <tt class="descname">angle</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.dc_vec.Vec.angle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the angle in radians between this vector and the other vector return value is constrained to the range [-PI,PI].</p>
+<dd><p>Returns the angle in radians between this vector and the other vector. Return value is constrained to the range [-PI,PI].</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Second vector to for angle calculation.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Second vector for angle calculation.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Angle in radians.</td>
 </tr>
@@ -167,19 +167,31 @@
 <dd><p>Return a new vector, the cross product.
 a x b = (a2b3 - a3b2, a3b1 - a1b3, a1b2 - a2b1)
 This will be at right angles to both self and other, with a length</p>
-<div class="highlight-python"><pre>len(self) * len(other) * sin(angle_between_them)
-
-:param other: Second vector to calculate cross product. 
-:type other: Vec
-:result: New vector.
-:rtype: Vec</pre>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param other:</th><td class="field-body">Second vector to calculate cross product.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type other:</th><td class="field-body">Vec</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">New vector.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">angle_between_them</span><span class="p">)</span>
+</pre></div>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_vec.Vec.dot">
 <tt class="descname">dot</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.dc_vec.Vec.dot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the dot product of this vector and the other vector</p>
+<dd><p>Computes the dot product of this vector and the other vector.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -238,7 +250,7 @@ This will be at right angles to both self and other, with a length</p>
 <dl class="attribute">
 <dt id="decodes.core.dc_vec.Vec.is_2d">
 <tt class="descname">is_2d</tt><a class="headerlink" href="#decodes.core.dc_vec.Vec.is_2d" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns True if the vector is 2d</p>
+<dd><p>Returns True if the vector is 2d.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -277,11 +289,17 @@ This will be at right angles to both self and other, with a length</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Vec to be compared.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>other</strong> (<em>Vec</em>) &#8211; Vec to be compared.</li>
+<li><strong>tol</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Tolerance of difference.</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Boolean result of comparison.</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Boolean result of comparison.</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -308,7 +326,7 @@ This will be at right angles to both self and other, with a length</p>
 <dl class="attribute">
 <dt id="decodes.core.dc_vec.Vec.length">
 <tt class="descname">length</tt><a class="headerlink" href="#decodes.core.dc_vec.Vec.length" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the length of this vector. Use vec.length2 when possible, as it is cheaper to calculate</p>
+<dd><p>Returns the length of this vector. Use vec.length2 when possible, as it is cheaper to calculate.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -381,7 +399,7 @@ This will be at right angles to both self and other, with a length</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Vector to project vector to.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Destination vector.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Projected vector.</td>
 </tr>
@@ -394,12 +412,12 @@ This will be at right angles to both self and other, with a length</p>
 <dl class="method">
 <dt id="decodes.core.dc_vec.Vec.projected_length">
 <tt class="descname">projected_length</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.dc_vec.Vec.projected_length" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the length of the vector which results from the projection of this onto other</p>
+<dd><p>Returns the length of the vector which results from projecting a vector onto a destination vector.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Vector to project vector to.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Destination vector.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Projected vector length.</td>
 </tr>
@@ -442,7 +460,7 @@ This will be at right angles to both self and other, with a length</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of digits to rounf the Vec&#8217;s coordinates.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of digits to round the Vec&#8217;s coordinates.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Rounded vector.</td>
 </tr>
@@ -455,19 +473,19 @@ This will be at right angles to both self and other, with a length</p>
 <dl class="method">
 <dt id="decodes.core.dc_vec.Vec.to_line">
 <tt class="descname">to_line</tt><big>(</big><em>pt=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_vec.Vec.to_line" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a ray from a given point along this vector</p>
+<dd><p>Returns a line from a given point along this vector.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_vec.Vec.to_ray">
 <tt class="descname">to_ray</tt><big>(</big><em>pt=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_vec.Vec.to_ray" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a ray from a given point along this vector</p>
+<dd><p>Returns a ray from a given point along this vector.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_vec.Vec.to_tuple">
 <tt class="descname">to_tuple</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_vec.Vec.to_tuple" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a tuple of the vec components</p>
+<dd><p>Returns a tuple of the Vec components.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -483,27 +501,71 @@ This will be at right angles to both self and other, with a length</p>
 <dl class="attribute">
 <dt id="decodes.core.dc_vec.Vec.tup">
 <tt class="descname">tup</tt><a class="headerlink" href="#decodes.core.dc_vec.Vec.tup" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns x, y, and z values of a vector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">x, y and z values.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_vec.Vec.ux">
 <em class="property">static </em><tt class="descname">ux</tt><big>(</big><em>length=1.0</em><big>)</big><a class="headerlink" href="#decodes.core.dc_vec.Vec.ux" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns unit vector (length = 1.0) in the x-direction.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Unit Vec in x-axis.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_vec.Vec.uy">
 <em class="property">static </em><tt class="descname">uy</tt><big>(</big><em>length=1.0</em><big>)</big><a class="headerlink" href="#decodes.core.dc_vec.Vec.uy" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns unit vector (length 1.0) in the y-direction.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Unit Vec in the y-axis.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_vec.Vec.uz">
 <em class="property">static </em><tt class="descname">uz</tt><big>(</big><em>length=1.0</em><big>)</big><a class="headerlink" href="#decodes.core.dc_vec.Vec.uz" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns unit vector (length = 1.0) in the z-direction.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Unit vec in the z-axis.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_vec.Vec.x">
 <tt class="descname">x</tt><a class="headerlink" href="#decodes.core.dc_vec.Vec.x" title="Permalink to this definition">¶</a></dt>
-<dd><p>The x-value of this vector.</p>
+<dd><p>Returns the x-value of this vector.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -519,7 +581,7 @@ This will be at right angles to both self and other, with a length</p>
 <dl class="attribute">
 <dt id="decodes.core.dc_vec.Vec.y">
 <tt class="descname">y</tt><a class="headerlink" href="#decodes.core.dc_vec.Vec.y" title="Permalink to this definition">¶</a></dt>
-<dd><p>The y-value of this vector.</p>
+<dd><p>Returns the y-value of this vector.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -535,7 +597,7 @@ This will be at right angles to both self and other, with a length</p>
 <dl class="attribute">
 <dt id="decodes.core.dc_vec.Vec.z">
 <tt class="descname">z</tt><a class="headerlink" href="#decodes.core.dc_vec.Vec.z" title="Permalink to this definition">¶</a></dt>
-<dd><p>The z-value of this vector.</p>
+<dd><p>Returns the z-value of this vector.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
