@@ -249,7 +249,7 @@ class QuadTree():
     @staticmethod
     def encompass(capacity = 4, pts = [Point()]):
         new_cap = capacity
-        q = QuadTree(capacity=new_cap, Bounds.encompass(pts))
+        q = QuadTree(capacity=new_cap, bounds=Bounds.encompass(pts))
         for p in pts : q.append(p)
         return q
         
