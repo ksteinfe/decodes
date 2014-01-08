@@ -320,15 +320,19 @@ class QuadTree():
         """
     
         if not self.contains(pt) : return False
-        unique_pts = Point.cull_duplicates(self._pts)
-        if not self.has_children and len(unique_pts) < self.cap:
-            self._pts.append(pt)
-            return True
-        else :
-            if not self.has_children : self._divide()
+        if not self.has_children :
+            if len(Point.cull_duplicates(self._pts)) < self.cap:
+                self._pts.append(pt)
+                return True
+            else :
+                self._divide()
+        
+        if self.has_children :
             for child in self.children:
                 if child.append(pt) : return True
             return False
+        else:
+            raise("quadtree.append()... how did i get here?")
         
     def _divide(self) :
         """Divides self into sub regions. Starts at bottom left and moves clockwise.
@@ -349,7 +353,7 @@ class QuadTree():
                     break
             if not accepted : "no child accepted this point!"
             
-        self._pts = [] # need empty list so Point.cull_duplicates will work
+        self._pts = None
         return True
     
     def contains(self,pt):
