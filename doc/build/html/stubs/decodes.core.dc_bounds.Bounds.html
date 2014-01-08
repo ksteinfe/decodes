@@ -80,7 +80,7 @@ axis are oriented to world axis</p>
 <dl class="attribute">
 <dt id="decodes.core.dc_bounds.Bounds.corners">
 <tt class="descname">corners</tt><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.corners" title="Permalink to this definition">¶</a></dt>
-<dd><p>moves counter clockwise, like so:</p>
+<dd><p>Moves counter clockwise, like so:</p>
 <p>(-,-)(+,-)(+,+)(-,+)</p>
 </dd></dl>
 
@@ -121,12 +121,45 @@ axis are oriented to world axis</p>
 <dl class="staticmethod">
 <dt id="decodes.core.dc_bounds.Bounds.encompass">
 <em class="property">static </em><tt class="descname">encompass</tt><big>(</big><em>pts=[pt[0,0,0]]</em><big>)</big><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.encompass" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Constructs a Bounds that encompasses all Points in pts.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pts</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; A list of Points.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">A Bounds that includes all Points in pts.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Bounds</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_bounds.Bounds.eval">
-<tt class="descname">eval</tt><big>(</big><em>x</em>, <em>y</em>, <em>z=0</em><big>)</big><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.eval" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<tt class="descname">eval</tt><big>(</big><em>u</em>, <em>v</em>, <em>w=0</em><big>)</big><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a point at normalized coordinates (u,v,w). If all coordinates are within a range of [0,1] then the point is in the Bounds. Otherwise the point is outside the Bounds.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>u</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; u-coordinate of a Point.</li>
+<li><strong>v</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; v-coordinate of a Point.</li>
+<li><strong>w</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; w-coordinate of a Point.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">A Point with normalized coordinates in the Bounds.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Point</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_bounds.Bounds.is_2d">
@@ -143,35 +176,104 @@ axis are oriented to world axis</p>
 <dl class="method">
 <dt id="decodes.core.dc_bounds.Bounds.near_pt">
 <tt class="descname">near_pt</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.near_pt" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the closest point to this Bounds.  If the point in within the bounds, simply returns the point</p>
+<dd><p>Returns the closest point within this Bounds.  If the point is already within the bounds, simply returns the point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>Point</em>) &#8211; Point.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">A Point within this Bounds.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_bounds.Bounds.overlaps">
 <tt class="descname">overlaps</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.overlaps" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns True if this Bounds overlaps the given Bounds.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Bounds</em>) &#8211; Given Bounds to be compared with this Bounds.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Boolean value</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_bounds.Bounds.subbounds">
 <tt class="descname">subbounds</tt><big>(</big><em>divs</em><big>)</big><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.subbounds" title="Permalink to this definition">¶</a></dt>
-<dd><p>produces subboundaries.
-starts at bottom left, moves from left to right and then bottom to top.</p>
+<dd><p>Produces sub-boundaries. Starts at bottom left, moves from left to right and then bottom to top.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>divs</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of sub-boundaries.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">A Bounds divided into sub-bounds.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Bounds</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_bounds.Bounds.to_polyline">
 <tt class="descname">to_polyline</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.to_polyline" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a PLine along the perimeter of a Bounds.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">PLine around the Bounds.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">PLine</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_bounds.Bounds.unit_cube">
 <em class="property">static </em><tt class="descname">unit_cube</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.unit_cube" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a unit cube Bounds (3D).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Unit cube Bounds.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Bounds</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_bounds.Bounds.unit_square">
 <em class="property">static </em><tt class="descname">unit_square</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.unit_square" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a unit square Bounds (2D) in the xy plane.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Unit square Bounds.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Bounds</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
