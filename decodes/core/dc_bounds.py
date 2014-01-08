@@ -224,7 +224,8 @@ class QuadTree():
 
     def append(self, pt) :
         if not self.contains(pt) : return False
-        if not self.has_children and len(self._pts) < self.cap:
+        unique_pts = Point.cull_duplicates(self._pts)
+        if not self.has_children and len(unique_pts) < self.cap:
             self._pts.append(pt)
             return True
         else :
