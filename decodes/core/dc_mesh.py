@@ -8,12 +8,12 @@ class Mesh(HasPts):
     """
     a very simple mesh class
     """
-    subclass_attr = [] # this list of props is unset anytime this HasPts object changes
+    subclass_attr = [] # this list of props is unset any time this HasPts object changes
     
     def __init__(self, vertices=None, faces=None, basis=None):
         """Mesh Constructor
 
-            :param vertices: The vertices of the mesh
+            :param vertices: The vertices of the mesh.
             :type vertices: [Point]
             :param faces: List of ordered faces.
             :type faces: [int]
@@ -30,7 +30,7 @@ class Mesh(HasPts):
     def faces(self): 
         """Returns a list of mesh faces.
         
-            :returns: List of mesh faces.
+            :result: List of mesh faces.
             :rtype: list
         """
         return self._faces
@@ -40,7 +40,8 @@ class Mesh(HasPts):
         
             :param a,b,c,d: Face to be added to the list of faces.
             :type a,b,c,d: int.
-            :returns: Modifies list of faces.
+            :result: Modifies list of faces.
+            :rtype: None
         """
         #TODO: add lists of faces just the same
         
@@ -53,7 +54,7 @@ class Mesh(HasPts):
         
             :param index: Face's index
             :type index: int
-            :returns: Vertice.
+            :returns: Vertices.
             :rtype: Point
         """
         return [self.pts[i] for i in self.faces[index]]
@@ -93,7 +94,7 @@ class Mesh(HasPts):
             :param msh: Mesh to explode.
             :type msh: Mesh
             :returns: List of meshes.
-            :type: list
+            :type: [Mesh]
         """
         exploded_meshes = []
         for face in msh.faces:
