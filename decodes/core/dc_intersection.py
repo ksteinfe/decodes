@@ -119,9 +119,28 @@ class Intersector(object):
             # if no intersection found, test to see if LinearEntity lies within the plane of the pgon
             pln = Plane.from_pts(line.spt,line.ept,line.spt+line.vec.cross(pgon.basis.z_axis))
             if pln.is_coplanar(pgon.basis.xy_plane):
-                self.log = "Line in Plane of Pgon"
-                raise NotImplementedError("I don't know how to intersect a polygon with a line that lines in the plane of the polygon")
-                return False
+                self.log = "LinearEntity in Plane of Pgon"
+                success = False
+                for edge in pgon.edges:
+                    xsec = Intersector()
+                    edge_success = xsec.of(edge,line)
+                    if edge_success:
+                        # we've found an intersection between this segment and our LinearEntity, check if point lies on edge
+                        t = Line(edge.spt,edge.vec).near(xsec.results[0])[1]
+                        if t>=0.0 and t<=1.0:
+                            # now check that intersection lies on our LinearEntity
+                            is_on = True
+                            t = Line(line.spt,line.vec).near(xsec.results[0])[1]
+                            #print type(line), t
+                            if type(line) == Segment:
+                                if t<0.0: is_on = False
+                                if t>1.0: is_on = False
+                            elif type(line) == Ray and t<0.0: is_on = False
+
+                            if is_on:
+                                self._geom.extend(xsec.results)
+                                success = True
+                return success
             else:
                 self.log = xsec.log + " of Pgon"
                 return False
