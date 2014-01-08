@@ -68,7 +68,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>point</strong> (<em>Point</em>) &#8211; Base point for a plane.</li>
-<li><strong>normal</strong> (<em>Vec</em>) &#8211; Normal direction of the new Plane. Defaults to Vec(0,0,1)</li>
+<li><strong>normal</strong> (<em>Vec</em>) &#8211; Normal direction of the new Plane. Defaults to Vec(0,0,1).</li>
 </ul>
 </td>
 </tr>
@@ -85,27 +85,53 @@
 <dl class="attribute">
 <dt id="decodes.core.dc_plane.Plane.d">
 <tt class="descname">d</tt><a class="headerlink" href="#decodes.core.dc_plane.Plane.d" title="Permalink to this definition">¶</a></dt>
-<dd><p>the distance of this plane from the origin</p>
+<dd><p>The distance of this plane from the origin</p>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_plane.Plane.from_pts">
 <em class="property">static </em><tt class="descname">from_pts</tt><big>(</big><em>pt_a</em>, <em>pt_b</em>, <em>pt_c</em><big>)</big><a class="headerlink" href="#decodes.core.dc_plane.Plane.from_pts" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="decodes.core.dc_plane.Plane.is_coplanar">
-<tt class="descname">is_coplanar</tt><big>(</big><em>other</em>, <em>tolerence=1e-06</em><big>)</big><a class="headerlink" href="#decodes.core.dc_plane.Plane.is_coplanar" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns True if the planes are co-planar within a given tolerence.</p>
+<dd><p>Constructs plane from points. A plane cannot be constructed from collinear points.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Plane</em>) &#8211; Plane to be compared.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pt_a</strong> (<em>Point</em>) &#8211; First point.</li>
+<li><strong>pt_b</strong> (<em>Point</em>) &#8211; Second point.</li>
+<li><strong>pt_c</strong> (<em>Point</em>) &#8211; Third point.</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Boolean result of comparison.</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Plane object.</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Plane</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_plane.Plane.is_coplanar">
+<tt class="descname">is_coplanar</tt><big>(</big><em>other</em>, <em>tolerance=1e-06</em><big>)</big><a class="headerlink" href="#decodes.core.dc_plane.Plane.is_coplanar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the planes are co-planar within a given tolerance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>other</strong> (<em>Plane</em>) &#8211; Plane to be compared.</li>
+<li><strong>tolerance</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Tolerance of difference between the two planes.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Boolean result of comparison.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -132,14 +158,14 @@
 <dl class="method">
 <dt id="decodes.core.dc_plane.Plane.near">
 <tt class="descname">near</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.dc_plane.Plane.near" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a tuple of the closest point to a given Plane, its t value and the distance from the given Point to the near Point.</p>
+<dd><p>Returns a tuple of the closest point to a given Plane, its t value, and the distance from the given point to the near point.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>Point</em>) &#8211; Point to look for a near Point on the Plane.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>Point</em>) &#8211; Point to look for a near point on the plane.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Tuple of near point on Plane, t value and distance from given point to near point.</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Tuple of near point on plane, t value and distance from given point to near point.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(Point, float, float)</td>
 </tr>
@@ -150,7 +176,7 @@
 <dl class="method">
 <dt id="decodes.core.dc_plane.Plane.near_pt">
 <tt class="descname">near_pt</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.dc_plane.Plane.near_pt" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the closest point to a given Plane.</p>
+<dd><p>Returns the closest point to the point provided on a given Plane.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />

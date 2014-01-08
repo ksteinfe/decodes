@@ -159,13 +159,6 @@ class Vec(Geometry):
     
 
     def __repr__(self): 
-        """Prints vector values in the following format.
-        
-        ::
-        
-            vec[{x},{y},{z}]
-        
-        """
         return "vec[{0},{1},{2}]".format(self.x,self.y,self.z)
     
     def to_tuple(self): 

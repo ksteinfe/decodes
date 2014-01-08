@@ -57,40 +57,66 @@
 <dt id="decodes.core.dc_bounds.Bounds">
 <em class="property">class </em><tt class="descclassname">decodes.core.dc_bounds.</tt><tt class="descname">Bounds</tt><big>(</big><em>**kargs</em><big>)</big><a class="headerlink" href="#decodes.core.dc_bounds.Bounds" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="decodes.core.dc_base.Geometry.html#decodes.core.dc_base.Geometry" title="decodes.core.dc_base.Geometry"><tt class="xref py py-class docutils literal"><span class="pre">decodes.core.dc_base.Geometry</span></tt></a></p>
-<p>A 2d retangular or 3d cubic boudary class
-axis are oriented to world axes</p>
+<p>A 2d rectangular or 3d cubic boundary class
+axis are oriented to world axis</p>
 <dl class="method">
 <dt id="decodes.core.dc_bounds.Bounds.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>**kargs</em><big>)</big><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>a Bounds may be constructed two ways: By setting &#8220;center&#8221;, &#8220;dim_x&#8221;, &#8220;dim_y&#8221;, and optionally &#8220;dim_z&#8221; OR by setting &#8220;ival_x&#8221;, &#8220;ival_y&#8221;, and optionally &#8220;ival_z&#8221;</p>
+<dd><p>A Bounds may be constructed two ways: By setting &#8220;center&#8221;, &#8220;dim_x&#8221;, &#8220;dim_y&#8221;, and optionally &#8220;dim_z&#8221; OR by setting &#8220;ival_x&#8221;, &#8220;ival_y&#8221;, and optionally &#8220;ival_z&#8221;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kargs</strong> (<a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; A dictionary containing the parameters of a Bounds.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Bounds</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Bounds</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_bounds.Bounds.corners">
 <tt class="descname">corners</tt><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.corners" title="Permalink to this definition">¶</a></dt>
-<dd><p>moves counter clockwise, like so:
-(-,-)(+,-)(+,+)(-,+)</p>
+<dd><p>moves counter clockwise, like so:</p>
+<p>(-,-)(+,-)(+,+)(-,+)</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_bounds.Bounds.cpt">
 <tt class="descname">cpt</tt><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.cpt" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the center Point of the Bounds.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Center Point of Bounds.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_bounds.Bounds.dim_x">
 <tt class="descname">dim_x</tt><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.dim_x" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns x dimension of Bounds.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_bounds.Bounds.dim_y">
 <tt class="descname">dim_y</tt><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.dim_y" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns y dimension of Bounds.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_bounds.Bounds.dim_z">
 <tt class="descname">dim_z</tt><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.dim_z" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns z dimension of Bounds.</p>
+</dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_bounds.Bounds.encompass">
@@ -105,12 +131,14 @@ axis are oriented to world axes</p>
 <dl class="attribute">
 <dt id="decodes.core.dc_bounds.Bounds.is_2d">
 <tt class="descname">is_2d</tt><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.is_2d" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns True if Bounds is 2-dimensional (no z component). Otherwise returns False.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_bounds.Bounds.is_3d">
 <tt class="descname">is_3d</tt><a class="headerlink" href="#decodes.core.dc_bounds.Bounds.is_3d" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns True if Bounds is 3-dimensional (x, y and z components). Otherwise returns False.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_bounds.Bounds.near_pt">

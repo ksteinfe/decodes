@@ -67,13 +67,13 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>a</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; a value.</li>
+<li><strong>a</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; a value</li>
 <li><strong>b</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; b value</li>
 <li><strong>c</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; c value</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Point object.</p>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Point object</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Point</p>
@@ -104,7 +104,26 @@
 <dl class="staticmethod">
 <dt id="decodes.core.dc_point.Point.cull_duplicates">
 <em class="property">static </em><tt class="descname">cull_duplicates</tt><big>(</big><em>pts</em>, <em>threshold=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_point.Point.cull_duplicates" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Discards duplicate points from a list of points.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pts</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; A list of points</li>
+<li><strong>threshold</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Tolerance of difference between points</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">List of points without duplicates</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">List</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_point.Point.distance">
@@ -114,9 +133,9 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Point</em>) &#8211; Point to calculate the distance from.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Point</em>) &#8211; Point to calculate the distance from</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Distance between points.</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Distance between points</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
 </tr>
@@ -132,9 +151,9 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Point</em>) &#8211; Point to calculate the distance from.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Point</em>) &#8211; Point to calculate the distance from</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Distance between points.</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Distance squared between points</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
 </tr>
@@ -199,13 +218,13 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>p0</strong> (<em>Point</em>) &#8211; First point to interpolate.</li>
-<li><strong>p1</strong> (<em>Point</em>) &#8211; Second point to interpolate.</li>
-<li><strong>t</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; t-value of interpolation.</li>
+<li><strong>p0</strong> (<em>Point</em>) &#8211; First point to interpolate</li>
+<li><strong>p1</strong> (<em>Point</em>) &#8211; Second point to interpolate</li>
+<li><strong>t</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; t-value of interpolation</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Interpolated point.</p>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Interpolated point</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Point</p>
@@ -271,9 +290,9 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Destination vector.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Destination vector</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">A point projected onto a Vector.</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">A point projected onto a Vector</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
 </tr>

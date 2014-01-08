@@ -62,57 +62,171 @@
 <dt id="decodes.core.dc_cs.CS.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>a=None</em>, <em>b=None</em>, <em>c=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_cs.CS.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>CS Constructor.</p>
-<div class="admonition-todo admonition" id="index-0">
-<p class="first admonition-title">Todo</p>
-<p class="last">write docstring detailing the different ways of constructing a CS</p>
-</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>Point or float</em>) &#8211; Point or decimal number.</li>
+<li><strong>b</strong> (<em>None or float</em>) &#8211; None or decimal number.</li>
+<li><strong>c</strong> (<em>None or float</em>) &#8211; None or decimal number.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Coordinate system.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Coordinate system</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_cs.CS.deval">
 <tt class="descname">deval</tt><big>(</big><em>a</em>, <em>b=0</em>, <em>c=0</em><big>)</big><a class="headerlink" href="#decodes.core.dc_cs.CS.deval" title="Permalink to this definition">¶</a></dt>
-<dd><p>evaluates a point in World coordinates and returns a Point containing the coordinates of a corresponding Point defined in CS coordinates</p>
+<dd><p>Evaluates the given coordinates (or coordinates contained within a given Point) and returns a Point in this CS.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>Point or float</em>) &#8211; Point or decimal number.</li>
+<li><strong>b</strong> (<em>None or float</em>) &#8211; None or decimal number.</li>
+<li><strong>c</strong> (<em>None or float</em>) &#8211; None or decimal number.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Point in CS coordinates.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Point</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_cs.CS.eval">
 <tt class="descname">eval</tt><big>(</big><em>a</em>, <em>b=0</em>, <em>c=0</em><big>)</big><a class="headerlink" href="#decodes.core.dc_cs.CS.eval" title="Permalink to this definition">¶</a></dt>
-<dd><p>evaluates a point in CS coordinates and returns a Point containing the coordinates of a corresponding Point defined in World coordinates</p>
+<dd><p>Evaluates the given coordinates (or coordinates contained within a given Point) relative to this CS and returns a Point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>Point or float</em>) &#8211; Point or decimal number.</li>
+<li><strong>b</strong> (<em>None or float</em>) &#8211; None or decimal number.</li>
+<li><strong>c</strong> (<em>None or float</em>) &#8211; None or decimal number.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Point in world coordinates.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Point</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_cs.CS.ixform">
 <tt class="descname">ixform</tt><a class="headerlink" href="#decodes.core.dc_cs.CS.ixform" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the Xform that corresponds to the transformation from CS space to world space.</p>
+</dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_cs.CS.on_xy">
 <em class="property">static </em><tt class="descname">on_xy</tt><big>(</big><em>x=0</em>, <em>y=0</em>, <em>x_vec=None</em>, <em>rot=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_cs.CS.on_xy" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns a coordinate system on the world xy plane
-optionally, one may define the origin_x and origin_y of the resulting CS
-one may also define ONE (but not both) of the following: 
-* a vector that controls the rotation of the resulting CS on the xy_plane. the z coordinate of this vector will be ignored.
-* a rotation value (0-&gt;2PI) that does the same thing</p>
+<dd><p>Returns a coordinate system on the world xy plane. Optionally, one may define the origin_x and origin_y of the resulting CS. One may also define ONE (but not both) of the following:</p>
+<ul class="simple">
+<li>a vector that controls the rotation of the resulting CS on the xy_plane. The z coordinate of this vector will be ignored.</li>
+<li>a rotation value (0-&gt;2PI) that does the same thing</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; x coordinate of CS origin.</li>
+<li><strong>y</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; y coordinate of CS origin.</li>
+<li><strong>x_vec</strong> (<em>Vec</em>) &#8211; A vector that controls the rotation of the CS.</li>
+<li><strong>rot</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; A rotation value between 0 and 2PI.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Coordinate system on the world xy plane.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Coordinate system.</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_cs.CS.on_xz">
 <em class="property">static </em><tt class="descname">on_xz</tt><big>(</big><em>x=0</em>, <em>z=0</em>, <em>x_vec=None</em>, <em>rot=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_cs.CS.on_xz" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns a coordinate system on the world xy plane
-optionally, one may define the origin_x and origin_z of the resulting CS
-one may also define ONE (but not both) of the following: 
-* a vector that controls the rotation of the resulting CS on the xy_plane. the y coordinate of this vector will be ignored.
-* a rotation value (0-&gt;2PI) that does the same thing</p>
+<dd><p>Returns a coordinate system on the world xz plane. Optionally, one may define the origin_x and origin_z of the resulting CS. One may also define ONE (but not both) of the following:</p>
+<ul class="simple">
+<li>a vector that controls the rotation of the resulting CS on the xz_plane. The y coordinate of this vector will be ignored.</li>
+<li>a rotation value (0-&gt;2PI) that does the same thing</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; x coordinate of CS origin.</li>
+<li><strong>z</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; z coordinate of CS origin.</li>
+<li><strong>x_vec</strong> (<em>Vec</em>) &#8211; A vector that controls the rotation of the CS.</li>
+<li><strong>rot</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; A rotation value between 0 and 2PI.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Coordinate system on the world xz plane.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Coordinate system.</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_cs.CS.on_yz">
 <em class="property">static </em><tt class="descname">on_yz</tt><big>(</big><em>y=0</em>, <em>z=0</em>, <em>x_vec=None</em>, <em>rot=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_cs.CS.on_yz" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns a coordinate system on the world xy plane
-optionally, one may define the origin_x and origin_y of the resulting CS
-one may also define ONE (but not both) of the following: 
-* a vector that controls the rotation of the resulting CS on the xy_plane. the x coordinate of this vector will be ignored.
-* a rotation value (0-&gt;2PI) that does the same thing</p>
+<dd><p>Returns a coordinate system on the world yz plane. Optionally, one may define the origin_y and origin_z of the resulting CS. One may also define ONE (but not both) of the following:</p>
+<ul class="simple">
+<li>a vector that controls the rotation of the resulting CS on the yz_plane. The x coordinate of this vector will be ignored.</li>
+<li>a rotation value (0-&gt;2PI) that does the same thing</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>y</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; y coordinate of CS origin.</li>
+<li><strong>z</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; z coordinate of CS origin.</li>
+<li><strong>x_vec</strong> (<em>Vec</em>) &#8211; A vector that controls the rotation of the CS.</li>
+<li><strong>rot</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; a rotation value between 0 and 2PI</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Coordinate system on the world yz plane.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Coordinate system</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
@@ -124,22 +238,26 @@ one may also define ONE (but not both) of the following:
 <dl class="attribute">
 <dt id="decodes.core.dc_cs.CS.x_ray">
 <tt class="descname">x_ray</tt><a class="headerlink" href="#decodes.core.dc_cs.CS.x_ray" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a ray along the x-axis.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_cs.CS.xform">
 <tt class="descname">xform</tt><a class="headerlink" href="#decodes.core.dc_cs.CS.xform" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the Xform that corresponds to the transformation from world space to CS space.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_cs.CS.xy_plane">
 <tt class="descname">xy_plane</tt><a class="headerlink" href="#decodes.core.dc_cs.CS.xy_plane" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the xy plane.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_cs.CS.xz_plane">
 <tt class="descname">xz_plane</tt><a class="headerlink" href="#decodes.core.dc_cs.CS.xz_plane" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the xz plane.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_cs.CS.yAxis">
@@ -150,12 +268,14 @@ one may also define ONE (but not both) of the following:
 <dl class="attribute">
 <dt id="decodes.core.dc_cs.CS.y_ray">
 <tt class="descname">y_ray</tt><a class="headerlink" href="#decodes.core.dc_cs.CS.y_ray" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a ray along the y-axis.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_cs.CS.yz_plane">
 <tt class="descname">yz_plane</tt><a class="headerlink" href="#decodes.core.dc_cs.CS.yz_plane" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the yz plane.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_cs.CS.zAxis">
@@ -166,7 +286,8 @@ one may also define ONE (but not both) of the following:
 <dl class="attribute">
 <dt id="decodes.core.dc_cs.CS.z_ray">
 <tt class="descname">z_ray</tt><a class="headerlink" href="#decodes.core.dc_cs.CS.z_ray" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a ray along the z-axis.</p>
+</dd></dl>
 
 </dd></dl>
 

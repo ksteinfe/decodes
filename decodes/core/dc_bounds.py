@@ -5,12 +5,17 @@ import math
 
 class Bounds(Geometry):
     """
-    A 2d retangular or 3d cubic boudary class
-    axis are oriented to world axes
+    A 2d rectangular or 3d cubic boundary class
+    axis are oriented to world axis
     """
     def __init__ (self, **kargs):
-        """
-        a Bounds may be constructed two ways: By setting "center", "dim_x", "dim_y", and optionally "dim_z" OR by setting "ival_x", "ival_y", and optionally "ival_z"
+        """A Bounds may be constructed two ways: By setting "center", "dim_x", "dim_y", and optionally "dim_z" OR by setting "ival_x", "ival_y", and optionally "ival_z"
+        
+            :param kargs: A dictionary containing the parameters of a Bounds.
+            :type kargs: dict
+            :result: Bounds
+            :rtype: Bounds
+        
         """
         try:
             x2 = abs(kargs['dim_x']/2.0)
@@ -31,6 +36,12 @@ class Bounds(Geometry):
 
     @property
     def cpt(self):
+        """Returns the center Point of the Bounds.
+            
+            :result: Center Point of Bounds.
+            :rtype: Point
+        
+        """
         try:
             return Point(self.ival_x.mid,self.ival_y.mid,self.ival_z.mid)
         except:
@@ -38,30 +49,46 @@ class Bounds(Geometry):
             
     @property
     def dim_x(self):
+        """Returns x dimension of Bounds.
+        """
+        
         return self.ival_x.delta
 
     @property
     def dim_y(self):
+        """Returns y dimension of Bounds.
+        """
+        
         return self.ival_y.delta
 
     @property
     def dim_z(self):
+        """Returns z dimension of Bounds.
+        """
+        
         try:
             return self.ival_z.delta
         except:
             return 0.0
 
     @property
-    def is_2d(self): return not hasattr(self, 'ival_z')
+    def is_2d(self):
+        """Returns True if Bounds is 2-dimensional (no z component). Otherwise returns False.
+        """
+        return not hasattr(self, 'ival_z')
 
     @property
-    def is_3d(self): return hasattr(self, 'ival_z')
+    def is_3d(self): 
+        """Returns True if Bounds is 3-dimensional (x, y and z components). Otherwise returns False.
+        """
+        return hasattr(self, 'ival_z')
 
     @property
     def corners(self):
-        """
-        moves counter clockwise, like so:
+        """moves counter clockwise, like so:
+        
         (-,-)(+,-)(+,+)(-,+)
+        
         """
         cpts = []
         try:
@@ -214,7 +241,6 @@ class QuadTree():
         if self.has_children: return False
         
         sub_bnds = self.bnd//2
-        print sub_bnds
         self.children = [QuadTree(self.cap,sub_bnd) for sub_bnd in sub_bnds]
 
         for pt in self._pts : 
@@ -248,12 +274,8 @@ class QuadTree():
         return ret_pts
         
     @staticmethod
-    def encompass(pts = [Point()]):
-        print "creating QuadTree:"
-        q = QuadTree(5,Bounds.encompass(pts))
-        print "appending points:"
-        for p in pts : 
-            print p
-            q.append(p)
+    def encompass(capacity = 4, pts = [Point()]):
+        q = QuadTree(capacity, Bounds.encompass(pts))
+        for p in pts : q.append(p)
         return q
         

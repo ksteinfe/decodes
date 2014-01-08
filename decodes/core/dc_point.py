@@ -19,13 +19,13 @@ class Point(Vec):
     def __init__(self, a=0, b=0, c=0):
         """Point Constructor
 
-            :param a: a value.
+            :param a: a value
             :type a: float
             :param b: b value
             :type b: float
             :param c: c value
             :type c: float
-            :result: Point object.
+            :result: Point object
             :rtype: Point
         """
         super(Point,self).__init__(a,b,c)
@@ -35,9 +35,9 @@ class Point(Vec):
         If a transformation is provided, applies the transformation to this point in a way equivalent to the expression ``other * self``.
         otherwise, returns a new point that results from multiplying each of the point's coordinates by the value provided.
         
-            :param other: Point or Vec to be multiplied.
+            :param other: Point or Vec to be multiplied
             :type other: Point or Vec
-            :result: New point.
+            :result: New point
             :rtype: Point
         """
         from .dc_xform import Xform
@@ -50,7 +50,7 @@ class Point(Vec):
         Returns a new point that results from adding this point's world coordinates to the other point's (or vector's) world coordinates.
         No matter the basis of the inputs, the resulting point will have no basis.
         
-            :param other: Point or Vec to be added.
+            :param other: Point or Vec to be added
             :type other: Point or Vec
             :result: New point.
             :rtype: Point
@@ -62,7 +62,7 @@ class Point(Vec):
         Returns a new point that results from subtracting the other point's (or vector's) world coordinates from this point's world coordinates.
         No matter the basis of the inputs, the resulting point will have no basis.
 
-            :param other: Point or Vec to be subtracted.
+            :param other: Point or Vec to be subtracted
             :type other: Point or Vec
             :result: New point.
             :rtype: Point
@@ -75,27 +75,20 @@ class Point(Vec):
         Returns a new point that results from dividing each of this point's world coordinates by the value provided.
         No matter the basis of the inputs, the resulting point will have no basis.
         
-            :param other: Point or Vec to be divided.
+            :param other: Point or Vec to be divided
             :type other: Point or Vec
-            :result: New point.
+            :result: New point
             :rtype: Point
         """
         return Point(self.x/float(other), self.y/float(other), self.z/float(other))
 
     def __repr__(self):
-        """Prints point coordinates in the following format.
-        
-        ::
-        
-            pt[{x},{y},{z}]
-        
-        """
         return "pt[{0},{1},{2}]".format(self.x,self.y,self.z)
 
     def __lt__(self, other):
         """Overloads the less than **(<)** operator.
         
-            :param other: Point to be compared.
+            :param other: Point to be compared
             :type other: Point
             :result: Boolean result of comparison
             :rtype: bool
@@ -111,7 +104,7 @@ class Point(Vec):
     def __gt__(self, other): 
         """Overloads the greater than **(>)** operator.
         
-            :param other: Point to be compared.
+            :param other: Point to be compared
             :type other: Point
             :result: Boolean result of comparison
             :rtype: bool
@@ -127,7 +120,7 @@ class Point(Vec):
     def __le__(self, other): 
         """Overloads the less than or equal to **(<=)** operator.
         
-            :param other: Point to be compared.
+            :param other: Point to be compared
             :type other: Point
             :result: Boolean result of comparison
             :rtype: bool
@@ -137,7 +130,7 @@ class Point(Vec):
     def __eq__(self, other): 
         """Overloads the equal **(==)** operator.
         
-            :param other: Point to be compared.
+            :param other: Point to be compared
             :type other: Point
             :result: Boolean result of comparison
             :rtype: bool
@@ -150,7 +143,7 @@ class Point(Vec):
     def __ne__(self, other): 
         """Overloads the not equal **(!=)** operator.
         
-            :param other: Point to be compared.
+            :param other: Point to be compared
             :type other: Point
             :result: Boolean result of comparison
             :rtype: bool
@@ -163,7 +156,7 @@ class Point(Vec):
     def __ge__(self, other): 
         """Overloads the greater than or equal to **(>=)** operator.
         
-            :param other: Point to be compared.
+            :param other: Point to be compared
             :type other: Point
             :result: Boolean result of comparison
             :rtype: bool
@@ -173,9 +166,9 @@ class Point(Vec):
     def distance2(self,other): 
         """Returns the distance squared between this point and the other point in local space. Both points must use the same basis.
         
-            :param other: Point to calculate the distance from.
+            :param other: Point to calculate the distance from
             :type other: Point
-            :result: Distance between points.
+            :result: Distance squared between points
             :rtype: float
         """
         return Vec(self,other).length2
@@ -183,9 +176,9 @@ class Point(Vec):
     def distance(self,other): 
         """Returns the distance between this point and the other point in local space. Both points must use the same basis.
         
-            :param other: Point to calculate the distance from.
+            :param other: Point to calculate the distance from
             :type other: Point
-            :result: Distance between points.
+            :result: Distance between points
             :rtype: float
         """
         return Vec(self,other).length
@@ -193,9 +186,9 @@ class Point(Vec):
     def projected(self, other): 
         """Returns a new point projected onto a destination vector
         
-            :param other: Destination vector.
+            :param other: Destination vector
             :type other: Vec
-            :result: A point projected onto a Vector.
+            :result: A point projected onto a Vector
             :rtype: Point
         """
         return Point( Vec(self.x,self.y,self.z).projected(other) )
@@ -258,13 +251,13 @@ class Point(Vec):
     def interpolate(p0,p1,t=0.5): 
         """Returns a new point which is the result of an interpolation between the two given points at the given t-value.
         
-            :param p0: First point to interpolate.
+            :param p0: First point to interpolate
             :type p0: Point
-            :param p1: Second point to interpolate.
+            :param p1: Second point to interpolate
             :type p1: Point
-            :param t: t-value of interpolation.
+            :param t: t-value of interpolation
             :type t: float
-            :result: Interpolated point.
+            :result: Interpolated point
             :rtype: Point
         """
         v = Vec.interpolate(p0,p1,t)
@@ -302,7 +295,14 @@ class Point(Vec):
         
     @staticmethod
     def cull_duplicates(pts, threshold = None):
-        """
+        """Discards duplicate points from a list of points.
+        
+            :param pts: A list of points
+            :type pts: list
+            :param threshold: Tolerance of difference between points
+            :type threshold: float
+            :result: List of points without duplicates
+            :rtype: List
         """
         if threshold == None:
             culled_pts = []
@@ -323,19 +323,19 @@ class Point(Vec):
 
 class BPoint(Point,HasBasis):
     """
-    a based point class
+    A based point class
     """
     
     def __init__(self, a=0, b=0, c=0, basis=None):
         """BPoint Constructor
 
-            :param a: a value.
+            :param a: a value
             :type a: float
             :param b: b value
             :type b: float
             :param c: c value
             :type c: float
-            :result: Point object.
+            :result: Point object
             :rtype: Point
         """
         super(BPoint,self).__init__(a,b,c)
@@ -349,7 +349,7 @@ class BPoint(Point,HasBasis):
     def x(self): 
         """The x-coordinate of this point. Setting the x-value of a point with a basis requires stripping the basis of the point. Set pt._x to alter the local coordinate instead.
 
-            :result: x value.
+            :result: x value
             :rtype: float
         """
         return self.basis.eval(self.basis_stripped()).x if not self.is_baseless else self._x
@@ -364,9 +364,9 @@ class BPoint(Point,HasBasis):
     
     @property
     def y(self): 
-        """The y-coordinate of this point. Setting the y-value of a point with a basis requires stripping the basis of the point. Set pt._y to alter the local coordinate instead
+        """The y-coordinate of this point. Setting the y-value of a point with a basis requires stripping the basis of the point. Set pt._y to alter the local coordinate instead.
         
-            :result: y value.
+            :result: y value
             :rtype: float
         """    
         return self.basis.eval(self.basis_stripped()).y if not self.is_baseless else self._y
@@ -381,9 +381,9 @@ class BPoint(Point,HasBasis):
     
     @property
     def z(self): 
-        """The z-coordinate of this point. Setting the z-value of a point with a basis requires stripping the basis of the point.    Set pt._z to alter the local coordinate instead
+        """The z-coordinate of this point. Setting the z-value of a point with a basis requires stripping the basis of the point. Set pt._z to alter the local coordinate instead.
         
-            :result: z value.
+            :result: z value
             :rtype: float
         """
         return self.basis.eval(self.basis_stripped()).z if not self.is_baseless else self._z
@@ -400,11 +400,11 @@ class BPoint(Point,HasBasis):
     
 
     def basis_applied(self, copy_children=True): 
-        """Returns a new point with basis applied. Coords will be interpreted in world space. Points will appear in the same position when drawn
+        """Returns a new point with basis applied. Coordinates will be interpreted in world space. Points will appear in the same position when drawn.
         
-            :param copy_children: If True, creates a new Point object with 'world' coordinates.
+            :param copy_children: If True, creates a new point object with 'world' coordinates
             :type copy_children: bool
-            :result: Point object with basis applied.
+            :result: Point object with basis applied
             :rtype: Point
         """
         pt = Point(self.x,self.y,self.z)
@@ -412,11 +412,11 @@ class BPoint(Point,HasBasis):
         return pt
     
     def basis_stripped(self, copy_children=True): 
-        """Returns a new point stripped of any bases. Coords will be interpreted in world space, and points will appear in their "local" position when drawn
+        """Returns a new point stripped of any bases. Coordinates will be interpreted in world space, and points will appear in their 'local' position when drawn.
         
-            :param copy_children: If True, creates a new Point object with 'local' coordinates.
+            :param copy_children: If True, creates a new point object with 'local' coordinates
             :type copy_children: bool
-            :result: Point object with basis stripped.
+            :result: Point object with basis stripped
             :rtype: Point
         """
         pt = Point(self._x,self._y,self._z)
@@ -424,11 +424,11 @@ class BPoint(Point,HasBasis):
         return pt
     
     def set_basis(self,basis): 
-        """Returns a new point whose local coordniates are the same as this point, but whose basis is set by the basis provided.
+        """Returns a new point whose local coordinates are the same as this point, but whose basis is set by the basis provided.
         
-            :param basis: New basis for the point.
+            :param basis: New basis for the point
             :type basis: Basis
-            :result: Point object with new basis.
+            :result: Point object with new basis
             :rtype: Point
         """
         return Point(self._x,self._y,self._z,basis=basis)
@@ -440,11 +440,11 @@ class BPoint(Point,HasBasis):
         return "pt[{0},{1},{2}]".format(self.x,self.y,self.z)
 
     def _distance2(self, other):
-        """Distance squared in local space. Cheaper to calculate than distance.
+        """Distance squared in local space. Cheaper to calculate than distance. Both points must use the same basis.
         
-            :param other: Point to calculate the distance from.
+            :param other: Point to calculate the distance from
             :type other: Point
-            :result: Distance between points.
+            :result: Distance squared between points
             :rtype: float
         """
         
@@ -454,30 +454,30 @@ class BPoint(Point,HasBasis):
     def _distance(self, other): 
         """Returns the distance between this point and the other point in local space. Both points must use the same basis.
         
-            :param other: Point to calculate the distance from.
+            :param other: Point to calculate the distance from
             :type other: Point
-            :result: Distance between points.
+            :result: Distance between points
             :rtype: float
         """
         if self.basis is not other.basis : raise BasisError("Cannot measure '_distance' between points with different bases.    Use 'distance' instead")
         return Vec(self,other).length
     
     def distance2(self,other): 
-        """Returns the distance between this point and the other point in local space. Both points must use the same basis.
+        """Returns the distance between this point and the other point in local space.
         
-            :param other: Point to calculate the distance from.
+            :param other: Point to calculate the distance from
             :type other: Point
-            :result: Distance between points.
+            :result: Distance squared between points
             :rtype: float
         """
         return Vec(self.basis_applied(),other.basis_applied()).length2
 
     def distance(self,other): 
-        """Returns the distance between this point and the other point in local space. Both points must use the same basis.
+        """Returns the distance between this point and the other point in local space.
         
-            :param other: Point to calculate the distance from.
+            :param other: Point to calculate the distance from
             :type other: Point
-            :result: Distance between points.
+            :result: Distance between points
             :rtype: float
         """
         return Vec(self.basis_applied(),other.basis_applied()).length
@@ -487,13 +487,13 @@ class BPoint(Point,HasBasis):
     def interpolate(p0,p1,t=0.5): 
         """Returns a new point which is the result of an interpolation between the two given points at the given t-value
         
-            :param p0: First point to interpolate.
+            :param p0: First point to interpolate
             :type p0: Point
-            :param p0: Second point to interpolate.
-            :type p0: Point
-            :param p0: t-value of interpolation.
-            :type p0: float
-            :result: Interpolated point.
+            :param p1: Second point to interpolate
+            :type p1: Point
+            :param t: t-value of interpolation
+            :type t: float
+            :result: Interpolated point
             :rtype: Point
         """
         #TODO this method used to maintain basis for same-based points, but this seemed to fuck things up in the rgon.inflate method.
@@ -507,13 +507,11 @@ class BPoint(Point,HasBasis):
 
     @staticmethod
     def _centroid(points): 
-        """Returns the centroid of a point cloud in local coordinates.
-        All given points will be evaluated with their bases stripped, and the basis of the returned point will adopt the basis of the given points.
-        Mixed bases among the given points will throw an error.
+        """Returns the centroid of a point cloud in local coordinates. All given points will be evaluated with their bases stripped, and the basis of the returned point will adopt the basis of the given points. Mixed bases among the given points will throw an error.
 
             :param points: Point cloud
-            :type p0: list
-            :result: Centroid of point cloud.
+            :type points: list
+            :result: Centroid of point cloud
             :rtype: Point
         """
         if all( points[0].basis is p.basis for p in points ) : 

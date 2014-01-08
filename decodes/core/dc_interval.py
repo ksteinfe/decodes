@@ -14,40 +14,63 @@ class Interval():
             :type a: float
             :param b: Second number of the interval.
             :type a: float
-            :returns: Interval Object.
-            :rtype: Interval.
+            :result: Interval Object.
+            :rtype: Interval
         """
         self.a = float(a)
         self.b = float(b)
     
     def __truediv__(self,divs): return self.__div__(divs)
     def __div__(self, divs): 
-        """overloads the division **(/)** operator
-        calls Interval.divide(divs)
+        """Overloads the division **(/)** operator. Calls Interval.divide(divs).
         
-            :returns: List of numbers in which a list is divided. 
+            :param divs: Number of divisions.
+            :type divs: int
+            :result: List of numbers in which a list is divided. 
             :rtype: list
         """
         return self.divide(divs)
 
     def __floordiv__(self, other): 
-        """overloads the integer division **(//)** operator
-        calls Interval.subinterval(other)
+        """Overloads the integer division **(//)** operator. Calls Interval.subinterval(other).
+            
+            :param other: Number to subintervals.
+            :type other: int
+            :result: list of subintervals
+            :rtype: list
+            
         """
         return self.subinterval(other)
 
     def __add__(self, val):
-        """Overloads the addition **(+)** operator. 
+        """Overloads the addition **(+)** operator.
+            
+            :param val: Value to add to the interval.
+            :type val: float
+            :result: New interval.
+            :rtype: Interval
+            
         """    
         return Interval(self.a + val, self.b + val)
+    
     def __sub__(self, val): 
-        """Overloads the addition **(-)** operator. 
+        """Overloads the subtraction **(-)** operator.
+
+            :param val: Value to subtract from the interval.
+            :type val: float
+            :result: New interval.
+            :rtype: Interval
         """    
         return Interval(self.a - val, self.b - val)
 
     def __contains__(self, number):
-        """
-        overloads the containment **(in)** operator
+        """Overloads the containment **(in)** operator
+        
+            :param number: Number whose containment must be determined.
+            :type number: float
+            :result: Boolean result of containment.
+            :rtype: bool
+            
         """
         ival = self.order()
         return (ival.a <= number) and (ival.b >= number)
@@ -66,7 +89,7 @@ class Interval():
     def list(self): 
         """Returns a list of the interval's start and end values.
         
-            :returns: List of interval's components
+            :result: List of interval's components
             :rtype: list
         """
         return [self.a, self.b]
@@ -75,7 +98,7 @@ class Interval():
     def is_ordered(self): 
         """Returns True if the start value of the interval is smaller than the end value.
         
-            :returns: Boolean value
+            :result: Boolean value
             :rtype: bool
         """
         return True if self.a < self.b else False
@@ -84,9 +107,9 @@ class Interval():
     def length(self):
         """Returns the absolute value of length of the interval.
         
-        For a signed representation, use delta
+        For a signed representation, use delta.
         
-            :returns: Absolute value of length of an interval.
+            :result: Absolute value of length of an interval.
             :rtype: int 
         """
         length = self.b - self.a 
@@ -97,23 +120,23 @@ class Interval():
     def delta(self): 
         """Returns the signed delta of the interval, calculated as b-a
         
-        For an unsigned representation, use length
+        For an unsigned representation, use length.
 
-            :returns: Delta of an interval.
+            :result: Delta of an interval.
             :rtype: float 
         """
         return float(self.b - self.a)
 
     @property
     def mid(self):
-        """
+        """Returns the midpoint value of the interval.
         """
         return self.eval(0.5)
 
     def order(self):
         """Returns a copy of this interval with ordered values, such that a < b
         
-            :returns: Ordered copy of Interval object.
+            :result: Ordered copy of Interval object.
             :rtype: Interval 
         """
         if self.is_ordered: return Interval(self.a, self.b)
@@ -121,9 +144,10 @@ class Interval():
 
     def invert(self):
         """Returns a copy of this interval with swapped values.
+        
         Such that this.a = new.b and this.b = new.a
         
-            :returns: Interval object with swapped values.
+            :result: Interval object with swapped values.
             :rtype: Interval 
         """
         return Interval(self.b, self.a)
@@ -134,7 +158,9 @@ class Interval():
         
             :param divs: Number of interval divisions.
             :type divs: int
-            :returns: List of numbers in which a list is divided. 
+            :param include_last: Boolean value.
+            :type include_last: bool
+            :result: List of numbers in which a list is divided. 
             :rtype: list
         """
         step = self.delta/float(divs)
@@ -146,7 +172,7 @@ class Interval():
         
             :param divs: Number of subintervals.
             :type divs: int
-            :returns: List of subintervals (interval objects). 
+            :result: List of subintervals (interval objects). 
             :rtype: list
         """
         return [Interval(n,n+self.delta/float(divs)) for n in self.divide(divs)]
@@ -156,7 +182,7 @@ class Interval():
         
             :param divs: Number of subintervals.
             :type divs: int
-            :returns: List of subintervals (interval objects). 
+            :result: List of subintervals (interval objects). 
             :rtype: list
         """
         if divs < 1 : return ival
@@ -169,12 +195,12 @@ class Interval():
            
     def deval(self, number): 
         """ 
-        Returns a parameter cooresponding to the position of the given number within this Interval.
-        Effectively, the opposite of eval()
+        Returns a parameter corresponding to the position of the given number within this interval.
+        Effectively, the opposite of eval().
 
             :param number: Number to find the parameter of.
             :type number: float
-            :returns: Parameter.
+            :result: Parameter.
             :rtype: float
 
         ::
@@ -190,11 +216,15 @@ class Interval():
         
     def eval(self, t,limited=False):
         """ Evaluates a given parameter within this interval.
+            
             For example, given an Interval(0->2*math.pi): eval(0.5) == math.pi
-             Optionally, you may limit the resulting output to this interval
+            
+        Optionally, you may limit the resulting output to this interval
+        
+            
             :param t: Number to evaluate.
             :type t: float
-            :returns: Evalauted number. 
+            :result: Evaluated number. 
             :rtype: float
 
         ::
@@ -210,8 +240,12 @@ class Interval():
         return self.limit_val(ret)
 
     def limit_val(self, n):
-        """
-        Limits a given value to the min and max of this Interval
+        """Limits a given value to the min and max of this Interval.
+        
+            :param n: the number to be limited by the Interval.
+            :type n: float
+            :result: a number between the min and max of this Interval (inclusive).
+            :rtype: float
         """
         if n < self.a : return self.a
         if n > self.b : return self.b
@@ -221,19 +255,30 @@ class Interval():
 
     @staticmethod
     def encompass(values = [0]):
-        """
-        Returns an interval defined by the minumum and maximum of a list of values
+        """Returns an interval defined by the minimum and maximum of a list of values.
+        
+            :param values: A list of numbers.
+            :type values: list
+            :result: An Interval from the min and max of a list of values.
+            :rtype: Interval
         """
         return Interval(min(values), max(values))
 
     @staticmethod
     def remap(val, source_interval, target_interval=None, limited=False): 
-        """ Translates a number from its position within the source interval to its relative position in the target interval.  Optionally, you may limit the resulting output to the target interval
+        """ Translates a number from its position within the source interval to its relative position in the target interval.  Optionally, you may limit the resulting output to the target interval.
         
             :param val: Number to remap.
             :type val: float
-            :returns: The given number remapped to the target interval.
+            :param source_interval: Source interval.
+            :type source_interval: interval
+            :param target_interval: Target interval
+            :type target_interval: interval
+            :param limited: flag that limits result to target interval
+            :type limited: bool
+            :result: The given number remapped to the target interval.
             :rtype: float
+        
         """  
         if target_interval is None: target_interval = Interval(0,1)
 

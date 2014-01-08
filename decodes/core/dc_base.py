@@ -110,7 +110,7 @@ class Geometry(object):
     @property
     def do_translate(self):
         """
-        if this property is set to false, outies will not translate this geometry into external formats, and pass along the class as-is.
+        If this property is set to false, outies will not translate this geometry into external formats, and pass along the class as-is.
         """
         return True
 
@@ -132,13 +132,13 @@ class Basis(object):
     
     def eval(self,a,b=0,c=0):
         """
-        evaluates a point in Basis coordinates and returns a Vec containing the coordinates of a corresponding Point defined in World coordinates
+        Evaluates a point in Basis coordinates and returns a Vec containing the coordinates of a corresponding Point defined in World coordinates
         """
         raise NotImplementedError("Evalutate not implemented.    I am a BAD basis!")
 
     def deval(self,a,b=0,c=0):
         """
-        evaluates a point in World coordinates and returns a Vec containing the coordinates of a corresponding Point defined in Basis coordinates
+        Evaluates a point in World coordinates and returns a Vec containing the coordinates of a corresponding Point defined in Basis coordinates
         """
         raise NotImplementedError("Devalutate not implemented.    I am a BAD basis!")
 
@@ -158,15 +158,15 @@ class HasBasis(Geometry):
     def basis(self, basis): 
         """Sets basis.
         
-            :param basis: Defined basis.
-            :result: Defined basis.
+            :param basis: Defined basis
+            :result: Defined basis
             :rtype: Basis
         """
         self._basis = basis
 
     @property
     def is_baseless(self):
-        """Tells us if a basis has been defined
+        """Tells us if a basis has been defined.
         """
         return (not hasattr(self, '_basis')) or self._basis is None
 
