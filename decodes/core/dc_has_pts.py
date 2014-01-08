@@ -234,8 +234,8 @@ class HasPts(HasBasis):
         """| Rotates the vertices in this object.
            | In the case of a PGon, this resets which point is the first point.
            
-                :param n:
-                :type n:
+                :param n: Number of steps to rotate.
+                :type n: int
                 :result: HasPts object
                 :rtype: HasPts
                 

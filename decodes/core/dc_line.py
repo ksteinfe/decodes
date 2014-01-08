@@ -127,6 +127,7 @@ class LinearEntity(Geometry):
           to see if the intersection point of the first two lines is a member 
           on the rest of the lines. If so, the lines are concurrent.
         
+        .. warning:: This method is not implemented.        
         """
         #TODO:: Implement this method.
         
@@ -155,6 +156,8 @@ class LinearEntity(Geometry):
             :type l2: LinearEntity
             :result: True if perpendicular.
             :rtype: bool
+            
+        .. warning:: This method is not implemented.           
         """
         
         #TODO:: Implement this method.
@@ -187,6 +190,7 @@ class LinearEntity(Geometry):
           get the directional vectors of the two lines and readily
           find the angle between the two using the above formula.
        
+        .. warning:: This method is not implemented.          
        """
         #TODO:: Implement this method.
 
@@ -214,6 +218,8 @@ class LinearEntity(Geometry):
             :type p: Point
             :result: New LinearEntity.
             :rtype: LinearEntity
+        
+        .. warning:: This method is not implemented.           
         """    
         #TODO:: Implement this method.
         
@@ -227,7 +233,9 @@ class LinearEntity(Geometry):
             :type p: Point
             :result: New LinearEntity.
             :rtype: LinearEntity
-        
+
+        .. warning:: This method is not implemented.   
+            
         """
         #TODO:: Implement this method.
         
@@ -350,7 +358,12 @@ class Segment(LinearEntity):
         """
         return self._pt == other._pt and self._vec == other._vec
 
-    def __contains__(self, other):  raise NotImplementedError()
+    def __contains__(self, other):
+    
+        #TODO: implement this method.
+        
+        raise NotImplementedError()
+    
     def __repr__(self): return "seg[{0} {1}]".format(self.spt,self._vec)
     
     def near(self,p):
@@ -382,11 +395,16 @@ class Segment(LinearEntity):
 
     @property
     def midpoint(self): 
-      """Returns the midpoint of this segment"""
+      """Returns the midpoint of this segment
+      
+            :result: Midpoint of Segment.
+            :rtype: Point
+      
+      """
       return Point.interpolate(self.spt, self.ept)
 
     def inverted(self):
-        """Return a new Segment between the ept and spt of this Segment, but pointing in the opposite direction
+        """Return a new Segment between the ept and spt of this Segment, but pointing in the opposite direction.
         
             :result: Inverted vector.
             :rtype: Vec
@@ -395,13 +413,33 @@ class Segment(LinearEntity):
 
 
 class VecField(PixelGrid):
-    """
-    a raster grid of vectors
-    each pixel contains a positioned 3d vector (a Ray)
+    """| A raster grid of vectors.
+       | Each pixel contains a positioned 3d vector (a Ray).
 
-    TODO: allow to set vectors as "bidirectional", which would affect the behavior of average vectors, and would produce lines rather than rays
-    """
+    """   
+       
+    #TODO: allow to set vectors as "bidirectional", which would affect the behavior of average vectors, and would produce lines rather than rays
+    
     def __init__(self, pixel_res=Interval(8,8), spatial_origin=Point(), spatial_dim=Interval(4,4), initial_value = Vec(),include_corners=False,wrap=True):
+    
+        """Description
+        
+            :param pixel_res: Resolution of vector grid.
+            :type pixel_res: Interval
+            :param spatial_origin: Center of vector field.
+            :type spatial_origin: Point
+            :param spatial_dim: Dimension of vector field.
+            :type spatial_dim: Interval
+            :param initial_value: Start value for vector field.
+            :type initial_value: Vec
+            :param include_corners: Boolean Value.
+            :type include_corners: bool
+            :param wrap: Boolean Value.
+            :type wrap: bool
+            :result: A vector field.
+            :rtype: VecField
+            
+        """
         try:
             self._res = (int(pixel_res.a),int(pixel_res.b))
         except:
@@ -419,17 +457,28 @@ class VecField(PixelGrid):
                 self._base_pts.append(Point(ival_x.mid, ival_y.mid)) 
 
     def to_rays(self):
+        """Returns a list of Rays that correspond to the Vecs from the Vector Field.
+        
+            :result: A list of Rays.
+            :rtype: [Rays]
+        """
         return [Ray(pt,vec) for vec,pt in zip(self._pixels, self._base_pts )]
 
     def get_cpt(self,x,y):
-        """
-        returns the center point of the cell associated with the given address
+        """Returns the center point of the cell associated with the given address.
+        
+            :param x: x-coordinate
+            :type x: float
+            :param y: y-coordinate
+            :type y: float
+            :result: Center point of cell.
+            :rtype: Point
+        
         """
         return self._base_pts[y*self._res[0]+x]
 
     def vec_near(self,a,b=None):
-        """
-        may be passed either a point or an x,y coord
+        """May be passed either a point or an x,y coordinate.
         """
         x,y = self.address_near(a,b)
         return self.get(x,y)

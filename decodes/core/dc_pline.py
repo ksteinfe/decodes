@@ -15,12 +15,15 @@ class PLine(HasPts):
         
             :param vertices: Vertices to build the pline.
             :type vertices: list
+            :param basis: Basis of polyline.
+            :type basis: basis
             :returns: Polyline.
             :rtype: PLine
-
-        .todo: check if passed an empty array of points
+        
         """
-        super(PLine,self).__init__(vertices,basis) #HasPts constructor handles initalization of verts and basis
+        #todo: check if passed an empty array of points
+        
+        super(PLine,self).__init__(vertices,basis) #HasPts constructor handles initialization of verts and basis
         self.basis = CS() if (basis is None) else basis # set the basis after appending the points
 
     @property
@@ -38,7 +41,7 @@ class PLine(HasPts):
 
     @property
     def length(self):
-        """ Returns the length of this polyline.
+        """ Returns the length of this PLine.
         
             :result: Length of this PLine
             :rtype: float
@@ -50,6 +53,11 @@ class PLine(HasPts):
             return self._length
         
     def reverse(self) :
+        """Reverses attribute changes for classes and subclasses.
+        
+            :result: Polyline.
+            :rtype: PLine
+        """
         self._unset_attr() # call this when any of storable properties (subclass_attr or class_attr) changes
         pts = []
         for pt in reversed(self): pts.append(pt)
@@ -58,6 +66,16 @@ class PLine(HasPts):
 
 
     def join (self, other, tol=False) :
+        """Joins this polyline with a given polyline.
+            
+            :param other: Polyline to join with this polyline.
+            :type other: PLine
+            :param tol: Tolerance of difference.
+            :type tol: bool.
+            :result: New joined Polyline.
+            :rtype: PLine
+            
+        """
         self._unset_attr() # call this when any of storable properties (subclass_attr or class_attr) changes
         if self[-1].is_identical(other[0],tol) :
             pts = []
@@ -103,7 +121,7 @@ class PLine(HasPts):
             return jpline
             
     def seg(self,index):
-        """ Returns a segment of this polyline
+        """ Returns a segment of this polyline.
        
             :param index: Index of the polyline's segment
             :type index: Int
@@ -114,10 +132,15 @@ class PLine(HasPts):
         return Segment(self.pts[index],self.pts[index+1])
         
     def eval(self,t):
-        """
-        evaluates this PLine at the specified parameter t
-        a t-value of 0 will result in a point conincident with PLine.pts[0]
-        a t-value of 1 will result in a point conincident with PLine.pts[-1]
+        """| Evaluates this PLine at the specified parameter t.
+           | A t-value of 0 will result in a point coincident with PLine.pts[0].
+           | A t-value of 1 will result in a point coincident with PLine.pts[-1].
+           
+                :param t: A decimal number between [0:1]
+                :type t: float
+                :result: A point on the polyline.
+                :rtype: Point
+           
         """
         if t > 1 : raise IndexError("Plines must be evaluated with t <= 1.0")
         if t < 0 : raise IndexError("Plines must be evaluated with t >= 0.0")
@@ -131,7 +154,7 @@ class PLine(HasPts):
                 return Point.interpolate(pa,pb,ival.deval(t))
         
     def near(self, p):
-        """Returns a tuple of the closest point to a given PLine, the index of the closest segment and the distance from the Point to the near Point.
+        """Returns a tuple of the closest point to a given PLine, the index of the closest segment, and the distance from the Point to the near Point.
        
             :param p: Point to look for a near Point on the PLine.
             :type p: Point
@@ -145,7 +168,7 @@ class PLine(HasPts):
         return (npts[ni][0],ni,npts[ni][2])
 
     def near_pt(self, p):
-        """Returns the closest point to a given PLine
+        """Returns the closest point to a given PLine.
        
             :param p: Point to look for a near Point on the PLine.
             :type p: Point

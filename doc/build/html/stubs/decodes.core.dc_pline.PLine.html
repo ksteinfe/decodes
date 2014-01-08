@@ -62,23 +62,24 @@
 <dt id="decodes.core.dc_pline.PLine.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>vertices=None</em>, <em>basis=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pline.PLine.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Polyline constructor.</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param vertices:</th><td class="field-body">Vertices to build the pline.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>vertices</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; Vertices to build the pline.</li>
+<li><strong>basis</strong> (<em>basis</em>) &#8211; Basis of polyline.</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type vertices:</th><td class="field-body">list</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Polyline.</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body">Polyline.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">PLine</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">PLine</p>
+</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
-<p>.todo: check if passed an empty array of points</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -100,20 +101,57 @@
 <dl class="method">
 <dt id="decodes.core.dc_pline.PLine.eval">
 <tt class="descname">eval</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pline.PLine.eval" title="Permalink to this definition">¶</a></dt>
-<dd><p>evaluates this PLine at the specified parameter t
-a t-value of 0 will result in a point conincident with PLine.pts[0]
-a t-value of 1 will result in a point conincident with PLine.pts[-1]</p>
+<dd><div class="line-block">
+<div class="line">Evaluates this PLine at the specified parameter t.</div>
+<div class="line">A t-value of 0 will result in a point coincident with PLine.pts[0].</div>
+<div class="line">A t-value of 1 will result in a point coincident with PLine.pts[-1].</div>
+</div>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param t:</th><td class="field-body">A decimal number between [0:1]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type t:</th><td class="field-body">float</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">A point on the polyline.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_pline.PLine.join">
 <tt class="descname">join</tt><big>(</big><em>other</em>, <em>tol=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pline.PLine.join" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Joins this polyline with a given polyline.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>other</strong> (<em>PLine</em>) &#8211; Polyline to join with this polyline.</li>
+<li><strong>tol</strong> (<em>bool.</em>) &#8211; Tolerance of difference.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">New joined Polyline.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">PLine</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_pline.PLine.length">
 <tt class="descname">length</tt><a class="headerlink" href="#decodes.core.dc_pline.PLine.length" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the length of this polyline.</p>
+<dd><p>Returns the length of this PLine.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -129,7 +167,7 @@ a t-value of 1 will result in a point conincident with PLine.pts[-1]</p>
 <dl class="method">
 <dt id="decodes.core.dc_pline.PLine.near">
 <tt class="descname">near</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pline.PLine.near" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a tuple of the closest point to a given PLine, the index of the closest segment and the distance from the Point to the near Point.</p>
+<dd><p>Returns a tuple of the closest point to a given PLine, the index of the closest segment, and the distance from the Point to the near Point.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -147,7 +185,7 @@ a t-value of 1 will result in a point conincident with PLine.pts[-1]</p>
 <dl class="method">
 <dt id="decodes.core.dc_pline.PLine.near_pt">
 <tt class="descname">near_pt</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pline.PLine.near_pt" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the closest point to a given PLine</p>
+<dd><p>Returns the closest point to a given PLine.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -165,12 +203,23 @@ a t-value of 1 will result in a point conincident with PLine.pts[-1]</p>
 <dl class="method">
 <dt id="decodes.core.dc_pline.PLine.reverse">
 <tt class="descname">reverse</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_pline.PLine.reverse" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Reverses attribute changes for classes and subclasses.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Polyline.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">PLine</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_pline.PLine.seg">
 <tt class="descname">seg</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pline.PLine.seg" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a segment of this polyline</p>
+<dd><p>Returns a segment of this polyline.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />

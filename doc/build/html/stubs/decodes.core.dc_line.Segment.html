@@ -85,7 +85,7 @@
 <dl class="method">
 <dt id="decodes.core.dc_line.Segment.inverted">
 <tt class="descname">inverted</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_line.Segment.inverted" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a new Segment between the ept and spt of this Segment, but pointing in the opposite direction</p>
+<dd><p>Return a new Segment between the ept and spt of this Segment, but pointing in the opposite direction.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -101,19 +101,52 @@
 <dl class="attribute">
 <dt id="decodes.core.dc_line.Segment.length">
 <tt class="descname">length</tt><a class="headerlink" href="#decodes.core.dc_line.Segment.length" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the length of this segment</p>
+<dd><p>Returns the length of this segment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Length of line segment.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_line.Segment.midpoint">
 <tt class="descname">midpoint</tt><a class="headerlink" href="#decodes.core.dc_line.Segment.midpoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the midpoint of this segment</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Midpoint of Segment.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_line.Segment.near">
 <tt class="descname">near</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.Segment.near" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a tuple of the closest point to a given line segment, its t value and the distance from the Point to the near Point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>Point</em>) &#8211; Point to look for a near Point on the Segment.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Tuple of near point on Segment, t value and distance from point to near point.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(Point, float, float)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
