@@ -349,7 +349,7 @@ class QuadTree():
                     break
             if not accepted : "no child accepted this point!"
             
-        self._pts = None
+        self._pts = [] # need empty list so Point.cull_duplicates will work
         return True
     
     def contains(self,pt):
