@@ -197,7 +197,7 @@ class Arc(HasBasis):
              raise GeometricError("A*C == B*B ... I Cannot find center of this Arc") 
         
         # Get the radius of the arc by getting the average distance from the points to the center
-        rad = sum([pt._distance(center) for pt in pts_in])/cnt
+        rad = sum([pt.distance(center) for pt in pts_in])/cnt
         
         # Create segments between all the points and the center
         segs = [Segment(center,pt) for pt in pts_in]
