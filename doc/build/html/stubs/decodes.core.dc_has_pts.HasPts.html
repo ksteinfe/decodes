@@ -57,23 +57,67 @@
 <dt id="decodes.core.dc_has_pts.HasPts">
 <em class="property">class </em><tt class="descclassname">decodes.core.dc_has_pts.</tt><tt class="descname">HasPts</tt><big>(</big><em>vertices=None</em>, <em>basis=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_has_pts.HasPts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="decodes.core.dc_base.HasBasis.html#decodes.core.dc_base.HasBasis" title="decodes.core.dc_base.HasBasis"><tt class="xref py py-class docutils literal"><span class="pre">decodes.core.dc_base.HasBasis</span></tt></a></p>
-<p>A base class for anything that contains a list of vertices.
-All HasPts classes also have bases</p>
+<div class="line-block">
+<div class="line">A base class for anything that contains a list of vertices.</div>
+<div class="line">All HasPts classes also have bases.</div>
+</div>
 <dl class="method">
 <dt id="decodes.core.dc_has_pts.HasPts.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>vertices=None</em>, <em>basis=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_has_pts.HasPts.__init__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>A constructor for a list of vertices with a shared basis.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>vertices</strong> (<em>[Vec]</em>) &#8211; A list of Vecs.</li>
+<li><strong>basis</strong> (<em>Basis</em>) &#8211; A basis</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">HasPts object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">HasPts</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_has_pts.HasPts._compatible_vec">
 <tt class="descname">_compatible_vec</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.dc_has_pts.HasPts._compatible_vec" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a vector compatible with the collection of vectors in this object if possible</p>
+<dd><p>Returns a vector compatible with the collection of vectors in this object if possible.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Vect to make compatible.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">New Vec.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_has_pts.HasPts._unset_attr">
 <tt class="descname">_unset_attr</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_has_pts.HasPts._unset_attr" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Deletes class and sublcass attributes when possible.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">None</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_has_pts.HasPts._vertices_changed">
@@ -83,15 +127,17 @@ All HasPts classes also have bases</p>
 <dl class="method">
 <dt id="decodes.core.dc_has_pts.HasPts.append">
 <tt class="descname">append</tt><big>(</big><em>pts</em><big>)</big><a class="headerlink" href="#decodes.core.dc_has_pts.HasPts.append" title="Permalink to this definition">¶</a></dt>
-<dd><p>Appends the given Point to the stored list of points.
-Each Point is processed to ensure compatibilty with this geometry&#8217;s basis</p>
+<dd><div class="line-block">
+<div class="line">Appends the given Point to the stored list of points.</div>
+<div class="line">Each Point is processed to ensure compatibility with this geometry&#8217;s basis.</div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pts</strong> (<em>Point or [Point]</em>) &#8211; Point(s) to append</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Modfies this geometry by adding items to the stored list of points</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Modifies this geometry by adding items to the stored list of points</td>
 </tr>
 </tbody>
 </table>
@@ -100,12 +146,13 @@ Each Point is processed to ensure compatibilty with this geometry&#8217;s basis<
 <dl class="attribute">
 <dt id="decodes.core.dc_has_pts.HasPts.basis">
 <tt class="descname">basis</tt><a class="headerlink" href="#decodes.core.dc_has_pts.HasPts.basis" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns basis.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_has_pts.HasPts.basis_applied">
 <tt class="descname">basis_applied</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_has_pts.HasPts.basis_applied" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a new Geometry with basis applied. Coords will be interpreted in world space, appearing in the same position when drawn</p>
+<dd><p>Returns a new Geometry with basis applied. Coordinates will be interpreted in world space, appearing in the same position when drawn.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -121,7 +168,7 @@ Each Point is processed to ensure compatibilty with this geometry&#8217;s basis<
 <dl class="method">
 <dt id="decodes.core.dc_has_pts.HasPts.basis_stripped">
 <tt class="descname">basis_stripped</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_has_pts.HasPts.basis_stripped" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a new Geometry stripped of any bases. Coords will be interpreted in world space, in their analogous &#8220;local&#8221; position when drawn</p>
+<dd><p>Returns a new Geometry stripped of any bases. Coordinates will be interpreted in world space, in their analogous &#8220;local&#8221; position when drawn.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -137,7 +184,7 @@ Each Point is processed to ensure compatibilty with this geometry&#8217;s basis<
 <dl class="attribute">
 <dt id="decodes.core.dc_has_pts.HasPts.centroid">
 <tt class="descname">centroid</tt><a class="headerlink" href="#decodes.core.dc_has_pts.HasPts.centroid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the centroid of the points of this object</p>
+<dd><p>Returns the centroid of the points of this object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -158,35 +205,66 @@ Each Point is processed to ensure compatibilty with this geometry&#8217;s basis<
 <dl class="method">
 <dt id="decodes.core.dc_has_pts.HasPts.clear">
 <tt class="descname">clear</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_has_pts.HasPts.clear" title="Permalink to this definition">¶</a></dt>
-<dd><p>Clears this Geometry of all the Points contained within it</p>
+<dd><p>Clears this Geometry of all the Points contained within it.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_has_pts.HasPts.pts">
 <tt class="descname">pts</tt><a class="headerlink" href="#decodes.core.dc_has_pts.HasPts.pts" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a copy of the vertices contained within this HasPts as Points.
-Does not allow manipulation.
-If you want to manipulate the vertices of this object, you should operate on the vertices directly (which are defined relative to this HasPts&#8217;s basis) by calling HasPts[0].x = value</p>
+<dd><div class="line-block">
+<div class="line">Returns a copy of the vertices contained within this HasPts as Points.</div>
+<div class="line">Does not allow manipulation.</div>
+<div class="line">If you want to manipulate the vertices of this object, you should operate on the vertices directly (which are defined relative to this HasPts&#8217;s basis) by calling HasPts[0].x = value</div>
+</div>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Point or list of points.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Point or [Point]</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="decodes.core.dc_has_pts.HasPts.reverse">
+<tt class="descname">reverse</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_has_pts.HasPts.reverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reverses storable properties depending on class or subclass attribute changes.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point or [Point]</td>
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">HasPts object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">HasPts</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="method">
-<dt id="decodes.core.dc_has_pts.HasPts.reverse">
-<tt class="descname">reverse</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_has_pts.HasPts.reverse" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
 <dt id="decodes.core.dc_has_pts.HasPts.rotate">
 <tt class="descname">rotate</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#decodes.core.dc_has_pts.HasPts.rotate" title="Permalink to this definition">¶</a></dt>
-<dd><p>rotates the vertices in this object.
-in the case of a PGon, this resets which pt is the first point</p>
+<dd><div class="line-block">
+<div class="line">Rotates the vertices in this object.</div>
+<div class="line">In the case of a PGon, this resets which point is the first point.</div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">HasPts object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">HasPts</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>

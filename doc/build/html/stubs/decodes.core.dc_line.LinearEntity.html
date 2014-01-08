@@ -90,6 +90,26 @@
 <dt id="decodes.core.dc_line.LinearEntity.angle_between">
 <tt class="descname">angle_between</tt><big>(</big><em>l1</em>, <em>l2</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.angle_between" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns an angle formed between the two linear entities.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param l1:</th><td class="field-body">First LinearEntity</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type l1:</th><td class="field-body">LinearEntity</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">param l2:</th><td class="field-body">Second LinearEntity</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type l2:</th><td class="field-body">LinearEntity</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Angle in radians.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p><strong>Description of Method:</strong>  
@@ -100,26 +120,76 @@ From the dot product of vectors v1 and v2 it is known that:</p>
 get the directional vectors of the two lines and readily
 find the angle between the two using the above formula.</p>
 </div>
-<div class="admonition-todo admonition" id="index-0">
-<p class="first admonition-title">Todo</p>
-<p class="last">Implement this method.</p>
-</div>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_line.LinearEntity.by_coords2d">
 <em class="property">static </em><tt class="descname">by_coords2d</tt><big>(</big><em>x0=0.0</em>, <em>y0=0.0</em>, <em>x1=1.0</em>, <em>y1=1.0</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.by_coords2d" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a 2D LinearEntity from two sets of x and y coordinates.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x0</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; First x-coord.</li>
+<li><strong>y0</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; First y-coord.</li>
+<li><strong>x1</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Second x-coord.</li>
+<li><strong>y1</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Second y-coord.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">LinearEntity</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Linear Entity</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_line.LinearEntity.by_coords3d">
 <em class="property">static </em><tt class="descname">by_coords3d</tt><big>(</big><em>x0=0.0</em>, <em>y0=0.0</em>, <em>z0=0.0</em>, <em>x1=1.0</em>, <em>y1=1.0</em>, <em>z1=1.0</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.by_coords3d" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a 3D LinearEntity from two sets of x,y and z coordinates.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x0</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; First x-coord.</li>
+<li><strong>y0</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; First y-coord.</li>
+<li><strong>z0</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; First z-coord.</li>
+<li><strong>x1</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Second x-coord.</li>
+<li><strong>y1</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Second y-coord.</li>
+<li><strong>z1</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Second z-coord.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">LinearEntity</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Linear Entity</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_line.LinearEntity.coefficients">
 <tt class="descname">coefficients</tt><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.coefficients" title="Permalink to this definition">¶</a></dt>
-<dd><p>The coefficients (a,b,c) of this line for equation ax+by+c=0</p>
+<dd><p>Returns the coefficients (a,b,c) of this line for equation ax+by+c=0</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">coefficients of the equation of a line (a,b,c).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
@@ -159,21 +229,35 @@ find the angle between the two using the above formula.</p>
 <dl class="method">
 <dt id="decodes.core.dc_line.LinearEntity.is_concurrent">
 <tt class="descname">is_concurrent</tt><big>(</big><em>*lines</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.is_concurrent" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns True if the set of linear entities are concurrent, False
-otherwise. Two or more linear entities are concurrent if they all
-intersect at a single point.</p>
+<dd><div class="line-block">
+<div class="line">Returns True if the set of linear entities are concurrent, False</div>
+<div class="line">otherwise. Two or more linear entities are concurrent if they all
+| intersect at a single point.</div>
+</div>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param lines:</th><td class="field-body">a set of LinearEntities</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type lines:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>Description of Method:</strong>  First, take the first 
 two lines and find their intersection. If there is no intersection, 
 then the first two lines were parallel and had no intersection so 
-concurrenecy is impossible amongst the whole set. Otherwise, check 
+concurrency is impossible amongst the whole set. Otherwise, check 
 to see if the intersection point of the first two lines is a member 
 on the rest of the lines. If so, the lines are concurrent.</p>
-</div>
-<div class="admonition-todo admonition" id="index-1">
-<p class="first admonition-title">Todo</p>
-<p class="last">Implement this method.</p>
 </div>
 </dd></dl>
 
@@ -204,31 +288,25 @@ on the rest of the lines. If so, the lines are concurrent.</p>
 <dl class="method">
 <dt id="decodes.core.dc_line.LinearEntity.is_perpendicular">
 <tt class="descname">is_perpendicular</tt><big>(</big><em>l1</em>, <em>l2</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.is_perpendicular" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns True if l1 and l2 are perpendicular, False otherwise</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<dd><p>Returns True if l1 and l2 are perpendicular, False otherwise.</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param l1:</th><td class="field-body">First LinearEntity</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>l1</strong> (<em>LinearEntity</em>) &#8211; First LinearEntity</li>
+<li><strong>l2</strong> (<em>LinearEntity</em>) &#8211; Second LinearEntity</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type l1:</th><td class="field-body">LinearEntity</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">True if perpendicular.</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">param l2:</th><td class="field-body">Second LinearEntity</td>
-</tr>
-<tr class="field-even field"><th class="field-name">type l2:</th><td class="field-body">LinearEntity</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">True if perpendicular.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">bool</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
-<div class="admonition-todo admonition" id="index-2">
-<p class="first admonition-title">Todo</p>
-<p class="last">Implement this method.</p>
-</div>
 </dd></dl>
 
 <dl class="method">
@@ -289,52 +367,36 @@ on the rest of the lines. If so, the lines are concurrent.</p>
 <dt id="decodes.core.dc_line.LinearEntity.perpendicular_line">
 <tt class="descname">perpendicular_line</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.perpendicular_line" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a new Line which is perpendicular to this linear entity and passes through the specified point.</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param p:</th><td class="field-body">Point that the LinearEntity will pass through.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>Point</em>) &#8211; Point that the LinearEntity will pass through.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type p:</th><td class="field-body">Point</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">New LinearEntity.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">New LinearEntity.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">LinearEntity</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">LinearEntity</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
-<div class="admonition-todo admonition" id="index-3">
-<p class="first admonition-title">Todo</p>
-<p class="last">Implement this method.</p>
-</div>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_line.LinearEntity.perpendicular_segment">
 <tt class="descname">perpendicular_segment</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.perpendicular_segment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a new Segment which connects p to a point on this linear entity and is also perpendicular to this line. Returns p itself if p is on this linear entity.</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param p:</th><td class="field-body">Point that the LinearEntity will pass through.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>Point</em>) &#8211; Point that the LinearEntity will pass through.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type p:</th><td class="field-body">Point</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">New LinearEntity.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">New LinearEntity.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">LinearEntity</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">LinearEntity</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
-<div class="admonition-todo admonition" id="index-4">
-<p class="first admonition-title">Todo</p>
-<p class="last">Implement this method.</p>
-</div>
 </dd></dl>
 
 <dl class="attribute">

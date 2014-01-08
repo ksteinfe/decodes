@@ -30,8 +30,8 @@ class LinearEntity(Geometry):
         else : raise TypeError("Incorrect parameters provided to %s constructor" % self.__class__.__name__)
     
     def __add__(self, other): 
-        """Overloads the addition **(+)** operator. 
-        Adds the given vector to LinearEntity._pt, effectively translating this LinearEntity
+        """| Overloads the addition **(+)** operator. 
+           | Adds the given vector to LinearEntity._pt, effectively translating this LinearEntity
         
             :param other: Vec to be added.
             :type other: Vec
@@ -53,7 +53,10 @@ class LinearEntity(Geometry):
     def spt(self, point): 
         """Sets the starting Point of a LinearEntity
 
+            :param point: Starting Point.
+            :type point: Point
             :result: Sets a starting point.
+            :rtype: None
         """
         self._pt = point
     @property
@@ -68,7 +71,10 @@ class LinearEntity(Geometry):
     def vec(self, vec):
         """Sets the Vec direction of a LinearEntity
 
+            :param vec: New Vec direction.
+            :type vec:Vec
             :result: Sets the Vec direction.
+            :rtype: None
         """    
         self._vec = vec
     @property
@@ -83,33 +89,47 @@ class LinearEntity(Geometry):
     def ept(self, point): 
         """Sets the end Point of a LinearEntity
 
+            :param point: End Point.
+            :type point: Point
             :result: End Point.
+            :rtype: None
         """
         self._vec = point-self._pt
     
     @property
     def coefficients(self):
-        """The coefficients (a,b,c) of this line for equation ax+by+c=0"""
+        """Returns the coefficients (a,b,c) of this line for equation ax+by+c=0
+        
+            :result: coefficients of the equation of a line (a,b,c).
+            :rtype: tuple
+        
+        """
         raise NotImplementedError()
         return (self.p1[1]-self.p2[1],
                 self.p2[0]-self.p1[0],
                 self.p1[0]*self.p2[1] - self.p1[1]*self.p2[0])
 
     def is_concurrent(*lines):
-        """
-        Returns True if the set of linear entities are concurrent, False
-        otherwise. Two or more linear entities are concurrent if they all
-        intersect at a single point.
+        """| Returns True if the set of linear entities are concurrent, False
+           | otherwise. Two or more linear entities are concurrent if they all
+           | intersect at a single point.
+            
+                :param lines: a set of LinearEntities
+                :type lines:
+                :result:
+                :rtype:
 
+                
         .. note:: **Description of Method:**  First, take the first 
           two lines and find their intersection. If there is no intersection, 
           then the first two lines were parallel and had no intersection so 
-          concurrenecy is impossible amongst the whole set. Otherwise, check 
+          concurrency is impossible amongst the whole set. Otherwise, check 
           to see if the intersection point of the first two lines is a member 
           on the rest of the lines. If so, the lines are concurrent.
         
-        .. todo:: Implement this method.
         """
+        #TODO:: Implement this method.
+        
         raise NotImplementedError()
 
     def is_parallel(l1, l2):
@@ -127,7 +147,7 @@ class LinearEntity(Geometry):
         return l1.vec.is_coincident(l2.vec) or l1.vec.is_coincident(l2.vec.inverted())
 
     def is_perpendicular(l1, l2):
-        """Returns True if l1 and l2 are perpendicular, False otherwise
+        """Returns True if l1 and l2 are perpendicular, False otherwise.
            
             :param l1: First LinearEntity
             :type l1: LinearEntity
@@ -135,9 +155,10 @@ class LinearEntity(Geometry):
             :type l2: LinearEntity
             :result: True if perpendicular.
             :rtype: bool
-            
-        .. todo:: Implement this method.
         """
+        
+        #TODO:: Implement this method.
+        
         raise NotImplementedError()
         try:
             a1,b1,c1 = l1.coefficients
@@ -149,6 +170,13 @@ class LinearEntity(Geometry):
     def angle_between(l1, l2):
         """
         Returns an angle formed between the two linear entities.
+        
+            :param l1: First LinearEntity
+            :type l1: LinearEntity
+            :param l2: Second LinearEntity
+            :type l2: LinearEntity
+            :result: Angle in radians.
+            :rtype: float
 
         .. note:: **Description of Method:**  
           From the dot product of vectors v1 and v2 it is known that::
@@ -158,9 +186,10 @@ class LinearEntity(Geometry):
           where A is the angle formed between the two vectors. We can
           get the directional vectors of the two lines and readily
           find the angle between the two using the above formula.
+       
+       """
+        #TODO:: Implement this method.
 
-        .. todo:: Implement this method.
-        """
         #v1 = l1.p2 - l1.p1
         #v2 = l2.p2 - l2.p1
         #return Basic.acos( (v1[0]*v2[0]+v1[1]*v2[1]) / (abs(v1)*abs(v2)) )
@@ -185,9 +214,9 @@ class LinearEntity(Geometry):
             :type p: Point
             :result: New LinearEntity.
             :rtype: LinearEntity
-            
-        .. todo:: Implement this method.
-        """
+        """    
+        #TODO:: Implement this method.
+        
         raise NotImplementedError()
 
     def perpendicular_segment(self, p):
@@ -198,9 +227,10 @@ class LinearEntity(Geometry):
             :type p: Point
             :result: New LinearEntity.
             :rtype: LinearEntity
-            
-        .. todo:: Implement this method.
+        
         """
+        #TODO:: Implement this method.
+        
         raise NotImplementedError()
 
     def __eq__(self, other):  raise NotImplementedError()
@@ -239,10 +269,45 @@ class LinearEntity(Geometry):
         return self.spt+(self.vec.normalized(self.vec.length*t))
 
     @staticmethod
-    def by_coords2d(x0=0.0,y0=0.0,x1=1.0,y1=1.0): return Segment(Point(x0,y0),Point(x1,y1))
+    def by_coords2d(x0=0.0,y0=0.0,x1=1.0,y1=1.0): 
+        """ Returns a 2D LinearEntity from two sets of x and y coordinates.
+        
+            :param x0: First x-coord.
+            :type x0: float
+            :param y0: First y-coord.
+            :type y0: float
+            :param x1: Second x-coord.
+            :type x1: float
+            :param y1: Second y-coord.
+            :type y1: float
+            :result: LinearEntity
+            :rtype: Linear Entity
+            
+        """
+    
+        return Segment(Point(x0,y0),Point(x1,y1))
 
     @staticmethod
-    def by_coords3d(x0=0.0,y0=0.0,z0=0.0,x1=1.0,y1=1.0,z1=1.0): return Segment(Point(x0,y0,z0),Point(x1,y1,z1))
+    def by_coords3d(x0=0.0,y0=0.0,z0=0.0,x1=1.0,y1=1.0,z1=1.0): 
+        """ Returns a 3D LinearEntity from two sets of x,y and z coordinates.
+        
+            :param x0: First x-coord.
+            :type x0: float
+            :param y0: First y-coord.
+            :type y0: float
+            :param z0: First z-coord.
+            :type z0: float
+            :param x1: Second x-coord.
+            :type x1: float
+            :param y1: Second y-coord.
+            :type y1: float
+            :param z1: Second z-coord.
+            :type z1: float
+            :result: LinearEntity
+            :rtype: Linear Entity
+            
+        """
+        return Segment(Point(x0,y0,z0),Point(x1,y1,z1))
 
 class Line(LinearEntity):
     """A line in space."""
@@ -260,6 +325,13 @@ class Ray(LinearEntity):
     def __repr__(self): return "ray[{0} {1}]".format(self._pt,self._vec)
     
     def near(self,p):
+        """Returns a tuple of the closest point to a given Ray, its t value and the distance from the Point to the near Point.
+       
+            :param p: Point to look for a near Point on the Ray.
+            :type p: Point
+            :result: Tuple of near point on Ray, t value and distance from point to near point.
+            :rtype: (Point, float, float)
+        """
         near = super(Ray,self).near(p)
         if near[1] < 0:
             near = (self.spt,0,p.distance(self.spt))
@@ -268,13 +340,28 @@ class Ray(LinearEntity):
 
 class Segment(LinearEntity):
     """A directed line segment in space."""
-    def __eq__(self, other):  
+    def __eq__(self, other):
+        """Returns true if a given line segment is equal to this line segment. 
+        
+            :param other: Line segment to compare.
+            :type other: Segment
+            :result: Boolean value.
+            :rtype: bool
+        """
         return self._pt == other._pt and self._vec == other._vec
 
     def __contains__(self, other):  raise NotImplementedError()
     def __repr__(self): return "seg[{0} {1}]".format(self.spt,self._vec)
     
     def near(self,p):
+        """Returns a tuple of the closest point to a given line segment, its t value and the distance from the Point to the near Point.
+       
+            :param p: Point to look for a near Point on the Segment.
+            :type p: Point
+            :result: Tuple of near point on Segment, t value and distance from point to near point.
+            :rtype: (Point, float, float)
+        """
+        
         near = super(Segment,self).near(p)
         if near[1] < 0:
             near = (self.spt,0.0,p.distance(self.spt))
@@ -285,7 +372,12 @@ class Segment(LinearEntity):
         
     @property
     def length(self): 
-      """Returns the length of this segment"""
+      """Returns the length of this segment.
+            
+            :result: Length of line segment.
+            :rtype: float
+      
+      """
       return self.vec.length        
 
     @property
