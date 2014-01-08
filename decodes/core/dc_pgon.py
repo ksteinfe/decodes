@@ -146,14 +146,13 @@ class PGon(HasPts):
        
             :param p: Point to look for a near Point on the PGon.
             :type p: Point
-            :result: Tuple of near point on PGon, index of near segment and distance from point to near point.
-            :rtype: (Point, integer, float)
+            :result: Nearest point on the PGon, index of the segment of this PGon on which this Point lies, the t-value along this segment, and the distance from the given Point.
+            :rtype: (Point, integer, float, float)
         """
-        #KS: this does not function as advertised, after narrowing down to the nearest segment we need to ` the given point
-        return False
         npts = [seg.near(p) for seg in self.edges]
-        ni = Point.near_index(p,[npt[0] for npt in npts])
-        return (npts[ni][0],ni,npts[ni][2])
+        npts = [(tup[0],tup[1],tup[2],n) for n,tup in enumerate(npts)] # add index
+        npts.sort(key=lambda tup: tup[2])
+        return (npts[0][0],npts[0][3],npts[0][1],npts[0][2])
 
     def near_pt(self, p):
         """Returns the closest point to a given PGon
