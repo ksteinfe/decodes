@@ -136,7 +136,7 @@ class Arc(HasBasis):
     def origin(self):
         return self._basis.origin
         
-    def __repr__(self): return "arc[{0},r:{1},sweep angle{2}]".format(self.origin,self.rad,self.sweep_angle)
+    def __repr__(self): return "arc[{0},r:{1},sweep angle{2}]".format(self.origin,self.rad,self.angle)
     
     
     # Returns an arc using a start point, a sweep point and a tangent to the arc at the start point
