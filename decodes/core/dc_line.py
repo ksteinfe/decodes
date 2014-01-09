@@ -478,7 +478,7 @@ class VecField(PixelGrid):
         return self._base_pts[y*self._res[0]+x]
 
     def vec_near(self,a,b=None):
-        """May be passed either a point or an x,y coordinate.
+        """May be passed either a point or an x,y coord
         """
         x,y = self.address_near(a,b)
         return self.get(x,y)

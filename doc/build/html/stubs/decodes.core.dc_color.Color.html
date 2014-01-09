@@ -60,15 +60,15 @@
 <dl class="method">
 <dt id="decodes.core.dc_color.Color.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>a=None</em>, <em>b=None</em>, <em>c=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_color.Color.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Color constructor</p>
+<dd><p>Color constructor.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>a</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; First color value (between 0.0 and 1.0). Defaults to 0.5</li>
-<li><strong>b</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Second color value (between 0.0 and 1.0). Defaults to 0.5</li>
-<li><strong>c</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Third color value (between 0.0 and 1.0). Defaults to 0.5</li>
+<li><strong>a</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; First color value (between 0.0 and 1.0). Defaults to 0.5.</li>
+<li><strong>b</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Second color value (between 0.0 and 1.0). Defaults to 0.5.</li>
+<li><strong>c</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Third color value (between 0.0 and 1.0). Defaults to 0.5.</li>
 </ul>
 </td>
 </tr>
@@ -92,8 +92,8 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>h</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; H color value (between 0.0 and 1.0).</li>
-<li><strong>s</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; S color value (between 0.0 and 1.0). Defaults to 1</li>
-<li><strong>b</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; B color value (between 0.0 and 1.0). Defaults to 1</li>
+<li><strong>s</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; S color value (between 0.0 and 1.0). Defaults to 1.</li>
+<li><strong>b</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; B color value (between 0.0 and 1.0). Defaults to 1.</li>
 </ul>
 </td>
 </tr>
@@ -135,12 +135,34 @@
 <dl class="attribute">
 <dt id="decodes.core.dc_color.Color.hue">
 <tt class="descname">hue</tt><a class="headerlink" href="#decodes.core.dc_color.Color.hue" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns hue value of this color.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Decimal value representing hue.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_color.Color.i">
 <tt class="descname">i</tt><a class="headerlink" href="#decodes.core.dc_color.Color.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the i-value of this color.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">i-value of this color.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_color.Color.interpolate">
@@ -153,7 +175,7 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>c0</strong> (<em>Color</em>) &#8211; First Color object</li>
 <li><strong>c1</strong> (<em>Color</em>) &#8211; Second Color object</li>
-<li><strong>t</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Interpolation value (between 0.0 and 1.0). Defaults to 0.5</li>
+<li><strong>t</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Interpolation value (between 0.0 and 1.0). Defaults to 0.5.</li>
 </ul>
 </td>
 </tr>
@@ -170,22 +192,66 @@
 <dl class="attribute">
 <dt id="decodes.core.dc_color.Color.q">
 <tt class="descname">q</tt><a class="headerlink" href="#decodes.core.dc_color.Color.q" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the q-value of this color.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">q-value of this color.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_color.Color.sat">
 <tt class="descname">sat</tt><a class="headerlink" href="#decodes.core.dc_color.Color.sat" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns saturation value of this color.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Decimal value representing saturation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_color.Color.val">
 <tt class="descname">val</tt><a class="headerlink" href="#decodes.core.dc_color.Color.val" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the numeric value of this color.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Decimal value representing this color.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_color.Color.y">
 <tt class="descname">y</tt><a class="headerlink" href="#decodes.core.dc_color.Color.y" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the y-value of this color.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">y-value of this color.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 

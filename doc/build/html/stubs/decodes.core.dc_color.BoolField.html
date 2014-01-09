@@ -62,12 +62,40 @@ each pixel contains a True or a False</p>
 <dl class="method">
 <dt id="decodes.core.dc_color.BoolField.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>pixel_res=ival[20.0,20.0], initial_value=False, ic=False, wrap=True</em><big>)</big><a class="headerlink" href="#decodes.core.dc_color.BoolField.__init__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>BoolField constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pixel_res</strong> (<em>Interval</em>) &#8211; Resolution of BoolField.</li>
+<li><strong>initial_value</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Start value of BoolField</li>
+<li><strong>ic</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Include corners parameter.</li>
+<li><strong>wrap</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Boolean value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">BoolField object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">BoolField</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_color.BoolField.to_image">
 <tt class="descname">to_image</tt><big>(</big><em>false_color=color[1.0,1.0,1.0], true_color=color[0.0,0.0,0.0]</em><big>)</big><a class="headerlink" href="#decodes.core.dc_color.BoolField.to_image" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Constructs and image from the BoolField.
+:param false_color: Color for False values.
+:type false_color: Color
+:param true_color: Color for True values.
+:type true_color: Color
+:result: Image
+:rtype: Image</p>
+</dd></dl>
 
 </dd></dl>
 

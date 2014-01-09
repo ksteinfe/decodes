@@ -62,22 +62,85 @@ each pixel contains a floating point number</p>
 <dl class="method">
 <dt id="decodes.core.dc_color.ValueField.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>pixel_res=ival[20.0,20.0], initial_value=0.0, include_corners=False, wrap=True</em><big>)</big><a class="headerlink" href="#decodes.core.dc_color.ValueField.__init__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>ValueField constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pixel_res</strong> (<em>Interval</em>) &#8211; Resolution of ValueField.</li>
+<li><strong>initial_value</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Start value of ValueField.</li>
+<li><strong>include_corners</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Boolean Value.</li>
+<li><strong>wrap</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Boolean Value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">ValueField Object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ValueField</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_color.ValueField.max_value">
 <tt class="descname">max_value</tt><a class="headerlink" href="#decodes.core.dc_color.ValueField.max_value" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns max value of ValueField.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Maximum value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_color.ValueField.min_value">
 <tt class="descname">min_value</tt><a class="headerlink" href="#decodes.core.dc_color.ValueField.min_value" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns min value of ValueField.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Minimum value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_color.ValueField.to_image">
 <tt class="descname">to_image</tt><big>(</big><em>min_color</em>, <em>max_color</em>, <em>value_range=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_color.ValueField.to_image" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Constructs image from ValueField.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>min_color</strong> (<em>Color</em>) &#8211; Minimum color in image.</li>
+<li><strong>max_color</strong> (<em>Color</em>) &#8211; Maximum color in image.</li>
+<li><strong>value_range</strong> (<em>Interval</em>) &#8211; Range of values.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Image.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Image.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
