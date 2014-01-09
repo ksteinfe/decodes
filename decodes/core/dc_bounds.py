@@ -231,7 +231,7 @@ class Bounds(Geometry):
         """Constructs a Bounds that encompasses all Points in pts.
         
             :param pts: A list of Points.
-            :type pts: list
+            :type pts: [Point]
             :result: A Bounds that includes all Points in pts.
             :rtype: Bounds
         
@@ -270,12 +270,12 @@ class QuadTree():
     def __init__ (self, capacity, bounds):
         """Description
         
-            :param capacity:
-            :type capacity:
-            :param bounds:
-            :type bounds:
-            :result:
-            :rtype:
+            :param capacity: Total number of points to contain.
+            :type capacity: int
+            :param bounds: Bounds.
+            :type bounds: Bounds
+            :result: QuadTree object.
+            :rtype: QuadTree
         
         """
     
@@ -300,7 +300,7 @@ class QuadTree():
         """Recursively returns all the points in this QuadTree.
         
             :result: List of Points.
-            :rtype: list
+            :rtype: [Point]
         """
         ret_pts = []
         if not self.has_children :
@@ -310,7 +310,7 @@ class QuadTree():
         return ret_pts
 
     def append(self, pt) :
-        """Description
+        """Appends the given point to the points in this QuadTree.
         
             :param pt: Point
             :type pt: Point
@@ -357,12 +357,12 @@ class QuadTree():
         return True
     
     def contains(self,pt):
-        """Description
+        """Returns true if given point is in this QuadTree.
         
-            :param pt:
-            :type pt:
-            :result:
-            :rtype:
+            :param pt: Point to test for containment.
+            :type pt: Point
+            :result: Boolean Value.
+            :rtype: bool
             
         """
         if self.has_children:
@@ -373,10 +373,10 @@ class QuadTree():
     def pts_in_bounds(self,bounds):
         """Finds all points that fall within a given bounds.
         
-            :param bounds:
-            :type bounds:
-            :result:
-            :rtype:
+            :param bounds: bounds
+            :type bounds: Bounds
+            :result: List of Points in Bounds.
+            :rtype: [Point]
             
         """
         if not self.bnd.overlaps(bounds) : return []
@@ -390,14 +390,14 @@ class QuadTree():
         
     @staticmethod
     def encompass(capacity = 4, pts = [Point()]):
-        """Description
+        """Returns a Bounds that encompasses the given points.
         
-            :param capacity:
-            :type capacity:
-            :param pts:
+            :param capacity: Capacity of points within the Bounds.
+            :type capacity: int
+            :param pts: List of Points.
             :type pts: [Point]
-            :result:
-            :rtype:
+            :result: Bounds encompassing the given points.
+            :rtype: Bounds
         
         """
     
