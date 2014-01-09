@@ -62,6 +62,27 @@
 <dt id="decodes.core.dc_pgon.RGon.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>num_of_sides</em>, <em>radius=None</em>, <em>basis=None</em>, <em>edge_length=None</em>, <em>apothem=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.RGon.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>RGon Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>num_of_sides</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of sides of polygon.</li>
+<li><strong>radius</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Distance from center to vertices.</li>
+<li><strong>basis</strong> (<em>Basis.</em>) &#8211; Basis.</li>
+<li><strong>edge_length</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Length of polygon edge.</li>
+<li><strong>apothem</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Distance from center to midpoint of sides.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Polygon.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">RGon</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -72,65 +93,187 @@
 <dl class="attribute">
 <dt id="decodes.core.dc_pgon.RGon.apothem">
 <tt class="descname">apothem</tt><a class="headerlink" href="#decodes.core.dc_pgon.RGon.apothem" title="Permalink to this definition">¶</a></dt>
-<dd><p>the distance from the center to the midpoint of any side</p>
+<dd><p>The distance from the center to the midpoint of any side.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Apothem of the polygon.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_pgon.RGon.area">
 <tt class="descname">area</tt><a class="headerlink" href="#decodes.core.dc_pgon.RGon.area" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the area of the polygon.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Area of the polygon.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_pgon.RGon.circle_cirscr">
 <tt class="descname">circle_cirscr</tt><a class="headerlink" href="#decodes.core.dc_pgon.RGon.circle_cirscr" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns the circumscribed circle of this RGon</p>
+<dd><p>Returns the circumscribed circle of this RGon.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Circumscribed circle.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Circle</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_pgon.RGon.circle_inscr">
 <tt class="descname">circle_inscr</tt><a class="headerlink" href="#decodes.core.dc_pgon.RGon.circle_inscr" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns the inscribed circle of this RGon</p>
+<dd><p>Returns the inscribed circle of this RGon.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Inscribed circle.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Circle</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_pgon.RGon.deflate">
 <tt class="descname">deflate</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.RGon.deflate" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns a regular polygon that circumscribes this one while maintaining the same number of sides</p>
+<dd><p>Returns a regular polygon that circumscribes this one while maintaining the same number of sides.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">a regular polygon circumscribing this one.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">RGon</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_pgon.RGon.edge_length">
 <tt class="descname">edge_length</tt><a class="headerlink" href="#decodes.core.dc_pgon.RGon.edge_length" title="Permalink to this definition">¶</a></dt>
-<dd><p>the length of any edge</p>
+<dd><p>The length of any edge.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">The length of any edge.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_pgon.RGon.from_edge">
 <em class="property">static </em><tt class="descname">from_edge</tt><big>(</big><em>segment, num_of_sides, normal=vec[0,0,1]</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.RGon.from_edge" title="Permalink to this definition">¶</a></dt>
-<dd><p>constructs a regular polygon given a line segment describing one edge.
-the side of the edge that the center of the resulting polygon falls is determined by taking the cross product of the given edge vector and the given normal vector</p>
+<dd><p>Constructs a regular polygon given a line segment describing one edge. The side of the edge that the center of the resulting polygon falls is determined by taking the cross product of the given edge vector and the given normal vector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>segment</strong> (<em>Segment</em>) &#8211; Edge of polygon.</li>
+<li><strong>num_of_sides</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of sides of polygon.</li>
+<li><strong>normal</strong> (<em>Vec</em>) &#8211; Vector normal to edge.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Regular polygon.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">RGon</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_pgon.RGon.inflate">
 <tt class="descname">inflate</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.RGon.inflate" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns a regular polygon inscribed inside this one while maintaining the same number of sides</p>
+<dd><p>Returns a regular polygon inscribed inside this one while maintaining the same number of sides.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">An regular inscribed polygon.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">RGon</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_pgon.RGon.interior_angle">
 <tt class="descname">interior_angle</tt><a class="headerlink" href="#decodes.core.dc_pgon.RGon.interior_angle" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the interior angle of this RGon.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Interior angle in radians.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_pgon.RGon.num_of_sides">
 <tt class="descname">num_of_sides</tt><a class="headerlink" href="#decodes.core.dc_pgon.RGon.num_of_sides" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns number of sides of the RGon.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Number of sides of polygon.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_pgon.RGon.radius">
 <tt class="descname">radius</tt><a class="headerlink" href="#decodes.core.dc_pgon.RGon.radius" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns radius of RGon.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Radius of polygon.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_pgon.RGon.subclass_attr">
@@ -140,7 +283,18 @@ the side of the edge that the center of the resulting polygon falls is determine
 <dl class="method">
 <dt id="decodes.core.dc_pgon.RGon.to_pgon">
 <tt class="descname">to_pgon</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.RGon.to_pgon" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the PGon equivalent of this RGon.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">A polygon.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">PGon</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 

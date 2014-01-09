@@ -186,12 +186,12 @@ class HasPts(HasBasis):
 
      
     def append(self,pts) : 
-        """| Appends the given Point to the stored list of points.
-           | Each Point is processed to ensure compatibility with this geometry's basis.
+        """Appends the given Point to the stored list of points.
+           Each Point is processed to ensure compatibility with this geometry's basis.
 
-                :param pts: Point(s) to append
-                :type pts: Point or [Point]
-                :result: Modifies this geometry by adding items to the stored list of points
+            :param pts: Point(s) to append
+            :type pts: Point or [Point]
+            :result: Modifies this geometry by adding items to the stored list of points
         """
         self._unset_attr()
         try : 

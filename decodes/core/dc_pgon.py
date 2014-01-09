@@ -6,9 +6,8 @@ import copy, collections
 import math
 
 class PGon(HasPts):
-    """
-    a very simple 2d polygon class
-    Polygons limit their vertices to x and y dimensions, and enforce that they employ a basis.    Transformations of a polygon should generally be applied to the basis.    Any tranfromations of the underlying vertices should ensure that the returned vectors are limited to x and y dimensions
+    """| A very simple 2d polygon class
+       | Polygons limit their vertices to x and y dimensions, and enforce that they employ a basis.    Transformations of a polygon should generally be applied to the basis.    Any tranfromations of the underlying vertices should ensure that the returned vectors are limited to x and y dimensions
     """
     subclass_attr = ['_edges'] # this list of props is unset anytime this HasPts object changes
 
@@ -22,16 +21,16 @@ class PGon(HasPts):
             :returns: PGon object. 
             :rtype: PGon
         """ 
-        #TODO: if i pass in verices but no basis, try and figure out what the CS should be and project all points to the proper plane
+        #TODO: if i pass in vertices but no basis, try and figure out what the CS should be and project all points to the proper plane
         if basis is None and vertices is None : raise GeometricError("You must define both a basis and a list of vertices to construct a PGon")
 
-        super(PGon,self).__init__(vertices,basis) #HasPts constructor handles initalization of verts and basis
+        super(PGon,self).__init__(vertices,basis) #HasPts constructor handles initialization of verts and basis
         self.basis = CS() if (basis is None) else basis # set the basis after appending the points
 
         
     def seg(self,index):
-        """ Returns a segment of this Polygon
-        The returned line segment will contain a copy of the Points stored in the segment.
+        """| Returns a segment of this Polygon
+           | The returned line segment will contain a copy of the Points stored in the segment.
         
             :param index: Index of the desired segment.
             :type index: Int
@@ -44,8 +43,13 @@ class PGon(HasPts):
         return Segment(self.pts[index],self.pts[index+1])
         
     def __contains__(self, pt):
-        """
-        overloads the containment **(in)** operator
+        """Overloads the containment **(in)** operator.
+        
+            :param pts: Point to determine containment in this PGon.
+            :type pts: Point
+            :result: Boolean Value.
+            :rtype: bool
+            
         """
         return self.contains_pt(pt)
 
@@ -55,6 +59,7 @@ class PGon(HasPts):
        
             :result: List of edges of a PGon
             :rtype: [Segment]
+            
         """
         edges = []
         for n in range(len(self)):
@@ -63,15 +68,24 @@ class PGon(HasPts):
         
     @property
     def area(self):
+        """ Returns the area of this PGon.
+        
+            :result: Area of PGon.
+            :rtype: float
+            
+        """
         a = 0
         for n in range(len(self._verts)): a += (self._verts[n-1].x + self._verts[n].x) * (self._verts[n-1].y - self._verts[n].y)
         return abs(a / 2.0)
 
     @property
     def bounds(self):
-        '''
-        returns the bounding box of this polygon, aligned to the basis of this polygon
-        '''
+        """Returns the bounding box of this polygon, aligned to the basis of this polygon.
+        
+            :result: Bounding box of polygon.
+            :rtype: Bounds
+            
+        """
 
         xx = [vec.x for vec in self._verts]
         yy = [vec.y for vec in self._verts]
@@ -81,9 +95,21 @@ class PGon(HasPts):
         return Bounds(ival_x = ivx, ival_y = ivy)
 
     def rotated_to_min_bounds(self, divs = 4 , levels = 2, min_a = 0, max_a =.5 * math.pi ):
-        '''
-        creates a copy of a polygon rotated to its best-fit bounding box
-        '''
+        """Creates a copy of a polygon rotated to its best-fit bounding box.
+        
+            :param divs: Number of divisions of rotation per level.
+            :type divs: int
+            :param levels: Number of iterations.
+            :type levels: int
+            :param min_a: Minimum angle of rotation.
+            :type min_a: float
+            :param max_a: Maximum angle of rotation
+            :type max_a: float
+            :result: Polygon rotated to minimum bounds.
+            :rtype: PGon
+            
+            
+        """
         from .dc_xform import *
     
         delta_a = (max_a - min_a) / divs
@@ -123,10 +149,16 @@ class PGon(HasPts):
 
 
     def eval(self,t):
-        """
-        evaluates this polygon at the specified parameter t
-        a t-value of 0 will result in a point conincident with PGon.pts[0]
-        a t-value of 1 will result in a point conincident with PGon.pts[-1]
+        """| Evaluates this polygon at the specified parameter t.
+           | A t-value of 0 will result in a point coincident with PGon.pts[0]
+           | A t-value of 1 will result in a point coincident with PGon.pts[-1]
+           
+           
+                :param t: A decimal number between [0:1].
+                :type t: float
+                :result: Point on PGon.
+                :rtype: Point
+                
         """
         if t > 1 : t = t%1.0
         if t < 0 : t = 1.0 - abs(t)%1.0
@@ -155,7 +187,7 @@ class PGon(HasPts):
         return (npts[0][0],npts[0][3],npts[0][1],npts[0][2])
 
     def near_pt(self, p):
-        """Returns the closest point to a given PGon
+        """Returns the closest point to a given PGon.
        
             :param p: Point to look for a near Point on the PGon.
             :type p: Point
@@ -167,31 +199,56 @@ class PGon(HasPts):
     def __repr__(self): return "pgon[{0}v]".format(len(self._verts))
     
     def basis_applied(self):
+        """ Returns a new PGon with basis applied.
+        
+            :result: PGon with basis applied.
+            :rtype: PGon
+            
+        """
+        
         clone = super(PGon,self).basis_applied()
         clone.basis = CS()
         return clone
 
     def basis_stripped(self):
+        """ Returns a new PGon with basis stripped.
+        
+            :result: PGon with basis stripped.
+            :rtype: PGon
+            
+        """
+        
         clone = super(PGon,self).basis_stripped()
         clone.basis = CS()
         return clone
 
 
     def inflate(self, rotation=0.5):
-        '''
-        returns a polygon inscribed inside this one.
-        each vertex of the returned polygon will lie on the midpoint of one of this polygon's edges
-
-        optionally, you may set the rotation 0->1
-        ''' 
+        """| Returns a polygon inscribed inside this one.
+           | Each vertex of the returned polygon will lie on the midpoint of one of this polygon's edges.
+           | Optionally, you may set the rotation 0->1
+           
+            :param rotation: A decimal number between [0:1].
+            :type rotation: float
+            :result: A polygon inscribed of this one.
+            :rtype: PGon
+        """
+        
         ipts = [Vec.interpolate(self._verts[n],self._verts[n-1],rotation) for n in range(len(self._verts))]
         return PGon(ipts,self.basis)
 
     def contains_pt(self, pt,tolerence=0.000001):
-        '''
-        tests if this polygon contains the given point.
-        the given point must lie on the plane of this polygon.
-        '''
+        """Tests if this polygon contains the given point. The given point must lie on the plane of this polygon.
+        
+            :param pt: Point to test containment in PGon.
+            :type pt: Point
+            :param tolerance: A decimal number.
+            :type tolerance: float
+            :result: Boolean Value.
+            :rtype: bool
+            
+        """
+        
         pt = Point(self.basis.deval(pt))
         if abs(pt.z) > tolerence : 
             warnings.warn("Given point does not lie on the same plane as this polygon.")
@@ -226,9 +283,13 @@ class PGon(HasPts):
         return icnt%2!=0
 
     def overlaps(self, other) :
-        """
-        tests for overlap with another polygon
-        returns true if these two polygons share a common plane, and if they overlap or if one is completely contained within another.
+        """Tests for overlap with another polygon. Returns true if these two polygons share a common plane, and if they overlap or if one is completely contained within another.
+        
+            :param other: Another polygon,
+            :type other: PGon
+            :result: Boolean Value.
+            :rtype: bool
+            
         """
         if not self.basis.xy_plane.is_coplanar(other.basis.xy_plane): return False
 
@@ -242,9 +303,17 @@ class PGon(HasPts):
 
     @staticmethod
     def triangle(pt_a,pt_b,pt_c):
-        """
-        Constructs a triangular polygon from three points.
-        Resulting PGon will have a basis at the centroid of the three points, with the x_axis pointing toward pt_a
+        """Constructs a triangular polygon from three points. Resulting PGon will have a basis at the centroid of the three points, with the x_axis pointing toward pt_a.
+        
+            :param pt_a: First Point.
+            :type pt_a: Point
+            :param pt_b: Second Point.
+            :type pt_b: Point
+            :param pt_c: Third Point.
+            :type pt_c: Point
+            :result: Triangular polygon.
+            :rtype: PGon
+        
         """
         cen = Point.centroid([pt_a,pt_b,pt_c])
         cs = CS(cen,Vec(cen,pt_a),Vec(cen,pt_b))
@@ -279,10 +348,11 @@ class PGon(HasPts):
             :type cpt: Point
             :param angle_interval: Radii interval.
             :type angle_interval: Interval
-            :param res: doughnut resolution.
+            :param res: Doughnut resolution.
             :type res: float
             :returns: Doughnut object. 
             :rtype: PGon
+            
         """ 
         cs = CylCS(cpt)
         pts = []
@@ -294,13 +364,26 @@ class PGon(HasPts):
         return PGon(pts)
 
 class RGon(PGon):
-    '''
+    """
     A Regular Polygon Class
-    '''
-    subclass_attr = ['_edges'] # this list of props is unset anytime this HasPts object changes
+    """
+    subclass_attr = ['_edges'] # this list of props is unset any time this HasPts object changes
 
     def __init__(self, num_of_sides, radius=None, basis=None, edge_length=None, apothem=None):
         """ RGon Constructor.
+            
+            :param num_of_sides: Number of sides of polygon.
+            :type num_of_sides: int
+            :param radius: Distance from center to vertices.
+            :type radius: float
+            :param basis: Basis.
+            :type basis: Basis.
+            :param edge_length: Length of polygon edge.
+            :type edge_length: float
+            :param apothem: Distance from center to midpoint of sides.
+            :type apothem: float
+            :result: Polygon.
+            :rtype: RGon
         
         """ 
         self._in_init = True
@@ -332,14 +415,31 @@ class RGon(PGon):
 
     @property
     def radius(self):
+        """Returns radius of RGon.
+        
+            :result: Radius of polygon.
+            :rtype: float
+            
+        """
         return self._radius
 
     @property
     def num_of_sides(self):
+        """Returns number of sides of the RGon.
+        
+            :result: Number of sides of polygon.
+            :rtype: int
+        
+        """
         return self._nos
 
     @property
     def area(self):
+        """Returns the area of the polygon.
+        
+            :result: Area of the polygon.
+            :rtype: float
+        """
         try:
             return self._area
         except:
@@ -348,9 +448,11 @@ class RGon(PGon):
 
     @property
     def apothem(self):
-        '''
-        the distance from the center to the midpoint of any side
-        '''
+        """The distance from the center to the midpoint of any side.
+        
+            :result: Apothem of the polygon.
+            :rtype: float
+        """
         try:
             return self._apothem
         except:
@@ -359,9 +461,12 @@ class RGon(PGon):
 
     @property
     def edge_length(self):
-        '''
-        the length of any edge
-        '''
+        """The length of any edge.
+            
+            :result: The length of any edge.
+            :rtype: float
+            
+        """
         try:
             return self._edge_length
         except:
@@ -370,20 +475,31 @@ class RGon(PGon):
 
     @property
     def circle_inscr(self):
-        '''
-        returns the inscribed circle of this RGon
-        '''
+        """Returns the inscribed circle of this RGon.
+        
+            :result: Inscribed circle.
+            :rtype: Circle
+            
+        """
         return Circle(self.basis.xy_plane,self.radius)
 
     @property
     def circle_cirscr(self):
-        '''
-        returns the circumscribed circle of this RGon
-        '''
+        """Returns the circumscribed circle of this RGon.
+        
+            :result: Circumscribed circle.
+            :rtype: Circle
+            
+        """
         return Circle(self.basis.xy_plane,self.apothem)
 
     @property
     def interior_angle(self):
+        """Returns the interior angle of this RGon.
+        
+            :result: Interior angle in radians.
+            :rtype: float
+        """
         try:
             return self._iangle
         except:
@@ -393,9 +509,12 @@ class RGon(PGon):
     def __repr__(self): return "rgon[{0}]".format(self.num_of_sides)
 
     def inflate(self):
-        '''
-        returns a regular polygon inscribed inside this one while maintaining the same number of sides
-        '''
+        """Returns a regular polygon inscribed inside this one while maintaining the same number of sides.
+        
+            :result: An regular inscribed polygon.
+            :rtype: RGon
+            
+        """
         o = self.basis.origin
         x = Vec(o,Point.interpolate(self.pts[0],self.pts[1]))
         y = self.basis.z_axis.cross(x)
@@ -403,9 +522,13 @@ class RGon(PGon):
         return RGon(self._nos,self.apothem,basis)
 
     def deflate(self):
-        '''
-        returns a regular polygon that circumscribes this one while maintaining the same number of sides
-        '''
+        """Returns a regular polygon that circumscribes this one while maintaining the same number of sides.
+        
+            :result: a regular polygon circumscribing this one.
+            :rtype: RGon
+            
+        """
+        
         o = self.basis.origin
         x = Vec(o,Point.interpolate(self.pts[0],self.pts[1]))
         y = self.basis.zAxis.cross(x)
@@ -413,6 +536,12 @@ class RGon(PGon):
         return RGon(self._nos,basis=basis,apothem=self.radius)
 
     def to_pgon(self):
+        """ Returns the PGon equivalent of this RGon.
+        
+            :result: A polygon.
+            :rtype: PGon
+            
+        """
         return PGon(self._verts,self.basis)
 
     def _vertices_changed(self):
@@ -420,9 +549,17 @@ class RGon(PGon):
 
     @staticmethod
     def from_edge(segment,num_of_sides,normal=Vec(0,0,1)):
-        """
-        constructs a regular polygon given a line segment describing one edge.
-        the side of the edge that the center of the resulting polygon falls is determined by taking the cross product of the given edge vector and the given normal vector
+        """Constructs a regular polygon given a line segment describing one edge. The side of the edge that the center of the resulting polygon falls is determined by taking the cross product of the given edge vector and the given normal vector.
+            
+            :param segment: Edge of polygon.
+            :type segment: Segment
+            :param num_of_sides: Number of sides of polygon.
+            :type num_of_sides: int
+            :param normal: Vector normal to edge.
+            :type normal: Vec
+            :result: Regular polygon.
+            :rtype: RGon
+            
         """
         apothem = segment.length / (2.0 * math.tan(math.pi/num_of_sides))
         cpt = segment.midpoint + segment.vec.cross(normal).normalized(apothem)

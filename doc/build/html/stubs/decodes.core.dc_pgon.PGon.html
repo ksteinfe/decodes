@@ -57,8 +57,10 @@
 <dt id="decodes.core.dc_pgon.PGon">
 <em class="property">class </em><tt class="descclassname">decodes.core.dc_pgon.</tt><tt class="descname">PGon</tt><big>(</big><em>vertices=None</em>, <em>basis=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.PGon" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="decodes.core.dc_has_pts.HasPts.html#decodes.core.dc_has_pts.HasPts" title="decodes.core.dc_has_pts.HasPts"><tt class="xref py py-class docutils literal"><span class="pre">decodes.core.dc_has_pts.HasPts</span></tt></a></p>
-<p>a very simple 2d polygon class
-Polygons limit their vertices to x and y dimensions, and enforce that they employ a basis.    Transformations of a polygon should generally be applied to the basis.    Any tranfromations of the underlying vertices should ensure that the returned vectors are limited to x and y dimensions</p>
+<div class="line-block">
+<div class="line">A very simple 2d polygon class</div>
+<div class="line">Polygons limit their vertices to x and y dimensions, and enforce that they employ a basis.    Transformations of a polygon should generally be applied to the basis.    Any tranfromations of the underlying vertices should ensure that the returned vectors are limited to x and y dimensions</div>
+</div>
 <dl class="method">
 <dt id="decodes.core.dc_pgon.PGon.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>vertices=None</em>, <em>basis=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.PGon.__init__" title="Permalink to this definition">¶</a></dt>
@@ -86,29 +88,89 @@ Polygons limit their vertices to x and y dimensions, and enforce that they emplo
 <dl class="attribute">
 <dt id="decodes.core.dc_pgon.PGon.area">
 <tt class="descname">area</tt><a class="headerlink" href="#decodes.core.dc_pgon.PGon.area" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the area of this PGon.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Area of PGon.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_pgon.PGon.basis_applied">
 <tt class="descname">basis_applied</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.PGon.basis_applied" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a new PGon with basis applied.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">PGon with basis applied.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">PGon</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_pgon.PGon.basis_stripped">
 <tt class="descname">basis_stripped</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.PGon.basis_stripped" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a new PGon with basis stripped.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">PGon with basis stripped.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">PGon</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_pgon.PGon.bounds">
 <tt class="descname">bounds</tt><a class="headerlink" href="#decodes.core.dc_pgon.PGon.bounds" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns the bounding box of this polygon, aligned to the basis of this polygon</p>
+<dd><p>Returns the bounding box of this polygon, aligned to the basis of this polygon.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Bounding box of polygon.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Bounds</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_pgon.PGon.contains_pt">
 <tt class="descname">contains_pt</tt><big>(</big><em>pt</em>, <em>tolerence=1e-06</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.PGon.contains_pt" title="Permalink to this definition">¶</a></dt>
-<dd><p>tests if this polygon contains the given point.
-the given point must lie on the plane of this polygon.</p>
+<dd><p>Tests if this polygon contains the given point. The given point must lie on the plane of this polygon.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pt</strong> (<em>Point</em>) &#8211; Point to test containment in PGon.</li>
+<li><strong>tolerance</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; A decimal number.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Boolean Value.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="staticmethod">
@@ -122,7 +184,7 @@ the given point must lie on the plane of this polygon.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>cpt</strong> (<em>Point</em>) &#8211; Center point of a rectangle.</li>
 <li><strong>angle_interval</strong> (<em>Interval</em>) &#8211; Radii interval.</li>
-<li><strong>res</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; doughnut resolution.</li>
+<li><strong>res</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Doughnut resolution.</li>
 </ul>
 </td>
 </tr>
@@ -155,17 +217,53 @@ the given point must lie on the plane of this polygon.</p>
 <dl class="method">
 <dt id="decodes.core.dc_pgon.PGon.eval">
 <tt class="descname">eval</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.PGon.eval" title="Permalink to this definition">¶</a></dt>
-<dd><p>evaluates this polygon at the specified parameter t
-a t-value of 0 will result in a point conincident with PGon.pts[0]
-a t-value of 1 will result in a point conincident with PGon.pts[-1]</p>
+<dd><div class="line-block">
+<div class="line">Evaluates this polygon at the specified parameter t.</div>
+<div class="line">A t-value of 0 will result in a point coincident with PGon.pts[0]</div>
+<div class="line">A t-value of 1 will result in a point coincident with PGon.pts[-1]</div>
+</div>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param t:</th><td class="field-body">A decimal number between [0:1].</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type t:</th><td class="field-body">float</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Point on PGon.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_pgon.PGon.inflate">
 <tt class="descname">inflate</tt><big>(</big><em>rotation=0.5</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.PGon.inflate" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns a polygon inscribed inside this one.
-each vertex of the returned polygon will lie on the midpoint of one of this polygon&#8217;s edges</p>
-<p>optionally, you may set the rotation 0-&gt;1</p>
+<dd><div class="line-block">
+<div class="line">Returns a polygon inscribed inside this one.</div>
+<div class="line">Each vertex of the returned polygon will lie on the midpoint of one of this polygon&#8217;s edges.</div>
+<div class="line">Optionally, you may set the rotation 0-&gt;1</div>
+</div>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param rotation:</th><td class="field-body">A decimal number between [0:1].</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type rotation:</th><td class="field-body">float</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">A polygon inscribed of this one.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">PGon</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
@@ -189,7 +287,7 @@ each vertex of the returned polygon will lie on the midpoint of one of this poly
 <dl class="method">
 <dt id="decodes.core.dc_pgon.PGon.near_pt">
 <tt class="descname">near_pt</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.PGon.near_pt" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the closest point to a given PGon</p>
+<dd><p>Returns the closest point to a given PGon.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -207,8 +305,19 @@ each vertex of the returned polygon will lie on the midpoint of one of this poly
 <dl class="method">
 <dt id="decodes.core.dc_pgon.PGon.overlaps">
 <tt class="descname">overlaps</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.PGon.overlaps" title="Permalink to this definition">¶</a></dt>
-<dd><p>tests for overlap with another polygon
-returns true if these two polygons share a common plane, and if they overlap or if one is completely contained within another.</p>
+<dd><p>Tests for overlap with another polygon. Returns true if these two polygons share a common plane, and if they overlap or if one is completely contained within another.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>PGon</em>) &#8211; Another polygon,</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Boolean Value.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="staticmethod">
@@ -239,14 +348,36 @@ returns true if these two polygons share a common plane, and if they overlap or 
 <dl class="method">
 <dt id="decodes.core.dc_pgon.PGon.rotated_to_min_bounds">
 <tt class="descname">rotated_to_min_bounds</tt><big>(</big><em>divs=4</em>, <em>levels=2</em>, <em>min_a=0</em>, <em>max_a=1.5707963267948966</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.PGon.rotated_to_min_bounds" title="Permalink to this definition">¶</a></dt>
-<dd><p>creates a copy of a polygon rotated to its best-fit bounding box</p>
+<dd><p>Creates a copy of a polygon rotated to its best-fit bounding box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>divs</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of divisions of rotation per level.</li>
+<li><strong>levels</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of iterations.</li>
+<li><strong>min_a</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Minimum angle of rotation.</li>
+<li><strong>max_a</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Maximum angle of rotation</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Polygon rotated to minimum bounds.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">PGon</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_pgon.PGon.seg">
 <tt class="descname">seg</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.PGon.seg" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a segment of this Polygon
-The returned line segment will contain a copy of the Points stored in the segment.</p>
+<dd><div class="line-block">
+<div class="line">Returns a segment of this Polygon</div>
+<div class="line">The returned line segment will contain a copy of the Points stored in the segment.</div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -269,8 +400,26 @@ The returned line segment will contain a copy of the Points stored in the segmen
 <dl class="staticmethod">
 <dt id="decodes.core.dc_pgon.PGon.triangle">
 <em class="property">static </em><tt class="descname">triangle</tt><big>(</big><em>pt_a</em>, <em>pt_b</em>, <em>pt_c</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.PGon.triangle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Constructs a triangular polygon from three points.
-Resulting PGon will have a basis at the centroid of the three points, with the x_axis pointing toward pt_a</p>
+<dd><p>Constructs a triangular polygon from three points. Resulting PGon will have a basis at the centroid of the three points, with the x_axis pointing toward pt_a.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pt_a</strong> (<em>Point</em>) &#8211; First Point.</li>
+<li><strong>pt_b</strong> (<em>Point</em>) &#8211; Second Point.</li>
+<li><strong>pt_c</strong> (<em>Point</em>) &#8211; Third Point.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Triangular polygon.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">PGon</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
