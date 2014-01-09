@@ -64,7 +64,7 @@
 <dl class="method">
 <dt id="decodes.core.dc_line.VecField.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>pixel_res=ival[8.0,8.0], spatial_origin=pt[0,0,0], spatial_dim=ival[4.0,4.0], initial_value=vec[0,0,0], include_corners=False, wrap=True</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.VecField.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Description</p>
+<dd><p>Vector field constructor.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -92,29 +92,120 @@
 <dl class="method">
 <dt id="decodes.core.dc_line.VecField.address_near">
 <tt class="descname">address_near</tt><big>(</big><em>a</em>, <em>b=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.VecField.address_near" title="Permalink to this definition">¶</a></dt>
-<dd><p>may be passed either a point or an x,y coord</p>
+<dd><p>Returns location of vector near the given location. May be passed either a point or an x,y coordinate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>float or Point</em>) &#8211; x-coordinate or Point.</li>
+<li><strong>b</strong> (<em>float or None</em>) &#8211; y-coordinate or None.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Location of vector.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int, int</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_line.VecField.addresses_near">
 <tt class="descname">addresses_near</tt><big>(</big><em>a</em>, <em>b=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.VecField.addresses_near" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns locations of vectors near the given location. May be passed either a point or an x,y coordinate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>float or Point</em>) &#8211; x-coordinate or Point.</li>
+<li><strong>b</strong> (<em>float or None</em>) &#8211; y-coordinate or None.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">List of locations.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">[tup]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_line.VecField.avg_vec_near">
 <tt class="descname">avg_vec_near</tt><big>(</big><em>a</em>, <em>b=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.VecField.avg_vec_near" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns an average vector from the near vectors around the given location. May be passed a point or an x,y coordinate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>float or Point</em>) &#8211; x-coordinate or Point.</li>
+<li><strong>b</strong> (<em>float or None</em>) &#8211; y-coordinate or None.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">An average vector.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Vec</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_line.VecField.cpt_near">
 <tt class="descname">cpt_near</tt><big>(</big><em>a</em>, <em>b=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.VecField.cpt_near" title="Permalink to this definition">¶</a></dt>
-<dd><p>may be passed either a point or an x,y coord</p>
+<dd><p>Returns center point of cell nearest to given location. May be passed either a point or an x,y coordinate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>float or Point</em>) &#8211; x-coordinate or Point.</li>
+<li><strong>b</strong> (<em>float or None</em>) &#8211; y-coordinate or None.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Center point of near cell.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Point</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_line.VecField.cpts_near">
 <tt class="descname">cpts_near</tt><big>(</big><em>a</em>, <em>b=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.VecField.cpts_near" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns center points of cells near the given location. May be passed either a point or an x,y coordinate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>float or Point</em>) &#8211; x-coordinate or Point.</li>
+<li><strong>b</strong> (<em>float or None</em>) &#8211; y-coordinate or None.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first last">List of center points near given location.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>rtype: [Point]</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_line.VecField.get_cpt">
@@ -143,7 +234,26 @@
 <dl class="method">
 <dt id="decodes.core.dc_line.VecField.spin_pt">
 <tt class="descname">spin_pt</tt><big>(</big><em>a</em>, <em>b=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.VecField.spin_pt" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Rotates vectors in a VecField around a given point. May be passed a point or an x,y coordinate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>float or Point</em>) &#8211; x-coordinate or Point to rotate around.</li>
+<li><strong>b</strong> (<em>float or None</em>) &#8211; y-coordinate or None.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">VecField object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">VecField</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_line.VecField.to_rays">
@@ -155,7 +265,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">A list of Rays.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">[Rays]</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">[Ray]</td>
 </tr>
 </tbody>
 </table>
@@ -164,13 +274,50 @@
 <dl class="method">
 <dt id="decodes.core.dc_line.VecField.vec_near">
 <tt class="descname">vec_near</tt><big>(</big><em>a</em>, <em>b=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.VecField.vec_near" title="Permalink to this definition">¶</a></dt>
-<dd><p>May be passed either a point or an x,y coord</p>
+<dd><p>Returns closest vector to the given location. May be passed either a point or an x,y coordinate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>float or Point</em>) &#8211; x-coordinate or Point.</li>
+<li><strong>b</strong> (<em>float or None</em>) &#8211; y-coordinate or None.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Nearest Vec.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Vec</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_line.VecField.vecs_near">
 <tt class="descname">vecs_near</tt><big>(</big><em>a</em>, <em>b=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.VecField.vecs_near" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns locations of vectors near the given location. May be passed either a point or an x,y coordinate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>float or Point</em>) &#8211; x-coordinate or Point.</li>
+<li><strong>b</strong> (<em>float or None</em>) &#8211; y-coordinate or None.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">List of locations of near vectors.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">[tup]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 

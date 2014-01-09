@@ -422,7 +422,7 @@ class VecField(PixelGrid):
     
     def __init__(self, pixel_res=Interval(8,8), spatial_origin=Point(), spatial_dim=Interval(4,4), initial_value = Vec(),include_corners=False,wrap=True):
     
-        """Description
+        """Vector field constructor.
         
             :param pixel_res: Resolution of vector grid.
             :type pixel_res: Interval
@@ -460,7 +460,7 @@ class VecField(PixelGrid):
         """Returns a list of Rays that correspond to the Vecs from the Vector Field.
         
             :result: A list of Rays.
-            :rtype: [Rays]
+            :rtype: [Ray]
         """
         return [Ray(pt,vec) for vec,pt in zip(self._pixels, self._base_pts )]
 
@@ -478,29 +478,73 @@ class VecField(PixelGrid):
         return self._base_pts[y*self._res[0]+x]
 
     def vec_near(self,a,b=None):
-        """May be passed either a point or an x,y coord
+        """Returns closest vector to the given location. May be passed either a point or an x,y coordinate.
+        
+            :param a: x-coordinate or Point.
+            :type a: float or Point
+            :param b: y-coordinate or None.
+            :type b: float or None
+            :result: Nearest Vec.
+            :rtype: Vec
+            
         """
         x,y = self.address_near(a,b)
         return self.get(x,y)
 
     def cpt_near(self,a,b=None):
-        """
-        may be passed either a point or an x,y coord
+        """Returns center point of cell nearest to given location. May be passed either a point or an x,y coordinate.
+        
+            :param a: x-coordinate or Point.
+            :type a: float or Point
+            :param b: y-coordinate or None.
+            :type b: float or None
+            :result: Center point of near cell.
+            :rtype: Point
+            
+            
         """
         x,y = self.address_near(a,b)
         return self.get_cpt(x,y)
 
     def vecs_near(self,a,b=None):
+        """Returns locations of vectors near the given location. May be passed either a point or an x,y coordinate.
+        
+            :param a: x-coordinate or Point.
+            :type a: float or Point
+            :param b: y-coordinate or None.
+            :type b: float or None
+            :result: List of locations of near vectors.
+            :rtype: [tup]
+            
+        """
         tups = self.addresses_near(a,b)
         return [self.get(tup[0],tup[1]) for tup in tups]
 
     def cpts_near(self,a,b=None):
+        """Returns center points of cells near the given location. May be passed either a point or an x,y coordinate.
+        
+            :param a: x-coordinate or Point.
+            :type a: float or Point
+            :param b: y-coordinate or None.
+            :type b: float or None
+            :result: List of center points near given location.
+            rtype: [Point]
+            
+        """
+        
         tups = self.addresses_near(a,b)
         return [self.get_cpt(tup[0],tup[1]) for tup in tups]
 
     def address_near(self,a,b=None):
-        """
-        may be passed either a point or an x,y coord
+        """Returns location of vector near the given location. May be passed either a point or an x,y coordinate.
+        
+            :param a: x-coordinate or Point.
+            :type a: float or Point
+            :param b: y-coordinate or None.
+            :type b: float or None
+            :result: Location of vector.
+            :rtype: int, int
+            
         """
         try:
             sample_pt = Point(a.x,a.y)
@@ -517,6 +561,17 @@ class VecField(PixelGrid):
         return x,y
 
     def addresses_near(self,a,b=None):
+        """ Returns locations of vectors near the given location. May be passed either a point or an x,y coordinate.
+        
+            :param a: x-coordinate or Point.
+            :type a: float or Point
+            :param b: y-coordinate or None.
+            :type b: float or None
+            :result: List of locations.
+            :rtype: [tup]
+            
+        """
+        
         try:
             sample_pt = Point(a.x,a.y)
         except:
@@ -546,6 +601,17 @@ class VecField(PixelGrid):
         return adds
 
     def avg_vec_near(self,a,b=None):
+        """Returns an average vector from the near vectors around the given location. May be passed a point or an x,y coordinate.
+        
+            :param a: x-coordinate or Point.
+            :type a: float or Point
+            :param b: y-coordinate or None.
+            :type b: float or None
+            :result: An average vector.
+            :rtype: Vec
+            
+        """
+        
         try:
             sample_pt = Point(a.x,a.y)
         except:
@@ -562,12 +628,22 @@ class VecField(PixelGrid):
                 vec = vec + vecs[n]* weights[n]
             return vec
         except:
-            # sample point is conincident with one of the near cpts
+            # sample point is coincident with one of the near cpts
             for n in range(len(cpts)):
                 if cpts[n] == sample_pt : return vecs[n]
             raise GeometricError("sample point coincident with center point: %s"%(sample_pt))
             
     def spin_pt(self,a,b=None):
+        """Rotates vectors in a VecField around a given point. May be passed a point or an x,y coordinate.
+        
+            :param a: x-coordinate or Point to rotate around.
+            :type a: float or Point
+            :param b: y-coordinate or None.
+            :type b: float or None
+            :result: VecField object.
+            :rtype: VecField
+                        
+        """
         try:
             spin_pt = Point(a.x,a.y)
         except:
