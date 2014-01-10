@@ -6,14 +6,28 @@ if VERBOSE_FS: print "intersection.py loaded"
 
 class Intersector(object):
     """
-    intersection results class
+    Intersection results class.
     """
     def __init__(self):
+        """Intersection Constructor.
+        
+            :result: Intersection Object.
+            :rtype: None
+            
+        """
         self._geom = []
         self.log = None
         self.tol = 0.000001
 
     def __getitem__(self,slice):
+        """Returns item at given index.
+        
+            :param slice: Index of item.
+            :type slice: int
+            :result: Intersection object.
+            :rtype: Intersection
+            
+        """
         return self._geom[slice]
 
     @property
