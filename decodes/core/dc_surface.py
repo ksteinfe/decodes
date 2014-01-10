@@ -6,10 +6,11 @@ if VERBOSE_FS: print "surface.py loaded"
 
 class Surface(IsParametrized):
     """
-    a simple surface class
+    A simple surface class
 
-    to construct a surface, pass in a function and [optionally] two intervals that determine the a valid range of u&v values
-    the function should expect two parameters u and v (float), and return a Point.
+    To construct a surface, pass in a function and [optionally] two intervals that determine the a valid range of u&v values.
+    
+    The function should expect two parameters u and v (float), and return a Point.
 
     """
     
@@ -18,10 +19,14 @@ class Surface(IsParametrized):
         
             :param function: A function returning points.
             :type function: function
-            :param domain: Domain for curve points.
-            :type domain: Interval
-            :param tolerance: The tolerance of this Surface expressed in domain space
-            :type tolerance: float
+            :param dom_u: Domain for u-value of curve points.
+            :type dom_u: Interval
+            :param dom_v: Domain for v-value of curve points.
+            :type dom_v: Interval
+            :param tol_u: The tolerance of u-direction of this Surface expressed in domain space.
+            :type tol_u: float
+            :param tol_v: The tolerance of v-direction of this Surface expressed in domain space.
+            :type tol_v: float
             :result: Surface object.
             :rtype: Surface
         """
@@ -43,10 +48,23 @@ class Surface(IsParametrized):
 
 
     @property
-    def surrogate(self): return self._surrogate
+    def surrogate(self): 
+        """Returns a mesh copy of this surface.
+        
+            :result: Mesh copy of this surface.
+            :rtype: Mesh
+        """
+        return self._surrogate
 
     @property
     def surrogate(self):
+        """Returns a mesh copy of this surface.
+        
+            :result: Mesh copy of this surface.
+            :rtype: Mesh
+            
+        """
+        
         try:
             return self._surrogate
         except:
@@ -54,6 +72,13 @@ class Surface(IsParametrized):
             return self._surrogate
 
     def _rebuild_surrogate(self):
+        """Deletes attributes of this surrogate Surface.
+        
+            :result: None
+            :rtype: None
+            
+        """
+    
         try: delattr(self, "_surrogate")
         except:
             pass
@@ -62,7 +87,8 @@ class Surface(IsParametrized):
     @property
     def domain_u(self): 
         """
-        Returns the Interval domain for the U-direction of this Surface
+        Returns the Interval domain for the U-direction of this Surface.
+            
             :result: Domain of this Surface in the U-direction.
             :rtype: Interval
         """
@@ -71,54 +97,87 @@ class Surface(IsParametrized):
     @property
     def u0(self):
         """
-        Returns the minimum value for the U domain of this Surface
+        Returns the minimum value for the U domain of this Surface.
+            
+            :result: Minimum value for U domain.
+            :rtype: float
+            
         """
         return self._dom[0].a
 
     @property
     def u1(self):
         """
-        Returns the maximum value for the U domain of this Surface
+        Returns the maximum value for the U domain of this Surface.
+        
+            :result: Maximum value for U domain.
+            :rtype: float
+            
         """
         return self._dom[0].b
 
     @property
     def v0(self):
         """
-        Returns the minimum value for the U domain of this Surface
+        Returns the minimum value for the V domain of this Surface.
+        
+            :result: Minimum value for V domain.
+            :rtype: float
+            
         """
         return self._dom[1].a
 
     @property
     def v1(self):
         """
-        Returns the maximum value for the U domain of this Surface
+        Returns the maximum value for the V domain of this Surface.
+        
+            :result: Maximum value for V domain.
+            :rtype: float
+        
         """
         return self._dom[1].b
 
     @property
     def domain_v(self): 
         """
-        Returns the Interval domain for the V-direction of this Surface
+        Returns the Interval domain for the V-direction of this Surface.
+           
             :result: Domain of this Surface in the V-direction.
             :rtype: Interval
+            
         """
         return self._dom[1]
 
     @property
     def tol_max(self):
-        """Determines the maximium tolerance as Surface.domain_u.delta / 10 , Surface.domain_v.delta / 10
+        """Determines the maximum tolerance as Surface.domain_u.delta / 10 , Surface.domain_v.delta / 10.
+        
+            :result: [Maximum U-tolerance, Maximum V-tolerance]
+            :rtype: [float, float]
         """
         return [self._dom[0].delta / 10.0, self._dom[1].delta / 10.0]
 
     @property
     def tol_u(self):
-        """
+        """Returns tolerance in the U-direction of this Surface.
+        
+            :result: Tolerance in U-direction.
+            :rtype: float
+            
         """
         return self._tol[0]
 
     @tol_u.setter
     def tol_u(self, tolerance):
+        """Sets the tolerance of this Surface in the U-direction.
+            
+            :param tolerance: Tolerance of this Surface.
+            :type tolerance: float
+            :result: None
+            :rtype: None
+            
+        """
         self._tol[0] = tolerance
         if self._tol[0] > self.tol_max[0] :  
             warnings.warn("Surface u tolerance too high relative to u domain - Resetting to max tol.  tol_u (%s) > Surface.max_tol(%s)"%(tolerance,self.tol_max))
@@ -131,12 +190,23 @@ class Surface(IsParametrized):
 
     @property
     def tol_v(self):
-        """
+        """Returns the tolerance of this Surface in the V-direction.
+        
+            :result: Tolerance in V-direction.
+            :rtype: float
+            
         """
         return self._tol[1]
 
     @tol_v.setter
     def tol_v(self, tolerance):
+        """Sets the tolerance of this surface in the V-direction.
+        
+            :param tolerance: Tolerance of this Surface.
+            :type tolerance: float
+            :result: None
+            :rtype: None
+        """
         self._tol[1] = tolerance
         if self._tol[1] > self.tol_max[1] :  
             warnings.warn("Surface v tolerance too high relative to v domain - Resetting to max tol.  tol_v (%s) > Surface.max_tol(%s)"%(tolerance,self.tol_max))
@@ -150,12 +220,13 @@ class Surface(IsParametrized):
 
     def deval(self,u,v):
         """ Evaluates this Surface and returns a Point.
-        T is a float value that falls within the defined domain of this Curve.
+        
+            u and v are float values that fall within the defined domain of this Surface.
 
             :param u: U-value to evaluate the Surface at.
-            :type t: float
+            :type u: float
             :param v: V-value to evaluate the Surface at.
-            :type t: float
+            :type v: float
             :result: a Point on this Surface.
             :rtype: Point
         """
@@ -174,13 +245,15 @@ class Surface(IsParametrized):
 
     def deval_pln(self,u,v):
         """ Evaluates this Surface and returns a Plane.
-        T is a float value that falls within the defined domain of this Curve.
-        Tangent vector determined by a nearest neighbor at distance Curve.tol/100
+        
+            u and v are float values that fall within the defined domain of this Surface.
+            
+            Tangent vector determined by a nearest neighbor at distance Surface.tol/100
 
             :param u: U-value to evaluate the Surface at.
-            :type t: float
+            :type u: float
             :param v: V-value to evaluate the Surface at.
-            :type t: float
+            :type v: float
             :result: a Plane on this Surface.
             :rtype: Plane
         """
@@ -202,6 +275,18 @@ class Surface(IsParametrized):
 
 
     def deval_curviso(self,u,v,calc_extras=False):
+        """Calculates the curvature of this Surface at a given location.
+        
+            :param u: U-value to evaluate the Surface at.
+            :type u: float
+            :param v: V-value to evaluate the Surface at.
+            :type v: float
+            :param calc_extras: Boolean value.
+            :type calc_extras: bool
+            :result: (Curvature at point in U-direction, osculating Circle), (Curvature at point in V-direction, osculating Circle)
+            :rtype:(float, Circle), (float, Circle)
+            
+        """
         # calculates the curvature of the isoparms of this surfaces
         # returns curvature values and osc circles
         pt, u_pos, u_neg, v_pos, v_neg = self._nudged(u,v,True)
@@ -234,24 +319,44 @@ class Surface(IsParametrized):
     def deval_curv(self,u,v,calc_extras=False):
         """
         IN:  
-        - a point dom_pt (given on this surface domain) referring to a point on the surface 
+        
+        - a point u,v (given on this surface domain) referring to a point on the surface.
 
         OUT:
+        
         The following geometric entities describing the shape of the surface at a given point:
+        
         - principal directions (expressed as a coordinate system)
+        
         - curvatures: principal curvatures (min/max), Gaussian curvature (K), Mean Curvature (H)
 
         Note: All quantities at a given point are computed using nearest neighbors on a mesh.  
+        
         For the case of a parametrized surface, we take a mesh of nearest neighbors with vertices
         given by the isocurves at a resolution tol_nudge. These calculations are good for any mesh 
-        on a surface;  all that would need to change for another type of mesh is 
-        (1) the construction of the mesh of nearest neighbors around the surface point in question 
-        (2) the calculation of the areas of the faces and the weighted face areas
+        on a surface;  all that would need to change for another type of mesh is: 
+        
+            (1) the construction of the mesh of nearest neighbors around the surface point in question 
+        
+            (2) the calculation of the areas of the faces and the weighted face areas
+        
         ref: 
+        
         Taubin, Gabriel, Estimating the Tensor of Curvature of a Surface from a Polyhedral
+        
         Approximation, http://pdf.aminer.org/000/234/737/curvature_approximation_for_triangulated_surfaces.pdf
 
-        Note: we can define projection onto a surface by computing the normal on the surrogate)
+        Note: We can define projection onto a surface by computing the normal on the surrogate.
+        
+            :param u: U-value to evaluate Surface at.
+            :type u: float
+            :param v: V-value to evaluate Surface at.
+            :type v: float
+            :param calc_extras: Boolean value.
+            :type calc_extras: bool
+            :result: The principal directions (CS), minimum curvature, maximum curvature, Gaussian curvature, Mean curvature
+            :rtype: CS, float, float, float, float
+            
         """
         # * eliminate when we have a matrix class or can import numpy
         def matrix_mult(matrix1,matrix2):
@@ -272,7 +377,7 @@ class Surface(IsParametrized):
         pt_uv = self.func(u,v)
         ret.append(pt_uv)
 
-        #construct mesh of nearest neighbors, with 0 indexing p_uv and neighbors indexed counterclockwise 
+        #construct mesh of nearest neighbors, with 0 indexing p_uv and neighbors indexed counter clockwise. 
         ngbr = Mesh()
         pt, u_pos, u_neg, v_pos, v_neg = self._nudged(u,v,True)
         ngbr.append(pt_uv)
@@ -420,11 +525,16 @@ class Surface(IsParametrized):
         return cs_principal, k1, k2, K, H
 
     def eval(self,u,v):
-        """ Evaluates this Curve and returns a Point.
-        T is a normalized float value (0->1) which will be remapped to the domain defined by this Curve.
-        equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain))
-            :param t: Normalized value between 0 and 1, to evaluate a curve.
-            :type t: float
+        """ Evaluates this Surface and returns a Point.
+            
+            u and v are normalized float values (0->1) which will be remapped to the domain defined by this Surface.
+            
+            Equivalent to Surface.deval(Interval.remap(t,Interval(),Surface.domain))
+            
+            :param u: U value to evaluate Surface at.
+            :type u: float
+            :param v: V value to evaluate Surface at.
+            :type v: float
             :result: a Point on this Surface.
             :rtype: Point
         """
@@ -434,10 +544,15 @@ class Surface(IsParametrized):
 
     def eval_pln(self,u,v):
         """ Evaluates this Curve and returns a Plane.
-        T is a normalized float value (0->1) which will be remapped to the domain defined by this Curve.
-        equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain))
-            :param t: Normalized value between 0 and 1, to evaluate a curve.
-            :type t: float
+        
+            u and v are normalized float values (0->1) which will be remapped to the domain defined by this Surface.
+        
+            Equivalent to Surface.deval(Interval.remap(t,Interval(),Surface.domain)).
+            
+            :param u: U value to evaluate the Surface at.
+            :type u: float
+            :param v: V value to evaluate the Surface at.
+            :type v: float
             :result: a Plane on this Surface.
             :rtype: Plane
         """
@@ -446,20 +561,52 @@ class Surface(IsParametrized):
         return self.deval_pln(Interval.remap(u,Interval(),self.domain_u),Interval.remap(v,Interval(),self.domain_v))
 
     def eval_curviso(self,u,v,calc_extras=False):
-        """
+        """Calculates the curvature of this Surface at a given location.
+        
+            :param u: U-value to evaluate the Surface at.
+            :type u: float
+            :param v: V-value to evaluate the Surface at.
+            :type v: float
+            :param calc_extras: Boolean value.
+            :type calc_extras: bool
+            :result: (Curvature at point in U-direction, osculating Circle), (Curvature at point in V-direction, osculating Circle)
+            :rtype:(float, Circle), (float, Circle)
+            
         """
         if u<0 or u>1 : raise DomainError("u out of bounds.  eval_curvature() must be called numbers between 0->1: eval(%s)"%u)
         if v<0 or v>1 : raise DomainError("v out of bounds.  eval_curvature() must be called numbers between 0->1: eval(%s)"%v)
         return self.deval_curviso(Interval.remap(u,Interval(),self.domain_u),Interval.remap(v,Interval(),self.domain_v),calc_extras)
 
     def eval_curv(self,u,v,calc_extras=False):
-        """
+        """ Returns the curvature of a surface at a given location u,v. Equivalent to deval_curv.
+        
+            :param u: U-value to evaluate Surface at.
+            :type u: float
+            :param v: V-value to evaluate Surface at.
+            :type v: float
+            :param calc_extras: Boolean value.
+            :type calc_extras: bool
+            :result: The principal directions (CS), minimum curvature, maximum curvature, Gaussian curvature, Mean curvature
+            :rtype: CS, float, float, float, float
+                        
         """
         if u<0 or u>1 : raise DomainError("u out of bounds.  eval_curvature() must be called numbers between 0->1: eval(%s)"%u)
         if v<0 or v>1 : raise DomainError("v out of bounds.  eval_curvature() must be called numbers between 0->1: eval(%s)"%v)
         return self.deval_curv(Interval.remap(u,Interval(),self.domain_u),Interval.remap(v,Interval(),self.domain_v),calc_extras)
 
     def _nudged(self,u,v,include_negs = False):
+        """Returns the nearest neighbors along u and v axis of a point(u,v). Used for discrete approximations calculations.
+        
+            :param u: U value to evaluate the Surface at.
+            :type u: float
+            :param v: V value to evaluate the Surface at.
+            :type v: float
+            :param include_negs: Boolean value.
+            :type include_negs: bool
+            :result: Point, first U-direction Vec, second U-direction Vec, first V-direction Vec, second V-direction Vec
+            :rtype: Point, Vec, Vec, Vec, Vec
+            
+        """
         #nearest neighbors along u and v axis of point(u,v); used for discrete approximations calculations 
         if u<self.domain_u.a or u>self.domain_u.b : raise DomainError("Curve evaluated outside the bounds of its u domain: deval(%s) %s"%(u,self.domain_u))
         if v<self.domain_v.a or v>self.domain_v.b : raise DomainError("Curve evaluated outside the bounds of its v domain: deval(%s) %s"%(v,self.domain_v))
@@ -494,6 +641,18 @@ class Surface(IsParametrized):
 
 
     def to_mesh(self,do_close=False,tris=False,divs_u=False,divs_v=False):
+        """ Returns a mesh from this Surface
+        
+            :param do_close:
+            :type do_close:
+            :param tris:
+            :type tris:
+            :param divs_u:
+            :type divs_u:
+            :param divs_V:
+            :type divs_v:
+            
+        """
         
         if not divs_u : divs_u = int(math.ceil(self.domain_u.delta/self.tol_u))
         if not divs_v : divs_v = int(math.ceil(self.domain_v.delta/self.tol_v))
