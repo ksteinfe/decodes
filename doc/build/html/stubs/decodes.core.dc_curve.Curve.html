@@ -57,9 +57,9 @@
 <dt id="decodes.core.dc_curve.Curve">
 <em class="property">class </em><tt class="descclassname">decodes.core.dc_curve.</tt><tt class="descname">Curve</tt><big>(</big><em>function=None, domain=ival[0.0,1.0], tolerance=None, basis=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="decodes.core.dc_base.HasBasis.html#decodes.core.dc_base.HasBasis" title="decodes.core.dc_base.HasBasis"><tt class="xref py py-class docutils literal"><span class="pre">decodes.core.dc_base.HasBasis</span></tt></a>, <a class="reference internal" href="decodes.core.dc_curve.IsParametrized.html#decodes.core.dc_curve.IsParametrized" title="decodes.core.dc_curve.IsParametrized"><tt class="xref py py-class docutils literal"><span class="pre">decodes.core.dc_curve.IsParametrized</span></tt></a></p>
-<p>a simple curve class</p>
-<p>to construct a curve, pass in a function and an [optional] interval that determines a valid range of values
-the function should expect a single parameter t(float), and return a Point.</p>
+<p>A simple curve class.</p>
+<p>To construct a curve, pass in a function and an [optional] interval that determines a valid range of values.
+The function should expect a single parameter t(float), and return a Point.</p>
 <dl class="method">
 <dt id="decodes.core.dc_curve.Curve.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>function=None, domain=ival[0.0,1.0], tolerance=None, basis=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve.__init__" title="Permalink to this definition">¶</a></dt>
@@ -88,17 +88,72 @@ the function should expect a single parameter t(float), and return a Point.</p>
 <dl class="staticmethod">
 <dt id="decodes.core.dc_curve.Curve._curvature_from_vecs">
 <em class="property">static </em><tt class="descname">_curvature_from_vecs</tt><big>(</big><em>pt</em>, <em>vec_pos</em>, <em>vec_neg</em>, <em>calc_circles=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve._curvature_from_vecs" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the curvature at a point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pt</strong> (<em>Point</em>) &#8211; Point on Curve.</li>
+<li><strong>vec_pos</strong> (<em>Vec</em>) &#8211; First vector for curvature.</li>
+<li><strong>vec_neg</strong> (<em>Vec</em>) &#8211; Second vector for curvature.</li>
+<li><strong>calc_circles</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Boolean Value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">(Curvature at point, osculating Circle)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">(float, Circle)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_curve.Curve._nearfar">
 <tt class="descname">_nearfar</tt><big>(</big><em>func_nf</em>, <em>pt</em>, <em>tolerance</em>, <em>max_recursion</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve._nearfar" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Calculates curve subdivisions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>func_nf</strong> (<em>function</em>) &#8211; Function to produce a curve.</li>
+<li><strong>pt</strong> (<em>Point</em>) &#8211; Point to begin recursion.</li>
+<li><strong>tolerance</strong> (<em>float.</em>) &#8211; Tolerance for point on a Curve.</li>
+<li><strong>max_recursion</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Maximum number of recursions.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Curve</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Curve</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_curve.Curve._nudged">
 <tt class="descname">_nudged</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve._nudged" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the nearest neighbors of a point on this Curve at the given t-value. Used for discrete approximations calculations.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Value to evaluate the curve at.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Point at t-value, nearest Vec, nearest Vec.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point, Vec, Vec</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_curve.Curve._rebuild_surrogate">
@@ -124,20 +179,17 @@ the function should expect a single parameter t(float), and return a Point.</p>
 <dl class="attribute">
 <dt id="decodes.core.dc_curve.Curve.appx_length">
 <tt class="descname">appx_length</tt><a class="headerlink" href="#decodes.core.dc_curve.Curve.appx_length" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Returns the approximate length of a curve</dt>
-<dd><table class="first last docutils field-list" frame="void" rules="none">
+<dd><p>Returns the approximate length of a curve.</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Approximate length of a curve.</td>
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Approximate length of a curve.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">float</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
 </tr>
 </tbody>
 </table>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="staticmethod">
@@ -150,6 +202,10 @@ the function should expect a single parameter t(float), and return a Point.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cpts</strong> (<em>[Point]</em>) &#8211; List of points the bezier curve is going to be built with.</td>
 </tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Bezier curve.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Curve</td>
+</tr>
 </tbody>
 </table>
 </dd></dl>
@@ -157,8 +213,8 @@ the function should expect a single parameter t(float), and return a Point.</p>
 <dl class="staticmethod">
 <dt id="decodes.core.dc_curve.Curve.circle">
 <em class="property">static </em><tt class="descname">circle</tt><big>(</big><em>ctr</em>, <em>rad</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve.circle" title="Permalink to this definition">¶</a></dt>
-<dd><p>constructs a Curve object that describes a circle given: a center (Point) and radius (float)
-the plane of the circle will always be parallel to the xy-plane</p>
+<dd><p>Constructs a Curve object that describes a circle given: a center (Point) and radius (float).</p>
+<p>The plane of the circle will always be parallel to the xy-plane.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -182,194 +238,234 @@ the plane of the circle will always be parallel to the xy-plane</p>
 <dl class="method">
 <dt id="decodes.core.dc_curve.Curve.deval">
 <tt class="descname">deval</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve.deval" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluates this Curve and returns a Point.
-T is a float value that falls within the defined domain of this Curve.
-Tangent vector determined by a nearest neighbor at distance Curve.tol/100</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<dd><p>Evaluates this Curve and returns a Point.</p>
+<p>t is a float value that falls within the defined domain of this Curve.</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param t:</th><td class="field-body">Value to evaluate the curve at.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Value to evaluate the curve at.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type t:</th><td class="field-body">float</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Point on the Curve.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Point on the Curve.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Point</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_curve.Curve.deval_crv">
 <tt class="descname">deval_crv</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve.deval_crv" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Calculates approximate curvature at the given t-value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Value to evaluate the curve at.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">(Curvature at t-value, osculating Circle)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(float, Circle)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_curve.Curve.deval_pln">
 <tt class="descname">deval_pln</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve.deval_pln" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluates this Curve and returns a Point.
-T is a float value that falls within the defined domain of this Curve.
-Tangent vector determined by a nearest neighbor at distance Curve.tol/100</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<dd><p>Evaluates this Curve and returns a Plane.</p>
+<p>t is a float value that falls within the defined domain of this Curve.</p>
+<p>Tangent vector determined by a nearest neighbor at distance Curve.tol/100</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param t:</th><td class="field-body">Value to evaluate the curve at.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Value to evaluate the curve at.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type t:</th><td class="field-body">float</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Plane on the Curve.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Point on the Curve.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Point</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Plane</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_curve.Curve.divide">
 <tt class="descname">divide</tt><big>(</big><em>divs=10</em>, <em>include_last=True</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve.divide" title="Permalink to this definition">¶</a></dt>
-<dd><p>Divides this Curve into a list of evaluated Planes equally spaced between Curve.domain.a and Curve.domain.b.
-If include_last is True (by default), returned list will contain divs+1 Points.
-If include_last is False, returned list will not include the point at Curve.domain.b</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<dd><p>Divides this Curve into a list of evaluated Planes equally spaced between Curve.domain.a and Curve.domain.b.</p>
+<p>If include_last is True (by default), returned list will contain divs+1 Points.</p>
+<p>If include_last is False, returned list will not include the point at Curve.domain.b</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param divs:</th><td class="field-body">Number of segments to divide this curve into.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>divs</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of segments to divide this curve into.</li>
+<li><strong>include_last</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Boolean Value.</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type divs:</th><td class="field-body">int</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">List of points</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body">List of points</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">[Point]</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">[Point]</p>
+</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_curve.Curve.domain">
 <tt class="descname">domain</tt><a class="headerlink" href="#decodes.core.dc_curve.Curve.domain" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Returns the Interval domain of a curve</dt>
-<dd><table class="first last docutils field-list" frame="void" rules="none">
+<dd><p>Returns the Interval domain of a curve.</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Domain of a curve.</td>
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Domain of a curve.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Interval</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Interval</td>
 </tr>
 </tbody>
 </table>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_curve.Curve.eval">
 <tt class="descname">eval</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve.eval" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluates this Curve and returns a Point.
-T is a normalized float value (0-&gt;1) which will be remapped to the domain defined by this Curve.
-equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain))</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<dd><p>Evaluates this Curve and returns a Point.</p>
+<p>t is a normalized float value (0-&gt;1) which will be remapped to the domain defined by this Curve.</p>
+<p>Equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain)).</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param t:</th><td class="field-body">Normalized value between 0 and 1, to evaluate a curve.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Normalized value between 0 and 1, to evaluate a Curve.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type t:</th><td class="field-body">float</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">a Point on the Curve.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">a Point on the Curve.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Point</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_curve.Curve.eval_crv">
 <tt class="descname">eval_crv</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve.eval_crv" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns curvature of this Curve at given t-value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Normalized value between 0 and 1, to evaluate a curve.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">(Curvature at t-value, osculating Circle)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(float, Circle)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_curve.Curve.eval_pln">
 <tt class="descname">eval_pln</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve.eval_pln" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluates this Curve and returns a Plane.
-T is a normalized float value (0-&gt;1) which will be remapped to the domain defined by this Curve.
-equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain))</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<dd><p>Evaluates this Curve and returns a Plane.</p>
+<p>t is a normalized float value (0-&gt;1) which will be remapped to the domain defined by this Curve.</p>
+<p>Equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain))</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param t:</th><td class="field-body">Normalized value between 0 and 1, to evaluate a curve.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Normalized value between 0 and 1, to evaluate a curve.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type t:</th><td class="field-body">float</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">a Plane on the Curve.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">a Plane on the Curve.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Plane</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Plane</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_curve.Curve.helix">
 <em class="property">static </em><tt class="descname">helix</tt><big>(</big><em>ctr</em>, <em>rad</em>, <em>rise_per_turn=1.0</em>, <em>number_of_turns=3.0</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve.helix" title="Permalink to this definition">¶</a></dt>
-<dd><p>constructs a Curve object that describes a helix given: a center (Point), a radius (float), a rise_per_turn (float), and a number_of_turns (float)
-the plane of the circle of the helix will always be parallel to the xy-plane
-:param ctr: Center point of the helix.
-:type ctr: Point
-:param rad: Radius of the helix.
-:type rad: float
-:param rise_per_turn: Amount the helix rises in z per turn.
-:type rise_per_turn: float
-:param number_of_turns: Number of turns the helix has.
-:type number_of_turns: float
-:result: Helix Curve object.
-:rtype: Curve</p>
+<dd><p>Constructs a Curve object that describes a helix given: a center (Point), a radius (float), a rise_per_turn (float), and a number_of_turns (float).</p>
+<p>The plane of the circle of the helix will always be parallel to the xy-plane.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ctr</strong> (<em>Point</em>) &#8211; Center point of the helix.</li>
+<li><strong>rad</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Radius of the helix.</li>
+<li><strong>rise_per_turn</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Amount the helix rises in z per turn.</li>
+<li><strong>number_of_turns</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Number of turns the helix has.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Helix Curve object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Curve</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_curve.Curve.hermite">
 <em class="property">static </em><tt class="descname">hermite</tt><big>(</big><em>cpts</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve.hermite" title="Permalink to this definition">¶</a></dt>
-<dd><p>constructs a hermite curve. It has nice tension and biasing controls. 
-:param cpts: List of control points to build the curve.
-:type cpts: [Point]
-:result: Hermite Curve object.
-:rtype: Curve</p>
+<dd><p>Constructs a hermite curve. It has nice tension and biasing controls.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cpts</strong> (<em>[Point]</em>) &#8211; List of control points to build the curve.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Hermite Curve object.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Curve</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_curve.Curve.subcurve">
 <tt class="descname">subcurve</tt><big>(</big><em>domain</em>, <em>tol=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve.subcurve" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a new Curve which is a copy of this Curve with the given Interval as the domain
-:param domain: New curve with a new given interval.
-:type domain: Interval
-:result: Copy of curve with new domain.
-:rtype: Curve</p>
+<dd><p>Returns a new Curve which is a copy of this Curve with the given Interval as the domain.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>domain</strong> (<em>Interval</em>) &#8211; New curve with a new given interval.</li>
+<li><strong>tol</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Tolerance of point on a subcurve.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Copy of curve with new domain.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Curve</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_curve.Curve.subdivide">
 <tt class="descname">subdivide</tt><big>(</big><em>divs</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve.subdivide" title="Permalink to this definition">¶</a></dt>
-<dd><p>Divides this Curve into a list of equal size sub-Curves.
-Each sub-Curve will adopt the tol of this curve, unless greater than the tol_max of the subcurve</p>
+<dd><p>Divides this Curve into a list of equal size sub-Curves.</p>
+<p>Each sub-Curve will adopt the tol of this curve, unless greater than the tol_max of the subcurve.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -387,30 +483,41 @@ Each sub-Curve will adopt the tol of this curve, unless greater than the tol_max
 <dl class="attribute">
 <dt id="decodes.core.dc_curve.Curve.surrogate">
 <tt class="descname">surrogate</tt><a class="headerlink" href="#decodes.core.dc_curve.Curve.surrogate" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a polyline representation of this curve. The number of points in the resulting PLine is related to the tolerance (tol) of this curve.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_curve.Curve.tol">
 <tt class="descname">tol</tt><a class="headerlink" href="#decodes.core.dc_curve.Curve.tol" title="Permalink to this definition">¶</a></dt>
-<dd><p>the tolerance of this Parameterized Object expressed in domain space
-for example, given an interval of 0-&gt;1, a tol of 0.1 will result in a curve constructed of 10 segments, evaulated with t-values 0.1 apart
-given an interval 0-&gt;PI, a tol of 0.1 will result in a curve constructed of 32 segments, evaluated with t-values less than 0.1 apart</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<dd><p>The tolerance of this Parameterized Object expressed in domain space.</p>
+<p>For example, given an interval of 0-&gt;1, a tol of 0.1 will result in a curve constructed of 10 segments, evaulated with t-values 0.1 apart</p>
+<p>Given an interval 0-&gt;PI, a tol of 0.1 will result in a curve constructed of 32 segments, evaluated with t-values less than 0.1 apart</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Sets the distance between point of a curve.</td>
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Sets the distance between point of a curve.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_curve.Curve.tol_max">
 <tt class="descname">tol_max</tt><a class="headerlink" href="#decodes.core.dc_curve.Curve.tol_max" title="Permalink to this definition">¶</a></dt>
-<dd><p>Determines the maximium tolerance as Curve.domain.delta / 10</p>
+<dd><p>Returns Curve.domain.delta / 10, which is understood to be the maximum tolerance (tol) of this curve.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">maximum tolerance</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
