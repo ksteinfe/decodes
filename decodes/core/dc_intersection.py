@@ -20,11 +20,11 @@ class Intersector(object):
         self.tol = 0.000001
 
     def __getitem__(self,slice):
-        """Returns item at given index.
+        """Returns intersection geometry at given index.
         
-            :param slice: Index of item.
+            :param slice: Index of intersection geometry.
             :type slice: int
-            :result: Intersection object.
+            :result: Intersection geometry.
             :rtype: Intersection
             
         """
@@ -32,26 +32,87 @@ class Intersector(object):
 
     @property
     def results(self):
+        """Returns list of intersection geometries. 
+        
+            :result: List of intersection geometries.
+            :rtype: [Intersection]
+            
+        """
         return self._geom
 
     def append(self,item):
+        """ Appends item to list of intersection geometries.
+        
+            :result: Appended item to list of intersection geometries.
+            :rtype: None
+            
+        """
+        
+        #ATTENTION! This function doesn't really make sense for intersections.
+        
         self._geom.append(item)
 
     def clear(self):
+        """Clears all intersection geometries from results list.
+        
+            :result: Empty list of intersections.
+            :rtype: None
+            
+        """
+    
         del self._geom[:]
         self.log = None
 
-    def __len__(self): return len(self._geom)
+    def __len__(self): 
+        """Returns the length of the list of intersection geometries.
+        
+            :result: Length of list.
+            :rtype: int
+            
+        """
+        
+        return len(self._geom)
 
     def of(self,a,b,**kargs):
+        """ Pass in two pieces of decodes geometry (a & b), and i'll have a go at intersecting them.
+        
+            Results will be stored in this xsec object.
+        
+            Extras (such as distance to intersection points) will be assigned as attributes to this xsec object.
+        
+            Function returns success, True or False        
+           
+            :param a: First geometry to intersect. May be any decodes geometry.
+            :type a: Geometry
+            :param b: Second geometry to intersect. May be any decodes geometry.
+            :type b: Geometry
+            :param kargs: Dictionary with two geometries to intersect.
+            :type kargs: dict
+            :result: Boolean Value
+            :rtype: bool
+            
+        """
+        
         return self.intersect(a,b,**kargs)
 
     def intersect(self,a,b,**kargs):
-        """
-        pass in two pieces of decodes geometry (a & b), and i'll have a go at intersecting them.
-        results will be stored in this xsec object
-        extras (such as distance to intersection points) will be assigned as attributes to this xsec object
-        function returns success, True or False
+        """ Pass in two pieces of decodes geometry (a & b), and I'll have a go at intersecting them.
+        
+            Results will be stored in this xsec object.
+        
+            Extras (such as distance to intersection points) will be assigned as attributes to this xsec object.
+        
+            Function returns success, True or False.
+        
+            :param a: First geometry to intersect. May be any decodes geometry.
+            :type a: Geometry
+            :param b: Second geometry to intersect. May be any decodes geometry.
+            :type b: Geometry
+            :param kargs: Dictionary with two geometries to intersect.
+            :type kargs: dict
+            :result: Boolean Value.
+            :rtype: bool
+        
         """
         self.clear()
         bad_types = [Bounds,Color,Interval,Point,Xform]
@@ -114,8 +175,21 @@ class Intersector(object):
 
 
     def _pgon_plane(self,line,plane,ignore_backface=False):
-        """
-        upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection
+        """Intersects a Polygon with a Plane. Upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection.
+        
+            :param line: Line to intersect.
+            :type line: Line
+            :param plane: Plane to intersect.
+            :type plane: Plane
+            :param ignore_backface: Boolean Value.
+            :type ignore_backface: bool
+            :result: Boolean Value.
+            :rtype: bool
+        
+        
+        
+        .. warning:: This method has not been implemented.
+        
         """
         # TODO
         return False
@@ -123,7 +197,17 @@ class Intersector(object):
 
     def _line_pgon(self,line,pgon,ignore_backface=False):
         """
-        upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection
+        Intersects a  Line with a Polygon. Upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection.
+        
+            :param line: Line to intersect.
+            :type line: Line
+            :param pgon: Polygon to intersect.
+            :type pgon: PGon
+            :param ignore_backface: Boolean Value.
+            :type ignore_backface: bool
+            :result: Boolean Value.
+            :rtype: bool
+            
         """
 
         # first intersect LinearEntity with this pgon's basis
@@ -170,7 +254,17 @@ class Intersector(object):
 
     def _line_plane(self,line,plane,ignore_backface=False):
         """
-        upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection
+        Intersects a Line with a Plane. Upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection.
+        
+            :param line: Line to intersect.
+            :type line: Line
+            :param plane: Plane to intersect.
+            :type plane: Plane
+            :param ignore_backface: Boolean Value.
+            :type ignore_backface: bool
+            :result: Boolean Value
+            :rtype: bool
+            
         """
         pln_norm = plane.normal.normalized()
         line_vec = line.vec.normalized()
@@ -187,6 +281,19 @@ class Intersector(object):
         return True
 
     def _ray_plane(self,ray,plane,ignore_backface=False):
+        """ Intersects a Ray with a Plane. Upon success the Intersector.dist property will be set to the distance between the ray.spt and the point of intersection.
+        
+            :param ray: Ray to intersect.
+            :type ray: Ray
+            :param plane: Plane to intersect.
+            :type plane: Plane
+            :param ignore_backface: Boolean Value.
+            :type ignore_backface: bool
+            :result: Boolean Value.
+            :rtype: bool
+            
+        """
+    
         xsec = Intersector()
         line_success = xsec._line_plane(ray,plane,ignore_backface = ignore_backface)
         if not line_success : 
@@ -200,6 +307,17 @@ class Intersector(object):
         return True
 
     def _seg_plane(self,seg,plane):
+        """ Intersects a Segment with a Plane. Upon success the Intersector.dist property will be set to the distance between the seg.spt and the point of intersection.
+            
+            :param seg: Segment to intersect.
+            :type seg: Segment
+            :param plane: Plane to intersect.
+            :type plane: PLane
+            :result: Boolean Value
+            :rtype: bool
+            
+        """
+    
         xsec = Intersector()
         line_success = xsec._line_plane(seg,plane,ignore_backface = False)
         if not line_success : 
@@ -217,8 +335,15 @@ class Intersector(object):
 
     def _pline_plane(self,pline,plane):
         """
-        self.edges
-        self.verts
+        Intersects a Polyline with a Plane. 
+        
+            :param pline: Polyline to intersect.
+            :type pline: PLine
+            :param plane: Plane to intersect.
+            :type plane: Plane
+            :result: Boolean value.
+            :rtype: bool
+            
         """
         self.edges = []
         self.verts = []
@@ -250,6 +375,18 @@ class Intersector(object):
         return ret
 
     def _plane_plane(self,pln_a,pln_b):
+    
+        """ Intersects two planes.
+        
+            :param pln_a: First plane to intersect.
+            :type pln_a: Plane
+            :param pln_b: Second plane to intersect.
+            :type pln_b: Plane
+            :result: Boolean value.
+            :rtype: bool
+            
+        """
+        
 
         if pln_a.normal.is_parallel(pln_b.normal) :
             self.log = "Planes are parallel, no intersection found."
@@ -277,6 +414,16 @@ class Intersector(object):
         """
 
     def _line_line(self,ln_a,ln_b):
+        """Intersects two lines.
+            
+            :param ln_a: First line to intersect.
+            :type ln_a: Line
+            :param ln_b: Second line to intersect.
+            :type ln_b: Line
+            :result: Boolean value
+            :rtype: bool
+            
+        """
         #TODO: test for lines on the xy plane, and do simpler intersection
         if ln_a.is_parallel(ln_b) :
             self.log = "Lines are parallel, no intersection found."
@@ -324,10 +471,20 @@ class Intersector(object):
 
 
     def _circle_circle(self,cir_a,cir_b):
-        '''
-        upon success, the Intersector.dist property will be set to the distance between the pair of points of intersection
-        dist of zero when circles intersect at just one point
-        '''
+        """ Intersects two circles.
+        
+            Upon success, the Intersector.dist property will be set to the distance between the pair of points of intersection.
+            
+            Dist of zero when circles intersect at just one point.
+            
+            :param cir_a: First circle to intersect.
+            :type cir_a: Circle
+            :param cir_b: Second circle to intersect.
+            :type cir_b: Circle
+            :result: Boolean value.
+            :rtype: bool
+            
+        """
         # TODO: this func currently only works on co-planar circles
         # TODO: move this functionality to the intersections class
         if not cir_a.plane.is_coplanar( cir_b.plane ) : 

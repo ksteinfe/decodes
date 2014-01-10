@@ -1,7 +1,7 @@
 
 .. currentmodule:: decodes.core
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 3 
    
    dc_base
    dc_bounds

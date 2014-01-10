@@ -77,83 +77,339 @@
 <dl class="method">
 <dt id="decodes.core.dc_intersection.Intersector._circle_circle">
 <tt class="descname">_circle_circle</tt><big>(</big><em>cir_a</em>, <em>cir_b</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector._circle_circle" title="Permalink to this definition">¶</a></dt>
-<dd><p>upon success, the Intersector.dist property will be set to the distance between the pair of points of intersection
-dist of zero when circles intersect at just one point</p>
+<dd><p>Intersects two circles.</p>
+<p>Upon success, the Intersector.dist property will be set to the distance between the pair of points of intersection.</p>
+<p>Dist of zero when circles intersect at just one point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>cir_a</strong> (<em>Circle</em>) &#8211; First circle to intersect.</li>
+<li><strong>cir_b</strong> (<em>Circle</em>) &#8211; Second circle to intersect.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Boolean value.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_intersection.Intersector._line_line">
 <tt class="descname">_line_line</tt><big>(</big><em>ln_a</em>, <em>ln_b</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector._line_line" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Intersects two lines.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ln_a</strong> (<em>Line</em>) &#8211; First line to intersect.</li>
+<li><strong>ln_b</strong> (<em>Line</em>) &#8211; Second line to intersect.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Boolean value</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_intersection.Intersector._line_pgon">
 <tt class="descname">_line_pgon</tt><big>(</big><em>line</em>, <em>pgon</em>, <em>ignore_backface=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector._line_pgon" title="Permalink to this definition">¶</a></dt>
-<dd><p>upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection</p>
+<dd><p>Intersects a  Line with a Polygon. Upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>line</strong> (<em>Line</em>) &#8211; Line to intersect.</li>
+<li><strong>pgon</strong> (<em>PGon</em>) &#8211; Polygon to intersect.</li>
+<li><strong>ignore_backface</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Boolean Value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Boolean Value.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_intersection.Intersector._line_plane">
 <tt class="descname">_line_plane</tt><big>(</big><em>line</em>, <em>plane</em>, <em>ignore_backface=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector._line_plane" title="Permalink to this definition">¶</a></dt>
-<dd><p>upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection</p>
+<dd><p>Intersects a Line with a Plane. Upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>line</strong> (<em>Line</em>) &#8211; Line to intersect.</li>
+<li><strong>plane</strong> (<em>Plane</em>) &#8211; Plane to intersect.</li>
+<li><strong>ignore_backface</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Boolean Value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Boolean Value</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_intersection.Intersector._pgon_plane">
 <tt class="descname">_pgon_plane</tt><big>(</big><em>line</em>, <em>plane</em>, <em>ignore_backface=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector._pgon_plane" title="Permalink to this definition">¶</a></dt>
-<dd><p>upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection</p>
+<dd><p>Intersects a Polygon with a Plane. Upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param line:</th><td class="field-body">Line to intersect.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type line:</th><td class="field-body">Line</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">param plane:</th><td class="field-body">Plane to intersect.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type plane:</th><td class="field-body">Plane</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">param ignore_backface:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">Boolean Value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">type ignore_backface:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">bool</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Boolean Value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This method has not been implemented.</p>
+</div>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_intersection.Intersector._plane_plane">
 <tt class="descname">_plane_plane</tt><big>(</big><em>pln_a</em>, <em>pln_b</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector._plane_plane" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Intersects two planes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pln_a</strong> (<em>Plane</em>) &#8211; First plane to intersect.</li>
+<li><strong>pln_b</strong> (<em>Plane</em>) &#8211; Second plane to intersect.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Boolean value.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_intersection.Intersector._pline_plane">
 <tt class="descname">_pline_plane</tt><big>(</big><em>pline</em>, <em>plane</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector._pline_plane" title="Permalink to this definition">¶</a></dt>
-<dd><p>self.edges
-self.verts</p>
+<dd><p>Intersects a Polyline with a Plane.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pline</strong> (<em>PLine</em>) &#8211; Polyline to intersect.</li>
+<li><strong>plane</strong> (<em>Plane</em>) &#8211; Plane to intersect.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Boolean value.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_intersection.Intersector._ray_plane">
 <tt class="descname">_ray_plane</tt><big>(</big><em>ray</em>, <em>plane</em>, <em>ignore_backface=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector._ray_plane" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Intersects a Ray with a Plane. Upon success the Intersector.dist property will be set to the distance between the ray.spt and the point of intersection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ray</strong> (<em>Ray</em>) &#8211; Ray to intersect.</li>
+<li><strong>plane</strong> (<em>Plane</em>) &#8211; Plane to intersect.</li>
+<li><strong>ignore_backface</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Boolean Value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Boolean Value.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_intersection.Intersector._seg_plane">
 <tt class="descname">_seg_plane</tt><big>(</big><em>seg</em>, <em>plane</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector._seg_plane" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Intersects a Segment with a Plane. Upon success the Intersector.dist property will be set to the distance between the seg.spt and the point of intersection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>seg</strong> (<em>Segment</em>) &#8211; Segment to intersect.</li>
+<li><strong>plane</strong> (<em>PLane</em>) &#8211; Plane to intersect.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Boolean Value</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_intersection.Intersector.append">
 <tt class="descname">append</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector.append" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Appends item to list of intersection geometries.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Appended item to list of intersection geometries.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_intersection.Intersector.clear">
 <tt class="descname">clear</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector.clear" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Clears all intersection geometries from results list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Empty list of intersections.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_intersection.Intersector.intersect">
 <tt class="descname">intersect</tt><big>(</big><em>a</em>, <em>b</em>, <em>**kargs</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector.intersect" title="Permalink to this definition">¶</a></dt>
-<dd><p>pass in two pieces of decodes geometry (a &amp; b), and i&#8217;ll have a go at intersecting them.
-results will be stored in this xsec object
-extras (such as distance to intersection points) will be assigned as attributes to this xsec object
-function returns success, True or False</p>
+<dd><p>Pass in two pieces of decodes geometry (a &amp; b), and I&#8217;ll have a go at intersecting them.</p>
+<p>Results will be stored in this xsec object.</p>
+<p>Extras (such as distance to intersection points) will be assigned as attributes to this xsec object.</p>
+<p>Function returns success, True or False.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>Geometry</em>) &#8211; First geometry to intersect. May be any decodes geometry.</li>
+<li><strong>b</strong> (<em>Geometry</em>) &#8211; Second geometry to intersect. May be any decodes geometry.</li>
+<li><strong>kargs</strong> (<a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; Dictionary with two geometries to intersect.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Boolean Value.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_intersection.Intersector.of">
 <tt class="descname">of</tt><big>(</big><em>a</em>, <em>b</em>, <em>**kargs</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector.of" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Pass in two pieces of decodes geometry (a &amp; b), and i&#8217;ll have a go at intersecting them.</p>
+<p>Results will be stored in this xsec object.</p>
+<p>Extras (such as distance to intersection points) will be assigned as attributes to this xsec object.</p>
+<p>Function returns success, True or False</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>Geometry</em>) &#8211; First geometry to intersect. May be any decodes geometry.</li>
+<li><strong>b</strong> (<em>Geometry</em>) &#8211; Second geometry to intersect. May be any decodes geometry.</li>
+<li><strong>kargs</strong> (<a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; Dictionary with two geometries to intersect.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Boolean Value</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_intersection.Intersector.results">
 <tt class="descname">results</tt><a class="headerlink" href="#decodes.core.dc_intersection.Intersector.results" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns list of intersection geometries.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">List of intersection geometries.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">[Intersection]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
