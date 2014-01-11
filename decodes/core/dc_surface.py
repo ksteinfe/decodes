@@ -86,8 +86,7 @@ class Surface(IsParametrized):
 
     @property
     def domain_u(self): 
-        """
-        Returns the Interval domain for the U-direction of this Surface.
+        """Returns the Interval domain for the U-direction of this Surface.
             
             :result: Domain of this Surface in the U-direction.
             :rtype: Interval
@@ -96,8 +95,7 @@ class Surface(IsParametrized):
 
     @property
     def u0(self):
-        """
-        Returns the minimum value for the U domain of this Surface.
+        """Returns the minimum value for the U domain of this Surface.
             
             :result: Minimum value for U domain.
             :rtype: float
@@ -107,8 +105,7 @@ class Surface(IsParametrized):
 
     @property
     def u1(self):
-        """
-        Returns the maximum value for the U domain of this Surface.
+        """Returns the maximum value for the U domain of this Surface.
         
             :result: Maximum value for U domain.
             :rtype: float
@@ -118,8 +115,7 @@ class Surface(IsParametrized):
 
     @property
     def v0(self):
-        """
-        Returns the minimum value for the V domain of this Surface.
+        """Returns the minimum value for the V domain of this Surface.
         
             :result: Minimum value for V domain.
             :rtype: float
@@ -129,8 +125,7 @@ class Surface(IsParametrized):
 
     @property
     def v1(self):
-        """
-        Returns the maximum value for the V domain of this Surface.
+        """Returns the maximum value for the V domain of this Surface.
         
             :result: Maximum value for V domain.
             :rtype: float
@@ -140,8 +135,7 @@ class Surface(IsParametrized):
 
     @property
     def domain_v(self): 
-        """
-        Returns the Interval domain for the V-direction of this Surface.
+        """Returns the Interval domain for the V-direction of this Surface.
            
             :result: Domain of this Surface in the V-direction.
             :rtype: Interval
@@ -284,7 +278,7 @@ class Surface(IsParametrized):
             :param calc_extras: Boolean value.
             :type calc_extras: bool
             :result: (Curvature at point in U-direction, osculating Circle), (Curvature at point in V-direction, osculating Circle)
-            :rtype:(float, Circle), (float, Circle)
+            :rtype: (float, Circle), (float, Circle)
             
         """
         # calculates the curvature of the isoparms of this surfaces
@@ -317,36 +311,33 @@ class Surface(IsParametrized):
         return crv_u,crv_v
 
     def deval_curv(self,u,v,calc_extras=False):
-        """
-        IN:  
+        """ IN:  
         
-        - a point u,v (given on this surface domain) referring to a point on the surface.
+            - a point u,v (given on this surface domain) referring to a point on the surface.
 
-        OUT:
+            OUT:
         
-        The following geometric entities describing the shape of the surface at a given point:
+            The following geometric entities describing the shape of the surface at a given point:
         
-        - principal directions (expressed as a coordinate system)
+            - principal directions (expressed as a coordinate system)
         
-        - curvatures: principal curvatures (min/max), Gaussian curvature (K), Mean Curvature (H)
+            - curvatures: principal curvatures (min/max), Gaussian curvature (K), Mean Curvature (H)
 
-        Note: All quantities at a given point are computed using nearest neighbors on a mesh.  
+            Note: All quantities at a given point are computed using nearest neighbors on a mesh.  
         
-        For the case of a parametrized surface, we take a mesh of nearest neighbors with vertices
-        given by the isocurves at a resolution tol_nudge. These calculations are good for any mesh 
-        on a surface;  all that would need to change for another type of mesh is: 
+            For the case of a parametrized surface, we take a mesh of nearest neighbors with vertices given by the isocurves at a resolution tol_nudge. These calculations are good for any mesh on a surface;  all that would need to change for another type of mesh is: 
         
-            (1) the construction of the mesh of nearest neighbors around the surface point in question 
+                (1) the construction of the mesh of nearest neighbors around the surface point in question 
         
-            (2) the calculation of the areas of the faces and the weighted face areas
+                (2) the calculation of the areas of the faces and the weighted face areas
         
-        ref: 
+            ref: 
         
-        Taubin, Gabriel, Estimating the Tensor of Curvature of a Surface from a Polyhedral
+            Taubin, Gabriel, Estimating the Tensor of Curvature of a Surface from a Polyhedral
         
-        Approximation, http://pdf.aminer.org/000/234/737/curvature_approximation_for_triangulated_surfaces.pdf
+            Approximation, http://pdf.aminer.org/000/234/737/curvature_approximation_for_triangulated_surfaces.pdf
 
-        Note: We can define projection onto a surface by computing the normal on the surrogate.
+            Note: We can define projection onto a surface by computing the normal on the surrogate.
         
             :param u: U-value to evaluate Surface at.
             :type u: float
@@ -570,7 +561,7 @@ class Surface(IsParametrized):
             :param calc_extras: Boolean value.
             :type calc_extras: bool
             :result: (Curvature at point in U-direction, osculating Circle), (Curvature at point in V-direction, osculating Circle)
-            :rtype:(float, Circle), (float, Circle)
+            :rtype: (float, Circle), (float, Circle)
             
         """
         if u<0 or u>1 : raise DomainError("u out of bounds.  eval_curvature() must be called numbers between 0->1: eval(%s)"%u)

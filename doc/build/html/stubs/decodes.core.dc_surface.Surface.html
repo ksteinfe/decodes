@@ -167,9 +167,7 @@
 <li>curvatures: principal curvatures (min/max), Gaussian curvature (K), Mean Curvature (H)</li>
 </ul>
 <p>Note: All quantities at a given point are computed using nearest neighbors on a mesh.</p>
-<p>For the case of a parametrized surface, we take a mesh of nearest neighbors with vertices
-given by the isocurves at a resolution tol_nudge. These calculations are good for any mesh 
-on a surface;  all that would need to change for another type of mesh is:</p>
+<p>For the case of a parametrized surface, we take a mesh of nearest neighbors with vertices given by the isocurves at a resolution tol_nudge. These calculations are good for any mesh on a surface;  all that would need to change for another type of mesh is:</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li>the construction of the mesh of nearest neighbors around the surface point in question</li>
@@ -180,32 +178,25 @@ on a surface;  all that would need to change for another type of mesh is:</p>
 <p>Taubin, Gabriel, Estimating the Tensor of Curvature of a Surface from a Polyhedral</p>
 <p>Approximation, <a class="reference external" href="http://pdf.aminer.org/000/234/737/curvature_approximation_for_triangulated_surfaces.pdf">http://pdf.aminer.org/000/234/737/curvature_approximation_for_triangulated_surfaces.pdf</a></p>
 <p>Note: We can define projection onto a surface by computing the normal on the surrogate.</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param u:</th><td class="field-body">U-value to evaluate Surface at.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>u</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; U-value to evaluate Surface at.</li>
+<li><strong>v</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; V-value to evaluate Surface at.</li>
+<li><strong>calc_extras</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Boolean value.</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type u:</th><td class="field-body">float</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">The principal directions (CS), minimum curvature, maximum curvature, Gaussian curvature, Mean curvature</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">param v:</th><td class="field-body">V-value to evaluate Surface at.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">type v:</th><td class="field-body">float</td>
-</tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">param calc_extras:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">Boolean value.</td>
-</tr>
-<tr class="field-even field"><th class="field-name" colspan="2">type calc_extras:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body">bool</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">The principal directions (CS), minimum curvature, maximum curvature, Gaussian curvature, Mean curvature</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">CS, float, float, float, float</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">CS, float, float, float, float</p>
+</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 </dd></dl>
 
 <dl class="method">
@@ -223,12 +214,14 @@ on a surface;  all that would need to change for another type of mesh is:</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first last">(Curvature at point in U-direction, osculating Circle), (Curvature at point in V-direction, osculating Circle)</p>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">(Curvature at point in U-direction, osculating Circle), (Curvature at point in V-direction, osculating Circle)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">(float, Circle), (float, Circle)</p>
 </td>
 </tr>
 </tbody>
 </table>
-<p>:rtype:(float, Circle), (float, Circle)</p>
 </dd></dl>
 
 <dl class="method">
@@ -261,36 +254,32 @@ on a surface;  all that would need to change for another type of mesh is:</p>
 <dt id="decodes.core.dc_surface.Surface.domain_u">
 <tt class="descname">domain_u</tt><a class="headerlink" href="#decodes.core.dc_surface.Surface.domain_u" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the Interval domain for the U-direction of this Surface.</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Domain of this Surface in the U-direction.</td>
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Domain of this Surface in the U-direction.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Interval</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Interval</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_surface.Surface.domain_v">
 <tt class="descname">domain_v</tt><a class="headerlink" href="#decodes.core.dc_surface.Surface.domain_v" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the Interval domain for the V-direction of this Surface.</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Domain of this Surface in the V-direction.</td>
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Domain of this Surface in the V-direction.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Interval</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Interval</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 </dd></dl>
 
 <dl class="method">
@@ -359,12 +348,14 @@ on a surface;  all that would need to change for another type of mesh is:</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first last">(Curvature at point in U-direction, osculating Circle), (Curvature at point in V-direction, osculating Circle)</p>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">(Curvature at point in U-direction, osculating Circle), (Curvature at point in V-direction, osculating Circle)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">(float, Circle), (float, Circle)</p>
 </td>
 </tr>
 </tbody>
 </table>
-<p>:rtype:(float, Circle), (float, Circle)</p>
 </dd></dl>
 
 <dl class="method">
@@ -396,12 +387,52 @@ on a surface;  all that would need to change for another type of mesh is:</p>
 <dl class="method">
 <dt id="decodes.core.dc_surface.Surface.isocurve">
 <tt class="descname">isocurve</tt><big>(</big><em>u_val=None</em>, <em>v_val=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_surface.Surface.isocurve" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns an isocurve of this Surface at the given u OR v value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>u_val</strong> (<em>float or None</em>) &#8211; U-value to extract isocurve at.</li>
+<li><strong>v_val</strong> (<em>float or None</em>) &#8211; V-value to extract the isocurve at.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Isocurve of Surface.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Curve</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_surface.Surface.isopolyline">
 <tt class="descname">isopolyline</tt><big>(</big><em>u_val=None</em>, <em>v_val=None</em>, <em>dom=None</em>, <em>res=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_surface.Surface.isopolyline" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns Polyline isocurve of this Surface at the given u OR v value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>u_val</strong> (<em>float or None</em>) &#8211; U-value to evaluate isocurve at.</li>
+<li><strong>v_val</strong> (<em>float or None</em>) &#8211; V-value to evaluate isocurve at.</li>
+<li><strong>dom</strong> (<em>Interval or None</em>) &#8211; u or v domain of this Surface.</li>
+<li><strong>res</strong> (<em>float or None.</em>) &#8211; Resolution of surface.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Isocurve of this surface.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Polyline</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_surface.Surface.surrogate">
@@ -422,16 +453,16 @@ on a surface;  all that would need to change for another type of mesh is:</p>
 <dl class="method">
 <dt id="decodes.core.dc_surface.Surface.to_mesh">
 <tt class="descname">to_mesh</tt><big>(</big><em>do_close=False</em>, <em>tris=False</em>, <em>divs_u=False</em>, <em>divs_v=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_surface.Surface.to_mesh" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a mesh from this Surface</p>
+<dd><p>Returns a mesh from this Surface.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>do_close</strong> &#8211; </li>
-<li><strong>tris</strong> &#8211; </li>
-<li><strong>divs_u</strong> &#8211; </li>
-<li><strong>divs_V</strong> &#8211; </li>
+<li><strong>do_close</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Boolean value.</li>
+<li><strong>tris</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Boolean value.</li>
+<li><strong>divs_u</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Boolean value.</li>
+<li><strong>divs_V</strong> &#8211; Boolean value.</li>
 </ul>
 </td>
 </tr>
@@ -501,72 +532,64 @@ on a surface;  all that would need to change for another type of mesh is:</p>
 <dt id="decodes.core.dc_surface.Surface.u0">
 <tt class="descname">u0</tt><a class="headerlink" href="#decodes.core.dc_surface.Surface.u0" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the minimum value for the U domain of this Surface.</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Minimum value for U domain.</td>
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Minimum value for U domain.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">float</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_surface.Surface.u1">
 <tt class="descname">u1</tt><a class="headerlink" href="#decodes.core.dc_surface.Surface.u1" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the maximum value for the U domain of this Surface.</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Maximum value for U domain.</td>
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Maximum value for U domain.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">float</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_surface.Surface.v0">
 <tt class="descname">v0</tt><a class="headerlink" href="#decodes.core.dc_surface.Surface.v0" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the minimum value for the V domain of this Surface.</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Minimum value for V domain.</td>
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Minimum value for V domain.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">float</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_surface.Surface.v1">
 <tt class="descname">v1</tt><a class="headerlink" href="#decodes.core.dc_surface.Surface.v1" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the maximum value for the V domain of this Surface.</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Maximum value for V domain.</td>
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Maximum value for V domain.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">float</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 </dd></dl>
 
 </dd></dl>
