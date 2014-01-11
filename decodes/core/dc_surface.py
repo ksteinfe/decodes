@@ -641,16 +641,16 @@ class Surface(IsParametrized):
 
 
     def to_mesh(self,do_close=False,tris=False,divs_u=False,divs_v=False):
-        """ Returns a mesh from this Surface
+        """ Returns a mesh from this Surface.
         
-            :param do_close:
-            :type do_close:
-            :param tris:
-            :type tris:
-            :param divs_u:
-            :type divs_u:
-            :param divs_V:
-            :type divs_v:
+            :param do_close: Boolean value.
+            :type do_close: bool
+            :param tris: Boolean value.
+            :type tris: bool
+            :param divs_u: Boolean value.
+            :type divs_u: bool
+            :param divs_V: Boolean value.
+            :type divs_v: bool
             
         """
         
@@ -710,6 +710,17 @@ class Surface(IsParametrized):
         return msh
 
     def isocurve(self, u_val=None, v_val=None):
+        """ Returns an isocurve of this Surface at the given u OR v value.
+        
+            :param u_val: U-value to extract isocurve at.
+            :type u_val: float or None
+            :param v_val: V-value to extract the isocurve at.
+            :type v_val: float or None
+            :result: Isocurve of Surface.
+            :rtype: Curve
+            
+        """
+    
         if u_val is None and v_val is None: raise AttributeError("Surface.isocurve requires either u_val OR v_val to be set")
         if u_val is not None and v_val is not None: raise AttributeError("u_val AND v_val cannot both be set when generating a Surface.isocurve")
 
@@ -723,6 +734,22 @@ class Surface(IsParametrized):
             return Curve(iso_func,self.domain_v,self.tol_v)
 
     def isopolyline(self, u_val = None, v_val = None, dom = None, res = None ):
+        """Returns Polyline isocurve of this Surface at the given u OR v value.
+        
+            :param u_val: U-value to evaluate isocurve at.
+            :type u_val: float or None
+            :param v_val: V-value to evaluate isocurve at.
+            :type v_val: float or None
+            :param dom: u or v domain of this Surface. 
+            :type dom: Interval or None
+            :param res: Resolution of surface.
+            :type res: float or None.
+            :result: Isocurve of this surface.
+            :rtype: Polyline
+            
+            
+        """
+        
         if u_val is None and v_val is None: raise AttributeError("Surface.isocurve requires either u_val OR v_val to be set")
         if u_val is not None and v_val is not None: raise AttributeError("u_val AND v_val cannot both be set when generating a Surface.isocurve")
 
