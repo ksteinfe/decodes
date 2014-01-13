@@ -213,8 +213,10 @@ The function should expect a single parameter t(float), and return a Point.</p>
 <dl class="staticmethod">
 <dt id="decodes.core.dc_curve.Curve.circle">
 <em class="property">static </em><tt class="descname">circle</tt><big>(</big><em>ctr</em>, <em>rad</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve.circle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Constructs a Curve object that describes a circle given: a center (Point) and radius (float).</p>
-<p>The plane of the circle will always be parallel to the xy-plane.</p>
+<dd><div class="line-block">
+<div class="line">Constructs a Curve object that describes a circle given: a center (Point) and radius (float).</div>
+<div class="line">The plane of the circle will always be parallel to the xy-plane.</div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -238,8 +240,10 @@ The function should expect a single parameter t(float), and return a Point.</p>
 <dl class="method">
 <dt id="decodes.core.dc_curve.Curve.deval">
 <tt class="descname">deval</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve.deval" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluates this Curve and returns a Point.</p>
-<p>t is a float value that falls within the defined domain of this Curve.</p>
+<dd><div class="line-block">
+<div class="line">Evaluates this Curve and returns a Point.</div>
+<div class="line">t is a float value that falls within the defined domain of this Curve.</div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -275,9 +279,13 @@ The function should expect a single parameter t(float), and return a Point.</p>
 <dl class="method">
 <dt id="decodes.core.dc_curve.Curve.deval_pln">
 <tt class="descname">deval_pln</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve.deval_pln" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluates this Curve and returns a Plane.</p>
-<p>t is a float value that falls within the defined domain of this Curve.</p>
-<p>Tangent vector determined by a nearest neighbor at distance Curve.tol/100</p>
+<dd><div class="line-block">
+<div class="line">Evaluates this Curve and returns a Plane.</div>
+<div class="line">t is a float value that falls within the defined domain of this Curve.</div>
+<div class="line-block">
+<div class="line">Tangent vector determined by a nearest neighbor at distance Curve.tol/100</div>
+</div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -295,9 +303,11 @@ The function should expect a single parameter t(float), and return a Point.</p>
 <dl class="method">
 <dt id="decodes.core.dc_curve.Curve.divide">
 <tt class="descname">divide</tt><big>(</big><em>divs=10</em>, <em>include_last=True</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve.divide" title="Permalink to this definition">¶</a></dt>
-<dd><p>Divides this Curve into a list of evaluated Planes equally spaced between Curve.domain.a and Curve.domain.b.</p>
-<p>If include_last is True (by default), returned list will contain divs+1 Points.</p>
-<p>If include_last is False, returned list will not include the point at Curve.domain.b</p>
+<dd><div class="line-block">
+<div class="line">Divides this Curve into a list of evaluated Planes equally spaced between Curve.domain.a and Curve.domain.b.</div>
+<div class="line">If include_last is True (by default), returned list will contain divs+1 Points.</div>
+<div class="line">If include_last is False, returned list will not include the point at Curve.domain.b</div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -337,9 +347,11 @@ The function should expect a single parameter t(float), and return a Point.</p>
 <dl class="method">
 <dt id="decodes.core.dc_curve.Curve.eval">
 <tt class="descname">eval</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve.eval" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluates this Curve and returns a Point.</p>
-<p>t is a normalized float value (0-&gt;1) which will be remapped to the domain defined by this Curve.</p>
-<p>Equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain)).</p>
+<dd><div class="line-block">
+<div class="line">Evaluates this Curve and returns a Point.</div>
+<div class="line">t is a normalized float value (0-&gt;1) which will be remapped to the domain defined by this Curve.</div>
+<div class="line">Equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain)).</div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -375,9 +387,11 @@ The function should expect a single parameter t(float), and return a Point.</p>
 <dl class="method">
 <dt id="decodes.core.dc_curve.Curve.eval_pln">
 <tt class="descname">eval_pln</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve.eval_pln" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluates this Curve and returns a Plane.</p>
-<p>t is a normalized float value (0-&gt;1) which will be remapped to the domain defined by this Curve.</p>
-<p>Equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain))</p>
+<dd><div class="line-block">
+<div class="line">Evaluates this Curve and returns a Plane.</div>
+<div class="line">t is a normalized float value (0-&gt;1) which will be remapped to the domain defined by this Curve.</div>
+<div class="line">Equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain))</div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -395,8 +409,10 @@ The function should expect a single parameter t(float), and return a Point.</p>
 <dl class="staticmethod">
 <dt id="decodes.core.dc_curve.Curve.helix">
 <em class="property">static </em><tt class="descname">helix</tt><big>(</big><em>ctr</em>, <em>rad</em>, <em>rise_per_turn=1.0</em>, <em>number_of_turns=3.0</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve.helix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Constructs a Curve object that describes a helix given: a center (Point), a radius (float), a rise_per_turn (float), and a number_of_turns (float).</p>
-<p>The plane of the circle of the helix will always be parallel to the xy-plane.</p>
+<dd><div class="line-block">
+<div class="line">Constructs a Curve object that describes a helix given: a center (Point), a radius (float), a rise_per_turn (float), and a number_of_turns (float).</div>
+<div class="line">The plane of the circle of the helix will always be parallel to the xy-plane.</div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -464,8 +480,10 @@ The function should expect a single parameter t(float), and return a Point.</p>
 <dl class="method">
 <dt id="decodes.core.dc_curve.Curve.subdivide">
 <tt class="descname">subdivide</tt><big>(</big><em>divs</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.Curve.subdivide" title="Permalink to this definition">¶</a></dt>
-<dd><p>Divides this Curve into a list of equal size sub-Curves.</p>
-<p>Each sub-Curve will adopt the tol of this curve, unless greater than the tol_max of the subcurve.</p>
+<dd><div class="line-block">
+<div class="line">Divides this Curve into a list of equal size sub-Curves.</div>
+<div class="line">Each sub-Curve will adopt the tol of this curve, unless greater than the tol_max of the subcurve.</div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -489,9 +507,11 @@ The function should expect a single parameter t(float), and return a Point.</p>
 <dl class="attribute">
 <dt id="decodes.core.dc_curve.Curve.tol">
 <tt class="descname">tol</tt><a class="headerlink" href="#decodes.core.dc_curve.Curve.tol" title="Permalink to this definition">¶</a></dt>
-<dd><p>The tolerance of this Parameterized Object expressed in domain space.</p>
-<p>For example, given an interval of 0-&gt;1, a tol of 0.1 will result in a curve constructed of 10 segments, evaulated with t-values 0.1 apart</p>
-<p>Given an interval 0-&gt;PI, a tol of 0.1 will result in a curve constructed of 32 segments, evaluated with t-values less than 0.1 apart</p>
+<dd><div class="line-block">
+<div class="line">The tolerance of this Parameterized Object expressed in domain space.</div>
+<div class="line">For example, given an interval of 0-&gt;1, a tol of 0.1 will result in a curve constructed of 10 segments, evaulated with t-values 0.1 apart</div>
+<div class="line">Given an interval 0-&gt;PI, a tol of 0.1 will result in a curve constructed of 32 segments, evaluated with t-values less than 0.1 apart</div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />

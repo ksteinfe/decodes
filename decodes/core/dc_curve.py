@@ -35,22 +35,19 @@ class IsParametrized(Geometry):
 
 
     def near(self,pt,tolerance=None,max_recursion=20):
-        """ Finds a location on this curve which is nearest to the given Point.
+        """| Finds a location on this curve which is nearest to the given Point.
+           | Unstable and inaccurate.
+           | Recursive function that searches for further points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
+           | Returns a tuple containing a Point, a t-value associated with this point, and the distance from this Point to the given Point.
             
-            Unstable and inaccurate.
-            
-            Recursive function that searches for further points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
-            
-            Returns a tuple containing a Point, a t-value associated with this point, and the distance from this Point to the given Point.
-            
-            :param pt: Point to look for the nearest point on a curve.
-            :type pt: Point
-            :param tolerance: Tolerance to search for the near point. Defaults to None.
-            :type tolerance: float
-            :param max_recursion: Maximum number of loops to look for the nearest point. Defaults to 20.
-            :type max_recursion: int
-            :result: Tuple containing a Point, a t-value associated with this point, and the distance from this Point to the given Point.
-            :rtype: (Point, float, float)
+           :param pt: Point to look for the nearest point on a curve.
+           :type pt: Point
+           :param tolerance: Tolerance to search for the near point. Defaults to None.
+           :type tolerance: float
+           :param max_recursion: Maximum number of loops to look for the nearest point. Defaults to 20.
+           :type max_recursion: int
+           :result: Tuple containing a Point, a t-value associated with this point, and the distance from this Point to the given Point.
+           :rtype: (Point, float, float)
         """
         if tolerance is None : tolerance = self.tol/10.0
         t = self._nearfar(Point.near_index,pt,tolerance,max_recursion)
@@ -58,43 +55,37 @@ class IsParametrized(Geometry):
         return(result,t,pt.distance(result))
 
     def near_pt(self,pt,tolerance=None,max_recursion=20):
-        """ Finds a location on this curve which is nearest to the given Point.
+        """| Finds a location on this curve which is nearest to the given Point.
+           | Unstable and inaccurate.
+           | Recursive function that searches for further points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
+           | Returns a Point.
             
-            Unstable and inaccurate.
-            
-            Recursive function that searches for further points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
-            
-            Returns a Point.
-            
-            :param pt: Point to look for the nearest point on a curve.
-            :type pt: Point
-            :param tolerance: Tolerance to search for the near point. Defaults to None.
-            :type tolerance: float
-            :param max_recursion: Maximum number of loops to look for the nearest point. Defaults to 20.
-            :type max_recursion: int
-            :result: Point.
-            :rtype: Point
+           :param pt: Point to look for the nearest point on a curve.
+           :type pt: Point
+           :param tolerance: Tolerance to search for the near point. Defaults to None.
+           :type tolerance: float
+           :param max_recursion: Maximum number of loops to look for the nearest point. Defaults to 20.
+           :type max_recursion: int
+           :result: Point.
+           :rtype: Point
         """
 
         return self.near(pt,tolerance,max_recursion)[0]
         
     def far(self,pt,tolerance=None,max_recursion=20):
-        """ Finds a location on this curve which is furthest from the given Point.
+        """| Finds a location on this curve which is furthest from the given Point.
+           | Unstable and inaccurate.
+           | Recursive function that searches for closer points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
+           | Returns a tuple containing a Point, a t-value associated with this Point, and the distance from this Point to the given Point.
             
-            Unstable and inaccurate.
-            
-            Recursive function that searches for closer points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
-            
-            Returns a tuple containing a Point, a t-value associated with this Point, and the distance from this Point to the given Point.
-            
-            :param pt: Point to look for the farthest point on a curve.
-            :type pt: Point
-            :param tolerance: Tolerance to search for the far point. Defaults to None.
-            :type tolerance: float
-            :param max_recursion: Maximum number of loops to look for the farthest point. Defaults to 20.
-            :type max_recursion: int
-            :result: Tuple containing a Point, a t-value associated with this point, and the distance from this Point to the given Point.
-            :rtype: (Point, float, float)
+           :param pt: Point to look for the farthest point on a curve.
+           :type pt: Point
+           :param tolerance: Tolerance to search for the far point. Defaults to None.
+           :type tolerance: float
+           :param max_recursion: Maximum number of loops to look for the farthest point. Defaults to 20.
+           :type max_recursion: int
+           :result: Tuple containing a Point, a t-value associated with this point, and the distance from this Point to the given Point.
+           :rtype: (Point, float, float)
         """
         if tolerance is None : tolerance = self.tol/10.0
         t = self._nearfar(Point.far_index,pt,tolerance,max_recursion)
@@ -102,22 +93,19 @@ class IsParametrized(Geometry):
         return(result,t,pt.distance(result))
 
     def far_pt(self,pt,tolerance=None,max_recursion=20):
-        """ Finds a location on this curve which is furthest from the given Point.
+        """| Finds a location on this curve which is furthest from the given Point.
+           | Unstable and inaccurate.
+           | Recursive function that searches for further points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
+           | Returns a Point.
             
-            Unstable and inaccurate.
-            
-            Recursive function that searches for further points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
-            
-            Returns a Point.
-            
-            :param pt: Point to look for the furthest point on a curve.
-            :type pt: Point
-            :param tolerance: Tolerance to search for the far point. Defaults to None.
-            :type tolerance: float
-            :param max_recursion: Maximum number of loops to look for the nearest point. Defaults to 20.
-            :type max_recursion: int
-            :result: Point.
-            :rtype: Point
+           :param pt: Point to look for the furthest point on a curve.
+           :type pt: Point
+           :param tolerance: Tolerance to search for the far point. Defaults to None.
+           :type tolerance: float
+           :param max_recursion: Maximum number of loops to look for the nearest point. Defaults to 20.
+           :type max_recursion: int
+           :result: Point.
+           :rtype: Point
         """
 
         return self.far(pt,tolerance,max_recursion)[0]
@@ -200,20 +188,18 @@ class Curve(HasBasis,IsParametrized):
     @property
     def tol(self): 
         #TODO: express tolerance as a percentage of domain delta instead... surfaces may have radically different domains in either direction
-        """The tolerance of this Parameterized Object expressed in domain space.
-        
-            For example, given an interval of 0->1, a tol of 0.1 will result in a curve constructed of 10 segments, evaulated with t-values 0.1 apart
+        """| The tolerance of this Parameterized Object expressed in domain space.
+           | For example, given an interval of 0->1, a tol of 0.1 will result in a curve constructed of 10 segments, evaulated with t-values 0.1 apart
+           | Given an interval 0->PI, a tol of 0.1 will result in a curve constructed of 32 segments, evaluated with t-values less than 0.1 apart
             
-            Given an interval 0->PI, a tol of 0.1 will result in a curve constructed of 32 segments, evaluated with t-values less than 0.1 apart
-            
-            :result: Sets the distance between point of a curve.
-            :rtype: float
+           :result: Sets the distance between point of a curve.
+           :rtype: float
             
         """
         return self._tol
     @tol.setter
     def tol(self, tolerance):
-        """Sets tolerance of this Curve.
+        """ Sets tolerance of this Curve.
         
             :param tolerance: Distance between a point of a curve.
             :type tolerance: float
@@ -233,14 +219,13 @@ class Curve(HasBasis,IsParametrized):
         return self.tol/100.0
 
     def deval(self,t):
-        """ Evaluates this Curve and returns a Point.
-            
-            t is a float value that falls within the defined domain of this Curve.
+        """| Evaluates this Curve and returns a Point.
+           | t is a float value that falls within the defined domain of this Curve.
 
-            :param t: Value to evaluate the curve at.
-            :type t: float
-            :result: Point on the Curve.
-            :rtype: Point
+           :param t: Value to evaluate the curve at.
+           :type t: float
+           :result: Point on the Curve.
+           :rtype: Point
             
         """
         if t<self.domain.a or t>self.domain.b : raise DomainError("Curve evaluated outside the bounds of its domain: deval(%s) %s"%(t,self.domain))
@@ -256,16 +241,14 @@ class Curve(HasBasis,IsParametrized):
         return pt
 
     def deval_pln(self,t):
-        """ Evaluates this Curve and returns a Plane.
-            
-            t is a float value that falls within the defined domain of this Curve.
-            
-            Tangent vector determined by a nearest neighbor at distance Curve.tol/100
+        """| Evaluates this Curve and returns a Plane.
+           | t is a float value that falls within the defined domain of this Curve.
+           |  Tangent vector determined by a nearest neighbor at distance Curve.tol/100
 
-            :param t: Value to evaluate the curve at.
-            :type t: float
-            :result: Plane on the Curve.
-            :rtype: Plane
+           :param t: Value to evaluate the curve at.
+           :type t: float
+           :result: Plane on the Curve.
+           :rtype: Plane
         """
         if t<self.domain.a or t>self.domain.b : raise DomainError("Curve evaluated outside the bounds of its domain: deval(%s) %s"%(t,self.domain))
 
@@ -283,7 +266,7 @@ class Curve(HasBasis,IsParametrized):
 
 
     def deval_crv(self,t):
-        """Calculates approximate curvature at the given t-value.
+        """ Calculates approximate curvature at the given t-value.
         
             :param t: Value to evaluate the curve at.
             :type t: float
@@ -308,31 +291,27 @@ class Curve(HasBasis,IsParametrized):
         return Curve._curvature_from_vecs(pt,vec_pos,vec_neg)
 
     def eval(self,t):
-        """ Evaluates this Curve and returns a Point.
+        """| Evaluates this Curve and returns a Point.
+           | t is a normalized float value (0->1) which will be remapped to the domain defined by this Curve.
+           | Equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain)).
             
-            t is a normalized float value (0->1) which will be remapped to the domain defined by this Curve.
-            
-            Equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain)).
-            
-            :param t: Normalized value between 0 and 1, to evaluate a Curve.
-            :type t: float
-            :result: a Point on the Curve.
-            :rtype: Point
+           :param t: Normalized value between 0 and 1, to evaluate a Curve.
+           :type t: float
+           :result: a Point on the Curve.
+           :rtype: Point
         """
         if t<0 or t>1 : raise DomainError("eval() must be called with a number between 0->1: eval(%s)"%t)
         return self.deval(Interval.remap(t,Interval(),self.domain))
 
     def eval_pln(self,t):
-        """ Evaluates this Curve and returns a Plane.
-        
-            t is a normalized float value (0->1) which will be remapped to the domain defined by this Curve.
+        """| Evaluates this Curve and returns a Plane.
+           | t is a normalized float value (0->1) which will be remapped to the domain defined by this Curve.
+           | Equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain))
             
-            Equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain))
-            
-            :param t: Normalized value between 0 and 1, to evaluate a curve.
-            :type t: float
-            :result: a Plane on the Curve.
-            :rtype: Plane
+           :param t: Normalized value between 0 and 1, to evaluate a curve.
+           :type t: float
+           :result: a Plane on the Curve.
+           :rtype: Plane
         """
         
         if t<0 or t>1 : raise DomainError("eval() must be called with a number between 0->1: eval(%s)"%t)
@@ -352,7 +331,7 @@ class Curve(HasBasis,IsParametrized):
 
     @staticmethod
     def _curvature_from_vecs(pt, vec_pos, vec_neg, calc_circles=False):
-        """Returns the curvature at a point.
+        """ Returns the curvature at a point.
         
             :param pt: Point on Curve.
             :type pt: Point
@@ -418,37 +397,34 @@ class Curve(HasBasis,IsParametrized):
 
 
     def divide(self, divs=10, include_last=True):
-        """Divides this Curve into a list of evaluated Planes equally spaced between Curve.domain.a and Curve.domain.b.
+        """| Divides this Curve into a list of evaluated Planes equally spaced between Curve.domain.a and Curve.domain.b.
+           | If include_last is True (by default), returned list will contain divs+1 Points.
+           | If include_last is False, returned list will not include the point at Curve.domain.b
         
-            If include_last is True (by default), returned list will contain divs+1 Points.
-        
-            If include_last is False, returned list will not include the point at Curve.domain.b
-        
-            :param divs: Number of segments to divide this curve into.
-            :type divs: int
-            :param include_last: Boolean Value.
-            :type include_last: bool
-            :returns: List of points 
-            :rtype: [Point]
+           :param divs: Number of segments to divide this curve into.
+           :type divs: int
+           :param include_last: Boolean Value.
+           :type include_last: bool
+           :returns: List of points 
+           :rtype: [Point]
         """
         return [self.deval(t) for t in self.domain.divide(divs,include_last)]
 
     def subdivide(self, divs):
-        """Divides this Curve into a list of equal size sub-Curves.
-            
-            Each sub-Curve will adopt the tol of this curve, unless greater than the tol_max of the subcurve.
+        """| Divides this Curve into a list of equal size sub-Curves.
+           | Each sub-Curve will adopt the tol of this curve, unless greater than the tol_max of the subcurve.
         
-            :param divs: Number of subcurves.
-            :type divs: int
-            :returns: List of sub-Curves. 
-            :rtype: [Curve]
+           :param divs: Number of subcurves.
+           :type divs: int
+           :returns: List of sub-Curves. 
+           :rtype: [Curve]
         """
         curves = []
         for subd in self.domain//divs: curves.append(self.subcurve(subd,self.tol/divs))
         return curves
 
     def subcurve(self,domain,tol=None):
-        """Returns a new Curve which is a copy of this Curve with the given Interval as the domain.
+        """ Returns a new Curve which is a copy of this Curve with the given Interval as the domain.
         
             :param domain: New curve with a new given interval.
             :type domain: Interval
@@ -517,16 +493,15 @@ class Curve(HasBasis,IsParametrized):
 
     @staticmethod
     def circle(ctr,rad):
-        """ Constructs a Curve object that describes a circle given: a center (Point) and radius (float).
-            
-            The plane of the circle will always be parallel to the xy-plane.
+        """| Constructs a Curve object that describes a circle given: a center (Point) and radius (float).
+           | The plane of the circle will always be parallel to the xy-plane.
         
-            :param ctr: Center point of the circle.
-            :type ctr: Point
-            :param rad: Radius of the circle.
-            :type rad: float
-            :result: Curve describing a circle.
-            :rtype: Curve
+           :param ctr: Center point of the circle.
+           :type ctr: Point
+           :param rad: Radius of the circle.
+           :type rad: float
+           :result: Curve describing a circle.
+           :rtype: Curve
         """
         def func(t):
             x = rad*math.cos(t)
@@ -536,20 +511,19 @@ class Curve(HasBasis,IsParametrized):
 
     @staticmethod
     def helix(ctr,rad,rise_per_turn=1.0,number_of_turns=3.0):
-        """ Constructs a Curve object that describes a helix given: a center (Point), a radius (float), a rise_per_turn (float), and a number_of_turns (float).
+        """| Constructs a Curve object that describes a helix given: a center (Point), a radius (float), a rise_per_turn (float), and a number_of_turns (float).
+           | The plane of the circle of the helix will always be parallel to the xy-plane.
             
-            The plane of the circle of the helix will always be parallel to the xy-plane.
-            
-            :param ctr: Center point of the helix.
-            :type ctr: Point
-            :param rad: Radius of the helix.
-            :type rad: float
-            :param rise_per_turn: Amount the helix rises in z per turn.
-            :type rise_per_turn: float
-            :param number_of_turns: Number of turns the helix has.
-            :type number_of_turns: float
-            :result: Helix Curve object.
-            :rtype: Curve
+           :param ctr: Center point of the helix.
+           :type ctr: Point
+           :param rad: Radius of the helix.
+           :type rad: float
+           :param rise_per_turn: Amount the helix rises in z per turn.
+           :type rise_per_turn: float
+           :param number_of_turns: Number of turns the helix has.
+           :type number_of_turns: float
+           :result: Helix Curve object.
+           :rtype: Curve
             
         """
         b = rise_per_turn/(math.pi*2)

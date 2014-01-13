@@ -114,20 +114,20 @@ class LinearEntity(Geometry):
            | otherwise. Two or more linear entities are concurrent if they all
            | intersect at a single point.
             
-                :param lines: a set of LinearEntities
-                :type lines:
-                :result:
-                :rtype:
+           :param lines: a set of LinearEntities
+           :type lines:
+           :result:
+           :rtype:
 
                 
-        .. note:: **Description of Method:**  First, take the first 
-          two lines and find their intersection. If there is no intersection, 
-          then the first two lines were parallel and had no intersection so 
-          concurrency is impossible amongst the whole set. Otherwise, check 
-          to see if the intersection point of the first two lines is a member 
-          on the rest of the lines. If so, the lines are concurrent.
+           .. note:: **Description of Method:**  First, take the first 
+                        two lines and find their intersection. If there is no intersection, 
+                        then the first two lines were parallel and had no intersection so 
+                        concurrency is impossible amongst the whole set. Otherwise, check 
+                        to see if the intersection point of the first two lines is a member 
+                        on the rest of the lines. If so, the lines are concurrent.
         
-        .. warning:: This method is not implemented.        
+           .. warning:: This method is not implemented.        
         """
         #TODO:: Implement this method.
         
@@ -181,16 +181,16 @@ class LinearEntity(Geometry):
             :result: Angle in radians.
             :rtype: float
 
-        .. note:: **Description of Method:**  
-          From the dot product of vectors v1 and v2 it is known that::
+            .. note:: **Description of Method:**  
+                        From the dot product of vectors v1 and v2 it is known that::
 
-              dot(v1, v2) = |v1|*|v2|*cos(A)
+                            dot(v1, v2) = |v1|*|v2|*cos(A)
 
-          where A is the angle formed between the two vectors. We can
-          get the directional vectors of the two lines and readily
-          find the angle between the two using the above formula.
+                        where A is the angle formed between the two vectors. We can
+                        get the directional vectors of the two lines and readily
+                        find the angle between the two using the above formula.
        
-        .. warning:: This method is not implemented.          
+            .. warning:: This method is not implemented.          
        """
         #TODO:: Implement this method.
 

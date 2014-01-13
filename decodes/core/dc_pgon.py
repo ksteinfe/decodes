@@ -6,8 +6,9 @@ import copy, collections
 import math
 
 class PGon(HasPts):
-    """| A very simple 2d polygon class
-       | Polygons limit their vertices to x and y dimensions, and enforce that they employ a basis.    Transformations of a polygon should generally be applied to the basis.    Any tranfromations of the underlying vertices should ensure that the returned vectors are limited to x and y dimensions
+    """A very simple 2d polygon class
+       
+       Polygons limit their vertices to x and y dimensions, and enforce that they employ a basis.    Transformations of a polygon should generally be applied to the basis.    Any tranfromations of the underlying vertices should ensure that the returned vectors are limited to x and y dimensions
     """
     subclass_attr = ['_edges'] # this list of props is unset anytime this HasPts object changes
 
@@ -29,13 +30,14 @@ class PGon(HasPts):
 
         
     def seg(self,index):
-        """| Returns a segment of this Polygon
-           | The returned line segment will contain a copy of the Points stored in the segment.
+        """Returns a segment of this Polygon
+           
+           The returned line segment will contain a copy of the Points stored in the segment.
         
-            :param index: Index of the desired segment.
-            :type index: Int
-            :returns: Segment object. 
-            :rtype: Segment
+           :param index: Index of the desired segment.
+           :type index: Int
+           :returns: Segment object. 
+           :rtype: Segment
         """
         if index >= len(self) : raise IndexError()
         if index == len(self)-1 : return Segment(self.pts[index],self.pts[0])
@@ -149,15 +151,17 @@ class PGon(HasPts):
 
 
     def eval(self,t):
-        """| Evaluates this polygon at the specified parameter t.
-           | A t-value of 0 will result in a point coincident with PGon.pts[0]
-           | A t-value of 1 will result in a point coincident with PGon.pts[-1]
+        """Evaluates this polygon at the specified parameter t.
+           
+           A t-value of 0 will result in a point coincident with PGon.pts[0].
+           
+           A t-value of 1 will result in a point coincident with PGon.pts[-1].
            
            
-                :param t: A decimal number between [0:1].
-                :type t: float
-                :result: Point on PGon.
-                :rtype: Point
+           :param t: A decimal number between [0:1].
+           :type t: float
+           :result: Point on PGon.
+           :rtype: Point
                 
         """
         if t > 1 : t = t%1.0
@@ -224,14 +228,16 @@ class PGon(HasPts):
 
 
     def inflate(self, rotation=0.5):
-        """| Returns a polygon inscribed inside this one.
-           | Each vertex of the returned polygon will lie on the midpoint of one of this polygon's edges.
-           | Optionally, you may set the rotation 0->1
+        """Returns a polygon inscribed inside this one.
            
-            :param rotation: A decimal number between [0:1].
-            :type rotation: float
-            :result: A polygon inscribed of this one.
-            :rtype: PGon
+           Each vertex of the returned polygon will lie on the midpoint of one of this polygon's edges.
+           
+           Optionally, you may set the rotation 0->1
+           
+          :param rotation: A decimal number between [0:1].
+          :type rotation: float
+          :result: A polygon inscribed of this one.
+          :rtype: PGon
         """
         
         ipts = [Vec.interpolate(self._verts[n],self._verts[n-1],rotation) for n in range(len(self._verts))]

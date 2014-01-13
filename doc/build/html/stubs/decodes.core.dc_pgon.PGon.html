@@ -57,10 +57,8 @@
 <dt id="decodes.core.dc_pgon.PGon">
 <em class="property">class </em><tt class="descclassname">decodes.core.dc_pgon.</tt><tt class="descname">PGon</tt><big>(</big><em>vertices=None</em>, <em>basis=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.PGon" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="decodes.core.dc_has_pts.HasPts.html#decodes.core.dc_has_pts.HasPts" title="decodes.core.dc_has_pts.HasPts"><tt class="xref py py-class docutils literal"><span class="pre">decodes.core.dc_has_pts.HasPts</span></tt></a></p>
-<div class="line-block">
-<div class="line">A very simple 2d polygon class</div>
-<div class="line">Polygons limit their vertices to x and y dimensions, and enforce that they employ a basis.    Transformations of a polygon should generally be applied to the basis.    Any tranfromations of the underlying vertices should ensure that the returned vectors are limited to x and y dimensions</div>
-</div>
+<p>A very simple 2d polygon class</p>
+<p>Polygons limit their vertices to x and y dimensions, and enforce that they employ a basis.    Transformations of a polygon should generally be applied to the basis.    Any tranfromations of the underlying vertices should ensure that the returned vectors are limited to x and y dimensions</p>
 <dl class="method">
 <dt id="decodes.core.dc_pgon.PGon.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>vertices=None</em>, <em>basis=None</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.PGon.__init__" title="Permalink to this definition">¶</a></dt>
@@ -217,53 +215,43 @@
 <dl class="method">
 <dt id="decodes.core.dc_pgon.PGon.eval">
 <tt class="descname">eval</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.PGon.eval" title="Permalink to this definition">¶</a></dt>
-<dd><div class="line-block">
-<div class="line">Evaluates this polygon at the specified parameter t.</div>
-<div class="line">A t-value of 0 will result in a point coincident with PGon.pts[0]</div>
-<div class="line">A t-value of 1 will result in a point coincident with PGon.pts[-1]</div>
-</div>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<dd><p>Evaluates this polygon at the specified parameter t.</p>
+<p>A t-value of 0 will result in a point coincident with PGon.pts[0].</p>
+<p>A t-value of 1 will result in a point coincident with PGon.pts[-1].</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param t:</th><td class="field-body">A decimal number between [0:1].</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; A decimal number between [0:1].</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type t:</th><td class="field-body">float</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Point on PGon.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Point on PGon.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Point</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_pgon.PGon.inflate">
 <tt class="descname">inflate</tt><big>(</big><em>rotation=0.5</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.PGon.inflate" title="Permalink to this definition">¶</a></dt>
-<dd><div class="line-block">
-<div class="line">Returns a polygon inscribed inside this one.</div>
-<div class="line">Each vertex of the returned polygon will lie on the midpoint of one of this polygon&#8217;s edges.</div>
-<div class="line">Optionally, you may set the rotation 0-&gt;1</div>
-</div>
+<dd><p>Returns a polygon inscribed inside this one.</p>
 <blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<div><p>Each vertex of the returned polygon will lie on the midpoint of one of this polygon&#8217;s edges.</p>
+<p>Optionally, you may set the rotation 0-&gt;1</p>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param rotation:</th><td class="field-body">A decimal number between [0:1].</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>rotation</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; A decimal number between [0:1].</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type rotation:</th><td class="field-body">float</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">A polygon inscribed of this one.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">A polygon inscribed of this one.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">PGon</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">PGon</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 </dd></dl>
 
 <dl class="method">
@@ -374,10 +362,8 @@
 <dl class="method">
 <dt id="decodes.core.dc_pgon.PGon.seg">
 <tt class="descname">seg</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#decodes.core.dc_pgon.PGon.seg" title="Permalink to this definition">¶</a></dt>
-<dd><div class="line-block">
-<div class="line">Returns a segment of this Polygon</div>
-<div class="line">The returned line segment will contain a copy of the Points stored in the segment.</div>
-</div>
+<dd><p>Returns a segment of this Polygon</p>
+<p>The returned line segment will contain a copy of the Points stored in the segment.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />

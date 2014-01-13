@@ -225,14 +225,13 @@ class Xform(object):
         return from_rgtransform(rh_xform)
     
     def __mul__(self, other):
-        """ Multiplies this Geometry by another Matrix, or by any piece of fieldpack geometry.
+        """| Multiplies this Geometry by another Matrix, or by any piece of fieldpack geometry.
+           | This function must be kept up to date with every new class of DC geom.
             
-            This function must be kept up to date with every new class of DC geom.
-            
-                :param other: Matrix to multiply by.
-                :type other: list
-                :result: Xform object
-                :rtype: Xform
+           :param other: Matrix to multiply by.
+           :type other: list
+           :result: Xform object
+           :rtype: Xform
         """
         if isinstance(other, Xform) : 
             xf = Xform()

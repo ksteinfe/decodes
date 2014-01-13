@@ -90,26 +90,24 @@
 <dt id="decodes.core.dc_line.LinearEntity.angle_between">
 <tt class="descname">angle_between</tt><big>(</big><em>l1</em>, <em>l2</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.angle_between" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns an angle formed between the two linear entities.</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param l1:</th><td class="field-body">First LinearEntity</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>l1</strong> (<em>LinearEntity</em>) &#8211; First LinearEntity</li>
+<li><strong>l2</strong> (<em>LinearEntity</em>) &#8211; Second LinearEntity</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type l1:</th><td class="field-body">LinearEntity</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Angle in radians.</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">param l2:</th><td class="field-body">Second LinearEntity</td>
-</tr>
-<tr class="field-even field"><th class="field-name">type l2:</th><td class="field-body">LinearEntity</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Angle in radians.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">float</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p><strong>Description of Method:</strong>  
@@ -235,25 +233,21 @@ find the angle between the two using the above formula.</p>
 <tt class="descname">is_concurrent</tt><big>(</big><em>*lines</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.is_concurrent" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
 <div class="line">Returns True if the set of linear entities are concurrent, False</div>
-<div class="line">otherwise. Two or more linear entities are concurrent if they all
-| intersect at a single point.</div>
+<div class="line">otherwise. Two or more linear entities are concurrent if they all</div>
+<div class="line">intersect at a single point.</div>
 </div>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param lines:</th><td class="field-body">a set of LinearEntities</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>lines</strong> &#8211; a set of LinearEntities</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type lines:</th><td class="field-body"></td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"></td>
 </tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body"></td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body"></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"></td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>Description of Method:</strong>  First, take the first 

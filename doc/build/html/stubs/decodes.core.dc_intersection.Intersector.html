@@ -77,9 +77,11 @@
 <dl class="method">
 <dt id="decodes.core.dc_intersection.Intersector._circle_circle">
 <tt class="descname">_circle_circle</tt><big>(</big><em>cir_a</em>, <em>cir_b</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector._circle_circle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Intersects two circles.</p>
-<p>Upon success, the Intersector.dist property will be set to the distance between the pair of points of intersection.</p>
-<p>Dist of zero when circles intersect at just one point.</p>
+<dd><div class="line-block">
+<div class="line">Intersects two circles.</div>
+<div class="line">Upon success, the Intersector.dist property will be set to the distance between the pair of points of intersection.</div>
+<div class="line">Dist of zero when circles intersect at just one point.</div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -178,32 +180,25 @@
 <dt id="decodes.core.dc_intersection.Intersector._pgon_plane">
 <tt class="descname">_pgon_plane</tt><big>(</big><em>line</em>, <em>plane</em>, <em>ignore_backface=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector._pgon_plane" title="Permalink to this definition">¶</a></dt>
 <dd><p>Intersects a Polygon with a Plane. Upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection.</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param line:</th><td class="field-body">Line to intersect.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>line</strong> (<em>Line</em>) &#8211; Line to intersect.</li>
+<li><strong>plane</strong> (<em>Plane</em>) &#8211; Plane to intersect.</li>
+<li><strong>ignore_backface</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Boolean Value.</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type line:</th><td class="field-body">Line</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Boolean Value.</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">param plane:</th><td class="field-body">Plane to intersect.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">type plane:</th><td class="field-body">Plane</td>
-</tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">param ignore_backface:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">Boolean Value.</td>
-</tr>
-<tr class="field-even field"><th class="field-name" colspan="2">type ignore_backface:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body">bool</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Boolean Value.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">bool</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">This method has not been implemented.</p>
@@ -342,10 +337,12 @@
 <dl class="method">
 <dt id="decodes.core.dc_intersection.Intersector.intersect">
 <tt class="descname">intersect</tt><big>(</big><em>a</em>, <em>b</em>, <em>**kargs</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector.intersect" title="Permalink to this definition">¶</a></dt>
-<dd><p>Pass in two pieces of decodes geometry (a &amp; b), and I&#8217;ll have a go at intersecting them.</p>
-<p>Results will be stored in this xsec object.</p>
-<p>Extras (such as distance to intersection points) will be assigned as attributes to this xsec object.</p>
-<p>Function returns success, True or False.</p>
+<dd><div class="line-block">
+<div class="line">Pass in two pieces of decodes geometry (a &amp; b), and I&#8217;ll have a go at intersecting them.</div>
+<div class="line">Results will be stored in this xsec object.</div>
+<div class="line">Extras (such as distance to intersection points) will be assigned as attributes to this xsec object.</div>
+<div class="line">Function returns success, True or False.</div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -370,10 +367,12 @@
 <dl class="method">
 <dt id="decodes.core.dc_intersection.Intersector.of">
 <tt class="descname">of</tt><big>(</big><em>a</em>, <em>b</em>, <em>**kargs</em><big>)</big><a class="headerlink" href="#decodes.core.dc_intersection.Intersector.of" title="Permalink to this definition">¶</a></dt>
-<dd><p>Pass in two pieces of decodes geometry (a &amp; b), and i&#8217;ll have a go at intersecting them.</p>
-<p>Results will be stored in this xsec object.</p>
-<p>Extras (such as distance to intersection points) will be assigned as attributes to this xsec object.</p>
-<p>Function returns success, True or False</p>
+<dd><div class="line-block">
+<div class="line">Pass in two pieces of decodes geometry (a &amp; b), and i&#8217;ll have a go at intersecting them.</div>
+<div class="line">Results will be stored in this xsec object.</div>
+<div class="line">Extras (such as distance to intersection points) will be assigned as attributes to this xsec object.</div>
+<div class="line">Function returns success, True or False        </div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
