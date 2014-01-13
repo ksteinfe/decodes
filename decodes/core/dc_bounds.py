@@ -36,7 +36,7 @@ class Bounds(Geometry):
 
     @property
     def cpt(self):
-        """Returns the center Point of the Bounds.
+        """ Returns the center Point of the Bounds.
             
             :result: Center Point of Bounds.
             :rtype: Point
@@ -49,21 +49,21 @@ class Bounds(Geometry):
             
     @property
     def dim_x(self):
-        """Returns x dimension of Bounds.
+        """ Returns x dimension of Bounds.
         """
         
         return self.ival_x.delta
 
     @property
     def dim_y(self):
-        """Returns y dimension of Bounds.
+        """ Returns y dimension of Bounds.
         """
         
         return self.ival_y.delta
 
     @property
     def dim_z(self):
-        """Returns z dimension of Bounds.
+        """ Returns z dimension of Bounds.
         """
         
         try:
@@ -73,19 +73,19 @@ class Bounds(Geometry):
 
     @property
     def is_2d(self):
-        """Returns True if Bounds is 2-dimensional (no z component). Otherwise returns False.
+        """ Returns True if Bounds is 2-dimensional (no z component). Otherwise returns False.
         """
         return not hasattr(self, 'ival_z')
 
     @property
     def is_3d(self): 
-        """Returns True if Bounds is 3-dimensional (x, y and z components). Otherwise returns False.
+        """ Returns True if Bounds is 3-dimensional (x, y and z components). Otherwise returns False.
         """
         return hasattr(self, 'ival_z')
 
     @property
     def corners(self):
-        """Moves counter clockwise, like so:
+        """ Moves counter clockwise, like so:
         
         (-,-)(+,-)(+,+)(-,+)
         
@@ -109,15 +109,14 @@ class Bounds(Geometry):
         return cpts
     
     def __contains__(self, pt):
-        """
-        Overloads the containment **(in)** operator.
+        """| Overloads the containment **(in)** operator.
+
+           .. note:: Less-than or equal-to logic applied, points that lie on any edge of the bounds will be considered to be contained within it.
         
-        Note: less-than or equal-to logic applied, points that lie on any edge of the bounds will be considered to be contained within it.
-        
-            :param pt: Point whose containment must be determined.
-            :type pt: Point
-            :result: Boolean value
-            :rtype: bool
+           :param pt: Point whose containment must be determined.
+           :type pt: Point
+           :result: Boolean value
+           :rtype: bool
         
         """
         if not (pt.x in self.ival_x) : return False
