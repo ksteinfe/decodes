@@ -36,7 +36,7 @@ class Color():
         
     @property
     def hue(self):  
-        """Returns hue value of this color.
+        """ Returns hue value of this color.
         
             :result: Decimal value representing hue.
             :rtype: float
@@ -44,7 +44,7 @@ class Color():
         return colorsys.rgb_to_hsv(self.r,self.g,self.b)[0]
     @property
     def sat(self):  
-        """Returns saturation value of this color.
+        """ Returns saturation value of this color.
         
             :result: Decimal value representing saturation.
             :rtype: float
@@ -52,7 +52,7 @@ class Color():
         return colorsys.rgb_to_hsv(self.r,self.g,self.b)[1]
     @property
     def val(self):  
-        """Returns the numeric value of this color.
+        """ Returns the numeric value of this color.
         
             :result: Decimal value representing this color.
             :rtype: float
@@ -61,7 +61,7 @@ class Color():
 
     @property
     def y(self):  
-        """Returns the y-value of this color.
+        """ Returns the y-value of this color.
         
             :result: y-value of this color.
             :rtype: float
@@ -69,7 +69,7 @@ class Color():
         return colorsys.rgb_to_yiq(self.r,self.g,self.b)[0]
     @property
     def i(self):  
-        """Returns the i-value of this color.
+        """ Returns the i-value of this color.
         
             :result: i-value of this color.
             :rtype: float
@@ -77,7 +77,7 @@ class Color():
         return colorsys.rgb_to_yiq(self.r,self.g,self.b)[1]
     @property
     def q(self):  
-        """Returns the q-value of this color.
+        """ Returns the q-value of this color.
         
             :result: q-value of this color.
             :rtype: float
@@ -86,7 +86,7 @@ class Color():
 
     @staticmethod
     def RGB(r,g,b):
-        """Creates a color object from RGB values.
+        """ Creates a color object from RGB values.
         
             :param r: R color value (between 0.0 and 1.0). 
             :type r: float
@@ -101,7 +101,7 @@ class Color():
     
     @staticmethod
     def HSB(h,s=1,b=1):
-        """Creates a color object from HSB values.
+        """ Creates a color object from HSB values.
         
             :param h: H color value (between 0.0 and 1.0). 
             :type h: float
@@ -118,7 +118,7 @@ class Color():
         
     @staticmethod
     def interpolate(c0,c1,t=0.5):
-        """Returns a new color interpolated from two Color objects.
+        """ Returns a new color interpolated from two Color objects.
         
             :param c0: First Color object
             :type c0: Color
@@ -143,7 +143,7 @@ class PixelGrid(object):
     """
     
     def __init__(self,include_corners=False,wrap=False):
-        """PixelGrid constructor.
+        """ PixelGrid constructor.
         
             :param include_corners: Boolean value.
             :type include_corners: bool
@@ -158,7 +158,7 @@ class PixelGrid(object):
 
     @property
     def px_width(self):
-        """Returns pixel width.
+        """ Returns pixel width.
             
             :result: Pixel width.
             :rtype: int
@@ -168,7 +168,7 @@ class PixelGrid(object):
 
     @property
     def px_height(self):
-        """Returns pixel height.
+        """ Returns pixel height.
         
             :result: pixel height
             :rtype: int
@@ -177,7 +177,7 @@ class PixelGrid(object):
         return int(self._res[1])
 
     def get(self,x,y):
-        """Returns value at location (x,y).
+        """ Returns value at location (x,y).
         
             :param x: x coordinate.
             :type x: float
@@ -190,7 +190,7 @@ class PixelGrid(object):
         return self._pixels[y*self._res[0]+x]
 
     def set(self,x,y,value):
-        """Set color value at location (x,y).
+        """ Set color value at location (x,y).
         
             :param x: x coordinate.
             :type x: float
@@ -206,7 +206,7 @@ class PixelGrid(object):
 
 # finds neighbors, taking into account both the type of neighborhood and whether there is wrapping or not
     def neighbors_of(self,x,y):
-        """Finds neighbors of location (x,y) in PixelGrid.
+        """ Finds neighbors of location (x,y) in PixelGrid.
             
             :param x: x coordinate.
             :type x: float
@@ -240,7 +240,7 @@ class ValueField(PixelGrid):
     each pixel contains a floating point number
     """
     def __init__(self, pixel_res=Interval(20,20), initial_value = 0.0,include_corners=False,wrap=True):
-        """ValueField constructor.
+        """ ValueField constructor.
         
             :param pixel_res: Resolution of ValueField.
             :type pixel_res: Interval
@@ -263,7 +263,7 @@ class ValueField(PixelGrid):
 
     @property
     def max_value(self):
-        """Returns max value of ValueField.
+        """ Returns max value of ValueField.
         
             :result: Maximum value.
             :rtype: float
@@ -273,7 +273,7 @@ class ValueField(PixelGrid):
 
     @property
     def min_value(self):
-        """Returns min value of ValueField.
+        """ Returns min value of ValueField.
         
             :result: Minimum value.
             :rtype: float
@@ -281,7 +281,7 @@ class ValueField(PixelGrid):
         return min(self._pixels)
 
     def to_image(self,min_color,max_color,value_range=None):
-        """Constructs image from ValueField.
+        """ Constructs image from ValueField.
         
             :param min_color: Minimum color in image.
             :type min_color: Color
@@ -310,7 +310,7 @@ class BoolField(PixelGrid):
     each pixel contains a True or a False
     """
     def __init__(self, pixel_res=Interval(20,20), initial_value = False,ic=False,wrap=True):
-        """BoolField constructor.
+        """ BoolField constructor.
         
             :param pixel_res: Resolution of BoolField.
             :type pixel_res: Interval
@@ -332,7 +332,8 @@ class BoolField(PixelGrid):
         super(BoolField,self).__init__(ic)
 
     def to_image(self,false_color=Color(1.0),true_color=Color(0.0)):
-        """Constructs and image from the BoolField.
+        """ Constructs and image from the BoolField.
+            
             :param false_color: Color for False values.
             :type false_color: Color
             :param true_color: Color for True values.
@@ -357,7 +358,7 @@ class Image(PixelGrid):
     each pixel contains a Color with normalized R,G,B values
     """
     def __init__(self, pixel_res=Interval(20,20), initial_color = Color(),include_corners=False,wrap=True):
-        """Image constructor.
+        """ Image constructor.
         
             :param pixel_res: Resolution of image.
             :type pixel_res: Interval
@@ -380,7 +381,7 @@ class Image(PixelGrid):
         super(Image,self).__init__(include_corners)
 
     def save(self, filename, path=False, verbose=False):
-        """Saves image file.
+        """ Saves image file.
             
             :param filename: Name of the image.
             :type filename: str

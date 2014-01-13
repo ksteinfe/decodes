@@ -30,9 +30,8 @@ class PGon(HasPts):
 
         
     def seg(self,index):
-        """Returns a segment of this Polygon
-           
-           The returned line segment will contain a copy of the Points stored in the segment.
+        """| Returns a segment of this Polygon
+           | The returned line segment will contain a copy of the Points stored in the segment.
         
            :param index: Index of the desired segment.
            :type index: Int
@@ -45,7 +44,7 @@ class PGon(HasPts):
         return Segment(self.pts[index],self.pts[index+1])
         
     def __contains__(self, pt):
-        """Overloads the containment **(in)** operator.
+        """ Overloads the containment **(in)** operator.
         
             :param pts: Point to determine containment in this PGon.
             :type pts: Point
@@ -57,7 +56,7 @@ class PGon(HasPts):
 
     @property
     def edges(self):
-        """Returns the edges of a PGon.
+        """ Returns the edges of a PGon.
        
             :result: List of edges of a PGon
             :rtype: [Segment]
@@ -82,7 +81,7 @@ class PGon(HasPts):
 
     @property
     def bounds(self):
-        """Returns the bounding box of this polygon, aligned to the basis of this polygon.
+        """ Returns the bounding box of this polygon, aligned to the basis of this polygon.
         
             :result: Bounding box of polygon.
             :rtype: Bounds
@@ -97,7 +96,7 @@ class PGon(HasPts):
         return Bounds(ival_x = ivx, ival_y = ivy)
 
     def rotated_to_min_bounds(self, divs = 4 , levels = 2, min_a = 0, max_a =.5 * math.pi ):
-        """Creates a copy of a polygon rotated to its best-fit bounding box.
+        """ Creates a copy of a polygon rotated to its best-fit bounding box.
         
             :param divs: Number of divisions of rotation per level.
             :type divs: int
@@ -151,11 +150,9 @@ class PGon(HasPts):
 
 
     def eval(self,t):
-        """Evaluates this polygon at the specified parameter t.
-           
-           A t-value of 0 will result in a point coincident with PGon.pts[0].
-           
-           A t-value of 1 will result in a point coincident with PGon.pts[-1].
+        """| Evaluates this polygon at the specified parameter t.
+           | A t-value of 0 will result in a point coincident with PGon.pts[0].
+           | A t-value of 1 will result in a point coincident with PGon.pts[-1].
            
            
            :param t: A decimal number between [0:1].
@@ -178,7 +175,7 @@ class PGon(HasPts):
 
 
     def near(self, p):
-        """Returns a tuple of the closest point to a given PGon, the index of the closest segment and the distance from the Point to the near Point.
+        """ Returns a tuple of the closest point to a given PGon, the index of the closest segment and the distance from the Point to the near Point.
        
             :param p: Point to look for a near Point on the PGon.
             :type p: Point
@@ -191,7 +188,7 @@ class PGon(HasPts):
         return (npts[0][0],npts[0][3],npts[0][1],npts[0][2])
 
     def near_pt(self, p):
-        """Returns the closest point to a given PGon.
+        """ Returns the closest point to a given PGon.
        
             :param p: Point to look for a near Point on the PGon.
             :type p: Point
@@ -228,23 +225,21 @@ class PGon(HasPts):
 
 
     def inflate(self, rotation=0.5):
-        """Returns a polygon inscribed inside this one.
+        """| Returns a polygon inscribed inside this one.
+           | Each vertex of the returned polygon will lie on the midpoint of one of this polygon's edges.
+           | Optionally, you may set the rotation 0->1
            
-           Each vertex of the returned polygon will lie on the midpoint of one of this polygon's edges.
-           
-           Optionally, you may set the rotation 0->1
-           
-          :param rotation: A decimal number between [0:1].
-          :type rotation: float
-          :result: A polygon inscribed of this one.
-          :rtype: PGon
+           :param rotation: A decimal number between [0:1].
+           :type rotation: float
+           :result: A polygon inscribed of this one.
+           :rtype: PGon
         """
         
         ipts = [Vec.interpolate(self._verts[n],self._verts[n-1],rotation) for n in range(len(self._verts))]
         return PGon(ipts,self.basis)
 
     def contains_pt(self, pt,tolerence=0.000001):
-        """Tests if this polygon contains the given point. The given point must lie on the plane of this polygon.
+        """ Tests if this polygon contains the given point. The given point must lie on the plane of this polygon.
         
             :param pt: Point to test containment in PGon.
             :type pt: Point
@@ -289,7 +284,7 @@ class PGon(HasPts):
         return icnt%2!=0
 
     def overlaps(self, other) :
-        """Tests for overlap with another polygon. Returns true if these two polygons share a common plane, and if they overlap or if one is completely contained within another.
+        """ Tests for overlap with another polygon. Returns true if these two polygons share a common plane, and if they overlap or if one is completely contained within another.
         
             :param other: Another polygon,
             :type other: PGon
@@ -309,7 +304,7 @@ class PGon(HasPts):
 
     @staticmethod
     def triangle(pt_a,pt_b,pt_c):
-        """Constructs a triangular polygon from three points. Resulting PGon will have a basis at the centroid of the three points, with the x_axis pointing toward pt_a.
+        """ Constructs a triangular polygon from three points. Resulting PGon will have a basis at the centroid of the three points, with the x_axis pointing toward pt_a.
         
             :param pt_a: First Point.
             :type pt_a: Point
@@ -421,7 +416,7 @@ class RGon(PGon):
 
     @property
     def radius(self):
-        """Returns radius of RGon.
+        """ Returns radius of RGon.
         
             :result: Radius of polygon.
             :rtype: float
@@ -431,7 +426,7 @@ class RGon(PGon):
 
     @property
     def num_of_sides(self):
-        """Returns number of sides of the RGon.
+        """ Returns number of sides of the RGon.
         
             :result: Number of sides of polygon.
             :rtype: int
@@ -441,7 +436,7 @@ class RGon(PGon):
 
     @property
     def area(self):
-        """Returns the area of the polygon.
+        """ Returns the area of the polygon.
         
             :result: Area of the polygon.
             :rtype: float
@@ -454,7 +449,7 @@ class RGon(PGon):
 
     @property
     def apothem(self):
-        """The distance from the center to the midpoint of any side.
+        """ The distance from the center to the midpoint of any side.
         
             :result: Apothem of the polygon.
             :rtype: float
@@ -467,7 +462,7 @@ class RGon(PGon):
 
     @property
     def edge_length(self):
-        """The length of any edge.
+        """ The length of any edge.
             
             :result: The length of any edge.
             :rtype: float
@@ -481,7 +476,7 @@ class RGon(PGon):
 
     @property
     def circle_inscr(self):
-        """Returns the inscribed circle of this RGon.
+        """ Returns the inscribed circle of this RGon.
         
             :result: Inscribed circle.
             :rtype: Circle
@@ -491,7 +486,7 @@ class RGon(PGon):
 
     @property
     def circle_cirscr(self):
-        """Returns the circumscribed circle of this RGon.
+        """ Returns the circumscribed circle of this RGon.
         
             :result: Circumscribed circle.
             :rtype: Circle
@@ -501,7 +496,7 @@ class RGon(PGon):
 
     @property
     def interior_angle(self):
-        """Returns the interior angle of this RGon.
+        """ Returns the interior angle of this RGon.
         
             :result: Interior angle in radians.
             :rtype: float
@@ -515,7 +510,7 @@ class RGon(PGon):
     def __repr__(self): return "rgon[{0}]".format(self.num_of_sides)
 
     def inflate(self):
-        """Returns a regular polygon inscribed inside this one while maintaining the same number of sides.
+        """ Returns a regular polygon inscribed inside this one while maintaining the same number of sides.
         
             :result: An regular inscribed polygon.
             :rtype: RGon
@@ -528,7 +523,7 @@ class RGon(PGon):
         return RGon(self._nos,self.apothem,basis)
 
     def deflate(self):
-        """Returns a regular polygon that circumscribes this one while maintaining the same number of sides.
+        """ Returns a regular polygon that circumscribes this one while maintaining the same number of sides.
         
             :result: a regular polygon circumscribing this one.
             :rtype: RGon
@@ -555,7 +550,7 @@ class RGon(PGon):
 
     @staticmethod
     def from_edge(segment,num_of_sides,normal=Vec(0,0,1)):
-        """Constructs a regular polygon given a line segment describing one edge. The side of the edge that the center of the resulting polygon falls is determined by taking the cross product of the given edge vector and the given normal vector.
+        """ Constructs a regular polygon given a line segment describing one edge. The side of the edge that the center of the resulting polygon falls is determined by taking the cross product of the given edge vector and the given normal vector.
             
             :param segment: Edge of polygon.
             :type segment: Segment

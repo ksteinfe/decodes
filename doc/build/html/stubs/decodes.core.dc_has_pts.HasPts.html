@@ -127,15 +127,19 @@
 <dl class="method">
 <dt id="decodes.core.dc_has_pts.HasPts.append">
 <tt class="descname">append</tt><big>(</big><em>pts</em><big>)</big><a class="headerlink" href="#decodes.core.dc_has_pts.HasPts.append" title="Permalink to this definition">¶</a></dt>
-<dd><p>Appends the given Point to the stored list of points.
-Each Point is processed to ensure compatibility with this geometry&#8217;s basis.</p>
+<dd><div class="line-block">
+<div class="line">Appends the given Point to the stored list of points.</div>
+<div class="line">Each Point is processed to ensure compatibility with this geometry&#8217;s basis.</div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pts</strong> (<em>Point or [Point]</em>) &#8211; Point(s) to append</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pts</strong> (<em>Point or [Point]</em>) &#8211; Point(s) to append.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Modifies this geometry by adding items to the stored list of points</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Modifies this geometry by adding items to the stored list of points.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">None</td>
 </tr>
 </tbody>
 </table>
@@ -145,6 +149,15 @@ Each Point is processed to ensure compatibility with this geometry&#8217;s basis
 <dt id="decodes.core.dc_has_pts.HasPts.basis">
 <tt class="descname">basis</tt><a class="headerlink" href="#decodes.core.dc_has_pts.HasPts.basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns basis.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Basis</td>
+</tr>
+</tbody>
+</table>
+<p>:rtype Basis</p>
 </dd></dl>
 
 <dl class="method">
@@ -214,18 +227,16 @@ Each Point is processed to ensure compatibility with this geometry&#8217;s basis
 <div class="line">Does not allow manipulation.</div>
 <div class="line">If you want to manipulate the vertices of this object, you should operate on the vertices directly (which are defined relative to this HasPts&#8217;s basis) by calling HasPts[0].x = value</div>
 </div>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Point or list of points.</td>
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Point or list of points.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Point or [Point]</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Point or [Point]</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 </dd></dl>
 
 <dl class="method">

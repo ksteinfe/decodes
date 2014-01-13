@@ -84,43 +84,41 @@
 <dl class="attribute">
 <dt id="decodes.core.dc_interval.Interval.delta">
 <tt class="descname">delta</tt><a class="headerlink" href="#decodes.core.dc_interval.Interval.delta" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the signed delta of the interval, calculated as b-a</p>
-<p>For an unsigned representation, use length.</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<dd><div class="line-block">
+<div class="line">Returns the signed delta of the interval, calculated as b-a</div>
+<div class="line">For an unsigned representation, use length.</div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Delta of an interval.</td>
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Delta of an interval.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">float</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_interval.Interval.deval">
 <tt class="descname">deval</tt><big>(</big><em>number</em><big>)</big><a class="headerlink" href="#decodes.core.dc_interval.Interval.deval" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a parameter corresponding to the position of the given number within this interval.
-Effectively, the opposite of eval().</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<dd><div class="line-block">
+<div class="line">Returns a parameter corresponding to the position of the given number within this interval.</div>
+<div class="line">Effectively, the opposite of eval().</div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param number:</th><td class="field-body">Number to find the parameter of.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>number</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Number to find the parameter of.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type number:</th><td class="field-body">float</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Parameter.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Parameter.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">float</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 <div class="highlight-python"><pre>print Interval(10,20).deval(12)
 &gt;&gt;0.2
 print Interval(10,20).deval(25)
@@ -131,8 +129,10 @@ print Interval(10,20).deval(25)
 <dl class="method">
 <dt id="decodes.core.dc_interval.Interval.divide">
 <tt class="descname">divide</tt><big>(</big><em>divs=10</em>, <em>include_last=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_interval.Interval.divide" title="Permalink to this definition">¶</a></dt>
-<dd><p>Divides this interval into a list of values equally spaced between a and b.
-Unless include_last is set to True, returned list will not include Interval.b: the first value returned is Interval.a and the last is Interval.b-(Interval.delta/divs)</p>
+<dd><div class="line-block">
+<div class="line">Divides this interval into a list of values equally spaced between a and b.</div>
+<div class="line">Unless include_last is set to True, returned list will not include Interval.b: the first value returned is Interval.a and the last is Interval.b-(Interval.delta/divs)</div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -174,26 +174,23 @@ Unless include_last is set to True, returned list will not include Interval.b: t
 <dl class="method">
 <dt id="decodes.core.dc_interval.Interval.eval">
 <tt class="descname">eval</tt><big>(</big><em>t</em>, <em>limited=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_interval.Interval.eval" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluates a given parameter within this interval.</p>
-<blockquote>
-<div>For example, given an Interval(0-&gt;2*math.pi): eval(0.5) == math.pi</div></blockquote>
-<p>Optionally, you may limit the resulting output to this interval</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<dd><div class="line-block">
+<div class="line">Evaluates a given parameter within this interval.</div>
+<div class="line">For example, given an Interval(0-&gt;2*math.pi): eval(0.5) == math.pi</div>
+<div class="line">Optionally, you may limit the resulting output to this interval</div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param t:</th><td class="field-body">Number to evaluate.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Number to evaluate.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type t:</th><td class="field-body">float</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Evaluated number.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Evaluated number.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">float</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 <div class="highlight-python"><pre>print Interval(10,20).eval(0.2)
 &gt;&gt;12.0
 print Interval(10,20).deval(1.5)
@@ -204,20 +201,20 @@ print Interval(10,20).deval(1.5)
 <dl class="method">
 <dt id="decodes.core.dc_interval.Interval.invert">
 <tt class="descname">invert</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_interval.Interval.invert" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a copy of this interval with swapped values.</p>
-<p>Such that this.a = new.b and this.b = new.a</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<dd><div class="line-block">
+<div class="line">Returns a copy of this interval with swapped values.</div>
+<div class="line">Such that this.a = new.b and this.b = new.a</div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Interval object with swapped values.</td>
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Interval object with swapped values.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Interval</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Interval</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 </dd></dl>
 
 <dl class="attribute">
@@ -239,20 +236,20 @@ print Interval(10,20).deval(1.5)
 <dl class="attribute">
 <dt id="decodes.core.dc_interval.Interval.length">
 <tt class="descname">length</tt><a class="headerlink" href="#decodes.core.dc_interval.Interval.length" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the absolute value of length of the interval.</p>
-<p>For a signed representation, use delta.</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<dd><div class="line-block">
+<div class="line">Returns the absolute value of length of the interval.</div>
+<div class="line">For a signed representation, use delta.</div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Absolute value of length of an interval.</td>
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Absolute value of length of an interval.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">int</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 </dd></dl>
 
 <dl class="method">
@@ -319,7 +316,9 @@ print Interval(10,20).deval(1.5)
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Interval</td>
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Interval from 0 to 2PI.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Interval</td>
 </tr>
 </tbody>
 </table>
@@ -395,7 +394,9 @@ print Interval(10,20).deval(1.5)
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Interval</td>
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Interval from 0 to 2PI.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Interval</td>
 </tr>
 </tbody>
 </table>

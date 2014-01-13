@@ -128,7 +128,7 @@ class Bounds(Geometry):
             return True
     
     def __floordiv__(self, other): 
-        """Overloads the integer division **(//)** operator. Calls Bounds.subbounds(other).
+        """ Overloads the integer division **(//)** operator. Calls Bounds.subbounds(other).
         
             :param other: Number of sub-boundaries.
             :type other: int
@@ -138,7 +138,7 @@ class Bounds(Geometry):
         return self.subbounds(other)
 
     def eval(self,u,v,w=0):
-        """Returns a point at normalized coordinates (u,v,w). If all coordinates are within a range of [0,1] then the point is in the Bounds. Otherwise the point is outside the Bounds.
+        """ Returns a point at normalized coordinates (u,v,w). If all coordinates are within a range of [0,1] then the point is in the Bounds. Otherwise the point is outside the Bounds.
         
             :param u: u-coordinate of a Point.
             :type u: float
@@ -154,7 +154,7 @@ class Bounds(Geometry):
         return Point(self.ival_x.eval(u),self.ival_y.eval(v),self.ival_z.eval(w))
 
     def overlaps(self, other) :
-        """Returns True if this Bounds overlaps the given Bounds.
+        """ Returns True if this Bounds overlaps the given Bounds.
         
             :param other: Given Bounds to be compared with this Bounds.
             :type other: Bounds
@@ -165,7 +165,7 @@ class Bounds(Geometry):
         return any([pt in self for pt in other.corners] + [pt in other for pt in self.corners])
 
     def subbounds(self,divs):
-        """Produces sub-boundaries. Starts at bottom left, moves from left to right and then bottom to top.
+        """ Produces sub-boundaries. Starts at bottom left, moves from left to right and then bottom to top.
         
             :param divs: Number of sub-boundaries.
             :type divs: int
@@ -191,7 +191,7 @@ class Bounds(Geometry):
         return ret
 
     def near_pt(self, p):
-        """Returns the closest point within this Bounds.  If the point is already within the bounds, simply returns the point.
+        """ Returns the closest point within this Bounds.  If the point is already within the bounds, simply returns the point.
         
             :param p: Point.
             :type p: Point
@@ -215,7 +215,7 @@ class Bounds(Geometry):
 
 
     def to_polyline(self):
-        """Returns a PLine along the perimeter of a Bounds.
+        """ Returns a PLine along the perimeter of a Bounds.
         
             :result: PLine around the Bounds.
             :rtype: PLine
@@ -227,7 +227,7 @@ class Bounds(Geometry):
 
     @staticmethod
     def encompass(pts = [Point()]):
-        """Constructs a Bounds that encompasses all Points in pts.
+        """ Constructs a Bounds that encompasses all Points in pts.
         
             :param pts: A list of Points.
             :type pts: [Point]
@@ -246,7 +246,7 @@ class Bounds(Geometry):
         
     @staticmethod
     def unit_square():
-        """Returns a unit square Bounds (2D) in the xy plane.
+        """ Returns a unit square Bounds (2D) in the xy plane.
         
             :result: Unit square Bounds.
             :rtype: Bounds
@@ -256,7 +256,7 @@ class Bounds(Geometry):
 
     @staticmethod
     def unit_cube():
-        """Returns a unit cube Bounds (3D).
+        """ Returns a unit cube Bounds (3D).
             
             :result: Unit cube Bounds.
             :rtype: Bounds
@@ -267,7 +267,7 @@ class Bounds(Geometry):
 
 class QuadTree():
     def __init__ (self, capacity, bounds):
-        """Description
+        """ QuadTree constructor.
         
             :param capacity: Total number of points to contain.
             :type capacity: int
@@ -284,7 +284,7 @@ class QuadTree():
         
     @property
     def has_children(self):
-        """Description
+        """ Returns True if QuadTree has children.
         
             :result: Boolean value.
             :rtype: bool
@@ -296,7 +296,7 @@ class QuadTree():
         
     @property
     def pts(self):
-        """Recursively returns all the points in this QuadTree.
+        """ Recursively returns all the points in this QuadTree.
         
             :result: List of Points.
             :rtype: [Point]
@@ -309,7 +309,7 @@ class QuadTree():
         return ret_pts
 
     def append(self, pt) :
-        """Appends the given point to the points in this QuadTree.
+        """ Appends the given point to the points in this QuadTree.
         
             :param pt: Point
             :type pt: Point
@@ -334,7 +334,7 @@ class QuadTree():
             raise("quadtree.append()... how did i get here?")
         
     def _divide(self) :
-        """Divides self into sub regions. Starts at bottom left and moves clockwise.
+        """ Divides self into sub regions. Starts at bottom left and moves clockwise.
         
             :result: Boolean Value
             :rtype: bool
@@ -356,7 +356,7 @@ class QuadTree():
         return True
     
     def contains(self,pt):
-        """Returns true if given point is in this QuadTree.
+        """ Returns true if given point is in this QuadTree.
         
             :param pt: Point to test for containment.
             :type pt: Point
@@ -370,7 +370,7 @@ class QuadTree():
             return pt in self.bnd
             
     def pts_in_bounds(self,bounds):
-        """Finds all points that fall within a given bounds.
+        """ Finds all points that fall within a given bounds.
         
             :param bounds: bounds
             :type bounds: Bounds
@@ -389,7 +389,7 @@ class QuadTree():
         
     @staticmethod
     def encompass(capacity = 4, pts = [Point()]):
-        """Returns a Bounds that encompasses the given points.
+        """ Returns a Bounds that encompasses the given points.
         
             :param capacity: Capacity of points within the Bounds.
             :type capacity: int

@@ -11,7 +11,7 @@ class PLine(HasPts):
     subclass_attr = ['_edges','_length'] # this list of props is unset anytime this HasPts object changes
 
     def __init__(self, vertices=None, basis=None):
-        """Polyline constructor.
+        """ Polyline constructor.
         
             :param vertices: Vertices to build the pline.
             :type vertices: list
@@ -28,7 +28,7 @@ class PLine(HasPts):
 
     @property
     def edges(self):
-        """Returns the edges of a PLine.
+        """ Returns the edges of a PLine.
        
             :result: List of edges of a PLine
             :rtype: [Segment]
@@ -53,7 +53,7 @@ class PLine(HasPts):
             return self._length
         
     def reverse(self) :
-        """Reverses attribute changes for classes and subclasses.
+        """ Reverses attribute changes for classes and subclasses.
         
             :result: Polyline.
             :rtype: PLine
@@ -66,7 +66,7 @@ class PLine(HasPts):
 
 
     def join (self, other, tol=False) :
-        """Joins this polyline with a given polyline.
+        """ Joins this polyline with a given polyline.
             
             :param other: Polyline to join with this polyline.
             :type other: PLine
@@ -136,10 +136,10 @@ class PLine(HasPts):
            | A t-value of 0 will result in a point coincident with PLine.pts[0].
            | A t-value of 1 will result in a point coincident with PLine.pts[-1].
            
-                :param t: A decimal number between [0:1]
-                :type t: float
-                :result: A point on the polyline.
-                :rtype: Point
+           :param t: A decimal number between [0:1]
+           :type t: float
+           :result: A point on the polyline.
+           :rtype: Point
            
         """
         if t > 1 : raise IndexError("Plines must be evaluated with t <= 1.0")
@@ -154,7 +154,7 @@ class PLine(HasPts):
                 return Point.interpolate(pa,pb,ival.deval(t))
         
     def near(self, p):
-        """Returns a tuple of the closest point to a given PLine, the index of the closest segment, and the distance from the Point to the near Point.
+        """ Returns a tuple of the closest point to a given PLine, the index of the closest segment, and the distance from the Point to the near Point.
        
             :param p: Point to look for a near Point on the PLine.
             :type p: Point
@@ -168,7 +168,7 @@ class PLine(HasPts):
         return (npts[ni][0],ni,npts[ni][2])
 
     def near_pt(self, p):
-        """Returns the closest point to a given PLine.
+        """ Returns the closest point to a given PLine.
        
             :param p: Point to look for a near Point on the PLine.
             :type p: Point

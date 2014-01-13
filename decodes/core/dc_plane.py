@@ -31,8 +31,7 @@ class Plane(Geometry):
 
     @property
     def d(self):
-        """
-        The distance of this plane from the origin
+        """ The distance of this plane from the origin.
         """
         from .dc_line import Line
         line = Line(self.origin, self._vec)
@@ -41,7 +40,7 @@ class Plane(Geometry):
         return tvec.length
 
     def __eq__(self, other):
-        """Overloads the equal **(==)** operator for vector identity.
+        """ Overloads the equal **(==)** operator for vector identity.
         
             :param other: Vec to be compared.
             :type other: Vec
@@ -117,7 +116,7 @@ class Plane(Geometry):
         
 
     def is_identical(self,other): 
-        """Returns True if the planes are equal.
+        """ Returns True if the planes are equal.
         
             :param other: Plane to be compared.
             :type other: Plane
@@ -127,7 +126,7 @@ class Plane(Geometry):
         return all([self.x==other.x,self.y==other.y,self.z==other.z,self._vec.x==other._vec.x,self._vec.y==other._vec.y,self._vec.z==other._vec.z])
 
     def is_coplanar(self,other,tolerance=0.000001): 
-        """Returns True if the planes are co-planar within a given tolerance.
+        """ Returns True if the planes are co-planar within a given tolerance.
         
             :param other: Plane to be compared.
             :type other: Plane
@@ -139,7 +138,7 @@ class Plane(Geometry):
         return all([self.near(other.origin)[0].distance(other.origin)<tolerance,self._vec.is_parallel(other._vec)])
 
     def near(self, p):
-        """Returns a tuple of the closest point to a given Plane, its t value, and the distance from the given point to the near point.
+        """ Returns a tuple of the closest point to a given Plane, its t value, and the distance from the given point to the near point.
        
             :param p: Point to look for a near point on the plane.
             :type p: Point
@@ -154,7 +153,7 @@ class Plane(Geometry):
         return (point,t,tvec.length) 
 
     def near_pt(self, p):
-        """Returns the closest point to the point provided on a given Plane.
+        """ Returns the closest point to the point provided on a given Plane.
        
             :param p: Point to look for a near Point on the Plane.
             :type p: Point
@@ -165,7 +164,7 @@ class Plane(Geometry):
 
     @staticmethod
     def from_pts(pt_a,pt_b,pt_c):
-        """Constructs plane from points. A plane cannot be constructed from collinear points.
+        """ Constructs plane from points. A plane cannot be constructed from collinear points.
             
             :param pt_a: First point.
             :type pt_a: Point

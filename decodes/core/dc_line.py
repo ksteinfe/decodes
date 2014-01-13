@@ -14,7 +14,7 @@ class LinearEntity(Geometry):
 
     """
     def __init__(self, a, b):
-        """LinearEntity Constructor
+        """LinearEntity Constructor.
 
             :param a: Starting point.
             :type a: Point
@@ -31,19 +31,19 @@ class LinearEntity(Geometry):
     
     def __add__(self, other): 
         """| Overloads the addition **(+)** operator. 
-           | Adds the given vector to LinearEntity._pt, effectively translating this LinearEntity
+           | Adds the given vector to LinearEntity._pt, effectively translating this LinearEntity.
         
-            :param other: Vec to be added.
-            :type other: Vec
-            :result: LinearEntity
-            :rtype: LinearEntity
+           :param other: Vec to be added.
+           :type other: Vec
+           :result: LinearEntity
+           :rtype: LinearEntity
         """
         self._pt = self._pt + other
         return self
 
     @property
     def spt(self): 
-        """Returns the starting Point of a LinearEntity
+        """ Returns the starting Point of a LinearEntity.
 
             :result: Starting Point.
             :rtype: Point
@@ -51,7 +51,7 @@ class LinearEntity(Geometry):
         return self._pt
     @spt.setter
     def spt(self, point): 
-        """Sets the starting Point of a LinearEntity
+        """ Sets the starting Point of a LinearEntity.
 
             :param point: Starting Point.
             :type point: Point
@@ -61,7 +61,7 @@ class LinearEntity(Geometry):
         self._pt = point
     @property
     def vec(self): 
-        """Returns the Vec direction of a LinearEntity
+        """ Returns the Vec direction of a LinearEntity.
 
             :result: Vector.
             :rtype: Vec
@@ -69,7 +69,7 @@ class LinearEntity(Geometry):
         return self._vec
     @vec.setter
     def vec(self, vec):
-        """Sets the Vec direction of a LinearEntity
+        """ Sets the Vec direction of a LinearEntity.
 
             :param vec: New Vec direction.
             :type vec:Vec
@@ -79,7 +79,7 @@ class LinearEntity(Geometry):
         self._vec = vec
     @property
     def ept(self): 
-        """Returns the end Point of a LinearEntity
+        """ Returns the end Point of a LinearEntity.
 
             :result: End Point.
             :rtype: Point
@@ -87,7 +87,7 @@ class LinearEntity(Geometry):
         return self._pt+self._vec
     @ept.setter
     def ept(self, point): 
-        """Sets the end Point of a LinearEntity
+        """ Sets the end Point of a LinearEntity.
 
             :param point: End Point.
             :type point: Point
@@ -98,7 +98,7 @@ class LinearEntity(Geometry):
     
     @property
     def coefficients(self):
-        """Returns the coefficients (a,b,c) of this line for equation ax+by+c=0
+        """ Returns the coefficients (a,b,c) of this line for equation ax+by+c=0
         
             :result: coefficients of the equation of a line (a,b,c).
             :rtype: tuple
@@ -134,7 +134,7 @@ class LinearEntity(Geometry):
         raise NotImplementedError()
 
     def is_parallel(l1, l2):
-        """Returns True if l1 and l2 are parallel, False otherwise
+        """ Returns True if l1 and l2 are parallel, False otherwise.
 
             :param l1: First LinearEntity
             :type l1: LinearEntity
@@ -148,7 +148,7 @@ class LinearEntity(Geometry):
         return l1.vec.is_coincident(l2.vec) or l1.vec.is_coincident(l2.vec.inverted())
 
     def is_perpendicular(l1, l2):
-        """Returns True if l1 and l2 are perpendicular, False otherwise.
+        """ Returns True if l1 and l2 are perpendicular, False otherwise.
            
             :param l1: First LinearEntity
             :type l1: LinearEntity
@@ -157,7 +157,7 @@ class LinearEntity(Geometry):
             :result: True if perpendicular.
             :rtype: bool
             
-        .. warning:: This method is not implemented.           
+            .. warning:: This method is not implemented.           
         """
         
         #TODO:: Implement this method.
@@ -171,8 +171,7 @@ class LinearEntity(Geometry):
             return False
 
     def angle_between(l1, l2):
-        """
-        Returns an angle formed between the two linear entities.
+        """ Returns an angle formed between the two linear entities.
         
             :param l1: First LinearEntity
             :type l1: LinearEntity
@@ -200,8 +199,7 @@ class LinearEntity(Geometry):
         raise NotImplementedError()
 
     def parallel_line(self, p):
-        """
-        Returns a new Line which is parallel to this linear entity and passes through the specified point.
+        """ Returns a new Line which is parallel to this linear entity and passes through the specified point.
         
             :param p: Point that the LinearEntity will pass through.
             :type p: Point
@@ -211,30 +209,28 @@ class LinearEntity(Geometry):
         return Line(p, self.vec)
 
     def perpendicular_line(self, p):
-        """
-        Returns a new Line which is perpendicular to this linear entity and passes through the specified point.
+        """ Returns a new Line which is perpendicular to this linear entity and passes through the specified point.
 
             :param p: Point that the LinearEntity will pass through.
             :type p: Point
             :result: New LinearEntity.
             :rtype: LinearEntity
         
-        .. warning:: This method is not implemented.           
+            .. warning:: This method is not implemented.           
         """    
         #TODO:: Implement this method.
         
         raise NotImplementedError()
 
     def perpendicular_segment(self, p):
-        """
-        Returns a new Segment which connects p to a point on this linear entity and is also perpendicular to this line. Returns p itself if p is on this linear entity.
+        """ Returns a new Segment which connects p to a point on this linear entity and is also perpendicular to this line. Returns p itself if p is on this linear entity.
 
             :param p: Point that the LinearEntity will pass through.
             :type p: Point
             :result: New LinearEntity.
             :rtype: LinearEntity
 
-        .. warning:: This method is not implemented.   
+            .. warning:: This method is not implemented.   
             
         """
         #TODO:: Implement this method.
@@ -245,7 +241,7 @@ class LinearEntity(Geometry):
     def __contains__(self, other):  raise NotImplementedError()
 
     def near(self, p):
-        """Returns a tuple of the closest point to a given LinearEntity, its t value and the distance from the Point to the near Point.
+        """ Returns a tuple of the closest point to a given LinearEntity, its t value and the distance from the Point to the near Point.
        
             :param p: Point to look for a near Point on the LinearEntity.
             :type p: Point
@@ -257,7 +253,7 @@ class LinearEntity(Geometry):
         return (point, t,point.distance(p))
 
     def near_pt(self, p):
-        """Returns the closest point to a given LinearEntity
+        """ Returns the closest point to a given LinearEntity
        
             :param p: Point to look for a near Point on the LinearEntity.
             :type p: Point
@@ -267,7 +263,7 @@ class LinearEntity(Geometry):
         return self.near(p)[0]
         
     def eval(self, t):
-        """Evaluates a LinearEntity at a given number.
+        """ Evaluates a LinearEntity at a given number.
         
             :param t: Number between 0 and 1 to evaluate the LinearEntity at.
             :type t: float
@@ -333,7 +329,7 @@ class Ray(LinearEntity):
     def __repr__(self): return "ray[{0} {1}]".format(self._pt,self._vec)
     
     def near(self,p):
-        """Returns a tuple of the closest point to a given Ray, its t value and the distance from the Point to the near Point.
+        """ Returns a tuple of the closest point to a given Ray, its t value and the distance from the Point to the near Point.
        
             :param p: Point to look for a near Point on the Ray.
             :type p: Point
@@ -349,7 +345,7 @@ class Ray(LinearEntity):
 class Segment(LinearEntity):
     """A directed line segment in space."""
     def __eq__(self, other):
-        """Returns true if a given line segment is equal to this line segment. 
+        """ Returns true if a given line segment is equal to this line segment. 
         
             :param other: Line segment to compare.
             :type other: Segment
@@ -367,7 +363,7 @@ class Segment(LinearEntity):
     def __repr__(self): return "seg[{0} {1}]".format(self.spt,self._vec)
     
     def near(self,p):
-        """Returns a tuple of the closest point to a given line segment, its t value and the distance from the Point to the near Point.
+        """ Returns a tuple of the closest point to a given line segment, its t value and the distance from the Point to the near Point.
        
             :param p: Point to look for a near Point on the Segment.
             :type p: Point
@@ -385,7 +381,7 @@ class Segment(LinearEntity):
         
     @property
     def length(self): 
-      """Returns the length of this segment.
+      """ Returns the length of this segment.
             
             :result: Length of line segment.
             :rtype: float
@@ -395,7 +391,7 @@ class Segment(LinearEntity):
 
     @property
     def midpoint(self): 
-      """Returns the midpoint of this segment
+      """ Returns the midpoint of this segment
       
             :result: Midpoint of Segment.
             :rtype: Point
@@ -404,7 +400,7 @@ class Segment(LinearEntity):
       return Point.interpolate(self.spt, self.ept)
 
     def inverted(self):
-        """Return a new Segment between the ept and spt of this Segment, but pointing in the opposite direction.
+        """ Return a new Segment between the ept and spt of this Segment, but pointing in the opposite direction.
         
             :result: Inverted vector.
             :rtype: Vec
@@ -422,7 +418,7 @@ class VecField(PixelGrid):
     
     def __init__(self, pixel_res=Interval(8,8), spatial_origin=Point(), spatial_dim=Interval(4,4), initial_value = Vec(),include_corners=False,wrap=True):
     
-        """Vector field constructor.
+        """ Vector field constructor.
         
             :param pixel_res: Resolution of vector grid.
             :type pixel_res: Interval
@@ -457,7 +453,7 @@ class VecField(PixelGrid):
                 self._base_pts.append(Point(ival_x.mid, ival_y.mid)) 
 
     def to_rays(self):
-        """Returns a list of Rays that correspond to the Vecs from the Vector Field.
+        """ Returns a list of Rays that correspond to the Vecs from the Vector Field.
         
             :result: A list of Rays.
             :rtype: [Ray]
@@ -465,7 +461,7 @@ class VecField(PixelGrid):
         return [Ray(pt,vec) for vec,pt in zip(self._pixels, self._base_pts )]
 
     def get_cpt(self,x,y):
-        """Returns the center point of the cell associated with the given address.
+        """ Returns the center point of the cell associated with the given address.
         
             :param x: x-coordinate
             :type x: float
@@ -478,7 +474,7 @@ class VecField(PixelGrid):
         return self._base_pts[y*self._res[0]+x]
 
     def vec_near(self,a,b=None):
-        """Returns closest vector to the given location. May be passed either a point or an x,y coordinate.
+        """ Returns closest vector to the given location. May be passed either a point or an x,y coordinate.
         
             :param a: x-coordinate or Point.
             :type a: float or Point
@@ -492,7 +488,7 @@ class VecField(PixelGrid):
         return self.get(x,y)
 
     def cpt_near(self,a,b=None):
-        """Returns center point of cell nearest to given location. May be passed either a point or an x,y coordinate.
+        """ Returns center point of cell nearest to given location. May be passed either a point or an x,y coordinate.
         
             :param a: x-coordinate or Point.
             :type a: float or Point
@@ -507,7 +503,7 @@ class VecField(PixelGrid):
         return self.get_cpt(x,y)
 
     def vecs_near(self,a,b=None):
-        """Returns locations of vectors near the given location. May be passed either a point or an x,y coordinate.
+        """ Returns locations of vectors near the given location. May be passed either a point or an x,y coordinate.
         
             :param a: x-coordinate or Point.
             :type a: float or Point
@@ -521,7 +517,7 @@ class VecField(PixelGrid):
         return [self.get(tup[0],tup[1]) for tup in tups]
 
     def cpts_near(self,a,b=None):
-        """Returns center points of cells near the given location. May be passed either a point or an x,y coordinate.
+        """ Returns center points of cells near the given location. May be passed either a point or an x,y coordinate.
         
             :param a: x-coordinate or Point.
             :type a: float or Point
@@ -536,7 +532,7 @@ class VecField(PixelGrid):
         return [self.get_cpt(tup[0],tup[1]) for tup in tups]
 
     def address_near(self,a,b=None):
-        """Returns location of vector near the given location. May be passed either a point or an x,y coordinate.
+        """ Returns location of vector near the given location. May be passed either a point or an x,y coordinate.
         
             :param a: x-coordinate or Point.
             :type a: float or Point
@@ -601,7 +597,7 @@ class VecField(PixelGrid):
         return adds
 
     def avg_vec_near(self,a,b=None):
-        """Returns an average vector from the near vectors around the given location. May be passed a point or an x,y coordinate.
+        """ Returns an average vector from the near vectors around the given location. May be passed a point or an x,y coordinate.
         
             :param a: x-coordinate or Point.
             :type a: float or Point
@@ -634,7 +630,7 @@ class VecField(PixelGrid):
             raise GeometricError("sample point coincident with center point: %s"%(sample_pt))
             
     def spin_pt(self,a,b=None):
-        """Rotates vectors in a VecField around a given point. May be passed a point or an x,y coordinate.
+        """ Rotates vectors in a VecField around a given point. May be passed a point or an x,y coordinate.
         
             :param a: x-coordinate or Point to rotate around.
             :type a: float or Point

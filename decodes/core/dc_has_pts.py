@@ -13,7 +13,7 @@ class HasPts(HasBasis):
     class_attr = ['_pts','_centroid'] # this list of props is unset any time this HasPts object changes
     
     def __init__(self, vertices=None,basis=None):
-        """A constructor for a list of vertices with a shared basis.
+        """ A constructor for a list of vertices with a shared basis.
         
             :param vertices: A list of Vecs.
             :type vertices: [Vec]
@@ -29,7 +29,7 @@ class HasPts(HasBasis):
 
 
     def __getitem__(self,slice):
-        """Returns item in this HasPts at given index.
+        """ Returns item in this HasPts at given index.
         
             :param slice: Given index.
             :type slice: int
@@ -46,7 +46,7 @@ class HasPts(HasBasis):
             return sliced
     
     def __setitem__(self,index,other):
-        """Replaces vertices at given index with the given vertices.
+        """ Replaces vertices at given index with the given vertices.
         
             :param index: Index to replace.
             :type index: int
@@ -66,14 +66,17 @@ class HasPts(HasBasis):
     
     @property
     def basis(self):
-        """Returns basis.
+        """ Returns basis.
+            
+            :result: Basis
+            :rtype Basis
         
         """
         return self._basis
 
     @basis.setter
     def basis(self, basis): 
-        """Sets basis.
+        """ Sets basis.
         
             :param basis: New Basis.
             :type basis: Basis.
@@ -85,7 +88,7 @@ class HasPts(HasBasis):
         self._basis = basis
 
     def __len__(self): 
-        """Returns the length of the list of vertices.
+        """ Returns the length of the list of vertices.
         
             :result: Length of list.
             :rtype: int
@@ -95,7 +98,7 @@ class HasPts(HasBasis):
 
 
     def __add__(self, vec):
-        """Overloads the addition **(+)** operator. Adds the given vector to each vertex in this Geometry
+        """ Overloads the addition **(+)** operator. Adds the given vector to each vertex in this Geometry
         
             :param vec: Vec to be added.
             :type vec: Vec
@@ -154,10 +157,10 @@ class HasPts(HasBasis):
            | If given a scalar, multiplies each vertex in this Geometry by the given scalar.
            | If given an Xform, applies the given transformation to the basis of this Geometry.
         
-            :param vec: Object to be multiplied.
-            :type vec: Vec or Xform
-            :result: New Vec.
-            :rtype: Vec
+           :param vec: Object to be multiplied.
+           :type vec: Vec or Xform
+           :result: New Vec.
+           :rtype: Vec
         """  
         self._unset_attr() # call this when any of storable properties (subclass_attr or class_attr) changes
         from .dc_xform import Xform
@@ -173,8 +176,8 @@ class HasPts(HasBasis):
            | Does not allow manipulation.
            | If you want to manipulate the vertices of this object, you should operate on the vertices directly (which are defined relative to this HasPts's basis) by calling HasPts[0].x = value
 
-                :result: Point or list of points.
-                :rtype: Point or [Point]
+           :result: Point or list of points.
+           :rtype: Point or [Point]
         """
         try:
             return tuple([Point(tup[0],tup[1],tup[2]) for tup in self._pts])
@@ -186,12 +189,13 @@ class HasPts(HasBasis):
 
      
     def append(self,pts) : 
-        """Appends the given Point to the stored list of points.
-           Each Point is processed to ensure compatibility with this geometry's basis.
+        """| Appends the given Point to the stored list of points.
+           | Each Point is processed to ensure compatibility with this geometry's basis.
 
-            :param pts: Point(s) to append
-            :type pts: Point or [Point]
-            :result: Modifies this geometry by adding items to the stored list of points
+           :param pts: Point(s) to append.
+           :type pts: Point or [Point]
+           :result: Modifies this geometry by adding items to the stored list of points.
+           :rtype: None
         """
         self._unset_attr()
         try : 
@@ -207,7 +211,7 @@ class HasPts(HasBasis):
 
     @property
     def centroid(self):
-        """Returns the centroid of the points of this object.
+        """ Returns the centroid of the points of this object.
         
             :returns: Centroid (point).
             :rtype: Point
@@ -220,7 +224,7 @@ class HasPts(HasBasis):
         
     
     def reverse(self):
-        """Reverses storable properties depending on class or subclass attribute changes.
+        """ Reverses storable properties depending on class or subclass attribute changes.
         
             :result: HasPts object
             :rtype: HasPts
@@ -234,10 +238,10 @@ class HasPts(HasBasis):
         """| Rotates the vertices in this object.
            | In the case of a PGon, this resets which point is the first point.
            
-                :param n: Number of steps to rotate.
-                :type n: int
-                :result: HasPts object
-                :rtype: HasPts
+           :param n: Number of steps to rotate.
+           :type n: int
+           :result: HasPts object
+           :rtype: HasPts
                 
         """
         self._unset_attr() # call this when any of storable properties (subclass_attr or class_attr) changes
@@ -247,7 +251,7 @@ class HasPts(HasBasis):
         return self
 
     def basis_applied(self): 
-        """Returns a new Geometry with basis applied. Coordinates will be interpreted in world space, appearing in the same position when drawn.
+        """ Returns a new Geometry with basis applied. Coordinates will be interpreted in world space, appearing in the same position when drawn.
         
             :result: Object with basis applied.
             :rtype: Object
@@ -260,7 +264,7 @@ class HasPts(HasBasis):
         return clone
     
     def basis_stripped(self): 
-        """Returns a new Geometry stripped of any bases. Coordinates will be interpreted in world space, in their analogous "local" position when drawn.
+        """ Returns a new Geometry stripped of any bases. Coordinates will be interpreted in world space, in their analogous "local" position when drawn.
         
             :result: Object with basis stripped.
             :rtype: Object
@@ -297,7 +301,7 @@ class HasPts(HasBasis):
                 raise GeometricError("Cannot find a representation of this thing that is compatible with a HasPts Geometry: "+str(other))
 
     def _unset_attr(self):
-        """Deletes class and sublcass attributes when possible.
+        """ Deletes class and sublcass attributes when possible.
         
             :result: None
             :rtype: None

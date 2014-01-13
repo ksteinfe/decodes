@@ -9,7 +9,7 @@ class CS(Geometry, Basis):
     """can describe any translation and rigid-body manipulation of the R3"""
     
     def __init__(self,a=None,b=None,c=None):
-        """CS Constructor.
+        """ CS Constructor.
            
             :param a: Point or decimal number.
             :type a: Point or float
@@ -47,8 +47,7 @@ class CS(Geometry, Basis):
         return "cs o[{0},{1},{2}] n[{3},{4},{5}]".format(self.origin.x,self.origin.y,self.origin.z,self.z_axis.x,self.z_axis.y,self.z_axis.z)
 
     def eval(self,a,b=0,c=0):
-        """
-        Evaluates the given coordinates (or coordinates contained within a given Point) relative to this CS and returns a Point.
+        """ Evaluates the given coordinates (or coordinates contained within a given Point) relative to this CS and returns a Point.
             
             :param a: Point or decimal number.
             :type a: Point or float
@@ -67,8 +66,7 @@ class CS(Geometry, Basis):
         return Point(self.origin + ((self.x_axis*x)+(self.y_axis*y)+(self.z_axis*z)))
 
     def deval(self,a,b=0,c=0):
-        """
-        Evaluates the given coordinates (or coordinates contained within a given Point) and returns a Point in this CS.
+        """ Evaluates the given coordinates (or coordinates contained within a given Point) and returns a Point in this CS.
             
             :param a: Point or decimal number.
             :type a: Point or float
@@ -94,7 +92,7 @@ class CS(Geometry, Basis):
 
     @property
     def xform(self):
-        """Returns the Xform that corresponds to the transformation from world space to CS space.
+        """ Returns the Xform that corresponds to the transformation from world space to CS space.
         
         """
         from .dc_xform import Xform
@@ -102,7 +100,7 @@ class CS(Geometry, Basis):
         
     @property
     def ixform(self): 
-        """Returns the Xform that corresponds to the transformation from CS space to world space.
+        """ Returns the Xform that corresponds to the transformation from CS space to world space.
         
         """
         from .dc_xform import Xform
@@ -110,66 +108,63 @@ class CS(Geometry, Basis):
 
     @property
     def xy_plane(self):
-        """Returns the xy plane.
+        """ Returns the xy plane.
         
         """
         return Plane(self.origin,self.z_axis)
 
     @property
     def xz_plane(self):
-        """Returns the xz plane.
+        """ Returns the xz plane.
         
         """
         return Plane(self.origin,self.y_axis)
 
     @property
     def yz_plane(self):
-        """Returns the yz plane.
+        """ Returns the yz plane.
         
         """
         return Plane(self.origin,self.x_axis)
 
     @property
     def x_ray(self):
-        """Returns a ray along the x-axis.
+        """ Returns a ray along the x-axis.
         """
         from .dc_line import Ray
         return Ray(self.origin,self.x_axis)
 
     @property
     def y_ray(self):
-        """Returns a ray along the y-axis.
+        """ Returns a ray along the y-axis.
         """
         from .dc_line import Ray
         return Ray(self.origin,self.y_axis)
 
     @property
     def z_ray(self):
-        """Returns a ray along the z-axis.
+        """ Returns a ray along the z-axis.
         """
         from .dc_line import Ray
         return Ray(self.origin,self.z_axis)
 
     @property
     def xAxis(self): 
-        """
-        depreciated
+        """ depreciated
         """
         warnings.warn("cs.xAxis depreciated. please use CS.x_axis instead")
         return self.x_axis
 
     @property
     def yAxis(self): 
-        """
-        depreciated
+        """ depreciated
         """
         warnings.warn("cs.yAxis depreciated. please use CS.y_axis instead")
         return self.y_axis
 
     @property
     def zAxis(self): 
-        """
-        depreciated
+        """ depreciated
         """
         warnings.warn("cs.zAxis depreciated. please use CS.z_axis instead")
         return self.z_axis
@@ -177,7 +172,7 @@ class CS(Geometry, Basis):
 
     @staticmethod
     def on_xy(x=0,y=0,x_vec=None,rot=None):
-        """Returns a coordinate system on the world xy plane. Optionally, one may define the origin_x and origin_y of the resulting CS. One may also define ONE (but not both) of the following: 
+        """ Returns a coordinate system on the world xy plane. Optionally, one may define the origin_x and origin_y of the resulting CS. One may also define ONE (but not both) of the following: 
             
             * a vector that controls the rotation of the resulting CS on the xy_plane. The z coordinate of this vector will be ignored.
             * a rotation value (0->2PI) that does the same thing
@@ -205,7 +200,7 @@ class CS(Geometry, Basis):
     
     @staticmethod
     def on_xz(x=0,z=0,x_vec=None,rot=None):
-        """Returns a coordinate system on the world xz plane. Optionally, one may define the origin_x and origin_z of the resulting CS. One may also define ONE (but not both) of the following: 
+        """ Returns a coordinate system on the world xz plane. Optionally, one may define the origin_x and origin_z of the resulting CS. One may also define ONE (but not both) of the following: 
         
             * a vector that controls the rotation of the resulting CS on the xz_plane. The y coordinate of this vector will be ignored.
             * a rotation value (0->2PI) that does the same thing
@@ -232,7 +227,7 @@ class CS(Geometry, Basis):
 
     @staticmethod
     def on_yz(y=0,z=0,x_vec=None,rot=None):
-        """Returns a coordinate system on the world yz plane. Optionally, one may define the origin_y and origin_z of the resulting CS. One may also define ONE (but not both) of the following: 
+        """ Returns a coordinate system on the world yz plane. Optionally, one may define the origin_y and origin_z of the resulting CS. One may also define ONE (but not both) of the following: 
         
             * a vector that controls the rotation of the resulting CS on the yz_plane. The x coordinate of this vector will be ignored.
             * a rotation value (0->2PI) that does the same thing
@@ -274,7 +269,7 @@ class CylCS(Geometry, Basis):
 
     """a CylCS can act as a basis for a point"""
     def eval(self,a,b=None,c=0):
-        """Returns a Point from this CS to a Cylindrical CS.
+        """ Returns a Point from this CS to a Cylindrical CS.
         
             :param a: Point or decimal number.
             :type a: Point or float

@@ -65,7 +65,7 @@
 <dl class="method">
 <dt id="decodes.core.dc_line.LinearEntity.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>LinearEntity Constructor</p>
+<dd><p>LinearEntity Constructor.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -197,7 +197,7 @@ find the angle between the two using the above formula.</p>
 <dl class="attribute">
 <dt id="decodes.core.dc_line.LinearEntity.ept">
 <tt class="descname">ept</tt><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.ept" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the end Point of a LinearEntity</p>
+<dd><p>Returns the end Point of a LinearEntity.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -266,7 +266,7 @@ on the rest of the lines. If so, the lines are concurrent.</p>
 <dl class="method">
 <dt id="decodes.core.dc_line.LinearEntity.is_parallel">
 <tt class="descname">is_parallel</tt><big>(</big><em>l1</em>, <em>l2</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.is_parallel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns True if l1 and l2 are parallel, False otherwise</p>
+<dd><p>Returns True if l1 and l2 are parallel, False otherwise.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -291,26 +291,24 @@ on the rest of the lines. If so, the lines are concurrent.</p>
 <dt id="decodes.core.dc_line.LinearEntity.is_perpendicular">
 <tt class="descname">is_perpendicular</tt><big>(</big><em>l1</em>, <em>l2</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.is_perpendicular" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns True if l1 and l2 are perpendicular, False otherwise.</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param l1:</th><td class="field-body">First LinearEntity</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>l1</strong> (<em>LinearEntity</em>) &#8211; First LinearEntity</li>
+<li><strong>l2</strong> (<em>LinearEntity</em>) &#8211; Second LinearEntity</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type l1:</th><td class="field-body">LinearEntity</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">True if perpendicular.</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">param l2:</th><td class="field-body">Second LinearEntity</td>
-</tr>
-<tr class="field-even field"><th class="field-name">type l2:</th><td class="field-body">LinearEntity</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">True if perpendicular.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">bool</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">This method is not implemented.</p>
@@ -375,22 +373,18 @@ on the rest of the lines. If so, the lines are concurrent.</p>
 <dt id="decodes.core.dc_line.LinearEntity.perpendicular_line">
 <tt class="descname">perpendicular_line</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.perpendicular_line" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a new Line which is perpendicular to this linear entity and passes through the specified point.</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param p:</th><td class="field-body">Point that the LinearEntity will pass through.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>Point</em>) &#8211; Point that the LinearEntity will pass through.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type p:</th><td class="field-body">Point</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">New LinearEntity.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">New LinearEntity.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">LinearEntity</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">LinearEntity</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">This method is not implemented.</p>
@@ -401,22 +395,18 @@ on the rest of the lines. If so, the lines are concurrent.</p>
 <dt id="decodes.core.dc_line.LinearEntity.perpendicular_segment">
 <tt class="descname">perpendicular_segment</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.perpendicular_segment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a new Segment which connects p to a point on this linear entity and is also perpendicular to this line. Returns p itself if p is on this linear entity.</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param p:</th><td class="field-body">Point that the LinearEntity will pass through.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>Point</em>) &#8211; Point that the LinearEntity will pass through.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type p:</th><td class="field-body">Point</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">New LinearEntity.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">New LinearEntity.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">LinearEntity</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">LinearEntity</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">This method is not implemented.</p>
@@ -426,7 +416,7 @@ on the rest of the lines. If so, the lines are concurrent.</p>
 <dl class="attribute">
 <dt id="decodes.core.dc_line.LinearEntity.spt">
 <tt class="descname">spt</tt><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.spt" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the starting Point of a LinearEntity</p>
+<dd><p>Returns the starting Point of a LinearEntity.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -442,7 +432,7 @@ on the rest of the lines. If so, the lines are concurrent.</p>
 <dl class="attribute">
 <dt id="decodes.core.dc_line.LinearEntity.vec">
 <tt class="descname">vec</tt><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.vec" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the Vec direction of a LinearEntity</p>
+<dd><p>Returns the Vec direction of a LinearEntity.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />

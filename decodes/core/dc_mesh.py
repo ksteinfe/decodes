@@ -11,7 +11,7 @@ class Mesh(HasPts):
     subclass_attr = [] # this list of props is unset any time this HasPts object changes
     
     def __init__(self, vertices=None, faces=None, basis=None):
-        """Mesh Constructor
+        """ Mesh Constructor.
 
             :param vertices: The vertices of the mesh.
             :type vertices: [Point]
@@ -28,7 +28,7 @@ class Mesh(HasPts):
         
     @property
     def faces(self): 
-        """Returns a list of mesh faces.
+        """ Returns a list of mesh faces.
         
             :result: List of mesh faces.
             :rtype: list
@@ -36,7 +36,7 @@ class Mesh(HasPts):
         return self._faces
 
     def add_face(self,a,b,c,d=-1):
-        """Adds a face to the mesh.
+        """ Adds a face to the mesh.
         
             :param a,b,c,d: Face to be added to the list of faces.
             :type a,b,c,d: int.
@@ -50,7 +50,7 @@ class Mesh(HasPts):
             else: self._faces.append([a,b,c])
     
     def face_pts(self,index):
-        """Returns the points of a given face.
+        """ Returns the points of a given face.
         
             :param index: Face's index
             :type index: int
@@ -60,7 +60,7 @@ class Mesh(HasPts):
         return [self.pts[i] for i in self.faces[index]]
     
     def face_centroid(self,index):
-        """Returns the centroids of individual mesh faces.
+        """ Returns the centroids of individual mesh faces.
         
             :param index: Index of a face.
             :type index: int
@@ -70,7 +70,7 @@ class Mesh(HasPts):
         return Point.centroid(self.face_pts(index))
         
     def face_normal(self,index):
-        """Returns the normal vector of a face.
+        """ Returns the normal vector of a face.
         
             :param index: Index of a face.
             :type index: int
@@ -89,7 +89,7 @@ class Mesh(HasPts):
     
     @staticmethod
     def explode(msh):
-        """Explodes a mesh into individual faces.
+        """ Explodes a mesh into individual faces.
         
             :param msh: Mesh to explode.
             :type msh: Mesh
