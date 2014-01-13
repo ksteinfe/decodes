@@ -81,45 +81,30 @@
 <dl class="method">
 <dt id="decodes.core.dc_xform.Xform._xform_tuple">
 <tt class="descname">_xform_tuple</tt><big>(</big><em>tup</em><big>)</big><a class="headerlink" href="#decodes.core.dc_xform.Xform._xform_tuple" title="Permalink to this definition">¶</a></dt>
-<dd><p>Transforms the given tuple by this Xform.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tup</strong> (<em>(float, float, float)</em>) &#8211; Tuple to transform.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Transformed tuple.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(float, float ,float)</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_xform.Xform.change_basis">
 <em class="property">static </em><tt class="descname">change_basis</tt><big>(</big><em>csSource</em>, <em>csTarget</em><big>)</big><a class="headerlink" href="#decodes.core.dc_xform.Xform.change_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Changes the plane basis of an object.</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param csSource:</th><td class="field-body">Plane source of the object.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>csSource</strong> (<em>Plane</em>) &#8211; Plane source of the object.</li>
+<li><strong>csTarget</strong> (<em>Plane</em>) &#8211; Target plane of the object.</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type csSource:</th><td class="field-body">Plane</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Object with new Plane basis.</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">param csTarget:</th><td class="field-body">Target plane of the object.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">type csTarget:</th><td class="field-body">Plane</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Object with new Plane basis.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Geometry</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Geometry</p>
+</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">This method currently relies on access to the Rhinocommon Kernel. It will not work in other contexts.</p>
@@ -129,12 +114,12 @@
 <dl class="method">
 <dt id="decodes.core.dc_xform.Xform.eval">
 <tt class="descname">eval</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.dc_xform.Xform.eval" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a Point in this Xform. An Xform can act as a basis for a point.</p>
+<dd><p>Given an Xform, evaluates a Point.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>(float, float, float)</em>) &#8211; Point</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Point</td>
 </tr>
@@ -147,284 +132,106 @@
 <dl class="attribute">
 <dt id="decodes.core.dc_xform.Xform.m00">
 <tt class="descname">m00</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m00" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns value at index (0,0) of Xform matrix.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Returns value at (0,0).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_xform.Xform.m01">
 <tt class="descname">m01</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m01" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns value at index (0,1) of Xform matrix.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Returns value at (0,1).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_xform.Xform.m02">
 <tt class="descname">m02</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m02" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns value at index (0,2) of Xform matrix.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Returns value at (0,2).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_xform.Xform.m03">
 <tt class="descname">m03</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m03" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns value at index (0,3) of Xform matrix.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Returns value at (0,3).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_xform.Xform.m10">
 <tt class="descname">m10</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m10" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns value at index (1,0) of Xform matrix.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Returns value at (1,0).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_xform.Xform.m11">
 <tt class="descname">m11</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m11" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns value at index (1,1) of Xform matrix.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Returns value at (1,1).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_xform.Xform.m12">
 <tt class="descname">m12</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m12" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns value at index (1,2) of Xform matrix.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Returns value at (1,2).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_xform.Xform.m13">
 <tt class="descname">m13</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m13" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns value at index (1,3) of Xform matrix.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Returns value at (1,3).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_xform.Xform.m20">
 <tt class="descname">m20</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m20" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns value at index (2,0) of Xform matrix.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Returns value at (2,0).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_xform.Xform.m21">
 <tt class="descname">m21</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m21" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns value at index (2,1) of Xform matrix.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Returns value at (2,1).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_xform.Xform.m22">
 <tt class="descname">m22</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m22" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns value at index (2,2) of Xform matrix.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Returns value at (2,2).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_xform.Xform.m23">
 <tt class="descname">m23</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m23" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns value at index (2,3) of Xform matrix.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Returns value at (2,3).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_xform.Xform.m30">
 <tt class="descname">m30</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m30" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns value at index (3,0) of Xform matrix.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Returns value at (3,0).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_xform.Xform.m31">
 <tt class="descname">m31</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m31" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns value at index (3,1) of Xform matrix.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Returns value at (3,1).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_xform.Xform.m32">
 <tt class="descname">m32</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m32" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns value at index (3,2) of Xform matrix.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Returns value at (3,2).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_xform.Xform.m33">
 <tt class="descname">m33</tt><a class="headerlink" href="#decodes.core.dc_xform.Xform.m33" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns value at index (3,3) of Xform matrix.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Returns value at (3,3).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_xform.Xform.mirror">
 <em class="property">static </em><tt class="descname">mirror</tt><big>(</big><em>plane='world_xy'</em><big>)</big><a class="headerlink" href="#decodes.core.dc_xform.Xform.mirror" title="Permalink to this definition">¶</a></dt>
 <dd><p>Produces mirror transform. Can pass in &#8220;world_xy&#8221;, &#8220;world_yz&#8221;, or &#8220;world_xz&#8221;. Or, pass in an arbitrary cs (produces mirror about XYplane of CS).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>plane</strong> (<em>Plane</em>) &#8211; Plane to mirror the object with. Defaults to world XY plane.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Mirrored object.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Geometry</td>
+</tr>
+</tbody>
+</table>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">When mirroring about an arbitrary plane, this method currently relies on access to the Rhinocommon Kernel.  It will not work in other contexts.</p>
 </div>
 <div class="admonition-todo admonition" id="index-0">
 <p class="first admonition-title">Todo</p>
-<p>Re-implement this method without using the Rhinocommon Kernel.</p>
-<table class="last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param plane:</th><td class="field-body">Plane to mirror the object with. Defaults to world XY plane.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">type plane:</th><td class="field-body">Plane</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Mirrored object.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Geometry</td>
-</tr>
-</tbody>
-</table>
+<p class="last">Re-implement this method without using the Rhinocommon Kernel.</p>
 </div>
 </dd></dl>
 
@@ -432,22 +239,19 @@
 <dt id="decodes.core.dc_xform.Xform.rotation">
 <em class="property">static </em><tt class="descname">rotation</tt><big>(</big><em>**kargs</em><big>)</big><a class="headerlink" href="#decodes.core.dc_xform.Xform.rotation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rotates an object around by a center and a rotation angle OR by a center, an axis and a rotation angle.</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param <a href="#id1"><span class="problematic" id="id2">**</span></a>kargs:</th><td class="field-body">Function that accepts multiple parameters to be passed. Parameters include center and axis of rotation and a rotation angle.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>**kargs</strong> &#8211; <p>Function that accepts multiple parameters to be passed. Parameters include center and axis of rotation and a rotation angle.</p>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type <a href="#id3"><span class="problematic" id="id4">**</span></a>kargs:</th><td class="field-body">Point, Vec, float</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Rotated object.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">Rotated object.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Geometry</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Geometry</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">This method currently relies on access to the Rhinocommon Kernel. It will not work in other contexts.</p>
@@ -475,18 +279,7 @@
 <dl class="method">
 <dt id="decodes.core.dc_xform.Xform.strip_translation">
 <tt class="descname">strip_translation</tt><big>(</big><big>)</big><a class="headerlink" href="#decodes.core.dc_xform.Xform.strip_translation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Description.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body"></td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_xform.Xform.translation">

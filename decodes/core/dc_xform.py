@@ -35,10 +35,10 @@ class Xform(object):
     
     """an Xform can act as a basis for a point"""
     def eval(self,other):
-        """Returns a Point in this Xform. An Xform can act as a basis for a point.
+        """Given an Xform, evaluates a Point.
         
-            :param other:
-            :type other:
+            :param other: Point
+            :type other: (float, float, float)
             :result: Point
             :rtype: (float, float, float)
         """
@@ -53,12 +53,6 @@ class Xform(object):
         
     
     def strip_translation(self):
-        """Description.
-        
-            :result:
-            :rtype:
-            
-        """
         
         m = list(self._m)
         xf = Xform(matrix = m)
@@ -112,14 +106,17 @@ class Xform(object):
     def mirror(plane="world_xy"):
         """Produces mirror transform. Can pass in "world_xy", "world_yz", or "world_xz". Or, pass in an arbitrary cs (produces mirror about XYplane of CS).
         
-        .. warning:: When mirroring about an arbitrary plane, this method currently relies on access to the Rhinocommon Kernel.  It will not work in other contexts.
-        .. todo:: Re-implement this method without using the Rhinocommon Kernel.
-        
             :param plane: Plane to mirror the object with. Defaults to world XY plane.
             :type plane: Plane
             :result: Mirrored object.
             :rtype: Geometry
+            
+            .. warning:: When mirroring about an arbitrary plane, this method currently relies on access to the Rhinocommon Kernel.  It will not work in other contexts.
+            .. todo:: Re-implement this method without using the Rhinocommon Kernel.
+            
         """
+        #TODO: Re-implement this method without using the Rhinocommon Kernel
+        
         xf = Xform()
         if plane=="world_xy" :
             xf.m22 *= -1
@@ -150,7 +147,7 @@ class Xform(object):
             :result: Rotated object.
             :rtype: Geometry
 
-       .. warning:: This method currently relies on access to the Rhinocommon Kernel. It will not work in other contexts.            
+            .. warning:: This method currently relies on access to the Rhinocommon Kernel. It will not work in other contexts.            
             
         """
        # TODO:: Re-implement this method without using the Rhinocommon Kernel.
@@ -214,7 +211,7 @@ class Xform(object):
             :result: Object with new Plane basis.
             :rtype: Geometry
             
-        .. warning:: This method currently relies on access to the Rhinocommon Kernel. It will not work in other contexts.
+            .. warning:: This method currently relies on access to the Rhinocommon Kernel. It will not work in other contexts.
         
         """
         #TODO:: Re-implement this method without using the Rhinocommon Kernel.
@@ -363,14 +360,7 @@ class Xform(object):
         raise NotImplementedError("can't xform that thing")
 
     def _xform_tuple(self,tup):
-        """Transforms the given tuple by this Xform.
-            
-            :param tup: Tuple to transform.
-            :type tup: (float, float, float)
-            :result: Transformed tuple.
-            :rtype: (float, float ,float)
-            
-        """
+
         return (
             tup[0] * self._m[0] + tup[1] * self._m[1] + tup[2] * self._m[2]     + self._m[3],
             tup[0] * self._m[4] + tup[1] * self._m[5] + tup[2] * self._m[6]     + self._m[7],
@@ -379,294 +369,102 @@ class Xform(object):
     
     @property 
     def m00(self): 
-        """Returns value at index (0,0) of Xform matrix.
-            
-            :result: Returns value at (0,0).
-            :rtype: float
-            
-        """
         return self._m[0]
     @m00.setter
     def m00(self,value): 
-        """Sets value at index (0,0) of Xform matrix.
-            
-            :result: None
-            :rtype: None
-            
-        """
         self._m[0] = value
     @property
-    def m01(self): 
-        """Returns value at index (0,1) of Xform matrix.
-            
-            :result: Returns value at (0,1).
-            :rtype: float
-            
-        """    
+    def m01(self):   
         return self._m[1]
     @m01.setter
     def m01(self,value):
-        """Sets value at index (0,1) of Xform matrix.
-            
-            :result: None
-            :rtype: None
-            
-        """    
         self._m[1] = value
     @property
     def m02(self):
-        """Returns value at index (0,2) of Xform matrix.
-            
-            :result: Returns value at (0,2).
-            :rtype: float
-            
-        """       
         return self._m[2]
     @m02.setter
     def m02(self,value):
-        """Sets value at index (0,2) of Xform matrix.
-            
-            :result: None
-            :rtype: None
-            
-        """    
         self._m[2] = value
     @property
-    def m03(self): 
-        """Returns value at index (0,3) of Xform matrix.
-            
-            :result: Returns value at (0,3).
-            :rtype: float
-            
-        """       
+    def m03(self):       
         return self._m[3]
     @m03.setter
-    def m03(self,value):
-        """Sets value at index (0,3) of Xform matrix.
-            
-            :result: None
-            :rtype: None
-            
-        """    
+    def m03(self,value): 
         self._m[3] = value
     
     @property
-    def m10(self): 
-        """Returns value at index (1,0) of Xform matrix.
-            
-            :result: Returns value at (1,0).
-            :rtype: float
-            
-        """       
+    def m10(self):      
         return self._m[4]
     @m10.setter
-    def m10(self,value):
-        """Sets value at index (1,0) of Xform matrix.
-            
-            :result: None
-            :rtype: None
-            
-        """    
+    def m10(self,value):  
         self._m[4] = value
     @property
-    def m11(self):
-        """Returns value at index (1,1) of Xform matrix.
-            
-            :result: Returns value at (1,1).
-            :rtype: float
-            
-        """       
+    def m11(self):      
         return self._m[5]
     @m11.setter
-    def m11(self,value):
-        """Sets value at index (1,1) of Xform matrix.
-            
-            :result: None
-            :rtype: None
-            
-        """    
+    def m11(self,value):   
         self._m[5] = value
     @property
-    def m12(self):
-        """Returns value at index (1,2) of Xform matrix.
-            
-            :result: Returns value at (1,2).
-            :rtype: float
-            
-        """       
+    def m12(self):     
         return self._m[6]
     @m12.setter
     def m12(self,value):
-        """Sets value at index (1,2) of Xform matrix.
-            
-            :result: None
-            :rtype: None
-            
-        """    
         self._m[6] = value
     @property
-    def m13(self):
-        """Returns value at index (1,3) of Xform matrix.
-            
-            :result: Returns value at (1,3).
-            :rtype: float
-            
-        """       
+    def m13(self):     
         return self._m[7]
     @m13.setter
     def m13(self,value):
-        """Sets value at index (1,3) of Xform matrix.
-            
-            :result: None
-            :rtype: None
-            
-        """    
         self._m[7] = value
     
     @property
-    def m20(self):
-        """Returns value at index (2,0) of Xform matrix.
-            
-            :result: Returns value at (2,0).
-            :rtype: float
-            
-        """       
+    def m20(self):      
         return self._m[8]
     @m20.setter
-    def m20(self,value):
-        """Sets value at index (2,0) of Xform matrix.
-            
-            :result: None
-            :rtype: None
-            
-        """    
+    def m20(self,value):   
         self._m[8] = value
     @property
-    def m21(self):
-        """Returns value at index (2,1) of Xform matrix.
-            
-            :result: Returns value at (2,1).
-            :rtype: float
-            
-        """       
+    def m21(self):     
         return self._m[9]
     @m21.setter
     def m21(self,value):
-        """Sets value at index (2,1) of Xform matrix.
-            
-            :result: None
-            :rtype: None
-            
-        """    
         self._m[9] = value
     @property
-    def m22(self):
-        """Returns value at index (2,2) of Xform matrix.
-            
-            :result: Returns value at (2,2).
-            :rtype: float
-            
-        """       
+    def m22(self):     
         return self._m[10]
     @m22.setter
-    def m22(self,value):
-        """Sets value at index (2,2) of Xform matrix.
-            
-            :result: None
-            :rtype: None
-            
-        """    
+    def m22(self,value):  
         self._m[10] = value
     @property
-    def m23(self):
-        """Returns value at index (2,3) of Xform matrix.
-            
-            :result: Returns value at (2,3).
-            :rtype: float
-            
-        """       
+    def m23(self):     
         return self._m[11]
     @m23.setter
-    def m23(self,value):
-        """Sets value at index (2,3) of Xform matrix.
-            
-            :result: None
-            :rtype: None
-            
-        """    
+    def m23(self,value): 
         self._m[11] = value
     
     @property
-    def m30(self):
-        """Returns value at index (3,0) of Xform matrix.
-            
-            :result: Returns value at (3,0).
-            :rtype: float
-            
-        """       
+    def m30(self):   
         return self._m[12]
     @m30.setter
-    def m30(self,value):
-        """Sets value at index (3,0) of Xform matrix.
-            
-            :result: None
-            :rtype: None
-            
-        """    
+    def m30(self,value):   
         self._m[12] = value
     @property
-    def m31(self):
-        """Returns value at index (3,1) of Xform matrix.
-            
-            :result: Returns value at (3,1).
-            :rtype: float
-            
-        """       
+    def m31(self):     
         return self._m[13]
     @m31.setter
     def m31(self,value):
-        """Sets value at index (3,1) of Xform matrix.
-            
-            :result: None
-            :rtype: None
-            
-        """    
         self._m[13] = value
     @property
-    def m32(self):
-        """Returns value at index (3,2) of Xform matrix.
-            
-            :result: Returns value at (3,2).
-            :rtype: float
-            
-        """       
+    def m32(self):    
         return self._m[14]
     @m32.setter
-    def m32(self,value):
-        """Sets value at index (3,2) of Xform matrix.
-            
-            :result: None
-            :rtype: None
-            
-        """    
+    def m32(self,value):  
         self._m[14] = value
     @property
-    def m33(self):
-        """Returns value at index (3,3) of Xform matrix.
-            
-            :result: Returns value at (3,3).
-            :rtype: float
-            
-        """       
+    def m33(self):      
         return self._m[15]
     @m33.setter
-    def m33(self,value):
-        """Sets value at index (3,3) of Xform matrix.
-            
-            :result: None
-            :rtype: None
-            
-        """    
+    def m33(self,value):   
         self._m[15] = value        
 
     
