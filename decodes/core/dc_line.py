@@ -108,7 +108,7 @@ class LinearEntity(Geometry):
         return (self.p1[1]-self.p2[1],
                 self.p2[0]-self.p1[0],
                 self.p1[0]*self.p2[1] - self.p1[1]*self.p2[0])
-
+    @staticmethod
     def is_concurrent(*lines):
         """| Returns True if the set of linear entities are concurrent, False
            | otherwise. Two or more linear entities are concurrent if they all
@@ -133,6 +133,7 @@ class LinearEntity(Geometry):
         
         raise NotImplementedError()
 
+    @staticmethod
     def is_parallel(l1, l2):
         """ Returns True if l1 and l2 are parallel, False otherwise.
 
@@ -147,6 +148,7 @@ class LinearEntity(Geometry):
         """
         return l1.vec.is_coincident(l2.vec) or l1.vec.is_coincident(l2.vec.inverted())
 
+    @staticmethod
     def is_perpendicular(l1, l2):
         """ Returns True if l1 and l2 are perpendicular, False otherwise.
            
@@ -170,6 +172,7 @@ class LinearEntity(Geometry):
         except AttributeError:
             return False
 
+    @staticmethod
     def angle_between(l1, l2):
         """ Returns an angle formed between the two linear entities.
         
