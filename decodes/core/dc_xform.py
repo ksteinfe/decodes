@@ -140,10 +140,10 @@ class Xform(object):
 
     @staticmethod
     def rotation(**kargs):
-        """Rotates an object around by a center and a rotation angle OR by a center, an axis and a rotation angle. 
+        """ Rotates an object around by a center and a rotation angle OR by a center, an axis and a rotation angle. 
             
-            :param **kargs: Function that accepts multiple parameters to be passed. Parameters include center and axis of rotation and a rotation angle. 
-            :type **kargs: Point, Vec, float
+            :param \**kargs: Function that accepts multiple parameters to be passed. Parameters include center and axis of rotation and a rotation angle. 
+            :type \**kargs: Point, Vec, float
             :result: Rotated object.
             :rtype: Geometry
 

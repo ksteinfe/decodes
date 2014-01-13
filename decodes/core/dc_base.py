@@ -20,7 +20,7 @@ class Geometry(object):
     """
     
     def __mul__(self, other):
-        """Overloads the multiplication **(*)** operator.
+        """ Overloads the multiplication **(*)** operator.
 
             :param other: Geometry to be multiplied.
             :type other: Geometry
@@ -40,7 +40,7 @@ class Geometry(object):
 
 
     def set_color(self,a,b=None,c=None):
-        """Sets the geometry's color
+        """ Sets the geometry's color
 
             :param a: Color object to set the geometry's color, or number value (between 0 and 1) to create a new color. If only a is passed as a float, the color will be grayscale.
             :type a: Color or float
@@ -57,7 +57,7 @@ class Geometry(object):
         else : self.props['color'] = Color(a,b,c)
         
     def get_color(self):
-        """Gets the geometry's color
+        """ Gets the geometry's color
 
             :result: Gets the geometry's color.
             :rtype: Color
@@ -68,7 +68,7 @@ class Geometry(object):
         return False
         
     def set_name(self,str):
-        """Sets the geometry's name
+        """ Sets the geometry's name.
 
             :param str: A str with the new geometry's name.
             :type str: str
@@ -79,7 +79,7 @@ class Geometry(object):
         self.props['name'] = str
         
     def set_weight(self,num):
-        """Sets the geometry's weight
+        """ Sets the geometry's weight.
 
             :param num: A number with the new geometry's weight.
             :type num: float
@@ -90,7 +90,7 @@ class Geometry(object):
         self.props['weight'] = num
 
     def set_fill(self,a,b=None,c=None):
-        """Sets the geometry's fill
+        """ Sets the geometry's fill.
 
             :param a: Color object to set the geometry's fill, or number value (between 0 and 1) to create a new color. If only a is passed as a float, the color will be grayscale.
             :type a: Color or float
@@ -109,8 +109,7 @@ class Geometry(object):
         
     @property
     def do_translate(self):
-        """
-        If this property is set to false, outies will not translate this geometry into external formats, and pass along the class as-is.
+        """ If this property is set to false, outies will not translate this geometry into external formats, and pass along the class as-is.
         """
         return True
 
@@ -131,14 +130,17 @@ class Basis(object):
     """
     
     def eval(self,a,b=0,c=0):
-        """
-        Evaluates a point in Basis coordinates and returns a Vec containing the coordinates of a corresponding Point defined in World coordinates
+        """ Evaluates a point in Basis coordinates and returns a Vec containing the coordinates of a corresponding Point defined in World coordinates.
+        
+            .. warning:: This method is not yet implemented. 
         """
         raise NotImplementedError("Evalutate not implemented.    I am a BAD basis!")
 
     def deval(self,a,b=0,c=0):
-        """
-        Evaluates a point in World coordinates and returns a Vec containing the coordinates of a corresponding Point defined in Basis coordinates
+        """ Evaluates a point in World coordinates and returns a Vec containing the coordinates of a corresponding Point defined in Basis coordinates
+            
+            .. warning:: This method is not yet implemented. 
+            
         """
         raise NotImplementedError("Devalutate not implemented.    I am a BAD basis!")
 
@@ -149,14 +151,14 @@ class HasBasis(Geometry):
     
     @property
     def basis(self):
-        """Identifies the defined basis. If no basis is defined, returns None.
+        """ Identifies the defined basis. If no basis is defined, returns None.
         """    
         if self.is_baseless: return None
         return self._basis
 
     @basis.setter
     def basis(self, basis): 
-        """Sets basis.
+        """ Sets basis.
         
             :param basis: Defined basis
             :result: Defined basis
@@ -166,13 +168,13 @@ class HasBasis(Geometry):
 
     @property
     def is_baseless(self):
-        """Tells us if a basis has been defined.
+        """ Tells us if a basis has been defined.
         """
         return (not hasattr(self, '_basis')) or self._basis is None
 
 
     def basis_applied(self, copy_children=True):
-        """Returns a new object with basis applied. Copies are created of any child objects by default. Take care to copy over props if appropriate.
+        """ Returns a new object with basis applied. Copies are created of any child objects by default. Take care to copy over props if appropriate.
             
             :result: Object with basis applied.
             :rtype: Basis
@@ -180,7 +182,7 @@ class HasBasis(Geometry):
         raise NotImplementedError("basis_applied not implemented.    I am a BAD HasBasis!")
     
     def basis_stripped(self, copy_children=True): 
-        """Returns a new object stripped of any basis. Copies are created of any child objects by default. Take care to copy over props if appropriate.
+        """ Returns a new object stripped of any basis. Copies are created of any child objects by default. Take care to copy over props if appropriate.
             
             :result: Object with basis applied.
             :rtype: Basis

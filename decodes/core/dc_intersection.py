@@ -83,8 +83,8 @@ class Intersector(object):
            :type a: Geometry
            :param b: Second geometry to intersect. May be any decodes geometry.
            :type b: Geometry
-           :param kargs: Dictionary with two geometries to intersect.
-           :type kargs: dict
+           :param \**kargs: Two geometries to intersect.
+           :type \**kargs: Geometry, Geometry
            :result: Boolean Value
            :rtype: bool
             
@@ -102,8 +102,8 @@ class Intersector(object):
            :type a: Geometry
            :param b: Second geometry to intersect. May be any decodes geometry.
            :type b: Geometry
-           :param kargs: Dictionary with two geometries to intersect.
-           :type kargs: dict
+           :param \**kargs: Two geometries to intersect.
+           :type \**kargs: Geometry, Geometry
            :result: Boolean Value.
            :rtype: bool
         

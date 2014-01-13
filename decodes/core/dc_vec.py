@@ -11,7 +11,7 @@ class Vec(Geometry):
     """
 
     def __init__(self, a=0, b=0, c=0):
-        """Vector Constructor. 
+        """ Vector Constructor. 
 
             :param a: a value.
             :type a: float
@@ -43,7 +43,7 @@ class Vec(Geometry):
 
     @property
     def x(self): 
-        """Returns the x-value of this vector. 
+        """ Returns the x-value of this vector. 
 
             :result: x value.
             :rtype: float
@@ -54,7 +54,7 @@ class Vec(Geometry):
     
     @property
     def y(self): 
-        """Returns the y-value of this vector. 
+        """ Returns the y-value of this vector. 
 
             :result: y value.
             :rtype: float
@@ -65,7 +65,7 @@ class Vec(Geometry):
     
     @property
     def z(self): 
-        """Returns the z-value of this vector. 
+        """ Returns the z-value of this vector. 
 
             :result: z value.
             :rtype: float
@@ -77,7 +77,7 @@ class Vec(Geometry):
 
     @property
     def tup(self):
-        """Returns x, y, and z values of a vector.
+        """ Returns x, y, and z values of a vector.
             
             :result: x, y and z values.
             :rtype: float
@@ -85,24 +85,24 @@ class Vec(Geometry):
         return self._x,self._y,self._z
 
     def __add__(self, vec):
-        """Overloads the addition **(+)** operator. 
-        Returns a new vector that results from adding this vector's world coordinates to the other vector's world coordinates.
+        """| Overloads the addition **(+)** operator. 
+           | Returns a new vector that results from adding this vector's world coordinates to the other vector's world coordinates.
         
-            :param vec: Vec to be added.
-            :type vec: Vec
-            :result: New Vec.
-            :rtype: Vec
+           :param vec: Vec to be added.
+           :type vec: Vec
+           :result: New Vec.
+           :rtype: Vec
         """    
         return Vec(self.x+vec.x , self.y+vec.y, self.z+vec.z)
     
     def __sub__(self, vec): 
-        """Overloads the subtraction **(-)** operator. 
-        Returns a new vector that results from subtracting this vector's world coordinates from the other vector's world coordinates.
+        """| Overloads the subtraction **(-)** operator. 
+           | Returns a new vector that results from subtracting this vector's world coordinates from the other vector's world coordinates.
         
-            :param vec: Vec to be subtracted.
-            :type vec: Vec
-            :result: New Vec.
-            :rtype: Vec
+           :param vec: Vec to be subtracted.
+           :type vec: Vec
+           :result: New Vec.
+           :rtype: Vec
         """    
         return Vec(self.x-vec.x , self.y-vec.y, self.z-vec.z)
     
@@ -110,45 +110,45 @@ class Vec(Geometry):
         return self.__div__(other)
     
     def __div__(self, scalar): 
-        """Overloads the division **(/)** operator. 
-        Returns a new vector that results from dividing this vector's world coordinates by a given scalar.
+        """| Overloads the division **(/)** operator. 
+           | Returns a new vector that results from dividing this vector's world coordinates by a given scalar.
         
-            :param scalar: Number to divide by
-            :type scalar: float
-            :result: New Vec.
-            :rtype: Vec
+           :param scalar: Number to divide by
+           :type scalar: float
+           :result: New Vec.
+           :rtype: Vec
         """  
         return Vec(self.x/float(scalar), self.y/float(scalar), self.z/float(scalar))
     
     def __invert__(self): 
-        """Overloads the inversion **(-vec)** operator. 
-        Inverts the direction of the vector.
-        Returns a new inverted vector.
+        """| Overloads the inversion **(-vec)** operator. 
+           | Inverts the direction of the vector.
+           | Returns a new inverted vector.
         
-            :result: Inverted Vec.
-            :rtype: Vec
+           :result: Inverted Vec.
+           :rtype: Vec
         """  
         return self.inverted()
 
     def __neg__(self): 
-        """Overloads the arithmetic negation **(-vec)** operator. 
-        Inverts the direction of the vector.
-        Returns a new inverted vector.
+        """| Overloads the arithmetic negation **(-vec)** operator. 
+           | Inverts the direction of the vector.
+           | Returns a new inverted vector.
         
-            :result: Inverted Vec.
-            :rtype: Vec
+           :result: Inverted Vec.
+           :rtype: Vec
         """  
         return self.inverted()
 
     def __mul__(self, other):
-        """Overloads the multiplication **(*)** operator. 
-        If given a scalar, returns a new vector that results from multiplying this vector by the scalar.
-        If given a vector, returns the cross product of this vector and the other vector.
+        """| Overloads the multiplication **(*)** operator. 
+           | If given a scalar, returns a new vector that results from multiplying this vector by the scalar.
+           | If given a vector, returns the cross product of this vector and the other vector.
         
-            :param vec: Vec to be multiplied.
-            :type vec: Vec
-            :result: New Vec.
-            :rtype: Vec
+           :param vec: Vec to be multiplied.
+           :type vec: Vec
+           :result: New Vec.
+           :rtype: Vec
         """  
         from .dc_xform import Xform
         if isinstance(other, Xform) :
@@ -162,7 +162,7 @@ class Vec(Geometry):
         return "vec[{0},{1},{2}]".format(self.x,self.y,self.z)
     
     def to_tuple(self): 
-        """Returns a tuple of the Vec components.
+        """ Returns a tuple of the Vec components.
         
             :result: Tuple of Vec values.
             :rtype: tuple
@@ -170,7 +170,7 @@ class Vec(Geometry):
         return (self.x,self.y,self.z)
 
     def __lt__(self, other): 
-        """Overloads the less than **(<)** operator for vector length.
+        """ Overloads the less than **(<)** operator for vector length.
         
             :param other: Vec to be compared.
             :type other: Vec
@@ -179,7 +179,7 @@ class Vec(Geometry):
         """
         return self.length2 < other.length2
     def __le__(self, other):
-        """Overloads the less than or equal to **(<=)** operator for vector length.
+        """ Overloads the less than or equal to **(<=)** operator for vector length.
         
             :param other: Vec to be compared.
             :type other: Vec
@@ -188,7 +188,7 @@ class Vec(Geometry):
         """
         return self.length2 <= other.length2
     def __eq__(self, other):
-        """Overloads the equal **(==)** operator for vector identity.
+        """ Overloads the equal **(==)** operator for vector identity.
         
             :param other: Vec to be compared.
             :type other: Vec
@@ -198,7 +198,7 @@ class Vec(Geometry):
         """    
         return self.is_identical(other)
     def __ne__(self, other): 
-        """Overloads the not equal **(!=)** operator for vector length.
+        """ Overloads the not equal **(!=)** operator for vector length.
         
             :param other: Vec to be compared.
             :type other: Vec
@@ -208,7 +208,7 @@ class Vec(Geometry):
         """
         return not self.is_identical(other)
     def __gt__(self, other): 
-        """Overloads the greater than **(>)** operator for vector length.
+        """ Overloads the greater than **(>)** operator for vector length.
         
             :param other: Vec to be compared.
             :type other: Vec
@@ -217,7 +217,7 @@ class Vec(Geometry):
         """
         return self.length2 > other.length2
     def __ge__(self, other): 
-        """Overloads the greater or equal **(>=)** operator for vector length.
+        """ Overloads the greater or equal **(>=)** operator for vector length.
         
             :param other: Vec to be compared.
             :type other: Vec
@@ -227,7 +227,7 @@ class Vec(Geometry):
         return self.length2 >= other.length2
     
     def is_identical(self,other,tol=False): 
-        """Returns True if the vectors are equal.
+        """ Returns True if the vectors are equal.
         
             :param other: Vec to be compared.
             :type other: Vec
@@ -245,7 +245,7 @@ class Vec(Geometry):
             return False
             
     def is_coincident(self,other): 
-        """Returns True if the vectors have equal direction.
+        """ Returns True if the vectors have equal direction.
         
             :param other: Vec to be compared.
             :type other: Vec
@@ -255,7 +255,7 @@ class Vec(Geometry):
         return self.normalized().is_identical( other.normalized() )
     
     def is_parallel(self,other): 
-        """Returns True if the vectors have equal or opposite direction.
+        """ Returns True if the vectors have equal or opposite direction.
         
             :param other: Vec to be compared.
             :type other: Vec
@@ -267,7 +267,7 @@ class Vec(Geometry):
 
     @property
     def is_2d(self): 
-        """Returns True if the vector is 2d.
+        """ Returns True if the vector is 2d.
         
             :result: True if 2d.
             :rtype: bool
@@ -276,7 +276,7 @@ class Vec(Geometry):
     
     @property
     def length(self): 
-        """Returns the length of this vector. Use vec.length2 when possible, as it is cheaper to calculate.
+        """ Returns the length of this vector. Use vec.length2 when possible, as it is cheaper to calculate.
         
             :result: Length of the Vec.
             :rtype: float
@@ -285,7 +285,7 @@ class Vec(Geometry):
     
     @property 
     def length2(self):
-        """Length squared. Cheaper to calculate than vec.length.
+        """ Length squared. Cheaper to calculate than vec.length.
         
             :result: Length of the Vec.
             :rtype: float
@@ -294,7 +294,7 @@ class Vec(Geometry):
     
     @length.setter
     def length(self,value): 
-        """Sets the length of this vector.
+        """ Sets the length of this vector.
         
             :param value: New length of vector.
             :type values: float
@@ -307,7 +307,7 @@ class Vec(Geometry):
     
     @staticmethod
     def interpolate(v0,v1,t=0.5):
-        """Interpolates between vectors v0 and v1 at param t.
+        """ Interpolates between vectors v0 and v1 at param t.
         
             :param v0: First Vec.
             :type v0: Vec
@@ -325,7 +325,7 @@ class Vec(Geometry):
 
     @staticmethod
     def random(interval = None,normalize=True,constrain2d=False):
-        """Returns a random vector within a given interval.
+        """ Returns a random vector within a given interval.
         
             :param interval: Interval to get the random values from.
             :type interval: Interval
@@ -347,7 +347,7 @@ class Vec(Geometry):
 
     @staticmethod
     def average(vecs):
-        """Returns the average of a list of vectors.
+        """ Returns the average of a list of vectors.
         
             :param vecs: List of vectors to average. 
             :type vecs: list
@@ -362,7 +362,7 @@ class Vec(Geometry):
 
     @staticmethod
     def bisector(v0,v1): 
-        """Returns the normalized bisector of two vectors.
+        """ Returns the normalized bisector of two vectors.
         
             :param v0: First vector to get the bisector from.
             :type v0: Vec
@@ -374,7 +374,7 @@ class Vec(Geometry):
         return Vec.average([v0.normalized(),v1.normalized()])            
 
     def normalized(self, length=1.0):
-        """Return a new vector in the same direction, but given length (default 1.0).
+        """ Return a new vector in the same direction, but given length (default 1.0).
         
             :param length: New length for the Vec (default 1.0)
             :type length: float
@@ -386,7 +386,7 @@ class Vec(Geometry):
         return Vec(self.x * factor, self.y * factor, self.z * factor)        
 
     def inverted(self):
-        """Return a new vector pointing in the opposite direction.
+        """ Return a new vector pointing in the opposite direction.
         
             :result: Inverted vector.
             :rtype: Vec
@@ -394,7 +394,7 @@ class Vec(Geometry):
         return Vec(-self.x,-self.y,-self.z)
     
     def rounded(self,n=0): 
-        """Returns a new vector with coords rounded to n-digits (defaults to 0 digits (nearest int). 
+        """ Returns a new vector with coords rounded to n-digits (defaults to 0 digits (nearest int). 
         
             :param n: Number of digits to round the Vec's coordinates.
             :type n: int
@@ -404,7 +404,7 @@ class Vec(Geometry):
         return Vec(round(self.x,n),round(self.y,n),round(self.z,n))
     
     def limited(self,n=1.0): 
-        """Returns a new vector limited to a given length.
+        """ Returns a new vector limited to a given length.
         
             :param n: Value to limit the Vec's length.
             :type n: float
@@ -415,7 +415,7 @@ class Vec(Geometry):
         return self.normalized(n)    
     
     def dot(self,other): 
-        """Computes the dot product of this vector and the other vector.
+        """ Computes the dot product of this vector and the other vector.
         
             :param other: Second vector to compute dot product.
             :type other: Vec
@@ -425,7 +425,7 @@ class Vec(Geometry):
         return float(self.x * other.x + self.y * other.y + self.z * other.z)
 
     def projected_length(self,other): 
-        """Returns the length of the vector which results from projecting a vector onto a destination vector.
+        """ Returns the length of the vector which results from projecting a vector onto a destination vector.
         
             :param other: Destination vector.
             :type other: Vec
@@ -435,7 +435,7 @@ class Vec(Geometry):
         return self.dot(other.normalized())
 
     def projected(self,other): 
-        """Returns a new vector projected onto a destination vector.
+        """ Returns a new vector projected onto a destination vector.
         
             :param other: Destination vector.
             :type other: Vec
@@ -445,18 +445,18 @@ class Vec(Geometry):
         return other * ( self.dot(other) / other.dot(other) )
 
     def cross(self, other):
-        """Return a new vector, the cross product.
-        a x b = (a2b3 - a3b2, a3b1 - a1b3, a1b2 - a2b1)
-        This will be at right angles to both self and other, with a length.
+        """| Return a new vector, the cross product.
+           | a x b = (a2b3 - a3b2, a3b1 - a1b3, a1b2 - a2b1)
+           | This will be at right angles to both self and other, with a length.
         
-            :param other: Second vector to calculate cross product. 
-            :type other: Vec
-            :result: New vector.
-            :rtype: Vec
+           :param other: Second vector to calculate cross product. 
+           :type other: Vec
+           :result: New vector.
+           :rtype: Vec
 
-        ::
+           ::
             
-            len(self) * len(other) * sin(angle_between_them)
+                len(self) * len(other) * sin(angle_between_them)
             
         """
         return Vec(
@@ -466,7 +466,7 @@ class Vec(Geometry):
         )
 
     def angle(self,other):
-        """Returns the angle in radians between this vector and the other vector. Return value is constrained to the range [-PI,PI].
+        """ Returns the angle in radians between this vector and the other vector. Return value is constrained to the range [-PI,PI].
         
             :param other: Second vector for angle calculation.
             :type other: Vec
@@ -489,8 +489,7 @@ class Vec(Geometry):
         return math.degrees(self.angle(other))
 
     def to_ray(self,pt=None):
-        """
-        Returns a ray from a given point along this vector.
+        """ Returns a ray from a given point along this vector.
         """
         from .dc_line import Ray
         from .dc_point import Point
@@ -498,8 +497,7 @@ class Vec(Geometry):
         return Ray(pt,Vec(self))
     
     def to_line(self,pt=None):
-        """
-        Returns a line from a given point along this vector.
+        """ Returns a line from a given point along this vector.
         """
         from .dc_line import Line
         from .dc_point import Point
@@ -508,7 +506,7 @@ class Vec(Geometry):
 
     @staticmethod
     def ux(length=1.0):
-        """Returns unit vector (length = 1.0) in the x-direction.
+        """ Returns unit vector (length = 1.0) in the x-direction.
         
             :result: Unit Vec in the x-axis.
             :rtype: Vec
@@ -517,7 +515,7 @@ class Vec(Geometry):
 
     @staticmethod
     def uy(length=1.0):
-        """Returns unit vector (length = 1.0) in the y-direction.
+        """ Returns unit vector (length = 1.0) in the y-direction.
             
             :result: Unit Vec in the y-axis.
             :rtype: Vec
@@ -526,7 +524,7 @@ class Vec(Geometry):
 
     @staticmethod
     def uz(length=1.0):
-        """Returns unit vector (length = 1.0) in the z-direction.
+        """ Returns unit vector (length = 1.0) in the z-direction.
         
             :result: Unit vec in the z-axis.
             :rtype: Vec

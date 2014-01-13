@@ -164,25 +164,23 @@
 <dl class="method">
 <dt id="decodes.core.dc_vec.Vec.cross">
 <tt class="descname">cross</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.dc_vec.Vec.cross" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a new vector, the cross product.
-a x b = (a2b3 - a3b2, a3b1 - a1b3, a1b2 - a2b1)
-This will be at right angles to both self and other, with a length.</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<dd><div class="line-block">
+<div class="line">Return a new vector, the cross product.</div>
+<div class="line">a x b = (a2b3 - a3b2, a3b1 - a1b3, a1b2 - a2b1)</div>
+<div class="line">This will be at right angles to both self and other, with a length.</div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param other:</th><td class="field-body">Second vector to calculate cross product.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Vec</em>) &#8211; Second vector to calculate cross product.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">type other:</th><td class="field-body">Vec</td>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">New vector.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">result:</th><td class="field-body">New vector.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">Vec</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Vec</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 <div class="highlight-python"><div class="highlight"><pre><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">angle_between_them</span><span class="p">)</span>
 </pre></div>
 </div>

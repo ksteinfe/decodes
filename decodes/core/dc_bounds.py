@@ -11,8 +11,8 @@ class Bounds(Geometry):
     def __init__ (self, **kargs):
         """A Bounds may be constructed two ways: By setting "center", "dim_x", "dim_y", and optionally "dim_z" OR by setting "ival_x", "ival_y", and optionally "ival_z"
         
-            :param **kargs: Function that accepts multiple parameters to be passed. Parameters include center, x, y and z dimension OR x, y and z intervals.
-            :type **kargs: (float, float), float, float OR Interval, Interval
+            :param \**kargs: Function that accepts multiple parameters to be passed. Parameters include center, x, y and z dimension OR x, y and z intervals.
+            :type \**kargs: (float, float), float, float OR Interval, Interval
             :result: Bounds
             :rtype: Bounds
         
