@@ -268,7 +268,7 @@ class Point(Vec):
         """ Returns the centroid of a point cloud.
         
             :param points: Point cloud
-            :type points: list
+            :type points: [Point]
             :result: Centroid of point cloud.
             :rtype: Point
         """
@@ -278,9 +278,9 @@ class Point(Vec):
     def random(interval=None,constrain2d=False):
         """ Returns a random point within the given (optional) range.
         
-            :param interval: Range to get the random value from
+            :param interval: Range to get the random value from.
             :type interval: Interval
-            :param constrain2d: Constrain the point to 2d space
+            :param constrain2d: Constrain the point to 2d space.
             :type constrain2d: bool
             :result: Random point
             :rtype: Point
