@@ -451,6 +451,12 @@ class Intersector(object):
         if pa.is_identical(pb,self.tol) : 
             self.log = "3d intersection found."
             self.append(pa)
+            
+            if type(ln_a) == Ray and self.ta < 0.0 : return False
+            if type(ln_b) == Ray and self.tb < 0.0 : return False  
+            if type(ln_a) == Segment and (self.ta < 0.0 or self.ta > 1.0) : return False
+            if type(ln_b) == Segment and (self.tb < 0.0 or self.tb > 1.0)  : return False  
+            
             return True
         else: 
             self.log = "No intersection found in 3d, recording shortest Segment between these two lines."
