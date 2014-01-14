@@ -145,8 +145,8 @@ class Vec(Geometry):
            | If given a scalar, returns a new vector that results from multiplying this vector by the scalar.
            | If given a vector, returns the cross product of this vector and the other vector.
         
-           :param vec: Vec to be multiplied.
-           :type vec: Vec
+           :param other: Scalar or Vec to be multiplied.
+           :type other: float or Vec
            :result: New Vec.
            :rtype: Vec
         """  
@@ -490,6 +490,11 @@ class Vec(Geometry):
 
     def to_ray(self,pt=None):
         """ Returns a ray from a given point along this vector.
+            
+            :param pt: Point along this vector.
+            :type pt: Point
+            :result: Ray from Point
+            :rtype: Ray
         """
         from .dc_line import Ray
         from .dc_point import Point
@@ -498,6 +503,11 @@ class Vec(Geometry):
     
     def to_line(self,pt=None):
         """ Returns a line from a given point along this vector.
+            
+            :param pt: Point along this vector.
+            :type pt: Point
+            :result: Line from Point.
+            :rtype: Line
         """
         from .dc_line import Line
         from .dc_point import Point
