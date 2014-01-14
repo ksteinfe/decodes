@@ -103,6 +103,7 @@ class LinearEntity(Geometry):
             :result: coefficients of the equation of a line (a,b,c).
             :rtype: tuple
         
+            .. warning:: This method is not yet implemented.
         """
         raise NotImplementedError()
         return (self.p1[1]-self.p2[1],
