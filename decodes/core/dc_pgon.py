@@ -271,7 +271,7 @@ class PGon(HasPts):
             except:
                 seg = Segment(Point(self._verts[n]),Point(self._verts[0]))
 
-            if seg.is_parallel(ray) : continue
+            if LinearEntity.is_parallel(seg,ray) : continue
             try:
                 slope = (seg.ept.y - seg.spt.y) / (seg.ept.x - seg.spt.x)
                 cond1 = (seg.spt.x <= pt.x) and (pt.x < seg.ept.x)
