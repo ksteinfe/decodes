@@ -228,7 +228,9 @@ class Curve(HasBasis,IsParametrized):
            :rtype: Point
             
         """
-        if t<self.domain.a or t>self.domain.b : raise DomainError("Curve evaluated outside the bounds of its domain: deval(%s) %s"%(t,self.domain))
+        if t<self.domain.a or t>self.domain.b : 
+            t = round(t,7) # this may be due to a rounding problem, try rounding to 7 decimal places
+            if t<self.domain.a or t>self.domain.b : raise DomainError("Curve evaluated outside the bounds of its domain: deval(%s) %s"%(t,self.domain))
         pt = self.func(t)
 
         #transform result to curve basis
@@ -250,7 +252,9 @@ class Curve(HasBasis,IsParametrized):
            :result: Plane on the Curve.
            :rtype: Plane
         """
-        if t<self.domain.a or t>self.domain.b : raise DomainError("Curve evaluated outside the bounds of its domain: deval(%s) %s"%(t,self.domain))
+        if t<self.domain.a or t>self.domain.b : 
+            t = round(t,7) # this may be due to a rounding problem, try rounding to 7 decimal places
+            if t<self.domain.a or t>self.domain.b : raise DomainError("Curve evaluated outside the bounds of its domain: deval(%s) %s"%(t,self.domain))
 
         pt, vec, neg_vec = self._nudged(t)
         
@@ -437,7 +441,7 @@ class Curve(HasBasis,IsParametrized):
         if tol > domain.delta/10.0 : tol = domain.delta/10.0
         return Curve(self.func,domain,tol)
 
-    def _nearfar(self,func_nf,pt,tolerance,max_recursion,divs=8):
+    def _nearfar(self,func_nf,pt,tolerance,max_recursion,idivs=8):
         """ Calculates curve subdivisions.
         
             :param func_nf: Function to produce a curve.
@@ -448,13 +452,14 @@ class Curve(HasBasis,IsParametrized):
             :type tolerance: float.
             :param max_recursion: Maximum number of recursions.
             :type max_recursion: int
+            :param idivs: Number of initial divisions
+            :type idivs: int
             :result: Curve
             :rtype: Curve
             
         """
         
-        def sub(crv):
-            #divs = 8 # number of divisions to cut the given curve into
+        def sub(crv,divs):
             buffer = 1.5 # multiplier for resulting area
             ni = func_nf(pt,crv/divs) # divide the curve and find the nearest or furthest point (depending on the function that was provided)
             nd = crv.domain.eval(ni/float(divs)) # find the domain value associated with this point
@@ -463,10 +468,11 @@ class Curve(HasBasis,IsParametrized):
             if domain.b > crv.domain.b : domain.b = crv.domain.b
             return crv.subcurve(domain),domain.a == crv.domain.a, domain.b == crv.domain.b # return a new curve with this domain
 
-        crv, force_spt, force_ept = sub(self)
+        crv, force_spt, force_ept = sub(self,idivs)
         n = 1
         while crv.domain.delta > tolerance : 
-            crv, at_spt, at_ept = sub(crv)
+            divs = 8 # number of subsequent divisions to cut the given curve into
+            crv, at_spt, at_ept = sub(crv,divs)
             force_spt = force_spt and at_spt
             force_ept = force_ept and at_ept
             n+=1
