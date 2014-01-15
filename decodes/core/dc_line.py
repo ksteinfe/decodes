@@ -276,46 +276,7 @@ class LinearEntity(Geometry):
         """
         return self.spt+(self.vec.normalized(self.vec.length*t))
 
-    @staticmethod
-    def by_coords2d(x0=0.0,y0=0.0,x1=1.0,y1=1.0): 
-        """ Returns a 2D LinearEntity from two sets of x and y coordinates.
-        
-            :param x0: First x-coord.
-            :type x0: float
-            :param y0: First y-coord.
-            :type y0: float
-            :param x1: Second x-coord.
-            :type x1: float
-            :param y1: Second y-coord.
-            :type y1: float
-            :result: LinearEntity
-            :rtype: Linear Entity
-            
-        """
-    
-        return Segment(Point(x0,y0),Point(x1,y1))
 
-    @staticmethod
-    def by_coords3d(x0=0.0,y0=0.0,z0=0.0,x1=1.0,y1=1.0,z1=1.0): 
-        """ Returns a 3D LinearEntity from two sets of x,y and z coordinates.
-        
-            :param x0: First x-coord.
-            :type x0: float
-            :param y0: First y-coord.
-            :type y0: float
-            :param z0: First z-coord.
-            :type z0: float
-            :param x1: Second x-coord.
-            :type x1: float
-            :param y1: Second y-coord.
-            :type y1: float
-            :param z1: Second z-coord.
-            :type z1: float
-            :result: LinearEntity
-            :rtype: Linear Entity
-            
-        """
-        return Segment(Point(x0,y0,z0),Point(x1,y1,z1))
 
 class Line(LinearEntity):
     """A line in space."""
@@ -411,6 +372,46 @@ class Segment(LinearEntity):
         """ 
         return Segment(self.ept,self._vec.inverted())
 
+    @staticmethod
+    def by_coords2d(x0=0.0,y0=0.0,x1=1.0,y1=1.0): 
+        """ Returns a 2D LinearEntity from two sets of x and y coordinates.
+        
+            :param x0: First x-coord.
+            :type x0: float
+            :param y0: First y-coord.
+            :type y0: float
+            :param x1: Second x-coord.
+            :type x1: float
+            :param y1: Second y-coord.
+            :type y1: float
+            :result: Segment
+            :rtype: Segment
+            
+        """
+    
+        return Segment(Point(x0,y0),Point(x1,y1))
+
+    @staticmethod
+    def by_coords3d(x0=0.0,y0=0.0,z0=0.0,x1=1.0,y1=1.0,z1=1.0): 
+        """ Returns a 3D LinearEntity from two sets of x,y and z coordinates.
+        
+            :param x0: First x-coord.
+            :type x0: float
+            :param y0: First y-coord.
+            :type y0: float
+            :param z0: First z-coord.
+            :type z0: float
+            :param x1: Second x-coord.
+            :type x1: float
+            :param y1: Second y-coord.
+            :type y1: float
+            :param z1: Second z-coord.
+            :type z1: float
+            :result: Segment
+            :rtype: Segment
+            
+        """
+        return Segment(Point(x0,y0,z0),Point(x1,y1,z1))        
 
 class VecField(PixelGrid):
     """| A raster grid of vectors.
