@@ -34,10 +34,10 @@ class IsParametrized(Geometry):
     def func(self): return self._func
 
 
-    def near(self,pt,tolerance=None,max_recursion=20):
+    def near(self,pt,tolerance=None,max_recursion=20,resolution=8):
         """| Finds a location on this curve which is nearest to the given Point.
            | Unstable and inaccurate.
-           | Recursive function that searches for further points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
+           | Recursive function that searches for closer points (at a given division resolution) until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
            | Returns a tuple containing a Point, a t-value associated with this point, and the distance from this Point to the given Point.
             
            :param pt: Point to look for the nearest point on a curve.
@@ -50,14 +50,14 @@ class IsParametrized(Geometry):
            :rtype: (Point, float, float)
         """
         if tolerance is None : tolerance = self.tol/10.0
-        t = self._nearfar(Point.near_index,pt,tolerance,max_recursion)
+        t = self._nearfar(Point.near_index,pt,tolerance,max_recursion,resolution)
         result = self.deval(t)
         return(result,t,pt.distance(result))
 
-    def near_pt(self,pt,tolerance=None,max_recursion=20):
+    def near_pt(self,pt,tolerance=None,max_recursion=20,resolution=8):
         """| Finds a location on this curve which is nearest to the given Point.
            | Unstable and inaccurate.
-           | Recursive function that searches for further points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
+           | Recursive function that searches for closer points (at a given division resolution) until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
            | Returns a Point.
             
            :param pt: Point to look for the nearest point on a curve.
@@ -70,12 +70,12 @@ class IsParametrized(Geometry):
            :rtype: Point
         """
 
-        return self.near(pt,tolerance,max_recursion)[0]
+        return self.near(pt,tolerance,max_recursion,resolution)[0]
         
-    def far(self,pt,tolerance=None,max_recursion=20):
+    def far(self,pt,tolerance=None,max_recursion=20,resolution=8):
         """| Finds a location on this curve which is furthest from the given Point.
            | Unstable and inaccurate.
-           | Recursive function that searches for closer points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
+           | Recursive function that searches for further points (at a given division resolution) until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
            | Returns a tuple containing a Point, a t-value associated with this Point, and the distance from this Point to the given Point.
             
            :param pt: Point to look for the farthest point on a curve.
@@ -88,14 +88,14 @@ class IsParametrized(Geometry):
            :rtype: (Point, float, float)
         """
         if tolerance is None : tolerance = self.tol/10.0
-        t = self._nearfar(Point.far_index,pt,tolerance,max_recursion)
+        t = self._nearfar(Point.far_index,pt,tolerance,max_recursion,resolution)
         result = self.deval(t)
         return(result,t,pt.distance(result))
 
-    def far_pt(self,pt,tolerance=None,max_recursion=20):
+    def far_pt(self,pt,tolerance=None,max_recursion=20,resolution=8):
         """| Finds a location on this curve which is furthest from the given Point.
            | Unstable and inaccurate.
-           | Recursive function that searches for further points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
+           | Recursive function that searches for further points u (at a given division resolution) ntil the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.
            | Returns a Point.
             
            :param pt: Point to look for the furthest point on a curve.
@@ -108,7 +108,7 @@ class IsParametrized(Geometry):
            :rtype: Point
         """
 
-        return self.far(pt,tolerance,max_recursion)[0]
+        return self.far(pt,tolerance,max_recursion,resolution)[0]
 
 
 
@@ -437,7 +437,7 @@ class Curve(HasBasis,IsParametrized):
         if tol > domain.delta/10.0 : tol = domain.delta/10.0
         return Curve(self.func,domain,tol)
 
-    def _nearfar(self,func_nf,pt,tolerance,max_recursion):
+    def _nearfar(self,func_nf,pt,tolerance,max_recursion,divs=8):
         """ Calculates curve subdivisions.
         
             :param func_nf: Function to produce a curve.
@@ -454,7 +454,7 @@ class Curve(HasBasis,IsParametrized):
         """
         
         def sub(crv):
-            divs = 8 # number of divisions to cut the given curve into
+            #divs = 8 # number of divisions to cut the given curve into
             buffer = 1.5 # multiplier for resulting area
             ni = func_nf(pt,crv/divs) # divide the curve and find the nearest or furthest point (depending on the function that was provided)
             nd = crv.domain.eval(ni/float(divs)) # find the domain value associated with this point
