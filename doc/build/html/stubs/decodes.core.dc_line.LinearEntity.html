@@ -86,9 +86,9 @@
 </table>
 </dd></dl>
 
-<dl class="method">
+<dl class="staticmethod">
 <dt id="decodes.core.dc_line.LinearEntity.angle_between">
-<tt class="descname">angle_between</tt><big>(</big><em>l1</em>, <em>l2</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.angle_between" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><tt class="descname">angle_between</tt><big>(</big><em>l1</em>, <em>l2</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.angle_between" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns an angle formed between the two linear entities.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -124,60 +124,6 @@ find the angle between the two using the above formula.</p>
 </div>
 </dd></dl>
 
-<dl class="staticmethod">
-<dt id="decodes.core.dc_line.LinearEntity.by_coords2d">
-<em class="property">static </em><tt class="descname">by_coords2d</tt><big>(</big><em>x0=0.0</em>, <em>y0=0.0</em>, <em>x1=1.0</em>, <em>y1=1.0</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.by_coords2d" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a 2D LinearEntity from two sets of x and y coordinates.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>x0</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; First x-coord.</li>
-<li><strong>y0</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; First y-coord.</li>
-<li><strong>x1</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Second x-coord.</li>
-<li><strong>y1</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Second y-coord.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">LinearEntity</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Linear Entity</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="decodes.core.dc_line.LinearEntity.by_coords3d">
-<em class="property">static </em><tt class="descname">by_coords3d</tt><big>(</big><em>x0=0.0</em>, <em>y0=0.0</em>, <em>z0=0.0</em>, <em>x1=1.0</em>, <em>y1=1.0</em>, <em>z1=1.0</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.by_coords3d" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a 3D LinearEntity from two sets of x,y and z coordinates.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>x0</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; First x-coord.</li>
-<li><strong>y0</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; First y-coord.</li>
-<li><strong>z0</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; First z-coord.</li>
-<li><strong>x1</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Second x-coord.</li>
-<li><strong>y1</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Second y-coord.</li>
-<li><strong>z1</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Second z-coord.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">LinearEntity</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Linear Entity</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <dl class="attribute">
 <dt id="decodes.core.dc_line.LinearEntity.coefficients">
 <tt class="descname">coefficients</tt><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.coefficients" title="Permalink to this definition">¶</a></dt>
@@ -192,6 +138,10 @@ find the angle between the two using the above formula.</p>
 </tr>
 </tbody>
 </table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This method is not yet implemented.</p>
+</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -228,9 +178,9 @@ find the angle between the two using the above formula.</p>
 </table>
 </dd></dl>
 
-<dl class="method">
+<dl class="staticmethod">
 <dt id="decodes.core.dc_line.LinearEntity.is_concurrent">
-<tt class="descname">is_concurrent</tt><big>(</big><em>*lines</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.is_concurrent" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><tt class="descname">is_concurrent</tt><big>(</big><em>*lines</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.is_concurrent" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
 <div class="line">Returns True if the set of linear entities are concurrent, False</div>
 <div class="line">otherwise. Two or more linear entities are concurrent if they all</div>
@@ -263,9 +213,9 @@ on the rest of the lines. If so, the lines are concurrent.</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="staticmethod">
 <dt id="decodes.core.dc_line.LinearEntity.is_parallel">
-<tt class="descname">is_parallel</tt><big>(</big><em>l1</em>, <em>l2</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.is_parallel" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><tt class="descname">is_parallel</tt><big>(</big><em>l1</em>, <em>l2</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.is_parallel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns True if l1 and l2 are parallel, False otherwise.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -287,9 +237,9 @@ on the rest of the lines. If so, the lines are concurrent.</p>
 </table>
 </dd></dl>
 
-<dl class="method">
+<dl class="staticmethod">
 <dt id="decodes.core.dc_line.LinearEntity.is_perpendicular">
-<tt class="descname">is_perpendicular</tt><big>(</big><em>l1</em>, <em>l2</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.is_perpendicular" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><tt class="descname">is_perpendicular</tt><big>(</big><em>l1</em>, <em>l2</em><big>)</big><a class="headerlink" href="#decodes.core.dc_line.LinearEntity.is_perpendicular" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns True if l1 and l2 are perpendicular, False otherwise.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />

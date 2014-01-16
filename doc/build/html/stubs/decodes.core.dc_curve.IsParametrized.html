@@ -66,11 +66,11 @@
 
 <dl class="method">
 <dt id="decodes.core.dc_curve.IsParametrized.far">
-<tt class="descname">far</tt><big>(</big><em>pt</em>, <em>tolerance=None</em>, <em>max_recursion=20</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.IsParametrized.far" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">far</tt><big>(</big><em>pt</em>, <em>tolerance=None</em>, <em>max_recursion=20</em>, <em>resolution=8</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.IsParametrized.far" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
 <div class="line">Finds a location on this curve which is furthest from the given Point.</div>
 <div class="line">Unstable and inaccurate.</div>
-<div class="line">Recursive function that searches for closer points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.</div>
+<div class="line">Recursive function that searches for further points (at a given division resolution) until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.</div>
 <div class="line">Returns a tuple containing a Point, a t-value associated with this Point, and the distance from this Point to the given Point.</div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -96,11 +96,11 @@
 
 <dl class="method">
 <dt id="decodes.core.dc_curve.IsParametrized.far_pt">
-<tt class="descname">far_pt</tt><big>(</big><em>pt</em>, <em>tolerance=None</em>, <em>max_recursion=20</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.IsParametrized.far_pt" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">far_pt</tt><big>(</big><em>pt</em>, <em>tolerance=None</em>, <em>max_recursion=20</em>, <em>resolution=8</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.IsParametrized.far_pt" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
 <div class="line">Finds a location on this curve which is furthest from the given Point.</div>
 <div class="line">Unstable and inaccurate.</div>
-<div class="line">Recursive function that searches for further points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.</div>
+<div class="line">Recursive function that searches for further points u (at a given division resolution) ntil the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.</div>
 <div class="line">Returns a Point.</div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -131,11 +131,11 @@
 
 <dl class="method">
 <dt id="decodes.core.dc_curve.IsParametrized.near">
-<tt class="descname">near</tt><big>(</big><em>pt</em>, <em>tolerance=None</em>, <em>max_recursion=20</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.IsParametrized.near" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">near</tt><big>(</big><em>pt</em>, <em>tolerance=None</em>, <em>max_recursion=20</em>, <em>resolution=8</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.IsParametrized.near" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
 <div class="line">Finds a location on this curve which is nearest to the given Point.</div>
 <div class="line">Unstable and inaccurate.</div>
-<div class="line">Recursive function that searches for further points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.</div>
+<div class="line">Recursive function that searches for closer points (at a given division resolution) until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.</div>
 <div class="line">Returns a tuple containing a Point, a t-value associated with this point, and the distance from this Point to the given Point.</div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -161,11 +161,11 @@
 
 <dl class="method">
 <dt id="decodes.core.dc_curve.IsParametrized.near_pt">
-<tt class="descname">near_pt</tt><big>(</big><em>pt</em>, <em>tolerance=None</em>, <em>max_recursion=20</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.IsParametrized.near_pt" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">near_pt</tt><big>(</big><em>pt</em>, <em>tolerance=None</em>, <em>max_recursion=20</em>, <em>resolution=8</em><big>)</big><a class="headerlink" href="#decodes.core.dc_curve.IsParametrized.near_pt" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
 <div class="line">Finds a location on this curve which is nearest to the given Point.</div>
 <div class="line">Unstable and inaccurate.</div>
-<div class="line">Recursive function that searches for further points until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.</div>
+<div class="line">Recursive function that searches for closer points (at a given division resolution) until the search area shrinks to given tolerance (Curve.tol/10 by default) in domain space.</div>
 <div class="line">Returns a Point.</div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">

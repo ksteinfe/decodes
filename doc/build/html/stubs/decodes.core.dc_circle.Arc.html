@@ -61,77 +61,248 @@
 <dl class="method">
 <dt id="decodes.core.dc_circle.Arc.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>cs</em>, <em>radius</em>, <em>sweep_angle</em><big>)</big><a class="headerlink" href="#decodes.core.dc_circle.Arc.__init__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Arc Constructor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>cs</strong> (<em>CS</em>) &#8211; Coordinate system.</li>
+<li><strong>radius</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Radius of arc.</li>
+<li><strong>sweep_angle</strong> &#8211; Angle of arc.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Arc object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Arc</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_circle.Arc.deval">
 <tt class="descname">deval</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_circle.Arc.deval" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Evaluates this Arc and returns a Point. Equivalent to eval.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Normalized value between 0 and 1.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">a Point on the Arc.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_circle.Arc.deval_pln">
 <tt class="descname">deval_pln</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_circle.Arc.deval_pln" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Evaluates this Arc and returns a Plane. Equivalent to eval_pln.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Normalized value between 0 and 1.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">a Plane on the Arc.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Plane</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_circle.Arc.ept">
 <tt class="descname">ept</tt><a class="headerlink" href="#decodes.core.dc_circle.Arc.ept" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the end Point of this Arc.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">End Point of this arc.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_circle.Arc.epts">
 <tt class="descname">epts</tt><a class="headerlink" href="#decodes.core.dc_circle.Arc.epts" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the end points of this Arc.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">End points of this arc.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Point, Point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_circle.Arc.eval">
 <tt class="descname">eval</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_circle.Arc.eval" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluates this Arc and returns a Point.
-:param t: Normalized value between 0 and 1
-:type t: float
-:result: a Point on the Arc.
-:rtype: Point</p>
+<dd><p>Evaluates this Arc and returns a Point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Normalized value between 0 and 1.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">a Point on the Arc.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_circle.Arc.eval_pln">
 <tt class="descname">eval_pln</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#decodes.core.dc_circle.Arc.eval_pln" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluates this Arc and returns a Plane.
-:param t: Normalized value between 0 and 1
-:type t: float
-:result: a Plane on the Arc.
-:rtype: Plane</p>
+<dd><p>Evaluates this Arc and returns a Plane.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Normalized value between 0 and 1.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">a Plane on the Arc.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Plane</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_circle.Arc.from_pts">
 <em class="property">static </em><tt class="descname">from_pts</tt><big>(</big><em>center</em>, <em>start_pt</em>, <em>sweep_pt</em>, <em>is_major=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_circle.Arc.from_pts" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns an arc using a center, a start point and a sweep point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>center</strong> (<em>Point</em>) &#8211; Center Point of Arc.</li>
+<li><strong>start_pt</strong> (<em>Point</em>) &#8211; Start Point of Arc.</li>
+<li><strong>sweep_pt</strong> (<em>Point</em>) &#8211; Sweep Point of Arc.</li>
+<li><strong>is_major</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Boolean Value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Arc</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Arc</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_circle.Arc.from_tan">
 <em class="property">static </em><tt class="descname">from_tan</tt><big>(</big><em>start_pt</em>, <em>sweep_pt</em>, <em>tan</em><big>)</big><a class="headerlink" href="#decodes.core.dc_circle.Arc.from_tan" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns an arc using a start point, a sweep point and a tangent to the arc at the start point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>start_pt</strong> (<em>Point</em>) &#8211; Arc start Point.</li>
+<li><strong>sweep_pt</strong> (<em>Point</em>) &#8211; Arc sweep Point.</li>
+<li><strong>tan</strong> (<em>Vec</em>) &#8211; Tangent vector at start point.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Arc</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Arc</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_circle.Arc.length">
 <tt class="descname">length</tt><a class="headerlink" href="#decodes.core.dc_circle.Arc.length" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns length of this Arc.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Length of arc.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_circle.Arc.origin">
 <tt class="descname">origin</tt><a class="headerlink" href="#decodes.core.dc_circle.Arc.origin" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the origin of the basis of this Arc.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Origin of this Arc&#8217;s basis.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_circle.Arc.spt">
 <tt class="descname">spt</tt><a class="headerlink" href="#decodes.core.dc_circle.Arc.spt" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the start Point of this Arc.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Start Point of this arc.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_circle.Arc.thru_pts">
 <em class="property">static </em><tt class="descname">thru_pts</tt><big>(</big><em>pts_in</em><big>)</big><a class="headerlink" href="#decodes.core.dc_circle.Arc.thru_pts" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a best fit arc using the modified least squares method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pts_in</strong> (<em>[Point]</em>) &#8211; Points to fit Arc to.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Best fit Arc</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Arc</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 

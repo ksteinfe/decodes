@@ -13,6 +13,7 @@ class Circle(Plane):
     
     def __init__(self,plane,radius):
         """ Circle constructor.
+        
             :param plane: Plane the Circle is centered on.
             :type plane: Plane
             :param radius: Radius of the circle.
@@ -30,15 +31,24 @@ class Circle(Plane):
         
     @property
     def plane(self):
+        """ Returns the plane this circles lies on.
+            
+            :result: Plane.
+            :rtype: Plane
+        """
         return Plane(Point(self.x,self.y,self.z),self._vec)
 
         
     def __repr__(self): return "circ[{0},{1},{2},{3},{4},{5} r:{6}]".format(self.x,self.y,self.z,self._vec.x,self._vec.y,self._vec.z,self.rad)
 
     def intersections(self,other):
-        '''
-        returns intersections with another circle
-        '''
+        """ Returns intersections with another circle.
+        
+            :param other: Other circle to intersect.
+            :type other: Circle
+            :result: Boolean value.
+            :rtype: bool
+        """
         warnings.warn("circle.intersections depreciated. please Intersector() instead")
         xsec = Intersector()
         if xsec.of(self,other):
@@ -47,12 +57,23 @@ class Circle(Plane):
     
     @staticmethod
     def mutually_tangent(cir_a,cir_b,tangent_offset=0.0,calc_extras=False):
-        """
-        given two circles, returns a circle that is tangent to both of them.
-        by default, returns the smallest possible circle (where the points of tangency on each given circle lies along a single line), 
-        however, if the tan_offset parameter is set to a value other than zero, then the point of tangency may be explicitly set as a rotation from this smallest tangency point
-        the two given circles must be co-planar
-        calc_extras = True returns the points of tangency as well
+        """| given two circles, returns a circle that is tangent to both of them.
+           | by default, returns the smallest possible circle (where the points of tangency on each given circle lies along a single line), 
+           | however, if the tan_offset parameter is set to a value other than zero, then the point of tangency may be explicitly set as a rotation from this smallest tangency point
+           | the two given circles must be co-planar
+           | calc_extras = True returns the points of tangency as well
+           
+           :param cir_a: First Circle.
+           :type cir_a: Circle.
+           :param cir_b: Second Circle.
+           :type cir_b: Circle
+           :param tangent_offset: Rotation from the smallest tangency point.
+           :type tangent_offset: float
+           :param calc_extras: Boolean Value.
+           :type calc_extras: bool
+           :result: Mutually tangent Circle.
+           :rtype: Circle
+           
         """
         if not cir_a.plane.is_coplanar(cir_b.plane):
             raise GeometricError("Circles must be co-planar.")  
@@ -93,13 +114,26 @@ class Arc(HasBasis):
     """
     
     def __init__(self,cs,radius,sweep_angle):
+        """Arc Constructor
+        
+            :param cs: Coordinate system.
+            :type cs: CS
+            :param radius: Radius of arc.
+            :type radius: float
+            :param sweep_angle: Angle of arc.
+            :type swee_angle: float
+            :result: Arc object
+            :rtype: Arc
+            
+        """
         self._basis = cs
         self.rad = radius
         self.angle = sweep_angle
         
     def eval(self,t):
         """ Evaluates this Arc and returns a Point.
-            :param t: Normalized value between 0 and 1
+        
+            :param t: Normalized value between 0 and 1.
             :type t: float
             :result: a Point on the Arc.
             :rtype: Point
@@ -110,7 +144,8 @@ class Arc(HasBasis):
 
     def eval_pln(self,t):
         """ Evaluates this Arc and returns a Plane.
-            :param t: Normalized value between 0 and 1
+        
+            :param t: Normalized value between 0 and 1.
             :type t: float
             :result: a Plane on the Arc.
             :rtype: Plane
@@ -119,31 +154,74 @@ class Arc(HasBasis):
         return Plane(pt,Vec(self.origin,pt).cross(self._basis.z_axis))
         
     def deval(self,t):
+        """ Evaluates this Arc and returns a Point. Equivalent to eval.
+            
+            :param t: Normalized value between 0 and 1.
+            :type t: float
+            :result: a Point on the Arc.
+            :rtype: Point
+            
+        """
         # only here so that we may use arcs as curves
         return self.eval(t)
 
     def deval_pln(self,t):
+        """ Evaluates this Arc and returns a Plane. Equivalent to eval_pln.
+        
+            :param t: Normalized value between 0 and 1.
+            :type t: float
+            :result: a Plane on the Arc.
+            :rtype: Plane
+        """    
         # only here so that we may use arcs as curves
         return self.eval_pln(t)
         
     @property
     def length(self):
+        """ Returns length of this Arc.
+        
+            :result: Length of arc.
+            :rtype: float
+        """
         return self.rad * self.angle
         
     @property
     def epts(self):
+        """ Returns the end points of this Arc.
+            
+            :result: End points of this arc.
+            :rtype: Point, Point
+        
+        """
         return self.eval(0), self.eval(1) 
         
     @property
     def spt(self):
+        """ Returns the start Point of this Arc.
+        
+            :result: Start Point of this arc.
+            :rtype: Point
+            
+        """
         return self.eval(0)
         
     @property
     def ept(self):
+        """ Returns the end Point of this Arc.
+            
+            :result: End Point of this arc.
+            :rtype: Point
+            
+        """
         return self.eval(1) 
 
     @property
     def origin(self):
+        """ Returns the origin of the basis of this Arc.
+        
+            :result: Origin of this Arc's basis.
+            :rtype: Point
+        """
         return self._basis.origin
         
     def __repr__(self): return "arc[{0},r:{1},sweep angle{2}]".format(self.origin,self.rad,self.angle)
@@ -152,6 +230,19 @@ class Arc(HasBasis):
     # Returns an arc using a start point, a sweep point and a tangent to the arc at the start point
     @staticmethod
     def from_tan(start_pt,sweep_pt,tan):
+        """Returns an arc using a start point, a sweep point and a tangent to the arc at the start point.
+            
+            :param start_pt: Arc start Point.
+            :type start_pt: Point
+            :param sweep_pt: Arc sweep Point.
+            :type sweep_pt: Point
+            :param tan: Tangent vector at start point.
+            :type tan: Vec
+            :result: Arc
+            :rtype: Arc
+            
+        """
+        
         vec_ab = Vec(start_pt, sweep_pt)
         vec_rad = tan.cross(tan.cross(vec_ab))
         ang = vec_ab.angle(vec_rad)
@@ -162,6 +253,21 @@ class Arc(HasBasis):
     # Returns an arc using a center, a start point and a sweep point
     @staticmethod
     def from_pts(center,start_pt,sweep_pt,is_major=False):
+        """ Returns an arc using a center, a start point and a sweep point.
+            
+            :param center: Center Point of Arc.
+            :type center: Point
+            :param start_pt: Start Point of Arc.
+            :type start_pt: Point
+            :param sweep_pt: Sweep Point of Arc.
+            :type sweep_pt: Point
+            :param is_major: Boolean Value.
+            :type is_major: bool
+            :result: Arc
+            :rtype: Arc
+            
+        """
+        
         radius = center.distance(start_pt)
         angle = Vec(center, start_pt).angle(Vec(center, sweep_pt))
         if is_major:
@@ -174,6 +280,15 @@ class Arc(HasBasis):
     #Returns a best fit arc using the modified least squares method
     @staticmethod
     def thru_pts(pts_in):
+        """ Returns a best fit arc using the modified least squares method.
+        
+            :param pts_in: Points to fit Arc to.
+            :type pts_in: [Point]
+            :result: Best fit Arc
+            :rtype: Arc
+            
+        """
+        
         # Get the number of input points
         cnt = len(pts_in)
         # An Arc needs at least 3 points

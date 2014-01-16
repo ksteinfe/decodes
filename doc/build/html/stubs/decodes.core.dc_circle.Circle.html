@@ -62,28 +62,92 @@ inherits all properties of the Plane class</p>
 <dl class="method">
 <dt id="decodes.core.dc_circle.Circle.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>plane</em>, <em>radius</em><big>)</big><a class="headerlink" href="#decodes.core.dc_circle.Circle.__init__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Circle constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>plane</strong> (<em>Plane</em>) &#8211; Plane the Circle is centered on.</li>
+<li><strong>radius</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Radius of the circle.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Circle object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Circle</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_circle.Circle.intersections">
 <tt class="descname">intersections</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#decodes.core.dc_circle.Circle.intersections" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns intersections with another circle</p>
+<dd><p>Returns intersections with another circle.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Circle</em>) &#8211; Other circle to intersect.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body">Boolean value.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="decodes.core.dc_circle.Circle.mutually_tangent">
 <em class="property">static </em><tt class="descname">mutually_tangent</tt><big>(</big><em>cir_a</em>, <em>cir_b</em>, <em>tangent_offset=0.0</em>, <em>calc_extras=False</em><big>)</big><a class="headerlink" href="#decodes.core.dc_circle.Circle.mutually_tangent" title="Permalink to this definition">¶</a></dt>
-<dd><p>given two circles, returns a circle that is tangent to both of them.
-by default, returns the smallest possible circle (where the points of tangency on each given circle lies along a single line), 
-however, if the tan_offset parameter is set to a value other than zero, then the point of tangency may be explicitly set as a rotation from this smallest tangency point
-the two given circles must be co-planar
-calc_extras = True returns the points of tangency as well</p>
+<dd><div class="line-block">
+<div class="line">given two circles, returns a circle that is tangent to both of them.</div>
+<div class="line">by default, returns the smallest possible circle (where the points of tangency on each given circle lies along a single line), </div>
+<div class="line">however, if the tan_offset parameter is set to a value other than zero, then the point of tangency may be explicitly set as a rotation from this smallest tangency point</div>
+<div class="line">the two given circles must be co-planar</div>
+<div class="line">calc_extras = True returns the points of tangency as well</div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>cir_a</strong> (<em>Circle.</em>) &#8211; First Circle.</li>
+<li><strong>cir_b</strong> (<em>Circle</em>) &#8211; Second Circle.</li>
+<li><strong>tangent_offset</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Rotation from the smallest tangency point.</li>
+<li><strong>calc_extras</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Boolean Value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result :</th><td class="field-body"><p class="first">Mutually tangent Circle.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Circle</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="decodes.core.dc_circle.Circle.plane">
 <tt class="descname">plane</tt><a class="headerlink" href="#decodes.core.dc_circle.Circle.plane" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the plane this circles lies on.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Plane.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Plane</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
