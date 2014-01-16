@@ -25,7 +25,7 @@ class Intersector(object):
             :param slice: Index of intersection geometry.
             :type slice: int
             :result: Intersection geometry.
-            :rtype: Intersection
+            :rtype: Intersector
             
         """
         return self._geom[slice]
@@ -35,7 +35,7 @@ class Intersector(object):
         """Returns list of intersection geometries. 
         
             :result: List of intersection geometries.
-            :rtype: [Intersection]
+            :rtype: [Intersector]
             
         """
         return self._geom

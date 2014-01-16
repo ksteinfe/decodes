@@ -48,6 +48,8 @@ class Circle(Plane):
             :type other: Circle
             :result: Boolean value.
             :rtype: bool
+            
+            .. warning:: Please use Intersector() instead.
         """
         warnings.warn("circle.intersections depreciated. please Intersector() instead")
         xsec = Intersector()
