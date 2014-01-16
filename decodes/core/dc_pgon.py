@@ -22,11 +22,45 @@ class PGon(HasPts):
             :returns: PGon object. 
             :rtype: PGon
         """ 
-        #TODO: if i pass in vertices but no basis, try and figure out what the CS should be and project all points to the proper plane
         if basis is None and vertices is None : raise GeometricError("You must define both a basis and a list of vertices to construct a PGon")
+        
+        if basis is None:
+            #if i pass in vertices but no basis, try and figure out what the CS should be and project all points to the proper plane
+            tol=0.000001
+            def appx_eq(a, b):
+                return abs(a-b) < tol
 
-        super(PGon,self).__init__(vertices,basis) #HasPts constructor handles initialization of verts and basis
-        self.basis = CS() if (basis is None) else basis # set the basis after appending the points
+            x_vals,y_vals,z_vals = [v.x for v in vertices],[v.y for v in vertices],[v.z for v in vertices]
+            x_avg,y_avg,z_avg = sum(x_vals)/float(len(x_vals)) , sum(y_vals)/float(len(y_vals)) , sum(z_vals)/float(len(z_vals))
+            cen = Point(x_avg,y_avg,z_avg)
+            if all(appx_eq(x,x_avg) for x in x_vals) or all(appx_eq(y,y_avg) for y in y_vals) or all(appx_eq(z,z_avg) for z in z_vals) :
+                """
+                n = 0
+                x_vec = Vec(cen,vertices[n])
+                while x_vec.length == 0 and n < len(vertices)-1:
+                    n+=1
+                    x_vec = Vec(cen,vertices[n])
+                y_vec = Vec(cen,vertices[n+1])
+                cs = CS(cen,x_vec,y_vec)
+                
+                """
+                cs = CS(vertices[0],Vec(vertices[0],vertices[1]),Vec(vertices[0],cen))
+                verts = [cs.deval(v) for v in vertices]
+                super(PGon,self).__init__([Vec(v.x,v.y) for v in verts],cs)
+            else:
+                plane = Plane.from_pts(vertices[0],vertices[1],vertices[2])
+                if all([plane.near(v)[2] < tol for v in vertices]):
+                    cs = CS(vertices[0],Vec(vertices[0],vertices[1]),Vec(vertices[0],Point.centroid(vertices)))
+                    verts = [cs.deval(v) for v in vertices]
+                    super(PGon,self).__init__([Vec(v.x,v.y) for v in verts],cs)
+                else:
+                    raise GeometricError("Cannot create a polygon from a non-planar set of points")
+                    #warnings.warn("PGon contructed without a basis, setting basis to global CS().")
+                    #super(PGon,self).__init__(vertices) #HasPts constructor handles initialization of verts and basis
+                    #self.basis = CS() # set the basis after appending the points
+        else:
+            super(PGon,self).__init__([Vec(v.x,v.y) for v in vertices],basis) #HasPts constructor handles initialization of verts and basis
+            self.basis = basis # set the basis after appending the points
 
         
     def seg(self,index):
