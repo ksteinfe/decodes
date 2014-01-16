@@ -32,7 +32,7 @@ class Xform(object):
         "\n\t\t[{},{},{},{}]".format(self.m10,self.m11,self.m12,self.m13) +
         "\n\t\t[{},{},{},{}]".format(self.m20,self.m21,self.m22,self.m23) +
         "\n\t\t[{},{},{},{}]".format(self.m30,self.m31,self.m32,self.m33) )
-    
+    '''
     """an Xform can act as a basis for a point"""
     def eval(self,other):
         """Given an Xform, evaluates a Point.
@@ -50,7 +50,7 @@ class Xform(object):
             print("mallard can't quack()")
         tup = self._xform_tuple(other.to_tuple())
         return Point(tup[0],tup[1],tup[2])
-        
+     '''
     
     def strip_translation(self):
         
