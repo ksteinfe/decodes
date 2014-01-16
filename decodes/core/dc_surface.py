@@ -48,15 +48,6 @@ class Surface(IsParametrized):
 
 
     @property
-    def surrogate(self): 
-        """Returns a mesh copy of this surface.
-        
-            :result: Mesh copy of this surface.
-            :rtype: Mesh
-        """
-        return self._surrogate
-
-    @property
     def surrogate(self):
         """Returns a mesh copy of this surface.
         
