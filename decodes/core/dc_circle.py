@@ -12,6 +12,16 @@ class Circle(Plane):
     """
     
     def __init__(self,plane,radius):
+        """ Circle constructor.
+            :param plane: Plane the Circle is centered on.
+            :type plane: Plane
+            :param radius: Radius of the circle.
+            :type radius: float
+            :result: Circle object.
+            :rtype: Circle
+            
+            
+        """
         self.x = plane.x
         self.y = plane.y
         self.z = plane.z
