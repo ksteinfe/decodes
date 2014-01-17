@@ -85,6 +85,12 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+<span class="n">Int</span><span class="o">=</span><span class="n">Interval</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">my_surf</span><span class="o">=</span><span class="n">Surface</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">Int</span><span class="p">,</span><span class="n">Int</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -131,8 +137,10 @@
 <dl class="method">
 <dt id="decodes.core.dc_surface.Surface.deval">
 <tt class="descname">deval</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="headerlink" href="#decodes.core.dc_surface.Surface.deval" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluates this Surface and returns a Point.</p>
-<p>u and v are float values that fall within the defined domain of this Surface.</p>
+<dd><div class="line-block">
+<div class="line">Evaluates this Surface and returns a Point.</div>
+<div class="line">u and v are float values that fall within the defined domain of this Surface.</div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -151,6 +159,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_surf</span><span class="o">.</span><span class="n">deval</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -197,6 +208,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_surf</span><span class="o">.</span><span class="n">deval_curv</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -222,14 +236,19 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_surf</span><span class="o">.</span><span class="n">deval_curviso</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
 <dt id="decodes.core.dc_surface.Surface.deval_pln">
 <tt class="descname">deval_pln</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="headerlink" href="#decodes.core.dc_surface.Surface.deval_pln" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluates this Surface and returns a Plane.</p>
-<p>u and v are float values that fall within the defined domain of this Surface.</p>
-<p>Tangent vector determined by a nearest neighbor at distance Surface.tol/100</p>
+<dd><div class="line-block">
+<div class="line">Evaluates this Surface and returns a Plane.</div>
+<div class="line">u and v are float values that fall within the defined domain of this Surface.</div>
+<div class="line">Tangent vector determined by a nearest neighbor at distance Surface.tol/100</div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -248,6 +267,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_surf</span><span class="o">.</span><span class="n">deval_pln</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -285,9 +307,11 @@
 <dl class="method">
 <dt id="decodes.core.dc_surface.Surface.eval">
 <tt class="descname">eval</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="headerlink" href="#decodes.core.dc_surface.Surface.eval" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluates this Surface and returns a Point.</p>
-<p>u and v are normalized float values (0-&gt;1) which will be remapped to the domain defined by this Surface.</p>
-<p>Equivalent to Surface.deval(Interval.remap(t,Interval(),Surface.domain))</p>
+<dd><div class="line-block">
+<div class="line">Evaluates this Surface and returns a Point.</div>
+<div class="line">u and v are normalized float values (0-&gt;1) which will be remapped to the domain defined by this Surface.</div>
+<div class="line">Equivalent to Surface.deval(Interval.remap(t,Interval(),Surface.domain))</div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -361,9 +385,11 @@
 <dl class="method">
 <dt id="decodes.core.dc_surface.Surface.eval_pln">
 <tt class="descname">eval_pln</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="headerlink" href="#decodes.core.dc_surface.Surface.eval_pln" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluates this Curve and returns a Plane.</p>
-<p>u and v are normalized float values (0-&gt;1) which will be remapped to the domain defined by this Surface.</p>
-<p>Equivalent to Surface.deval(Interval.remap(t,Interval(),Surface.domain)).</p>
+<dd><div class="line-block">
+<div class="line">Evaluates this Curve and returns a Plane.</div>
+<div class="line">u and v are normalized float values (0-&gt;1) which will be remapped to the domain defined by this Surface.</div>
+<div class="line">Equivalent to Surface.deval(Interval.remap(t,Interval(),Surface.domain)).</div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -406,6 +432,13 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_surf</span><span class="o">.</span><span class="n">isopolyline</span><span class="p">(</span><span class="n">u_val</span><span class="o">=</span><span class="mf">3.5</span><span class="p">)</span>
+
+<span class="n">OR</span>
+
+<span class="n">my_surf</span><span class="o">.</span><span class="n">isopolyline</span><span class="p">(</span><span class="n">u_val</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">v_val</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -448,6 +481,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_surf</span><span class="o">.</span><span class="n">surrogate</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -468,6 +504,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_surf</span><span class="o">.</span><span class="n">to_mesh</span><span class="p">()</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="attribute">

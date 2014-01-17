@@ -61,6 +61,10 @@ class Surface(IsParametrized):
             :result: Mesh copy of this surface.
             :rtype: Mesh
             
+            ::
+                
+                my_surf.surrogate
+            
         """
         
         try:
@@ -211,16 +215,19 @@ class Surface(IsParametrized):
 
 
     def deval(self,u,v):
-        """ Evaluates this Surface and returns a Point.
-        
-            u and v are float values that fall within the defined domain of this Surface.
+        """| Evaluates this Surface and returns a Point.
+           | u and v are float values that fall within the defined domain of this Surface.
 
-            :param u: U-value to evaluate the Surface at.
-            :type u: float
-            :param v: V-value to evaluate the Surface at.
-            :type v: float
-            :result: a Point on this Surface.
-            :rtype: Point
+           :param u: U-value to evaluate the Surface at.
+           :type u: float
+           :param v: V-value to evaluate the Surface at.
+           :type v: float
+           :result: a Point on this Surface.
+           :rtype: Point
+            
+           ::
+            
+               my_surf.deval(5,5)
         """
         '''
         # some rounding errors require something like this:
@@ -236,18 +243,20 @@ class Surface(IsParametrized):
 
 
     def deval_pln(self,u,v):
-        """ Evaluates this Surface and returns a Plane.
-        
-            u and v are float values that fall within the defined domain of this Surface.
-            
-            Tangent vector determined by a nearest neighbor at distance Surface.tol/100
+        """| Evaluates this Surface and returns a Plane.
+           | u and v are float values that fall within the defined domain of this Surface.
+           | Tangent vector determined by a nearest neighbor at distance Surface.tol/100
 
-            :param u: U-value to evaluate the Surface at.
-            :type u: float
-            :param v: V-value to evaluate the Surface at.
-            :type v: float
-            :result: a Plane on this Surface.
-            :rtype: Plane
+           :param u: U-value to evaluate the Surface at.
+           :type u: float
+           :param v: V-value to evaluate the Surface at.
+           :type v: float
+           :result: a Plane on this Surface.
+           :rtype: Plane
+           
+           ::
+                
+               my_surf.deval_pln(5,5)
         """
         '''
         # some rounding errors require something like this:
@@ -277,6 +286,10 @@ class Surface(IsParametrized):
             :type calc_extras: bool
             :result: (Curvature at point in U-direction, osculating Circle), (Curvature at point in V-direction, osculating Circle)
             :rtype: (float, Circle), (float, Circle)
+            
+            ::
+            
+                my_surf.deval_curviso(3,5)
             
         """
         # calculates the curvature of the isoparms of this surfaces
@@ -345,6 +358,10 @@ class Surface(IsParametrized):
             :type calc_extras: bool
             :result: The principal directions (CS), minimum curvature, maximum curvature, Gaussian curvature, Mean curvature
             :rtype: CS, float, float, float, float
+            
+            ::
+            
+                my_surf.deval_curv(5,4)
             
         """
         # * eliminate when we have a matrix class or can import numpy
@@ -514,36 +531,32 @@ class Surface(IsParametrized):
         return cs_principal, k1, k2, K, H
 
     def eval(self,u,v):
-        """ Evaluates this Surface and returns a Point.
+        """| Evaluates this Surface and returns a Point.
+           | u and v are normalized float values (0->1) which will be remapped to the domain defined by this Surface.
+           | Equivalent to Surface.deval(Interval.remap(t,Interval(),Surface.domain))
             
-            u and v are normalized float values (0->1) which will be remapped to the domain defined by this Surface.
-            
-            Equivalent to Surface.deval(Interval.remap(t,Interval(),Surface.domain))
-            
-            :param u: U value to evaluate Surface at.
-            :type u: float
-            :param v: V value to evaluate Surface at.
-            :type v: float
-            :result: a Point on this Surface.
-            :rtype: Point
+           :param u: U value to evaluate Surface at.
+           :type u: float
+           :param v: V value to evaluate Surface at.
+           :type v: float
+           :result: a Point on this Surface.
+           :rtype: Point
         """
         if u<0 or u>1 : raise DomainError("u out of bounds.  eval() must be called numbers between 0->1: eval(%s)"%u)
         if v<0 or v>1 : raise DomainError("v out of bounds.  eval() must be called numbers between 0->1: eval(%s)"%v)
         return self.deval(Interval.remap(u,Interval(),self.domain_u),Interval.remap(v,Interval(),self.domain_v))
 
     def eval_pln(self,u,v):
-        """ Evaluates this Curve and returns a Plane.
-        
-            u and v are normalized float values (0->1) which will be remapped to the domain defined by this Surface.
-        
-            Equivalent to Surface.deval(Interval.remap(t,Interval(),Surface.domain)).
+        """| Evaluates this Curve and returns a Plane.
+           | u and v are normalized float values (0->1) which will be remapped to the domain defined by this Surface.
+           | Equivalent to Surface.deval(Interval.remap(t,Interval(),Surface.domain)).
             
-            :param u: U value to evaluate the Surface at.
-            :type u: float
-            :param v: V value to evaluate the Surface at.
-            :type v: float
-            :result: a Plane on this Surface.
-            :rtype: Plane
+           :param u: U value to evaluate the Surface at.
+           :type u: float
+           :param v: V value to evaluate the Surface at.
+           :type v: float
+           :result: a Plane on this Surface.
+           :rtype: Plane
         """
         if u<0 or u>1 : raise DomainError("u out of bounds.  eval() must be called numbers between 0->1: eval(%s)"%u)
         if v<0 or v>1 : raise DomainError("v out of bounds.  eval() must be called numbers between 0->1: eval(%s)"%v)
@@ -641,6 +654,10 @@ class Surface(IsParametrized):
             :param divs_V: Boolean value.
             :type divs_v: bool
             
+            ::
+            
+                my_surf.to_mesh()
+            
         """
         
         if not divs_u : divs_u = int(math.ceil(self.domain_u.delta/self.tol_u))
@@ -707,6 +724,14 @@ class Surface(IsParametrized):
             :type v_val: float or None
             :result: Isocurve of Surface.
             :rtype: Curve
+            
+            ::
+            
+                my_surf.isopolyline(u_val=3.5)
+                
+                OR
+                
+                my_surf.isopolyline(u_val=None, v_val=2.5)
             
         """
     
