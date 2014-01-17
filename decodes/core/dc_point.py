@@ -27,6 +27,19 @@ class Point(Vec):
             :type c: float
             :result: Point object
             :rtype: Point
+            
+            
+            ::
+            
+                pt_a=Point()
+                
+                pt_b=Point(1,1)
+                
+                pt_c=Point(1,1,1)
+                
+                pts=[Point(i,i,i) for i in range(10)]
+                
+            
         """
         super(Point,self).__init__(a,b,c)
     
@@ -35,10 +48,14 @@ class Point(Vec):
            | If a transformation is provided, applies the transformation to this point in a way equivalent to the expression ``other * self``.
            | Otherwise, returns a new point that results from multiplying each of the point's coordinates by the value provided.
         
-           :param other: Point or Vec to be multiplied
-           :type other: Point or Vec
+           :param other: Number to multiply Point by.
+           :type other: float or Xform
            :result: New point
            :rtype: Point
+           
+           ::
+           
+                pt_a * 5
         """
         from .dc_xform import Xform
         if isinstance(other, Xform) : return other*self
@@ -54,6 +71,10 @@ class Point(Vec):
            :type other: Point or Vec
            :result: New point.
            :rtype: Point
+           
+           ::
+                
+                pt_a + pt_b
         """
         return Point(self.x+other.x , self.y+other.y, self.z+other.z)
     
@@ -66,6 +87,10 @@ class Point(Vec):
            :type other: Point or Vec
            :result: New point.
            :rtype: Point
+           
+           ::
+           
+                pt_a - pt_b
         """
         return Point(self.x-other.x , self.y-other.y, self.z-other.z)
 
@@ -75,10 +100,14 @@ class Point(Vec):
            | Returns a new point that results from dividing each of this point's world coordinates by the value provided.
            | No matter the basis of the inputs, the resulting point will have no basis.
         
-           :param other: Point or Vec to be divided
-           :type other: Point or Vec
+           :param other: Number to divide Point by.
+           :type other: float.
            :result: New point
            :rtype: Point
+           
+           ::
+           
+                pt_a / 5
         """
         return Point(self.x/float(other), self.y/float(other), self.z/float(other))
 
@@ -92,6 +121,10 @@ class Point(Vec):
             :type other: Point
             :result: Boolean result of comparison
             :rtype: bool
+            
+            ::
+            
+                pt_a < pt_b
         """
         try:
             if self.z < other.z : return True
@@ -170,6 +203,10 @@ class Point(Vec):
             :type other: Point
             :result: Distance squared between points
             :rtype: float
+            
+            ::
+            
+                pt_a.distance2(pt_b)
         """
         return Vec(self,other).length2
 
@@ -180,6 +217,10 @@ class Point(Vec):
             :type other: Point
             :result: Distance between points
             :rtype: float
+            
+            ::
+            
+                pt_a.distance(pt_b)
         """
         return Vec(self,other).length
     
@@ -190,6 +231,10 @@ class Point(Vec):
             :type other: Vec
             :result: A point projected onto a Vector
             :rtype: Point
+            
+            ::
+            
+                pt_a.projected(Vec(1,1,1))
         """
         return Point( Vec(self.x,self.y,self.z).projected(other) )
 
@@ -203,6 +248,10 @@ class Point(Vec):
             :type pts: Point
             :result: A point from the list which is nearest to the source point
             :rtype: Point
+            
+            ::
+            
+                Point.near(pt_a,pts)
         """
         return pts[Point.near_index(pt,pts)]
 
@@ -216,6 +265,11 @@ class Point(Vec):
             :type pts: Point
             :result: The index of the nearest point
             :rtype: int
+            
+            ::
+            
+                Point.near_index(pt_a, pts)
+                
         """
         dists = [pt.distance2(p) for p in pts]
         return dists.index(min(dists))
@@ -230,6 +284,10 @@ class Point(Vec):
             :type pts: Point
             :result: A point from the list which is furthest from the source point
             :rtype: Point
+            
+            ::
+            
+                Point.far(pt_a, pts)
         """
         return pts[Point.far_index(pt,pts)]
 
@@ -243,6 +301,10 @@ class Point(Vec):
             :type pts: Point
             :result: The index of the furthest point
             :rtype: int
+            
+            ::
+            
+                Point.far_index(pt_a, pts)
         """
         dists = [pt.distance2(p) for p in pts]
         return dists.index(max(dists))
@@ -259,6 +321,10 @@ class Point(Vec):
             :type t: float
             :result: Interpolated point
             :rtype: Point
+            
+            ::
+            
+                Point.interpolate(pt_a, pt_b)
         """
         v = Vec.interpolate(p0,p1,t)
         return Point(v.x,v.y,v.z)
@@ -271,6 +337,10 @@ class Point(Vec):
             :type points: [Point]
             :result: Centroid of point cloud.
             :rtype: Point
+            
+            ::
+            
+                Point.centroid(pts)
         """
         return Point( Vec.average(points) )
     
@@ -284,6 +354,10 @@ class Point(Vec):
             :type constrain2d: bool
             :result: Random point
             :rtype: Point
+            
+            ::
+            
+                Point.random(Interval(0,10))
         """
         if interval is None:
             interval = Interval(-1.0,1.0)
@@ -303,6 +377,10 @@ class Point(Vec):
             :type threshold: float
             :result: List of points without duplicates
             :rtype: List
+            
+            ::
+            
+                Point.cull_duplicates(pts)
         """
         if threshold == None:
             culled_pts = []
