@@ -66,7 +66,7 @@ class CS(Geometry, Basis):
         return Point(self.origin + ((self.x_axis*x)+(self.y_axis*y)+(self.z_axis*z)))
 
     def deval(self,a,b=0,c=0):
-        """ Evaluates the given coordinates (or coordinates contained within a given Point) and returns a Point in this CS.
+        """ Evaluates the given coordinates (or coordinates contained within a given Point) and returns a Vector between the origin of this CS and the point.
             
             :param a: Point or decimal number.
             :type a: Point or float
@@ -74,8 +74,8 @@ class CS(Geometry, Basis):
             :type b: None or float
             :param c: None or decimal number.
             :type c: None or float
-            :result: Point in CS coordinates.
-            :rtype: Point
+            :result: Vector in this CS.
+            :rtype: Vec
             
         """
         from .dc_line import Line  
