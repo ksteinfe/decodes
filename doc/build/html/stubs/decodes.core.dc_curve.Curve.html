@@ -83,7 +83,10 @@ The function should expect a single parameter t(float), and return a Point.</p>
 </tr>
 </tbody>
 </table>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">Example</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">u</span><span class="p">),</span><span class="n">u</span><span class="p">)</span>
+<span class="n">Inv</span><span class="o">=</span><span class="n">Interval</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">crv</span> <span class="o">=</span> <span class="n">Curve</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">Inv</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -194,6 +197,9 @@ The function should expect a single parameter t(float), and return a Point.</p>
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">a_len</span><span class="o">=</span><span class="n">crv</span><span class="o">.</span><span class="n">appx_length</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="staticmethod">
@@ -260,6 +266,9 @@ The function should expect a single parameter t(float), and return a Point.</p>
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">d_pt</span><span class="o">=</span><span class="n">curv</span><span class="o">.</span><span class="n">deval</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -330,6 +339,9 @@ The function should expect a single parameter t(float), and return a Point.</p>
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">divs</span><span class="o">=</span><span class="n">crv</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -479,6 +491,9 @@ The function should expect a single parameter t(float), and return a Point.</p>
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">sub_curv</span><span class="o">=</span><span class="n">crv</span><span class="o">.</span><span class="n">subcurve</span><span class="p">(</span><span class="n">Interval</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>            
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -506,6 +521,19 @@ The function should expect a single parameter t(float), and return a Point.</p>
 <dt id="decodes.core.dc_curve.Curve.surrogate">
 <tt class="descname">surrogate</tt><a class="headerlink" href="#decodes.core.dc_curve.Curve.surrogate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a polyline representation of this curve. The number of points in the resulting PLine is related to the tolerance (tol) of this curve.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Result :</th><td class="field-body">Polyline of curve.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">PLine</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">surg</span><span class="o">=</span><span class="n">crv</span><span class="o">.</span><span class="n">surrogate</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="attribute">

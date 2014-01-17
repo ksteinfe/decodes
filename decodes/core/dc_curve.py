@@ -48,6 +48,16 @@ class IsParametrized(Geometry):
            :type max_recursion: int
            :result: Tuple containing a Point, a t-value associated with this point, and the distance from this Point to the given Point.
            :rtype: (Point, float, float)
+           
+           ::
+
+                def func(u):
+                    return Point(math.sin(u),u)
+                Inv=Interval(0,20)
+                crv = Curve(func,Inv)
+
+                n_tup=crv.near(Point(0,0,0))
+
         """
         if tolerance is None : tolerance = self.tol/10.0
         t = self._nearfar(Point.near_index,pt,tolerance,max_recursion,resolution)
@@ -86,6 +96,16 @@ class IsParametrized(Geometry):
            :type max_recursion: int
            :result: Tuple containing a Point, a t-value associated with this point, and the distance from this Point to the given Point.
            :rtype: (Point, float, float)
+           
+           ::
+           
+                def func(u):
+                    return Point(math.sin(u),u)
+                Inv=Interval(0,20)
+                crv = Curve(func,Inv)   
+                
+                f_tup=crv.far(Point(0,0,0))
+                      
         """
         if tolerance is None : tolerance = self.tol/10.0
         t = self._nearfar(Point.far_index,pt,tolerance,max_recursion,resolution)
@@ -135,7 +155,10 @@ class Curve(HasBasis,IsParametrized):
             
            :: 
            
-                Example
+                def func(u):
+                    return Point(math.sin(u),u)
+                Inv=Interval(0,20)
+                crv = Curve(func,Inv)
         """
         if function is not None : self._func = function
         self._dom = domain
@@ -158,6 +181,14 @@ class Curve(HasBasis,IsParametrized):
     @property
     def surrogate(self): 
         """ Returns a polyline representation of this curve. The number of points in the resulting PLine is related to the tolerance (tol) of this curve.
+        
+            :result: Polyline of curve.
+            :rtype: PLine
+            
+            ::
+            
+                surg=crv.surrogate
+        
         """
         return self._surrogate
 
@@ -167,6 +198,10 @@ class Curve(HasBasis,IsParametrized):
             
             :result: Approximate length of a curve.
             :rtype: float
+            
+            ::
+            
+                a_len=crv.appx_length
         """
         return self._surrogate.length
 
@@ -230,6 +265,11 @@ class Curve(HasBasis,IsParametrized):
            :type t: float
            :result: Point on the Curve.
            :rtype: Point
+           
+           ::
+           
+                d_pt=curv.deval(0.5)
+
             
         """
         if t<self.domain.a or t>self.domain.b : 
@@ -307,6 +347,7 @@ class Curve(HasBasis,IsParametrized):
            :type t: float
            :result: a Point on the Curve.
            :rtype: Point
+
         """
         if t<0 or t>1 : raise DomainError("eval() must be called with a number between 0->1: eval(%s)"%t)
         return self.deval(Interval.remap(t,Interval(),self.domain))
@@ -415,6 +456,10 @@ class Curve(HasBasis,IsParametrized):
            :type include_last: bool
            :returns: List of points 
            :rtype: [Point]
+           
+           ::
+           
+                divs=crv.divide(5)
         """
         return [self.deval(t) for t in self.domain.divide(divs,include_last)]
 
@@ -426,6 +471,7 @@ class Curve(HasBasis,IsParametrized):
            :type divs: int
            :returns: List of sub-Curves. 
            :rtype: [Curve]
+           
         """
         curves = []
         for subd in self.domain//divs: curves.append(self.subcurve(subd,self.tol/divs))
@@ -434,12 +480,16 @@ class Curve(HasBasis,IsParametrized):
     def subcurve(self,domain,tol=None):
         """ Returns a new Curve which is a copy of this Curve with the given Interval as the domain.
         
-            :param domain: New curve with a new given interval.
-            :type domain: Interval
-            :param tol: Tolerance of point on a subcurve.
-            :type tol: float
-            :result: Copy of curve with new domain.
-            :rtype: Curve
+           :param domain: New curve with a new given interval.
+           :type domain: Interval
+           :param tol: Tolerance of point on a subcurve.
+           :type tol: float
+           :result: Copy of curve with new domain.
+           :rtype: Curve
+            
+           ::
+                
+                sub_curv=crv.subcurve(Interval(5,10))            
         """
         if tol is None: tol = self.tol
         if tol > domain.delta/10.0 : tol = domain.delta/10.0
