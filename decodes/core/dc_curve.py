@@ -124,14 +124,18 @@ class Curve(HasBasis,IsParametrized):
     def __init__(self, function=None, domain=Interval(0,1), tolerance=None, basis=None):
         """ Constructs a Curve object. If tolerance is None, Curve.tol = tol_max().
         
-            :param function: A function returning points.
-            :type function: function
-            :param domain: Domain for curve points.
-            :type domain: Interval
-            :param tolerance: The tolerance of this curve expressed in domain space.
-            :type tolerance: float
-            :result: Curve object.
-            :rtype: Curve
+           :param function: A function returning points.
+           :type function: function
+           :param domain: Domain for curve points.
+           :type domain: Interval
+           :param tolerance: The tolerance of this curve expressed in domain space.
+           :type tolerance: float
+           :result: Curve object.
+           :rtype: Curve
+            
+           :: 
+           
+                Example
         """
         if function is not None : self._func = function
         self._dom = domain
