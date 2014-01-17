@@ -3,19 +3,25 @@ from decodes.core import *
 #import decodes.unit_tests
 
 
-pln_a = Plane(Point(0,0,2),Vec(1,0))
-pln_b = Plane(Point(),Vec(0,0,1))
-cs = CS(Point(0,0,2),Vec(0,0,-1),Vec(0,1))
+cs = CS.on_xy(1,1,x_vec=Vec(0,1))
+cs = CS()
+pt_a = cs.eval_cyl(1,math.pi,0)
+pt_b = cs.eval_cyl(1,math.pi/2,0)
+pt_c = cs.eval_cyl(1,math.pi*3/2,0)
 
-#circ = Circle(pln_a,1.0)
-arc = Arc(cs,3.0,math.pi)
+pt_d = cs.eval_cyl(1,math.pi+0.1,0)
+pt_e = cs.eval_cyl(1,math.pi-0.1,0)
 
-xsec = Intersector()
-if xsec.of(pln_b,arc):
-    print "xsec found!"
+print pt_a
+print cs.deval_cyl(pt_a)
 
-print xsec.log
-print xsec.log
+print pt_b
+print cs.deval_cyl(pt_b)
 
+print pt_c
+print cs.deval_cyl(pt_c)
 
-#raw_input("press enter...")
+print cs.deval_cyl(pt_d)
+print cs.deval_cyl(pt_e)
+
+raw_input("press enter...")

@@ -90,6 +90,55 @@ class CS(Geometry, Basis):
         zz = Line(self.origin,self.z_axis).near(pt)[1]
         return Vec(xx,yy,zz)
 
+    def eval_cyl(self,radius,radians,z=0):
+        """ Returns a Point relative to this CS given three cylindrical coordinates.
+        
+            :param radius: number representing the distance of the resulting Point from the origin of this CS.
+            :type radius: float
+            :param radians: number representing the rotation angle (in radians) of the resulting Point measured from the x-axis of this CS.
+            :type radians: float
+            :param z: number representing the distance of the resulting Point from the xy_plane of this CS.
+            :type z: float
+            :result: A Point in a cylindrical space.
+            :rtype: Point
+            
+        """
+        pt = Point( radius * math.cos(radians), radius * math.sin(radians), z)
+        return self.eval(pt)
+
+    def deval_cyl(self,a,b=0,c=0):
+        """ Evaluates the given coordinates (or coordinates contained within a given Point) and returns a tuple containing the cylindrical coordinate representation of this Point relative to this CS.
+            
+            :param a: Point or decimal number.
+            :type a: Point or float
+            :param b: None or decimal number.
+            :type b: None or float
+            :param c: None or decimal number.
+            :type c: None or float
+            :result: Tuple of cylindrical coordinates - radius, radians, z.
+            :rtype: (float, float, float)
+            
+        """
+        vec = self.deval(a,b,c)
+        z = vec.z
+        vec.z = 0
+        radius = vec.length
+        ang = vec.angle(self.x_axis)
+
+        vec_lcl = self.deval(a,b,c)
+        z = vec_lcl.z
+        vec_lcl.z = 0
+        radius = vec_lcl.length
+    
+        vec_gbl = Vec(self.origin,self.eval(vec_lcl.x,vec_lcl.y))
+        ang = vec_gbl.angle(self.x_axis)
+
+        if not self.x_axis.is_parallel(vec_gbl):
+            crs = self.x_axis.cross(vec_gbl)
+            if crs.angle(self.z_axis) > math.pi/2 : ang = math.pi*2-ang
+
+        return(radius,ang,z)
+
     @property
     def xform(self):
         """ Returns the Xform that corresponds to the transformation from world space to CS space.
