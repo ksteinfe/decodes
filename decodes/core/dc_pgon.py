@@ -381,7 +381,9 @@ class PGon(HasPts):
         
             :param cpt: Center point of a rectangle.
             :type cpt: Point
-            :param angle_interval: Radii interval.
+            :param radius_interval: Radii interval.
+            :type radius_interval: Interval
+            :param angle_interval: Angle interval.
             :type angle_interval: Interval
             :param res: Doughnut resolution.
             :type res: float
