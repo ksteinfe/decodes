@@ -130,6 +130,10 @@ class Intersector(object):
 
             if type_other == PLine : return self._pline_plane(other,plane)
 
+            if type_other == Circle : return self._circle_plane(other,plane)
+
+            if type_other == Arc : return self._arc_plane(other,plane)
+
             if type_other == Plane : return self._plane_plane(other,plane)
 
 
@@ -142,6 +146,7 @@ class Intersector(object):
             else: circ,other,type_other = b,a,type_a
 
             if type_other == Circle : return self._circle_circle(other,circ)
+
 
             
         # INTERSECTIONS WITH A PGON
@@ -168,7 +173,7 @@ class Intersector(object):
         raise NotImplementedError("I don't know how to intersect a %s with a %s"%(type_a.__name__,type_b.__name__))
 
 
-    def _pgon_plane(self,line,plane,ignore_backface=False):
+    def _pgon_plane(self,pgon,plane,ignore_backface=False):
         """ Intersects a Polygon with a Plane. Upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection.
         
             :param line: Line to intersect.
@@ -403,6 +408,91 @@ class Intersector(object):
         return True
         """
 
+    def _circle_plane(self,circ,plane):
+        xsec = Intersector()
+        plane_success = xsec._plane_plane(circ,plane)
+        if not plane_success : 
+            self.log = xsec.log
+            return False
+        
+        self.line = xsec._geom[0] # add plane-plane intersection line
+        npt, t, dist = self.line.near(circ.origin)
+        x_vec = Vec(circ.origin,npt)
+        if x_vec.length < self.tol : x_vec = Vec(circ.origin,self.line.ept)
+        if x_vec.length < self.tol : x_vec = Vec(circ.origin,self.line.spt)
+
+        cs = CS(circ.origin,x_vec,circ.normal.cross(x_vec))
+        p0 = cs.deval(self.line.spt)
+        p1 = cs.deval(self.line.spt+self.line.vec)
+
+        # circle-line intersection
+        # TODO: move this to its own method
+        dx = p1.x - p0.x
+        dy = p1.y - p0.y
+        dr = math.sqrt(dx**2+dy**2)
+        d = (p0.x*p1.y) - (p1.x*p0.y)
+
+        discr = circ.rad**2 * dr**2 - d**2
+        if discr < 0 :
+            self.log = "Circle does not intersect with given Plane"
+            return False
+        elif discr == 0:
+            self.log = "Circle intersects Plane at a tangent Point"
+            self.append(npt)
+            return True
+        elif discr > 0:
+            self.log = "Circle intersects Plane at two Points"
+            discr2 = math.sqrt(discr)
+            dr2 = dr**2
+            def sgn(x):
+                if x > 0 : return -1
+                return 1
+
+            x0 = (d * dy + sgn(dy) * dx * discr2) / dr2
+            x1 = (d * dy - sgn(dy) * dx * discr2) / dr2
+            y0 =(-d * dx + abs(dy) * discr2) / dr2
+            y1 =(-d * dx - abs(dy) * discr2) / dr2
+
+            self.append(cs.eval(x0,y0))
+            self.append(cs.eval(x1,y1))
+            return True
+
+        return False
+
+    def _arc_plane(self,arc,plane):
+        # TODO: THIS IS NOT BEHAVING WELL.
+        # check that angle is accounting for > 180deg below
+        xsec = Intersector()
+        circ = Circle(arc.basis.xy_plane,arc.rad)
+        circle_success = xsec._circle_plane(circ,plane)
+        if not circle_success : 
+            self.log = xsec.log
+            self.log = "Plane failed to intersect with Circle derived from given Arc: "+xsec.log
+            return False
+        else:
+            n=0
+            for pt in xsec.results:
+                n+=1
+                vec = Vec(arc.origin,pt)
+                ang = vec.angle(arc.basis.x_axis)
+                if ang == 0:
+                    self.append(pt)
+                    continue
+                if not CS(arc.origin,arc.basis.x_axis,vec).z_axis.is_coincident(arc.basis.z_axis):
+                    # look here!
+                    pass
+                    ang = math.pi*2 - ang
+                if ang <= arc.angle: 
+                    self.append(pt)
+                else:
+                    self.log = "One of the intersection Points do not fall within sweep angle of this Arc: pt_angle={0} arc_angle={1} pt_num={2}".format(ang,arc.angle,n)
+        
+        if len(self)==0:
+            self.log = "Intersection Points do not fall within sweep angle of this Arc"
+
+        return len(self)>0 
+
+
     def _line_line(self,ln_a,ln_b):
         """Intersects two lines.
             
@@ -480,7 +570,7 @@ class Intersector(object):
             
         """
         # TODO: this func currently only works on co-planar circles
-        # TODO: move this functionality to the intersections class
+
         if not cir_a.plane.is_coplanar( cir_b.plane ) : 
             self.log = "Circles are not coplanar. Try checking the normal direction of the circle base planes, as these must align in order to be coplanar."
             return False
