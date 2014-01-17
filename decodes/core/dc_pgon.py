@@ -21,6 +21,17 @@ class PGon(HasPts):
             :type basis: Basis
             :returns: PGon object. 
             :rtype: PGon
+            
+            ::
+            
+                pts=[
+                    Point(0,0,0),
+                    Point(0,1,0),
+                    Point(1,1,0),
+                    Point(1,0,0)
+                    ]
+                    
+                my_pgon=PGon(pts)
         """ 
         if basis is None and vertices is None : raise GeometricError("You must define both a basis and a list of vertices to construct a PGon")
         
@@ -95,6 +106,10 @@ class PGon(HasPts):
             :result: List of edges of a PGon
             :rtype: [Segment]
             
+            ::
+            
+                my_pgon.edges
+            
         """
         edges = []
         for n in range(len(self)):
@@ -108,6 +123,10 @@ class PGon(HasPts):
             :result: Area of PGon.
             :rtype: float
             
+            ::
+            
+                my_pgon.area
+            
         """
         a = 0
         for n in range(len(self._verts)): a += (self._verts[n-1].x + self._verts[n].x) * (self._verts[n-1].y - self._verts[n].y)
@@ -119,6 +138,10 @@ class PGon(HasPts):
         
             :result: Bounding box of polygon.
             :rtype: Bounds
+            
+            ::
+            
+                my_pgon.bounds
             
         """
 
@@ -193,6 +216,10 @@ class PGon(HasPts):
            :type t: float
            :result: Point on PGon.
            :rtype: Point
+           
+           ::
+           
+                my_pgon.eval(0.5)
                 
         """
         if t > 1 : t = t%1.0
@@ -215,6 +242,10 @@ class PGon(HasPts):
             :type p: Point
             :result: Nearest point on the PGon, index of the segment of this PGon on which this Point lies, the t-value along this segment, and the distance from the given Point.
             :rtype: (Point, integer, float, float)
+            
+            ::
+            
+                my_pgon.near(Point(0,0,0))
         """
         npts = [seg.near(p) for seg in self.edges]
         npts = [(tup[0],tup[1],tup[2],n) for n,tup in enumerate(npts)] # add index
@@ -228,6 +259,10 @@ class PGon(HasPts):
             :type p: Point
             :result: Near point on PGon.
             :rtype: Point
+            
+            ::
+            
+                my_pgon.near_pt(Point(0,0,0))
         """
         return self.near(p)[0]
 
@@ -267,6 +302,10 @@ class PGon(HasPts):
            :type rotation: float
            :result: A polygon inscribed of this one.
            :rtype: PGon
+           
+           ::
+           
+                my_pgon.inflate()
         """
         
         ipts = [Vec.interpolate(self._verts[n],self._verts[n-1],rotation) for n in range(len(self._verts))]
@@ -281,6 +320,10 @@ class PGon(HasPts):
             :type tolerance: float
             :result: Boolean Value.
             :rtype: bool
+            
+            ::
+            
+                my_pgon.constains_pt(Point(0,0,0))
             
         """
         
@@ -325,6 +368,12 @@ class PGon(HasPts):
             :result: Boolean Value.
             :rtype: bool
             
+            ::
+            
+                my_pgon2=PGon([Point(1,1,0), Point(1,2,0), Point(2,2,0), Point(2,1,0)])
+                
+                my_pgon.overlaps(my_pgon2)
+            
         """
         if not self.basis.xy_plane.is_coplanar(other.basis.xy_plane): return False
 
@@ -348,6 +397,10 @@ class PGon(HasPts):
             :type pt_c: Point
             :result: Triangular polygon.
             :rtype: PGon
+            
+            ::
+            
+                PGon.triangle(Point(0,0,0), Point(1,2,3), Point(4,5,6))
         
         """
         cen = Point.centroid([pt_a,pt_b,pt_c])
@@ -369,6 +422,10 @@ class PGon(HasPts):
             :type h: float
             :returns: Rectangle (PGon object). 
             :rtype: PGon
+            
+            ::
+            
+                PGon.rectangle(Point(0,0,0), 5, 10)
         """ 
         w2 = w/2.0
         h2 = h/2.0
@@ -391,13 +448,11 @@ class PGon(HasPts):
             :rtype: PGon
             
         """ 
-        cs = CylCS(cpt)
+        cs = CS(cpt)
         pts = []
-        
-        def cyl_pt(rad,ang): return Point(rad,ang,basis=cs).basis_applied()
 
-        for t in angle_interval.divide(res,True):pts.append(cyl_pt(radius_interval.a,t))
-        for t in angle_interval.invert().divide(res,True):pts.append(cyl_pt(radius_interval.b,t))
+        for t in angle_interval.divide(res,True):pts.append(cs.eval_cyl(radius_interval.a,t))
+        for t in angle_interval.invert().divide(res,True):pts.append(cs.eval_cyl(radius_interval.b,t))
         return PGon(pts)
 
 class RGon(PGon):
@@ -421,6 +476,14 @@ class RGon(PGon):
             :type apothem: float
             :result: Polygon.
             :rtype: RGon
+            
+            ::
+            
+                my_rgon=RGon(num_of_sides=5, radius=2.0, edge_length=3.5)
+                
+                OR
+                
+                my_rgon2=RGon(num_of_sides=4, radius=3, apothem=4.5)
         
         """ 
         self._in_init = True
@@ -476,6 +539,11 @@ class RGon(PGon):
         
             :result: Area of the polygon.
             :rtype: float
+            
+            ::
+            
+                my_rgon.area
+                
         """
         try:
             return self._area
@@ -489,6 +557,11 @@ class RGon(PGon):
         
             :result: Apothem of the polygon.
             :rtype: float
+            
+            ::
+            
+                my_rgon.apothem
+                
         """
         try:
             return self._apothem
@@ -503,6 +576,10 @@ class RGon(PGon):
             :result: The length of any edge.
             :rtype: float
             
+            ::
+            
+                my_rgon.edge_length
+                
         """
         try:
             return self._edge_length
@@ -516,6 +593,10 @@ class RGon(PGon):
         
             :result: Inscribed circle.
             :rtype: Circle
+            
+            ::
+            
+                my_rgon.circle_inscr
             
         """
         return Circle(self.basis.xy_plane,self.radius)
@@ -536,6 +617,10 @@ class RGon(PGon):
         
             :result: Interior angle in radians.
             :rtype: float
+            
+            ::
+            
+                my_rgon.interior_angle
         """
         try:
             return self._iangle
@@ -551,6 +636,10 @@ class RGon(PGon):
             :result: An regular inscribed polygon.
             :rtype: RGon
             
+            ::
+            
+                my_rgon.inflate()
+            
         """
         o = self.basis.origin
         x = Vec(o,Point.interpolate(self.pts[0],self.pts[1]))
@@ -563,6 +652,10 @@ class RGon(PGon):
         
             :result: a regular polygon circumscribing this one.
             :rtype: RGon
+            
+            ::
+            
+                my_rgon.deflate()
             
         """
         
@@ -578,6 +671,9 @@ class RGon(PGon):
             :result: A polygon.
             :rtype: PGon
             
+            ::
+            
+                my_rgon.to_pgon()
         """
         return PGon(self._verts,self.basis)
 
@@ -596,6 +692,10 @@ class RGon(PGon):
             :type normal: Vec
             :result: Regular polygon.
             :rtype: RGon
+            
+            ::
+            
+                new_rgon=RGon.from_edge(Segment.by_coords2d(0,0,0,5),5, Vec(0,1,0))
             
         """
         apothem = segment.length / (2.0 * math.tan(math.pi/num_of_sides))

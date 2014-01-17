@@ -29,6 +29,13 @@ class Surface(IsParametrized):
             :type tol_v: float
             :result: Surface object.
             :rtype: Surface
+            
+            ::
+            
+                def func(u,v):
+                    return Point(u,v)
+                Int=Interval(1,20)
+                my_surf=Surface(func,Int,Int)
         """
         if function is not None : self._func = function
         self._dom = dom_u, dom_v
