@@ -21,6 +21,15 @@ class Vec(Geometry):
             :type c: float
             :result: Vector object.
             :rtype: Vec
+            
+            ::
+            
+                my_vec=Vec(1,1,1)
+                
+                vec_1=Vec(Point(1,1,1))
+                
+                vec_2=Vec(Point(0,0,0), Point(1,1,1))
+
         """
         if a is None : a = 0
         if b is None : b = 0
@@ -92,6 +101,10 @@ class Vec(Geometry):
            :type vec: Vec
            :result: New Vec.
            :rtype: Vec
+           
+           ::
+           
+                my_vec + vec_1
         """    
         return Vec(self.x+vec.x , self.y+vec.y, self.z+vec.z)
     
@@ -103,6 +116,10 @@ class Vec(Geometry):
            :type vec: Vec
            :result: New Vec.
            :rtype: Vec
+           
+           ::
+           
+                my_vec - vec_1          
         """    
         return Vec(self.x-vec.x , self.y-vec.y, self.z-vec.z)
     
@@ -117,6 +134,10 @@ class Vec(Geometry):
            :type scalar: float
            :result: New Vec.
            :rtype: Vec
+           
+           ::
+           
+                my_vec / 2           
         """  
         return Vec(self.x/float(scalar), self.y/float(scalar), self.z/float(scalar))
     
@@ -127,6 +148,11 @@ class Vec(Geometry):
         
            :result: Inverted Vec.
            :rtype: Vec
+           
+           ::
+                
+                my_vec.__invert__()
+                
         """  
         return self.inverted()
 
@@ -137,6 +163,7 @@ class Vec(Geometry):
         
            :result: Inverted Vec.
            :rtype: Vec
+           
         """  
         return self.inverted()
 
@@ -149,6 +176,10 @@ class Vec(Geometry):
            :type other: float or Vec
            :result: New Vec.
            :rtype: Vec
+           
+           ::
+           
+                my_vec * vec_1
         """  
         from .dc_xform import Xform
         if isinstance(other, Xform) :
@@ -176,6 +207,10 @@ class Vec(Geometry):
             :type other: Vec
             :result: Boolean result of comparison.
             :rtype: bool
+            
+            ::
+            
+                my_vec < (vec_1)
         """
         return self.length2 < other.length2
     def __le__(self, other):
@@ -235,6 +270,10 @@ class Vec(Geometry):
             :type tol: float
             :result: Boolean result of comparison.
             :rtype: bool
+            
+            ::
+            
+                my_vec.is_identical(vec_1)
         """   
         try:
             if not tol:
@@ -251,6 +290,10 @@ class Vec(Geometry):
             :type other: Vec
             :result: Boolean result of comparison.
             :rtype: bool
+            
+            ::
+            
+                my_vec.is_coincident(vec_1)
         """   
         return self.normalized().is_identical( other.normalized() )
     
@@ -261,6 +304,10 @@ class Vec(Geometry):
             :type other: Vec
             :result: Boolean result of comparison.
             :rtype: bool
+            
+            ::
+            
+                my_vec.is_parallel(vec_1)
         """   
         return self.is_coincident(other) or self.inverted().is_coincident(other)
 
@@ -271,6 +318,10 @@ class Vec(Geometry):
         
             :result: True if 2d.
             :rtype: bool
+            
+            ::
+            
+                my_vec.is_2d
         """   
         return True if (self.z==0) else False
     
@@ -280,6 +331,10 @@ class Vec(Geometry):
         
             :result: Length of the Vec.
             :rtype: float
+            
+            ::
+            
+                my_vec.length
         """
         return math.sqrt(self.x * self.x + self.y * self.y + self.z * self.z)
     
@@ -289,6 +344,10 @@ class Vec(Geometry):
         
             :result: Length of the Vec.
             :rtype: float
+            
+            ::
+            
+                my_vec.length2
         """
         return self.x ** 2 + self.y ** 2 + self.z ** 2
     
@@ -317,6 +376,10 @@ class Vec(Geometry):
             :type t: float
             :result: Interpolated vector.
             :rtype: Vec
+            
+            ::
+            
+                Vec.interpolate(vec_1, vec_2)
         """
         x = (1-t) * v0.x + t * v1.x
         y = (1-t) * v0.y + t * v1.y
@@ -335,6 +398,10 @@ class Vec(Geometry):
             :type constrain2d: bool
             :result: Random vector.
             :rtype: Vec
+            
+            ::
+                            
+                Vec.random(Interval(1,10))
         """
         if interval is None:
             interval = Interval(-1,1)
@@ -353,6 +420,10 @@ class Vec(Geometry):
             :type vecs: list
             :result: Averaged vector.
             :rtype: Vec
+            
+            ::
+            
+                Vec.average(my_vec, vec_1)
         """
         return Vec( 
             sum([float(v.x) for v in vecs])/len(vecs) , 
@@ -370,6 +441,10 @@ class Vec(Geometry):
             :type v1: Vec
             :result: Bisector vector.
             :rtype: Vec
+            
+            ::
+            
+                Vec.bisector(vec_1, vec_2)
         """
         return Vec.average([v0.normalized(),v1.normalized()])            
 
@@ -380,6 +455,10 @@ class Vec(Geometry):
             :type length: float
             :result: Normalized vector.
             :rtype: Vec
+            
+            ::
+            
+                my_vec.normalized()
         """
         if self.length == 0 : raise GeometricError("Cannot normalize a vector of length zero: %s"%(self))
         factor = length / self.length
@@ -390,6 +469,10 @@ class Vec(Geometry):
         
             :result: Inverted vector.
             :rtype: Vec
+            
+            ::
+            
+                my_vec.inverted()
         """ 
         return Vec(-self.x,-self.y,-self.z)
     
@@ -400,6 +483,10 @@ class Vec(Geometry):
             :type n: int
             :result: Rounded vector. 
             :rtype: Vec
+            
+            ::
+            
+                my_vec.rounded()
         """
         return Vec(round(self.x,n),round(self.y,n),round(self.z,n))
     
@@ -410,6 +497,11 @@ class Vec(Geometry):
             :type n: float
             :result: Limited vector.
             :rtype: Vec
+            
+            ::
+            
+                my_vec.limited()
+                
         """
         if self.length2 < n**2 : return Vec(self.x,self.y,self.z)
         return self.normalized(n)    
@@ -421,6 +513,11 @@ class Vec(Geometry):
             :type other: Vec
             :result: Dot product.
             :rtype: float
+            
+            ::
+            
+                my_vec.dot(vec_2)
+            
         """
         return float(self.x * other.x + self.y * other.y + self.z * other.z)
 
@@ -431,6 +528,10 @@ class Vec(Geometry):
             :type other: Vec
             :result: Projected vector length.
             :rtype: float
+            
+            ::
+            
+                my_vec.projected_length(vec_2)
         """
         return self.dot(other.normalized())
 
@@ -441,6 +542,10 @@ class Vec(Geometry):
             :type other: Vec
             :result: Projected vector.
             :rtype: Vec
+            
+            ::
+            
+                my_vec.projected(vec_2)
         """
         return other * ( self.dot(other) / other.dot(other) )
 
@@ -457,6 +562,8 @@ class Vec(Geometry):
            ::
             
                 len(self) * len(other) * sin(angle_between_them)
+                
+                my_vec.cross(vec_1)
             
         """
         return Vec(
@@ -472,6 +579,10 @@ class Vec(Geometry):
             :type other: Vec
             :result: Angle in radians.
             :rtype: float
+            
+            ::
+            
+                my_vec.angle(vec_1)
         """
         vdot = self.dot(other) / (self.length * other.length)
         if vdot>1.0 : vdot = 1.0
@@ -495,6 +606,11 @@ class Vec(Geometry):
             :type pt: Point
             :result: Ray from Point
             :rtype: Ray
+            
+            ::
+            
+                my_vec.to_ray(Point(1,1,1))
+                
         """
         from .dc_line import Ray
         from .dc_point import Point
@@ -508,6 +624,10 @@ class Vec(Geometry):
             :type pt: Point
             :result: Line from Point.
             :rtype: Line
+            
+            ::
+            
+                my_vec.to_line(Point(1,1,1))
         """
         from .dc_line import Line
         from .dc_point import Point

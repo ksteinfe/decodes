@@ -81,6 +81,13 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_vec</span><span class="o">=</span><span class="n">Vec</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">vec_1</span><span class="o">=</span><span class="n">Vec</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">vec_2</span><span class="o">=</span><span class="n">Vec</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -99,6 +106,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_vec</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">vec_1</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -135,6 +145,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Vec</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">my_vec</span><span class="p">,</span> <span class="n">vec_1</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="staticmethod">
@@ -159,6 +172,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Vec</span><span class="o">.</span><span class="n">bisector</span><span class="p">(</span><span class="n">vec_1</span><span class="p">,</span> <span class="n">vec_2</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -182,6 +198,8 @@
 </tbody>
 </table>
 <div class="highlight-python"><div class="highlight"><pre><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">angle_between_them</span><span class="p">)</span>
+
+<span class="n">my_vec</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">vec_1</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -202,6 +220,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_vec</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">vec_2</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="staticmethod">
@@ -227,6 +248,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Vec</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">vec_1</span><span class="p">,</span> <span class="n">vec_2</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -243,6 +267,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_vec</span><span class="o">.</span><span class="n">inverted</span><span class="p">()</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -259,6 +286,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_vec</span><span class="o">.</span><span class="n">is_2d</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -277,6 +307,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_vec</span><span class="o">.</span><span class="n">is_coincident</span><span class="p">(</span><span class="n">vec_1</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -301,6 +334,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_vec</span><span class="o">.</span><span class="n">is_identical</span><span class="p">(</span><span class="n">vec_1</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -319,6 +355,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_vec</span><span class="o">.</span><span class="n">is_parallel</span><span class="p">(</span><span class="n">vec_1</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -335,6 +374,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_vec</span><span class="o">.</span><span class="n">length</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -351,6 +393,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_vec</span><span class="o">.</span><span class="n">length2</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -369,6 +414,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_vec</span><span class="o">.</span><span class="n">limited</span><span class="p">()</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -387,6 +435,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_vec</span><span class="o">.</span><span class="n">normalized</span><span class="p">()</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -405,6 +456,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_vec</span><span class="o">.</span><span class="n">projected</span><span class="p">(</span><span class="n">vec_2</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -423,6 +477,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_vec</span><span class="o">.</span><span class="n">projected_length</span><span class="p">(</span><span class="n">vec_2</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="staticmethod">
@@ -448,6 +505,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Vec</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">Interval</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -466,6 +526,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_vec</span><span class="o">.</span><span class="n">rounded</span><span class="p">()</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -484,6 +547,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_vec</span><span class="o">.</span><span class="n">to_line</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -502,6 +568,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_vec</span><span class="o">.</span><span class="n">to_ray</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
