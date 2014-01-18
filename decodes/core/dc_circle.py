@@ -127,6 +127,10 @@ class Arc(HasBasis):
             :result: Arc object
             :rtype: Arc
             
+            ::
+            
+                my_arc=Arc(CS(Point(0,0,0)), 6.0, 1.5) 
+            
         """
         self._basis = cs
         self.rad = radius
@@ -139,6 +143,10 @@ class Arc(HasBasis):
             :type t: float
             :result: a Point on the Arc.
             :rtype: Point
+            
+            ::
+            
+                my_arc.eval(0.5)
         """
         x = self.rad * math.cos(t*self.angle)
         y = self.rad * math.sin(t*self.angle)
@@ -151,6 +159,10 @@ class Arc(HasBasis):
             :type t: float
             :result: a Plane on the Arc.
             :rtype: Plane
+            
+            ::
+            
+                my_arc.eval_pln(0.5)
         """
         pt = self.eval(t)
         return Plane(pt,Vec(self.origin,pt).cross(self._basis.z_axis))
@@ -184,6 +196,10 @@ class Arc(HasBasis):
         
             :result: Length of arc.
             :rtype: float
+            
+            ::
+            
+                my_arc.length
         """
         return self.rad * self.angle
         
@@ -193,6 +209,10 @@ class Arc(HasBasis):
             
             :result: End points of this arc.
             :rtype: Point, Point
+            
+            ::
+            
+                my_arc.epts
         
         """
         return self.eval(0), self.eval(1) 
@@ -204,6 +224,10 @@ class Arc(HasBasis):
             :result: Start Point of this arc.
             :rtype: Point
             
+            ::
+            
+                my_arc.spt
+            
         """
         return self.eval(0)
         
@@ -214,6 +238,10 @@ class Arc(HasBasis):
             :result: End Point of this arc.
             :rtype: Point
             
+            ::
+            
+                my_arc.ept
+            
         """
         return self.eval(1) 
 
@@ -223,6 +251,10 @@ class Arc(HasBasis):
         
             :result: Origin of this Arc's basis.
             :rtype: Point
+            
+            ::
+            
+                my_arc.origin
         """
         return self._basis.origin
         
