@@ -21,6 +21,22 @@ class Mesh(HasPts):
             :type basis: Basis
             :result: Mesh object.
             :rtype: Mesh
+            
+            ::
+            
+                pts=[
+                    Point(0,0,0),
+                    Point(0,1,0),
+                    Point(1,1,0),
+                    Point(1,0,0),
+                    Point(0,0,1),
+                    Point(0,1,1),
+                    Point(1,1,1),
+                    Point(1,0,1),
+                    ]
+    
+                quad_faces=[[0,1,2,3],[4,5,6,7],[0,4,5,1],[3,7,6,2]]
+                quadmesh=Mesh(pts,quad_faces)                
         """
         super(Mesh,self).__init__(vertices,basis) #HasPts constructor handles initalization of verts and basis
         self._faces = [] if (faces is None) else faces
@@ -42,6 +58,10 @@ class Mesh(HasPts):
             :type a,b,c,d: int.
             :result: Modifies list of faces.
             :rtype: None
+            
+            ::
+            
+                quadmesh.add_face(4,5,6,7)
         """
         #TODO: add lists of faces just the same
         
@@ -56,6 +76,10 @@ class Mesh(HasPts):
             :type index: int
             :returns: Vertices.
             :rtype: Point
+            
+            ::
+            
+                quadmesh.face_pts(0)
         """
         return [self.pts[i] for i in self.faces[index]]
     
@@ -66,6 +90,10 @@ class Mesh(HasPts):
             :type index: int
             :returns: The centroid of a face.
             :rtype: Point
+            
+            ::
+            
+                quadmesh.face_centroid(0)
         """
         return Point.centroid(self.face_pts(index))
         
@@ -76,6 +104,10 @@ class Mesh(HasPts):
             :type index: int
             :returns: Normal vector.
             :rtype: Vec
+            
+            ::
+            
+                quadmesh.face_normal(0)
         """
         verts = self.face_pts(index)
         if len(verts) == 3 : return Vec(verts[0],verts[1]).cross(Vec(verts[0],verts[2])).normalized()
@@ -95,6 +127,10 @@ class Mesh(HasPts):
             :type msh: Mesh
             :returns: List of meshes.
             :type: [Mesh]
+            
+            ::
+            
+                Mesh.explode(quadmesh)
         """
         exploded_meshes = []
         for face in msh.faces:
