@@ -20,6 +20,12 @@ class Plane(Geometry):
             :type normal: Vec
             :result: Plane object.
             :rtype: Plane
+            
+            ::
+            
+                pln_1=Plane(Point(0,0,0), Vec(1,1,1))
+                
+                pln_2=Plane(Point(0,0,0), Point(0,1,1), Point(1,0,1))
         """
         if normal.length == 0 : raise GeometricError("Cannot construct a plane with a normal vector of length zero: %s"%(normal))
         # super(Plane,self).__init__(point) Plane class used to override Vec class
@@ -32,6 +38,15 @@ class Plane(Geometry):
     @property
     def d(self):
         """ The distance of this plane from the origin.
+            
+            :result: Distance from origin.
+            :rtype: float
+            
+            ::
+                
+                pln_1.d
+        
+        
         """
         from .dc_line import Line
         line = Line(self.origin, self._vec)
@@ -80,6 +95,10 @@ class Plane(Geometry):
 
             :result: Plane's normal.
             :rtype: Vec
+            
+            ::
+            
+                pln_1.normal
         """
         return self._vec
     @normal.setter
@@ -99,6 +118,10 @@ class Plane(Geometry):
 
             :result: Plane's origin point.
             :rtype: Point
+            
+            ::
+            
+                pln_1.origin
         """
         return Point(self.x,self.y,self.z)
     @origin.setter
@@ -122,6 +145,10 @@ class Plane(Geometry):
             :type other: Plane
             :result: Boolean result of comparison.
             :rtype: bool
+            
+            ::
+            
+                pln_1.is_identical(pln_2)
         """   
         return all([self.x==other.x,self.y==other.y,self.z==other.z,self._vec.x==other._vec.x,self._vec.y==other._vec.y,self._vec.z==other._vec.z])
 
@@ -134,6 +161,10 @@ class Plane(Geometry):
             :type tolerance: float
             :result: Boolean result of comparison.
             :rtype: bool
+            
+            ::
+            
+                pln_1.is_coplanar(pln_2)
         """   
         return all([self.near(other.origin)[0].distance(other.origin)<tolerance,self._vec.is_parallel(other._vec)])
 
@@ -144,6 +175,10 @@ class Plane(Geometry):
             :type p: Point
             :result: Tuple of near point on plane, t value and distance from given point to near point.
             :rtype: (Point, float, float)
+            
+            ::
+                
+                pln_1.near(Point(1,1,1))
         """
         from .dc_line import Line
         line = Line(self.origin, self._vec)
@@ -174,6 +209,10 @@ class Plane(Geometry):
             :type pt_c: Point
             :result: Plane object.
             :rtype: Plane
+            
+            ::
+            
+                pln_2=Plane(Point(0,0,0), Point(0,1,1), Point(1,0,1))
         """
         pt = Point.centroid([pt_a,pt_b,pt_c])
         try:

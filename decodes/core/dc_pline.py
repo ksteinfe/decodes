@@ -19,6 +19,11 @@ class PLine(HasPts):
             :type basis: basis
             :returns: Polyline.
             :rtype: PLine
+            
+            ::
+            
+                pts=[Point(i,i,i) for i in range(10)]
+                my_pline=PLine(pts)
         
         """
         #todo: check if passed an empty array of points
@@ -32,6 +37,10 @@ class PLine(HasPts):
        
             :result: List of edges of a PLine
             :rtype: [Segment]
+            
+            ::
+            
+                my_pline.edges
         """
         try:
             return self._edges
@@ -45,6 +54,10 @@ class PLine(HasPts):
         
             :result: Length of this PLine
             :rtype: float
+            
+            ::
+            
+                my_pline.length
         """
         try:
             return self._length
@@ -74,6 +87,13 @@ class PLine(HasPts):
             :type tol: bool.
             :result: New joined Polyline.
             :rtype: PLine
+            
+            ::
+            
+                pts_2=[Point(i+1, i, i-1) for in range(5)]
+                my_pline2=PLine(pts_2)
+                
+                my_pline.join(my_pline2)
             
         """
         self._unset_attr() # call this when any of storable properties (subclass_attr or class_attr) changes
@@ -127,6 +147,10 @@ class PLine(HasPts):
             :type index: Int
             :result: Line segment
             :rtype: Segment
+            
+            ::
+                
+                my_pline.seg(2)
         """
         if index >= len(self._verts) : raise IndexError()
         return Segment(self.pts[index],self.pts[index+1])
@@ -140,6 +164,10 @@ class PLine(HasPts):
            :type t: float
            :result: A point on the polyline.
            :rtype: Point
+           
+           ::
+                
+                my_pline.eval(0.5)
            
         """
         if t > 1 : raise IndexError("Plines must be evaluated with t <= 1.0")
@@ -160,6 +188,10 @@ class PLine(HasPts):
             :type p: Point
             :result: Tuple of near point on PLine, index of near segment and distance from point to near point.
             :rtype: (Point, integer, float)
+            
+            ::
+            
+                my_pline.near(Point(1,2,3))
         """
         #KS: this does not function as advertised, after narrowing down to the nearest segment we need to project the given point
         return False

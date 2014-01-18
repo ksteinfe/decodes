@@ -80,6 +80,10 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pts</span><span class="o">=</span><span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+<span class="n">my_pline</span><span class="o">=</span><span class="n">PLine</span><span class="p">(</span><span class="n">pts</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -96,6 +100,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_pline</span><span class="o">.</span><span class="n">edges</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -118,6 +125,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_pline</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -142,6 +152,11 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><pre>pts_2=[Point(i+1, i, i-1) for in range(5)]
+my_pline2=PLine(pts_2)
+
+my_pline.join(my_pline2)</pre>
+</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -158,6 +173,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_pline</span><span class="o">.</span><span class="n">length</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -176,6 +194,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_pline</span><span class="o">.</span><span class="n">near</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -228,6 +249,9 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_pline</span><span class="o">.</span><span class="n">seg</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="attribute">
