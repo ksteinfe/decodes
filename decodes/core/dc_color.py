@@ -136,6 +136,25 @@ class Color():
         
     def __repr__(self):
         return "color[{0},{1},{2}]".format(self.r,self.g,self.b)
+        
+    def __eq__(self, other):
+        """ Overloads the equal **(==)** operator for Color identity.
+        
+            :param other: Color to be compared.
+            :type other: Color
+            :result: Boolean result of comparison.
+            :rtype: bool
+
+        """    
+        bool = True
+        if abs(self.r - other.r) > 1.0/255:
+            bool = False
+        if abs(self.g - other.g) > 1.0/255:
+            bool = False
+        if abs(self.b - other.b) > 1.0/255:
+            bool = False
+                          
+        return bool
 
 class PixelGrid(object):
     """
@@ -259,7 +278,7 @@ class ValueField(PixelGrid):
         except:
             self._res = pixel_res
         self._pixels = [initial_value]*(self.px_width*self.px_height)
-        super(ValueField,self).__init__(include_corners)
+        super(ValueField,self).__init__(include_corners, wrap)
 
     @property
     def max_value(self):
