@@ -155,7 +155,6 @@ class Color():
             r += c.r
             g += c.g
             b += c.b
-        print r,g,b,n
         return Color(r/n,g/n,b/n)
         
     def __repr__(self):
@@ -176,9 +175,26 @@ class Color():
         if abs(self.g - other.g) > 1.0/255:
             bool = False
         if abs(self.b - other.b) > 1.0/255:
-            bool = False
-                          
+            bool = False                       
         return bool
+        
+    def __ne__(self, other): 
+        """ Overloads the not equal **(!=)** operator for Color identity.
+        
+            :param other: Color to be compared.
+            :type other: Color
+            :result: Boolean result of comparison.
+            :rtype: bool
+
+        """
+        bool = False
+        if abs(self.r - other.r) > 1.0/255:
+            bool = True
+        if abs(self.g - other.g) > 1.0/255:
+            bool = True
+        if abs(self.b - other.b) > 1.0/255:
+            bool = True                       
+        return bool        
 
 class PixelGrid(object):
     """
