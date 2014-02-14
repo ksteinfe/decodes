@@ -134,6 +134,30 @@ class Color():
         b = (1-t) * c0.b + t * c1.b
         return Color(r,g,b)
         
+        
+    @staticmethod
+    def average(colors = []):
+        """ Returns a new color that is the average of a list of Color objects.
+        
+            :param c: Color Objects
+            :type c: List
+            :result: Averaged Color object.
+            :rtype: Color
+        """
+        try:
+            n = len(colors)
+        except:
+            n = 0
+        if n== 0:
+            return Color(1.0)
+        r,g,b = 0,0,0
+        for c in colors:
+            r += c.r
+            g += c.g
+            b += c.b
+        print r,g,b,n
+        return Color(r/n,g/n,b/n)
+        
     def __repr__(self):
         return "color[{0},{1},{2}]".format(self.r,self.g,self.b)
         
