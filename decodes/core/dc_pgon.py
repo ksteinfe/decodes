@@ -311,7 +311,7 @@ class PGon(HasPts):
         ipts = [Vec.interpolate(self._verts[n],self._verts[n-1],rotation) for n in range(len(self._verts))]
         return PGon(ipts,self.basis)
 
-    def contains_pt(self, pt,tolerence=0.000001):
+    def contains_pt(self, pt,tolerance=0.000001):
         """ Tests if this polygon contains the given point. The given point must lie on the plane of this polygon.
         
             :param pt: Point to test containment in PGon.
@@ -328,7 +328,7 @@ class PGon(HasPts):
         """
         
         pt = Point(self.basis.deval(pt))
-        if abs(pt.z) > tolerence : 
+        if abs(pt.z) > tolerance : 
             warnings.warn("Given point does not lie on the same plane as this polygon.")
             return False
         pt.z = 0
@@ -338,6 +338,7 @@ class PGon(HasPts):
         
         for seg in self.edges:
             ln = Segment(seg.spt,pt)
+            if ln.vec.length2 < tolerance: return True
             if ln.vec.is_coincident(seg.vec) and ln.vec.length2 <= seg.vec.length2 : return True
         
         icnt = 0
