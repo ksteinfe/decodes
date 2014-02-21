@@ -352,8 +352,8 @@ class PGon(HasPts):
             if LinearEntity.is_parallel(seg,ray) : continue
             try:
                 slope = (seg.ept.y - seg.spt.y) / (seg.ept.x - seg.spt.x)
-                cond1 = (seg.spt.x <= pt.x) and (pt.x < seg.ept.x)
-                cond2 = (seg.ept.x <= pt.x) and (pt.x < seg.spt.x)
+                cond1 = (seg.spt.x <= pt.x) and (pt.x <= seg.ept.x)
+                cond2 = (seg.ept.x <= pt.x) and (pt.x <= seg.spt.x)
                 above = (pt.y < slope * (pt.x - seg.spt.x) + seg.spt.y)
                 if ((cond1 or cond2) and above ) : icnt += 1
             except:
