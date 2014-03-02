@@ -168,8 +168,10 @@ class Point(Vec):
             :result: Boolean result of comparison
             :rtype: bool
         """
+        def approx_equal(a, b): return abs(a - b) < EPSILON
+
         try:
-            return all([self.x==other.x,self.y==other.y,self.z==other.z])
+            return all([approx_equal(self.x,other.x),approx_equal(self.y,other.y),approx_equal(self.z,other.z)])
         except:
             return False
 
@@ -182,7 +184,7 @@ class Point(Vec):
             :rtype: bool
         """
         try:
-            return not all([self.x==other.x,self.y==other.y,self.z==other.z])
+            return not all([approx_equal(self.x,other.x),approx_equal(self.y,other.y),approx_equal(self.z,other.z)])
         except:
             return False
 
@@ -368,7 +370,7 @@ class Point(Vec):
         return p
         
     @staticmethod
-    def cull_duplicates(pts, threshold = None):
+    def cull_duplicates(pts, threshold = EPSILON):
         """ Discards duplicate points from a list of points.
         
             :param pts: A list of points

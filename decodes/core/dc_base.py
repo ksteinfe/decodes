@@ -2,8 +2,7 @@ from decodes.core import *
 if VERBOSE_FS: print "base.py loaded"
 import copy,exceptions, collections
 
-
-
+EPSILON = 1.0e-10
 
 class GeometricError(StandardError):
     pass
@@ -19,6 +18,9 @@ class Geometry(object):
     A base geometry class for all other geometry to inherit.
     """
     
+    def appx_eq(self,a, b):
+        return abs(a-b) < self.epsilon
+
     def __mul__(self, other):
         """ Overloads the multiplication **(*)** operator.
 
