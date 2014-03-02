@@ -2,11 +2,21 @@ import decodes as dc
 from decodes.core import *
 #import decodes.unit_tests
 
+from decodes.extensions.graph import *
 
-pt = Point(0,0,0)
-pt_b = Point(0,0,0.000000000001)
-print EPSILON
 
-print pt == pt_b
+gph = Graph()
+gph.add_edge('a','b')
+gph.add_edge('b','c')
+gph.add_edge('c','d')
+gph.add_edge('a','d',2)
+
+print gph
+print gph.weights
+
+print gph._calc_dijkstra('a')
+print gph.shortest_path('a','d')
+
+
 
 raw_input("press enter...")

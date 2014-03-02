@@ -183,6 +183,7 @@ class Point(Vec):
             :result: Boolean result of comparison
             :rtype: bool
         """
+        def approx_equal(a, b): return abs(a - b) < EPSILON
         try:
             return not all([approx_equal(self.x,other.x),approx_equal(self.y,other.y),approx_equal(self.z,other.z)])
         except:

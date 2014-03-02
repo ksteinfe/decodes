@@ -37,6 +37,7 @@ class PGon(HasPts):
         
         if basis is None:
             #if i pass in vertices but no basis, try and figure out what the CS should be and project all points to the proper plane
+            #TODO: switch to EPSILON constant
             tol=0.000001
             def appx_eq(a, b):
                 return abs(a-b) < tol
