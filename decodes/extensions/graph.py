@@ -29,6 +29,10 @@ class Graph(object):
         self.edges[from_node].append(to_node)
         self.weights[(from_node, to_node)] = weight
 
+    @property
+    def node_list(self):
+        return list(self.nodes)
+
     def __repr__(self): return "graph[{0} nodes ,{1} connections]".format(len(self.nodes),sum([len(edge) for edge in self.edges.values()]))
 
 

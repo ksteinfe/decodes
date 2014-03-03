@@ -16,7 +16,7 @@ print gph.weights
 
 print gph._calc_dijkstra('a')
 print gph.shortest_path('a','d')
-
+print gph.node_list
 
 
 raw_input("press enter...")
