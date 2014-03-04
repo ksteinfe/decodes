@@ -8,7 +8,7 @@ print "http://decod.es"
 
 class Outies:
     # list here all the outies we currently support
-    Rhino, Grasshopper, SVG , ACAD = range(4)
+    Rhino, Grasshopper, SVG , ACAD, Dynamo = range(5)
 
 
 # keep this up to date with what outies we support
@@ -46,6 +46,9 @@ def make_out(outtype, name="untitled", path=False, **kargs):
         
         if path : return io.svg_out.SVGOut(name, path, canvas_dimensions=c_dim, flip_y=flip)
         else : return io.svg_out.SVGOut(name, canvas_dimensions=c_dim, flip_y=flip)
+    elif outtype == Outies.Dynamo:
+        import io.dynamo_out
+        return io.dynamo_out.DynamoOut(name)
     else :
         print "!!! hey, i don't have an outie of type foo !!!"
         return False
