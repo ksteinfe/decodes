@@ -4,7 +4,7 @@ from ..core import dc_color, dc_base, dc_vec, dc_point, dc_cs, dc_line, dc_mesh,
 from .rhino_in import *
 if VERBOSE_FS: print "dynamo_in loaded"
 
-#import Rhino.Geometry as rg
+#import Rhino.Geometry as ds
 #import System.Drawing.Color
 
 import clr, collections
@@ -26,67 +26,76 @@ class DynamoIn():
         pass
         
     @staticmethod
-    def get(gh_in_str, gh_in):
-        # main function for processing incoming data from Grasshopper into Decodes geometry
-        # incoming may be a sigleton, a list, or a datatree
-        # variable in GH script component will be replaced by whatever is returned here
+    #def get(dyn_in_str, dyn_in):
+    def get(dyn_in):
+        # main function for processing incoming data from Dynamo into Decodes geometry
+        # incoming may be a sigleton, a list, or a list of lists
+        # variable in Dynamo script component will be replaced by whatever is returned here
 
-        if gh_in is None : return None
-        if type(gh_in) is list: return [DynamoIn.get(gh_in_str+"["+str(i)+"]",item) for i, item in enumerate(gh_in)]
+        if dyn_in is None : return None
+        #################################################################################################################
+        # THIS WILL HAVE TO WAIT TILL THEY FIX THEIR COMPONENT
+        #################################################################################################################
+        if type(dyn_in) is list: return [DynamoIn.get(dyn_in_str+"["+str(i)+"]",item) for i, item in enumerate(dyn_in)]
         
-        #if type(gh_in) is rg.Interval: return Interval(gh_in.T0,gh_in.T1)
+        # NO INTERVALS IN DYNAMO/DS
+        #if type(dyn_in) is ds.Interval: return Interval(dyn_in.T0,dyn_in.T1)
 
-        if type(gh_in) is ds.Rectangle3d :  gh_in = gh_in.ToPolyline()
+        if type(dyn_in) is ds.Rectangle :  dyn_in = ds.PolyCurve.ByPoints(ds.dyn_in.Corners, True)
 
-        if type(gh_in) is rg.Vector3d : return from_dynvec(gh_in)
-        elif type(gh_in)is rg.Point3d : return from_dynpt(gh_in)
-        elif type(gh_in)is rg.Plane : 
-            return CS(from_dynpt(gh_in.Origin), from_dynvec(gh_in.XAxis), from_dynvec(gh_in.YAxis))
-        elif type(gh_in) is rg.Line : 
-            return Segment(Point(gh_in.FromX,gh_in.FromY,gh_in.FromZ),Point(gh_in.ToX,gh_in.ToY,gh_in.ToZ))
-        elif type(gh_in) is rg.LineCurve : 
-            return Segment(Point(gh_in.PointAtStart.X,gh_in.PointAtStart.Y,gh_in.PointAtStart.Z),Point(gh_in.PointAtEnd.X,gh_in.PointAtEnd.Y,gh_in.PointAtEnd.Z))
-        elif type(gh_in) is System.Drawing.Color : 
-            return Color(float(gh_in.R)/255,float(gh_in.G)/255,float(gh_in.B)/255)
+        if type(dyn_in) is ds.Vector: return from_dynvec(dyn_in)
+        elif type(dyn_in)is ds.Point: return from_dynpt(dyn_in)
+        elif type(dyn_in)is ds.Vertex: return from_dynpt(dyn_in.PointGeometry)
+        elif type(dyn_in)is ds.Plane : 
+            return Plane(from_dynpt(dyn_in.Origin), from_dynvec(dyn_in.Normal))
+        elif type(dyn_in)is ds.CoordinateSystem : 
+            return from_dyncs(dyn_in)
+        elif type(dyn_in) is ds.Line : 
+            return Segment(from_dynpt(dyn_in.StartPoint), from_dynpt(dyn_in.EndPoint))
+        elif type(dyn_in) is ds.Edge : 
+            return Segment(from_dynpt(dyn_in.StartVertex), from_dynpt(dyn_in.EndVertex))
+        # No idea how colors are defined in the new protgeometry.....
+        """
+        elif type(dyn_in) is System.Drawing.Color : 
+            return Color(float(dyn_in.R)/255,float(dyn_in.G)/255,float(dyn_in.B)/255)"""
 
-        elif type(gh_in)is rg.Circle :
-            pln = Plane( from_dynpt(gh_in.Center), from_dynvec(gh_in.Plane.Normal))
-            return Circle(pln,gh_in.Radius)
-            
-        elif type(gh_in)is rg.Arc :
-            x_axis = Vec(from_dynpt(gh_in.Center),from_dynpt(gh_in.StartPoint))
-            y_axis = from_dynvec(gh_in.Plane.Normal).cross(x_axis)
-            cs = CS( from_dynpt(gh_in.Center), x_axis, y_axis )
-            swp_ang = abs(gh_in.EndAngle - gh_in.StartAngle)
-            return Arc(cs,gh_in.Radius,swp_ang)
-
-        elif type(gh_in) is rg.PolylineCurve: 
-            ispolyline, dyn_polyline = gh_in.TryGetPolyline()
-            if (ispolyline) : return from_rgpolyline(dyn_polyline)
-        elif type(gh_in) is rg.Polyline:
-            return from_rgpolyline(gh_in)
-        elif type(gh_in) is rg.NurbsCurve : 
-            #TODO: check if gh_in can be described as a line first...
-            ispolyline, dyn_polyline = gh_in.TryGetPolyline()
-            if (ispolyline) : return from_rgpolyline(dyn_polyline)
-        elif type(gh_in) is rg.Mesh : 
-            verts = [Point(rh_pt.X,rh_pt.Y,rh_pt.Z) for rh_pt in gh_in.Vertices]
+        elif type(dyn_in)is ds.Circle :
+            pln = Plane(from_dynpt(dyn_in.CenterPoint), from_dynvec(dyn_in.Normal))
+            return Circle(pln,dyn_in.Radius)
+        elif type(dyn_in)is ds.Arc :
+            x_axis = Vec(from_dynpt(dyn_in.CenterPoint),from_dynpt(dyn_in.StartPoint))
+            y_axis = from_dynvec(dyn_in.Normal).cross(x_axis)
+            cs = CS( from_dynpt(dyn_in.CenterPoint), x_axis, y_axis )
+            swp_ang = abs(dyn_in.SweepAngle * 0.0174532925)
+            return Arc(cs,dyn_in.Radius,swp_ang)
+        elif type(dyn_in) is ds.PolyCurve: 
+            return from_dspolyline(dyn_in)
+        elif type(dyn_in) is ds.Polygon:
+            return from_dspolygon(dyn_in)
+        elif type(dyn_in) is ds.NurbsCurve : 
+            #Approximates a nurbscrv into a PLine
+            return from_nurbscurve(dyn_in)
+        elif type(dyn_in) is ds.Ellipse : 
+            #Approximates an ellipse into a PLine
+            #TODO mathematical description of ellipse to return decodes curve
+            return from_nurbscurve(dyn_in)
+        elif type(dyn_in) is ds.Mesh : 
+            verts = [from_dynpt(pt) for pt in dyn_in.VertexPositions]
             faces = []
-            for rh_fc in gh_in.Faces :
-                if rh_fc[2] == rh_fc[3] : faces.append([rh_fc[0],rh_fc[1],rh_fc[2]]) #add this triangle
-                else : faces.append([rh_fc[0],rh_fc[1],rh_fc[2],rh_fc[3]]) #add this quad
+            for face in dyn_in.FaceIndices:
+                faces.append(face.A, face.B, face.C, face.D)
             return Mesh(verts,faces)
 
-        elif any(p in str(type(gh_in)) for p in GrasshopperIn.primitive_types) : return gh_in
-        elif any(p in str(type(gh_in)) for p in GrasshopperIn.friendly_types) : return gh_in
-        elif any(p in str(type(gh_in)) for p in GrasshopperIn.structure_types) : return gh_in
+        elif any(p in str(type(dyn_in)) for p in DynamoIn.primitive_types) : return dyn_in
+        elif any(p in str(type(dyn_in)) for p in DynamoIn.friendly_types) : return dyn_in
+        elif any(p in str(type(dyn_in)) for p in DynamoIn.structure_types) : return dyn_in
         else :
-            print "UNKNOWN TYPE: "+gh_in_str+" is an "+ str(type(gh_in))
-            return gh_in
-            #print inspect.getmro(gh_in.__class__)
-            #if issubclass(gh_in.__class__, rg.GeometryBase ) : print "this is geometry"
-            #print gh_incoming.TypeHint
-            #print gh_incoming.Description
+            print "UNKNOWN TYPE: "+str(type(dyn_in))+" is an "+ str(type(dyn_in))
+            return dyn_in
+            #print inspect.getmro(dyn_in.__class__)
+            #if issubclass(dyn_in.__class__, ds.GeometryBase ) : print "this is geometry"
+            #print dyn_incoming.TypeHint
+            #print dyn_incoming.Description
 
 
 def from_dynvec(dyn_vec):
@@ -95,29 +104,43 @@ def from_dynvec(dyn_vec):
 def from_dynpt(dyn_pt):
     return Point(dyn_pt.X,dyn_pt.Y,dyn_pt.Z)
 
-def from_dynplane(dyn_plane):
-        cpt = from_dynpt(dyn_plane.Origin)
-        x_axis = from_dynvec(dyn_plane.XAxis)
-        y_axis = from_dynvec(dyn_plane.YAxis)
+def from_dyncs(dyn_cs):
+        cpt = from_dynpt(dyn_cs.Origin)
+        x_axis = from_dynvec(dyn_cs.XAxis)
+        y_axis = from_dynvec(dyn_cs.YAxis)
         return CS(cpt,x_axis,y_axis)
 
-def from_rgpolyline(dyn_polyline):
+def from_polycurve(dyn_polycurve):
+    crvs = dyn_polycurve.Curves()
+    verts = [from_dynpt(crv.StartPoint) for crv in crvs]
+    verts.append(from_dynpt(crvs[len(crvs)-1].EndPoint))
+    return verts  
+        
+def from_dspolyline(dyn_polyline):
     if not dyn_polyline.IsClosed : 
-        gh_curve = dyn_polyline.ToNurbsCurve()
-        w_verts = [from_dynpt(dyn_polyline[i]) for i in range(len(dyn_polyline))]
+        w_verts = from_polycurve(dyn_polyline)
         return PLine(w_verts)
     else:
-        gh_curve = dyn_polyline.ToNurbsCurve()
-        isplanar, plane = gh_curve.TryGetPlane()
-        if not isplanar : raise GeometricError("Cannot import non-planar polylines as polygons.  Did you give me degenerate geometry?")
-        cs = from_dynplane(plane)
-        w_verts = [from_dynpt(dyn_polyline[i]) for i in range(len(dyn_polyline))]
+        if not dyn_polyline.IsPlanar() : raise GeometricError("Cannot import non-planar polylines as polygons.  Did you give me degenerate geometry?")
+        cs = from_dyncs(dyn_polyline.ContextCoordinateSystem)
+        w_verts = from_polycurve(dyn_polyline)
         verts = [ Vec(pt*cs.ixform) for pt in w_verts ]
         if (verts[0]==verts[-1]) : del verts[-1] #remove last vert if a duplicate
         return PGon(verts,cs)
     
-
-def from_rgtransform(rh_xf):
+def from_dspolygon(dyn_polygon):
+    cs = from_dyncs(dyn_polygon.ContextCoordinateSystem)
+    w_verts = [from_dynpt(pt) for pt in dyn_polygon.Points]
+    verts = [ Vec(pt*cs.ixform) for pt in w_verts ]
+    if (verts[0]==verts[-1]) : del verts[-1] #remove last vert if a duplicate
+    return PGon(verts,cs)
+    
+def from_nurbscurve(dyn_nurbscurve):
+    rng = Interval().divide(100, True)
+    verts = [from_dynpt(dyn_nurbscurve.PointAtParameter(i)) for i in rng]
+    return PLine(verts)
+    
+def from_dstransform(rh_xf):
     xf = Xform()
     xf.m00, xf.m01, xf.m02, xf.m03 = rh_xf.M00, rh_xf.M01, rh_xf.M02, rh_xf.M03
     xf.m10, xf.m11, xf.m12, xf.m13 = rh_xf.M10, rh_xf.M11, rh_xf.M12, rh_xf.M13
@@ -130,14 +153,14 @@ for reference: the following code is injected before and after a user's script i
 ## -- BEGIN DECODES HEADER -- ##
 import decodes as dc
 from decodes.core import *
-from decodes.io.gh_in import *
+from decodes.io.dyn_in import *
 from decodes.io.gh_out import *
-exec(io.gh_in.component_header_code)
+exec(io.dyn_in.component_header_code)
 exec(io.gh_out.component_header_code)
 ## -- END DECODES HEADER -- ##
 
 ## -- BEGIN DECODES FOOTER -- ##
-exec(io.gh_in.component_footer_code)
+exec(io.dyn_in.component_footer_code)
 exec(io.gh_out.component_footer_code)
 ## -- END DECODES FOOTER -- ##
 '''
@@ -148,8 +171,8 @@ inputs = ghenv.Component.Params.Input
 import Rhino.Geometry as rg
 import System.Drawing.Color
 for input in inputs : 
-        gh_in_str = input.Name
-        vars()[gh_in_str] = GrasshopperIn.get(gh_in_str, eval(gh_in_str))
+        dyn_in_str = input.Name
+        vars()[dyn_in_str] = GrasshopperIn.get(dyn_in_str, eval(dyn_in_str))
 """
 
 component_footer_code = ""
