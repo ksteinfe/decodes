@@ -4,7 +4,7 @@ from ..core import dc_color, dc_base, dc_vec, dc_point, dc_cs, dc_line, dc_mesh,
 from .rhino_in import *
 if VERBOSE_FS: print "dynamo_in loaded"
 
-#import Rhino.Geometry as ds
+#import Rhino.Geometry as rg
 #import System.Drawing.Color
 
 import clr, collections
@@ -41,28 +41,26 @@ class DynamoIn():
         # NO INTERVALS IN DYNAMO/DS
         #if type(dyn_in) is ds.Interval: return Interval(dyn_in.T0,dyn_in.T1)
 
-        if type(dyn_in) is ds.Rectangle :  dyn_in = ds.PolyCurve.ByPoints(ds.dyn_in.Corners, True)
-
-        if type(dyn_in) is ds.Vector: return from_dynvec(dyn_in)
-        elif type(dyn_in)is ds.Point: return from_dynpt(dyn_in)
-        elif type(dyn_in)is ds.Vertex: return from_dynpt(dyn_in.PointGeometry)
-        elif type(dyn_in)is ds.Plane : 
+        if type(dyn_in) is ds.Rectangle :  
+            dyn_in = ds.PolyCurve.ByPoints(ds.dyn_in.Corners, True)
+        if type(dyn_in) is ds.Vector: 
+            return from_dynvec(dyn_in)
+        elif type(dyn_in)is ds.Point: 
+            return from_dynpt(dyn_in)
+        elif type(dyn_in)is ds.Vertex: 
+            return from_dynpt(dyn_in.PointGeometry)
+        elif type(dyn_in)is ds.Plane: 
             return Plane(from_dynpt(dyn_in.Origin), from_dynvec(dyn_in.Normal))
         elif type(dyn_in)is ds.CoordinateSystem : 
             return from_dyncs(dyn_in)
-        elif type(dyn_in) is ds.Line : 
+        elif type(dyn_in) is ds.Line: 
             return Segment(from_dynpt(dyn_in.StartPoint), from_dynpt(dyn_in.EndPoint))
-        elif type(dyn_in) is ds.Edge : 
+        elif type(dyn_in) is ds.Edge: 
             return Segment(from_dynpt(dyn_in.StartVertex), from_dynpt(dyn_in.EndVertex))
-        # No idea how colors are defined in the new protgeometry.....
-        """
-        elif type(dyn_in) is System.Drawing.Color : 
-            return Color(float(dyn_in.R)/255,float(dyn_in.G)/255,float(dyn_in.B)/255)"""
-
-        elif type(dyn_in)is ds.Circle :
+        elif type(dyn_in)is ds.Circle:
             pln = Plane(from_dynpt(dyn_in.CenterPoint), from_dynvec(dyn_in.Normal))
             return Circle(pln,dyn_in.Radius)
-        elif type(dyn_in)is ds.Arc :
+        elif type(dyn_in)is ds.Arc:
             x_axis = Vec(from_dynpt(dyn_in.CenterPoint),from_dynpt(dyn_in.StartPoint))
             y_axis = from_dynvec(dyn_in.Normal).cross(x_axis)
             cs = CS( from_dynpt(dyn_in.CenterPoint), x_axis, y_axis )
@@ -72,7 +70,7 @@ class DynamoIn():
             return from_dspolyline(dyn_in)
         elif type(dyn_in) is ds.Polygon:
             return from_dspolygon(dyn_in)
-        elif type(dyn_in) is ds.NurbsCurve : 
+        elif type(dyn_in) is ds.NurbsCurve: 
             #Approximates a nurbscrv into a PLine
             return from_nurbscurve(dyn_in)
         elif type(dyn_in) is ds.Ellipse : 
@@ -85,10 +83,12 @@ class DynamoIn():
             for face in dyn_in.FaceIndices:
                 faces.append(face.A, face.B, face.C, face.D)
             return Mesh(verts,faces)
-
-        elif any(p in str(type(dyn_in)) for p in DynamoIn.primitive_types) : return dyn_in
-        elif any(p in str(type(dyn_in)) for p in DynamoIn.friendly_types) : return dyn_in
-        elif any(p in str(type(dyn_in)) for p in DynamoIn.structure_types) : return dyn_in
+        elif any(p in str(type(dyn_in)) for p in DynamoIn.primitive_types): 
+            return dyn_in
+        elif any(p in str(type(dyn_in)) for p in DynamoIn.friendly_types): 
+            return dyn_in
+        elif any(p in str(type(dyn_in)) for p in DynamoIn.structure_types): 
+            return dyn_in
         else :
             print "UNKNOWN TYPE: "+str(type(dyn_in))+" is an "+ str(type(dyn_in))
             return dyn_in
@@ -164,9 +164,10 @@ exec(io.dyn_in.component_footer_code)
 exec(io.gh_out.component_footer_code)
 ## -- END DECODES FOOTER -- ##
 '''
-        
+    
 #TODO: make this into a proper innie instead
-component_header_code = """
+#component_header_code = 
+"""
 inputs = ghenv.Component.Params.Input
 import Rhino.Geometry as rg
 import System.Drawing.Color
@@ -175,4 +176,4 @@ for input in inputs :
         vars()[dyn_in_str] = GrasshopperIn.get(dyn_in_str, eval(dyn_in_str))
 """
 
-component_footer_code = ""
+#component_footer_code = """

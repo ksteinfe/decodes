@@ -57,6 +57,8 @@ def make_out(outtype, name="untitled", path=False, **kargs):
 def make_in(intype):
     if intype == innies.Rhino:
         return innies.RhinoIn()
+    if intype == innies.Dynamo:
+        return innies.DynamoIn()
     if intype == innies.Foo:
         if VERBOSE : print "!!! hey, i don't have an innie of type foo !!!"
         return False
