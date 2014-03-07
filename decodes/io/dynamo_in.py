@@ -1,11 +1,8 @@
 from .. import *
 from ..core import *
 from ..core import dc_color, dc_base, dc_vec, dc_point, dc_cs, dc_line, dc_mesh, dc_pgon, dc_xform, dc_intersection
-from .rhino_in import *
 if VERBOSE_FS: print "dynamo_in loaded"
 
-#import Rhino.Geometry as rg
-#import System.Drawing.Color
 
 import clr, collections
 
@@ -24,25 +21,18 @@ class DynamoIn():
     
     def __init__(self):
         pass
-        
+    
     @staticmethod
-    #def get(dyn_in_str, dyn_in):
     def get(dyn_in):
         # main function for processing incoming data from Dynamo into Decodes geometry
         # incoming may be a sigleton, a list, or a list of lists
         # variable in Dynamo script component will be replaced by whatever is returned here
-
+        if _should_iterate(dyn_in) :
+            return [DynamoIn.get(input) for input in dyn_in]
+            
         if dyn_in is None : return None
-        #################################################################################################################
-        # THIS WILL HAVE TO WAIT TILL THEY FIX THEIR COMPONENT
-        #################################################################################################################
-        if type(dyn_in) is list: return [DynamoIn.get(dyn_in_str+"["+str(i)+"]",item) for i, item in enumerate(dyn_in)]
-        
-        # NO INTERVALS IN DYNAMO/DS
-        #if type(dyn_in) is ds.Interval: return Interval(dyn_in.T0,dyn_in.T1)
-
         if type(dyn_in) is ds.Rectangle :  
-            dyn_in = ds.PolyCurve.ByPoints(ds.dyn_in.Corners, True)
+            dyn_in = ds.PolyCurve.ByPoints(dyn_in.Corners[0:2], True)
         if type(dyn_in) is ds.Vector: 
             return from_dynvec(dyn_in)
         elif type(dyn_in)is ds.Point: 
@@ -97,6 +87,7 @@ class DynamoIn():
             #print dyn_incoming.TypeHint
             #print dyn_incoming.Description
 
+def _should_iterate(item): return isinstance(item, collections.Iterable) and not isinstance(item,basestring)
 
 def from_dynvec(dyn_vec):
     return Vec(dyn_vec.X,dyn_vec.Y,dyn_vec.Z)
@@ -124,14 +115,21 @@ def from_dspolyline(dyn_polyline):
         if not dyn_polyline.IsPlanar() : raise GeometricError("Cannot import non-planar polylines as polygons.  Did you give me degenerate geometry?")
         cs = from_dyncs(dyn_polyline.ContextCoordinateSystem)
         w_verts = from_polycurve(dyn_polyline)
-        verts = [ Vec(pt*cs.ixform) for pt in w_verts ]
+        verts = [ cs.eval(pt) for pt in w_verts ]
         if (verts[0]==verts[-1]) : del verts[-1] #remove last vert if a duplicate
         return PGon(verts,cs)
     
 def from_dspolygon(dyn_polygon):
     cs = from_dyncs(dyn_polygon.ContextCoordinateSystem)
     w_verts = [from_dynpt(pt) for pt in dyn_polygon.Points]
-    verts = [ Vec(pt*cs.ixform) for pt in w_verts ]
+    verts = [ cs.eval(pt) for pt in w_verts ]
+    if (verts[0]==verts[-1]) : del verts[-1] #remove last vert if a duplicate
+    return PGon(verts,cs)
+    
+def from_dsrectangle(dyn_rectangle):
+    cs = from_dyncs(dyn_rectangle.ContextCoordinateSystem)
+    w_verts = [from_dynpt(pt) for pt in dyn_rectangle.Points]
+    verts = [ cs.eval(pt) for pt in w_verts ]
     if (verts[0]==verts[-1]) : del verts[-1] #remove last vert if a duplicate
     return PGon(verts,cs)
     
@@ -153,27 +151,25 @@ for reference: the following code is injected before and after a user's script i
 ## -- BEGIN DECODES HEADER -- ##
 import decodes as dc
 from decodes.core import *
-from decodes.io.dyn_in import *
-from decodes.io.gh_out import *
-exec(io.dyn_in.component_header_code)
-exec(io.gh_out.component_header_code)
+from decodes.io.dynamo_in import *
+from decodes.io.dynamo_out import *
+exec(io.dynamo_in.component_header_code)
+exec(io.dynamo_out.component_header_code)
 ## -- END DECODES HEADER -- ##
 
 ## -- BEGIN DECODES FOOTER -- ##
-exec(io.dyn_in.component_footer_code)
-exec(io.gh_out.component_footer_code)
+exec(io.dynamo_in.component_footer_code)
+exec(io.dynamo_out.component_footer_code)
 ## -- END DECODES FOOTER -- ##
 '''
     
 #TODO: make this into a proper innie instead
-#component_header_code = 
+component_header_code = """
+IN[0] = DynamoIn.get(IN[0])
 """
-inputs = ghenv.Component.Params.Input
-import Rhino.Geometry as rg
-import System.Drawing.Color
-for input in inputs : 
-        dyn_in_str = input.Name
-        vars()[dyn_in_str] = GrasshopperIn.get(dyn_in_str, eval(dyn_in_str))
+# once they fix their stuff, this should work like this:
+""" 
+for k in IN:
+    k = DynamoIn.get(k)
 """
-
-#component_footer_code = """
+component_footer_code = """       """

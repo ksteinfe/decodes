@@ -48,7 +48,7 @@ def make_out(outtype, name="untitled", path=False, **kargs):
         else : return io.svg_out.SVGOut(name, canvas_dimensions=c_dim, flip_y=flip)
     elif outtype == Outies.Dynamo:
         import io.dynamo_out
-        return io.dynamo_out.DynamoOut(name)
+        return io.dynamo_out.DynamoOut()
     else :
         print "!!! hey, i don't have an outie of type foo !!!"
         return False
