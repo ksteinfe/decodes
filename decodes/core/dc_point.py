@@ -385,6 +385,7 @@ class Point(Vec):
             
                 Point.cull_duplicates(pts)
         """
+        if len(pts)==0: return pts
         if threshold == None:
             culled_pts = []
             for pt in pts: 

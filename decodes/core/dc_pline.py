@@ -27,7 +27,8 @@ class PLine(HasPts):
         
         """
         #todo: check if passed an empty array of points
-        
+        if vertices is not None:
+            if len(vertices)<2: raise GeometricError("Plines must be constructed with at least two points")
         super(PLine,self).__init__(vertices,basis) #HasPts constructor handles initialization of verts and basis
         self.basis = CS() if (basis is None) else basis # set the basis after appending the points
 
