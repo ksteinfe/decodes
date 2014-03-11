@@ -435,7 +435,7 @@ class PGon(HasPts):
         return PGon([Point(-w2,-h2),Point(w2,-h2),Point(w2,h2),Point(-w2,h2)],basis)
 
     @staticmethod
-    def doughnut(cpt,radius_interval,angle_interval=Interval(0,math.pi*2),res=20):
+    def doughnut(cs,radius_interval,angle_interval=Interval(0,math.pi*2),res=20):
         """ Constructs a doughnut based on a center point, two radii, and optionally a start angle, sweep angle, and resolution.
         
             :param cpt: Center point of a rectangle.
@@ -450,11 +450,18 @@ class PGon(HasPts):
             :rtype: PGon
             
         """ 
-        cs = CS(cpt)
+        try:
+            cs.eval(0,0)
+        except:
+            cs = CS(cs)
         pts = []
-
-        for t in angle_interval.divide(res,True):pts.append(cs.eval_cyl(radius_interval.a,t))
-        for t in angle_interval.invert().divide(res,True):pts.append(cs.eval_cyl(radius_interval.b,t))
+        rad_a = radius_interval.a
+        rad_b = radius_interval.b
+        if rad_a == 0 : rad_a = EPSILON
+        if rad_b == 0 : rad_b = EPSILON
+        if rad_a == rad_b : rad_b += EPSILON
+        for t in angle_interval.divide(res,True):pts.append(cs.eval_cyl(rad_a,t))
+        for t in angle_interval.invert().divide(res,True):pts.append(cs.eval_cyl(rad_b,t))
         return PGon(pts)
 
 class RGon(PGon):

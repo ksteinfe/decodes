@@ -43,6 +43,28 @@ class CS(Geometry, Basis):
         self.z_axis = self.x_axis.cross(vec_y).normalized()
         self.y_axis = self.z_axis.cross(self.x_axis).normalized()
 
+    def __eq__(self, other):
+        """ Overloads the equal **(==)**  operator for position and orientation of this CS as compared to the given CS.
+        
+            :param other: CS to be compared.
+            :type other: CS
+            :result: Boolean result of comparison.
+            :rtype: bool
+
+        """
+        return self.origin == other.origin and self.x_axis == other.x_axis and  self.y_axis == other.y_axis and  self.z_axis == other.z_axis
+        
+    def __ne__(self, other): 
+        """ Overloads the not equal **(!=)** operator for position and orientation of this CS as compared to the given CS.
+        
+            :param other: CS to be compared.
+            :type other: CS
+            :result: Boolean result of comparison.
+            :rtype: bool
+
+        """
+        return not self == other
+        
     def __repr__(self):
         return "cs o[{0},{1},{2}] n[{3},{4},{5}]".format(self.origin.x,self.origin.y,self.origin.z,self.z_axis.x,self.z_axis.y,self.z_axis.z)
 

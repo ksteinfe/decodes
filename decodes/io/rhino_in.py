@@ -47,19 +47,22 @@ def from_rgplane(rh_plane):
         return CS(cpt,x_axis,y_axis)
 
 def from_rgpolyline(gh_polyline):
-    if not gh_polyline.IsClosed : 
-        gh_curve = gh_polyline.ToNurbsCurve()
-        w_verts = [from_rgpt(gh_polyline[i]) for i in range(len(gh_polyline))]
-        return PLine(w_verts)
-    else:
+    if gh_polyline.IsClosed : 
         gh_curve = gh_polyline.ToNurbsCurve()
         isplanar, plane = gh_curve.TryGetPlane()
-        if not isplanar : raise GeometricError("Cannot import non-planar polylines as polygons.  Did you give me degenerate geometry?")
-        cs = from_rgplane(plane)
-        w_verts = [from_rgpt(gh_polyline[i]) for i in range(len(gh_polyline))]
-        verts = [ Vec(pt*cs.ixform) for pt in w_verts ]
-        if (verts[0]==verts[-1]) : del verts[-1] #remove last vert if a duplicate
-        return PGon(verts,cs)
+        if isplanar : 
+            cs = from_rgplane(plane)
+            w_verts = [from_rgpt(gh_polyline[i]) for i in range(len(gh_polyline))]
+            verts = [ Vec(pt*cs.ixform) for pt in w_verts ]
+            if (verts[0]==verts[-1]) : del verts[-1] #remove last vert if a duplicate
+            return PGon(verts,cs)
+        else:
+            warnings.warn("Cannot import non-planar closed polyline as PGon, attempting to import as a PLine")
+        
+    # if we've gotten this far, then the pline isn't closed, or is closed and non-planar
+    gh_curve = gh_polyline.ToNurbsCurve()
+    w_verts = [from_rgpt(gh_polyline[i]) for i in range(len(gh_polyline))]
+    return PLine(w_verts)
     
 
 def from_rgtransform(rh_xf):
