@@ -106,7 +106,7 @@ class HasPts(HasBasis):
             :rtype: None
         """
         self._unset_attr()  # call this when any of storable properties (subclass_attr or class_attr) changes
-        for v in _verts: v = v + vec
+        for v in self._verts: v = v + vec
         self._vertices_changed() # call to trigger subclass handling of vertex manipulation
 
     '''
