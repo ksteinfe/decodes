@@ -236,8 +236,8 @@ class Surface(IsParametrized):
         if v < self.v0 and v > self.v0-self.tol_v : v = v0
         if v > self.v1 and v < self.v1+self.tol_v : v = v1
         '''
-        if u<self.u0 or u>self.u1 : raise DomainError("Surface evaluated outside the bounds of its u-domain: deval(%s) %s"%(u,self.domain_u))
-        if v<self.v0 or v>self.v1 : raise DomainError("Surface evaluated outside the bounds of its v-domain: deval(%s) %s"%(v,self.domain_v))
+        if u not in self.domain_u : raise DomainError("Surface evaluated outside the bounds of its u-domain: deval(%s) %s"%(u,self.domain_u))
+        if v not in self.domain_v : raise DomainError("Surface evaluated outside the bounds of its v-domain: deval(%s) %s"%(v,self.domain_v))
         
         return Point(self.func(u,v))
 
@@ -265,8 +265,8 @@ class Surface(IsParametrized):
         if v < self.v0 and v > self.v0-self.tol_v : v = v0
         if v > self.v1 and v < self.v1+self.tol_v : v = v1
         '''
-        if u<self.u0 or u>self.u1 : raise DomainError("Surface evaluated outside the bounds of its u-domain: deval(%s) %s"%(u,self.domain_u))
-        if v<self.v0 or v>self.v1 : raise DomainError("Surface evaluated outside the bounds of its v-domain: deval(%s) %s"%(v,self.domain_v))
+        if u not in self.domain_u : raise DomainError("Surface evaluated outside the bounds of its u-domain: deval(%s) %s"%(u,self.domain_u))
+        if v not in self.domain_v : raise DomainError("Surface evaluated outside the bounds of its v-domain: deval(%s) %s"%(v,self.domain_v))
 
         pt,vec_u,vec_v = self._nudged(u,v)
         vec = vec_u.cross(vec_v)
@@ -610,8 +610,8 @@ class Surface(IsParametrized):
             
         """
         #nearest neighbors along u and v axis of point(u,v); used for discrete approximations calculations 
-        if u<self.domain_u.a or u>self.domain_u.b : raise DomainError("Curve evaluated outside the bounds of its u domain: deval(%s) %s"%(u,self.domain_u))
-        if v<self.domain_v.a or v>self.domain_v.b : raise DomainError("Curve evaluated outside the bounds of its v domain: deval(%s) %s"%(v,self.domain_v))
+        if u not in self.domain_u : raise DomainError("Surface evaluated outside the bounds of its u-domain: deval(%s) %s"%(u,self.domain_u))
+        if v not in self.domain_v : raise DomainError("Surface evaluated outside the bounds of its v-domain: deval(%s) %s"%(v,self.domain_v))
         pt = Point(self.func(u,v))
         
         vec_u = False
