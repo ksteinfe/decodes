@@ -575,7 +575,9 @@ class RGon(PGon):
         try:
             return self._apothem
         except:
-            self._apothem = Vec.interpolate(self._verts[0],self._verts[1]).length
+            mpt = Point.interpolate(self.pts[0],self.pts[1])
+            self._apothem = mpt.distance(self.centroid)
+            #self._apothem = Vec.interpolate(self._verts[0],self._verts[1]).length
             return self._apothem
 
     @property
