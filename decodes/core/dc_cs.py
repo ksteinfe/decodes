@@ -52,7 +52,10 @@ class CS(Geometry, Basis):
             :rtype: bool
 
         """
-        return self.origin == other.origin and self.x_axis == other.x_axis and  self.y_axis == other.y_axis and  self.z_axis == other.z_axis
+        try:
+            return self.origin == other.origin and self.x_axis == other.x_axis and  self.y_axis == other.y_axis and  self.z_axis == other.z_axis
+        except:
+            return False
         
     def __ne__(self, other): 
         """ Overloads the not equal **(!=)** operator for position and orientation of this CS as compared to the given CS.
