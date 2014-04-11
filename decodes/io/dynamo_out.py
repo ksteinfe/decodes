@@ -1,20 +1,24 @@
 from .. import *
 from ..core import *
 from ..core import dc_base, dc_vec, dc_point, dc_cs, dc_line, dc_pline, dc_mesh, dc_pgon
-#from .rhino_out import *
 from . import outie
 if VERBOSE_FS: print "dynamo_out loaded"
 
 import clr, collections
 
 clr.AddReference('ProtoGeometry')
-import Autodesk.DesignScript.Geometry as ds
+clr.AddReference('DSCoreNodes')
 
+import Autodesk.DesignScript.Geometry as ds
+import DSCore
 #TODO: check at end of script if the user overwrote the established 'outie' with either a singleton, a list of sc.Geoms, or something else, and act accordingly (raising the appropriate warnings) 
 
 class DynamoOut(outie.Outie):
     """outie for pushing stuff to grasshopper"""
     raw_types = ["Curve","Surface"]
+    primitive_types = ["bool", "int", "float", "str"]
+    structure_types = ["classobj", "instance", "function", "class"]
+    friendly_types = ["DHr"]
 
     def __init__(self):
         super(DynamoOut,self).__init__()
@@ -55,8 +59,17 @@ class DynamoOut(outie.Outie):
             return self._drawPlane(g)
         if isinstance(g,Curve): 
             return self._drawCurve(g)
+        if isinstance(g,Color): 
+            return self._drawColor(g)
         # ADD ANY RAW TYPES DIRECTLY
         if any(p in str(type(g)) for p in DynamoOut.raw_types) : return g
+        if any(p in str(type(g)) for p in DynamoOut.primitive_types): 
+            return g
+        if any(p in str(type(g)) for p in DynamoOut.friendly_types): 
+            return g
+        if any(p in str(type(g)) for p in DynamoOut.structure_types): 
+            return g
+        
         #if isinstance(g, (Geometry) ) : raise NotImplementedError("I do not have a translation for that decodes geometry type in DynamoOut")
 
     def _drawVec(self, vec): 
@@ -101,6 +114,9 @@ class DynamoOut(outie.Outie):
 
     def _drawCS(self, cs):
         return ds.CoordinateSystem.ByOriginVectors(to_dyn_pt(cs.origin),to_dyn_vec(cs.x_axis),to_dyn_vec(cs.y_axis))
+        
+    def _drawColor(self, color):
+        return to_dyn_dscolor(color)
 
 def to_dyn_vec(vec):
     return ds.Vector.ByCoordinates(vec.x,vec.y,vec.z)
@@ -130,7 +146,12 @@ def to_dyn_plane(other):
 def dyn_interpolated_curve(points):
     dyn_points = [to_dyn_pt(pt) for pt in points]
     return ds.NurbsCurve.ByPoints(dyn_points)
-
+    
+def to_dyn_dscolor(color):
+    ri = Interval(0,255).eval(5)#color.r)
+    gi = Interval(0,255).eval(5)#color.g)
+    bi = Interval(0,255).eval(5)#color.b)
+    return DSCore.Color.ByARGB(255,ri,gi,bi)
 
 
 '''

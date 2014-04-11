@@ -7,10 +7,12 @@ if VERBOSE_FS: print "dynamo_in loaded"
 import clr, collections
 
 clr.AddReference('ProtoGeometry')
+clr.AddReference('DSCoreNodes')
+
 import Autodesk.DesignScript.Geometry as ds
-
+import DSCore
 #TODO: figure out how to hack the code completion thingo to display decodes geometry after gh geom has been translated
-
+# DSCore.Color
 
 
 class DynamoIn():
@@ -32,7 +34,10 @@ class DynamoIn():
             
         if dyn_in is None : return None
         if type(dyn_in) is ds.Rectangle :  
-            dyn_in = ds.PolyCurve.ByPoints(dyn_in.Corners[0:2], True)
+            dyn_in = ds.PolyCurve.ByPoints(dyn_in.Points[0:2], True)
+            #pts = [from_dynpt(pt) for pt in dyn_in.Points[0:2]
+            #pts.append(from_dynpt(dyn_in.Points[0]))
+            #return pts
         if type(dyn_in) is ds.Vector: 
             return from_dynvec(dyn_in)
         elif type(dyn_in)is ds.Point: 
@@ -73,6 +78,8 @@ class DynamoIn():
             for face in dyn_in.FaceIndices:
                 faces.append(face.A, face.B, face.C, face.D)
             return Mesh(verts,faces)
+        elif type(dyn_in) is DSCore.Color: 
+            return from_dscolor(dyn_in)
         elif any(p in str(type(dyn_in)) for p in DynamoIn.primitive_types): 
             return dyn_in
         elif any(p in str(type(dyn_in)) for p in DynamoIn.friendly_types): 
@@ -81,7 +88,6 @@ class DynamoIn():
             return dyn_in
         else :
             print "UNKNOWN TYPE: "+str(type(dyn_in))+" is an "+ str(type(dyn_in))
-            return dyn_in
             #print inspect.getmro(dyn_in.__class__)
             #if issubclass(dyn_in.__class__, ds.GeometryBase ) : print "this is geometry"
             #print dyn_incoming.TypeHint
@@ -138,14 +144,11 @@ def from_nurbscurve(dyn_nurbscurve):
     verts = [from_dynpt(dyn_nurbscurve.PointAtParameter(i)) for i in rng]
     return PLine(verts)
     
-def from_dstransform(rh_xf):
-    xf = Xform()
-    xf.m00, xf.m01, xf.m02, xf.m03 = rh_xf.M00, rh_xf.M01, rh_xf.M02, rh_xf.M03
-    xf.m10, xf.m11, xf.m12, xf.m13 = rh_xf.M10, rh_xf.M11, rh_xf.M12, rh_xf.M13
-    xf.m20, xf.m21, xf.m22, xf.m23 = rh_xf.M20, rh_xf.M21, rh_xf.M22, rh_xf.M23
-    xf.m30, xf.m31, xf.m32, xf.m33 = rh_xf.M30, rh_xf.M31, rh_xf.M32, rh_xf.M33
-    return xf
-
+def from_dscolor(dyn_color):
+    ri = Interval(0,255).deval(dyn_color.Red)
+    gi = Interval(0,255).deval(dyn_color.Green)
+    bi = Interval(0,255).deval(dyn_color.Blue)
+    return Color(ri,gi,bi)
 '''
 for reference: the following code is injected before and after a user's script in grasshopper components
 ## -- BEGIN DECODES HEADER -- ##
@@ -165,11 +168,9 @@ exec(io.dynamo_out.component_footer_code)
     
 #TODO: make this into a proper innie instead
 component_header_code = """
-IN[0] = DynamoIn.get(IN[0])
-"""
-# once they fix their stuff, this should work like this:
-""" 
+new_in = []
 for k in IN:
-    k = DynamoIn.get(k)
+    new_in.append(DynamoIn.get(k))
+IN = new_in
 """
 component_footer_code = """       """
