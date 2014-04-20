@@ -38,3 +38,7 @@ pip-log.txt
 
 #help files
 *.chm
+
+#jython class files
+*$py.class
+
