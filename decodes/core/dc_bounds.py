@@ -221,7 +221,7 @@ class Bounds(Geometry):
             :rtype: PLine
             
         """
-        from .dc_pline import *
+        from .dc_pline import PLine
         return PLine(self.corners+[self.corners[0]])
 
 

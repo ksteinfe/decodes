@@ -169,7 +169,7 @@ class PGon(HasPts):
             
             
         """
-        from .dc_xform import *
+        from .dc_xform import Xform
     
         delta_a = (max_a - min_a) / divs
 
