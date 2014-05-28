@@ -139,5 +139,24 @@ class Mesh(HasPts):
             exploded_meshes.append(Mesh(pts,[nface]))
         return exploded_meshes
     
+    
+    def to_graph(self, val=1):
+        from decodes.extensions.graph import Graph
+        graph = Graph()
+        graph.naked_nodes = []
+        for f1 in range(len(self.faces)):
+            for f2 in range(len(self.faces)):
+                if f1 != f2:
+                    count = 0
+                    for index in self.faces[f2]:
+                        if index in self.faces[f1]:
+                            count+=1
+                    if count >= val:
+                        graph.add_edge(f1,f2)
+            if len(graph.edges[f1]) < len(self.faces[f1]):
+                if f1 not in graph.naked_nodes:
+                    graph.naked_nodes.append(f1)
+                                          
+        return graph
 
     

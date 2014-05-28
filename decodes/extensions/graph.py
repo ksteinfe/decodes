@@ -26,8 +26,9 @@ class Graph(object):
  
     def _add_edge(self, from_node, to_node, weight):
         self.edges.setdefault(from_node, []) # key might exist already, but if not this instructs our dict to return an empty list for this key.
-        self.edges[from_node].append(to_node)
-        self.weights[(from_node, to_node)] = weight
+        if not to_node in self.edges[from_node]:
+            self.edges[from_node].append(to_node)
+            self.weights[(from_node, to_node)] = weight
 
     @property
     def node_list(self):
