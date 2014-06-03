@@ -106,32 +106,39 @@ class Circle(Plane):
             raise GeometricError("Circle.mutually_tangent encountered a problem performing an intersection operation.") 
             
     @staticmethod
-    def thru_pts(pts):
-        """ Returns an Circle that goes through 3 Points
+    def thru_pts(start_pt, mid_pt, end_pt):
+        """ Returns an Circle that goes through a startpoint, midpoint and endpoint
                 
-            :param pts: Points to draw Circle through
-            :type start_pt: [Point]
+            :param start_pt: First Point on Circle
+            :type start_pt: Point
+            :param mid_pt: Second Point on Circle.
+            :type mid_pt: Point
+            :param end_pt: Third Point on Circle
+            :type end_pt: Point
             :result: circ_out
             :rtype: Circle
             
         """
-        v1 = Vec(pts[2] - pts[1])
-        v2 = Vec(pts[0] - pts[1])
-        v3 = Vec(pts[2] - pts[0])
+        v1 = Vec(end_pt - mid_pt)
+        v2 = Vec(start_pt - mid_pt)
+        v3 = Vec(end_pt - start_pt)
         
-        rad_osc = 0.5*v1.length*v2.length*v3.length/(v1*v3).length
-        denom = 2*(v1.cross(v3).length)*(v1.cross(v3).length)
-        a1 = v3.length*v3.length*v1.dot(v2)/denom
-        a2 = v2.length*v2.length*v1.dot(v3)/denom
-        a3 = v1.length*v1.length*(-v2.dot(v3))/denom
-        center_osc = pts[1]*a1 + pts[2]*a2 + pts[0]*a3
+        try:
+            rad_osc = 0.5*v1.length*v2.length*v3.length/(v1*v3).length
+            denom = 2*(v1.cross(v3).length)*(v1.cross(v3).length)
+            a1 = v3.length*v3.length*v1.dot(v2)/denom
+            a2 = v2.length*v2.length*v1.dot(v3)/denom
+            a3 = v1.length*v1.length*(-v2.dot(v3))/denom
+            center_osc = mid_pt*a1 + end_pt*a2 + start_pt*a3
+            
+            pln_out = Plane(center_osc, v1.cross(v2))
+            circ_out = Circle(pln_out,rad_osc)
+            
+            return circ_out
         
-        pln_out = Plane(center_osc, v1.cross(v2))
-        circ_out = Circle(pln_out,rad_osc)
-
-        print "approximate curvature: ", 1/rad_osc
-        return circ_out
-    
+        except: 
+            print "points are either co-linear or at least two are coincident"
+            return False
 
 
 
@@ -305,16 +312,21 @@ class Arc(HasBasis):
         """
         
         vec_ab = Vec(start_pt, sweep_pt)
-        vec_rad = tan.cross(tan.cross(vec_ab))
-        ang = vec_ab.angle(vec_rad)
-        rad = vec_ab.length/math.cos(ang)/2.0
-        center = Point(start_pt+vec_rad.normalized(rad))
+        try:
+            vec_rad = tan.cross(tan.cross(vec_ab))
+            ang = vec_ab.angle(vec_rad)
+            rad = vec_ab.length/math.cos(ang)/2.0
+            center = Point(start_pt+vec_rad.normalized(rad))
         
-        if (vec_ab.dot(tan) > 0):
-            arc_out = Arc.from_pts(center,start_pt,sweep_pt)
-        else:
-            arc_out = Arc.from_pts(center,start_pt, sweep_pt, True)    
-        return arc_out
+            if (vec_ab.dot(tan) > 0):
+                arc_out = Arc.from_pts(center,start_pt,sweep_pt)
+            else:
+                arc_out = Arc.from_pts(center,start_pt, sweep_pt, True)    
+            return arc_out
+        
+        except: 
+            print "points are either co-linear or at least two are coincident"
+            return False
         
     
     # Returns an arc using a center, a start point and a sweep point
@@ -366,27 +378,31 @@ class Arc(HasBasis):
         v2 = Vec(start_pt, end_pt)
         v3 = Vec(end_pt, mid_pt)
         
-        xl = v1.cross(v3).length
-        if xl == 0 : return Ray(start_pt,v2)
+        try:
+            xl = v1.cross(v3).length
+            if xl == 0 : return False
+                
+            rad = 0.5*v1.length*v2.length*v3.length/xl        
+            denom = 2*xl*xl
             
-        rad = 0.5*v1.length*v2.length*v3.length/xl        
-        denom = 2*xl*xl
+            a1 = v3.length*v3.length*v1.dot(v2)/denom
+            a2 = v2.length*v2.length*v1.dot(v3)/denom
+            a3 = v1.length*v1.length*(-v2.dot(v3))/denom
+            center = start_pt*a1 + mid_pt*a2 + end_pt*a3
+            
+            #test to see which arc between start_pt and end_pt contains mid_pt
+            #condition given by the angle between v1 and the perpendicular vector to v2 being acute
+            pln_normal = Vec(center, start_pt).cross(Vec(center, end_pt))
+            v_perp = v2.cross(pln_normal)
+            if (v1.dot(v_perp) > 0):
+                arc_out = Arc.from_pts(center,start_pt,end_pt)
+            else:
+                arc_out = Arc.from_pts(center,start_pt, end_pt, True)
+            return arc_out
         
-        a1 = v3.length*v3.length*v1.dot(v2)/denom
-        a2 = v2.length*v2.length*v1.dot(v3)/denom
-        a3 = v1.length*v1.length*(-v2.dot(v3))/denom
-        center = start_pt*a1 + mid_pt*a2 + end_pt*a3
-        
-        #test to see which arc between start_pt and end_pt contains mid_pt
-        #condition given by the angle between v1 and the perpendicular vector to v2 being acute
-        pln_normal = Vec(center, start_pt).cross(Vec(center, end_pt))
-        v_perp = v2.cross(pln_normal)
-        if (v1.dot(v_perp) > 0):
-            arc_out = Arc.from_pts(center,start_pt,end_pt)
-        else:
-            arc_out = Arc.from_pts(center,start_pt, end_pt, True)
-        return arc_out
-    
+        except: 
+            print "points are either co-linear or at least two are coincident"
+            return False
     
     
     #Returns a best fit arc using the modified least squares method
