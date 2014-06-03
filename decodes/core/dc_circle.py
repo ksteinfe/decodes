@@ -103,7 +103,34 @@ class Circle(Plane):
                 return cir,pt_tan,pt_tan_b
             return cir
         else:
-            raise GeometricError("Circle.mutually_tangent encountered a problem performing an intersection operation.")  
+            raise GeometricError("Circle.mutually_tangent encountered a problem performing an intersection operation.") 
+            
+    @staticmethod
+    def thru_pts(pts):
+        """ Returns an Circle that goes through 3 Points
+                
+            :param pts: Points to draw Circle through
+            :type start_pt: [Point]
+            :result: circ_out
+            :rtype: Circle
+            
+        """
+        v1 = Vec(pts[2] - pts[1])
+        v2 = Vec(pts[0] - pts[1])
+        v3 = Vec(pts[2] - pts[0])
+        
+        rad_osc = 0.5*v1.length*v2.length*v3.length/(v1*v3).length
+        denom = 2*(v1.cross(v3).length)*(v1.cross(v3).length)
+        a1 = v3.length*v3.length*v1.dot(v2)/denom
+        a2 = v2.length*v2.length*v1.dot(v3)/denom
+        a3 = v1.length*v1.length*(-v2.dot(v3))/denom
+        center_osc = pts[1]*a1 + pts[2]*a2 + pts[0]*a3
+        
+        pln_out = Plane(center_osc, v1.cross(v2))
+        circ_out = Circle(pln_out,rad_osc)
+
+        print "approximate curvature: ", 1/rad_osc
+        return circ_out
     
 
 
@@ -282,7 +309,13 @@ class Arc(HasBasis):
         ang = vec_ab.angle(vec_rad)
         rad = vec_ab.length/math.cos(ang)/2.0
         center = Point(start_pt+vec_rad.normalized(rad))
-        return Arc.from_pts(center, start_pt, sweep_pt)   
+        
+        if (vec_ab.dot(tan) > 0):
+            arc_out = Arc.from_pts(center,start_pt,sweep_pt)
+        else:
+            arc_out = Arc.from_pts(center,start_pt, sweep_pt, True)    
+        return arc_out
+        
     
     # Returns an arc using a center, a start point and a sweep point
     @staticmethod
@@ -311,9 +344,54 @@ class Arc(HasBasis):
             cs = CS(center, Vec(center, start_pt), Vec(center, sweep_pt))    
         return Arc(cs, radius, angle)
     
+    
+    # Make an arc that goes through a startpoint, midpoint and endpoint
+    @staticmethod
+    def thru_pts(start_pt, mid_pt, end_pt):
+        """ Returns an arc that goes through a startpoint, midpoint and endpoint
+                
+            :param start_pt: Start Point of Arc.
+            :type start_pt: Point
+            :param mid_pt: Mid Point of Arc.
+            :type mid_pt: Point
+            :param end_pt: End Point of Arc.
+            :type end_pt: Point
+            :result: Arc
+            :rtype: Arc
+            
+        """
+    
+    
+        v1 = Vec(start_pt, mid_pt)
+        v2 = Vec(start_pt, end_pt)
+        v3 = Vec(end_pt, mid_pt)
+        
+        xl = v1.cross(v3).length
+        if xl == 0 : return Ray(start_pt,v2)
+            
+        rad = 0.5*v1.length*v2.length*v3.length/xl        
+        denom = 2*xl*xl
+        
+        a1 = v3.length*v3.length*v1.dot(v2)/denom
+        a2 = v2.length*v2.length*v1.dot(v3)/denom
+        a3 = v1.length*v1.length*(-v2.dot(v3))/denom
+        center = start_pt*a1 + mid_pt*a2 + end_pt*a3
+        
+        #test to see which arc between start_pt and end_pt contains mid_pt
+        #condition given by the angle between v1 and the perpendicular vector to v2 being acute
+        pln_normal = Vec(center, start_pt).cross(Vec(center, end_pt))
+        v_perp = v2.cross(pln_normal)
+        if (v1.dot(v_perp) > 0):
+            arc_out = Arc.from_pts(center,start_pt,end_pt)
+        else:
+            arc_out = Arc.from_pts(center,start_pt, end_pt, True)
+        return arc_out
+    
+    
+    
     #Returns a best fit arc using the modified least squares method
     @staticmethod
-    def thru_pts(pts_in):
+    def best_fit(pts_in):
         """ Returns a best fit arc using the modified least squares method.
         
             :param pts_in: Points to fit Arc to.
@@ -376,5 +454,54 @@ class Arc(HasBasis):
         # Orient the CS with the segment with the smallest angle
         cs = CS(center,segs[0].vec,segs[1].vec)
         return Arc(cs,rad,sweep)
+        
+    
+    # Returns the distance between an Arc and a point
+    def near(self, p):
+        """ Returns the distance between an Arc and a Point.
+        
+            :param p: Point to look for a near Point on the LinearEntity.
+            :type p: Point
+            :result: Tuple of near point on Arc, and distance from point to near point
+            :rtype: (Point, float)
+            
+        """
+    
+        #find the normal vector to the plane of the arc
+        pln_normal = (Vec(self.origin, self.spt).cross(Vec(self.origin, self.ept))).normalized()
+        # if normal vector points to same side of plane as curve point
+        if Vec(self.origin, p).dot(pln_normal) > 0:
+            pt_proj = p - pln_normal*(Vec(self.origin, p).dot(pln_normal))
+        else:
+            pt_proj = p + pln_normal*(Vec(self.origin, p).dot(-pln_normal))
+        dist_1 = p.distance(pt_proj) 
+
+        #find intersection of the projected point with full circle (both lying on same plane)
+        vec_u = Vec(self.origin, pt_proj).normalized()
+        pt_int = self.origin + vec_u*self.rad  
+
+        #set up quantities to test whether the intersection point is on the arc
+        v_perp = Vec(self.spt, self.ept).cross(pln_normal)
+        if (self.angle > math.pi): v_perp = -v_perp
+
+        #if intersection point is on the arc
+        if (Vec(self.spt, pt_int).dot(v_perp) > 0):     
+            dist_2 = pt_proj.distance(pt_int)
+        #if pt_int is not on the arc
+        else:
+            dist_2 = min(pt_proj.distance(self.spt), pt_proj.distance(self.ept))
+        
+        return (pt_int, math.sqrt(dist_1**2 + dist_2**2))
+    
+    
+    def near_pt(self, p):
+        """ Returns the closest point to a given Arc
+       
+            :param p: Point to look for a near Point on the Arc.
+            :type p: Point
+            :result: Near point on Arc.
+            :rtype: Point
+        """
+        return self.near(p)[0]
 
 

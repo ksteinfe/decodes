@@ -378,6 +378,19 @@ class Curve(HasBasis,IsParametrized):
         if t<0 or t>1 : raise DomainError("eval_curvature() must be called with a number between 0->1: eval(%s)"%t)
         return self.deval_curvature(Interval.remap(t,Interval(),self.domain))
 
+    def tangent(self, t):
+        """ Returns the tangent Vector to this Curve at given t-value
+        
+            :param t: Normalized value between 0 and 1, to evaluate a curve.
+            :type t: float
+            :result: Tangent Vector at t-value
+            :rtype: Vec
+        
+        """
+        pln = self.eval_pln(t)
+        return pln.normal        
+        
+        
     @staticmethod
     def _curvature_from_vecs(pt, vec_pos, vec_neg, calc_circles=False):
         """ Returns the curvature at a point.
