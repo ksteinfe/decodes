@@ -1,6 +1,6 @@
-from .. import *
-from ..core import *
-from ..core import dc_base, dc_color
+from decodes import *
+from decodes.core import *
+from decodes.core import dc_base, dc_color
 
 if VERBOSE_FS: print "outie loaded"
 import copy, collections
