@@ -11,8 +11,7 @@ setup(
     author='Kyle Steinfeld',
     author_email = "ksteinfe@gmail.com",
     classifiers = [
-      "Programming Language :: Python"
-      "Programming Language :: Python :: 2"
+      "Programming Language :: Python :: 2.7",
       "Topic :: Multimedia :: Graphics :: 3D Modeling"
     ],
 )
