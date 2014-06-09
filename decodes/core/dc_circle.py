@@ -137,8 +137,7 @@ class Circle(Plane):
             return circ_out
         
         except: 
-            print "points are either co-linear or at least two are coincident"
-            return False
+            raise GeometricError("points are either co-linear or at least two are coincident") 
 
 
 
@@ -325,8 +324,7 @@ class Arc(HasBasis):
             return arc_out
         
         except: 
-            print "points are either co-linear or at least two are coincident"
-            return False
+            raise GeometricError("points are either co-linear or at least two are coincident") 
         
     
     # Returns an arc using a center, a start point and a sweep point
@@ -349,6 +347,7 @@ class Arc(HasBasis):
         
         radius = center.distance(start_pt)
         angle = Vec(center, start_pt).angle(Vec(center, sweep_pt))
+        
         if is_major:
             angle = 2*math.pi - angle
             cs = CS(center, Vec(center, start_pt), Vec(center, sweep_pt).inverted())
@@ -393,16 +392,23 @@ class Arc(HasBasis):
             #test to see which arc between start_pt and end_pt contains mid_pt
             #condition given by the angle between v1 and the perpendicular vector to v2 being acute
             pln_normal = Vec(center, start_pt).cross(Vec(center, end_pt))
+            if pln_normal.length == 0:
+                pln_normal = v1.cross(v2)
             v_perp = v2.cross(pln_normal)
-            if (v1.dot(v_perp) > 0):
-                arc_out = Arc.from_pts(center,start_pt,end_pt)
-            else:
-                arc_out = Arc.from_pts(center,start_pt, end_pt, True)
-            return arc_out
-        
+            
+            try:
+                arc_out = Arc.from_pts(center,start_pt,end_pt, not v1.dot(v_perp))
+            except:
+                angle = Vec(center,start_pt).angle(Vec(center, end_pt))
+                radius = center.distance(start_pt)
+                cs = CS(center, Vec(center, start_pt), Vec(center, mid_pt))
+                arc_out = Arc(cs, radius, angle)
+            return arc_out   
+            
         except: 
-            print "points are either co-linear or at least two are coincident"
-            return False
+            raise GeometricError("points are either co-linear or at least two are coincident") 
+
+        
     
     
     #Returns a best fit arc using the modified least squares method
