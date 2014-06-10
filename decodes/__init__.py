@@ -39,13 +39,15 @@ def make_out(outtype, name="untitled", path=False, **kargs):
 
         c_dim=False
         flip=False
+        save_file=True
         if "canvas_dimensions" in kargs : c_dim = kargs["canvas_dimensions"]
+        if "save_file" in kargs : save_file = kargs["save_file"]
         if "flip_y" in kargs : 
             if c_dim is False : raise Exception("If you want to flip the y-axis of this SVG, you have to tell me the canvas_dimensions.  Please pass an Interval.")
             flip = kargs["flip_y"]
         
-        if path : return io.svg_out.SVGOut(name, path, canvas_dimensions=c_dim, flip_y=flip)
-        else : return io.svg_out.SVGOut(name, canvas_dimensions=c_dim, flip_y=flip)
+        if path : return io.svg_out.SVGOut(name, path, canvas_dimensions=c_dim, flip_y=flip,save_file=save_file)
+        else : return io.svg_out.SVGOut(name, canvas_dimensions=c_dim, flip_y=flip,save_file=save_file)
     elif outtype == Outies.Dynamo:
         import io.dynamo_out
         return io.dynamo_out.DynamoOut()
