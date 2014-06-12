@@ -9,7 +9,7 @@ class PLine(HasPts):
     a simple polyline class
     """
     subclass_attr = ['_edges','_length'] # this list of props is unset anytime this HasPts object changes
-
+    
     def __init__(self, vertices=None, basis=None):
         """ Polyline constructor.
         

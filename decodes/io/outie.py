@@ -25,9 +25,13 @@ class Outie(object):
         else:
             if ngeom is None : return
             if isinstance(ngeom, (Geometry) ) :
-                if isinstance(ngeom, (HasBasis) ) and ngeom.do_translate : ngeom = ngeom.basis_applied()
-#                self.geom.append(copy.deepcopy(ngeom))
-                self.geom.append(ngeom)
+                if isinstance(ngeom, (HasBasis) ) and ngeom.do_translate : 
+                    try:
+                        ngeom = ngeom.basis_applied()
+                        # self.geom.append(copy.deepcopy(ngeom))
+                        self.geom.append(ngeom)
+                    except:
+                        self.geom.append(ngeom)
             elif isinstance(ngeom, collections.Iterable) : 
                 for g in ngeom : self.put(g)
             else : 
