@@ -512,8 +512,20 @@ class Arc(HasBasis):
         #if pt_int is not on the arc
         else:
             dist_2 = min(pt_proj.distance(self.spt), pt_proj.distance(self.ept))
+   
+        angle = Vec(self.origin, self.spt).angle(Vec(self.origin, pt_int))
         
-        return (pt_int, math.sqrt(dist_1**2 + dist_2**2))
+        if self.basis.deval(self._basis.xAxis.cross(Vec(self.origin, pt_int))).z < 0:
+            angle = math.pi * 2 - angle
+        t = angle/self.angle
+        near = (pt_int, t, math.sqrt(dist_1**2 + dist_2**2))
+        
+        
+        if near[1] < 0 or near[1] > 1:
+            if p.distance(self.spt) < p.distance(self.ept):
+                near = (self.spt,0.0,p.distance(self.spt))
+            else: near = (self.ept,1.0,p.distance(self.ept))
+        return near
     
     
     def near_pt(self, p):
