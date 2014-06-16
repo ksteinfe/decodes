@@ -58,6 +58,7 @@ class JsonOut(outie.Outie):
         jsonpickle.handlers.registry.register(Curve, CurveHandler)
         
     def draw(self):
+        print "drawing"        
         pickled = jsonpickle.encode(self.geom)
         
         if self._save_file: 
