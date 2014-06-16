@@ -32,6 +32,8 @@ class Outie(object):
                         self.geom.append(ngeom)
                     except:
                         self.geom.append(ngeom)
+                else:
+                    self.geom.append(ngeom)
             elif isinstance(ngeom, collections.Iterable) : 
                 for g in ngeom : self.put(g)
             else : 
