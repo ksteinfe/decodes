@@ -1,7 +1,7 @@
 import decodes
 from decodes.core import *
 
-outie = decodes.make_out(decodes.Outies.JSON, "json_out")
+outie = decodes.make_out(decodes.Outies.JSON, "json_out", save_file=False)
 scale = 50
 
 for x in range(2):
