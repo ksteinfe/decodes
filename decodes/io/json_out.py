@@ -58,14 +58,14 @@ class JsonOut(outie.Outie):
         jsonpickle.handlers.registry.register(Curve, CurveHandler)
         
     def draw(self):
-        print "drawing"        
-        pickled = jsonpickle.encode(self.geom)
+        print "drawing" 
+        self.json = jsonpickle.encode(self.geom)
         
         if self._save_file: 
             print "drawing js to "+self.filepath
             # write buffer to file
             fo = open(self.filepath, "wb")
-            fo.write( pickled )
+            fo.write( self.json )
             fo.close()
         
         return True
