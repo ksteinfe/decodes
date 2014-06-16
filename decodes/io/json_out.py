@@ -34,6 +34,22 @@ class JsonOut(outie.Outie):
                 return data
         jsonpickle.handlers.registry.register(Point, PointHandler)
         
+        class SegmentHandler(jsonpickle.handlers.BaseHandler):    
+            def flatten(self, obj, data):
+                data['spt'] = (obj.spt.x,obj.spt.y,obj.spt.z)
+                data['ept'] = (obj.ept.x,obj.ept.y,obj.ept.z)
+                return data
+        jsonpickle.handlers.registry.register(Segment, SegmentHandler)
+        
+        
+        class LineHandler(jsonpickle.handlers.BaseHandler):    
+            def flatten(self, obj, data):
+                data['pt'] = (obj.spt.x,obj.spt.y,obj.spt.z)
+                data['vec'] = (obj.vec.x,obj.vec.y,obj.vec.z)
+                return data
+        jsonpickle.handlers.registry.register(Line, LineHandler)
+        jsonpickle.handlers.registry.register(Ray, LineHandler)
+        
         class PLineHandler(jsonpickle.handlers.BaseHandler):    
             def flatten(self, obj, data):
                 #data['pts'] = [PointHandler(None).flatten(pt,{}) for pt in obj.pts]

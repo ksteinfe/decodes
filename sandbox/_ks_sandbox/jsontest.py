@@ -1,7 +1,7 @@
 import decodes
 from decodes.core import *
 
-outie = decodes.make_out(decodes.Outies.JSON, "json_out", save_file=False)
+outie = decodes.make_out(decodes.Outies.JSON, "json_out", save_file=True)
 scale = 50
 
 for x in range(2):
@@ -9,7 +9,6 @@ for x in range(2):
         pt = Point(x*scale,y*scale)
         pt.set_color(Color(1,0,0))
         pt.set_weight(2*y+1.5)
-        print pt
         outie.put(pt)
         
 
@@ -29,17 +28,21 @@ cir.set_weight(5.0)
 cir.set_fill(Color(0,1,0))
 outie.put(cir)
 
-from pprint import pprint
-pprint(crv.func.__dict__)
+seg = Segment(Point(2,2),Point(4,2))
+outie.put(seg)
 
+ray = Ray(Point(6,6),Vec(1,1))
+line = Line(Point(7,6),Vec(1,1))
+outie.put(ray)
+outie.put(line)
 
-
+'''
 pg = PGon([Point(),Point(0,1),Point(1,1)])
 outie.put(pg)
 
 rg = RGon(5,2.0)
 outie.put(rg)
-
+'''
 
 
 outie.draw()
