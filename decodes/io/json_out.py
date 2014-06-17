@@ -16,6 +16,15 @@ class JsonOut(outie.Outie):
     min_point_size = 0.001
     default_curve_resolution = 50
 
+    @property
+    def json(self):
+        try:
+            return self._json
+        except:
+            self.draw()
+            return self._json
+    
+    
     def __init__(self, filename, path=False, save_file=True):
         super(JsonOut,self).__init__()
         if filename[-4:].lower() == ".js" : filename = filename[:-4]
@@ -98,8 +107,7 @@ class JsonOut(outie.Outie):
         jsonpickle.handlers.registry.register(Curve, CurveHandler)
         
     def draw(self):
-        print "drawing" 
-        self.json = jsonpickle.encode(self.geom)
+        self._json = jsonpickle.encode(self.geom)
         
         if self._save_file: 
             print "drawing js to "+self.filepath
