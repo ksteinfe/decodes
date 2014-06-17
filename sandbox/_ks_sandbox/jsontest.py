@@ -29,17 +29,27 @@ cir.set_fill(Color(0,1,0))
 outie.put(cir)
 
 seg = Segment(Point(2,2),Point(4,2))
+seg.set_color(1,0,0)
+seg.set_weight(5.0)
+seg.set_name("myseg")
 outie.put(seg)
+
+seg2 = Segment(Point(2,2),Point(4,2))
+outie.put(seg2)
+
 
 ray = Ray(Point(6,6),Vec(1,1))
 line = Line(Point(7,6),Vec(1,1))
 outie.put(ray)
 outie.put(line)
 
-'''
+
 pg = PGon([Point(),Point(0,1),Point(1,1)])
+pg.set_color(0,1,0)
+pg.set_fill(0,0,1)
 outie.put(pg)
 
+'''
 rg = RGon(5,2.0)
 outie.put(rg)
 '''

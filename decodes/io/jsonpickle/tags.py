@@ -8,15 +8,15 @@ that need to be specially handled.
 """
 from compat import set
 
-ID = 'py/id'
-OBJECT = 'py/object'
-TYPE = 'py/type'
-REPR = 'py/repr'
-REF = 'py/ref'
-TUPLE = 'py/tuple'
-SET = 'py/set'
-SEQ = 'py/seq'
-STATE = 'py/state'
+ID = 'py_id'
+OBJECT = 'py_object'
+TYPE = 'py_type'
+REPR = 'py_repr'
+REF = 'py_ref'
+TUPLE = 'py_tuple'
+SET = 'py_set'
+SEQ = 'py_seq'
+STATE = 'py_state'
 JSON_KEY = 'json://'
 
 # All reserved tag names
