@@ -490,7 +490,11 @@ class Arc(HasBasis):
         """
     
         #find the normal vector to the plane of the arc
-        pln_normal = (Vec(self.origin, self.spt).cross(Vec(self.origin, self.ept))).normalized()
+        if self.spt != self.ept:
+            pln_normal = (Vec(self.origin, self.spt).cross(Vec(self.origin, self.ept))).normalized()
+        else:
+            pln_normal = (Vec(self.origin, self.ept).cross(Vec(self.origin, self.eval(0.25)))).normalized()
+        
         # if normal vector points to same side of plane as curve point
         if Vec(self.origin, p).dot(pln_normal) > 0:
             pt_proj = p - pln_normal*(Vec(self.origin, p).dot(pln_normal))
@@ -520,11 +524,11 @@ class Arc(HasBasis):
         t = angle/self.angle
         near = (pt_int, t, math.sqrt(dist_1**2 + dist_2**2))
         
-        
         if near[1] < 0 or near[1] > 1:
             if p.distance(self.spt) < p.distance(self.ept):
                 near = (self.spt,0.0,p.distance(self.spt))
             else: near = (self.ept,1.0,p.distance(self.ept))
+        
         return near
     
     
@@ -537,5 +541,16 @@ class Arc(HasBasis):
             :rtype: Point
         """
         return self.near(p)[0]
+    
+    def is_major(self):
+        """ Arc angle check
+        """
+        if self.angle >= 180 : return True
+        else: return False
+    
+    def flipped(self):
+        """ Returns the inverse Arc
+        """
+        return Arc.from_pts(self.origin, self.spt, self.ept, not self.is_major())
 
 
