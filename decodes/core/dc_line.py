@@ -641,8 +641,8 @@ class VecField(PixelGrid):
             :type a: float or Point
             :param b: y-coordinate or None.
             :type b: float or None
-            :result: VecField object.
-            :rtype: VecField
+            :result: Modifies this Vector Field in place.
+            :rtype: None
                         
         """
         try:

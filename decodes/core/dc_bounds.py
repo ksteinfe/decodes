@@ -245,14 +245,14 @@ class Bounds(Geometry):
                     
         
     @staticmethod
-    def unit_square():
+    def unit_square(dimension = 1.0):
         """ Returns a unit square Bounds (2D) in the xy plane.
         
             :result: Unit square Bounds.
             :rtype: Bounds
             
         """
-        return Bounds(ival_x=Interval(),ival_y=Interval())
+        return Bounds(ival_x=Interval(-dimension/2,dimension/2),ival_y=Interval(-dimension/2,dimension/2))
 
     @staticmethod
     def unit_cube():
