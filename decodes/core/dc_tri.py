@@ -1,5 +1,6 @@
-
-
+from decodes.core import *
+from . import dc_base, dc_vec, dc_point, dc_line, dc_plane #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
+if VERBOSE_FS: print "tri.py loaded"
 
 class Tri():
     
@@ -114,9 +115,11 @@ class Tri():
         return Tri(pts[0],pts[1],pts[2])
         
     def to_pgon(self):
+        from .dc_pgon import PGon
         return PGon(self.pts)
     
     def to_msh(self):
+        from .dc_mesh import Mesh
         msh = Mesh(self.pts)
         msh.add_face(0,1,2)
         return msh

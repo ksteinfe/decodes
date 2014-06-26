@@ -58,6 +58,10 @@ class SVGOut(outie.Outie):
         # MUST LOOK FOR CHILD CLASSES BEFORE PARENT CLASSES (points before vecs)
         if isinstance(g,Curve): g = g.surrogate
 
+        # treat Tris as PGons
+        if isinstance(g, Tri):  g = PGon([g.pa,g.pb,g.pc])
+        
+        
         g = self._flip_geom(g)
 
         if isinstance(g, Point) : return self._drawPoint(g)

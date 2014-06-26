@@ -17,6 +17,7 @@ from dc_cs import *
 
 from dc_line import *
 from dc_circle import *
+from dc_tri import *
 
 from dc_has_pts import *
 from dc_pline import *

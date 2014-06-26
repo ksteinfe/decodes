@@ -56,6 +56,9 @@ class GrasshopperOut(outie.Outie):
             tree.Add(g,path)
             return True
 
+        # treat Tris as PGons
+        if isinstance(g, Tri):  g = PGon([g.pa,g.pb,g.pc])
+            
         def extract_props(g):
             from DcPython import Decodes as dcp
             att = dcp.Decodes_Attributes()
@@ -124,7 +127,7 @@ class GrasshopperOut(outie.Outie):
             tree_p.Add(extract_props(g), path)
             return True
 
-        if isinstance(g, PGon) : 
+        if isinstance(g, PGon): 
             tree.Add(self._drawPGon(g),path)
             tree_p.Add(extract_props(g), path)
             return True
