@@ -2,7 +2,7 @@ from decodes.core import *
 from . import dc_base, dc_vec, dc_point, dc_line, dc_plane #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
 if VERBOSE_FS: print "tri.py loaded"
 
-class Tri():
+class Tri(Geometry):
     
     def __init__(self, pt_a, pt_b, pt_c):
         self.pa = pt_a
