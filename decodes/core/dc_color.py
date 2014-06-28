@@ -134,6 +134,29 @@ class Color():
         b = (1-t) * c0.b + t * c1.b
         return Color(r,g,b)
         
+    @staticmethod
+    def interpolate2d(u0v0, u0v1, u1v0, u1v1,u=0.5,v=0.5):
+        """ Returns a new color interpolated from four Color objects.
+        
+            :param u0v0: Color object at bottom left corner
+            :type u0v0: Color
+            :param u0v1: Color object at top left corner
+            :type u0v1: Color
+            :param u1v0: Color object at bottom right corner
+            :type u1v0: Color
+            :param u1v1: Color object at top right corner
+            :type u1v1: Color
+            :param u: Interpolation value (between 0.0 and 1.0). Defaults to 0.5.
+            :type u: float
+            :param v: Interpolation value (between 0.0 and 1.0). Defaults to 0.5.
+            :type v: float
+            :result: Interpolated Color object.
+            :rtype: Color
+        """
+        c1 = Color().interpolate(u1v0,u1v1,v)
+        c0 = Color().interpolate(u0v0,u0v1,v)
+        return Color().interpolate(c0,c1,u)
+        
         
     @staticmethod
     def average(colors = []):
@@ -235,6 +258,16 @@ class PixelGrid(object):
         """
         return int(self._res[1])
 
+    @property
+    def addresses(self):
+        """ Returns a list of tuples containing x,y addresses in this PixelGrid.
+        
+            :result: a list of tuples
+            :rtype: [(int,int)]
+            
+        """
+        return [(x,y) for x in range(self.px_width) for y in range(self.px_height)]
+        
     def get(self,x,y):
         """ Returns value at location (x,y).
         
