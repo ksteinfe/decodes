@@ -1,6 +1,6 @@
 import decodes.core as dc
 from decodes.core import *
-import math
+import math, itertools
 
 class Graph(object):
     """
@@ -37,7 +37,13 @@ class Graph(object):
     def __repr__(self): return "graph[{0} nodes ,{1} connections]".format(len(self.nodes),sum([len(edge) for edge in self.edges.values()]))
 
 
-
+    @property
+    def node_pairs(self):
+        ret = []
+        for n1, others in self.edges.iteritems():
+             for n2 in others: ret.append((n1,n2))
+        return tuple(ret)
+    
     """
     Source:
     http://forrst.com/posts/Dijkstras_algorithm_in_Python-B4U
