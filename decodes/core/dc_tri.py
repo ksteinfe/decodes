@@ -75,6 +75,14 @@ class Tri(Geometry):
         rad = 2.0*self.area/self.perimeter
         return Circle(pln,rad)
         
+    def rotate(self):
+        self.pa, self.pb, self.pc = self.pb, self.pc, self.pa
+        
+    def flip(self, keep_a=False,keep_b=False):
+        if keep_a: self.pb, self.pc = self.pc, self.pb
+        elif keep_b: self.pa, self.pc = self.pc, self.pa
+        else: self.pa, self.pb = self.pb, self.pa
+        
     def edge(self,index):
         if index == 0 : return Segment(self.pa,self.pb)
         elif index == 1 : return Segment(self.pb,self.pc)
