@@ -364,6 +364,16 @@ class Segment(LinearEntity):
       """
       return Point.interpolate(self.spt, self.ept)
 
+    @property
+    def pts(self): 
+      """ Returns the start and end points of this Segment.
+            
+            :result: The start and end Points of this Segment.
+            :rtype: [Point]
+      
+      """
+      return self.spt, self.ept
+      
     def inverted(self):
         """ Return a new Segment between the ept and spt of this Segment, but pointing in the opposite direction.
         
