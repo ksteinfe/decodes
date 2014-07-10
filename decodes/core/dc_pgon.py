@@ -132,6 +132,23 @@ class PGon(HasPts):
         a = 0
         for n in range(len(self._verts)): a += (self._verts[n-1].x + self._verts[n].x) * (self._verts[n-1].y - self._verts[n].y)
         return abs(a / 2.0)
+        
+    @property
+    def is_clockwise(self):
+        """ Determines if the verts of this PGon are more-or-less ordered clockwise or counter-clockwise relative to its basis.
+        
+            :result: The clockwiseness of this PGon.
+            :rtype: bool
+            
+            ::
+            
+                my_pgon.area
+            
+        """
+        a = 0
+        for n in range(len(self._verts)): a += (self._verts[n-1].x + self._verts[n].x) * (self._verts[n-1].y - self._verts[n].y)
+        return a > 0.0
+        
 
     @property
     def bounds(self):
@@ -153,6 +170,11 @@ class PGon(HasPts):
 
         return Bounds(ival_x = ivx, ival_y = ivy)
 
+        
+    def angle_bisector(self,index):
+        return False
+        
+        
     def rotated_to_min_bounds(self, divs = 4 , levels = 2, min_a = 0, max_a =.5 * math.pi ):
         """ Creates a copy of a polygon rotated to its best-fit bounding box.
         
