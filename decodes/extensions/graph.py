@@ -14,21 +14,26 @@ class Graph(object):
     def add_node(self, value):
         self.nodes.add(value)
     
-    def add_edge(self, from_node, to_node, weight=1.0):
+    def add_edge(self, from_node, to_node, weight=1.0,bidirectional=True):
         # make sure these nodes are in our list of nodes
         if from_node not in self.nodes: self.add_node(from_node)
         if to_node not in self.nodes: self.add_node(to_node)
         
         # add the edge
-        self._add_edge(from_node, to_node, weight)
+        success = self._add_edge(from_node, to_node, weight)
         # add the reverse edge
-        if not from_node == to_node: self._add_edge(to_node, from_node, weight)
+        if bidirectional:
+            if not from_node == to_node: 
+                success= success and self._add_edge(to_node, from_node, weight)
+        return success
  
     def _add_edge(self, from_node, to_node, weight):
         self.edges.setdefault(from_node, []) # key might exist already, but if not this instructs our dict to return an empty list for this key.
         if not to_node in self.edges[from_node]:
             self.edges[from_node].append(to_node)
             self.weights[(from_node, to_node)] = weight
+            return True
+        return False
 
     @property
     def node_list(self):
