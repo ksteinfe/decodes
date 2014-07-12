@@ -113,18 +113,113 @@ class Graph(object):
         route.reverse()
         return route
 
-'''
+
 class SpatialGraph(Graph):
     """
     A graph of spatial points
-    important to note that graph is indexed by object, not by position. it will detect duplicate objects, but not duplicate point locations
+    A graph is indexed by object, not by position. This class ensures that duplicate point positions are not permitted.
+    Collection of points given at construction are not checked for duplicates
     """
-    def __init__(self):
+    def __init__(self,initial_pts=False):
         super(SpatialGraph,self).__init__()
         self.distances = {}
+        
+        #self.qtree = QuadTree(4, bnds)
+        #for pt in pts: qt.append(pt)
+        
+        if initial_pts:
+            for pt in initial_pts: self.add_node(pt)
+        
+    """
+    if not check validity, duplicate point locations are not checked, nor is the existence of the requested node in the set of nodes
+    """
+    def add_edge(self, from_node, to_node, bidirectional=True, check_validity=True):
+        if check_validity:
+            na, nb = self.node_at(from_node), self.node_at(to_node)
+            if na: from_node = na
+            if nb: to_node = nb
+        
+            # make sure these nodes are in our list of nodes
+            if from_node not in self.nodes: self.add_node(from_node)
+            if to_node not in self.nodes: self.add_node(to_node)
+        
+        # add the edge
+        dist = from_node.distance(to_node)   
+        success = self._add_edge(from_node, to_node, dist)
+        # add the reverse edge
+        if bidirectional: success = success and self._add_edge(to_node, from_node, dist)
+        return success
+        
+        
+        
+    def add_node(self, pt, check_validity=True):
+        if check_validity:
+            undup = self.node_at(pt)
+            if undup: pt = undup
+        
+        self.nodes.add(pt)
+        
+        
+        
+        
+    def to_segs(self):
+        return [[Segment(spt,ept) for ept in epts] for spt, epts in self.edges.items()]
+        
+        
+    def __contains__(self, pt):
+        """| Overloads the containment **(in)** operator"""
+        return node_at(pt) is not False
+        
+    def node_at(self,pt):
+        for other in self.nodes:
+            if pt == other : return other
+        return False
 
-    def _add_edge(self, from_node, to_node, weight):
-        self.edges[from_node].append(to_node)
-        self.weights[(from_node, to_node)] = weight
-        self.distances[(from_node, to_node)] = from_node.distance(to_node)
-'''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

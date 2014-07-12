@@ -17,22 +17,26 @@ class Bounds(Geometry):
             :rtype: Bounds
         
         """
-        try:
-            x2 = abs(kargs['dim_x']/2.0)
-            y2 = abs(kargs['dim_y']/2.0)
-            self.ival_x = Interval(kargs['center'].x-x2,kargs['center'].x+x2)
-            self.ival_y = Interval(kargs['center'].y-y2,kargs['center'].y+y2)
-            if "dim_z" in kargs:
-                z2 = abs(kargs['dim_z']/2.0)
-                self.ival_z = Interval(kargs['center'].z-z2,kargs['center'].z+z2)
-        except:
+        if len(kargs)==0:
+            self.ival_x = Interval()
+            self.ival_y = Interval()
+        else:
             try:
-                self.ival_x = kargs['ival_x']
-                self.ival_y = kargs['ival_y']
-                if "ival_z" in kargs:
-                    self.ival_z = kargs['ival_z']
+                x2 = abs(kargs['dim_x']/2.0)
+                y2 = abs(kargs['dim_y']/2.0)
+                self.ival_x = Interval(kargs['center'].x-x2,kargs['center'].x+x2)
+                self.ival_y = Interval(kargs['center'].y-y2,kargs['center'].y+y2)
+                if "dim_z" in kargs:
+                    z2 = abs(kargs['dim_z']/2.0)
+                    self.ival_z = Interval(kargs['center'].z-z2,kargs['center'].z+z2)
             except:
-                raise ValueError('Bounds require either "center", "dim_x", "dim_y" OR "ival_x", "ival_y"')
+                try:
+                    self.ival_x = kargs['ival_x']
+                    self.ival_y = kargs['ival_y']
+                    if "ival_z" in kargs:
+                        self.ival_z = kargs['ival_z']
+                except:
+                    raise ValueError('Bounds require either "center", "dim_x", "dim_y" OR "ival_x", "ival_y"')
 
     @property
     def cpt(self):
@@ -152,6 +156,16 @@ class Bounds(Geometry):
         if self.is_2d:
             return Point(self.ival_x.eval(u),self.ival_y.eval(v))
         return Point(self.ival_x.eval(u),self.ival_y.eval(v),self.ival_z.eval(w))
+        
+    def scaled(self, factor):
+        f2 = (factor-1.0)/2.0
+        pts = [self.eval(0-f2,0-f2,0-f2),self.eval(1+f2,1+f2,1+f2)]
+        ix = Interval.encompass([p.x for p in pts])
+        iy = Interval.encompass([p.y for p in pts])
+        if self.is_2d:  return Bounds(ival_x = ix, ival_y = iy)
+        iz = Interval.encompass([p.z for p in pts])
+        return Bounds(ival_x = ix, ival_y = iy, ival_z = iz)
+        
 
     def overlaps(self, other) :
         """ Returns True if this Bounds overlaps the given Bounds.
@@ -214,7 +228,7 @@ class Bounds(Geometry):
         return p
 
 
-    def to_polyline(self):
+    def to_pline(self):
         """ Returns a PLine along the perimeter of a Bounds.
         
             :result: PLine around the Bounds.
@@ -222,7 +236,10 @@ class Bounds(Geometry):
             
         """
         from .dc_pline import PLine
-        return PLine(self.corners+[self.corners[0]])
+        if self.is_2d: return PLine(self.corners+[self.corners[0]])
+        else: 
+            pp = self.corners
+            return PLine([pp[0],pp[1],pp[2],pp[3],pp[0],pp[4],pp[5],pp[6],pp[7],pp[4]])
 
 
     @staticmethod
@@ -386,6 +403,42 @@ class QuadTree():
         else :
             for child in self.children: ret_pts.extend(child.pts_in_bounds(bounds))
         return ret_pts
+        
+        
+    def flatten(self,return_empty_containers=False):
+        if self.has_children:
+            ret = []
+            if return_empty_containers: ret = [self]
+            for child in self.children: ret.extend(child.flatten(return_empty_containers))
+            return ret
+        else:
+            return [self]
+
+    def container_of(self,pt):
+        if not pt in self.bnd: return False
+        if not self.has_children: return self
+        for child in self.children:
+            if pt in child.bnd: return child.container_of(pt)
+            
+            
+    def pts_neighboring(self,pt):
+        container = self.container_of(pt)
+        bnd = container.bnd.scaled(1.10)
+        others = self.flatten()
+        ret = []
+        for other in others:
+            if other.bnd.overlaps(bnd):
+                ret.extend(other.pts)
+        return ret
+        
+    def near_pt(self,pt,count=1,exclude_coincident=True):
+        if count > self.cap: raise Exception("near_pt count too high! Increase capacity of QTree to ensure accurate results")
+        pts = self.pts_neighboring(pt)
+        pts.sort(key = lambda p: p.distance2(pt))
+        if exclude_coincident and pts[0] == pt:
+            return pts[1:count+1]
+        return pts[:count]
+        
         
     @staticmethod
     def encompass(capacity = 4, pts = [Point()]):
