@@ -173,6 +173,7 @@ class PGon(HasPts):
         
     def angle_bisector(self,index):
         return False
+    
         
         
     def rotated_to_min_bounds(self, divs = 4 , levels = 2, min_a = 0, max_a =.5 * math.pi ):
@@ -333,6 +334,42 @@ class PGon(HasPts):
         
         ipts = [Vec.interpolate(self._verts[n],self._verts[n-1],rotation) for n in range(len(self._verts))]
         return PGon(ipts,self.basis)
+    
+    
+    def offset(self, dist, flip=False):
+        """| Returns a polygon offset from this one.
+           
+           :param dist: A distance to offset the polygon.
+           :type dist: float
+           :result: A polygon offset from this one.
+           :rtype: PGon
+           
+           ::
+           
+                my_pgon.offset()
+        """
+        from .dc_intersection import Intersector
+        if not self.is_clockwise:
+            self.reverse()
+            
+        cross_vec = self.basis.z_axis
+        if flip: cross_vec = cross_vec.inverted()
+        
+        vecs = [edge.vec for edge in self.edges]
+        xsec = Intersector()
+        segs = []
+        
+        for i in range(len(vecs)):
+            bisec = Vec.bisector(vecs[i-1],vecs[i]).cross(cross_vec).normalized(dist)
+            segs.append(Segment(self.edges[i].spt, self.edges[i].spt + bisec))
+
+        for n in range(len(segs)):
+            if xsec.intersect(segs[n-1],segs[n]):
+                raise GeometricError("The offset value is to high")
+                
+        return PGon([self.basis.deval(seg.ept) for seg in segs],self.basis)
+    
+    
 
     def contains_pt(self, pt,tolerance=0.000001):
         """ Tests if this polygon contains the given point. The given point must lie on the plane of this polygon.
