@@ -295,7 +295,7 @@ class CS(Geometry, Basis):
         if rot is not None:
             x_vec = Vec(math.cos(rot),0,math.sin(rot))
         if x_vec is None:
-            x_vec = Vec(1,0)
+            x_vec = Vec(0,0,1)
         x_vec.y = 0
         return CS(Point(x,0,z),x_vec,x_vec.cross(Vec(0,1,0)))
 
@@ -322,7 +322,7 @@ class CS(Geometry, Basis):
         if rot is not None:
             x_vec = Vec(0,math.cos(rot),math.sin(rot))
         if x_vec is None:
-            x_vec = Vec(1,0)
+            x_vec = Vec(0,0,1)
         x_vec.x = 0
         return CS(Point(0,y,z),x_vec,x_vec.cross(Vec(-1,0,0)))
 

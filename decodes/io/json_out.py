@@ -46,6 +46,13 @@ class JsonOut(outie.Outie):
             except:
                 return data
         
+        def cs_to_arr(cs):
+            return (cs.origin.x,cs.origin.y,cs.origin.z,cs.x_axis.x,cs.x_axis.y,cs.x_axis.z,cs.y_axis.x,cs.y_axis.y,cs.y_axis.z)
+            #return (cs.origin.x,cs.origin.y,cs.origin.z,cs.x_axis.x,cs.x_axis.y,cs.x_axis.z,cs.y_axis.x,cs.y_axis.y,cs.y_axis.z,cs.z_axis.x,cs.z_axis.y,cs.z_axis.z)
+            
+        def pln_to_arr(pln):
+            return (pln.x,pln.y,pln.z,pln.normal.x,pln.normal.y,pln.normal.z)
+            #return (cs.origin.x,cs.origin.y,cs.origin.z,cs.x_axis.x,cs.x_axis.y,cs.x_axis.z,cs.y_axis.x,cs.y_axis.y,cs.y_axis.z,cs.z_axis.x,cs.z_axis.y,cs.z_axis.z)
         
         class PointHandler(jsonpickle.handlers.BaseHandler):    
             def flatten(self, obj, data):
@@ -53,6 +60,32 @@ class JsonOut(outie.Outie):
                 data = props_to_data(obj,data)
                 return data
         jsonpickle.handlers.registry.register(Point, PointHandler)
+        jsonpickle.handlers.registry.register(Vec, PointHandler)
+        
+        class VecHandler(jsonpickle.handlers.BaseHandler):    
+            def flatten(self, obj, data):
+                data['xyz'] = (obj._x,obj._y,obj._z)
+                data = props_to_data(obj,data)
+                return data
+        jsonpickle.handlers.registry.register(Point, PointHandler)
+        
+        class PlaneHandler(jsonpickle.handlers.BaseHandler):    
+            def flatten(self, obj, data):
+                #data['pts'] = [PointHandler(None).flatten(pt,{}) for pt in obj.pts] 
+                data['center'] = (obj.x,obj.y,obj.z)
+                data['normal'] = (obj.normal.x,obj.normal.y,obj.normal.z)
+                data = props_to_data(obj,data)
+                return data
+        jsonpickle.handlers.registry.register(Plane, PlaneHandler)
+        
+        class CSHandler(jsonpickle.handlers.BaseHandler):    
+            def flatten(self, obj, data):
+                data['origin'] = (obj.origin.x,obj.origin.y,obj.origin.z)
+                data['x_axis'] = (obj.x_axis.x,obj.x_axis.y,obj.x_axis.z)
+                data['y_axis'] = (obj.y_axis.x,obj.y_axis.y,obj.y_axis.z)
+                data = props_to_data(obj,data)
+                return data
+        jsonpickle.handlers.registry.register(CS, CSHandler)
         
         class SegmentHandler(jsonpickle.handlers.BaseHandler):    
             def flatten(self, obj, data):
@@ -87,16 +120,26 @@ class JsonOut(outie.Outie):
                 data = props_to_data(obj,data)
                 return data
         jsonpickle.handlers.registry.register(PGon, PGonHandler)
+        jsonpickle.handlers.registry.register(RGon, PGonHandler)
         
         class CircleHandler(jsonpickle.handlers.BaseHandler):    
             def flatten(self, obj, data):
                 #data['pts'] = [PointHandler(None).flatten(pt,{}) for pt in obj.pts]
-                data['center'] = (obj.x,obj.y,obj.z)
-                data['normal'] = (obj._vec.x,obj._vec.y,obj._vec.z)
+                data['plane'] = pln_to_arr(obj)
                 data['rad'] = obj.rad
                 data = props_to_data(obj,data)
                 return data
         jsonpickle.handlers.registry.register(Circle, CircleHandler)
+        
+        class ArcHandler(jsonpickle.handlers.BaseHandler):    
+            def flatten(self, obj, data):
+                #data['pts'] = [PointHandler(None).flatten(pt,{}) for pt in obj.pts] 
+                data['cs'] = cs_to_arr(obj.basis)
+                data['rad'] = obj.rad
+                data['angle'] = obj.angle
+                data = props_to_data(obj,data)
+                return data
+        jsonpickle.handlers.registry.register(Arc, ArcHandler)
         
         class CurveHandler(jsonpickle.handlers.BaseHandler):    
             def flatten(self, obj, data):
@@ -105,6 +148,24 @@ class JsonOut(outie.Outie):
                 data = props_to_data(obj,data)
                 return data
         jsonpickle.handlers.registry.register(Curve, CurveHandler)
+        
+        class SurfaceHandler(jsonpickle.handlers.BaseHandler):    
+            def flatten(self, obj, data):
+                data['pts'] = [(pt.x,pt.y,pt.z)for pt in obj.surrogate.pts]
+                data['faces'] = [f for f in obj.surrogate.faces]
+                data = props_to_data(obj,data)
+                return data
+        jsonpickle.handlers.registry.register(Surface, SurfaceHandler)
+        
+        class MeshHandler(jsonpickle.handlers.BaseHandler):    
+            def flatten(self, obj, data):
+                data['pts'] = [(pt.x,pt.y,pt.z)for pt in obj.pts]
+                data['faces'] = [f for f in obj.faces]
+                data = props_to_data(obj,data)
+                return data
+        jsonpickle.handlers.registry.register(Mesh, MeshHandler)
+        
+        
         
     def draw(self):
         self._json = jsonpickle.encode(self.geom)
