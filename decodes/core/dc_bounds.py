@@ -112,6 +112,38 @@ class Bounds(Geometry):
             cpts.append(Point(self.ival_x.a,self.ival_y.b))
         return cpts
     
+    @property
+    def edges(self):
+        from .dc_line import Segment
+        cnrs = self.corners
+        if self.is_2d:
+            return [
+                Segment(cnrs[0],cnrs[1]),
+                Segment(cnrs[1],cnrs[2]),
+                Segment(cnrs[2],cnrs[3]),
+                Segment(cnrs[3],cnrs[0])
+                ]
+        else:
+            return [
+                Segment(cnrs[0],cnrs[1]),
+                Segment(cnrs[1],cnrs[2]),
+                Segment(cnrs[2],cnrs[3]),
+                Segment(cnrs[3],cnrs[0]),
+                
+                Segment(cnrs[4],cnrs[5]),
+                Segment(cnrs[5],cnrs[6]),
+                Segment(cnrs[6],cnrs[7]),
+                Segment(cnrs[7],cnrs[4]),
+                
+                Segment(cnrs[0],cnrs[4]),
+                Segment(cnrs[1],cnrs[5]),
+                Segment(cnrs[2],cnrs[6]),
+                Segment(cnrs[3],cnrs[7])
+                ]
+        
+    
+    
+    
     def __contains__(self, pt):
         """| Overloads the containment **(in)** operator.
 
@@ -178,7 +210,7 @@ class Bounds(Geometry):
         """
         return any([pt in self for pt in other.corners] + [pt in other for pt in self.corners])
 
-    def subbounds(self,divs):
+    def subbounds(self,divs,equalize=False):
         """ Produces sub-boundaries. Starts at bottom left, moves from left to right and then bottom to top.
         
             :param divs: Number of sub-boundaries.
@@ -187,12 +219,18 @@ class Bounds(Geometry):
             :rtype: Bounds
         
         """
+        if equalize:
+            divdim = min(self.ival_x.delta / divs, self.ival_y.delta / divs)
+            if self.is_3d: divdim = min(divdim, self.ival_z.delta / divs)
+            subival_x = self.ival_x//int(round(self.ival_x.delta/divdim))
+            subival_y = self.ival_y//int(round(self.ival_y.delta/divdim))
+            if self.is_3d: subival_z = self.ival_z//int(round(self.ival_z.delta/divdim))
+        else:
+            subival_x = self.ival_x//divs
+            subival_y = self.ival_y//divs
+            if self.is_3d: subival_z = self.ival_z//divs
         ret = []
-        
-        subival_x = self.ival_x//divs
-        subival_y = self.ival_y//divs
         if self.is_3d:
-            subival_z = self.ival_z//divs
             for iz in subival_z:
                 for iy in subival_y:
                     for ix in subival_x:
@@ -204,8 +242,8 @@ class Bounds(Geometry):
 
         return ret
 
-    def near_pt(self, p):
-        """ Returns the closest point within this Bounds.  If the point is already within the bounds, simply returns the point.
+    def near_pt(self, p, force_project=False):
+        """ Returns the closest point within this Bounds.  If the point is already within the bounds and force_project is False, simply returns the point; if force_project is True, the point is projected to the edge of this bounds.
         
             :param p: Point.
             :type p: Point
@@ -213,18 +251,30 @@ class Bounds(Geometry):
             :rtype: Point
             
         """
-        if p in self : return p
-        if p.x < self.ival_x.a : p.x = self.ival_x.a
-        if p.x > self.ival_x.b : p.x = self.ival_x.b
-        if p.y < self.ival_y.a : p.y = self.ival_y.a
-        if p.y > self.ival_y.b : p.y = self.ival_y.b
-
-        if self.is_2d:
-            p.z = 0
+        p = Point(p.x,p.y,p.z)
+        if p in self : 
+            if force_project:
+                dx = self.ival_x.a - p.x if p.x - self.ival_x.a < self.ival_x.b - p.x else self.ival_x.b - p.x
+                dy = self.ival_y.a - p.y if p.y - self.ival_y.a < self.ival_y.b - p.y else self.ival_y.b - p.y
+                dz = self.ival_z.a - p.z if p.z - self.ival_z.a < self.ival_z.b - p.z else self.ival_z.b - p.z
+                
+                deltas = (abs(dx),abs(dy),abs(dz))
+                mn = deltas.index(min(deltas))
+                if mn == 0: p.x += dx
+                elif mn == 1: p.y += dy
+                else : p.z += dz
+            
         else:
-            if p.z < self.ival_z.a : p.z = self.ival_z.a
-            if p.z > self.ival_z.b : p.z = self.ival_z.b
-
+            if p.x < self.ival_x.a : p.x = self.ival_x.a
+            if p.x > self.ival_x.b : p.x = self.ival_x.b
+            if p.y < self.ival_y.a : p.y = self.ival_y.a
+            if p.y > self.ival_y.b : p.y = self.ival_y.b
+        
+            if self.is_2d: p.z = 0
+            else:
+                if p.z < self.ival_z.a : p.z = self.ival_z.a
+                if p.z > self.ival_z.b : p.z = self.ival_z.b
+        
         return p
 
 
@@ -252,10 +302,10 @@ class Bounds(Geometry):
             :rtype: Bounds
         
         """
-        ix = Interval.encompass([p.x for p in pts])
-        iy = Interval.encompass([p.y for p in pts])
+        ix = Interval.encompass([p.x for p in pts],nudge=True)
+        iy = Interval.encompass([p.y for p in pts],nudge=True)
         try:
-            iz = Interval.encompass([p.z for p in pts])
+            iz = Interval.encompass([p.z for p in pts],nudge=True)
             return Bounds(ival_x = ix, ival_y = iy, ival_z = iz)
         except:
             return Bounds(ival_x = ix, ival_y = iy)
@@ -282,6 +332,11 @@ class Bounds(Geometry):
     
         return Bounds(ival_x=Interval(),ival_y=Interval(),ival_z=Interval())
 
+        
+        
+        
+        
+        
 class QuadTree():
     def __init__ (self, capacity, bounds):
         """ QuadTree constructor.
@@ -320,7 +375,7 @@ class QuadTree():
         """
         ret_pts = []
         if not self.has_children :
-            ret_pts = [Point(pt) for pt in self._pts]
+            ret_pts = list(self._pts)
         else :
             for child in self.children: ret_pts.extend(child.pts)
         return ret_pts
@@ -350,7 +405,7 @@ class QuadTree():
         else:
             raise("quadtree.append()... how did i get here?")
         
-    def _divide(self) :
+    def _divide(self,equalize_bounds=False) :
         """ Divides self into sub regions. Starts at bottom left and moves clockwise.
         
             :result: Boolean Value
@@ -358,9 +413,14 @@ class QuadTree():
         """
         if self.has_children: return False
         
-        sub_bnds = self.bnd//2
+        if equalize_bounds: 
+            sub_bnds = self.bnd.subbounds(1,equalize=True)
+        else:
+            sub_bnds = self.bnd//2
+            
         self.children = [QuadTree(self.cap,sub_bnd) for sub_bnd in sub_bnds]
-
+        for child in self.children: child.parent = self
+        
         for pt in self._pts : 
             accepted = False
             for child in self.children:
@@ -415,29 +475,47 @@ class QuadTree():
             return [self]
 
     def container_of(self,pt):
-        if not pt in self.bnd: return False
+        if not pt in self.bnd: raise Exception("point does not lie within the bounds of this QTree")
         if not self.has_children: return self
         for child in self.children:
             if pt in child.bnd: return child.container_of(pt)
             
             
     def pts_neighboring(self,pt):
+        return self.container_of(pt).pts
+        
+    def containers_neighboring(self,pt):
         container = self.container_of(pt)
         bnd = container.bnd.scaled(1.10)
         others = self.flatten()
         ret = []
         for other in others:
-            if other.bnd.overlaps(bnd):
-                ret.extend(other.pts)
+            if other.bnd.overlaps(bnd): ret.append(other)
         return ret
         
-    def near_pt(self,pt,count=1,exclude_coincident=True):
-        if count > self.cap: raise Exception("near_pt count too high! Increase capacity of QTree to ensure accurate results")
-        pts = self.pts_neighboring(pt)
-        pts.sort(key = lambda p: p.distance2(pt))
-        if exclude_coincident and pts[0] == pt:
-            return pts[1:count+1]
-        return pts[:count]
+    def pts_nearby(self,src_pt):
+        if not src_pt in self.bnd : src_pt = self.bnd.near_pt(src_pt)
+        container = self.container_of(src_pt)
+        #a.put(container.bnd.to_pline())
+        near_pts = container.pts
+        
+        proj_pts = [Point(container.bnd.ival_x.a,src_pt.y,src_pt.z), Point(container.bnd.ival_x.b,src_pt.y,src_pt.z),Point(src_pt.x,container.bnd.ival_y.a,src_pt.z), Point(src_pt.x,container.bnd.ival_y.b,src_pt.z)]
+        if container.bnd.is_3d: proj_pts.extend([Point(src_pt.x,src_pt.y,container.bnd.ival_z.a), Point(src_pt.x,src_pt.y,container.bnd.ival_z.b)])
+        for edge in container.bnd.edges: proj_pts.append(edge.near_pt(src_pt))
+        
+        for p in proj_pts:
+            p += Vec(src_pt,p)*EPSILON
+            #a.put(Segment(src_pt,p))
+            try:
+                adj_container = self.container_of(p)
+                a.put(adj_container.bnd.to_pline())
+                for adj_pt in adj_container.pts:
+                    if adj_pt not in near_pts: near_pts.append(adj_pt)
+            except:
+                # no adjacent container
+                pass
+        near_pts.sort(key = lambda p: p.distance2(src_pt))
+        return near_pts
         
         
     @staticmethod
@@ -454,6 +532,7 @@ class QuadTree():
         """
     
         q = QuadTree(capacity, Bounds.encompass(pts))
+        q._divide(equalize_bounds=True)
         for p in pts : q.append(p)
         return q
         

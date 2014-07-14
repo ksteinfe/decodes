@@ -248,7 +248,7 @@ class Interval():
     def __repr__(self): return "ival[{0},{1}]".format(self.a,self.b)
 
     @staticmethod
-    def encompass(values = [0]):
+    def encompass(values = [0],nudge=False):
         """ Returns an interval defined by the minimum and maximum of a list of values.
         
             :param values: A list of numbers.
@@ -256,6 +256,8 @@ class Interval():
             :result: An Interval from the min and max of a list of values.
             :rtype: Interval
         """
+        from .dc_base import EPSILON
+        if nudge: return Interval(min(values)-EPSILON, max(values)+EPSILON)
         return Interval(min(values), max(values))
 
     @staticmethod
