@@ -172,9 +172,19 @@ class PGon(HasPts):
 
         
     def angle_bisector(self,index):
-        return False
-    
+        """ Returns the bisector of one angle in a Polygon
         
+            :result: The Vector that bisects that angle, and the angle of the bisector
+            :rtype: (Vec, float)
+
+            
+        """
+        v0 = self.edges[index-1].vec
+        v1 = self.edges[index].vec
+        bisec =  Vec.bisector(v0,v1).cross(self.basis.z_axis)
+        return (bisec, bisec.angle(v1))
+        
+       
         
     def rotated_to_min_bounds(self, divs = 4 , levels = 2, min_a = 0, max_a =.5 * math.pi ):
         """ Creates a copy of a polygon rotated to its best-fit bounding box.
@@ -349,20 +359,18 @@ class PGon(HasPts):
                 my_pgon.offset()
         """
         from .dc_intersection import Intersector
-        if not self.is_clockwise:
-            self.reverse()
-            
-        cross_vec = self.basis.z_axis
-        if flip: cross_vec = cross_vec.inverted()
         
-        vecs = [edge.vec for edge in self.edges]
-        xsec = Intersector()
         segs = []
+        for i in range(len(self.pts)):
         
-        for i in range(len(vecs)):
-            bisec = Vec.bisector(vecs[i-1],vecs[i]).cross(cross_vec).normalized(dist)
-            segs.append(Segment(self.edges[i].spt, self.edges[i].spt + bisec))
+            bisec, theta  = self.angle_bisector(i)
+            if theta < math.pi/2: off_len = dist/math.sin(theta)
+            else: off_len = dist/math.cos(theta-math.pi/2)
 
+            if not flip: segs.append(Segment(self.pts[i], self.pts[i] + bisec.normalized(off_len)))
+            else: segs.append(Segment(self.pts[i], self.pts[i] - bisec.normalized(off_len)))
+        
+        xsec = Intersector()
         for n in range(len(segs)):
             if xsec.intersect(segs[n-1],segs[n]):
                 raise GeometricError("The offset value is to high")
