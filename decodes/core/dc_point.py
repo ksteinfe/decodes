@@ -226,6 +226,36 @@ class Point(Vec):
                 pt_a.distance(pt_b)
         """
         return Vec(self,other).length
+        
+    def dist2(self,other): 
+        """ Returns the distance squared between this point and the other point in local space. Both points must use the same basis.
+        
+            :param other: Point to calculate the distance from
+            :type other: Point
+            :result: Distance squared between points
+            :rtype: float
+            
+            ::
+            
+                pt_a.distance2(pt_b)
+        """
+        return Vec(self,other).length2
+
+    def dist(self,other): 
+        """ Returns the distance between this point and the other point in local space. Both points must use the same basis.
+        
+            :param other: Point to calculate the distance from
+            :type other: Point
+            :result: Distance between points
+            :rtype: float
+            
+            ::
+            
+                pt_a.distance(pt_b)
+        """
+        return Vec(self,other).length
+        
+        
     
     def projected(self, other): 
         """ Returns a new point projected onto a destination vector
