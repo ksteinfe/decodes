@@ -40,7 +40,24 @@ class LinearEntity(Geometry):
         """
         self._pt = self._pt + other
         return self
-
+    
+    def __mul__(self, other):
+        """| Overloads the multiplication **(*)** operator. 
+           | If given a scalar, transforms this LinearEntity by multiplying the vector of this LinearEntity by the scalar, and returns this LinearEntity
+        
+           :param other: Scalar to be multiplied.
+           :type other: float
+           :result: This LinearEntity
+           :rtype: LinearEntity
+           
+           ::
+           
+                my_le * float
+        """  
+        self._vec *= other
+        return self
+    
+    
     @property
     def spt(self): 
         """ Returns the starting Point of a LinearEntity.

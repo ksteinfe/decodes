@@ -247,19 +247,10 @@ class Interval():
     
     def __repr__(self): return "ival[{0},{1}]".format(self.a,self.b)
 
-    @staticmethod
-    def encompass(values = [0],nudge=False):
-        """ Returns an interval defined by the minimum and maximum of a list of values.
-        
-            :param values: A list of numbers.
-            :type values: list
-            :result: An Interval from the min and max of a list of values.
-            :rtype: Interval
-        """
-        from .dc_base import EPSILON
-        if nudge: return Interval(min(values)-EPSILON, max(values)+EPSILON)
-        return Interval(min(values), max(values))
-
+    
+    def remap_to(self,val,target_interval=None,limited=False):
+        return Interval.remap(val,self,target_interval,limited)
+    
     @staticmethod
     def remap(val, source_interval, target_interval=None, limited=False): 
         """ Translates a number from its position within the source interval to its relative position in the target interval.  Optionally, you may limit the resulting output to the target interval.
@@ -280,6 +271,20 @@ class Interval():
 
         t = source_interval.deval(val)
         return target_interval.eval(t,limited)
+    
+    @staticmethod
+    def encompass(values = [0],nudge=False):
+        """ Returns an interval defined by the minimum and maximum of a list of values.
+        
+            :param values: A list of numbers.
+            :type values: list
+            :result: An Interval from the min and max of a list of values.
+            :rtype: Interval
+        """
+        from .dc_base import EPSILON
+        if nudge: return Interval(min(values)-EPSILON, max(values)+EPSILON)
+        return Interval(min(values), max(values))
+
 
     @staticmethod
     def twopi():

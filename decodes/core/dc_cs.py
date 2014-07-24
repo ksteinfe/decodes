@@ -33,9 +33,10 @@ class CS(Geometry, Basis):
             # a cannot act like a point, let's try to make a point out of a,b,c
             pt = Point(a,b,c)
 
-        try: self.origin = pt.basis_applied()
-        except : self.origin = pt
-
+        #try: self.origin = pt.basis_applied()
+        #except : self.origin = pt
+        self.origin = pt
+        
         if vec_x.length == 0 : raise GeometricError("vec_x is a Vec of length 0")
         if vec_y.length == 0 : raise GeometricError("vec_y is a Vec of length 0")
 
@@ -67,6 +68,24 @@ class CS(Geometry, Basis):
 
         """
         return not self == other
+        
+        
+    def __add__(self, other): 
+        """| Overloads the addition **(+)** operator. 
+           | Translates this CS by adding the given Vec to the origin of this CS and returns this CS
+        
+           :param other: Vec to be added
+           :type other: Vec
+           :result: this CS.
+           :rtype: CS
+           
+           ::
+                
+                cs + vec
+        """
+        self.origin += other
+        return self
+        
         
     def __repr__(self):
         return "cs o[{0},{1},{2}] n[{3},{4},{5}]".format(self.origin.x,self.origin.y,self.origin.z,self.z_axis.x,self.z_axis.y,self.z_axis.z)
