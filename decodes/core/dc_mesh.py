@@ -140,7 +140,38 @@ class Mesh(HasPts):
         return exploded_meshes
     
     
-    def to_graph(self, val=1):
+    
+    def to_pt_graph(self):
+        """ Returns a Graph representation of the mesh points by index.
+
+            :returns: A Graph of point indexes.
+            :rtype: Graph
+            
+            ::
+            
+                quadmesh.to_pt_graph()
+        """
+        from decodes.extensions.graph import Graph
+        graph = Graph()
+        for index in range(len(self.pts)):
+            for face in self.faces:
+                for px in face:
+                    if index in face and index!=px: graph.add_edge(index, px)
+        return graph
+    
+    
+    def to_face_graph(self, val=1):
+        """ Returns a Graph representation of the mesh faces by index.
+            
+            :param val: number of coincident points for neighborness.
+            :type val: int
+            :returns: A Graph of face indexes.
+            :rtype: Graph
+            
+            ::
+            
+                quadmesh.to_face_graph(2)
+        """ 
         from decodes.extensions.graph import Graph
         graph = Graph()
         graph.naked_nodes = []
