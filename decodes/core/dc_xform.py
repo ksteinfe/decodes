@@ -201,24 +201,28 @@ class Xform(object):
             return from_rgtransform(rh_xform)
             
     @staticmethod
-    def change_basis(cs_src,cs_tar):
+    def change_basis(csSource,csTarget):
         """ Changes the plane basis of an object.            
             
-            :param cs_src: CS source of the object.
-            :type cs_src: CS
-            :param cs_tar: CS plane of the object.
-            :type cs_tar: CS
-            :result: Transformation Matrix.
-            :rtype: Xform
+            :param csSource: Plane source of the object.
+            :type csSource: Plane
+            :param csTarget: Target plane of the object.
+            :type csTarget: Plane
+            :result: Object with new Plane basis.
+            :rtype: Geometry
             
+            .. warning:: This method currently relies on access to the Rhinocommon Kernel. It will not work in other contexts.
+        
         """
-        xg, yg, zg = Vec(1,0,0), Vec(0,1,0), Vec(0,0,1) # global coordinate basis vectors
-        xs, ys, zs = cs_src.x_axis, cs_src.y_axis, cs_src.z_axis
-        xt, yt, zt = cs_tar.x_axis, cs_tar.y_axis, cs_tar.z_axis
-        xf_gs = Xform(matrix=[xs.dot(xg),xs.dot(yg),xs.dot(zg),0,ys.dot(xg),ys.dot(yg),ys.dot(zg),0,zs.dot(xg),zs.dot(yg),zs.dot(zg),0,0,0,0,1])
-        xf_gs *= Xform.translation(-cs_src.origin) 
-        xf_st = Xform(matrix=[xg.dot(xt),xg.dot(yt),xg.dot(zt),0,yg.dot(xt),yg.dot(yt),yg.dot(zt),0,zg.dot(xt),zg.dot(yt),zg.dot(zt),0,0,0,0,1])
-        return Xform.translation(cs_tar.origin)* (xf_st * xf_gs )
+        #TODO:: Re-implement this method without using the Rhinocommon Kernel.
+        
+        import Rhino
+        from ..io.rhino_out import to_rgvec, to_rgpt, to_rgplane
+        from ..io.rhino_in import from_rgtransform
+        rh_source_plane = to_rgplane(csSource)
+        rh_target_plane = to_rgplane(csTarget)
+        rh_xform = Rhino.Geometry.Transform.PlaneToPlane(rh_source_plane, rh_target_plane)
+        return from_rgtransform(rh_xform)
     
     def __mul__(self, other):
         """| Multiplies this Geometry by another Matrix, or by any piece of fieldpack geometry.
