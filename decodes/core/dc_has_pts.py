@@ -231,7 +231,7 @@ class HasPts(HasBasis):
             
         """
         self._unset_attr() # call this when any of storable properties (subclass_attr or class_attr) changes
-        self._verts.reverse
+        self._verts.reverse()
         return self
 
     def rotate(self,n):
@@ -306,6 +306,11 @@ class HasPts(HasBasis):
             :result: None
             :rtype: None
         """
+        try: 
+            del self._pts
+        except:
+            pass
+            
         for attr in self.class_attr : 
             try: delattr(self, attr)
             except:
