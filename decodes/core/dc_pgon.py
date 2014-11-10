@@ -146,7 +146,7 @@ class PGon(HasPts):
             
         """
         a = 0
-        for n in range(len(self._verts)): a += (self._verts[n-1].x + self._verts[n].x) * (self._verts[n-1].y - self._verts[n].y)
+        for n in range(len(self._verts)): a += (self._verts[n-1].x - self._verts[n].x) * (self._verts[n-1].y + self._verts[n].y)
         return a > 0.0
         
 
