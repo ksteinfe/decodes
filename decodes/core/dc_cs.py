@@ -182,7 +182,47 @@ class CS(Geometry, Basis):
             if crs.angle(self.z_axis) > math.pi/2 : ang = math.pi*2-ang
 
         return(radius,ang,z)
-
+        
+    def eval_sph(self, rad, lon, col):
+        """ Returns a Point relative to this CS given three spherical coordinates.
+        
+            :param radius: number representing the distance of the resulting Point from the origin of this CS.
+            :type radius: float
+            :param lon: number representing the azimuthal coordinate running from 0 to 2pi (longitude).
+            :type lon: float
+            :param col: number representing the polar coordinate running from 0 to pi (colatitude).
+            :type col: float
+            :result: a Point in a sherical space.
+            :rtype: point
+            
+        """
+        x = rad*math.cos(lon)*math.sin(col)
+        y = rad*math.sin(lon)*math.sin(col)
+        z = rad*math.cos(col)
+        
+        return self.eval(Point(x,y,z))
+    
+    def deval_sph(self,a,b=0,c=0):
+        """ Evaluates the given coordinates (or coordinates contained within a given Point) and returns a tuple containing the spherical coordinate representation of this Point relative to this CS.
+            
+            :param a: Point or decimal number.
+            :type a: Point or float.
+            :param b: None or decimal number.
+            :type b: None or float.
+            :param c: None or decimal number.
+            :type c: None or float
+            :result: Tuple of spherical coordinates - radius, longitude, colatitude
+            :rtype: (float, float, float)
+        
+        """
+        
+        vec = self.deval(a,b,c)
+        rad = vec.length
+        lon = math.radians((180/math.pi)*math.atan2(-vec.y, -vec.x)+180)
+        col = Vec.uz().angle(vec)
+        
+        return (rad, lon, col)
+    
     @property
     def xform(self):
         """ Returns the Xform that corresponds to the transformation from world space to CS space.
