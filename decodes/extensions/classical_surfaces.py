@@ -32,31 +32,33 @@ class ClassicalSurface(Surface):
         raise NotImplementedError("isocurve not implemented. I am a BAD ClassicalSurface!")
 
 
+
 class RotationalSurface(ClassicalSurface):
     # rotational surfaces are constrained to rotational axis that pass thru the world origin
     
-    def __init__(self, generatrix, axis=Vec(0,0,1), dom_v=Interval(0,math.pi), tol_v=None):
+    def __init__(self, generator, axis=Vec(0,0,1), dom_u=Interval(0,math.pi), tol_u=None):
         '''
-        the given generatrix curve will be rotated about an axis through the origin and defined by given vector
+        the given generator curve will be rotated about an axis through the center and defined by given vector
         '''
-        self.genx = generatrix
-        self.axis = axis
+        self.genx = generator
+        self.center = axis._pt
+        self.axis = axis._vec
 
         def func(u,v):
             pt = self.genx.deval(u)
-            xf = Xform.rotation(angle=v,axis=self.axis)
+            xf = Xform.rotation(angle=v,center=self.center, axis=self.axis)
             return pt*xf
 
         try:
-            dom_u = self.genx.domain
-            tol_u = self.genx.tol
+            dom_v = self.genx.domain
+            tol_v = self.genx.tol
         except:
             # we may have been passed a non-curve genx, such as an arc
             # todo, make a way to set the tolerence of this arc
-            dom_u = Interval()
-            tol_u = 1.0/10.0
+            dom_v = Interval()
+            tol_v = 1.0/10.0
 
-        super(RotationalSurface,self).__init__(func,dom_u,dom_v,tol_u,tol_v)
+        super(RotationalSurface,self).__init__(func,dom_v,dom_u,tol_v,tol_u)
 
     def deval_pln(self,u,v,flip_ang_tol=0.0001):
         xf = Xform.rotation(angle=v,axis=self.axis)
@@ -106,11 +108,11 @@ class RotationalSurface(ClassicalSurface):
         
 class TranslationalSurface(ClassicalSurface):
     
-    def __init__(self, generatrix, axis=Vec(1,0), dom_v=Interval(0,1), tol_v=None):
+    def __init__(self, generator, axis=Vec(1,0), dom_v=Interval(0,1), tol_v=None):
         '''
-        the given generatrix curve will be translated along the given axis
+        the given generator curve will be translated along the given axis
         '''
-        self.genx = generatrix
+        self.genx = generator
         self.axis = axis
 
         def func(u,v):
