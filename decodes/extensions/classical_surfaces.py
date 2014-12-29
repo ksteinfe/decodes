@@ -105,29 +105,25 @@ class RotationalSurface(ClassicalSurface):
                  pass
              return iso
 
-        
+
 class TranslationalSurface(ClassicalSurface):
     
-    def __init__(self, generator, axis=Vec(1,0), dom_v=Interval(0,1), tol_v=None):
+    def __init__(self, generator, directrix, dom_v=Interval(0,1), tol_v=None):
         '''
-        the given generator curve will be translated along the given axis
+        the given generator curve will be translated along the given directrix
         '''
         self.genx = generator
-        self.axis = axis
+        self.dirx = directrix
 
         def func(u,v):
-            pt = self.genx.deval(u)
-            vec = Vec(axis)*v
-            return pt+vec
+            self.genx.basis = CS(self.dirx.eval(u))
+            return self.genx.eval(v)
 
         try:
             dom_u = self.genx.domain
             tol_u = self.genx.tol
         except:
-            # we may have been passed a non-curve genx, such as an arc
-            # todo, make a way to set the tolerence of this arc
-            dom_u = Interval()
-            tol_u = 1.0/10.0
+            raise NotImplementedError("Either generator or directrix not a Decodes curve")
 
         super(TranslationalSurface,self).__init__(func,dom_u,dom_v,tol_u,tol_v)
 
@@ -135,7 +131,7 @@ class TranslationalSurface(ClassicalSurface):
         pln_crv = self.genx.deval_pln(u)
 
         pt = self._func(u,v)
-        return Plane(pt, pln_crv.normal.cross(self.axis))
+        return Plane(pt, pln_crv.normal.cross(self.vec)) ### this will break, no longer uses self.vec
 
 
     def deval_crv(self,u,v):
@@ -153,6 +149,8 @@ class TranslationalSurface(ClassicalSurface):
              pass
 
         return super(ClassicalSurface,self).isocurve(u_val,v_val)
+
+
 
 class Torus(ClassicalSurface):
     pi = math.pi
