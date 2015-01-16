@@ -208,7 +208,21 @@ class Bounds(Geometry):
             :rtype: bool
             
         """
-        return any([pt in self for pt in other.corners] + [pt in other for pt in self.corners])
+        #if any([pt in self for pt in other.corners] + [pt in other for pt in self.corners]): return True
+        #if self.is_2d: return ((self.ival_x in other.ival_x and other.ival_y in self.ival_y) or (other.ival_x in self.ival_x and self.ival_y in other.ival_y))
+        #return ((self.ival_x in other.ival_x or other.ival_x in self.ival_x) and (self.ival_y in other.ival_y or other.ival_y in self.ival_y) and (self.ival_z in other.ival_z or other.ival_z in self.ival_z) )
+        #return False
+        if self.is_2d: 
+            return(
+                (other.ival_x.overlaps(self.ival_x) or self.ival_x.overlaps(other.ival_x)) and 
+                (other.ival_y.overlaps(self.ival_y) or self.ival_y.overlaps(other.ival_y)) 
+            )
+        else: 
+            return(
+                (other.ival_x.overlaps(self.ival_x) or self.ival_x.overlaps(other.ival_x)) and 
+                (other.ival_y.overlaps(self.ival_y) or self.ival_y.overlaps(other.ival_y)) and 
+                (other.ival_z.overlaps(self.ival_z) or self.ival_z.overlaps(other.ival_z))
+            )
 
     def subbounds(self,divs,equalize=False):
         """ Produces sub-boundaries. Starts at bottom left, moves from left to right and then bottom to top.
@@ -520,14 +534,14 @@ class QuadTree():
         
     @staticmethod
     def encompass(capacity = 4, pts = [Point()]):
-        """ Returns a Bounds that encompasses the given points.
+        """ Returns a QuadTree that encompasses the given points.
         
             :param capacity: Capacity of points within the Bounds.
             :type capacity: int
             :param pts: List of Points.
             :type pts: [Point]
-            :result: Bounds encompassing the given points.
-            :rtype: Bounds
+            :result: QuadTree encompassing the given points.
+            :rtype: QuadTree
         
         """
     

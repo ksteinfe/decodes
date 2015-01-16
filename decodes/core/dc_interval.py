@@ -84,7 +84,7 @@ class Interval():
             :rtype: bool
         """
         return all([self.a==other.a,self.b==other.b])
-
+    
     @property
     def list(self): 
         """ Returns a list of the interval's start and end values.
@@ -131,6 +131,11 @@ class Interval():
         """
         return self.eval(0.5)
 
+    def overlaps(self,other):
+        """
+        """
+        return other.a in self or other.b in self or self.a in other or self.b in other
+        
     def order(self):
         """ Returns a copy of this interval with ordered values, such that a < b
         

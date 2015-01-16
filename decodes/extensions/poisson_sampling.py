@@ -39,9 +39,7 @@ class Poisson_Sampler():
     
     def in_nbd(self, p):
         index = self.grid_coord(p)
-        for pt in self.cells[index]:
-            if p.distance2(pt) <= self.r_sqr:
-                return True
+        if len(self.cells[index]):return True
         for ci in self.graph.edges[index]:
             if ci in self.cells:
                 for pt in self.cells[ci]:
