@@ -25,7 +25,7 @@ class HasPts(HasBasis):
         """
         self._verts = [] # a list of vecs that represent the local coordinates of this object's points
         if vertices is not None: self.append(vertices)
-        self.basis = basis # set the basis after appending the points
+        self._basis = basis # set the basis after appending the points
 
 
     def __getitem__(self,slice):
@@ -41,7 +41,7 @@ class HasPts(HasBasis):
         return sliced
         try:
             #TODO: move slice indexing to subclasses and return object rather than point list
-            return [Point(vec,basis=self.basis) for vec in sliced]
+            return [Point(self._basis.eval(vec)) for vec in sliced]
         except:
             return sliced
     
@@ -184,7 +184,7 @@ class HasPts(HasBasis):
             return tuple([Point(tup[0],tup[1],tup[2]) for tup in self._pts])
         except:
             if self.is_baseless : self._pts =  [vec.tup for vec in self._verts]
-            else : self._pts =  [self.basis.eval(vec).tup for vec in self._verts]
+            else : self._pts =  [self._basis.eval(vec).tup for vec in self._verts]
 
             return tuple([Point(tup[0],tup[1],tup[2]) for tup in self._pts])
 
@@ -290,9 +290,9 @@ class HasPts(HasBasis):
             if self.is_baseless: return Vec(other) # if this object is baseless, then use the world coordinates of the other
             if (not hasattr(other, 'basis')) or other.basis is None : 
                  # if the other is baseless, then devaluate the point so that it is described in terms of this object's basis.
-                 return Vec(self.basis.deval(other))
+                 return Vec(self._basis.deval(other))
 
-            if self.basis is other.basis : return Vec(other._x,other._y,other._z) # if we share a basis, then use the local coordinates of the other
+            if self._basis is other.basis : return Vec(other._x,other._y,other._z) # if we share a basis, then use the local coordinates of the other
             raise BasisError("The basis for this Geometry and the point you're adding do not match. Try applying or stripping the point of its basis, or describing the point in terms of this Geometry's basis")
         else:
             try:

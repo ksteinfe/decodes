@@ -181,7 +181,7 @@ class PGon(HasPts):
         """
         v0 = self.edges[index-1].vec
         v1 = self.edges[index].vec
-        bisec =  Vec.bisector(v0,v1).cross(self.basis.z_axis)
+        bisec =  Vec.bisector(v0,v1).cross(self._basis.z_axis)
         return (bisec, bisec.angle(v1))
         
        
@@ -343,7 +343,7 @@ class PGon(HasPts):
         """
         
         ipts = [Vec.interpolate(self._verts[n],self._verts[n-1],rotation) for n in range(len(self._verts))]
-        return PGon(ipts,self.basis)
+        return PGon(ipts,self._basis)
     
     
     def offset(self, dist, flip=False):
@@ -375,7 +375,7 @@ class PGon(HasPts):
             if xsec.intersect(segs[n-1],segs[n]):
                 raise GeometricError("The offset value is to high")
                 
-        return PGon([self.basis.deval(seg.ept) for seg in segs],self.basis)
+        return PGon([self._basis.deval(seg.ept) for seg in segs],self._basis)
     
     
 
@@ -395,7 +395,7 @@ class PGon(HasPts):
             
         """
         
-        pt = Point(self.basis.deval(pt))
+        pt = Point(self._basis.deval(pt))
         if abs(pt.z) > tolerance : 
             warnings.warn("Given point does not lie on the same plane as this polygon.")
             return False
@@ -444,7 +444,7 @@ class PGon(HasPts):
                 my_pgon.overlaps(my_pgon2)
             
         """
-        if not self.basis.xy_plane.is_coplanar(other.basis.xy_plane): return False
+        if not self._basis.xy_plane.is_coplanar(other.basis.xy_plane): return False
 
         for pt in other.pts: 
             if self.contains_pt(pt) : return True
@@ -677,7 +677,7 @@ class RGon(PGon):
                 my_rgon.circle_inscr
             
         """
-        return Circle(self.basis.xy_plane,self.radius)
+        return Circle(self._basis.xy_plane,self.radius)
 
     @property
     def circle_cirscr(self):
@@ -687,7 +687,7 @@ class RGon(PGon):
             :rtype: Circle
             
         """
-        return Circle(self.basis.xy_plane,self.apothem)
+        return Circle(self._basis.xy_plane,self.apothem)
 
     @property
     def interior_angle(self):
@@ -719,9 +719,9 @@ class RGon(PGon):
                 my_rgon.inflate()
             
         """
-        o = self.basis.origin
+        o = self._basis.origin
         x = Vec(o,Point.interpolate(self.pts[0],self.pts[1]))
-        y = self.basis.z_axis.cross(x)
+        y = self._basis.z_axis.cross(x)
         basis = CS(o,x,y)
         return RGon(self._nos,self.apothem,basis)
 
@@ -737,9 +737,9 @@ class RGon(PGon):
             
         """
         
-        o = self.basis.origin
+        o = self._basis.origin
         x = Vec(o,Point.interpolate(self.pts[0],self.pts[1]))
-        y = self.basis.zAxis.cross(x)
+        y = self._basis.zAxis.cross(x)
         basis = CS(o,x,y)
         return RGon(self._nos,basis=basis,apothem=self.radius)
 
@@ -753,7 +753,7 @@ class RGon(PGon):
             
                 my_rgon.to_pgon()
         """
-        return PGon(self._verts,self.basis)
+        return PGon(self._verts,self._basis)
 
     def _vertices_changed(self):
         if not self._in_init : raise GeometricError("I cannot manipulate the vertices of this PGon.  Convert to PGon using RGon.to_pgon()")

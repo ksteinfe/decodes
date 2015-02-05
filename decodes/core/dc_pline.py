@@ -97,7 +97,7 @@ class PLine(HasPts):
                 my_pline.join(my_pline2)
             
         """
-        if self.basis != other.basis: raise BasisError("The basis for this PLine and the PLine you're joining it to do not match.")
+        if self._basis != other.basis: raise BasisError("The basis for this PLine and the PLine you're joining it to do not match.")
         self._unset_attr() # call this when any of storable properties (subclass_attr or class_attr) changes
         if self[-1].is_identical(other[0],tol) :
             pts = []
