@@ -72,6 +72,7 @@ class HasPts(HasBasis):
             :rtype Basis
         
         """
+        warnings.warn("Altering the properties of the basis of a HasPts object will not automatically update the HasPts.pts. If you want to mess around with any properties of this HasPts object's basis, be sure to call HasPts._unset_attr() after doing so.")
         return self._basis
 
     @basis.setter
