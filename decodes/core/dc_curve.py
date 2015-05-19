@@ -285,6 +285,35 @@ class Curve(HasBasis,IsParametrized):
             pt = pt * self.basis.xform
         
         return pt
+        
+        
+     def deval_cs(self,t):
+        """|Calculates the Frenet Frame (coordinate system axes aligned 
+           |with tangent (T), normal (N) and B (TxN) vectors
+        
+            :param t: Value to evaluate the curve at.
+            :type t: float
+            :result: CS with T as x axis, N as y axis
+            :rtype: CS
+        
+        """
+        pt, vec_pos, vec_neg = self._nudged(t)
+
+        # if given a curve endpoint, nudge vectors a bit so we don't get zero curvature, but leave origin the same
+        if (t-self.tol_nudge <= self.domain.a):
+            nhood = self._nudged(self.tol_nudge)
+            vec_pos = nhood[1]
+            vec_neg = nhood[2]
+        if (t+self.tol_nudge >= self.domain.b):
+            nhood = self._nudged(self.domain.b-self.tol_nudge)
+            vec_pos = nhood[1]
+            vec_neg = nhood[2]
+
+        k, circ = Curve._curvature_from_vecs(pt,vec_pos,vec_neg, calc_circles = True)
+        center_osc = circ.plane.origin
+        vec_N = Vec(center_osc-pt).normalized()
+        vec_B = vec_T.cross(vec_N)
+        return CS(pt, vec_T, vec_N)
 
     def deval_pln(self,t):
         """| Evaluates this Curve and returns a Plane.
@@ -322,8 +351,6 @@ class Curve(HasBasis,IsParametrized):
             :rtype: (float, Circle)
         
         """
-        # caluculates approximate curvature
-        # returns curvature value and osc circle
         pt, vec_pos, vec_neg = self._nudged(t)
 
         # if given a curve endpoint, nudge vectors a bit so we don't get zero curvature, but leave origin the same
@@ -351,7 +378,21 @@ class Curve(HasBasis,IsParametrized):
         """
         if t<0 or t>1 : raise DomainError("eval() must be called with a number between 0->1: eval(%s)"%t)
         return self.deval(Interval.remap(t,Interval(),self.domain))
-
+   
+   def eval_cs(self,t):
+        """| Evaluates this Curve and returns a CS.
+           | t is a normalized float value (0->1) which will be remapped to the domain defined by this Curve.
+           | Equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain))
+            
+           :param t: Normalized value between 0 and 1, to evaluate a curve.
+           :type t: float
+           :result: a CS on the Curve.
+           :rtype: CS
+        """
+        
+        if t<0 or t>1 : raise DomainError("eval() must be called with a number between 0->1: eval(%s)"%t)
+        return self.deval_cs(Interval.remap(t,Interval(),self.domain))
+        
     def eval_pln(self,t):
         """| Evaluates this Curve and returns a Plane.
            | t is a normalized float value (0->1) which will be remapped to the domain defined by this Curve.
