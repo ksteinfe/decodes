@@ -430,7 +430,7 @@ class Curve(HasBasis,IsParametrized):
         
         pln_out = Plane(center_osc, v1.cross(v2))
         circ_out = Circle(pln_out,rad_osc)
-        return (1/rad_osc, center_osc, circ_out)
+        return (1/rad_osc, circ_out)
 
 
     def _nudged(self,t):
