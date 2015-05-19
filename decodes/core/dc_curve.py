@@ -376,7 +376,7 @@ class Curve(HasBasis,IsParametrized):
         
         """
         if t<0 or t>1 : raise DomainError("eval_curvature() must be called with a number between 0->1: eval(%s)"%t)
-        return self.deval_curvature(Interval.remap(t,Interval(),self.domain))
+        return self.deval_crv(Interval.remap(t,Interval(),self.domain))
 
     def tangent(self, t):
         """ Returns the tangent Vector to this Curve at given t-value
@@ -430,7 +430,7 @@ class Curve(HasBasis,IsParametrized):
         
         pln_out = Plane(center_osc, v1.cross(v2))
         circ_out = Circle(pln_out,rad_osc)
-        return (1/rad_osc, circ_out)
+        return (1/rad_osc, center_osc, circ_out)
 
 
     def _nudged(self,t):
