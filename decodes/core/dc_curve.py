@@ -287,7 +287,7 @@ class Curve(HasBasis,IsParametrized):
         return pt
         
         
-     def deval_cs(self,t):
+    def deval_cs(self,t):
         """|Calculates the Frenet Frame (coordinate system axes aligned 
            |with tangent (T), normal (N) and B (TxN) vectors
         
@@ -390,7 +390,7 @@ class Curve(HasBasis,IsParametrized):
            :rtype: CS
         """
         
-        if t<0 or t>1 : raise DomainError("eval() must be called with a number between 0->1: eval(%s)"%t)
+        if t<0 or t>1 : raise DomainError("eval_cs() must be called with a number between 0->1: eval(%s)"%t)
         return self.deval_cs(Interval.remap(t,Interval(),self.domain))
         
     def eval_pln(self,t):
@@ -404,7 +404,7 @@ class Curve(HasBasis,IsParametrized):
            :rtype: Plane
         """
         
-        if t<0 or t>1 : raise DomainError("eval() must be called with a number between 0->1: eval(%s)"%t)
+        if t<0 or t>1 : raise DomainError("eval_pln() must be called with a number between 0->1: eval(%s)"%t)
         return self.deval_pln(Interval.remap(t,Interval(),self.domain))
 
     def eval_crv(self,t):
@@ -416,7 +416,7 @@ class Curve(HasBasis,IsParametrized):
             :rtype: (float, Circle)
         
         """
-        if t<0 or t>1 : raise DomainError("eval_curvature() must be called with a number between 0->1: eval(%s)"%t)
+        if t<0 or t>1 : raise DomainError("eval_crv() must be called with a number between 0->1: eval(%s)"%t)
         return self.deval_crv(Interval.remap(t,Interval(),self.domain))
 
     def tangent(self, t):
