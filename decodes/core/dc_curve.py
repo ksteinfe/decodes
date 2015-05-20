@@ -374,12 +374,12 @@ class Curve(HasBasis,IsParametrized):
            :type t: float
            :result: a Point on the Curve.
            :rtype: Point
-
+            
         """
         if t<0 or t>1 : raise DomainError("eval() must be called with a number between 0->1: eval(%s)"%t)
         return self.deval(Interval.remap(t,Interval(),self.domain))
-   
-   def eval_cs(self,t):
+        
+    def eval_cs(self,t):
         """| Evaluates this Curve and returns a CS.
            | t is a normalized float value (0->1) which will be remapped to the domain defined by this Curve.
            | Equivalent to Curve.deval(Interval.remap(t,Interval(),Curve.domain))
