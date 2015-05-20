@@ -385,12 +385,9 @@ class CS(Geometry, Basis):
         x_vec.x = 0
         return CS(Point(0,y,z),x_vec,x_vec.cross(Vec(-1,0,0)))
 
-
 class ShearedCS(Geometry, Basis):
     def __init__(self,pt=Point(0,0),x_axis=Vec(1,0),y_axis=Vec(1,0),z_axis=None):
         self.origin = pt
-
-
 
 class CylCS(Geometry, Basis):
     """a cylindrical coordinate system"""
@@ -429,5 +426,4 @@ class CylCS(Geometry, Basis):
                 raise AttributeError("either pass me a point or three numbers please")
                 
         return pt
-        
         
