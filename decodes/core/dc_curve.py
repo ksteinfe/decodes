@@ -288,8 +288,9 @@ class Curve(HasBasis,IsParametrized):
         
         
     def deval_cs(self,t):
-        """|Calculates the Frenet Frame (coordinate system axes aligned 
-           |with tangent (T), normal (N) and B (TxN) vectors
+        """ Calculates the Frenet Frame (vectors aligned with tangent (T), normal (N) and B (TxN) vectors
+            and returns a CS with x-y plane designated as N-B. This is chosen since most elements propogated
+            along a curve are positioned transversally to the curve. 
         
             :param t: Value to evaluate the curve at.
             :type t: float
@@ -313,7 +314,7 @@ class Curve(HasBasis,IsParametrized):
         center_osc = circ.plane.origin
         vec_N = Vec(center_osc-pt).normalized()
         vec_B = vec_T.cross(vec_N)
-        return CS(pt, vec_T, vec_N)
+        return CS(pt, vec_N, vec_B)
 
     def deval_pln(self,t):
         """| Evaluates this Curve and returns a Plane.
