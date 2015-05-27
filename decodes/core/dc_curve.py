@@ -435,7 +435,7 @@ class Curve(HasBasis,IsParametrized):
         
     @staticmethod
     def _curvature_from_vecs(pt, vec_pos, vec_neg, calc_circles=False):
-        """ Returns the curvature at a point.
+        """ Returns curvature and osculating circle determined by point and nearest neighbors
         
             :param pt: Point on Curve.
             :type pt: Point
