@@ -110,14 +110,20 @@ class TranslationalSurface(ClassicalSurface):
     
     def __init__(self, generator, directrix, dom_v=Interval(0,1), tol_v=None):
         '''
-        the given generator curve will be translated along the given directrix
+        the given generator curve will be translated along the given directrix curve
         '''
         self.genx = generator
         self.dirx = directrix
 
-        def func(u,v):
-            self.genx.basis = CS(self.dirx.eval(u))
-            return self.genx.eval(v)
+        def func(u,v):                 
+            #self.genx.basis = CS(self.dirx.eval(u))
+            #return self.genx.eval(v)        
+            origin = self.dirx.deval(0)
+            u_value = self.dirx.domain.length*u + directrix.domain.a
+            v_value = self.genx.domain.length*v + self.genx.domain.a
+            vec = origin - self.dirx.deval(u_value)
+            return self.genx.deval(v_value) - vec
+
 
         try:
             dom_u = self.genx.domain

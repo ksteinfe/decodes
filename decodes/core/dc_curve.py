@@ -319,7 +319,7 @@ class Curve(HasBasis,IsParametrized):
     def deval_pln(self,t):
         """| Evaluates this Curve and returns a Plane.
            | t is a float value that falls within the defined domain of this Curve.
-           |  Tangent vector determined by a nearest neighbor at distance Curve.tol/100
+           |  Tangent vector determined by a nearest neighbor evaluated at a parameter distance Curve.tol/100 away
 
            :param t: Value to evaluate the curve at.
            :type t: float
@@ -484,14 +484,13 @@ class Curve(HasBasis,IsParametrized):
             :rtype: Point, Vec, Vec
         """
         
-        #nearest neighbors of a point t; used for discrete approximations calculations 
         if t<self.domain.a or t>self.domain.b : raise DomainError("Curve evaluated outside the bounds of its domain: deval(%s) %s"%(t,self.domain))
 
         pt_t = self.func(t)
         vec_minus = False
         vec_plus = False
 
-        if (t-self.tol_nudge >= self.domain.a): vec_minus = Vec(pt_t,self.func(t - self.tol_nudge))
+        if (t-self.tol_nudge >= self.domain.a): vec_minus = Vec(pt_t, self.func(t - self.tol_nudge))
         if (t+self.tol_nudge <= self.domain.b): vec_plus = Vec(pt_t,self.func(t + self.tol_nudge))
 
         if not vec_plus: vec_plus = vec_minus.inverted()
