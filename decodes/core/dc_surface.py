@@ -738,11 +738,13 @@ class Surface(IsParametrized):
         if u_val is None and v_val is None: raise AttributeError("Surface.isocurve requires either u_val OR v_val to be set")
         if u_val is not None and v_val is not None: raise AttributeError("u_val AND v_val cannot both be set when generating a Surface.isocurve")
 
-        if v_val is None:
+        if u_val is None:
+            # we're plotting a u-iso
             if u_val<self.u0 or u_val>self.u1 : raise DomainError("Isocurve cannot be generated outside the bounds of this Surface's u-domain (%s) %s"%(u_val,self.domain_u))
             def iso_func(t):  return Point(self.func(u_val,t))
             return Curve(iso_func,self.domain_u,self.tol_u)
         else :
+            # we're plotting a v-iso
             if v_val<self.v0 or v_val>self.v1 : raise DomainError("Isocurve cannot be generated outside the bounds of this Surface's v-domain (%s) %s"%(v_val,self.domain_v))
             def iso_func(t): return Point(self.func(t,v_val))
             return Curve(iso_func,self.domain_v,self.tol_v)
@@ -774,7 +776,7 @@ class Surface(IsParametrized):
             if res is None : res = int(dom.delta / self.tol_v)
             return PLine([self.deval(u_val,v) for v in dom.divide(res,True)])
         else :
-             # we're plotting a v-iso
+            # we're plotting a v-iso
             if v_val<self.v0 or v_val>self.v1 : raise DomainError("Isocurve cannot be generated outside the bounds of this Surface's v-domain (%s) %s"%(v_val,self.domain_v))
             if dom is None : dom = self.domain_u
             if res is None : res = int(dom.delta / self.tol_u)

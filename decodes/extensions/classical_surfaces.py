@@ -36,7 +36,7 @@ class ClassicalSurface(Surface):
 class RotationalSurface(ClassicalSurface):
     # rotational surfaces are constrained to rotational axis that pass thru the world origin
     
-    def __init__(self, generator, axis=Vec(0,0,1), dom_u=Interval(0,math.pi), tol_u=None):
+    def __init__(self, generator, axis=Ray(Point(), Vec(0,0,1)), dom_u=Interval.twopi(), tol_u=None):
         '''
         the given generator curve will be rotated about an axis through the center and defined by given vector
         '''
@@ -45,24 +45,22 @@ class RotationalSurface(ClassicalSurface):
         self.axis = axis._vec
 
         def func(u,v):
-            pt = self.genx.deval(u)
-            xf = Xform.rotation(angle=v,center=self.center, axis=self.axis)
+            pt = self.genx.eval(v)
+            xf = Xform.rotation(angle = dom_u.eval(u), center = self.center, axis = self.axis)        
             return pt*xf
 
         try:
             dom_v = self.genx.domain
             tol_v = self.genx.tol
         except:
-            # we may have been passed a non-curve genx, such as an arc
-            # todo, make a way to set the tolerence of this arc
             dom_v = Interval()
             tol_v = 1.0/10.0
 
-        super(RotationalSurface,self).__init__(func,dom_v,dom_u,tol_v,tol_u)
+        super(RotationalSurface,self).__init__(func,Interval(),Interval(),tol_u,tol_v)
 
     def deval_pln(self,u,v,flip_ang_tol=0.0001):
-        xf = Xform.rotation(angle=v,axis=self.axis)
-        pln_crv = self.genx.deval_pln(u) * xf
+        xf = Xform.rotation(angle=u,axis=self.axis)
+        pln_crv = self.genx.deval_pln(v) * xf
         axis_pt = Point(self.axis.to_line().near_pt(pln_crv.origin))
 
         try:
@@ -83,21 +81,21 @@ class RotationalSurface(ClassicalSurface):
         if u_val is None and v_val is None: raise AttributeError("Surface.isocurve requires either u_val OR v_val to be set")
         if u_val is not None and v_val is not None: raise AttributeError("u_val AND v_val cannot both be set when generating a Surface.isocurve")
 
-        if v_val is None:
+        if u_val is None:
             # we're plotting a u-iso, return an Arc
-            pt_0 = self.genx.deval(u_val)
+            pt_0 = self.genx.eval(v_val)
             pt_1 = self.axis.to_line().near_pt(pt_0)
             rad = pt_0.distance(pt_1)
             cs = CS(pt_1,Vec(pt_1,pt_0),Vec(pt_0,pt_1).cross(self.axis))
 
-            return Arc(cs,rad,self.domain_v.delta)
+            return Arc(cs,rad,self.domain_u)
         else :
              # we're plotting a v-iso, return our curve
              iso = copy.copy(self.genx)
              if iso.is_baseless:
-                iso.basis = CS()*Xform.rotation(angle=v_val,axis=self.axis)
+                iso.basis = CS()*Xform.rotation(angle=u_val,axis=self.axis)
              else:
-                 iso.basis = iso.basis*Xform.rotation(angle=v_val,axis=self.axis)
+                 iso.basis = iso.basis*Xform.rotation(angle=u_val,axis=self.axis)
 
              try:
                  iso._rebuild_surrogate()
@@ -108,30 +106,26 @@ class RotationalSurface(ClassicalSurface):
 
 class TranslationalSurface(ClassicalSurface):
     
-    def __init__(self, generator, directrix, dom_v=Interval(0,1), tol_v=None):
+    def __init__(self, generator, directrix, origin, tol_v=None):
         '''
         the given generator curve will be translated along the given directrix curve
         '''
         self.genx = generator
         self.dirx = directrix
+        self.origin = origin #intersection of the generator and directrix curves
 
         def func(u,v):                 
-            #self.genx.basis = CS(self.dirx.eval(u))
-            #return self.genx.eval(v)        
-            origin = self.dirx.deval(0)
-            u_value = self.dirx.domain.length*u + directrix.domain.a
-            v_value = self.genx.domain.length*v + self.genx.domain.a
-            vec = origin - self.dirx.deval(u_value)
-            return self.genx.deval(v_value) - vec
-
-
+            vec = self.dirx.eval(u) - origin
+            return self.genx.eval(v) + vec
+            
         try:
-            dom_u = self.genx.domain
-            tol_u = self.genx.tol
+            tol_u = self.dirx.tol
+            tol_v = self.genx.tol
         except:
-            raise NotImplementedError("Either generator or directrix not a Decodes curve")
+            tol_u = 1.0/10.0
+            tol_v = 1.0/10.0
 
-        super(TranslationalSurface,self).__init__(func,dom_u,dom_v,tol_u,tol_v)
+        super(TranslationalSurface,self).__init__(func,Interval(), Interval(),tol_u,tol_v)
 
     def deval_pln(self,u,v):
         pln_crv = self.genx.deval_pln(u)
@@ -148,10 +142,10 @@ class TranslationalSurface(ClassicalSurface):
         # TODO: implement
         # we could re-implement deval_crv here in the context of this classical surface type, or we could pass the buck to our general Surface class
         if v_val is None:
-            # we're plotting a u-iso, return a line
+            # we're plotting a u-iso, return the tranlated directrix
             pass
         else :
-             # we're plotting a v-iso, return our curve translated
+             # we're plotting a v-iso, return the translated generator
              pass
 
         return super(ClassicalSurface,self).isocurve(u_val,v_val)
