@@ -71,7 +71,8 @@ class SVGOut(outie.Outie):
             if isinstance(g, Line) : return self._drawLine(g)
             if isinstance(g, Ray) : return self._drawRay(g)
             if isinstance(g, Segment) : return self._drawSegment(g)
-
+        if isinstance(g, Circle) : return self._drawCircle(g)
+            
         return False
 
     def _buffer_append(self,type,atts,style):
@@ -96,6 +97,13 @@ class SVGOut(outie.Outie):
         atts = 'cx="%s" cy="%s" r="%s"' % (pt.x, pt.y,size)
         self._buffer_append(type,atts,style)
         return True
+        
+    def _drawCircle(self, cir):
+        type = 'circle'
+        style = self._extract_props(cir)
+        atts = 'cx="%s" cy="%s" r="%s"' % (cir.x, cir.y, cir.rad)
+        self._buffer_append(type,atts,style)
+        return True        
         
     def _drawPolygon(self, pgon):
         type = 'polygon'
