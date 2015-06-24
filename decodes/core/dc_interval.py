@@ -288,7 +288,9 @@ class Interval():
         """
         from .dc_base import EPSILON
         if nudge: return Interval(min(values)-EPSILON, max(values)+EPSILON)
-        return Interval(min(values), max(values))
+        a, b = min(values), max(values)
+        if a == b : return False
+        return Interval(a,b)
 
 
     @staticmethod

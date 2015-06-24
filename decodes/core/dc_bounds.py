@@ -236,9 +236,13 @@ class Bounds(Geometry):
         if equalize:
             divdim = min(self.ival_x.delta / divs, self.ival_y.delta / divs)
             if self.is_3d: divdim = min(divdim, self.ival_z.delta / divs)
-            subival_x = self.ival_x//int(round(self.ival_x.delta/divdim))
-            subival_y = self.ival_y//int(round(self.ival_y.delta/divdim))
-            if self.is_3d: subival_z = self.ival_z//int(round(self.ival_z.delta/divdim))
+            divs_x = int(round(self.ival_x.delta/divdim))
+            divs_y = int(round(self.ival_y.delta/divdim))
+            subival_x = self.ival_x // divs_x
+            subival_y = self.ival_y // divs_y
+            if self.is_3d: 
+                divs_z = int(round(self.ival_z.delta/divdim))
+                subival_z = self.ival_z // divs_z
         else:
             subival_x = self.ival_x//divs
             subival_y = self.ival_y//divs
@@ -319,7 +323,8 @@ class Bounds(Geometry):
         ix = Interval.encompass([p.x for p in pts],nudge=True)
         iy = Interval.encompass([p.y for p in pts],nudge=True)
         try:
-            iz = Interval.encompass([p.z for p in pts],nudge=True)
+            iz = Interval.encompass([p.z for p in pts])
+            if not iz: raise
             return Bounds(ival_x = ix, ival_y = iy, ival_z = iz)
         except:
             return Bounds(ival_x = ix, ival_y = iy)
