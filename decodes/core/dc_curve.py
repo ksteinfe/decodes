@@ -309,7 +309,7 @@ class Curve(HasBasis,IsParametrized):
             nhood = self._nudged(self.domain.b-self.tol_nudge)
             vec_pos = nhood[1]
             vec_neg = nhood[2]
-        vec_T = self.tangent(t)
+        vec_T = self.tangent(self.domain.deval(t))
         k, circ = Curve._curvature_from_vecs(pt,vec_pos,vec_neg, calc_circles = True)
         center_osc = circ.plane.origin
         vec_N = Vec(center_osc-pt).normalized()
