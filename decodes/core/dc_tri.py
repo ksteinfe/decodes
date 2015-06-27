@@ -41,6 +41,7 @@ class Tri(Geometry):
     @property
     def circumcenter(self):
         #http://www.mathopenref.com/trianglecircumcenter.html
+        from .dc_intersection import *
         xsec = Intersector()
         bsec_ab = self.edge_bisector(0)
         bsec_bc = self.edge_bisector(1)
@@ -59,6 +60,7 @@ class Tri(Geometry):
     @property
     def incenter(self):
         #http://www.mathopenref.com/triangleincenter.html
+        from .dc_intersection import *
         xsec = Intersector()
         bsec_ab = self.angle_bisector(0)
         bsec_bc = self.angle_bisector(1)
