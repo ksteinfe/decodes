@@ -15,7 +15,7 @@ class SVGOut(outie.Outie):
     min_point_size = 0.001
     default_curve_resolution = 50
 
-    def __init__(self, filename, path=False, canvas_dimensions=False, flip_y=False, save_file=True):
+    def __init__(self, filename, path=False, canvas_dimensions=False, flip_y=False, save_file=True,verbose=True):
         super(SVGOut,self).__init__()
         #if not path : self.filepath = __file__.rpartition(os.sep)[0] + os.sep + filename + ".svg"
         if filename[-4:].lower() == ".svg" : filename = filename[:-4]
@@ -28,10 +28,11 @@ class SVGOut(outie.Outie):
         self._canvas_dim = canvas_dimensions
         self._flip = flip_y
         self._save_file = save_file
+        self._verbose = verbose
         self.svg = False
 
     def _startDraw(self):
-        print "building svg string"
+        self._verbose: print "building svg string"
         self.svg = False
         
         self.buffer = cStringIO.StringIO()
@@ -44,7 +45,7 @@ class SVGOut(outie.Outie):
         self.svg = self.buffer.getvalue()
         
         if self._save_file: 
-            print "drawing svg to "+self.filepath
+            if self._verbose: print "drawing svg to "+self.filepath
             # write buffer to file
             fo = open(self.filepath, "wb")
             fo.write( self.svg )

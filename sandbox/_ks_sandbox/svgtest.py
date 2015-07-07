@@ -2,7 +2,7 @@ import decodes as dc
 from decodes.core import *
 
 
-outie = dc.make_out(dc.Outies.SVG, "svg_out", canvas_dimensions=Interval(1000,500), flip_y = True)
+outie = dc.make_out(dc.Outies.SVG, "svg_out", path="", canvas_dimensions=Interval(1000,500), flip_y = True)
 scale = 50
 
 for x in range(10):
