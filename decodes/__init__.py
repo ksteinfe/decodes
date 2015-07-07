@@ -40,14 +40,16 @@ def make_out(outtype, name="untitled", path=False, **kargs):
         c_dim=False
         flip=False
         save_file=True
+        verbose = False
         if "canvas_dimensions" in kargs : c_dim = kargs["canvas_dimensions"]
         if "save_file" in kargs : save_file = kargs["save_file"]
         if "flip_y" in kargs : 
             if c_dim is False : raise Exception("If you want to flip the y-axis of this SVG, you have to tell me the canvas_dimensions.  Please pass an Interval.")
             flip = kargs["flip_y"]
+        if "verbose" in kargs : verbose = kargs["verbose"]
         
-        if path : return io.svg_out.SVGOut(name, path, canvas_dimensions=c_dim, flip_y=flip,save_file=save_file)
-        else : return io.svg_out.SVGOut(name, canvas_dimensions=c_dim, flip_y=flip,save_file=save_file)
+        if path : return io.svg_out.SVGOut(name, path, canvas_dimensions=c_dim, flip_y=flip,save_file=save_file,verbose=verbose)
+        else : return io.svg_out.SVGOut(name, canvas_dimensions=c_dim, flip_y=flip,save_file=save_file,verbose=verbose)
     elif outtype == Outies.ThreeJS:
         import io.threejs_out
         save_file=True

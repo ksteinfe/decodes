@@ -32,7 +32,7 @@ class SVGOut(outie.Outie):
         self.svg = False
 
     def _startDraw(self):
-        self._verbose: print "building svg string"
+        if self._verbose: print "building svg string"
         self.svg = False
         
         self.buffer = cStringIO.StringIO()
