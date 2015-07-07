@@ -183,22 +183,22 @@ class CS(Geometry, Basis):
 
         return(radius,ang,z)
         
-    def eval_sph(self, rad, lon, col):
+    def eval_sph(self, rho, phi, theta):
         """ Returns a Point relative to this CS given three spherical coordinates.
         
-            :param radius: number representing the distance of the resulting Point from the origin of this CS.
-            :type radius: float
-            :param lon: number representing the azimuthal coordinate running from 0 to 2pi (longitude).
-            :type lon: float
-            :param col: number representing the polar coordinate running from 0 to pi (colatitude).
-            :type col: float
-            :result: a Point in a sherical space.
+            :param rho: number representing the distance of the resulting Point from the origin of this CS.
+            :type rho: float
+            :param phi: number representing the polar coordinate running from 0 to pi (colatitude).
+            :type phi: float
+            :param theta: number representing the azimuthal coordinate running from 0 to 2pi (longitude).
+            :type theta: float
+            :result: a Point in a spherical space.
             :rtype: point
             
         """
-        x = rad*math.cos(lon)*math.sin(col)
-        y = rad*math.sin(lon)*math.sin(col)
-        z = rad*math.cos(col)
+        x = rho*math.sin(phi)*math.cos(theta)
+        y = rho*math.sin(phi)*math.sin(theta)
+        z = rho*math.cos(phi)
         
         return self.eval(Point(x,y,z))
     
@@ -217,11 +217,11 @@ class CS(Geometry, Basis):
         """
         
         vec = self.deval(a,b,c)
-        rad = vec.length
-        lon = math.radians((180/math.pi)*math.atan2(-vec.y, -vec.x)+180)
-        col = Vec.uz().angle(vec)
+        rho = vec.length
+        theta = math.radians((180/math.pi)*math.atan2(-vec.y, -vec.x)+180)
+        phi = Vec.uz().angle(vec)
         
-        return (rad, lon, col)
+        return (rho, phi, theta)
     
     @property
     def xform(self):
