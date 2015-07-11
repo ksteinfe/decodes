@@ -606,7 +606,7 @@ class Curve(HasBasis,IsParametrized):
 
 
     @staticmethod
-    def circle(ctr,rad):
+    def circle(ctr,rad,ival=Interval.twopi()):
         """| Constructs a Curve object that describes a circle given: a center (Point) and radius (float).
            | The plane of the circle will always be parallel to the xy-plane.
         
@@ -621,7 +621,7 @@ class Curve(HasBasis,IsParametrized):
             x = rad*math.cos(t)
             y = rad*math.sin(t)
             return Point(x,y)+ctr
-        return Curve(func,Interval(0,math.pi*2))
+        return Curve(func,ival)
 
     @staticmethod
     def helix(ctr,rad,rise_per_turn=1.0,number_of_turns=3.0):
