@@ -738,7 +738,7 @@ class Surface(IsParametrized):
         if u_val is None and v_val is None: raise AttributeError("Surface.isocurve requires either u_val OR v_val to be set")
         if u_val is not None and v_val is not None: raise AttributeError("u_val AND v_val cannot both be set when generating a Surface.isocurve")
 
-        if u_val is None:
+        if v_val is None:
             # we're plotting a u-iso
             if u_val<self.u0 or u_val>self.u1 : raise DomainError("Isocurve cannot be generated outside the bounds of this Surface's u-domain (%s) %s"%(u_val,self.domain_u))
             def iso_func(t):  return Point(self.func(u_val,t))
