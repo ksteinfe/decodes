@@ -80,17 +80,15 @@ class RotationalSurface(ClassicalSurface):
     def isocurve(self, u_val=None, v_val=None):
         if u_val is None and v_val is None: raise AttributeError("Surface.isocurve requires either u_val OR v_val to be set")
         if u_val is not None and v_val is not None: raise AttributeError("u_val AND v_val cannot both be set when generating a Surface.isocurve")
-
+        
+        # if plotting a u-iso, return an Arc
         if u_val is None:
-            # we're plotting a u-iso, return an Arc
-            pt_0 = self.genx.eval(v_val)
-            pt_1 = self.axis.to_line().near_pt(pt_0)
-            rad = pt_0.distance(pt_1)
-            cs = CS(pt_1,Vec(pt_1,pt_0),Vec(pt_0,pt_1).cross(self.axis))
-
-            return Arc(cs,rad,self.domain_u)
-        else :
-             # we're plotting a v-iso, return our curve
+            pt_0 = self.func(0,v_val)
+            pt_1 = self.func(0.5,v_val)
+            pt_2 = self.func(1,v_val)
+            return Arc.thru_pts(pt_0, pt_1,pt_2)
+        # else if plotting a v-iso, return rotated Curve
+        else :            
              iso = copy.copy(self.genx)
              if iso.is_baseless:
                 iso.basis = CS()*Xform.rotation(angle=u_val,axis=self.axis)
