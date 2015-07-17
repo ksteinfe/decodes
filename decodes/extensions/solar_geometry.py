@@ -8,9 +8,7 @@ class SolarGeom():
     def __init__(self,latitude,longitude,timezone):
         self.lat = latitude
         self.lng = longitude
-        self.tmz = timezone
-        self.alphas = [SolarGeom._calc_alpha(day_of_year) for day_of_year in range(365)]
-    
+        self.tmz = timezone   
 
     #determine the sun vector for given coordinates, day of the year, local time. 
     def vec_at(self,day_of_year,hour_of_day):
@@ -27,58 +25,55 @@ class SolarGeom():
     def angles_at(self,day_of_year,hour_of_day):
         """
         calculates the following solar position angles for given coordinates, integer day of the year (0->365), local time. 
-        altitude
-        azimuth
-        declination
-        hour angle
+        Altitude
+        Azimuth
+        Declination
+        Hour Angle
         all output in radians
         """
-        alpha = self.alphas[day_of_year]
-        obliquity_rad = math.radians(23.44)
-        #calc delta = declination angle 
-        delta_rad = math.asin(math.sin(alpha)*math.sin(obliquity_rad))
-    
-        #calc omega = hour angle, angle between local longitude and solar noon
-        ET = (0.0172 + 0.4281*math.cos(alpha)-7.3515*math.sin(alpha)-3.3495*math.cos(2*alpha) - 9.3619*math.sin(2*alpha))/60
-        omega = 15*(hour_of_day + self.lat/15 - self.tmz + ET - 12)
-        omega_rad = math.radians(omega)
-    
-        #calc altitude
-        phi_rad = math.radians(self.lat)
-        altitude_rad =  math.asin(math.cos(delta_rad)*math.cos(phi_rad)*math.cos(omega_rad) + math.sin(delta_rad)*math.sin(phi_rad))
-        #calc azimuth 
-        azimuth_rad = math.acos((math.sin(delta_rad)*math.cos(phi_rad) - math.cos(delta_rad)*math.sin(phi_rad)*math.cos(omega_rad))/    math.cos(altitude_rad))
+        alpha = self._calc_alpha(day_of_year, hour_of_day)
+        #calculate Declination Angle
+        declination = 0.396372-22.91327*math.cos(alpha)+4.02543*math.sin(alpha)-0.387205*math.cos(2*alpha)+0.051967*math.sin(2*alpha)-0.154527*math.cos(3*alpha)+0.084798*math.sin(3*alpha)
+        declination_rad = math.radians(declination)
         
-        #KS MOD
-        #if omega_rad > math.pi or o < 0:
-        #    azimuth_rad = math.pi*2-azimuth_rad
+        # time correction for solar angle 
+        TC = 0.004297+0.107029*math.cos(alpha)-1.837877*math.sin(alpha)-0.837378*math.cos(2*alpha)-2.340475*math.sin(2*alpha)
+        # calculate Solar Hour Angle, angle between local longitude and solar noon
+        hour_angle = (hour_of_day-12-self.tmz)*(360/24) + self.lng + TC
+        if hour_angle >= 180:
+            hour_angle = hour_angle - 360
+        if hour_angle <= -180:
+            hour_angle = hour_angle + 360
+        hour_angle_rad = math.radians(hour_angle)      
         
-        #JK ORIG
-        #if omega_rad > 0:
-        #    azimuth_rad = math.pi-azimuth_rad
+        #calc Altitude Angle
+        lat_rad = math.radians(self.lat)
+        cos_zenith= math.sin(lat_rad)*math.sin(declination_rad)+math.cos(lat_rad)*math.cos(declination_rad)*math.cos(hour_angle_rad)
+        if cos_zenith>1:
+            cos_zenith = 1
+        if cos_zenith<-1:
+            cos_zenith = -1
+
+        zenith_rad = math.acos(cos_zenith)
+        altitude_rad =  math.asin(cos_zenith)
         
-        return altitude_rad, azimuth_rad, delta_rad, omega_rad
+        #calc Azimuth angle
+        cos_azimuth = (math.sin(declination_rad)-math.sin(lat_rad)*math.cos(zenith_rad))/(math.cos(lat_rad)*math.sin(zenith_rad))
+        azimuth = math.degrees(math.acos(cos_azimuth))
+        if hour_angle_rad > 0:
+            azimuth = 360-azimuth
+        azimuth_rad = math.radians(azimuth)
+        
+        return altitude_rad, azimuth_rad, declination_rad, hour_angle_rad
 
 
 
     @staticmethod
-    def _calc_alpha(day_in):
+    def _calc_alpha(day_in, hour_in):
         """
-        #calculates alpha = ecliptic longitute, varying from alpha = 0 at the March Equinox completing 360 in 1 year.  Output in degrees.
-        #divides the year into intervals between solstice-equinox and treats alpha as uniformly varying throughout each interval    
+        calculates alpha = ecliptic longitude, varying from alpha = 0 completing 360 in 1 year.
         """
-        marchEquinox = SolarGeom.str_to_day_of_year("3/20")
-        juneSolstice = SolarGeom.str_to_day_of_year("6/20")
-        septemberEquinox = SolarGeom.str_to_day_of_year("9/22")
-        decemberSolstice = SolarGeom.str_to_day_of_year("12/21")
-        if (marchEquinox<=day_in <= juneSolstice) :
-            alphaOut = 90*(day_in-marchEquinox)/(juneSolstice-marchEquinox)
-        elif (juneSolstice < day_in <=septemberEquinox):
-            alphaOut = 90+90*(day_in-juneSolstice)/(septemberEquinox-juneSolstice)
-        elif (septemberEquinox< day_in<=decemberSolstice):
-            alphaOut = 180+90*(day_in-septemberEquinox)/(decemberSolstice-septemberEquinox)
-        else:
-            alphaOut = 270+90*(day_in + 365 - decemberSolstice)/(marchEquinox + 365-decemberSolstice)
+        alphaOut = (360/365.25)*(day_in + hour_in/24) 
         return math.radians(alphaOut)
     
     @staticmethod
@@ -86,7 +81,7 @@ class SolarGeom():
         """
         converts a date given as "mo/day" into a day of year
         """
-        daysInMonth= [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]     #days in month array
+        daysInMonth= [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]  
         (month, day) = date_in.split('/')
         dayOut = 0;
         for m in range(1,int(month)):
@@ -101,11 +96,4 @@ class SolarGeom():
         """
         (hour, minutes) = time_in.split(':')
         return  int(hour) + int(minutes)/60.0
-
-
-
-
-
-
-
 
