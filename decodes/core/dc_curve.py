@@ -667,28 +667,25 @@ class Curve(HasBasis,IsParametrized):
         return Curve(func)
 
     @staticmethod
-    def hermite(cpts):
-        """ Constructs a hermite curve. It has nice tension and biasing controls. 
+    def hermite(cpts, tension=0.0, bias = 0.0):
+        """ Constructs a hermite interpolation curve with tension and bias controls
             
             :param cpts: List of control points to build the curve.
             :type cpts: [Point]
             :result: Hermite Curve object.
             :rtype: Curve
         """
-        # from http://paulbourke.net/miscellaneous/interpolation/
         if len(cpts) <= 1 : raise GeometricError("Curve not valid: A Hermite requires a minimum of two points.  You gave me %s"%(len(cpts)))
-        def hermite_interpolate(y0,y1,y2,y3,mu,tension,bias):
-            mu2 = mu * mu
-            mu3 = mu2 * mu
-            m0 = (y1-y0)*(1+bias)*(1-tension)/2
-            m0 += (y2-y1)*(1-bias)*(1-tension)/2
-            m1 = (y2-y1)*(1+bias)*(1-tension)/2
-            m1 += (y3-y2)*(1-bias)*(1-tension)/2
-            a0 = 2*mu3 - 3*mu2 + 1
-            a1 = mu3 - 2*mu2 + mu
-            a2 = mu3 -   mu2
-            a3 = -2*mu3 + 3*mu2
-            return(a0*y1+a1*m0+a2*m1+a3*y2)
+        def hermite_interpolate(p0,p1,p2,p3,t,tension, bias):
+            tau = 0.5*(1-tension)*(1+bias)
+            m0 = (p2-p0)*tau
+            m1 = (p3-p1)*tau
+            t2,t3 = t**2, t**3
+            a0 = 2*t3 - 3*t2 + 1
+            a1 = t3 - 2*t2 + t
+            a2 = t3 - t2
+            a3 = -2*t3 + 3*t2
+            return(p1*a0+m0*a1+m1*a2+p2*a3)
         
         # find total distance between given points, and construct intervals
         ivals = []
@@ -717,10 +714,7 @@ class Curve(HasBasis,IsParametrized):
             p1 = cpts[t_index+1]
             p2 = cpts[t_index+2]
             p3 = cpts[t_index+3]
-            x = hermite_interpolate(p0.x,p1.x,p2.x,p3.x,ivals[t_index].deval(t),0,0)
-            y = hermite_interpolate(p0.y,p1.y,p2.y,p3.y,ivals[t_index].deval(t),0,0)
-            z = hermite_interpolate(p0.z,p1.z,p2.z,p3.z,ivals[t_index].deval(t),0,0)
-            return Point(x,y,z)
+            return hermite_interpolate(p0,p1,p2,p3,ivals[t_index].deval(t),tension, bias)
         
         return Curve(func)
 
