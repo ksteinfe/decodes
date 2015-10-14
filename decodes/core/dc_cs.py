@@ -122,16 +122,16 @@ class CS(Geometry, Basis):
             :rtype: Vec
             
         """
-        from .dc_line import Line  
         try:
             x,y,z = a.x,a.y,a.z
         except:
             x,y,z = a,b,c
         
-        pt = Point(x,y,z)
-        xx = Line(self.origin,self.x_axis).near(pt)[1]
-        yy = Line(self.origin,self.y_axis).near(pt)[1]
-        zz = Line(self.origin,self.z_axis).near(pt)[1]
+        v = Vec(self.origin,Point(x,y,z)) 
+        xx = v.dot(self.x_axis)
+        yy = v.dot(self.y_axis)
+        zz = v.dot(self.z_axis)
+
         return Vec(xx,yy,zz)
 
     def eval_cyl(self,radius,radians,z=0):
