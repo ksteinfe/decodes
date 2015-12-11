@@ -76,7 +76,7 @@ class PGon(HasPts):
 
         
     def seg(self,index):
-        """| Returns a segment of this Polygon
+        """| Returns a segment of this Polygon as a Segment
            | The returned line segment will contain a copy of the Points stored in the segment.
         
            :param index: Index of the desired segment.
@@ -88,6 +88,23 @@ class PGon(HasPts):
         if index == len(self)-1 : return Segment(self.pts[index],self.pts[0])
         #TODO: handle negative indices
         return Segment(self.pts[index],self.pts[index+1])
+
+        
+    def cnr(self,index):
+        """| Returns a corner of this Polygon as a pair of Rays
+        
+           :param index: Index of the desired corner.
+           :type index: Int
+           :returns: A Pair of Rays. 
+           :rtype: (Ray)
+        """
+        if index >= len(self) : raise IndexError()
+        i0, i1 = index - 1, index + 1
+        if i0<0 : i0 = len(self)-1
+        if i1> len(self)-1 : i1 = 0
+        
+        return Ray(self.pts[index],Vec(self.pts[index],self.pts[i0])) , Ray(self.pts[index],Vec(self.pts[index],self.pts[i1]))
+        
         
     def __contains__(self, pt):
         """ Overloads the containment **(in)** operator.
