@@ -94,24 +94,7 @@ class LinearEntity(Geometry):
             :rtype: None
         """    
         self._vec = vec
-    @property
-    def ept(self): 
-        """ Returns the end Point of a LinearEntity.
 
-            :result: End Point.
-            :rtype: Point
-        """
-        return self._pt+self._vec
-    @ept.setter
-    def ept(self, point): 
-        """ Sets the end Point of a LinearEntity.
-
-            :param point: End Point.
-            :type point: Point
-            :result: End Point.
-            :rtype: None
-        """
-        self._vec = point-self._pt
     
     @property
     def coefficients(self):
@@ -291,7 +274,7 @@ class LinearEntity(Geometry):
             :result: Evaluated Point on LinearEntity.
             :rtype: Point
         """
-        return self.spt+(self.vec.normalized(self.vec.length*t))
+        return self.spt + (self.vec * t)
 
 
 
@@ -343,6 +326,26 @@ class Segment(LinearEntity):
         raise NotImplementedError()
     
     def __repr__(self): return "seg[{0} {1}]".format(self.spt,self._vec)
+    
+    
+    @property
+    def ept(self): 
+        """ Returns the end Point of a LinearEntity.
+
+            :result: End Point.
+            :rtype: Point
+        """
+        return self._pt+self._vec
+    @ept.setter
+    def ept(self, point): 
+        """ Sets the end Point of a LinearEntity.
+
+            :param point: End Point.
+            :type point: Point
+            :result: End Point.
+            :rtype: None
+        """
+        self._vec = point-self._pt    
     
     def near(self,p):
         """ Returns a tuple of the closest point to a given line segment, its t value and the distance from the Point to the near Point.
