@@ -319,6 +319,30 @@ class Segment(LinearEntity):
         """
         return self._pt == other._pt and self._vec == other._vec
 
+
+    def __truediv__(self,divs): return self.__div__(divs)
+    def __div__(self, divs): 
+        """ Overloads the division **(/)** operator. Calls Segment.divide(divs).
+        
+           :param divs: Number of divisions.
+           :type divs: int        
+           :result: List of Points equally spaced along this Segment
+           :rtype: list
+        """
+        return self.divide(divs)
+
+    def __floordiv__(self, divs): 
+        """ Overloads the integer division **(//)** operator. Calls Segment.subinterval(divs).
+            
+            :param divs: Number of subsegments.
+            :type divs: int
+            :result: List of smaller Segments. 
+            :rtype: list
+            
+        """
+        return self.subsegment(divs)
+        
+        
     def __contains__(self, other):
     
         #TODO: implement this method.
@@ -402,6 +426,31 @@ class Segment(LinearEntity):
         """ 
         return Segment(self.ept,self._vec.inverted())
 
+        
+    def divide(self, divs):
+        """| Divides this segment into a list of Points equally spaced between its start-point and endpoint.
+           | Number of Points returned will be one more than integer divs, such that if this Segment is divided into two, three Points are returned.
+        
+           :param divs: Number of divisions.
+           :type divs: int        
+           :result: List of Points equally spaced along this Segment
+           :rtype: list
+        """
+        tt = Interval().divide(divs, True)
+        return [self.eval(t) for t in tt]
+    
+    def subsegment(self, divs):
+        """ Divides this Segment into a list of smaller equally-sized Segments.
+        
+            :param divs: Number of subsegments.
+            :type divs: int
+            :result: List of smaller Segments. 
+            :rtype: list
+        """
+        pts = self.divide(divs)
+        return [Segment(pa,pb) for pa,pb in zip(pts[:-1],pts[1:]) ]
+        
+        
     @staticmethod
     def by_coords2d(x0=0.0,y0=0.0,x1=1.0,y1=1.0): 
         """ Returns a 2D LinearEntity from two sets of x and y coordinates.
