@@ -272,6 +272,10 @@ class Point(Vec):
         return Point( Vec(self.x,self.y,self.z).projected(other) )
 
     @staticmethod
+    def sorted_by_distance(pts,pt):
+        return [tup[1] for tup in sorted( [(p.dist2(pt),p) for p in pts] )]
+        
+    @staticmethod
     def near(pt, pts):
         """ Returns a point from the given list of points which is nearest to the source point.
 
