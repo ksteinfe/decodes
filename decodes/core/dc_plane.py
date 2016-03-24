@@ -196,6 +196,19 @@ class Plane(Geometry):
             :rtype: Point
         """
         return self.near(p)[0]
+        
+        
+    def to_cs(self, guide_vec):
+        """ Returns a CS aligned with this Plane, with the x-axis oriented toward the given guide Vec.
+       
+            :param guide_vec: Vec that guides the orientation of the x-axis of the resulting CS.
+            :type p: Vec
+        """
+        from .dc_cs import CS
+        y_vec = self.normal.cross(guide_vec)
+        x_vec = self.normal.cross(y_vec).inverted()
+        return CS(self.origin, x_vec, y_vec)
+        
 
     @staticmethod
     def from_pts(pt_a,pt_b,pt_c):
