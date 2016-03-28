@@ -509,11 +509,12 @@ class Intersector(object):
         if Line.is_parallel(ln_a,ln_b) :
             self.log = "Lines are parallel, no intersection found."
             return False
-        
+        ept_a = ln_a.spt+ln_a.vec
+        ept_b = ln_b.spt+ln_b.vec
         p1 = Vec(float(ln_a.spt.x),float(ln_a.spt.y),float(ln_a.spt.z))
-        p2 = Vec(float(ln_a.ept.x),float(ln_a.ept.y),float(ln_a.ept.z))
+        p2 = Vec(float(ept_a.x),float(ept_a.y),float(ept_a.z))
         p3 = Vec(float(ln_b.spt.x),float(ln_b.spt.y),float(ln_b.spt.z))
-        p4 = Vec(float(ln_b.ept.x),float(ln_b.ept.y),float(ln_b.ept.z))
+        p4 = Vec(float(ept_b.x),float(ept_b.y),float(ept_b.z))
         p13 = p1 - p3
         p43 = p4 - p3
 
