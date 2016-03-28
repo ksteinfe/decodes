@@ -255,8 +255,11 @@ class Xform(object):
         # HASPTS GEOMETRY
         # applies transformation to the verts, leaving the basis intact
         if isinstance(other, HasPts) : 
+            raise NotImplementedError("can't xform a haspts")
             other._verts = [v*self for v in other._verts]
             return other
+            # TODO: deal with applying transformations to haspts geometry
+            
 
         # BASED GEOMETRY
         # all objects that are not HASPTS but are HASBASIS and have a basis defined and are capable of applying their basis... must do so before transforming points
