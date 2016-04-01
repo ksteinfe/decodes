@@ -2,7 +2,7 @@ from decodes.core import *
 if VERBOSE_FS: print "base.py loaded"
 import copy,exceptions, collections
 
-EPSILON = 1.0e-10
+
 
 class GeometricError(StandardError):
     pass
