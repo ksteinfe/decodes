@@ -7,8 +7,6 @@ import math
 class Plane(Geometry):
     """
     a simple plane class
-
-
     """
     
     def __init__(self, point=Point(), normal=Vec(0,0,1)):
@@ -55,39 +53,17 @@ class Plane(Geometry):
         return tvec.length
 
     def __eq__(self, other):
-        """ Overloads the equal **(==)** operator for vector identity.
+        """ Overloads the equal **(==)** operator for Plane identity.
         
-            :param other: Vec to be compared.
-            :type other: Vec
+            :param other: Plane to be compared.
+            :type other: Plane
             :result: Boolean result of comparison.
             :rtype: bool
 
         """    
-        return self.is_identical(other)
+        return self.is_equal(other)
 
     def __repr__(self): return "pln[{0},{1},{2},{3},{4},{5}]".format(self.x,self.y,self.z,self._vec.x,self._vec.y,self._vec.z)
-
-    '''
-    DEPRECIATED
-    @property
-    def vec(self): 
-        """ Returns the plane's vector.
-
-            :result: Plane's vector (Point).
-            :rtype: Vec
-        """
-        return self._vec
-    @vec.setter
-    def vec(self, v): 
-        """ Sets the plane's vector.
-
-            :param v: Sets the vector of the plane (Point).
-            :type v: Vec, point
-            :result: Plane object.
-            :rtype: Plane
-        """
-        self._vec = v.normalized()
-    '''
 
     @property
     def normal(self): 
@@ -133,42 +109,117 @@ class Plane(Geometry):
             :result: Plane object.
             :rtype: Plane
         """
-        self.x = pt.x
-        self.y = pt.y
-        self.z = pt.z
+        self.x, self.y, self.z = point.tup
         
+    @property
+    def pt(self): 
+        """ Returns the plane's origin point.
 
-    def is_identical(self,other): 
-        """ Returns True if the planes are equal.
+            :result: Plane's origin point.
+            :rtype: Point
+            
+            ::
+            
+                pln_1.origin
+        """
+        return Point(self.x,self.y,self.z)
+    @pt.setter
+    def pt(self, point): 
+        """ Sets the plane's origin point.
+
+            :param pt: Sets the origin point of the plane.
+            :type pt: Point
+            :result: Plane object.
+            :rtype: Plane
+        """
+        self.x, self.y, self.z = point.tup
+
+    def is_equal(self,other,pt_tol=None, vec_tol=None):
+        """ Returns True if the given Plane shares a reference Point and normal direction with this Plane
         
             :param other: Plane to be compared.
             :type other: Plane
+            :param pos_tol: Tolerance of point projection distance.
+            :type pos_tol: float               
+            :param vec_tol: Tolerance of vector direction difference that does not correspond to an angular dimension or distance, but is treated as a separate numeric delta for x, y, and z coordinates of the normalized vectors.
+            :type vec_tol: float
             :result: Boolean result of comparison.
             :rtype: bool
             
             ::
             
-                pln_1.is_identical(pln_2)
-        """   
-        return all([self.x==other.x,self.y==other.y,self.z==other.z,self._vec.x==other._vec.x,self._vec.y==other._vec.y,self._vec.z==other._vec.z])
+                my_pln.is_equal(other_pln)
+        """
+        return self.origin.is_equal(other.origin,pt_tol) and self.normal.is_coincident(other.normal,vec_tol)
 
-        
-    def is_coplanar(self,other,tolerance=0.000001): 
-        """ Returns True if the planes are co-planar within a given tolerance.
+    def is_coincident(self,other,pt_tol=None, vec_tol=None):
+        """ Returns True if the given Plane shares any contained Point, and if the two normal directions are coincident
         
             :param other: Plane to be compared.
             :type other: Plane
-            :param tolerance: Tolerance of difference between the two planes.
-            :type tolerance: float
+            :param pos_tol: Tolerance of point projection distance.
+            :type pos_tol: float               
+            :param vec_tol: Tolerance of vector direction difference that does not correspond to an angular dimension or distance, but is treated as a separate numeric delta for x, y, and z coordinates of the normalized vectors.
+            :type vec_tol: float          
             :result: Boolean result of comparison.
             :rtype: bool
             
             ::
             
-                pln_1.is_coplanar(pln_2)
+                my_pln.is_coincident(other_pln)
         """   
-        return all([self.near(other.origin)[0].distance(other.origin)<tolerance,self._vec.is_parallel(other._vec)])
+        if self.normal.is_coincident(other.normal,vec_tol): 
+            if self.near(other.origin)[2] <= pos_tol and other.near(self.origin)[2] <= pos_tol: return True
+        return False
+        
+    def is_coplanar(self,other,pt_tol=None, vec_tol=None):
+        """ Returns True if the given Plane shares any contained Point, and if the two normal directions are parallel
+        
+            :param other: Plane to be compared.
+            :type other: Plane
+            :param pos_tol: Tolerance of point projection distance.
+            :type pos_tol: float               
+            :param vec_tol: Tolerance of vector direction difference that does not correspond to an angular dimension or distance, but is treated as a separate numeric delta for x, y, and z coordinates of the normalized vectors.
+            :type vec_tol: float          
+            :result: Boolean result of comparison.
+            :rtype: bool
+            
+            ::
+            
+                my_pln.is_coplanar(other_pln)
+        """   
+        if self.normal.is_parallel(other.normal,vec_tol): 
+            if self.near(other.origin)[2] <= pos_tol and other.near(self.origin)[2] <= pos_tol: return True
+        return False        
 
+    def is_parallel(self,other, vec_tol=None):
+        """ Returns True if the normal directions of this Plane and the given Plane are parallel
+
+            :param other: Plane to be compared.
+            :type other: Plane
+            :param vec_tol: Tolerance of vector direction difference that does not correspond to an angular dimension or distance, but is treated as a separate numeric delta for x, y, and z coordinates of the normalized vectors.
+            :type vec_tol: float          
+            :result: Boolean result of comparison.
+            :rtype: bool
+        
+            
+        """
+        return self.normal.is_parallel(other.normal,vec_tol)
+    
+    def is_perpendicular(self,other, vec_tol=None):
+        """ Returns True if the normal directions of this Plane and the given Plane are perpendicular
+           
+            :param other: Plane to be compared.
+            :type other: Plane
+            :param vec_tol: Tolerance of vector direction difference that does not correspond to an angular dimension or distance, but is treated as a separate numeric delta for x, y, and z coordinates of the normalized vectors.
+            :type vec_tol: float          
+            :result: Boolean result of comparison.
+            :rtype: bool
+                     
+        """
+        return self.normal.is_perpendicular(other.normal,vec_tol)
+        
+        
     def near(self, p):
         """ Returns a tuple of the closest point to a given Plane, its t value, and the distance from the given point to the near point.
        
@@ -210,34 +261,6 @@ class Plane(Geometry):
         x_vec = self.normal.cross(y_vec).inverted()
         return CS(self.origin, x_vec, y_vec)
         
-    @staticmethod
-    def is_parallel(p1, p2):
-        """ Returns True if the two given Planes are parallel, False otherwise.
-
-            :param l1: First Plane
-            :type l1: Plane
-            :param l2: Second Plane
-            :type l2: Plane
-            :result: True if parallel.
-            :rtype: bool
-        
-            
-        """
-        return p1.vec.is_parallel(p2.vec)
-
-    @staticmethod
-    def is_perpendicular(p1, p2):
-        """ Returns True if the two given Planes are perpendicular, False otherwise.
-           
-            :param l1: First Plane
-            :type l1: Plane
-            :param l2: Second Plane
-            :type l2: Plane
-            :result: True if perpendicular.
-            :rtype: bool
-                     
-        """
-        return p1.vec.dot(p2.vec) == 0
         
     @staticmethod
     def from_pts(pt_a,pt_b,pt_c):
