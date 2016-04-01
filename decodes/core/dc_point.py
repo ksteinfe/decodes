@@ -160,35 +160,6 @@ class Point(Vec):
         """
         return True if (self < other or self == other) else False
         
-    def __eq__(self, other): 
-        """ Overloads the equal **(==)** operator.
-        
-            :param other: Point to be compared
-            :type other: Point
-            :result: Boolean result of comparison
-            :rtype: bool
-        """
-        def approx_equal(a, b): return abs(a - b) < EPSILON
-
-        try:
-            return all([approx_equal(self.x,other.x),approx_equal(self.y,other.y),approx_equal(self.z,other.z)])
-        except:
-            return False
-
-    def __ne__(self, other): 
-        """ Overloads the not equal **(!=)** operator.
-        
-            :param other: Point to be compared
-            :type other: Point
-            :result: Boolean result of comparison
-            :rtype: bool
-        """
-        def approx_equal(a, b): return abs(a - b) < EPSILON
-        try:
-            return not all([approx_equal(self.x,other.x),approx_equal(self.y,other.y),approx_equal(self.z,other.z)])
-        except:
-            return False
-
     def __ge__(self, other): 
         """ Overloads the greater than or equal to **(>=)** operator.
         
@@ -198,6 +169,7 @@ class Point(Vec):
             :rtype: bool
         """
         return True if (self > other or self == other) else False 
+    
     
     def distance2(self,other): 
         """ Returns the distance squared between this point and the other point in local space. Both points must use the same basis.

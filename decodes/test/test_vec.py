@@ -45,9 +45,9 @@ class Tests(unittest.TestCase):
         self.assertEqual(True,v2!=v3)
         self.assertEqual(False,v2!=v4)
 
-        self.assertEqual(False,v1.is_identical(v2))
-        self.assertEqual(False,v2.is_identical(v3))
-        self.assertEqual(True,v2.is_identical(v4))
+        self.assertEqual(False,v1.is_equal(v2))
+        self.assertEqual(False,v2.is_equal(v3))
+        self.assertEqual(True,v2.is_equal(v4))
 
         self.assertEqual(True,v1.is_coincident(v2))
         self.assertEqual(False,v2.is_coincident(v3))

@@ -541,7 +541,7 @@ class Intersector(object):
 
         pa = Point(p1.x + mua * p21.x,p1.y + mua * p21.y,p1.z + mua * p21.z)
         pb = Point(p3.x + mub * p43.x,p3.y + mub * p43.y,p3.z + mub * p43.z)
-        if pa.is_identical(pb,self.tol) : 
+        if pa.is_equal(pb,self.tol) : 
             self.log = "3d intersection found."
             self.append(pa)
             

@@ -231,7 +231,7 @@ class Vec(Geometry):
             :rtype: bool
 
         """    
-        return self.is_identical(other)
+        return self.is_equal(self,other)
     def __ne__(self, other): 
         """ Overloads the not equal **(!=)** operator for vector length.
         
@@ -241,7 +241,7 @@ class Vec(Geometry):
             :rtype: bool
 
         """
-        return not self.is_identical(other)
+        return not self.is_equal(self,other)
     def __gt__(self, other): 
         """ Overloads the greater than **(>)** operator for vector length.
         
@@ -261,7 +261,7 @@ class Vec(Geometry):
         """
         return self.length2 >= other.length2
     
-    def is_identical(self,other,tol=False): 
+    def is_equal(self,other,tol=None):
         """ Returns True if the vectors are equal.
         
             :param other: Vec to be compared.
@@ -273,16 +273,20 @@ class Vec(Geometry):
             
             ::
             
-                my_vec.is_identical(vec_1)
-        """   
+                my_vec.is_equal(vec_1)
+        """    
+        if tol is None: tol = EPSILON
+        def apxeq(a, b): return abs(a - b) < tol
+        
         try:
-            if not tol:
-                return all([self.x==other.x,self.y==other.y,self.z==other.z])
-            else :
-                return all([abs(self.x-other.x)<tol,abs(self.y-other.y)<tol,abs(self.z-other.z)<tol])
+            return all([apxeq(self.x,other.x),apxeq(self.y,other.y),apxeq(self.z,other.z)])
         except:
             return False
-            
+    
+    
+    def is_identical(self,other,tol=False): 
+        raise NotImplementedError()
+        
     def is_coincident(self,other): 
         """ Returns True if the vectors have equal direction.
         
