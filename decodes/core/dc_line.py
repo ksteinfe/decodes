@@ -115,40 +115,57 @@ class LinearEntity(Geometry):
     def is_identical(self,other): return self.is_coincident(other)
     def is_coincident(self, other):  raise NotImplementedError()
     
-    @staticmethod
-    def is_parallel(l1, l2):
-        """ Returns True if l1 and l2 are parallel, False otherwise.
+    def is_parallel(self,other,tol=None):
+        """ Returns True if the LinearEntities contain vectors with equal or opposite direction within a given tolerance.
 
-            :param l1: First LinearEntity
-            :type l1: LinearEntity
-            :param l2: Second LinearEntity
-            :type l2: LinearEntity
-            :result: True if parallel.
+            :param other: LinearEntity to be compared.
+            :type other: LinearEntity
+            :param tol: Tolerance of difference that does not correspond to an angular dimension or distance, but is treated as a separate numeric delta for x, y, and z coordinates of the normalized vectors.
+            :type tol: float              
+            :result: Boolean result of comparison.
             :rtype: bool
         
             
         """
-        return l1.vec.is_coincident(l2.vec) or l1.vec.is_coincident(l2.vec.inverted())
+        return self.vec.is_parallel(other.vec,tol)
 
-    @staticmethod
-    def is_perpendicular(l1, l2):
-        """ Returns True if l1 and l2 are perpendicular, False otherwise.
+    def is_perpendicular(self,other, tol=None):
+        """ Returns True if the LinearEntities contain vectors with perpendicular to one another within a given tolerance.
            
-            :param l1: First LinearEntity
-            :type l1: LinearEntity
-            :param l2: Second LinearEntity
-            :type l2: LinearEntity
-            :result: True if perpendicular.
+            :param other: LinearEntity to be compared.
+            :type other: LinearEntity
+            :param tol: Tolerance of vector direction difference that does not correspond to an angular dimension or distance, but is treated as a separate numeric delta for x, y, and z coordinates of the normalized vectors.
+            :type tol: float              
+            :result: Boolean result of comparison.
             :rtype: bool
                      
         """
-        if l1.vec.dot(l2.vec) == 0:
-            la = Line(l1.spt, l1.vec)
-            lb = Line(l2.spt, l2.vec)
+        if self.vec.is_perpendicular(other.vec,tol):
+            la = Line(self.spt, self.vec)
+            lb = Line(other.spt, other.vec)
             from .dc_intersection import Intersector
             xsec = Intersector()
             if xsec.of(la,lb): return True
         return False
+        
+    def is_collinear(self,other, pos_tol=None, ang_tol=None):
+        """ Returns True if the LinearEntities are parallel within a given tolerance ang_tol, and lie on the same line within another tolerance pos_tol.
+           
+            :param other: LinearEntity to be compared.
+            :type other: LinearEntity
+            :param pos_tol: Tolerance of point projection distance.
+            :type tol: float               
+            :param ang_tol: Tolerance of vector direction difference that does not correspond to an angular dimension or distance, but is treated as a separate numeric delta for x, y, and z coordinates of the normalized vectors.
+            :type tol: float              
+            :result: Boolean result of comparison.
+            :rtype: bool
+                     
+        """
+        if self.vec.is_parallel(other.vec,ang_tol):
+            if pos_tol is None: pos_tol = EPSILON
+            la, lb = Line(self.spt, self.vec), Line(other.spt, other.vec)
+            if la.near(other.spt)[2] <= pos_tol and lb.near(self.spt)[2] <= pos_tol : return True
+        return False       
 
     @staticmethod
     def angle_between(l1, l2):
