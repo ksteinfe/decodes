@@ -99,7 +99,7 @@ class PLine(HasPts):
         """
         if self._basis != other.basis: raise BasisError("The basis for this PLine and the PLine you're joining it to do not match.")
         self._unset_attr() # call this when any of storable properties (subclass_attr or class_attr) changes
-        if self[-1].is_identical(other[0],tol) :
+        if self[-1].is_equal(other[0],tol) :
             pts = []
             for s in self : pts.append(s)
             for o in other : pts.append(o)
@@ -108,7 +108,7 @@ class PLine(HasPts):
             jpline= PLine(pts)
             return jpline
             
-        elif self[0].is_identical(other[-1],tol) :
+        elif self[0].is_equal(other[-1],tol) :
             pts = []
             for o in other : pts.append(o)
             for s in self : pts.append(s)
@@ -116,7 +116,7 @@ class PLine(HasPts):
             jpline= PLine(pts)
             return jpline
             
-        elif self [0].is_identical(other[0],tol) : 
+        elif self[0].is_equal(other[0],tol) : 
             other = other.reverse()
             pts = []
             for o in other : pts.append(o)
@@ -125,7 +125,7 @@ class PLine(HasPts):
             jpline= PLine(pts)
             return jpline
             
-        elif self [-1].is_identical(other[-1],tol) :
+        elif self[-1].is_equal(other[-1],tol) :
             other = other.reverse()
             pts = []
             for s in self : pts.append(s)

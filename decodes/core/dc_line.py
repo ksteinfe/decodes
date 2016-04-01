@@ -123,8 +123,8 @@ class LinearEntity(Geometry):
             
                 ln_1.is_identical(ln_2)
         """   
-        if not self.pt.is_identical(other.pt): return False
-        if not self.vec.is_identical(other.vec): return False
+        if not self.pt.is_equal(other.pt): return False
+        if not self.vec.is_equal(other.vec): return False
         return True  
       
     
