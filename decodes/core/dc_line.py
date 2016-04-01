@@ -109,6 +109,25 @@ class LinearEntity(Geometry):
         return (self.p1[1]-self.p2[1],
                 self.p2[0]-self.p1[0],
                 self.p1[0]*self.p2[1] - self.p1[1]*self.p2[0])
+    
+    
+    def is_identical(self,other): 
+        """ Returns True if the LinearEntities are equal.
+        
+            :param other: LinearEntity to be compared.
+            :type other: LinearEntity
+            :result: Boolean result of comparison.
+            :rtype: bool
+            
+            ::
+            
+                ln_1.is_identical(ln_2)
+        """   
+        if not self.pt.is_identical(other.pt): return False
+        if not self.vec.is_identical(other.vec): return False
+        return True  
+      
+    
     @staticmethod
     def is_concurrent(*lines):
         """| Returns True if the set of linear entities are concurrent, False
@@ -159,19 +178,15 @@ class LinearEntity(Geometry):
             :type l2: LinearEntity
             :result: True if perpendicular.
             :rtype: bool
-            
-            .. warning:: This method is not implemented.           
+                     
         """
-        
-        #TODO:: Implement this method.
-        
-        raise NotImplementedError()
-        try:
-            a1,b1,c1 = l1.coefficients
-            a2,b2,c2 = l2.coefficients
-            return bool(simplify(a1*a2 + b1*b2) == 0)
-        except AttributeError:
-            return False
+        if l1.vec.dot(l2.vec) == 0:
+            la = Line(l1.spt, l1.vec)
+            lb = Line(l2.spt, l2.vec)
+            from .dc_intersection import Intersector
+            xsec = Intersector()
+            if xsec.of(la,lb): return True
+        return False
 
     @staticmethod
     def angle_between(l1, l2):

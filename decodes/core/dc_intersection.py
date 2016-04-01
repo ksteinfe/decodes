@@ -506,6 +506,7 @@ class Intersector(object):
             
         """
         #TODO: test for lines on the xy plane, and do simpler intersection
+        #TODO: differentiate Lines from Rays and Segs 
         if Line.is_parallel(ln_a,ln_b) :
             self.log = "Lines are parallel, no intersection found."
             return False

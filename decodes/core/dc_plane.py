@@ -152,6 +152,7 @@ class Plane(Geometry):
         """   
         return all([self.x==other.x,self.y==other.y,self.z==other.z,self._vec.x==other._vec.x,self._vec.y==other._vec.y,self._vec.z==other._vec.z])
 
+        
     def is_coplanar(self,other,tolerance=0.000001): 
         """ Returns True if the planes are co-planar within a given tolerance.
         
@@ -209,7 +210,35 @@ class Plane(Geometry):
         x_vec = self.normal.cross(y_vec).inverted()
         return CS(self.origin, x_vec, y_vec)
         
+    @staticmethod
+    def is_parallel(p1, p2):
+        """ Returns True if the two given Planes are parallel, False otherwise.
 
+            :param l1: First Plane
+            :type l1: Plane
+            :param l2: Second Plane
+            :type l2: Plane
+            :result: True if parallel.
+            :rtype: bool
+        
+            
+        """
+        return p1.vec.is_parallel(p2.vec)
+
+    @staticmethod
+    def is_perpendicular(p1, p2):
+        """ Returns True if the two given Planes are perpendicular, False otherwise.
+           
+            :param l1: First Plane
+            :type l1: Plane
+            :param l2: Second Plane
+            :type l2: Plane
+            :result: True if perpendicular.
+            :rtype: bool
+                     
+        """
+        return p1.vec.dot(p2.vec) == 0
+        
     @staticmethod
     def from_pts(pt_a,pt_b,pt_c):
         """ Constructs plane from points. A plane cannot be constructed from collinear points.
