@@ -5,6 +5,7 @@ import math, random
 if VERBOSE_FS: print "vec.py loaded"
 
 
+
 class Vec(Geometry):
     """
     a simple vector class
@@ -261,19 +262,20 @@ class Vec(Geometry):
         """
         return self.length2 >= other.length2
     
+    def is_identical(self,other,tol=None): return self.is_equal(other,tol)
     def is_equal(self,other,tol=None):
         """ Returns True if the vectors are equal.
         
             :param other: Vec to be compared.
             :type other: Vec
-            :param tol: Tolerance of difference.
+            :param tol: Tolerance of difference that does not correspond to an actual distance, but is treated as a separate numeric delta for x, y, and z coordinates.
             :type tol: float
             :result: Boolean result of comparison.
             :rtype: bool
             
             ::
             
-                my_vec.is_equal(vec_1)
+                my_vec.is_equal(other_vec)
         """    
         if tol is None: tol = EPSILON
         def apxeq(a, b): return abs(a - b) < tol
@@ -282,39 +284,75 @@ class Vec(Geometry):
             return all([apxeq(self.x,other.x),apxeq(self.y,other.y),apxeq(self.z,other.z)])
         except:
             return False
-    
-    
-    def is_identical(self,other,tol=False): 
-        raise NotImplementedError()
         
-    def is_coincident(self,other): 
+    def is_coincident(self,other,tol=None): 
         """ Returns True if the vectors have equal direction.
         
             :param other: Vec to be compared.
             :type other: Vec
+            :param tol: Tolerance of difference that does not correspond to an angular dimension or distance, but is treated as a separate numeric delta for x, y, and z coordinates of the normalized vectors.
+            :type tol: float            
             :result: Boolean result of comparison.
             :rtype: bool
             
             ::
             
-                my_vec.is_coincident(vec_1)
+                my_vec.is_coincident(other_vec)
         """   
-        return self.normalized().is_identical( other.normalized() )
-    
-    def is_parallel(self,other): 
+        return self.normalized().is_equal( other.normalized() , tol)
+
+   
+    def is_similar(self,other,tol=math.pi/2): 
+        """ Returns True if the vectors point in the general same direction, in other words, if they are coincident within a given angular tolerance, the default of which is PI/2. Useful in determining if an inversion is required to bring the vectors into better alignment.
+        
+            :param other: Vec to be compared.
+            :type other: Vec    
+            :param tol: Angular tolerance of difference in radians.       
+            :type tol: float                
+            :result: Boolean result of comparison.
+            :rtype: bool
+            
+            ::
+            
+                my_vec.is_similar(other_vec)
+        """   
+        return self.angle(other) <= tol
+        
+    def is_parallel(self,other,tol=None): 
         """ Returns True if the vectors have equal or opposite direction.
         
             :param other: Vec to be compared.
             :type other: Vec
+            :param tol: Tolerance of difference that does not correspond to an angular dimension or distance, but is treated as a separate numeric delta for x, y, and z coordinates of the normalized vectors.
+            :type tol: float              
             :result: Boolean result of comparison.
             :rtype: bool
             
             ::
             
-                my_vec.is_parallel(vec_1)
+                my_vec.is_parallel(other_vec)
         """   
-        return self.is_coincident(other) or self.inverted().is_coincident(other)
+        return self.is_coincident(other, tol) or self.inverted().is_coincident(other, tol)
 
+    def is_perpendicular(self,other,tol=None): 
+        """ Returns True if the vectors are perpendicular to one another.
+        
+            :param other: Vec to be compared.
+            :type other: Vec
+            :param tol: Angular tolerance of difference in radians.       
+            :type tol: float                   
+            :result: Boolean result of comparison.
+            :rtype: bool
+            
+            ::
+            
+                my_vec.is_perpendicular(other_vec)
+        """   
+        if tol is None: return self.dot(other) == 0.0
+        return abs(math.pi/2 - self.angle(other)) <= tol
+   
+
+        
 
     @property
     def is_2d(self): 
@@ -577,7 +615,7 @@ class Vec(Geometry):
         )
 
     def angle(self,other):
-        """ Returns the angle in radians between this vector and the other vector. Return value is constrained to the range [-PI,PI].
+        """ Returns the angle in radians between this vector and the other vector. Return value is constrained to the range [0,PI].
         
             :param other: Second vector for angle calculation.
             :type other: Vec
