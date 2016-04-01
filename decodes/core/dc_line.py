@@ -128,30 +128,6 @@ class LinearEntity(Geometry):
         return True  
       
     
-    @staticmethod
-    def is_concurrent(*lines):
-        """| Returns True if the set of linear entities are concurrent, False
-           | otherwise. Two or more linear entities are concurrent if they all
-           | intersect at a single point.
-            
-           :param lines: a set of LinearEntities
-           :type lines:
-           :result:
-           :rtype:
-
-                
-           .. note:: **Description of Method:**  First, take the first 
-                        two lines and find their intersection. If there is no intersection, 
-                        then the first two lines were parallel and had no intersection so 
-                        concurrency is impossible amongst the whole set. Otherwise, check 
-                        to see if the intersection point of the first two lines is a member 
-                        on the rest of the lines. If so, the lines are concurrent.
-        
-           .. warning:: This method is not implemented.        
-        """
-        #TODO:: Implement this method.
-        
-        raise NotImplementedError()
 
     @staticmethod
     def is_parallel(l1, l2):
@@ -359,9 +335,7 @@ class Segment(LinearEntity):
         
         
     def __contains__(self, other):
-    
         #TODO: implement this method.
-        
         raise NotImplementedError()
     
     def __repr__(self): return "seg[{0} {1}]".format(self.spt,self._vec)
