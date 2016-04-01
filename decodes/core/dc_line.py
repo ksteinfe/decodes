@@ -57,6 +57,7 @@ class LinearEntity(Geometry):
         self._vec *= other
         return self
     
+    def __eq__(self, other):  raise NotImplementedError()
     
     @property
     def spt(self): 
@@ -110,25 +111,10 @@ class LinearEntity(Geometry):
                 self.p2[0]-self.p1[0],
                 self.p1[0]*self.p2[1] - self.p1[1]*self.p2[0])
     
+    def is_equal(self, other):  raise NotImplementedError()
+    def is_identical(self,other): return self.is_coincident(other)
+    def is_coincident(self, other):  raise NotImplementedError()
     
-    def is_identical(self,other): 
-        """ Returns True if the LinearEntities are equal.
-        
-            :param other: LinearEntity to be compared.
-            :type other: LinearEntity
-            :result: Boolean result of comparison.
-            :rtype: bool
-            
-            ::
-            
-                ln_1.is_identical(ln_2)
-        """   
-        if not self.pt.is_equal(other.pt): return False
-        if not self.vec.is_equal(other.vec): return False
-        return True  
-      
-    
-
     @staticmethod
     def is_parallel(l1, l2):
         """ Returns True if l1 and l2 are parallel, False otherwise.
