@@ -57,7 +57,15 @@ class LinearEntity(Geometry):
         self._vec *= other
         return self
     
-    def __eq__(self, other):  raise NotImplementedError()
+    def __eq__(self, other):
+        """| Overloads the equality **(==)** operator. 
+           | Calls the is_equal method
+           
+           ::
+           
+                my_le == other_le
+        """  
+        return self.is_equal(other)
     
     @property
     def spt(self): 
@@ -76,7 +84,7 @@ class LinearEntity(Geometry):
             :result: Sets a starting point.
             :rtype: None
         """
-        self._pt = point
+        self._pt = point  
     @property
     def vec(self): 
         """ Returns the Vec direction of a LinearEntity.
@@ -154,9 +162,9 @@ class LinearEntity(Geometry):
             :param other: LinearEntity to be compared.
             :type other: LinearEntity
             :param pos_tol: Tolerance of point projection distance.
-            :type tol: float               
+            :type pos_tol: float               
             :param ang_tol: Tolerance of vector direction difference that does not correspond to an angular dimension or distance, but is treated as a separate numeric delta for x, y, and z coordinates of the normalized vectors.
-            :type tol: float              
+            :type ang_tol: float              
             :result: Boolean result of comparison.
             :rtype: bool
                      
@@ -165,38 +173,19 @@ class LinearEntity(Geometry):
             if pos_tol is None: pos_tol = EPSILON
             la, lb = Line(self.spt, self.vec), Line(other.spt, other.vec)
             if la.near(other.spt)[2] <= pos_tol and lb.near(self.spt)[2] <= pos_tol : return True
-        return False       
+        return False
 
-    @staticmethod
-    def angle_between(l1, l2):
+    def angle(self, other):
         """ Returns an angle formed between the two linear entities.
         
-            :param l1: First LinearEntity
-            :type l1: LinearEntity
-            :param l2: Second LinearEntity
-            :type l2: LinearEntity
+            :param other: Other LinearEntity
+            :type other: LinearEntity
             :result: Angle in radians.
-            :rtype: float
-
-            .. note:: **Description of Method:**  
-                        From the dot product of vectors v1 and v2 it is known that::
-
-                            dot(v1, v2) = |v1|*|v2|*cos(A)
-
-                        where A is the angle formed between the two vectors. We can
-                        get the directional vectors of the two lines and readily
-                        find the angle between the two using the above formula.
-       
-            .. warning:: This method is not implemented.          
+            :rtype: float      
        """
-        #TODO:: Implement this method.
+        return self.vec.angle(other.vec)
 
-        #v1 = l1.p2 - l1.p1
-        #v2 = l2.p2 - l2.p1
-        #return Basic.acos( (v1[0]*v2[0]+v1[1]*v2[1]) / (abs(v1)*abs(v2)) )
-        raise NotImplementedError()
-
-    def parallel_line(self, p):
+    def parallel_line_through(self, p):
         """ Returns a new Line which is parallel to this linear entity and passes through the specified point.
         
             :param p: Point that the LinearEntity will pass through.
@@ -205,35 +194,6 @@ class LinearEntity(Geometry):
             :rtype: LinearEntity
         """
         return Line(p, self.vec)
-
-    def perpendicular_line(self, p):
-        """ Returns a new Line which is perpendicular to this linear entity and passes through the specified point.
-
-            :param p: Point that the LinearEntity will pass through.
-            :type p: Point
-            :result: New LinearEntity.
-            :rtype: LinearEntity
-        
-            .. warning:: This method is not implemented.           
-        """    
-        #TODO:: Implement this method.
-        
-        raise NotImplementedError()
-
-    def perpendicular_segment(self, p):
-        """ Returns a new Segment which connects p to a point on this linear entity and is also perpendicular to this line. Returns p itself if p is on this linear entity.
-
-            :param p: Point that the LinearEntity will pass through.
-            :type p: Point
-            :result: New LinearEntity.
-            :rtype: LinearEntity
-
-            .. warning:: This method is not implemented.   
-            
-        """
-        #TODO:: Implement this method.
-        
-        raise NotImplementedError()
 
     def __eq__(self, other):  raise NotImplementedError()
     def __contains__(self, other):  raise NotImplementedError()
@@ -274,18 +234,102 @@ class LinearEntity(Geometry):
 
 class Line(LinearEntity):
     """A line in space."""
-    def __eq__(self, other):  raise NotImplementedError()
     def __contains__(self, other):  raise NotImplementedError()
     def __repr__(self): return "line[{0} {1}]".format(self._pt,self._vec)
+    @property
+    def pt(self): 
+        """ Returns the reference Point of a Line.
 
+            :result: the reference Point.
+            :rtype: Point
+        """
+        return self._pt
+    @pt.setter
+    def pt(self, point): 
+        """ Sets the reference Point of a Line.
+
+            :param point: the the reference Point.
+            :type point: Point
+            :result: Sets a reference point.
+            :rtype: None
+        """
+        self._pt = point
+        
+    def is_equal(self,other,pt_tol=None, vec_tol=None):
+        """ Returns True if the given Line shares the Point and direction with this Line
+        
+            :param other: Line to be compared.
+            :type other: Line
+            :param pos_tol: Tolerance of point distance.
+            :type pos_tol: float               
+            :param vec_tol: Tolerance of vector direction difference that does not correspond to an angular dimension or distance, but is treated as a separate numeric delta for x, y, and z coordinates of the normalized vectors.
+            :type vec_tol: float
+            :result: Boolean result of comparison.
+            :rtype: bool
+            
+            ::
+            
+                my_line.is_equal(other_line)
+        """
+        return self.pt.is_equal(other.pt,pt_tol) and self.vec.is_equal(other.vec,vec_tol)
+
+    def is_coincident(self,other,pt_tol=None, vec_tol=None):
+        """ Returns True if the Lines share any Point along their length and have parallel direction Vecs. Equivalent to LinearEntity.is_colinear()
+        
+            :param other: Line to be compared.
+            :type other: Line
+            :param pos_tol: Tolerance of point distance.
+            :type pos_tol: float               
+            :param vec_tol: Tolerance of vector direction difference that does not correspond to an angular dimension or distance, but is treated as a separate numeric delta for x, y, and z coordinates of the normalized vectors.          
+            :result: Boolean result of comparison.
+            :rtype: bool
+            
+            ::
+            
+                my_line.is_coincident(other_line)
+        """
+        return self.is_collinear(other,pt_tol=None, vec_tol=None)
+        
 
 class Ray(LinearEntity):
     """A ray in space."""
-    def __eq__(self, other):  
-        return self._pt == other._pt and self._vec.is_coincident(other._vec)
-
     def __contains__(self, other):  raise NotImplementedError()
     def __repr__(self): return "ray[{0} {1}]".format(self._pt,self._vec)
+    
+    def is_coincident(self,other,pt_tol=None, vec_tol=None):
+        """ Returns True if the given Ray shares a start Point and normalized direction vector with this Ray. Equivalent to Ray.is_equal()
+        
+            :param other: Ray to be compared.
+            :type other: Ray
+            :param pos_tol: Tolerance of point projection distance.
+            :type pos_tol: float               
+            :param vec_tol: Tolerance of vector direction difference that does not correspond to an angular dimension or distance, but is treated as a separate numeric delta for x, y, and z coordinates of the normalized vectors.
+            :type vec_tol: float
+            :result: Boolean result of comparison.
+            :rtype: bool
+            
+            ::
+            
+                my_ray.is_equal(other_ray)
+        """    
+        return self.is_equal(other,pt_tol=None, vec_tol=None)    
+    def is_equal(self,other,pt_tol=None, vec_tol=None):
+        """ Returns True if the given Ray shares a start Point and normalized direction vector with this Ray
+        
+            :param other: Ray to be compared.
+            :type other: Ray
+            :param pos_tol: Tolerance of point projection distance.
+            :type pos_tol: float               
+            :param vec_tol: Tolerance of vector direction difference that does not correspond to an angular dimension or distance, but is treated as a separate numeric delta for x, y, and z coordinates of the normalized vectors.
+            :type vec_tol: float
+            :result: Boolean result of comparison.
+            :rtype: bool
+            
+            ::
+            
+                my_ray.is_equal(other_ray)
+        """
+        return self.spt.is_equal(other.spt,pt_tol) and self.vec.is_coincident(other.vec,vec_tol)
     
     def near(self,p):
         """ Returns a tuple of the closest point to a given Ray, its t value and the distance from the Point to the near Point.
@@ -303,16 +347,6 @@ class Ray(LinearEntity):
 
 class Segment(LinearEntity):
     """A directed line segment in space."""
-    def __eq__(self, other):
-        """ Returns true if a given line segment is equal to this line segment. 
-        
-            :param other: Line segment to compare.
-            :type other: Segment
-            :result: Boolean value.
-            :rtype: bool
-        """
-        return self._pt == other._pt and self._vec == other._vec
-
 
     def __truediv__(self,divs): return self.__div__(divs)
     def __div__(self, divs): 
@@ -342,8 +376,7 @@ class Segment(LinearEntity):
         raise NotImplementedError()
     
     def __repr__(self): return "seg[{0} {1}]".format(self.spt,self._vec)
-    
-    
+       
     @property
     def ept(self): 
         """ Returns the end Point of a LinearEntity.
@@ -362,6 +395,43 @@ class Segment(LinearEntity):
             :rtype: None
         """
         self._vec = point-self._pt    
+    
+    def is_equal(self,other,pt_tol=None, vec_tol=None):
+        """ Returns True if the given Segment shares termination Points and direction with this Segment
+        
+            :param other: Segment to be compared.
+            :type other: Segment
+            :param pos_tol: Tolerance of point projection distance.
+            :type pos_tol: float               
+            :param vec_tol: Tolerance of vector direction difference that does not correspond to an angular dimension or distance, but is treated as a separate numeric delta for x, y, and z coordinates of the normalized vectors.
+            :type vec_tol: float
+            :result: Boolean result of comparison.
+            :rtype: bool
+            
+            ::
+            
+                my_seg.is_equal(other_seg)
+        """
+        return self.spt.is_equal(other.spt,pt_tol) and self.vec.is_equal(other.vec,vec_tol)
+        
+    def is_coincident(self,other,tol=None):
+        """ Returns True if the given Segment shares termination Points but not necessarily direction with this Segment
+        
+            :param other: Segment to be compared.
+            :type other: Segment             
+            :param tol: Tolerance of point difference that does not correspond to an actual distance, but is treated as a separate numeric delta for x, y, and z coordinates.
+            :type tol: float
+            :result: Boolean result of comparison.
+            :rtype: bool
+            
+            ::
+            
+                my_seg.is_equal(other_seg)
+        """
+        if self.spt.is_equal(other.spt,pt_tol) and self.ept.is_equal(other.ept,pt_tol): return True
+        if self.spt.is_equal(other.ept,pt_tol) and self.ept.is_equal(other.spt,pt_tol): return True
+        return False
+        
     
     def near(self,p):
         """ Returns a tuple of the closest point to a given line segment, its t value and the distance from the Point to the near Point.
