@@ -312,7 +312,7 @@ class Vec(Geometry):
             :result: Boolean result of comparison.
             :rtype: bool
             
-            ::
+            ::  
             
                 my_vec.is_similar(other_vec)
         """   

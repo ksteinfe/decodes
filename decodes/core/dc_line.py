@@ -230,7 +230,8 @@ class LinearEntity(Geometry):
         """
         return self.spt + (self.vec * t)
 
-
+    def to_line(self):
+        return Line(self.spt,self.vec)
 
 class Line(LinearEntity):
     """A line in space."""

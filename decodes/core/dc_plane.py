@@ -237,7 +237,7 @@ class Plane(Geometry):
         t = line.near(p)[1]
         tvec = self._vec*-t
         point = p + tvec
-        return (point,t,tvec.length) 
+        return (point,t,tvec.length)
 
     def near_pt(self, p):
         """ Returns the closest point to the point provided on a given Plane.
