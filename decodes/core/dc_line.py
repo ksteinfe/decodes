@@ -257,7 +257,7 @@ class Line(LinearEntity):
         self._pt = point
         
     def is_equal(self,other,pt_tol=None, vec_tol=None):
-        """ Returns True if the given Line shares the Point and direction with this Line
+        """ Returns True if the given Line shares the Point and coincident directions with this Line
         
             :param other: Line to be compared.
             :type other: Line
@@ -272,7 +272,7 @@ class Line(LinearEntity):
             
                 my_line.is_equal(other_line)
         """
-        return self.pt.is_equal(other.pt,pt_tol) and self.vec.is_equal(other.vec,vec_tol)
+        return self.pt.is_equal(other.pt,pt_tol) and self.vec.is_coincident(other.vec,vec_tol)
 
     def is_coincident(self,other,pt_tol=None, vec_tol=None):
         """ Returns True if the Lines share any Point along their length and have parallel direction Vecs. Equivalent to LinearEntity.is_colinear()
@@ -289,7 +289,7 @@ class Line(LinearEntity):
             
                 my_line.is_coincident(other_line)
         """
-        return self.is_collinear(other,pt_tol=None, vec_tol=None)
+        return self.is_collinear(other,pt_tol, vec_tol) and self.vec.is_coincident(other.vec,vec_tol)
         
 
 class Ray(LinearEntity):
@@ -313,7 +313,8 @@ class Ray(LinearEntity):
             
                 my_ray.is_equal(other_ray)
         """    
-        return self.is_equal(other,pt_tol=None, vec_tol=None)    
+        return self.is_equal(other,pt_tol, vec_tol)    
+        
     def is_equal(self,other,pt_tol=None, vec_tol=None):
         """ Returns True if the given Ray shares a start Point and normalized direction vector with this Ray
         
