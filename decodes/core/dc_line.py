@@ -163,7 +163,7 @@ class LinearEntity(Geometry):
             :type other: LinearEntity
             :param pos_tol: Tolerance of point projection distance.
             :type pos_tol: float               
-            :param ang_tol: Tolerance of vector direction difference that does not correspond to an angular dimension or distance, but is treated as a separate numeric delta for x, y, and z coordinates of the normalized vectors.
+            :param ang_tol: Tolerance of vector direction difference 
             :type ang_tol: float              
             :result: Boolean result of comparison.
             :rtype: bool
@@ -174,6 +174,24 @@ class LinearEntity(Geometry):
             la, lb = Line(self.spt, self.vec), Line(other.spt, other.vec)
             if la.near(other.spt)[2] <= pos_tol and lb.near(self.spt)[2] <= pos_tol : return True
         return False
+        
+    def is_coplanar(self,other, tol=None):
+        """ Returns True if the LinearEntities lie on the same plane within a given tolerance tol
+           
+            :param other: LinearEntity to be compared.
+            :type other: LinearEntity
+            :param tol: Tolerance of vector direction difference
+            :type tol: float  
+            :result: Boolean result of comparison.
+            :rtype: bool
+                     
+        """
+        p0,p1 = self.spt,self.spt+self.vec
+        q0,q1 = other.spt, other.spt+other.vec
+        n_vec = Vec(q0,p1).cross(Vec(q0,p0))
+        if n_vec.dot(Vec(q0,q1)) < tol: return True
+        return False
+ 
 
     def angle(self, other):
         """ Returns an angle formed between the two linear entities.
