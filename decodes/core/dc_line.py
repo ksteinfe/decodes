@@ -189,6 +189,7 @@ class LinearEntity(Geometry):
         p0,p1 = self.spt,self.spt+self.vec
         q0,q1 = other.spt, other.spt+other.vec
         n_vec = Vec(q0,p1).cross(Vec(q0,p0))
+        if tol is None: tol = EPSILON
         if n_vec.dot(Vec(q0,q1)) < tol: return True
         return False
  
