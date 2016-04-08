@@ -418,8 +418,8 @@ class Intersector(object):
         self.line = xsec._geom[0] # add plane-plane intersection line
         npt, t, dist = self.line.near(circ.origin)
         x_vec = Vec(circ.origin,npt)
-        if x_vec.length < self.tol : x_vec = Vec(circ.origin,self.line.ept)
-        if x_vec.length < self.tol : x_vec = Vec(circ.origin,self.line.spt)
+        if x_vec.length < self.tol : x_vec = Vec(circ.origin,self.line.pt+self.line.vec)
+        if x_vec.length < self.tol : x_vec = Vec(circ.origin,self.line.pt)
 
         cs = CS(circ.origin,x_vec,circ.normal.cross(x_vec))
         p0 = cs.deval(self.line.spt)

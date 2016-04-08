@@ -232,7 +232,7 @@ class Vec(Geometry):
             :rtype: bool
 
         """    
-        return self.is_equal(self,other)
+        return self.is_equal(other)
     def __ne__(self, other): 
         """ Overloads the not equal **(!=)** operator for vector length.
         
@@ -242,7 +242,7 @@ class Vec(Geometry):
             :rtype: bool
 
         """
-        return not self.is_equal(self,other)
+        return not self.is_equal(other)
     def __gt__(self, other): 
         """ Overloads the greater than **(>)** operator for vector length.
         
