@@ -263,7 +263,7 @@ class Plane(Geometry):
         
         
     @staticmethod
-    def from_pts(pt_a,pt_b,pt_c):
+    def from_pts(a,b=None,c=None):
         """ Constructs plane from points. A plane cannot be constructed from collinear points.
             
             :param pt_a: First point.
@@ -279,9 +279,30 @@ class Plane(Geometry):
             
                 pln_2=Plane(Point(0,0,0), Point(0,1,1), Point(1,0,1))
         """
+        pt_a, pt_b, pt_c = a,b,c
+        if b is None and c is None:
+            pt_a, pt_b, pt_c = a[0],a[1],a[2]
+        
         pt = Point.centroid([pt_a,pt_b,pt_c])
         try:
             nml = Vec(pt_a,pt_b).cross(Vec(pt_a,pt_c))
         except:
             raise GeometricError("Cannot create a Plane from collinear Points.")
         return Plane(pt,nml)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
