@@ -556,6 +556,12 @@ class Segment(LinearEntity):
         """
         return Segment(Point(x0,y0,z0),Point(x1,y1,z1))        
 
+    @staticmethod
+    def chain(pts,periodic=None):
+        if periodic is None: return [Segment(pa,pb) for pa,pb in zip(pts[:-1],pts[1:])]
+        return [Segment(pts[-1],pts[0])]+[Segment(pa,pb) for pa,pb in zip(pts[:-1],pts[1:])]
+    
+        
 class VecField(PixelGrid):
     """| A raster grid of vectors.
        | Each pixel contains a positioned 3d vector (a Ray).
