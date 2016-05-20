@@ -67,6 +67,17 @@ class LinearEntity(Geometry):
         """  
         return self.is_equal(other)
     
+    def __contains__(self, other):
+        """ Overloads the containment **(in)** operator
+        
+            :param number: Point whose containment must be determined.
+            :type number: Point
+            :result: Boolean result of containment.
+            :rtype: bool
+            
+        """
+        return self.contains(other)
+    
     @property
     def spt(self): 
         """ Returns the starting Point of a LinearEntity.
@@ -163,7 +174,7 @@ class LinearEntity(Geometry):
             :type other: LinearEntity
             :param pos_tol: Tolerance of point projection distance.
             :type pos_tol: float               
-            :param ang_tol: Tolerance of vector direction difference that does not correspond to an angular dimension or distance, but is treated as a separate numeric delta for x, y, and z coordinates of the normalized vectors.
+            :param ang_tol: Tolerance of vector direction difference 
             :type ang_tol: float              
             :result: Boolean result of comparison.
             :rtype: bool
@@ -174,6 +185,44 @@ class LinearEntity(Geometry):
             la, lb = Line(self.spt, self.vec), Line(other.spt, other.vec)
             if la.near(other.spt)[2] <= pos_tol and lb.near(self.spt)[2] <= pos_tol : return True
         return False
+        
+    def is_coplanar(self,other, tol=None):
+        """ Returns True if the LinearEntities lie on the same plane within a given tolerance tol
+           
+            :param other: LinearEntity to be compared.
+            :type other: LinearEntity
+            :param tol: Tolerance of vector direction difference
+            :type tol: float  
+            :result: Boolean result of comparison.
+            :rtype: bool
+                     
+        """
+        p0,p1 = self.spt,self.spt+self.vec
+        q0,q1 = other.spt, other.spt+other.vec
+        n_vec = Vec(q0,p1).cross(Vec(q0,p0))
+        if tol is None: tol = EPSILON
+        if n_vec.dot(Vec(q0,q1)) < tol: return True
+        return False
+ 
+    
+    def contains(self,pt,tol=None):
+        """ Returns True if the given Point lines along this Segment within a given tolerance
+
+            :param other: Point to be appraised.
+            :type other: Point             
+            :param tol: Tolerance of point projection.
+            :type tol: float
+            :result: Boolean result of comparison.
+            :rtype: bool
+            
+            ::
+            
+                my_seg.contains(pt)
+        """
+        if tol is None: tol = EPSILON
+        if self.near(pt)[2] < tol: return True
+        return False
+ 
 
     def angle(self, other):
         """ Returns an angle formed between the two linear entities.
@@ -194,9 +243,6 @@ class LinearEntity(Geometry):
             :rtype: LinearEntity
         """
         return Line(p, self.vec)
-
-    def __eq__(self, other):  raise NotImplementedError()
-    def __contains__(self, other):  raise NotImplementedError()
 
     def near(self, p):
         """ Returns a tuple of the closest point to a given LinearEntity, its t value and the distance from the Point to the near Point.
@@ -235,7 +281,6 @@ class LinearEntity(Geometry):
 
 class Line(LinearEntity):
     """A line in space."""
-    def __contains__(self, other):  raise NotImplementedError()
     def __repr__(self): return "line[{0} {1}]".format(self._pt,self._vec)
     @property
     def pt(self): 
@@ -294,7 +339,6 @@ class Line(LinearEntity):
 
 class Ray(LinearEntity):
     """A ray in space."""
-    def __contains__(self, other):  raise NotImplementedError()
     def __repr__(self): return "ray[{0} {1}]".format(self._pt,self._vec)
     
     def is_coincident(self,other,pt_tol=None, vec_tol=None):
@@ -372,10 +416,6 @@ class Segment(LinearEntity):
         """
         return self.subsegment(divs)
         
-        
-    def __contains__(self, other):
-        #TODO: implement this method.
-        raise NotImplementedError()
     
     def __repr__(self): return "seg[{0} {1}]".format(self.spt,self._vec)
        
@@ -398,6 +438,37 @@ class Segment(LinearEntity):
         """
         self._vec = point-self._pt    
     
+    @property
+    def length(self): 
+      """ Returns the length of this segment.
+            
+            :result: Length of line segment.
+            :rtype: float
+      
+      """
+      return self.vec.length        
+
+    @property
+    def midpoint(self): 
+      """ Returns the midpoint of this segment
+      
+            :result: Midpoint of Segment.
+            :rtype: Point
+      
+      """
+      return Point.interpolate(self.spt, self.ept)
+
+    @property
+    def pts(self): 
+      """ Returns the start and end points of this Segment.
+            
+            :result: The start and end Points of this Segment.
+            :rtype: [Point]
+      
+      """
+      return self.spt, self.ept
+
+
     def is_equal(self,other,pt_tol=None, vec_tol=None):
         """ Returns True if the given Segment shares termination Points and direction with this Segment
         
@@ -430,10 +501,45 @@ class Segment(LinearEntity):
             
                 my_seg.is_equal(other_seg)
         """
-        if self.spt.is_equal(other.spt,pt_tol) and self.ept.is_equal(other.ept,pt_tol): return True
-        if self.spt.is_equal(other.ept,pt_tol) and self.ept.is_equal(other.spt,pt_tol): return True
+        if self.spt.is_equal(other.spt,tol) and self.ept.is_equal(other.ept,tol): return True
+        if self.spt.is_equal(other.ept,tol) and self.ept.is_equal(other.spt,tol): return True
         return False
         
+
+    def is_overlapping(self,other,tol=None):
+        """ Returns True if the given Segment shares any Points along its length with this Segment
+        
+            :param other: Segment to be compared.
+            :type other: Segment             
+            :param tol: Tolerance of point projection.
+            :type tol: float
+            :result: Boolean result of comparison.
+            :rtype: bool
+            
+            ::
+            
+                my_seg.is_overlapping(other_seg)
+        """
+        if not self.is_collinear(other): return False
+        if self.contains(other.spt) or self.contains(other.ept): return True
+        if other.is_encompassing(self): return True
+        return False
+        
+    def is_encompassing(self,other,tol=None):
+        """ Returns True if the given Segment shares all the Points along its length with this Segment
+        
+            :param other: Segment to be compared.
+            :type other: Segment             
+            :param tol: Tolerance of point projection.
+            :type tol: float
+            :result: Boolean result of comparison.
+            :rtype: bool
+            
+            ::
+            
+                my_seg.is_encompassing(other_seg)
+        """
+        return self.contains(other.spt) and self.contains(other.ept)
     
     def near(self,p):
         """ Returns a tuple of the closest point to a given line segment, its t value and the distance from the Point to the near Point.
@@ -452,35 +558,7 @@ class Segment(LinearEntity):
         return near
         
         
-    @property
-    def length(self): 
-      """ Returns the length of this segment.
-            
-            :result: Length of line segment.
-            :rtype: float
-      
-      """
-      return self.vec.length        
 
-    @property
-    def midpoint(self): 
-      """ Returns the midpoint of this segment
-      
-            :result: Midpoint of Segment.
-            :rtype: Point
-      
-      """
-      return Point.interpolate(self.spt, self.ept)
-
-    @property
-    def pts(self): 
-      """ Returns the start and end points of this Segment.
-            
-            :result: The start and end Points of this Segment.
-            :rtype: [Point]
-      
-      """
-      return self.spt, self.ept
       
     def inverted(self):
         """ Return a new Segment between the ept and spt of this Segment, but pointing in the opposite direction.
@@ -557,10 +635,12 @@ class Segment(LinearEntity):
         return Segment(Point(x0,y0,z0),Point(x1,y1,z1))        
 
     @staticmethod
-    def chain(pts,periodic=None):
-        if periodic is None: return [Segment(pa,pb) for pa,pb in zip(pts[:-1],pts[1:])]
-        return [Segment(pts[-1],pts[0])]+[Segment(pa,pb) for pa,pb in zip(pts[:-1],pts[1:])]
-    
+    def merge(seg_a, seg_b, tol=None):
+        if not seg_a.is_overlapping(seg_b,tol): return False
+        pts = [seg_a.spt,seg_a.ept,seg_b.spt,seg_b.ept]
+        t_vals = sorted([seg_a.to_line().near(p)[1] for p in pts])
+        return Segment(seg_a.eval(t_vals[0]), seg_a.eval(t_vals[-1]))
+
         
 class VecField(PixelGrid):
     """| A raster grid of vectors.

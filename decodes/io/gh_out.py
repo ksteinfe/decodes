@@ -173,10 +173,13 @@ class GrasshopperOut(outie.Outie):
     
     def _drawLinearEntity(self, ln):
         if isinstance(ln, Segment) : return rg.Line(rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z),rg.Point3d(ln.ept.x,ln.ept.y,ln.ept.z))
-        if isinstance(ln, Line) :    return rg.Line(rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z),rg.Point3d(ln.ept.x,ln.ept.y,ln.ept.z))
+        if isinstance(ln, Line) :
+            ept = ln.spt + ln.vec
+            return rg.Line(rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z),rg.Point3d(ept.x,ept.y,ept.z))
         if isinstance(ln, Ray) : 
             rh_spt = rg.Point3d(ln.spt.x,ln.spt.y,ln.spt.z)
-            rh_ept = rg.Point3d(ln.ept.x,ln.ept.y,ln.ept.z)
+            ept = ln.spt + ln.vec
+            rh_ept = rg.Point3d(ept.x,ept.y,ept.z)
             return [rh_spt,rg.Line(rh_spt,rh_ept)]
     
     def _drawPLine(self, pline):

@@ -676,46 +676,42 @@ class Curve(HasBasis,IsParametrized):
             :rtype: Curve
         """
         if len(cpts) <= 1 : raise GeometricError("Curve not valid: A Hermite requires a minimum of two points.  You gave me %s"%(len(cpts)))
-        def hermite_interpolate(p0,p1,p2,p3,t,tension, bias):
-            tau = 0.5*(1-tension)*(1+bias)
-            m0 = (p2-p0)*tau
-            m1 = (p3-p1)*tau
-            t2,t3 = t**2, t**3
-            a0 = 2*t3 - 3*t2 + 1
-            a1 = t3 - 2*t2 + t
-            a2 = t3 - t2
-            a3 = -2*t3 + 3*t2
-            return(p1*a0+m0*a1+m1*a2+p2*a3)
-        
-        # find total distance between given points, and construct intervals
+        # sum distances between control pts and construct intervals
         ivals = []
-        a,b = 0,0
-        for n in range(len(cpts)-1):
-            b = a + cpts[n].distance(cpts[n+1])
-            ivals.append(Interval(a,b))
-            a = b
+        sum = 0
+        for dist in [pa.dist(pb) for pa,pb in zip(cpts[:-1],cpts[1:])]:
+            ivals.append(Interval(sum,sum+dist))
+            sum += dist
 
         # add tangent control points
-        cpts.insert(0,cpts[0]+Vec(cpts[1],cpts[0]))
-        cpts.append(cpts[-1]+Vec(cpts[-2],cpts[-1]))
-        def func(t):
-            #if t==1: t_index = len(cpts)-4
-            #if t==0: t_index = 0
-            #else : t_index = int(math.floor(t*(len(cpts)-3))) 
-            
-            t_index = int(Interval.remap(t,Interval(),Interval(0,len(cpts)-3)))
-            t = t*ivals[-1].b # remap t from 0->1 to 0->length
-            t_index = -1
-            for n in range(len(ivals)) : 
-                if t in ivals[n] : 
-                    t_index = n
-                    break
-            p0 = cpts[t_index]
-            p1 = cpts[t_index+1]
-            p2 = cpts[t_index+2]
-            p3 = cpts[t_index+3]
-            return hermite_interpolate(p0,p1,p2,p3,ivals[t_index].deval(t),tension, bias)
+        cpts.insert( 0, cpts[0]+Vec(cpts[1],cpts[0]) )
+        cpts.append( cpts[-1]+Vec(cpts[-2],cpts[-1]) )
+
+        # a span relates an interval to a set of points
+        spans = {}
+        for n, ival in enumerate(ivals):
+            spans[ival] = [ cpts[n], cpts[n+1], cpts[n+2], cpts[n+3] ]
         
+        def func(t):
+            t = t*sum
+            for ival in spans:
+                if t in ival:
+                    # set t to the normalized value for this span
+                    t = ival.deval(t)
+                    # square and cube of t
+                    t2, t3 = t**2, t**3
+                    # the points of the span
+                    p0,p1,p2,p3 = spans[ival]
+                    
+                    # hermite interpolation
+                    tau = 0.5*(1-tension)*(1+bias)
+                    m0, m1 = (p2-p0)*tau, (p3-p1)*tau
+                    a0 = 2*t3 - 3*t2 + 1
+                    a1 = t3 - 2*t2 + t
+                    a2 = t3 - t2
+                    a3 = -2*t3 + 3*t2
+                    return( p1*a0 + m0*a1 + m1*a2 + p2*a3 )
+                    
         return Curve(func)
 
 

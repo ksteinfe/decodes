@@ -85,6 +85,10 @@ class Interval():
         """
         return all([self.a==other.a,self.b==other.b])
     
+    def __hash__(self):
+        return hash( (self.a, self.b) )
+    
+    
     @property
     def list(self): 
         """ Returns a list of the interval's start and end values.

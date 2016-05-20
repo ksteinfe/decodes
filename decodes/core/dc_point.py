@@ -170,7 +170,10 @@ class Point(Vec):
         """
         return True if (self > other or self == other) else False 
     
-    
+
+       
+            
+            
     def distance2(self,other): 
         """ Returns the distance squared between this point and the other point in local space. Both points must use the same basis.
         

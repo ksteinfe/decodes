@@ -232,7 +232,7 @@ class Vec(Geometry):
             :rtype: bool
 
         """    
-        return self.is_equal(self,other)
+        return self.is_equal(other)
     def __ne__(self, other): 
         """ Overloads the not equal **(!=)** operator for vector length.
         
@@ -242,7 +242,7 @@ class Vec(Geometry):
             :rtype: bool
 
         """
-        return not self.is_equal(self,other)
+        return not self.is_equal(other)
     def __gt__(self, other): 
         """ Overloads the greater than **(>)** operator for vector length.
         
@@ -488,7 +488,31 @@ class Vec(Geometry):
             
                 Vec.bisector(vec_1, vec_2)
         """
-        return Vec.average([v0.normalized(),v1.normalized()])            
+        return Vec.average([v0.normalized(),v1.normalized()]).normalized()
+        
+        
+    @staticmethod
+    def bisectors(v0,v1): 
+        """ Returns all possible normalized bisectors that result from comparing inverted and non-inverted versions of the two vectors.
+        
+            :param v0: First vector to get the bisector from.
+            :type v0: Vec
+            :param v1: Second vector to get the bisector from.
+            :type v1: Vec
+            :result: Bisector vector.
+            :rtype: Vec
+            
+            ::
+            
+                Vec.bisectors(vec_1, vec_2)
+        """
+        va, vb = v0.normalized(),v1.normalized()
+        return Vec.average([va,vb]).normalized(), Vec.average([-va,vb]).normalized(), Vec.average([-va,-vb]).normalized(), Vec.average([va,-vb]).normalized()
+
+
+    def best_match(self, others):
+        return sorted(others,key=lambda v: self.angle(v))[0]
+        
 
     def normalized(self, length=1.0):
         """ Return a new vector in the same direction, but given length (default 1.0).
