@@ -640,6 +640,11 @@ class Segment(LinearEntity):
         pts = [seg_a.spt,seg_a.ept,seg_b.spt,seg_b.ept]
         t_vals = sorted([seg_a.to_line().near(p)[1] for p in pts])
         return Segment(seg_a.eval(t_vals[0]), seg_a.eval(t_vals[-1]))
+        
+    @staticmethod
+    def chain(pts,periodic=None):
+        if periodic is None: return [Segment(pa,pb) for pa,pb in zip(pts[:-1],pts[1:])]
+        return [Segment(pts[-1],pts[0])]+[Segment(pa,pb) for pa,pb in zip(pts[:-1],pts[1:])]        
 
         
 class VecField(PixelGrid):
