@@ -504,7 +504,7 @@ class Intersector(object):
             :rtype: bool
             
         """
-        if ln_a.is_parallel(ln_b, self.tol) :
+        if ln_a.is_parallel(ln_b, self.tol):
             self.log = "Lines are parallel, no intersection found."
             return False
         if not ln_a.is_coplanar(ln_b, self.tol):
@@ -512,7 +512,7 @@ class Intersector(object):
             return False
         p0, v1 = ln_a.spt, ln_a.vec
         q0, v2 = ln_b.spt, ln_b.vec    
-        if v1 < self.tol or v2 < self.tol: return False
+        if v1.length2 < self.tol or v2.length2 < self.tol: return False
         n_vec = v1.cross(v2)
         v2_perp = v2.cross(n_vec)
         #parameter of intersection along ln_a
@@ -598,8 +598,6 @@ class Intersector(object):
             self.log = "No intersection found in 3d, recording shortest Segment between these two lines."
             self.append(Segment(pa,pb))
             return False
-
-        
 
 
     def _circle_circle(self,cir_a,cir_b):
