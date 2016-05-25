@@ -493,8 +493,51 @@ class Intersector(object):
 
         return len(self)>0 
 
-
     def _line_line(self,ln_a,ln_b):
+        """Intersects two lines.
+            
+            :param ln_a: First line to intersect.
+            :type ln_a: Line
+            :param ln_b: Second line to intersect.
+            :type ln_b: Line
+            :result: Boolean value
+            :rtype: bool
+            
+        """
+        if ln_a.is_parallel(ln_b, self.tol) :
+            self.log = "Lines are parallel, no intersection found."
+            return False
+        if not ln_a.is_coplanar(ln_b, self.tol):
+            self.log = "Lines don't lie on same plane, no intersection found."
+            return False
+       
+        p0, v1 = ln_a.spt, ln_a.vec
+        q0, v2 = ln_b.spt, ln_b.vec    
+        n_vec = v1.cross(v2)
+        v2_perp = v2.cross(n_vec)
+        #parameter of intersection along ln_a
+        self.ta = -v2_perp.dot(Vec(q0,p0))/(v2_perp.dot(v1))
+        #point of intersection along ln_a
+        pa = ln_a.eval(self.ta)
+        v1_perp = v1.cross(n_vec)
+        #parameter of intersection along ln_b
+        self.tb = -v1_perp.dot(Vec(p0,q0))/(v1_perp.dot(v2))
+        #point of intersection along ln_b
+        pb = ln_b.eval(self.tb)
+        if pa.is_equal(pb, self.tol) :
+            self.log = "3d intersection found."
+            self.append(pa)
+            if type(ln_a) == Ray and self.ta < 0.0 : return False
+            if type(ln_b) == Ray and self.tb < 0.0 : return False  
+            if type(ln_a) == Segment and (self.ta < 0.0 or self.ta > 1.0) : return False
+            if type(ln_b) == Segment and (self.tb < 0.0 or self.tb > 1.0) : return False
+            return True
+        else: 
+            self.log = "No intersection found in 3d, recording shortest Segment between these two lines."
+            self.append(Segment(pa,pb))
+            return False
+
+    def _line_line_OLD(self,ln_a,ln_b):
         """Intersects two lines.
             
             :param ln_a: First line to intersect.
