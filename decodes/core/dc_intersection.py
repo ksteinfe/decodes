@@ -510,9 +510,9 @@ class Intersector(object):
         if not ln_a.is_coplanar(ln_b, self.tol):
             self.log = "Lines don't lie on same plane, no intersection found."
             return False
-       
         p0, v1 = ln_a.spt, ln_a.vec
         q0, v2 = ln_b.spt, ln_b.vec    
+        if v1 < self.tol or v2 < self.tol: return False
         n_vec = v1.cross(v2)
         v2_perp = v2.cross(n_vec)
         #parameter of intersection along ln_a
