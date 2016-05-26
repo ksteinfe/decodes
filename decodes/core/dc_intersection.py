@@ -109,66 +109,48 @@ class Intersector(object):
         
         """
         self.clear()
+        
+        # a whitelist of types we support
+        good_types = [Plane, Circle, PGon, RGon, Line, Ray, Segment, PLine, Arc]
         bad_types = [Bounds,Color,Interval,Point,Xform]
-        type_a = type(a)
-        type_b = type(b)
-        if any(type_a == type for type in bad_types) : raise NotImplementedError("It isn't possible to intersect a %s with anything!"%(type_a.__name__))
-        if any(type_b == type for type in bad_types) : raise NotImplementedError("It isn't possible to intersect a %s with anything!"%(type_b.__name__))
-
+        if any([type(obj) in bad_types for obj in [a,b]]) : raise NotImplementedError("It isn't possible to intersect the following types: %s"%([typ.__name__ for typ in bad_types]))
+        if any([type(obj) not in good_types for obj in [a,b]]) : raise NotImplementedError("I can only intersect the following types: %s"%([typ.__name__ for typ in good_types]))
+        # sort by order found in whitelist collection
+        a,b = sorted( [a,b], key = lambda obj: good_types.index(type(obj)) )
+        type_a, type_b = type(a), type(b)
+        
+        ignore_backface = False
+        if "ignore_backface" in kargs: ignore_backface = kargs['ignore_backface']
+        
         # INTERSECTIONS WITH A PLANE
-        if any(item == Plane for item in [type_a,type_b]) : 
-            if type_a == Plane : plane,other,type_other = a,b,type_b
-            else: plane,other,type_other = b,a,type_a
+        if type_a == Plane:
+            plane, other = a,b
 
-            ignore_backface = False
-            if "ignore_backface" in kargs: ignore_backface = kargs['ignore_backface']
-
-            if type_other == Vec : return self._ray_plane(Ray(Point(),other),plane,ignore_backface)
-            if type_other == Line : return self._line_plane(other,plane,ignore_backface)
-            if type_other == Ray : return self._ray_plane(other,plane,ignore_backface)
-            if type_other == Segment : return self._seg_plane(other,plane)
-
-            if type_other == PLine : return self._pline_plane(other,plane)
-
-            if type_other == Circle : return self._circle_plane(other,plane)
-
-            if type_other == Arc : return self._arc_plane(other,plane)
-
-            if type_other == Plane : return self._plane_plane(other,plane)
-
-
-
+            if type_b == Vec : return self._ray_plane(Ray(Point(),other),plane,ignore_backface)
+            if type_b == Line : return self._line_plane(other,plane,ignore_backface)
+            if type_b == Ray : return self._ray_plane(other,plane,ignore_backface)
+            if type_b == Segment : return self._seg_plane(other,plane)
+            if type_b == PLine : return self._pline_plane(other,plane)
+            if type_b == Circle : return self._circle_plane(other,plane)
+            if type_b == Arc : return self._arc_plane(other,plane)
+            if type_b == Plane : return self._plane_plane(other,plane)
+            
             raise NotImplementedError("I don't know how to intersect a Plane with a %s"%(type_other.__name__))
 
         # INTERSECTIONS WITH A CIRCLE
-        if any(item == Circle for item in [type_a,type_b]) : 
-            if type_a == Circle : circ,other,type_other = a,b,type_b
-            else: circ,other,type_other = b,a,type_a
+        if type_a == Circle:
+            circ, other = a,b
+            if type_b == Circle : return self._circle_circle(other,circ)
 
-            if type_other == Circle : return self._circle_circle(other,circ)
-
-
-            
         # INTERSECTIONS WITH A PGON
-        if any(item == RGon for item in [type_a,type_b]) : 
-            if type_a == RGon : type_a = PGon
-            else: type_b = PGon
-
-        if any(item == PGon for item in [type_a,type_b]) : 
-            if type_a == PGon : pgon,other,type_other = a,b,type_b
-            else: pgon,other,type_other = b,a,type_a
-
-            ignore_backface = False
-            if "ignore_backface" in kargs: ignore_backface = kargs['ignore_backface']
-
+        if type_a == RGon or type_a == PGon:
+            pgon, other = a,b
             if isinstance(other,LinearEntity) : return self._line_pgon(other,pgon,ignore_backface)
-
 
         # INTERSECTIONS WITH A LINE
         # last resort for Line-Line intersections
         if all(isinstance(item,LinearEntity) for item in [a,b]) : 
             return self._line_line(a,b)
-
 
         raise NotImplementedError("I don't know how to intersect a %s with a %s"%(type_a.__name__,type_b.__name__))
 
@@ -211,10 +193,8 @@ class Intersector(object):
         # first intersect LinearEntity with this pgon's basis
         xsec = Intersector()
         basis_success = xsec.of(pgon.basis.xy_plane,line,ignore_backface = ignore_backface)
-        if not basis_success : 
-            # if no intersection found, test to see if LinearEntity lies within the plane of the pgon
-            pln = Plane.from_pts(line.spt,line.ept,line.spt+line.vec.cross(pgon.basis.z_axis))
-            if pln.is_coplanar(pgon.basis.xy_plane):
+        if basis_success : 
+            if pgon.basis.xy_plane.contains(line.spt) and pgon.basis.xy_plane.contains(line.spt+line.vec):
                 self.log = "LinearEntity in Plane of Pgon"
                 success = False
                 for edge in pgon.edges:
@@ -236,19 +216,21 @@ class Intersector(object):
                             if is_on:
                                 self._geom.extend(xsec.results)
                                 success = True
+                if success: self.log += " and an intersection was found with at least one of the edges"
+                else: self.log += " but no intersections were found with any of the edges"
                 return success
             else:
-                self.log = xsec.log + " of Pgon"
-                return False
-            
-        if pgon.contains_pt(xsec._geom[0]):
-            self._geom = xsec._geom
-            self.dist = xsec.dist
-            return True
+                self.log = "LinearEntity intersects Plane of Pgon"
+                if pgon.contains_pt(xsec._geom[0]):
+                    self._geom = xsec._geom
+                    self.dist = xsec.dist
+                    return True
+                else:
+                    self.log = "Intersection of PGon.basis and LinearEntity does not lie within PGon."
+                    return False
         else:
-            self.log = "Intersection of PGon.basis and LinearEntity does not lie within PGon."
+            self.log = "LinearEntity does not intersect PGon.basis."
             return False
-
 
     def _line_plane(self,line,plane,ignore_backface=False):
         """ Intersects a Line with a Plane. Upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection.
