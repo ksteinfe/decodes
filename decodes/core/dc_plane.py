@@ -169,6 +169,7 @@ class Plane(Geometry):
                 my_pln.is_coincident(other_pln)
         """   
         if self.normal.is_coincident(other.normal,vec_tol): 
+            if pt_tol is None: pt_tol = EPSILON
             if self.near(other.origin)[2] <= pt_tol and other.near(self.origin)[2] <= pt_tol: return True
         return False
         
@@ -189,6 +190,7 @@ class Plane(Geometry):
                 my_pln.is_coplanar(other_pln)
         """   
         if self.normal.is_parallel(other.normal,vec_tol): 
+            if pt_tol is None: pt_tol = EPSILON
             if self.near(other.origin)[2] <= pt_tol and other.near(self.origin)[2] <= pt_tol: return True
         return False        
 
@@ -261,7 +263,7 @@ class Plane(Geometry):
             
             ::
             
-                my_seg.contains(pt)
+                my_plane.contains(pt)
         """
         if tol is None: tol = EPSILON
         if self.near(pt)[2] < tol: return True
