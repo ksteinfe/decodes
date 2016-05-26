@@ -3,7 +3,7 @@ from . import dc_interval #here we may only import modules that have been loaded
 
 import colorsys
 
-class Color():
+class Color(object):
     """
     a simple color class
     """
