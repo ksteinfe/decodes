@@ -263,18 +263,26 @@ class Intersector(object):
             :rtype: bool
             
         """
-        pln_norm = plane.normal.normalized()
-        line_vec = line.vec.normalized()
+        if plane.contains(line.spt) and plane.contains(line.spt+line.vec):
+            self.log = "LinearEntity lies in the Plane"
+            self.dist = 0.0
+            self.append(line)
+            return True
+        pln_norm = plane.normal
+        line_vec = line.vec
         denom = pln_norm.dot(line_vec) # note, plane normal faces outward in the direction of the 'front' of the plane.  this may not be standard. 
+        # pos denom indicates ray behind plane
         if ignore_backface and denom >= 0 : 
-            self.log = "Backfaces ingored. LinearEntity lies behind Plane"
-            return False # pos denom indicates ray behind plane
+            self.log = "Backfaces ignored. LinearEntity lies behind Plane"
+            return False 
+        # denom of zero indicates no intersection
         if denom == 0 : 
-            self.log = "LinearEntity does not intersect Plane"
-            return False # denom of zero indicates no intersection
-        self.dist = (plane.origin - line.spt).dot(pln_norm) / denom # t < 0 indicates plane behind ray
-    
-        self.append(line.spt + line_vec.normalized(self.dist))
+            self.log = "No intersection"
+            return False
+        t = pln_norm.dot(plane.origin-line.spt) / denom
+        self.dist = t # t < 0 indicates plane behind ray
+        self.append(line.eval(t))
+        self.log = "Intersection found."
         return True
 
     def _ray_plane(self,ray,plane,ignore_backface=False):
@@ -301,6 +309,7 @@ class Intersector(object):
             return False
         self._geom = xsec._geom
         self.dist = xsec.dist
+        self.log = "Intersection found."
         return True
 
     def _seg_plane(self,seg,plane):
@@ -321,13 +330,14 @@ class Intersector(object):
             self.log = xsec.log
             return False
         if xsec.dist < 0 : 
-            self.log = "While pointing in the right direction, this Segment does not span across Plane"
+            self.log = "While pointing in the right direction, this Segment does cross Plane"
             return False
         if xsec.dist > seg.length : 
-            self.log = "Segment points in the wrong direction, and does not span across Plane"
+            self.log = "Segment points in the wrong direction, and does not cross Plane"
             return False
         self._geom = xsec._geom
         self.dist = xsec.dist
+        self.log = "Intersection found."
         return True
 
     def _pline_plane(self,pline,plane):
@@ -525,12 +535,12 @@ class Intersector(object):
         #point of intersection along ln_b
         pb = ln_b.eval(self.tb)
         if pa.is_equal(pb, self.tol) :
-            self.log = "3d intersection found."
-            self.append(pa)
             if type(ln_a) == Ray and self.ta < 0.0 : return False
             if type(ln_b) == Ray and self.tb < 0.0 : return False  
             if type(ln_a) == Segment and (self.ta < 0.0 or self.ta > 1.0) : return False
             if type(ln_b) == Segment and (self.tb < 0.0 or self.tb > 1.0) : return False
+            self.log = "Intersection found."
+            self.append(pa)
             return True
         else: 
             self.log = "No intersection found in 3d, recording shortest Segment between these two lines."
