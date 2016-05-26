@@ -169,7 +169,7 @@ class Plane(Geometry):
                 my_pln.is_coincident(other_pln)
         """   
         if self.normal.is_coincident(other.normal,vec_tol): 
-            if self.near(other.origin)[2] <= pos_tol and other.near(self.origin)[2] <= pos_tol: return True
+            if self.near(other.origin)[2] <= pt_tol and other.near(self.origin)[2] <= pt_tol: return True
         return False
         
     def is_coplanar(self,other,pt_tol=None, vec_tol=None):
@@ -189,7 +189,7 @@ class Plane(Geometry):
                 my_pln.is_coplanar(other_pln)
         """   
         if self.normal.is_parallel(other.normal,vec_tol): 
-            if self.near(other.origin)[2] <= pos_tol and other.near(self.origin)[2] <= pos_tol: return True
+            if self.near(other.origin)[2] <= pt_tol and other.near(self.origin)[2] <= pt_tol: return True
         return False        
 
     def is_parallel(self,other, vec_tol=None):
@@ -249,7 +249,25 @@ class Plane(Geometry):
         """
         return self.near(p)[0]
         
-        
+    def contains(self,pt,tol=None):
+        """ Returns True if the given Point lines in the Plane within a given tolerance
+
+            :param other: Point to be appraised.
+            :type other: Point             
+            :param tol: Tolerance of point projection.
+            :type tol: float
+            :result: Boolean result of comparison.
+            :rtype: bool
+            
+            ::
+            
+                my_seg.contains(pt)
+        """
+        if tol is None: tol = EPSILON
+        if self.near(pt)[2] < tol: return True
+        return False    
+ 
+
     def to_cs(self, guide_vec):
         """ Returns a CS aligned with this Plane, with the x-axis oriented toward the given guide Vec.
        
