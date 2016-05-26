@@ -2,7 +2,7 @@ from decodes.core import *
 import math, random
 
 
-class Interval():
+class Interval(object):
     """
     an interval class
     """
