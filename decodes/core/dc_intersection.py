@@ -475,7 +475,7 @@ class Intersector(object):
                     ang = math.pi*2 - ang
                 '''
 
-                if ang <= arc.angle: 
+                if ang <= arc.angle:                
                     self.append(pt)
                 else:
                     self.log = "One of the intersection Points do not fall within sweep angle of this Arc: pt_angle={0} arc_angle={1}".format(ang,arc.angle)
@@ -496,15 +496,24 @@ class Intersector(object):
             :rtype: bool
             
         """
+        #first three if blocks deal with special cases (lines are coplanar, collinear, parallel)
+        if not ln_a.is_coplanar(ln_b, self.tol):
+            self.log = "Lines don't lie on same plane, no intersection found."
+            return False       
+        if ln_a.is_collinear(ln_b):
+            self.log = "Lines are collinear, attempting to find intersection"
+            return False
+            #return self._line_line_collinear(ln_a,ln_b) #TODO
         if ln_a.is_parallel(ln_b, self.tol):
             self.log = "Lines are parallel, no intersection found."
             return False
-        if not ln_a.is_coplanar(ln_b, self.tol):
-            self.log = "Lines don't lie on same plane, no intersection found."
-            return False
+        
+        #Everything that follows deals with the case where the intersection, if there is any, is a point
         p0, v1 = ln_a.spt, ln_a.vec
         q0, v2 = ln_b.spt, ln_b.vec    
-        if v1.length2 < self.tol or v2.length2 < self.tol: return False
+        if v1.length2 < self.tol or v2.length2 < self.tol: 
+            self.log("Length of one of the lines is below the tolerance")
+            return False
         n_vec = v1.cross(v2)
         v2_perp = v2.cross(n_vec)
         #parameter of intersection along ln_a
@@ -529,8 +538,9 @@ class Intersector(object):
             self.append(Segment(pa,pb))
             return False
 
-    def _line_line_OLD(self,ln_a,ln_b):
-        """Intersects two lines.
+    
+    def _line_line_collinear(self,ln_a,ln_b):
+        """Intersects two lines that are collinear
             
             :param ln_a: First line to intersect.
             :type ln_a: Line
@@ -539,59 +549,67 @@ class Intersector(object):
             :result: Boolean value
             :rtype: bool
             
+            
+            TODO - implemented, not yet incorporated
         """
-        #TODO: test for lines on the xy plane, and do simpler intersection
-        #TODO: differentiate Lines from Rays and Segs 
-        if ln_a.is_parallel(ln_b) :
-            self.log = "Lines are parallel, no intersection found."
+ 
+        if not ln_a.is_collinear(ln_b):
+            self.log = "Lines are not collinear"
             return False
-        ept_a = ln_a.spt+ln_a.vec
-        ept_b = ln_b.spt+ln_b.vec
-        p1 = Vec(float(ln_a.spt.x),float(ln_a.spt.y),float(ln_a.spt.z))
-        p2 = Vec(float(ept_a.x),float(ept_a.y),float(ept_a.z))
-        p3 = Vec(float(ln_b.spt.x),float(ln_b.spt.y),float(ln_b.spt.z))
-        p4 = Vec(float(ept_b.x),float(ept_b.y),float(ept_b.z))
-        p13 = p1 - p3
-        p43 = p4 - p3
-
-        if (p43.length2 < self.tol): return False
-        p21 = p2 - p1
-        if (p21.length2 < self.tol): return False
-        
-        d1343 = p13.x * p43.x + p13.y * p43.y + p13.z * p43.z
-        d4321 = p43.x * p21.x + p43.y * p21.y + p43.z * p21.z
-        d1321 = p13.x * p21.x + p13.y * p21.y + p13.z * p21.z
-        d4343 = p43.x * p43.x + p43.y * p43.y + p43.z * p43.z
-        d2121 = p21.x * p21.x + p21.y * p21.y + p21.z * p21.z
-
-        denom = d2121 * d4343 - d4321 * d4321
-        numer = d1343 * d4321 - d1321 * d4343
-        if denom == 0.0 :
-            self.log = "Division by Zero, no intersection found."
-            return False
-
-        mua = numer / denom
-        mub = (d1343 + d4321 * (mua)) / d4343
-        self.ta, self.tb = mua,mub
-
-        pa = Point(p1.x + mua * p21.x,p1.y + mua * p21.y,p1.z + mua * p21.z)
-        pb = Point(p3.x + mub * p43.x,p3.y + mub * p43.y,p3.z + mub * p43.z)
-        if pa.is_equal(pb,self.tol) : 
-            self.log = "3d intersection found."
-            self.append(pa)
-            
-            if type(ln_a) == Ray and self.ta < 0.0 : return False
-            if type(ln_b) == Ray and self.tb < 0.0 : return False  
-            if type(ln_a) == Segment and (self.ta < 0.0 or self.ta > 1.0) : return False
-            if type(ln_b) == Segment and (self.tb < 0.0 or self.tb > 1.0)  : return False  
-            
+        if type(ln_a) == Line:
+            self.append(ln_b)
             return True
-        else: 
-            self.log = "No intersection found in 3d, recording shortest Segment between these two lines."
-            self.append(Segment(pa,pb))
+        if type(ln_b) == Line:
+            self.append(ln_a)
+            return True
+        if type(ln_a) == Ray and type(ln_b) == Ray:
+            #if rays overlap
+            if ln_a.contains(ln_b.spt) or ln_b.contains(ln_a.spt):
+                #if rays have same direction
+                if ln_a.vec.is_coincident(ln_b.vec):
+                    if ln_a.near(ln_b.spt)[1] > 0: self.append(Ray(ln_b.spt, ln_b.vec))
+                    if ln_b.near(ln_a.spt)[1] >= 0: self.append(Ray(ln_a.spt, ln_a.vec))
+                else:
+                    return Segment(ln_a.spt, ln_b.spt)
+                return True
+            else:
+                self.log = "Rays don't overlap"
+                return False    
+        if type(ln_a) == Ray and type(ln_b) == Segment:
+            if ln_a.contains(ln_b.spt) and ln_a.contains(ln_b.ept):
+                self.append(ln_b)
+                return True
+            if ln_a.contains(ln_b.spt): 
+                self.append(Segment(ln_b.spt, ln_a.spt))
+                return True
+            if ln_a.contains(ln_b.ept): 
+                self.append(Segment(ln_a.spt, ln_b.ept))
+                return True
+            self.log = "Ray and Segment don't overlap"    
             return False
-
-
+        if type(ln_a) == Segment and type(ln_b) == Ray:
+            if ln_b.contains(ln_a.spt) and ln_b.contains(ln_a.ept): 
+                self.append(ln_a)
+                return True
+            if ln_b.contains(ln_a.spt):
+                self.append(Segment(ln_a.spt, ln_b.spt))
+                return True
+            if ln_b.contains(ln_a.ept): 
+                self.append(Segment(ln_b.spt, ln_a.ept))
+                return True
+            self.log = "Segment and Ray don't overlap" 
+            return False
+        if type(ln_a) == Segment and type(ln_b) == Segment:
+            if not ln_a.is_overlapping(ln_b):
+                self.log = "Segments don't overlap"
+                return False
+            ln_ext = ln_a.to_line()
+            pts = [ln_a.spt, ln_a.ept, ln_b.spt, ln_b.ept]
+            t_vals = sorted([ln_ext.near(p)[1] for p in pts])
+            self.append(Segment(ln_ext.eval(t_vals[1]), ln_ext.eval(t_vals[2])))
+            return True
+        return False
+            
     def _circle_circle(self,cir_a,cir_b):
         """| Intersects two circles.
            | Upon success, the Intersector.dist property will be set to the distance between the pair of points of intersection.
