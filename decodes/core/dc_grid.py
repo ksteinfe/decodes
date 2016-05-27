@@ -1,207 +1,324 @@
 from decodes.core import *
 
-
-class Grid(object):
+   
+class Grid(Raster):
     """
-    an abstract class for storing information in a raster grid format.
+    an abstract class for storing information in a spatialized raster grid format.
+    once a Grid.bnds is initialized it should not be changed, as collections of spatial intervals are calculated to speed addressing and near pts calculations
     """
     
-    def __init__(self,include_corners=False,wrap=False):
+    def __init__(self,pixel_res=None,bnds=None,**kwargs):
         """ Grid constructor.
-        
+
+            :param pixel_res: Resolution of Grid.
+            :type pixel_res: Interval or Tuple of two Integers
+            :param bnds: 2d spatial boundary of Grid.
+            :type pixel_res: Bounds         
             :param include_corners: Boolean value.
             :type include_corners: bool
             :param wrap: Boolean value.
             :type wrap: bool
-            :result: Grid object
-            :rtype: Grid
+            :result: Raster object
+            :rtype: Raster
             
         """
-        self.include_corners = include_corners
-        self.wrap = wrap
+        super(Grid,self).__init__(pixel_res,**kwargs)
+        if bnds is None: self._bnds = Bounds.unit_square()
+        else: self._bnds = Bounds(ival_x=bnds.ival_x,ival_y=bnds.ival_y ) # enforces 2d Bounds
+        self._recalculate_base_pts()
 
+        
     @property
-    def px_width(self):
-        """ Returns pixel width.
+    def bnds(self):
+        """ Returns Grid bounds.
             
-            :result: Pixel width.
-            :rtype: int
-            
-        """
-        return int(self._res[0])
-
-    @property
-    def px_height(self):
-        """ Returns pixel height.
-        
-            :result: pixel height
-            :rtype: int
+            :result: Grid bounds.
+            :rtype: Bounds
             
         """
-        return int(self._res[1])
-
-    @property
-    def addresses(self):
-        """ Returns a list of tuples containing x,y addresses in this Grid.
+        return self._bnds
         
-            :result: a list of tuples
-            :rtype: [(int,int)]
-            
-        """
-        return [(x,y) for x in range(self.px_width) for y in range(self.px_height)]
+    def get_cpt(self,x,y):
+        """ Returns the center point of the cell associated with the given address.
         
-    def get(self,x,y):
-        """ Returns value at location (x,y).
-        
-            :param x: x coordinate.
+            :param x: x-coordinate
             :type x: float
-            :param y: y coordinate.
+            :param y: y-coordinate
             :type y: float
-            :result: Color value.
-            :rtype: Color
-            
-        """
-        return self._pixels[y*self._res[0]+x]
-
-    def set(self,x,y,value):
-        """ Set color value at location (x,y).
+            :result: Center point of cell.
+            :rtype: Point
         
-            :param x: x coordinate.
-            :type x: float
-            :param y: y coordinate.
-            :type y: float
-            :param value: Color value
-            :type value: Color
-            :result: Grid object.
-            :rtype: None
-            
         """
-        self._pixels[y*self.px_width+x] = value
-
-# finds neighbors, taking into account both the type of neighborhood and whether there is wrapping or not
-    def neighbors_of(self,x,y):
-        """ Finds neighbors of location (x,y) in Grid.
-            
-            :param x: x coordinate.
-            :type x: float
-            :param y: y coordinate.
-            :type y: float
-            :result: List of neighbors.
-            :rtype: list
-            
-        """
-        m = self.px_width
-        n = self.px_height
-        ret=[]
-        for di in [-1,0,1]:
-            for dj in [-1,0,1]:
-                if (abs(di)+abs(dj)) > 0:
-                    if self.wrap :          # wrap is true
-                        new_index = ((y+dj)%n)*m+((x+di)%m)
-                        if (di == 0) or (dj == 0) : ret.append(self._pixels[new_index])
-                        elif self.include_corners : ret.append(self._pixels[new_index])
-                    else:           # wrap is false
-                        if ((x+di) in range(m)) and ((y+dj) in range(n)):
-                            new_index = ((y+dj)%n)*m+((x+di)%m)
-                            if (di == 0) or (dj == 0) : ret.append(self._pixels[new_index])
-                            elif self.include_corners : ret.append(self._pixels[new_index])
-        return ret
-
-class Image(Grid):
-    """
-    a raster grid of Colors
-    each pixel contains a Color with normalized R,G,B values
-    """
-    def __init__(self, pixel_res=Interval(20,20), initial_color = Color(),include_corners=False,wrap=True):
-        """ Image constructor.
+        return self._base_pts[y*self._res[0]+x]
+       
+    def cpt_near(self,a,b=None):
+        """ Returns center point of cell nearest to given location. May be passed either a point or an x,y coordinate.
         
-            :param pixel_res: Resolution of image.
-            :type pixel_res: Interval
-            :param initial_color: Start color of image.
-            :type initial_color: Color
-            :param include_corners: Boolean value.
-            :type include_corners: bool
-            :param wrap: Boolean value.
-            :type wrap: bool
-            :result: Image object.
-            :rtype: Image
+            :param a: x-coordinate or Point.
+            :type a: float or Point
+            :param b: y-coordinate or None.
+            :type b: float or None
+            :result: Center point of near cell.
+            :rtype: Point
             
+            
+        """
+        x,y = self.address_near(a,b)
+        return self.get_cpt(x,y)       
+
+    def cpts_near(self,a,b=None):
+        """ Returns center points of cells near the given location. May be passed either a point or an x,y coordinate.
+        
+            :param a: x-coordinate or Point.
+            :type a: float or Point
+            :param b: y-coordinate or None.
+            :type b: float or None
+            :result: List of center points near given location.
+            rtype: [Point]
+            
+        """
+        
+        tups = self.addresses_near(a,b)
+        return [self.get_cpt(tup[0],tup[1]) for tup in tups]
+
+        
+    def address_near(self,a,b=None):
+        """ Returns addresses of grid cells near the given location. May be passed either a point or an x,y coordinate.
+        
+            :param a: x-coordinate or Point.
+            :type a: float or Point
+            :param b: y-coordinate or None.
+            :type b: float or None
+            :result: Location of vector.
+            :rtype: int, int
             
         """
         try:
-            self._res = (int(pixel_res.a),int(pixel_res.b))
+            sample_pt = Point(a.x,a.y)
         except:
-            self._res = pixel_res
-        self._pixels = [initial_color]*(self.px_width*self.px_height)
-        super(Image,self).__init__(include_corners)
+            sample_pt = Point(a,b)
 
-    def save(self, filename, path=False, verbose=False):
-        """ Saves image file.
+        x = min(1.0,max(0.0,self.bnds.ival_x.deval(sample_pt.x)))
+        y = min(1.0,max(0.0,self.bnds.ival_y.deval(sample_pt.y)))
+
+        x = int(math.floor(Interval(0,self.px_width).eval(x)))
+        y = int(math.floor(Interval(0,self.px_height).eval(y)))
+        if x == self.px_width : x = self.px_width-1
+        if y == self.px_height : y = self.px_height-1
+        return x,y
+
+    def addresses_near(self,a,b=None):
+        """ Returns addresses of grid cells near the given location. May be passed either a point or an x,y coordinate.
+        
+            :param a: x-coordinate or Point.
+            :type a: float or Point
+            :param b: y-coordinate or None.
+            :type b: float or None
+            :result: List of locations.
+            :rtype: [tup]
             
-            :param filename: Name of the image.
-            :type filename: str
-            :param path: File path to save image to.
-            :type path: bool
-            :param verbose: Boolean value
-            :type verbose: bool
-            :result: Saved image file.
-            :rtype: None
+        """
+        
+        try:
+            sample_pt = Point(a.x,a.y)
+        except:
+            sample_pt = Point(a,b)
+    
+        dx2 = self.bnds.ival_x.delta / self.px_width / 2
+        dy2 = self.bnds.ival_y.delta / self.px_height / 2
+    
+        x = self.bnds.ival_x.deval(sample_pt.x)
+        y = self.bnds.ival_y.deval(sample_pt.y)
+    
+        x = Interval.remap(x,Interval(dx2,1-dx2),Interval(0,self.px_width-1))
+        y = Interval.remap(y,Interval(dy2,1-dy2),Interval(0,self.px_height-1))
+    
+        x_flr,y_flr = math.floor(x),math.floor(y)
+        x_cei,y_cei = math.ceil(x), math.ceil(y)
+    
+        x_flr = int(Interval(0,self.px_width-1).limit_val(x_flr))
+        y_flr = int(Interval(0,self.px_height-1).limit_val(y_flr))
+        x_cei = int(Interval(0,self.px_width-1).limit_val(x_cei))
+        y_cei = int(Interval(0,self.px_height-1).limit_val(y_cei))
+    
+        adds = []
+        for tup in [(x_flr,y_flr),(x_cei, y_flr),(x_cei, y_cei),(x_flr, y_cei)]:
+            if tup not in adds:
+                adds.append(tup)
+        return adds        
+
+        
+    def _recalculate_base_pts(self):
+        """
+        If the bounds changes or the res changes, the values defined here must be recalculated
         
         """
-        import os, struct, array
-        if path==False : path = os.path.expanduser("~")
-        filename = filename + ".tga"
+        #sp_org = self._bnds.cpt
+        #sp_dim = spatial_dim
+        #self._sp_ival_x = Interval(self._sp_org.x - self._sp_dim.a/2, self._sp_org.x + self._sp_dim.a/2) # spatial interval x
+        #self._sp_ival_y = Interval(self._sp_org.y - self._sp_dim.b/2, self._sp_org.y + self._sp_dim.b/2) # spatial interval y
+        self._base_pts = []
+        self._ivals_x = self.bnds.ival_x//self._res[0]
+        self._ivals_y = self.bnds.ival_y//self._res[1]
+        for ival_y in self._ivals_y:
+            for ival_x in self._ivals_x:
+                self._base_pts.append(Point(ival_x.mid, ival_y.mid))
+     
+    @property
+    def cell_pgons(self):
+        from .dc_pgon import PGon
+        pgons = []
+        for ival_y in self._ivals_y:
+            for ival_x in self._ivals_x:
+                pts = Point(ival_x.a, ival_y.a),Point(ival_x.b, ival_y.a),Point(ival_x.b, ival_y.b),Point(ival_x.a, ival_y.b)
+                pgons.append(PGon(pts))
+        return pgons
 
-        if verbose:
-            print "saving image to ",os.path.join(path, filename)
-            from time import time
-            t0 = time()
-
-        ## begin tga header fields:
-        ## structure seen at 
-        ## http://gpwiki.org/index.php/TGA, 2009-09-20
-        Offset = 0
-        ColorType = 0
-        ImageType = 2
-        PaletteStart = 0
-        PaletteLen = 0
-        PalBits = 8
-        XOrigin = 0
-        YOrigin = 0
-        Width = int(self.px_width)
-        Height = int(self.px_height)
-        BPP = 24
-        Orientation = 0
-
-        # (c 'short' stays for 16 bit data)
-        StructFmt = "<BBBHHBHHhhBB"
-
-        header = struct.pack(StructFmt, Offset, ColorType, ImageType,
-                                        PaletteStart, PaletteLen, PalBits,
-                                        XOrigin, YOrigin, Width, Height,
-                                        BPP, Orientation)
-
-        # Array mdule and format documentation at:  http://docs.python.org/library/array.html
-        data = array.array("B", (255 for i in xrange(self.px_width * self.px_height * 3)))
-
-        for n,clr in enumerate(self._pixels):
-            data[n * 3] = int(clr.b*255)
-            data[n * 3 + 1] = int(clr.g*255)
-            data[n * 3 + 2] = int(clr.r*255)
-
-        if verbose: 
-            t1 = time()
-            print 'packing data took: %f' %(t1-t0)
-
-        if not os.path.exists(path):
-            if verbose : print "creating folder",path
-            os.makedirs(path)
+    @property
+    def lattice_segs(self):
+        x_segs = []
+        x_segs.append(Segment( Point(self._ivals_x[0].a,self.bnds.ival_y.a), Point(self._ivals_x[0].a,self.bnds.ival_y.b) ))
+        for ival_x in self._ivals_x:
+            x_segs.append(Segment( Point(ival_x.b,self.bnds.ival_y.a), Point(ival_x.b,self.bnds.ival_y.b) ))
+            
+        y_segs = []
+        y_segs.append(Segment( Point(self.bnds.ival_x.a,self._ivals_y[0].a), Point(self.bnds.ival_x.b,self._ivals_y[0].a) ))
+        for ival_y in self._ivals_y:
+            y_segs.append(Segment( Point(self.bnds.ival_x.a,ival_y.b), Point(self.bnds.ival_x.b,ival_y.b) ))            
+                
+        return x_segs, y_segs
         
-        datafile = open(os.path.join(path, filename), "wb")
-        datafile.write(header)
-        data.write(datafile)
-        datafile.close()
+class VecField(Grid):
+    """| A raster grid of vectors.
+       | Each pixel contains a positioned 3d vector (a Ray).
 
-        if verbose: 
-            t2 = time()
-            print 'writing file took: %f' %(t2-t1)
+    """   
+       
+    #TODO: allow to set vectors as "bidirectional", which would affect the behavior of average vectors, and would produce lines rather than rays
+    
+    #def __init__(self, pixel_res=Interval(8,8), spatial_origin=Point(), spatial_dim=Interval(4,4), initial_value = Vec(),include_corners=False,wrap=True):
+    def __init__(self,pixel_res=None,bnds=None,initial_value = Vec(),**kwargs):
+    
+        """ Vector field constructor.
+            
+            TODO: UPDATE DOCUMENTATION 
+            
+            :param pixel_res: Resolution of vector grid.
+            :type pixel_res: Interval
+            :param spatial_origin: Center of vector field.
+            :type spatial_origin: Point
+            :param spatial_dim: Dimension of vector field.
+            :type spatial_dim: Interval
+            :param initial_value: Start value for vector field.
+            :type initial_value: Vec
+            :param include_corners: Boolean Value.
+            :type include_corners: bool
+            :param wrap: Boolean Value.
+            :type wrap: bool
+            :result: A vector field.
+            :rtype: VecField
+            
+        """
+        super(VecField,self).__init__(pixel_res,bnds,**kwargs)
+        self.populate(initial_value,True)
+
+
+    def to_rays(self):
+        """ Returns a list of Rays that correspond to the Vecs from the Vector Field.
+        
+            :result: A list of Rays.
+            :rtype: [Ray]
+        """
+        return [Ray(pt,vec) for vec,pt in zip(self._pixels, self._base_pts )]
+
+
+    def vec_near(self,a,b=None):
+        """ Returns closest vector to the given location. May be passed either a point or an x,y coordinate.
+        
+            :param a: x-coordinate or Point.
+            :type a: float or Point
+            :param b: y-coordinate or None.
+            :type b: float or None
+            :result: Nearest Vec.
+            :rtype: Vec
+            
+        """
+        x,y = self.address_near(a,b)
+        return self.get(x,y)
+
+
+    def vecs_near(self,a,b=None):
+        """ Returns locations of vectors near the given location. May be passed either a point or an x,y coordinate.
+        
+            :param a: x-coordinate or Point.
+            :type a: float or Point
+            :param b: y-coordinate or None.
+            :type b: float or None
+            :result: List of locations of near vectors.
+            :rtype: [tup]
+            
+        """
+        tups = self.addresses_near(a,b)
+        return [self.get(tup[0],tup[1]) for tup in tups]
+
+    def avg_vec_near(self,a,b=None):
+        """ Returns an average vector from the near vectors around the given location. May be passed a point or an x,y coordinate.
+        
+            :param a: x-coordinate or Point.
+            :type a: float or Point
+            :param b: y-coordinate or None.
+            :type b: float or None
+            :result: An average vector.
+            :rtype: Vec
+            
+        """
+        
+        try:
+            sample_pt = Point(a.x,a.y)
+        except:
+            sample_pt = Point(a,b)
+            
+        vecs = self.vecs_near(sample_pt)
+        cpts = self.cpts_near(sample_pt)
+        try:
+            dists = [1.0/sample_pt.distance2(cpt) for cpt in cpts]
+            tot = sum(dists)
+            weights = [dist/tot for dist in dists]
+            vec = Vec()
+            for n in range(len(vecs)):
+                vec = vec + vecs[n]* weights[n]
+            return vec
+        except:
+            # sample point is coincident with one of the near cpts
+            for n in range(len(cpts)):
+                if cpts[n] == sample_pt : return vecs[n]
+            raise GeometricError("sample point coincident with center point: %s"%(sample_pt))
+            
+    def spin_pt(self,a,b=None):
+        """ Rotates vectors in a VecField around a given point. May be passed a point or an x,y coordinate.
+        
+            :param a: x-coordinate or Point to rotate around.
+            :type a: float or Point
+            :param b: y-coordinate or None.
+            :type b: float or None
+            :result: Modifies this Vector Field in place.
+            :rtype: None
+                        
+        """
+        try:
+            spin_pt = Point(a.x,a.y)
+        except:
+            spin_pt = Point(a,b)
+            
+        import math as m # import math library
+        # for every x value in the vector field:
+        for x in range(self.px_width):
+            # for every y value in the vector field
+            for y in range(self.px_height):
+                # create a new spin vector
+                v_x = y*(m.sin(spin_pt.y) + m.cos(spin_pt.x)) # vector x-component
+                v_y = x*(m.sin(spin_pt.x) - m.cos(spin_pt.y)) # vector y-component
+                new_vec = Vec(v_x, v_y) # construct new spin vector
+                # set vector at x,y to new spin vector
+                self.set(x,y,new_vec)
+            

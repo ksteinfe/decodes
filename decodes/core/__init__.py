@@ -28,8 +28,8 @@ from dc_line import *
 from dc_circle import *
 from dc_tri import *
 
+from dc_raster import *
 from dc_grid import *
-from dc_field import *
 
 from dc_has_pts import *
 from dc_pline import *
