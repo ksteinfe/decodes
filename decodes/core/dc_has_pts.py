@@ -152,7 +152,7 @@ class HasPts(HasBasis):
             :rtype: Vec
         """  
         return self.inverted()
-'''
+    '''
     def __mul__(self, other):
         """| Overloads the multiplication **(*)** operator. 
            | If given a scalar, multiplies each vertex in this Geometry by the given scalar.

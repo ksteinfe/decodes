@@ -83,6 +83,8 @@ class PGon(HasPts):
            :type index: Int
            :returns: Segment object. 
            :rtype: Segment
+           
+           
         """
         if index >= len(self) : raise IndexError()
         if index == len(self)-1 : return Segment(self.pts[index],self.pts[0])

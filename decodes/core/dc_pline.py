@@ -8,6 +8,7 @@ class PLine(HasPts):
     """
     a simple polyline class
     """
+    # TOD: remove all subclass_attr for PLine
     subclass_attr = ['_edges','_length'] # this list of props is unset anytime this HasPts object changes
     
     def __init__(self, vertices=None, basis=None):
@@ -27,10 +28,9 @@ class PLine(HasPts):
         
         """
         #todo: check if passed an empty array of points
-        if vertices is not None:
-            if len(vertices)<2: raise GeometricError("Plines must be constructed with at least two points")
+        if vertices is None or len(vertices)<2: raise GeometricError("Plines must be constructed with at least two points")
         super(PLine,self).__init__(vertices,basis) #HasPts constructor handles initialization of verts and basis
-        self.basis = CS() if (basis is None) else basis # set the basis after appending the points
+        #self.basis = CS() if (basis is None) else basis # set the basis after appending the points
 
     @property
     def edges(self):
@@ -38,6 +38,8 @@ class PLine(HasPts):
        
             :result: List of edges of a PLine
             :rtype: [Segment]
+            
+            TODO: this returns the local edges (uses self._verts)... shouldn't it return the global edges? This would be in line with PGon.
             
             ::
             
@@ -55,6 +57,8 @@ class PLine(HasPts):
         
             :result: Length of this PLine
             :rtype: float
+            
+            TODO: better to not store this, but calculate as needed?
             
             ::
             
