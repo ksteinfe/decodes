@@ -42,4 +42,16 @@ from dc_intersection import *
 from dc_curve import *
 from dc_surface import *
 
+"""
+Shifts a List
+"""
+def shift(lst,n=0):
+    n = int(n)%len(lst)
+    return lst[n:] + lst[:n]
 
+    
+"""
+Matches Relative Indices within a List
+"""   
+def match(lst,rel_idxs):
+    return zip(*[shift(lst,idx) for idx in rel_idxs])
