@@ -81,7 +81,6 @@ class Grid(Raster):
         tups = self.addresses_near(a,b)
         return [self.get_cpt(tup[0],tup[1]) for tup in tups]
 
-        
     def address_near(self,a,b=None):
         """ Returns addresses of grid cells near the given location. May be passed either a point or an x,y coordinate.
         
@@ -146,7 +145,6 @@ class Grid(Raster):
             if tup not in adds:
                 adds.append(tup)
         return adds        
-
         
     def _recalculate_base_pts(self):
         """
@@ -194,7 +192,7 @@ class VecField(Grid):
 
     """   
        
-    #TODO: allow to set vectors as "bidirectional", which would affect the behavior of average vectors, and would produce lines rather than rays
+    #TODO: allow to set vectors as "bidirectional" tensors, which would affect the behavior of average vectors, and would produce lines rather than rays. or, Make a TensorField class
     
     #def __init__(self, pixel_res=Interval(8,8), spatial_origin=Point(), spatial_dim=Interval(4,4), initial_value = Vec(),include_corners=False,wrap=True):
     def __init__(self,pixel_res=None,bnds=None,initial_value = Vec(),**kwargs):
@@ -222,7 +220,6 @@ class VecField(Grid):
         super(VecField,self).__init__(pixel_res,bnds,**kwargs)
         self.populate(initial_value,True)
 
-
     def to_rays(self):
         """ Returns a list of Rays that correspond to the Vecs from the Vector Field.
         
@@ -230,7 +227,6 @@ class VecField(Grid):
             :rtype: [Ray]
         """
         return [Ray(pt,vec) for vec,pt in zip(self._pixels, self._base_pts )]
-
 
     def vec_near(self,a,b=None):
         """ Returns closest vector to the given location. May be passed either a point or an x,y coordinate.
@@ -245,7 +241,6 @@ class VecField(Grid):
         """
         x,y = self.address_near(a,b)
         return self.get(x,y)
-
 
     def vecs_near(self,a,b=None):
         """ Returns locations of vectors near the given location. May be passed either a point or an x,y coordinate.
