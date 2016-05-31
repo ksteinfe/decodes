@@ -486,7 +486,51 @@ class Intersector(object):
         return len(self)>0 
 
     def _line_line(self,ln_a,ln_b):
-        """Intersects two lines.
+        """Intersects two lines, returning False for non-intersecting lines but 
+        calculates/records the shortest segment between the two lines if that exists
+            
+            :param ln_a: First line to intersect.
+            :type ln_a: Line
+            :param ln_b: Second line to intersect.
+            :type ln_b: Line
+            :result: Boolean value
+            :rtype: bool            
+        """    
+        if ln_a.is_collinear(ln_b):
+            self.log = "Lines are collinear, attempting to find intersection"
+            return False
+            #return self._line_line_collinear(ln_a,ln_b) #TODO
+        if ln_a.is_parallel(ln_b, self.tol):
+            self.log = "Lines are parallel, no intersection found."
+            return False   
+        p0, v1 = ln_a.spt, ln_a.vec
+        q0, v2 = ln_b.spt, ln_b.vec       
+        if v1.length2 < self.tol or v2.length2 < self.tol: 
+            self.log("Length of one of the lines is below the tolerance")
+            return False
+        v_q0p0 = Vec(p0-q0)
+        v1dotv2 = v1.dot(v2)
+        denom = - v1.length2*v2.length2 + v1dotv2*v1dotv2
+        self.ta = (v2.length2*(v1.dot(v_q0p0)) - v1dotv2*(v2.dot(v_q0p0)))/denom
+        self.tb = (v1dotv2*(v1.dot(v_q0p0)) - v1.length2*(v2.dot(v_q0p0)))/denom
+        pa = ln_a.eval(self.ta)
+        pb = ln_b.eval(self.tb)   
+        
+        if pa.is_equal(pb, self.tol) :
+            if type(ln_a) == Ray and self.ta < 0.0 : return False
+            if type(ln_b) == Ray and self.tb < 0.0 : return False  
+            if type(ln_a) == Segment and (self.ta < 0.0 or self.ta > 1.0) : return False
+            if type(ln_b) == Segment and (self.tb < 0.0 or self.tb > 1.0) : return False
+            self.log = "Intersection found."
+            self.append(pa)
+            return True
+        else: 
+            self.log = "No intersection found, recording shortest Segment between these two lines."
+            self.append(Segment(pa,pb))
+            return False
+    
+    def _line_line_SAVE(self,ln_a,ln_b):
+        """Intersects two lines, returning False for any pair of non-intersecting lines
             
             :param ln_a: First line to intersect.
             :type ln_a: Line
@@ -516,28 +560,20 @@ class Intersector(object):
             return False
         n_vec = v1.cross(v2)
         v2_perp = v2.cross(n_vec)
+        v_q0p0 = Vec(p0-q0)
         #parameter of intersection along ln_a
-        self.ta = -v2_perp.dot(Vec(q0,p0))/(v2_perp.dot(v1))
-        #point of intersection along ln_a
-        pa = ln_a.eval(self.ta)
+        self.ta = -v2_perp.dot(v_q0p0)/(v2_perp.dot(v1))
         v1_perp = v1.cross(n_vec)
         #parameter of intersection along ln_b
-        self.tb = -v1_perp.dot(Vec(p0,q0))/(v1_perp.dot(v2))
-        #point of intersection along ln_b
-        pb = ln_b.eval(self.tb)
-        if pa.is_equal(pb, self.tol) :
-            if type(ln_a) == Ray and self.ta < 0.0 : return False
-            if type(ln_b) == Ray and self.tb < 0.0 : return False  
-            if type(ln_a) == Segment and (self.ta < 0.0 or self.ta > 1.0) : return False
-            if type(ln_b) == Segment and (self.tb < 0.0 or self.tb > 1.0) : return False
-            self.log = "Intersection found."
-            self.append(pa)
-            return True
-        else: 
-            self.log = "No intersection found in 3d, recording shortest Segment between these two lines."
-            self.append(Segment(pa,pb))
-            return False
-
+        self.tb = v1_perp.dot(v_q0p0)/(v1_perp.dot(v2))
+        if type(ln_a) == Ray and self.ta < 0.0 : return False
+        if type(ln_b) == Ray and self.tb < 0.0 : return False  
+        if type(ln_a) == Segment and (self.ta < 0.0 or self.ta > 1.0) : return False
+        if type(ln_b) == Segment and (self.tb < 0.0 or self.tb > 1.0) : return False
+        self.log = "Intersection found."
+        self.append(ln_a.eval(self.ta))
+        return True
+ 
     
     def _line_line_collinear(self,ln_a,ln_b):
         """Intersects two lines that are collinear
