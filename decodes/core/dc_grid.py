@@ -7,13 +7,13 @@ class Grid(Raster):
     once a Grid.bnds is initialized it should not be changed, as collections of spatial intervals are calculated to speed addressing and near pts calculations
     """
     
-    def __init__(self,pixel_res=None,bnds=None,**kwargs):
+    def __init__(self,pixel_dim=None,bnds=None,**kwargs):
         """ Grid constructor.
 
-            :param pixel_res: Resolution of Grid.
-            :type pixel_res: Interval or Tuple of two Integers
+            :param pixel_dim: Resolution of Grid.
+            :type pixel_dim: Interval or Tuple of two Integers
             :param bnds: 2d spatial boundary of Grid.
-            :type pixel_res: Bounds         
+            :type pixel_dim: Bounds         
             :param include_corners: Boolean value.
             :type include_corners: bool
             :param wrap: Boolean value.
@@ -22,7 +22,7 @@ class Grid(Raster):
             :rtype: Raster
             
         """
-        super(Grid,self).__init__(pixel_res,**kwargs)
+        super(Grid,self).__init__(pixel_dim,**kwargs)
         if bnds is None: self._bnds = Bounds.unit_square()
         else: self._bnds = Bounds(ival_x=bnds.ival_x,ival_y=bnds.ival_y ) # enforces 2d Bounds
         self._recalculate_base_pts()
@@ -49,7 +49,7 @@ class Grid(Raster):
             :rtype: Point
         
         """
-        return self._base_pts[y*self._res[0]+x]
+        return self._base_pts[y*self.px_width+x]
        
     def cpt_near(self,a,b=None):
         """ Returns center point of cell nearest to given location. May be passed either a point or an x,y coordinate.
@@ -156,8 +156,8 @@ class Grid(Raster):
         #self._sp_ival_x = Interval(self._sp_org.x - self._sp_dim.a/2, self._sp_org.x + self._sp_dim.a/2) # spatial interval x
         #self._sp_ival_y = Interval(self._sp_org.y - self._sp_dim.b/2, self._sp_org.y + self._sp_dim.b/2) # spatial interval y
         self._base_pts = []
-        self._ivals_x = self.bnds.ival_x//self._res[0]
-        self._ivals_y = self.bnds.ival_y//self._res[1]
+        self._ivals_x = self.bnds.ival_x//self.px_width
+        self._ivals_y = self.bnds.ival_y//self.px_height
         for ival_y in self._ivals_y:
             for ival_x in self._ivals_x:
                 self._base_pts.append(Point(ival_x.mid, ival_y.mid))
@@ -194,15 +194,14 @@ class VecField(Grid):
        
     #TODO: allow to set vectors as "bidirectional" tensors, which would affect the behavior of average vectors, and would produce lines rather than rays. or, Make a TensorField class
     
-    #def __init__(self, pixel_res=Interval(8,8), spatial_origin=Point(), spatial_dim=Interval(4,4), initial_value = Vec(),include_corners=False,wrap=True):
-    def __init__(self,pixel_res=None,bnds=None,initial_value = Vec(),**kwargs):
+    def __init__(self,pixel_dim=None,bnds=None,initial_value = Vec(),**kwargs):
     
         """ Vector field constructor.
             
             TODO: UPDATE DOCUMENTATION 
             
-            :param pixel_res: Resolution of vector grid.
-            :type pixel_res: Interval
+            :param pixel_dim: Resolution of vector grid.
+            :type pixel_dim: Interval
             :param spatial_origin: Center of vector field.
             :type spatial_origin: Point
             :param spatial_dim: Dimension of vector field.
@@ -217,7 +216,7 @@ class VecField(Grid):
             :rtype: VecField
             
         """
-        super(VecField,self).__init__(pixel_res,bnds,**kwargs)
+        super(VecField,self).__init__(pixel_dim,bnds,**kwargs)
         self.populate(initial_value,True)
 
     def to_rays(self):

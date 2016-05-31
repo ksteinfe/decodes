@@ -6,11 +6,11 @@ class Raster(object):
     an abstract class for storing information in a raster grid format.
     """
     
-    def __init__(self,pixel_res=None,**kwargs):
+    def __init__(self,pixel_dim=None,**kwargs):
         """ Raster constructor.
         
-            :param pixel_res: Pixel dimension of this Raster.
-            :type pixel_res: Interval or Tuple        
+            :param pixel_dim: Pixel dimension of this Raster.
+            :type pixel_dim: Interval or Tuple        
             :param include_corners: Boolean value.
             :type include_corners: bool
             :param wrap: Boolean value.
@@ -19,14 +19,14 @@ class Raster(object):
             :rtype: Raster
             
         """
-        if pixel_res is None: pixel_res = Interval(20,20)
+        if pixel_dim is None: pixel_dim = Interval(20,20)
         try:
-            self._res = (int(pixel_res.a),int(pixel_res.b))
+            self._dim = (int(pixel_dim.a),int(pixel_dim.b))
         except:
             try:
-                a,b = pixel_res
+                a,b = pixel_dim
                 a,b = int(a), int(b)
-                self._res = a,b
+                self._dim = a,b
             except:
                 raise Exception("The first given argument should be either an Interval or a Tuple of two Integers")            
         
@@ -35,18 +35,19 @@ class Raster(object):
         if "include_corners" in kwargs: self.include_corners = kwargs["include_corners"]
         if "wrap" in kwargs: self.wrap = kwargs["wrap"]
         
+        # the _pixels collection is initialized but not populated
         self._pixels = []
 
         
     @property
-    def res(self):
-        """ Returns pixel resolution.
+    def px_dim(self):
+        """ Returns pixel dimension.
             
-            :result: Pixel Resolution.
+            :result: Pixel Dimension.
             :rtype: (int,int)
             
         """
-        return self._res
+        return self._dim
         
     @property
     def px_width(self):
@@ -56,7 +57,7 @@ class Raster(object):
             :rtype: int
             
         """
-        return int(self._res[0])
+        return int(self._dim[0])
 
     @property
     def px_height(self):
@@ -66,7 +67,7 @@ class Raster(object):
             :rtype: int
             
         """
-        return int(self._res[1])
+        return int(self._dim[1])
         
     @property
     def px_count(self):
@@ -99,7 +100,7 @@ class Raster(object):
             :rtype: Color
             
         """
-        return self._pixels[y*self._res[0]+x]
+        return self._pixels[y*self._dim[0]+x]
 
     def set(self,x,y,value):
         """ Set color value at location (x,y).
@@ -166,11 +167,11 @@ class Image(Raster):
     a raster grid of Colors
     each pixel contains a Color with normalized R,G,B values
     """
-    def __init__(self,pixel_res,initial_color = Color(),**kwargs):
+    def __init__(self,pixel_dim,initial_color = Color(),**kwargs):
         """ Image constructor.
         
-            :param pixel_res: Resolution of image.
-            :type pixel_res: Interval or Tuple of two Integers
+            :param pixel_dim: Resolution of image.
+            :type pixel_dim: Interval or Tuple of two Integers
             :param initial_color: Start color of image.
             :type initial_color: Color
             :param include_corners: Boolean value.
@@ -182,7 +183,7 @@ class Image(Raster):
             
             
         """
-        super(Image,self).__init__(pixel_res,**kwargs)
+        super(Image,self).__init__(pixel_dim,**kwargs)
         self.populate(initial_color)
         
 
@@ -264,11 +265,11 @@ class ValueField(Raster):
     a raster grid of floating point values
     each pixel contains a floating point number
     """
-    def __init__(self, pixel_res=None, initial_value=0.0, **kwargs):
+    def __init__(self, pixel_dim=None, initial_value=0.0, **kwargs):
         """ ValueField constructor.
         
-            :param pixel_res: Resolution of ValueField.
-            :type pixel_res: Interval
+            :param pixel_dim: Resolution of ValueField.
+            :type pixel_dim: Interval
             :param initial_value: Start value of ValueField.
             :type initial_value: float
             :param include_corners: Boolean Value.
@@ -280,7 +281,7 @@ class ValueField(Raster):
             
         """
         if "wrap" not in kwargs: kwargs["wrap"] = True
-        super(ValueField,self).__init__(pixel_res,**kwargs)
+        super(ValueField,self).__init__(pixel_dim,**kwargs)
         self.populate(initial_value)
         
 
@@ -333,11 +334,11 @@ class BoolField(Raster):
     each pixel contains a True or a False
     """
     
-    def __init__(self, pixel_res=None, initial_value=False, **kwargs):
+    def __init__(self, pixel_dim=None, initial_value=False, **kwargs):
         """ BoolField constructor.
         
-            :param pixel_res: Resolution of BoolField.
-            :type pixel_res: Interval
+            :param pixel_dim: Resolution of BoolField.
+            :type pixel_dim: Interval
             :param initial_value: Start value of BoolField
             :type initial_value: bool
             :param include_corners: Boolean value.
@@ -349,7 +350,7 @@ class BoolField(Raster):
             
         """
         if "wrap" not in kwargs: kwargs["wrap"] = True
-        super(BoolField,self).__init__(pixel_res,**kwargs)
+        super(BoolField,self).__init__(pixel_dim,**kwargs)
         self.populate(initial_value)
         
 
@@ -364,7 +365,7 @@ class BoolField(Raster):
             :rtype: Image
             
         """
-        img = Image(self._res,false_color)
+        img = Image(self._dim,false_color)
         for n, bool in enumerate(self._pixels):
             if bool : img._pixels[n] = true_color
 
