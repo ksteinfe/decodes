@@ -460,6 +460,7 @@ class Intersector(object):
             self.log = "Plane failed to intersect with Circle derived from given Arc: "+xsec.log
             return False
         else:
+            self.angs = []
             for pt in xsec.results:
                 ang = arc.basis.deval_cyl(pt)[1]
                 '''
@@ -475,8 +476,9 @@ class Intersector(object):
                     ang = math.pi*2 - ang
                 '''
 
-                if ang <= arc.angle:                
+                if ang <= arc.angle:             
                     self.append(pt)
+                    self.angs.append(ang)
                 else:
                     self.log = "One of the intersection Points do not fall within sweep angle of this Arc: pt_angle={0} arc_angle={1}".format(ang,arc.angle)
         

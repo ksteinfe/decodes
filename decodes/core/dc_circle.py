@@ -139,9 +139,6 @@ class Circle(Plane):
         except: 
             raise GeometricError("points are either co-linear or at least two are coincident") 
 
-
-
-
       
 class Arc(HasBasis):
     """
@@ -291,8 +288,124 @@ class Arc(HasBasis):
         """
         return self._basis.origin
         
+    @property
+    def is_major(self):
+        return self.angle > math.pi
+
+    @property
+    def is_minor(self):
+        return self.angle < math.pi
+
+    @property
+    def is_semicircle(self):
+        return self.angle == math.pi          
+      
+    
+    # Returns the distance between an Arc and a point
+    def near(self, p):
+        """ Returns the distance between an Arc and a Point.
+        
+            :param p: Point to look for a near Point on the LinearEntity.
+            :type p: Point
+            :result: Tuple of near point on Arc, and distance from point to near point
+            :rtype: (Point, float)
+            
+        """
+    
+        #find the normal vector to the plane of the arc
+        if self.spt != self.ept:
+            pln_normal = (Vec(self.origin, self.spt).cross(Vec(self.origin, self.ept))).normalized()
+        else:
+            pln_normal = (Vec(self.origin, self.ept).cross(Vec(self.origin, self.eval(0.25)))).normalized()
+        
+        # if normal vector points to same side of plane as curve point
+        if Vec(self.origin, p).dot(pln_normal) > 0:
+            pt_proj = p - pln_normal*(Vec(self.origin, p).dot(pln_normal))
+        else:
+            pt_proj = p + pln_normal*(Vec(self.origin, p).dot(-pln_normal))
+        dist_1 = p.distance(pt_proj) 
+
+        #find intersection of the projected point with full circle (both lying on same plane)
+        vec_u = Vec(self.origin, pt_proj).normalized()
+        pt_int = self.origin + vec_u*self.rad  
+
+        #set up quantities to test whether the intersection point is on the arc
+        v_perp = Vec(self.spt, self.ept).cross(pln_normal)
+        if (self.angle > math.pi): v_perp = -v_perp
+
+        #if intersection point is on the arc
+        if (Vec(self.spt, pt_int).dot(v_perp) > 0):     
+            dist_2 = pt_proj.distance(pt_int)
+        #if pt_int is not on the arc
+        else:
+            dist_2 = min(pt_proj.distance(self.spt), pt_proj.distance(self.ept))
+   
+        angle = Vec(self.origin, self.spt).angle(Vec(self.origin, pt_int))
+        
+        if self.basis.deval(self._basis.xAxis.cross(Vec(self.origin, pt_int))).z < 0:
+            angle = math.pi * 2 - angle
+        t = angle/self.angle
+        near = (pt_int, t, math.sqrt(dist_1**2 + dist_2**2))
+        
+        if near[1] < 0 or near[1] > 1:
+            if p.distance(self.spt) < p.distance(self.ept):
+                near = (self.spt,0.0,p.distance(self.spt))
+            else: near = (self.ept,1.0,p.distance(self.ept))
+        
+        return near
+    
+    
+    def near_pt(self, p):
+        """ Returns the closest point to a given Arc
+       
+            :param p: Point to look for a near Point on the Arc.
+            :type p: Point
+            :result: Near point on Arc.
+            :rtype: Point
+        """
+        return self.near(p)[0]
+    
+     
+    def reciprocal(self):
+        vx = Vec(self.origin,self.ept)
+        vy = Vec(self.origin,self.eval(1.0+EPSILON))
+        cs = CS(self.origin,vx,vy)
+        return Arc(cs,self.rad,math.pi*2-self.angle)
+
+    
+    def split_by(self,plane):
+        """ Splits this arc by a given Plane
+        
+            :result: Origin of this Arc's basis.
+            :rtype: Point
+            
+            ::
+            
+                my_arc.origin
+        """    
+        from .dc_intersection import Intersector 
+        xsec = Intersector()
+        if not xsec.of(self, plane): return False
+        
+        pts = xsec.results + [self.ept]
+        delts = [j-i for i, j in zip([0]+xsec.angs, xsec.angs+[self.angle])]
+        angs = xsec.angs + [self.angle]
+        
+        split_arcs = []
+        cs = self.basis
+        for pt, delt, ang in zip(pts,delts,angs):
+            split_arcs.append(Arc(cs,self.rad,delt))
+            vx = Vec(cs.origin,pt)
+            vy = Vec(cs.origin,self.eval(ang/self.angle+EPSILON))
+            cs = CS(cs.origin,vx,vy)
+            
+        return split_arcs    
+    
+      
+        
     def __repr__(self): return "arc[{0},r:{1},sweep angle{2}]".format(self.origin,self.rad,self.angle)
     
+
     
     # Returns an arc using a start point, a sweep point and a tangent to the arc at the start point
     @staticmethod
@@ -409,8 +522,6 @@ class Arc(HasBasis):
             raise GeometricError("points are either co-linear or at least two are coincident") 
 
         
-    
-    
     #Returns a best fit arc using the modified least squares method
     @staticmethod
     def best_fit(pts_in):
@@ -478,79 +589,5 @@ class Arc(HasBasis):
         return Arc(cs,rad,sweep)
         
     
-    # Returns the distance between an Arc and a point
-    def near(self, p):
-        """ Returns the distance between an Arc and a Point.
-        
-            :param p: Point to look for a near Point on the LinearEntity.
-            :type p: Point
-            :result: Tuple of near point on Arc, and distance from point to near point
-            :rtype: (Point, float)
-            
-        """
-    
-        #find the normal vector to the plane of the arc
-        if self.spt != self.ept:
-            pln_normal = (Vec(self.origin, self.spt).cross(Vec(self.origin, self.ept))).normalized()
-        else:
-            pln_normal = (Vec(self.origin, self.ept).cross(Vec(self.origin, self.eval(0.25)))).normalized()
-        
-        # if normal vector points to same side of plane as curve point
-        if Vec(self.origin, p).dot(pln_normal) > 0:
-            pt_proj = p - pln_normal*(Vec(self.origin, p).dot(pln_normal))
-        else:
-            pt_proj = p + pln_normal*(Vec(self.origin, p).dot(-pln_normal))
-        dist_1 = p.distance(pt_proj) 
-
-        #find intersection of the projected point with full circle (both lying on same plane)
-        vec_u = Vec(self.origin, pt_proj).normalized()
-        pt_int = self.origin + vec_u*self.rad  
-
-        #set up quantities to test whether the intersection point is on the arc
-        v_perp = Vec(self.spt, self.ept).cross(pln_normal)
-        if (self.angle > math.pi): v_perp = -v_perp
-
-        #if intersection point is on the arc
-        if (Vec(self.spt, pt_int).dot(v_perp) > 0):     
-            dist_2 = pt_proj.distance(pt_int)
-        #if pt_int is not on the arc
-        else:
-            dist_2 = min(pt_proj.distance(self.spt), pt_proj.distance(self.ept))
-   
-        angle = Vec(self.origin, self.spt).angle(Vec(self.origin, pt_int))
-        
-        if self.basis.deval(self._basis.xAxis.cross(Vec(self.origin, pt_int))).z < 0:
-            angle = math.pi * 2 - angle
-        t = angle/self.angle
-        near = (pt_int, t, math.sqrt(dist_1**2 + dist_2**2))
-        
-        if near[1] < 0 or near[1] > 1:
-            if p.distance(self.spt) < p.distance(self.ept):
-                near = (self.spt,0.0,p.distance(self.spt))
-            else: near = (self.ept,1.0,p.distance(self.ept))
-        
-        return near
-    
-    
-    def near_pt(self, p):
-        """ Returns the closest point to a given Arc
-       
-            :param p: Point to look for a near Point on the Arc.
-            :type p: Point
-            :result: Near point on Arc.
-            :rtype: Point
-        """
-        return self.near(p)[0]
-    
-    def is_major(self):
-        """ Arc angle check
-        """
-        if self.angle >= 180 : return True
-        else: return False
-    
-    def flipped(self):
-        """ Returns the inverse Arc
-        """
-        return Arc.from_pts(self.origin, self.spt, self.ept, not self.is_major())
 
 
