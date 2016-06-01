@@ -373,32 +373,31 @@ class Intersector(object):
             :rtype: bool
             
         """
-        
-
+        #TODO - return plane if coincident or coplanar
         if pln_a.normal.is_parallel(pln_b.normal) :
             self.log = "Planes are parallel, no intersection found."
             return False
-        vec = pln_a.normal.cross(pln_b.normal)
-    
+        n1, n2 = pln_a.normal, pln_b.normal
+        n1dotn2, r1, r2 = n1.dot(n2), n1.dot(pln_a.origin), n2.dot(pln_b.origin)
+        vec = n1.cross(pln_b.normal)
+        denom = 1-n1dotn2*n1dotn2
+        c1 = (r1 - n1dotn2*r2)/denom
+        c2 = (r2 - n1dotn2*r1)/denom
+        p0 = n1*c1 + n2*c2
+        self.append(Line(p0, vec))    
+        return True
+        """
+        vec = pln_a.normal.cross(pln_b.normal)    
         ldir = pln_b.normal.cross(vec)
         denom = pln_a.normal.dot(ldir)
         tvec = pln_a.origin - pln_b.origin
         t = pln_a.normal.dot(tvec) / denom
-        pt = pln_b.origin + ldir * t
-    
+        pt = pln_b.origin + ldir * t   
         self.append( Line(pt,vec) )
         return True
         """
-        a1,b1,c1 = pln_a.normal.x,pln_a.normal.y,pln_a.normal.z
-        a2,b2,c2 = pln_b.normal.x,pln_b.normal.y,pln_b.normal.z
 
-        x = 0
-        y = (-c1 -pln_a.d) / b1
-        z = ((b2/b1)*pln_a.d -pln_b.d)/(c2 - c1*b2/b1)
-        
-        self.append( Line(Point(x,y,z),vec) )
-        return True
-        """
+
 
     def _circle_plane(self,circ,plane):
         xsec = Intersector()
