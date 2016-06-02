@@ -110,53 +110,10 @@ class HasPts(HasBasis):
         for v in self._verts: v = v + vec
         self._vertices_changed() # call to trigger subclass handling of vertex manipulation
 
-    '''
-    def __sub__(self, vec): 
-        """Overloads the addition **(-)** operator. 
-        Returns a new vector that results from subtracting this vector's world coordinates to the other vector's world coordinates.
-        
-            :param vec: Vec to be subtracted.
-            :type vec: Vec
-            :result: New vec.
-            :rtype: Vec
-        """    
-        return Vec(self.x-vec.x , self.y-vec.y, self.z-vec.z)
-    def __truediv__(self,other): 
-        return self.__div__(other)
-    def __div__(self, scalar): 
-        """Overloads the addition **(/)** operator. 
-        Returns a new vector that results from dividing this vector's world coordinates by a given scalar.
-        
-            :param scalar: number to divide by
-            :type scalar: Float
-            :result: New vec.
-            :rtype: Vec
-        """  
-        return Vec(self.x/float(scalar), self.y/float(scalar), self.z/float(scalar))
-    def __invert__(self): 
-        """Overloads the inversion **(~vec)** operator. 
-        Inverts the direction of the vector
-        Returns a new inverted vector.
-        
-            :result: Inverted Vec.
-            :rtype: Vec
-        """  
-        return self.inverted()
-
-    def __neg__(self): 
-        """Overloads the arithmetic negation **(-vec)** operator. 
-        Inverts the direction of the vector
-        Returns a new inverted vector.
-        
-            :result: Inverted Vec.
-            :rtype: Vec
-        """  
-        return self.inverted()
-    '''
     def __mul__(self, other):
         """| Overloads the multiplication **(*)** operator. 
            | If given a scalar, multiplies each vertex in this Geometry by the given scalar.
-           | If given an Xform, applies the given transformation to the basis of this Geometry.
+           | If given an Xform, applies the given transformation to each vertex of this Geometry.
         
            :param vec: Object to be multiplied.
            :type vec: Vec or Xform
@@ -169,7 +126,6 @@ class HasPts(HasBasis):
         else : 
             for n in range(len(self._verts)): self._verts[n] = self._verts[n] * other
             self._vertices_changed() # call to trigger subclass handling of vertex manipulation
-
 
     @property
     def pts(self): 
@@ -286,6 +242,21 @@ class HasPts(HasBasis):
             :rtype: Vec
             
         """
+        if self.is_baseless: 
+            # if this object is baseless, attempt to use the world coordinates of the other
+            return Vec(other) 
+        if isinstance(other, Point): 
+            # if this object is based and the other is a Point, devaluate by this object's basis
+            return Vec(self._basis.deval(other))
+            
+        try:
+            # Vecs (and anything else from which we can read x,y,z values) are interpreted in local coordinates
+            return Vec(other.x,other.y,other.z)
+        except:
+            raise GeometricError("Cannot find a representation of this thing that is compatible with a HasPts Geometry: "+str(other))
+        
+        """
+        THIS LOOKS LIKE IT WAS FROM THE BASED POINT DAYS
         if isinstance(other, Point):
             if self.is_baseless: return Vec(other) # if this object is baseless, then use the world coordinates of the other
             if (not hasattr(other, 'basis')) or other.basis is None : 
@@ -300,6 +271,7 @@ class HasPts(HasBasis):
                 return Vec(other.x,other.y,other.z)
             except:
                 raise GeometricError("Cannot find a representation of this thing that is compatible with a HasPts Geometry: "+str(other))
+        """
 
     def _unset_attr(self):
         """ Deletes class and sublcass attributes when possible.
