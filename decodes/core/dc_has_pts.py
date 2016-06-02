@@ -255,23 +255,6 @@ class HasPts(HasBasis):
         except:
             raise GeometricError("Cannot find a representation of this thing that is compatible with a HasPts Geometry: "+str(other))
         
-        """
-        THIS LOOKS LIKE IT WAS FROM THE BASED POINT DAYS
-        if isinstance(other, Point):
-            if self.is_baseless: return Vec(other) # if this object is baseless, then use the world coordinates of the other
-            if (not hasattr(other, 'basis')) or other.basis is None : 
-                 # if the other is baseless, then devaluate the point so that it is described in terms of this object's basis.
-                 return Vec(self._basis.deval(other))
-
-            if self._basis is other.basis : return Vec(other._x,other._y,other._z) # if we share a basis, then use the local coordinates of the other
-            raise BasisError("The basis for this Geometry and the point you're adding do not match. Try applying or stripping the point of its basis, or describing the point in terms of this Geometry's basis")
-        else:
-            try:
-                # Vecs (and anything else from which we can read x,y,z values) are interpreted in local coordinates
-                return Vec(other.x,other.y,other.z)
-            except:
-                raise GeometricError("Cannot find a representation of this thing that is compatible with a HasPts Geometry: "+str(other))
-        """
 
     def _unset_attr(self):
         """ Deletes class and sublcass attributes when possible.
