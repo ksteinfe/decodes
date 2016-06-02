@@ -48,7 +48,7 @@ class PLine(HasPts):
         try:
             return self._edges
         except:
-            self._edges = [ self.seg(n) for n in range(len(self._verts)-1) ]
+            self._edges = [ self.seg(n) for n in range(len(self)-1) ]
             return self._edges
 
     @property
@@ -70,17 +70,13 @@ class PLine(HasPts):
             self._length = sum([self.pts[n].distance(self.pts[n+1]) for n in range(-1,len(self.pts)-1) ] )
             return self._length
         
-    def reverse(self) :
-        """ Reverses attribute changes for classes and subclasses.
+    def reversed(self) :
+        """ Returns a copy of this PLine with the vertices reversed
         
             :result: Polyline.
             :rtype: PLine
         """
-        self._unset_attr() # call this when any of storable properties (subclass_attr or class_attr) changes
-        pts = []
-        for pt in reversed(self): pts.append(pt)
-        rpline = PLine(pts)
-        return rpline
+        return PLine(reversed(self._verts),self.basis)
 
 
     def join (self, other, tol=False) :
@@ -158,7 +154,7 @@ class PLine(HasPts):
                 
                 my_pline.seg(2)
         """
-        if index >= len(self._verts) : raise IndexError()
+        if index >= len(self) : raise IndexError()
         return Segment(self.pts[index],self.pts[index+1])
         
     def eval(self,t):
@@ -176,16 +172,12 @@ class PLine(HasPts):
                 my_pline.eval(0.5)
            
         """
-        if t > 1 : raise IndexError("Plines must be evaluated with t <= 1.0")
-        if t < 0 : raise IndexError("Plines must be evaluated with t >= 0.0")
+        if t > 1 or t < 0 : raise IndexError("PLines must be evaluated with 0.0 <= t <= 1.0")
         if t == 0.0 : return self.pts[0]
         if t == 1.0 : return self.pts[-1]
 
-        for n, ival in enumerate(Interval()//(len(self)-1)):
-            if t in ival:
-                pa = self.pts[n]
-                pb = self.pts[n+1]
-                return Point.interpolate(pa,pb,ival.deval(t))
+        for seg,ival in zip(self.edges, Interval()//(len(self)-1)):
+            if t in ival: return seg.eval(ival.deval(t))
         
     def near(self, p):
         """ Returns a tuple of the closest point to a given PLine, the index of the closest segment, and the distance from the Point to the near Point.
