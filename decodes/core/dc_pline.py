@@ -142,7 +142,7 @@ class PLine(HasPts):
             print "new segment created"
             return jpline
             
-    def seg(self,index):
+    def seg(self,idx):
         """ Returns a segment of this polyline.
        
             :param index: Index of the polyline's segment
@@ -154,8 +154,8 @@ class PLine(HasPts):
                 
                 my_pline.seg(2)
         """
-        if index >= len(self) : raise IndexError()
-        return Segment(self.pts[index],self.pts[index+1])
+        idx = idx%(len(self)-1)
+        return Segment(self.pts[idx],self.pts[idx+1])
         
     def eval(self,t):
         """| Evaluates this PLine at the specified parameter t.

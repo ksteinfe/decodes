@@ -145,7 +145,7 @@ class HasPts(HasBasis):
             return tuple([Point(tup[0],tup[1],tup[2]) for tup in self._pts])
 
      
-    def append(self,pts) : 
+    def append(self,pts):
         """| Appends the given Point to the stored list of points.
            | Each Point is processed to ensure compatibility with this geometry's basis.
 

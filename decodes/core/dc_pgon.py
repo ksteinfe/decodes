@@ -33,29 +33,16 @@ class PGon(HasPts):
                     
                 my_pgon=PGon(pts)
         """ 
-        if basis is None and vertices is None : raise GeometricError("You must define both a basis and a list of vertices to construct a PGon")
+        if basis is None and vertices is None : raise GeometricError("You must define either a basis or a list of vertices (or both) to construct a PGon")
         
         if basis is None:
             #if i pass in vertices but no basis, try and figure out what the CS should be and project all points to the proper plane
-            #TODO: switch to EPSILON constant
-            tol=0.000001
-            def appx_eq(a, b):
-                return abs(a-b) < tol
+            def appx_eq(a, b): return abs(a-b) < EPSILON
 
             x_vals,y_vals,z_vals = [v.x for v in vertices],[v.y for v in vertices],[v.z for v in vertices]
             x_avg,y_avg,z_avg = sum(x_vals)/float(len(x_vals)) , sum(y_vals)/float(len(y_vals)) , sum(z_vals)/float(len(z_vals))
             cen = Point(x_avg,y_avg,z_avg)
             if all(appx_eq(x,x_avg) for x in x_vals) or all(appx_eq(y,y_avg) for y in y_vals) or all(appx_eq(z,z_avg) for z in z_vals) :
-                """
-                n = 0
-                x_vec = Vec(cen,vertices[n])
-                while x_vec.length == 0 and n < len(vertices)-1:
-                    n+=1
-                    x_vec = Vec(cen,vertices[n])
-                y_vec = Vec(cen,vertices[n+1])
-                cs = CS(cen,x_vec,y_vec)
-                
-                """
                 cs = CS(vertices[0],Vec(vertices[0],vertices[1]),Vec(vertices[0],cen))
                 verts = [cs.deval(v) for v in vertices]
                 super(PGon,self).__init__([Vec(v.x,v.y) for v in verts],cs)
@@ -67,15 +54,27 @@ class PGon(HasPts):
                     super(PGon,self).__init__([Vec(v.x,v.y) for v in verts],cs)
                 else:
                     raise GeometricError("Cannot create a polygon from a non-planar set of points")
-                    #warnings.warn("PGon contructed without a basis, setting basis to global CS().")
-                    #super(PGon,self).__init__(vertices) #HasPts constructor handles initialization of verts and basis
-                    #self.basis = CS() # set the basis after appending the points
         else:
             super(PGon,self).__init__([Vec(v.x,v.y) for v in vertices],basis) #HasPts constructor handles initialization of verts and basis
             self.basis = basis # set the basis after appending the points
 
         
-    def seg(self,index):
+    def append(self,pts):
+        """| Appends the given Point to the PGon.
+           | Each Point is processed to ensure planarity.
+
+           :param pts: Point(s) to append.
+           :type pts: Point or [Point]
+           :result: Modifies this geometry by adding items to the stored list of points.
+           :rtype: None
+        """
+        super(PGon,self).append(pts)
+        try:
+            for n in range(len(pts)): self._verts[-(n+1)].z = 0
+        except:
+            self._verts[-1].z = 0
+        
+    def seg(self,idx):
         """| Returns a segment of this Polygon as a Segment
            | The returned line segment will contain a copy of the Points stored in the segment.
         
@@ -86,10 +85,8 @@ class PGon(HasPts):
            
            
         """
-        if index >= len(self) : raise IndexError()
-        if index == len(self)-1 : return Segment(self.pts[index],self.pts[0])
-        #TODO: handle negative indices
-        return Segment(self.pts[index],self.pts[index+1])
+        idx_a, idx_b = idx%(len(self)), (idx+1)%(len(self))
+        return Segment(self.pts[idx_a],self.pts[idx_b])
 
         
     def cnr(self,index):
@@ -131,10 +128,7 @@ class PGon(HasPts):
                 my_pgon.edges
             
         """
-        edges = []
-        for n in range(len(self)):
-            edges.append(self.seg(n))
-        return edges
+        return [self.seg(n) for n in range(len(self))]
         
     @property
     def area(self):
