@@ -11,7 +11,7 @@ class Vec(Geometry):
     a simple vector class
     """
 
-    def __init__(self, a=0, b=0, c=0):
+    def __init__(self, a=None, b=None, c=None):
         """ Vector Constructor. 
 
             :param a: a value.
@@ -32,9 +32,9 @@ class Vec(Geometry):
                 vec_2=Vec(Point(0,0,0), Point(1,1,1))
 
         """
-        if a is None : a = 0
-        if b is None : b = 0
-        if c is None : c = 0
+        if a is None : a = 0.0
+        if b is None : b = 0.0
+        if c is None : c = 0.0
 
         if all( hasattr(a,i) and hasattr(b,i) for i in ['x','y','z'] ) :
             # we've been passed two things that act like points
