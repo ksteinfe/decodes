@@ -92,19 +92,17 @@ class Grid(Raster):
             :rtype: int, int
             
         """
-        try:
-            sample_pt = Point(a.x,a.y)
-        except:
-            sample_pt = Point(a,b)
-
-        x = min(1.0,max(0.0,self.bnds.ival_x.deval(sample_pt.x)))
-        y = min(1.0,max(0.0,self.bnds.ival_y.deval(sample_pt.y)))
-
-        x = int(math.floor(Interval(0,self.px_width).eval(x)))
-        y = int(math.floor(Interval(0,self.px_height).eval(y)))
-        if x == self.px_width : x = self.px_width-1
-        if y == self.px_height : y = self.px_height-1
-        return x,y
+        pt = Point(a,b)
+        
+        if pt.x <= self.bnds.ival_x.a : idx_x = 0
+        elif pt.x >= self.bnds.ival_x.b : idx_x = self.px_width - 1
+        else: idx_x = [pt.x in ival for ival in self._ivals_x].index(True)
+        
+        if pt.y <= self.bnds.ival_y.a : idx_y = 0
+        elif pt.y >= self.bnds.ival_y.b : idx_y = self.px_height - 1
+        else: idx_y = [pt.y in ival for ival in self._ivals_y].index(True)
+        
+        return idx_x, idx_y
 
     def addresses_near(self,a,b=None):
         """ Returns addresses of grid cells near the given location. May be passed either a point or an x,y coordinate.
@@ -117,34 +115,14 @@ class Grid(Raster):
             :rtype: [tup]
             
         """
-        
-        try:
-            sample_pt = Point(a.x,a.y)
-        except:
-            sample_pt = Point(a,b)
-    
-        dx2 = self.bnds.ival_x.delta / self.px_width / 2
-        dy2 = self.bnds.ival_y.delta / self.px_height / 2
-    
-        x = self.bnds.ival_x.deval(sample_pt.x)
-        y = self.bnds.ival_y.deval(sample_pt.y)
-    
-        x = Interval.remap(x,Interval(dx2,1-dx2),Interval(0,self.px_width-1))
-        y = Interval.remap(y,Interval(dy2,1-dy2),Interval(0,self.px_height-1))
-    
-        x_flr,y_flr = math.floor(x),math.floor(y)
-        x_cei,y_cei = math.ceil(x), math.ceil(y)
-    
-        x_flr = int(Interval(0,self.px_width-1).limit_val(x_flr))
-        y_flr = int(Interval(0,self.px_height-1).limit_val(y_flr))
-        x_cei = int(Interval(0,self.px_width-1).limit_val(x_cei))
-        y_cei = int(Interval(0,self.px_height-1).limit_val(y_cei))
-    
-        adds = []
-        for tup in [(x_flr,y_flr),(x_cei, y_flr),(x_cei, y_cei),(x_flr, y_cei)]:
-            if tup not in adds:
-                adds.append(tup)
-        return adds
+        pt = Point(a,b)
+        add = self.address_near(pt)
+        dx = 1 if pt.x > self._ivals_x[add[0]].mid else -1
+        dy = 1 if pt.y > self._ivals_y[add[1]].mid else -1
+        adds = [add,(add[0]+dx,add[1]),(add[0]+dx,add[1]+dy),(add[0],add[1]+dy)]
+        adds = filter(lambda add: add[0]>=0 and add[0]<self.px_width, adds)
+        adds = filter(lambda add: add[1]>=0 and add[1]<self.px_height, adds)
+        return sorted(adds)
         
     def _recalculate_base_pts(self):
         """
@@ -238,8 +216,7 @@ class VecField(Grid):
             :rtype: Vec
             
         """
-        x,y = self.address_near(a,b)
-        return self.get(x,y)
+        return self.get(*self.address_near(a,b))
 
     def vecs_near(self,a,b=None):
         """ Returns locations of vectors near the given location. May be passed either a point or an x,y coordinate.
@@ -252,8 +229,7 @@ class VecField(Grid):
             :rtype: [tup]
             
         """
-        tups = self.addresses_near(a,b)
-        return [self.get(tup[0],tup[1]) for tup in tups]
+        return [self.get(*add) for add in self.addresses_near(a,b)]
 
     def avg_vec_near(self,a,b=None):
         """ Returns an average vector from the near vectors around the given location. May be passed a point or an x,y coordinate.
