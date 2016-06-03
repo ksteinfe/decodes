@@ -82,7 +82,7 @@ class Grid(Raster):
         return [self.get_cpt(tup[0],tup[1]) for tup in tups]
 
     def address_near(self,a,b=None):
-        """ Returns addresses of grid cells near the given location. May be passed either a point or an x,y coordinate.
+        """ Returns address of the grid cell nearest to the given location. May be passed either a point or an x,y coordinate.
         
             :param a: x-coordinate or Point.
             :type a: float or Point
@@ -144,7 +144,7 @@ class Grid(Raster):
         for tup in [(x_flr,y_flr),(x_cei, y_flr),(x_cei, y_cei),(x_flr, y_cei)]:
             if tup not in adds:
                 adds.append(tup)
-        return adds        
+        return adds
         
     def _recalculate_base_pts(self):
         """
