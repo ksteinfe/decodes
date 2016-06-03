@@ -201,7 +201,9 @@ class Intersector(object):
                     xsec = Intersector()
                     edge_success = xsec.of(edge,line)
                     if edge_success:
-                        # we've found an intersection between this segment and our LinearEntity, check if point lies on edge
+                        self._geom.extend(xsec.results)
+                        success = True
+                        '''
                         t = Line(edge.spt,edge.vec).near(xsec.results[0])[1]
                         if t>=0.0 and t<=1.0:
                             # now check that intersection lies on our LinearEntity
@@ -216,6 +218,7 @@ class Intersector(object):
                             if is_on:
                                 self._geom.extend(xsec.results)
                                 success = True
+                        '''
                 if success: self.log += " and an intersection was found with at least one of the edges"
                 else: self.log += " but no intersections were found with any of the edges"
                 return success
@@ -397,9 +400,17 @@ class Intersector(object):
         return True
         """
 
-
-
     def _circle_plane(self,circ,plane):
+        """ Intersects a circle and a plane.
+        
+            :param circ: circle to intersect.
+            :type circ: Circle
+            :param pln: plane to intersect.
+            :type pln: Plane
+            :result: Boolean value.
+            :rtype: bool
+            
+        """
         xsec = Intersector()
         plane_success = xsec._plane_plane(circ,plane)
         if not plane_success : 
@@ -407,7 +418,22 @@ class Intersector(object):
             return False
         
         self.line = xsec._geom[0] # add plane-plane intersection line
-        npt, t, dist = self.line.near(circ.origin)
+        npt, t, dist = self.line.near(circ.origin)       
+        R = circ.rad
+        if dist > R:
+            self.log = "Circle does not intersect with given Plane"
+            return False
+        if dist == R:
+            self.log = "Circle intersects Plane at a tangent Point"
+            self.append(npt)
+            return True       
+        if dist < R:
+            self.log = "Circle intersects Plane at two Points"
+            factor = math.sqrt(circ.rad**2-dist**2)/self.line.vec.length
+            self.append(npt-self.line.vec*factor)
+            self.append(npt+self.line.vec*factor)
+            return True
+        """
         x_vec = Vec(circ.origin,npt)
         if x_vec.length < self.tol : x_vec = Vec(circ.origin,self.line.pt+self.line.vec)
         if x_vec.length < self.tol : x_vec = Vec(circ.origin,self.line.pt)
@@ -449,7 +475,8 @@ class Intersector(object):
             return True
 
         return False
-
+        """
+        
     def _arc_plane(self,arc,plane):
         xsec = Intersector()
         circ = Circle(arc.basis.xy_plane,arc.rad)
