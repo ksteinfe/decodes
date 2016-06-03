@@ -39,17 +39,16 @@ class PLine(HasPts):
             :result: List of edges of a PLine
             :rtype: [Segment]
             
-            TODO: this returns the local edges (uses self._verts)... shouldn't it return the global edges? This would be in line with PGon.
             
             ::
             
                 my_pline.edges
         """
         try:
-            return self._edges
+            return copy.copy(self._edges)
         except:
-            self._edges = [ self.seg(n) for n in range(len(self)-1) ]
-            return self._edges
+            self._edges = tuple([ self.seg(n) for n in range(len(self)-1) ])
+            return copy.copy(self._edges)
 
     @property
     def length(self):

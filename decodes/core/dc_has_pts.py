@@ -137,12 +137,12 @@ class HasPts(HasBasis):
            :rtype: Point or [Point]
         """
         try:
-            return tuple([Point(tup[0],tup[1],tup[2]) for tup in self._pts])
+            return copy.copy(self._pts)
         except:
-            if self.is_baseless : self._pts =  [vec.tup for vec in self._verts]
-            else : self._pts =  [self._basis.eval(vec).tup for vec in self._verts]
+            if self.is_baseless : self._pts =  tuple([Point(v) for v in self._verts])
+            else : self._pts =  tuple([Point(self._basis.eval(v)) for v in self._verts])
 
-            return tuple([Point(tup[0],tup[1],tup[2]) for tup in self._pts])
+            return copy.copy(self._pts)
 
      
     def append(self,pts):
