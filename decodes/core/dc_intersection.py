@@ -17,7 +17,7 @@ class Intersector(object):
         """
         self._geom = []
         self.log = None
-        self.tol = 0.000001
+        self.tol = EPSILON
 
     def __getitem__(self,slice):
         """Returns intersection geometry at given index.
