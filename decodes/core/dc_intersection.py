@@ -141,6 +141,7 @@ class Intersector(object):
         if type_a == Circle:
             circ, other = a,b
             if type_b == Circle : return self._circle_circle(other,circ)
+            if isinstance(other, LinearEntity) : return self._line_circle(other, circ)
 
         # INTERSECTIONS WITH A PGON
         if type_a == RGon or type_a == PGon:
@@ -235,6 +236,7 @@ class Intersector(object):
             self.log = "LinearEntity does not intersect PGon.basis."
             return False
 
+            
     def _line_plane(self,line,plane,ignore_backface=False):
         """ Intersects a Line with a Plane. Upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection.
         
@@ -270,6 +272,7 @@ class Intersector(object):
         self.log = "Intersection found."
         return True
 
+        
     def _ray_plane(self,ray,plane,ignore_backface=False):
         """ Intersects a Ray with a Plane. Upon success the Intersector.dist property will be set to the distance between the ray.spt and the point of intersection.
         
@@ -297,6 +300,7 @@ class Intersector(object):
         self.log = "Intersection found."
         return True
 
+        
     def _seg_plane(self,seg,plane):
         """ Intersects a Segment with a Plane. Upon success the Intersector.dist property will be set to the distance between the seg.spt and the point of intersection.
             
@@ -325,6 +329,7 @@ class Intersector(object):
         self.log = "Intersection found."
         return True
 
+        
     def _pline_plane(self,pline,plane):
         """ Intersects a Polyline with a Plane. 
         
@@ -420,16 +425,17 @@ class Intersector(object):
         self.line = xsec._geom[0] # add plane-plane intersection line
         npt, t, dist = self.line.near(circ.origin)       
         R = circ.rad
-        if dist > R:
-            self.log = "Circle does not intersect with given Plane"
-            return False
-        if dist == R:
-            self.log = "Circle intersects Plane at a tangent Point"
+        # dist == R within set tolerance
+        if (abs(dist-R) < self.tol):
+            self.log = "One intersection point found"
             self.append(npt)
-            return True       
+            return True   
+        if dist > R:
+            self.log = "No intersection found"
+            return False   
         if dist < R:
-            self.log = "Circle intersects Plane at two Points"
-            factor = math.sqrt(circ.rad**2-dist**2)/self.line.vec.length
+            self.log = "Two intersection points found"
+            factor = math.sqrt(R**2-dist**2)/self.line.vec.length
             self.append(npt-self.line.vec*factor)
             self.append(npt+self.line.vec*factor)
             return True
@@ -473,7 +479,6 @@ class Intersector(object):
             self.append(cs.eval(x0,y0))
             self.append(cs.eval(x1,y1))
             return True
-
         return False
         """
         
@@ -513,6 +518,63 @@ class Intersector(object):
 
         return len(self)>0 
 
+        
+    def _line_circle(self, line, circ): 
+        """ Intersects a LinearEntity with a Circle. 
+        
+            :param circ: circle to intersect.
+            :type circ: Circle
+            :param pln: LinearEntity to intersect.
+            :type pln: Line, Seg or Ray
+            :result: Boolean value.
+            :rtype: bool
+            
+        """
+        xsec = Intersector()
+        if not xsec.of(line, circ.plane): 
+            self.log = "Line and Plane of Circle don't intersect"
+            return False
+        if type(xsec.results[0])==Point:
+            self.log = "Line and Plane of Circle intersect at one point"
+            pt, self.t = xsec.results[0], xsec.dist
+            if not circ.contains(pt) and not (circ.origin.distance(pt) == R):
+                return False
+            if type(line) == Ray and self.t < 0.0: return False
+            if type(line) == Segment and ((self.t < 0.0) or (self.t > 1.0)): return False
+            self.log = "Intersection found"
+            self.append(pt)
+            return True
+        self.log = "Line lies in Plane of Circle"
+        R, center = circ.rad, circ.origin
+        npt, t, dist = Line(line.spt, line.vec).near(center) #projection onto the extended line
+        #if dist is "equal" to R
+        if (abs(dist-R) < self.tol):
+            self.log = "Case of one possible intersection point"
+            self.t = t
+            if type(line) == Ray and self.t < 0.0: return False
+            if type(line) == Segment and ((self.t < 0.0) or (self.t > 1.0)): return False
+            self.append(npt)
+            return True
+        if dist > R:
+            self.log = "Case of no intersection point"
+            return False
+        if dist < R:
+            self.log = "Case of two possible intersection points"
+            factor = math.sqrt(circ.rad**2-dist**2)/line.vec.length
+            self.ta, self.tb = t - factor, t + factor
+            pa, pb = npt-line.vec*factor, npt+line.vec*factor 
+            if type(line) == Ray:
+                if self.ta >= 0.0: self.append(pa)
+                if self.tb >= 0.0: self.append(pb)
+                if len(self) == 0: return False 
+                return True
+            if type(line) == Segment:
+                if (self.ta >= 0.0 and self.ta <= 1.0): self.append(pa)
+                if (self.tb >= 0.0 and self.tb <= 1.0): self.append(pb)
+                if len(self) == 0: return False
+                return True
+
+                
     def _line_line(self,ln_a,ln_b):
         """Intersects two lines, returning False for non-intersecting lines but 
         calculates/records the shortest segment between the two lines if that exists
@@ -556,7 +618,8 @@ class Intersector(object):
             self.log = "No intersection found, recording shortest Segment between these two lines."
             self.append(Segment(pa,pb))
             return False
-    
+ 
+ 
     def _line_line_SAVE(self,ln_a,ln_b):
         """Intersects two lines, returning False for any pair of non-intersecting lines
             
@@ -673,7 +736,8 @@ class Intersector(object):
             self.append(Segment(ln_ext.eval(t_vals[1]), ln_ext.eval(t_vals[2])))
             return True
         return False
-            
+
+        
     def _circle_circle(self,cir_a,cir_b):
         """| Intersects two circles.
            | Upon success, the Intersector.dist property will be set to the distance between the pair of points of intersection.
