@@ -19,6 +19,8 @@ UX = Vec(1,0,0)
 UY = Vec(0,1,0)
 UZ = Vec(0,0,1)
 
+from dc_graph import *
+
 from dc_bounds import *
 
 from dc_plane import *

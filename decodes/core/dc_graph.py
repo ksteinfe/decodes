@@ -1,5 +1,7 @@
-import decodes.core as dc
 from decodes.core import *
+from . import dc_base, dc_vec, dc_point #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
+if VERBOSE_FS: print "graph.py loaded"
+
 import math, itertools
 
 class Graph(object):
