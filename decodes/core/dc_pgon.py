@@ -340,13 +340,13 @@ class PGon(HasPts):
         return clone
 
 
-    def inflate(self, rotation=0.5):
+    def inflate(self, t=0.5):
         """| Returns a polygon inscribed inside this one.
            | Each vertex of the returned polygon will lie on the midpoint of one of this polygon's edges.
-           | Optionally, you may set the rotation 0->1
+           | Optionally, you may set the t 0->1
            
-           :param rotation: A decimal number between [0:1].
-           :type rotation: float
+           :param t: A decimal number between [0:1].
+           :type t: float
            :result: A polygon inscribed of this one.
            :rtype: PGon
            
@@ -593,7 +593,7 @@ class RGon(PGon):
             if radius <= 0 : raise GeometricError("radius must be greater than zero")
             self._radius = radius
         else:
-            raise GeometricError("You must specify one and only one of the following: radius, edge length, in_radius")
+            raise GeometricError("You must specify one and only one of the following: radius, edge length, apothem")
 
         step = math.pi*2.0/num_of_sides
         verts = [Point( self.radius * math.cos(step*n), self.radius * math.sin(step*n))  for n in range(num_of_sides) ]
@@ -719,9 +719,13 @@ class RGon(PGon):
             self._iangle = (self._nos-2) * math.pi/self._nos
             return self._iangle
         
+    def append(self,pts):
+        raise GeometricError("I can't even. You can't append vertices to a RGon!")
+        
+        
     def __repr__(self): return "rgon[{0}]".format(self.num_of_sides)
 
-    def inflate(self):
+    def inflate(self, t=0.5):
         """ Returns a regular polygon inscribed inside this one while maintaining the same number of sides.
         
             :result: An regular inscribed polygon.
@@ -732,11 +736,12 @@ class RGon(PGon):
                 my_rgon.inflate()
             
         """
+        pt = Point.interpolate(self.pts[0],self.pts[1],t)
         o = self._basis.origin
-        x = Vec(o,Point.interpolate(self.pts[0],self.pts[1]))
+        x = Vec(o,pt)
         y = self._basis.z_axis.cross(x)
         basis = CS(o,x,y)
-        return RGon(self._nos,self.apothem,basis)
+        return RGon(self._nos,o.dist(pt),basis)
 
     def deflate(self):
         """ Returns a regular polygon that circumscribes this one while maintaining the same number of sides.
@@ -752,7 +757,7 @@ class RGon(PGon):
         
         o = self._basis.origin
         x = Vec(o,Point.interpolate(self.pts[0],self.pts[1]))
-        y = self._basis.zAxis.cross(x)
+        y = self._basis.z_axis.cross(x)
         basis = CS(o,x,y)
         return RGon(self._nos,basis=basis,apothem=self.radius)
 
