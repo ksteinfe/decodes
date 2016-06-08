@@ -6,7 +6,7 @@ import math, itertools
 
 class Graph(object):
     """
-    A simple undirected, weighted graph
+    A directed, weighted graph
     """
     def __init__(self):
         self.nodes = set() # a set is an unordered collection of unique elements
