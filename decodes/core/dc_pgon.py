@@ -392,7 +392,7 @@ class PGon(HasPts):
     
     
 
-    def contains_pt(self, pt,tolerance=0.000001):
+    def contains_pt(self, pt,tolerance=EPSILON):
         """ Tests if this polygon contains the given point. The given point must lie on the plane of this polygon.
         
             :param pt: Point to test containment in PGon.

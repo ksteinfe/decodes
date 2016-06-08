@@ -176,66 +176,68 @@ class Intersector(object):
         # TODO
         return False
 
-
     def _line_pgon(self,line,pgon,ignore_backface=False):
-        """ Intersects a  Line with a Polygon. Upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection.
-        
-            :param line: Line to intersect.
-            :type line: Line
-            :param pgon: Polygon to intersect.
-            :type pgon: PGon
-            :param ignore_backface: Boolean Value.
-            :type ignore_backface: bool
-            :result: Boolean Value.
-            :rtype: bool
+        """ Intersects a  LinearEntity with a PGon. If the LinearEntity lies in the Plane of PGon, all Segments of intersection will be returned and Intersector.dist property will be set to 0. If the line and plane of PGon intersect at a Point, the Intersector.dist property to the distance between line.spt and the point of intersection. 
+        TODO - once line_line_collinear is incorporated, this will be able to handle the case when the LinearEntity overlaps any of the PGon edges
+    
+        :param line: Line to intersect.
+        :type line: Line
+        :param pgon: Polygon to intersect.
+        :type pgon: PGon
+        :param ignore_backface: Boolean Value.
+        :type ignore_backface: bool
+        :result: Boolean Value.
+        :rtype: bool
             
         """
-
-        # first intersect LinearEntity with this pgon's basis
+        #first find intersection between LinearEntity and Plane of PGon
         xsec = Intersector()
         basis_success = xsec.of(pgon.basis.xy_plane,line,ignore_backface = ignore_backface)
-        if basis_success : 
-            if pgon.basis.xy_plane.contains(line.spt) and pgon.basis.xy_plane.contains(line.spt+line.vec):
-                self.log = "LinearEntity in Plane of Pgon"
-                success = False
-                for edge in pgon.edges:
-                    xsec = Intersector()
-                    edge_success = xsec.of(edge,line)
-                    if edge_success:
-                        self._geom.extend(xsec.results)
-                        success = True
-                        '''
-                        t = Line(edge.spt,edge.vec).near(xsec.results[0])[1]
-                        if t>=0.0 and t<=1.0:
-                            # now check that intersection lies on our LinearEntity
-                            is_on = True
-                            t = Line(line.spt,line.vec).near(xsec.results[0])[1]
-                            #print type(line), t
-                            if type(line) == Segment:
-                                if t<0.0: is_on = False
-                                if t>1.0: is_on = False
-                            elif type(line) == Ray and t<0.0: is_on = False
 
-                            if is_on:
-                                self._geom.extend(xsec.results)
-                                success = True
-                        '''
-                if success: self.log += " and an intersection was found with at least one of the edges"
-                else: self.log += " but no intersections were found with any of the edges"
-                return success
-            else:
-                self.log = "LinearEntity intersects Plane of Pgon"
-                if pgon.contains_pt(xsec._geom[0]):
-                    self._geom = xsec._geom
-                    self.dist = xsec.dist
-                    return True
-                else:
-                    self.log = "Intersection of PGon.basis and LinearEntity does not lie within PGon."
-                    return False
-        else:
+        #if LinearEntity and Plane do not intersect
+        if not basis_success:
             self.log = "LinearEntity does not intersect PGon.basis."
             return False
 
+        #if LinearEntity lies in the Plane of PGon
+        if pgon.basis.xy_plane.contains(line.spt) and pgon.basis.xy_plane.contains(line.spt+line.vec):
+            self.log = "LinearEntity in Plane of PGon"
+            self.dist = 0
+            success = False
+            results = [] #stores tuples (t-value, point) used to find intersecting segments
+            if pgon.contains_pt(line.spt): 
+                results.append((0,line.spt))
+            #for each edge of PGon
+            for edge in pgon.edges:
+                #find intersection between LinearEntity and edge 
+                xsec = Intersector()
+                edge_success = xsec.of(line,edge)
+                #if Line-Line intersection is successful
+                if edge_success:
+                    #add intersection to results
+                    results.append((xsec.ta, xsec[0]))
+            if type(line)==Segment and pgon.contains_pt(line.ept): 
+                results.append((1,line.ept))
+            #sort points by t-value along LinearEntity
+            results = sorted(results)
+            #find all segments between ordered pairs of points that lie in PGon
+            for i in range(len(results)-1):
+                seg = Segment(results[i][1],results[i+1][1])
+                if pgon.contains_pt(seg.midpoint):
+                    self.append(seg)
+                    #return True if there is any segment that lies in the PGon
+                    success = True
+            return success
+        
+        #if LinearEntity intersects Plane of PGon at a Point
+        self.log = "LinearEntity intersects Plane of PGon at a Point"
+        #if Point is contained in the PGon
+        if pgon.contains_pt(xsec[0]):
+            #add point of intersection to results
+            self.append(xsec[0])
+            self.dist = xsec.dist
+            return True
+            
             
     def _line_plane(self,line,plane,ignore_backface=False):
         """ Intersects a Line with a Plane. Upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection.
@@ -422,7 +424,7 @@ class Intersector(object):
             self.log = xsec.log
             return False
         
-        self.line = xsec._geom[0] # add plane-plane intersection line
+        self.line = xsec[0] # add plane-plane intersection line
         npt, t, dist = self.line.near(circ.origin)       
         R = circ.rad
         # dist == R within set tolerance
@@ -534,9 +536,9 @@ class Intersector(object):
         if not xsec.of(line, circ.plane): 
             self.log = "Line and Plane of Circle don't intersect"
             return False
-        if type(xsec.results[0])==Point:
+        if type(xsec[0])==Point:
             self.log = "Line and Plane of Circle intersect at one point"
-            pt, self.t = xsec.results[0], xsec.dist
+            pt, self.t = xsec[0], xsec.dist
             if not circ.contains(pt) and not (circ.origin.distance(pt) == R):
                 return False
             if type(line) == Ray and self.t < 0.0: return False
