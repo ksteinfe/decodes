@@ -151,7 +151,6 @@ class Mesh(HasPts):
             
                 quadmesh.to_pt_graph()
         """
-        from decodes.extensions.graph import Graph
         graph = Graph()
         for index in range(len(self.pts)):
             for face in self.faces:

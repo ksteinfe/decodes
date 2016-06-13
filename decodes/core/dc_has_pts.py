@@ -24,7 +24,7 @@ class HasPts(HasBasis):
         
         """
         self._verts = [] # a list of vecs that represent the local coordinates of this object's points
-        if vertices is not None: self.append(vertices)
+        if vertices is not None: self._append(vertices)
         self._basis = basis # set the basis after appending the points
 
 
@@ -146,14 +146,9 @@ class HasPts(HasBasis):
 
      
     def append(self,pts):
-        """| Appends the given Point to the stored list of points.
-           | Each Point is processed to ensure compatibility with this geometry's basis.
-
-           :param pts: Point(s) to append.
-           :type pts: Point or [Point]
-           :result: Modifies this geometry by adding items to the stored list of points.
-           :rtype: None
-        """
+        self.append(pts)
+        
+    def _append(self,pts):   
         self._unset_attr()
         try : 
             for p in pts : self._verts.append(self._compatible_vec(p))
