@@ -54,8 +54,11 @@ class LinearEntity(Geometry):
            
                 my_le * float
         """  
-        self._vec *= other
-        return self
+        from .dc_xform import Xform
+        if isinstance(other, Xform) : return other * self
+        else :        
+            self._vec *= other
+            return self
     
     def __eq__(self, other):
         """| Overloads the equality **(==)** operator. 
