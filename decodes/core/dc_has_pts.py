@@ -146,7 +146,7 @@ class HasPts(HasBasis):
 
      
     def append(self,pts):
-        self.append(pts)
+        self._append(pts)
         
     def _append(self,pts):   
         self._unset_attr()
