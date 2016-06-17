@@ -8,23 +8,21 @@ class Xform(object):
     """
         A transformation matrix class.
     """
-    def __init__(self,value=1.0,matrix=None):
+    def __init__(self,matrix=None):
         """XForm Constructor
-
-            :param value: Transformation value (defaults to 1.0).
-            :type value: float
+            
             :param matrix: Matrix
             :type matrix: list
             :result: XForm object.
             :rtype: XForm
         """
-        if matrix :
+        if matrix is not None :
             self._m = matrix
         else :
             self._m = [0.0]*16
-            self.c11 = value
-            self.c22 = value
-            self.c33 = value
+            self.c11 = 1.0
+            self.c22 = 1.0
+            self.c33 = 1.0
             self.c44 = 1.0
             
     def __repr__(self):
@@ -32,28 +30,8 @@ class Xform(object):
         "\n\t\t[{},{},{},{}]".format(self.c21,self.c22,self.c23,self.c24) +
         "\n\t\t[{},{},{},{}]".format(self.c31,self.c32,self.c33,self.c34) +
         "\n\t\t[{},{},{},{}]".format(self.c41,self.c42,self.c43,self.c44) )
-    '''
-    """an Xform can act as a basis for a point"""
-    def eval(self,other):
-        """Given an Xform, evaluates a Point.
-        
-            :param other: Point
-            :type other: (float, float, float)
-            :result: Point
-            :rtype: (float, float, float)
-        """
-        try:
-            x = other.x
-            y = other.y
-            z = other.z
-        except TypeError:
-            print("mallard can't quack()")
-        tup = self._xform_tuple(other.to_tuple())
-        return Point(tup[0],tup[1],tup[2])
-     '''
     
     def strip_translation(self):
-        
         m = list(self._m)
         xf = Xform(matrix = m)
         xf.c14 = 0
@@ -221,13 +199,13 @@ class Xform(object):
         return Xform.translation(cs_tar.origin)* (xf_st * xf_gs )
     
     def __mul__(self, other):
-        """| Multiplies this Geometry by another Matrix, or by any piece of fieldpack geometry.
+        """| Multiplies this Geometry by another Matrix, or by any piece of geometry.
            | This function must be kept up to date with every new class of DC geom.
             
-           :param other: Matrix to multiply by.
-           :type other: list
-           :result: Xform object
-           :rtype: Xform
+           :param other: Matrix to multiply or Geometry to transform.
+           :type other: object
+           :result: multiplied object
+           :rtype: object
         """
         if isinstance(other, Xform) : 
             xf = Xform()
@@ -251,7 +229,18 @@ class Xform(object):
             ]
             return xf
         
+        return self.transform(other)
+        
 
+    def transform(self,other):
+        """| Multiplies any appropriate piece of geometry by this XForm
+           | This function must be kept up to date with every new class of DC geom.
+            
+           :param other: geometry to transform.
+           :type other: Geometry
+           :result: multiplied object
+           :rtype: Geometry
+        """
         # HASPTS GEOMETRY
         # applies transformation to the verts, leaving the basis intact
         if isinstance(other, HasPts) : 
@@ -272,12 +261,15 @@ class Xform(object):
                 other = o
             except:
                 pass
-
+        
         if isinstance(other, LinearEntity) : 
-            other._pt = other._pt*self
+            pt = other._pt*self
             xf = self.strip_translation()
-            other._vec = other._vec*xf
-            return other
+            vec = other._vec*xf
+            print pt, vec
+            if isinstance(other, Line) : return Line(pt,vec)
+            if isinstance(other, Ray) : return Ray(pt,vec)
+            if isinstance(other, Segment) : return Segment(pt,vec)
             
         if isinstance(other, CS) : 
             cs = other
@@ -316,19 +308,7 @@ class Xform(object):
             pt = Point(tup[0],tup[1],tup[2])
             pt.copy_props(other)
             return pt
-            '''
-            if other.is_baseless : 
-                tup = self._xform_tuple(other.to_tuple())
-                pt = Point(tup[0],tup[1],tup[2])
-                pt.copy_props(other)
-                return pt
-            else :
-                tup = self._xform_tuple(other.basis_stripped().to_tuple())
-                pt = Point(tup[0],tup[1],tup[2],basis=other.basis)
-                pt.copy_props(other)
-                return pt
-            '''
-
+        
         if isinstance(other, Vec) : 
             tup = self._xform_tuple(other.to_tuple())
             vec = Vec(tup[0],tup[1],tup[2])
@@ -340,7 +320,7 @@ class Xform(object):
             cir = Circle(pln,other.rad)
             cir.copy_props(other)
             return cir 
-
+        
         if isinstance(other, Plane) : 
             pln = other
             tup = self._xform_tuple(pln.origin.to_tuple())
@@ -354,9 +334,11 @@ class Xform(object):
             pln.copy_props(other)
             return pln
 
-
-        raise NotImplementedError("can't xform that thing")
-
+        
+        raise NotImplementedError("can't xform an object of type {}".format(type(other)))
+        
+        
+        
     def _xform_tuple(self,tup):
 
         return (
