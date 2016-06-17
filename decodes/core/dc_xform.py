@@ -22,16 +22,16 @@ class Xform(object):
             self._m = matrix
         else :
             self._m = [0.0]*16
-            self.m00 = value
-            self.m11 = value
-            self.m22 = value
-            self.m33 = 1.0
+            self.c11 = value
+            self.c22 = value
+            self.c33 = value
+            self.c44 = 1.0
             
     def __repr__(self):
-        return ( "xform\t[{},{},{},{}]".format(self.m00,self.m01,self.m02,self.m03) +
-        "\n\t\t[{},{},{},{}]".format(self.m10,self.m11,self.m12,self.m13) +
-        "\n\t\t[{},{},{},{}]".format(self.m20,self.m21,self.m22,self.m23) +
-        "\n\t\t[{},{},{},{}]".format(self.m30,self.m31,self.m32,self.m33) )
+        return ( "xform\t[{},{},{},{}]".format(self.c11,self.c12,self.c13,self.c14) +
+        "\n\t\t[{},{},{},{}]".format(self.c21,self.c22,self.c23,self.c24) +
+        "\n\t\t[{},{},{},{}]".format(self.c31,self.c32,self.c33,self.c34) +
+        "\n\t\t[{},{},{},{}]".format(self.c41,self.c42,self.c43,self.c44) )
     '''
     """an Xform can act as a basis for a point"""
     def eval(self,other):
@@ -56,9 +56,9 @@ class Xform(object):
         
         m = list(self._m)
         xf = Xform(matrix = m)
-        xf.m03 = 0
-        xf.m13 = 0
-        xf.m23 = 0
+        xf.c14 = 0
+        xf.c24 = 0
+        xf.c34 = 0
         return xf
     
     @staticmethod
@@ -71,9 +71,9 @@ class Xform(object):
             :rtype: Geometry
         """
         xf = Xform()
-        xf.m03 = vec.x
-        xf.m13 = vec.y
-        xf.m23 = vec.z
+        xf.c14 = vec.x
+        xf.c24 = vec.y
+        xf.c34 = vec.z
         return xf
 
     @staticmethod
@@ -87,19 +87,19 @@ class Xform(object):
         """
         if not origin:
             xf = Xform()
-            xf.m00 = factor
-            xf.m11 = factor
-            xf.m22 = factor
+            xf.c11 = factor
+            xf.c22 = factor
+            xf.c33 = factor
             return xf
         else:
             xf = Xform()
-            xf.m00 = factor
-            xf.m11 = factor
-            xf.m22 = factor
+            xf.c11 = factor
+            xf.c22 = factor
+            xf.c33 = factor
 
-            xf.m03 = (1-factor)*origin.x
-            xf.m13 = (1-factor)*origin.y
-            xf.m23 = (1-factor)*origin.z
+            xf.c14 = (1-factor)*origin.x
+            xf.c24 = (1-factor)*origin.y
+            xf.c34 = (1-factor)*origin.z
             return xf
 
     @staticmethod
@@ -119,13 +119,13 @@ class Xform(object):
         
         xf = Xform()
         if plane=="world_xy" :
-            xf.m22 *= -1
+            xf.c33 *= -1
             return xf
         elif plane=="world_xz" :
-            xf.m11 *= -1
+            xf.c22 *= -1
             return xf
         elif plane=="world_yz" :
-            xf.m00 *= -1
+            xf.c11 *= -1
             return xf
         else:
             if isinstance(plane, CS) : 
@@ -168,17 +168,17 @@ class Xform(object):
                 cost = math.cos(kargs["angle"])
                 sint = math.sin(kargs["angle"])
 
-                xf.m00 = u2+(1-u2)*cost
-                xf.m01 = uv*(1-cost)- w * sint
-                xf.m02 = uw*(1-cost)+ v * sint
+                xf.c11 = u2+(1-u2)*cost
+                xf.c12 = uv*(1-cost)- w * sint
+                xf.c13 = uw*(1-cost)+ v * sint
 
-                xf.m10 = uv*(1-cost)+ w * sint
-                xf.m11 = v2+(1-v2) * cost
-                xf.m12 = vw*(1-cost)- u * sint
+                xf.c21 = uv*(1-cost)+ w * sint
+                xf.c22 = v2+(1-v2) * cost
+                xf.c23 = vw*(1-cost)- u * sint
 
-                xf.m20 = uw*(1-cost)- v * sint
-                xf.m21 = vw*(1-cost)+ u * sint
-                xf.m22 = w2+(1-w2)*cost
+                xf.c31 = uw*(1-cost)- v * sint
+                xf.c32 = vw*(1-cost)+ u * sint
+                xf.c33 = w2+(1-w2)*cost
                 return xf
             else:
                 raise
@@ -232,22 +232,22 @@ class Xform(object):
         if isinstance(other, Xform) : 
             xf = Xform()
             xf._m = [
-                self.m00 * other.m00 + self.m01 * other.m10 + self.m02 * other.m20 + self.m03 * other.m30,
-                self.m00 * other.m01 + self.m01 * other.m11 + self.m02 * other.m21 + self.m03 * other.m31,
-                self.m00 * other.m02 + self.m01 * other.m12 + self.m02 * other.m22 + self.m03 * other.m32,
-                self.m00 * other.m03 + self.m01 * other.m13 + self.m02 * other.m23 + self.m03 * other.m33,
-                self.m10 * other.m00 + self.m11 * other.m10 + self.m12 * other.m20 + self.m13 * other.m30,
-                self.m10 * other.m01 + self.m11 * other.m11 + self.m12 * other.m21 + self.m13 * other.m31,
-                self.m10 * other.m02 + self.m11 * other.m12 + self.m12 * other.m22 + self.m13 * other.m32,
-                self.m10 * other.m03 + self.m11 * other.m13 + self.m12 * other.m23 + self.m13 * other.m33,
-                self.m20 * other.m00 + self.m21 * other.m10 + self.m22 * other.m20 + self.m23 * other.m30,
-                self.m20 * other.m01 + self.m21 * other.m11 + self.m22 * other.m21 + self.m23 * other.m31,
-                self.m20 * other.m02 + self.m21 * other.m12 + self.m22 * other.m22 + self.m23 * other.m32,
-                self.m20 * other.m03 + self.m21 * other.m13 + self.m22 * other.m23 + self.m23 * other.m33,
-                self.m30 * other.m00 + self.m31 * other.m10 + self.m32 * other.m20 + self.m33 * other.m30,
-                self.m30 * other.m01 + self.m31 * other.m11 + self.m32 * other.m21 + self.m33 * other.m31,
-                self.m30 * other.m02 + self.m31 * other.m12 + self.m32 * other.m22 + self.m33 * other.m32,
-                self.m30 * other.m03 + self.m31 * other.m13 + self.m32 * other.m23 + self.m33 * other.m33,
+                self.c11 * other.c11 + self.c12 * other.c21 + self.c13 * other.c31 + self.c14 * other.c41,
+                self.c11 * other.c12 + self.c12 * other.c22 + self.c13 * other.c32 + self.c14 * other.c42,
+                self.c11 * other.c13 + self.c12 * other.c23 + self.c13 * other.c33 + self.c14 * other.c43,
+                self.c11 * other.c14 + self.c12 * other.c24 + self.c13 * other.c34 + self.c14 * other.c44,
+                self.c21 * other.c11 + self.c22 * other.c21 + self.c23 * other.c31 + self.c24 * other.c41,
+                self.c21 * other.c12 + self.c22 * other.c22 + self.c23 * other.c32 + self.c24 * other.c42,
+                self.c21 * other.c13 + self.c22 * other.c23 + self.c23 * other.c33 + self.c24 * other.c43,
+                self.c21 * other.c14 + self.c22 * other.c24 + self.c23 * other.c34 + self.c24 * other.c44,
+                self.c31 * other.c11 + self.c32 * other.c21 + self.c33 * other.c31 + self.c34 * other.c41,
+                self.c31 * other.c12 + self.c32 * other.c22 + self.c33 * other.c32 + self.c34 * other.c42,
+                self.c31 * other.c13 + self.c32 * other.c23 + self.c33 * other.c33 + self.c34 * other.c43,
+                self.c31 * other.c14 + self.c32 * other.c24 + self.c33 * other.c34 + self.c34 * other.c44,
+                self.c41 * other.c11 + self.c42 * other.c21 + self.c43 * other.c31 + self.c44 * other.c41,
+                self.c41 * other.c12 + self.c42 * other.c22 + self.c43 * other.c32 + self.c44 * other.c42,
+                self.c41 * other.c13 + self.c42 * other.c23 + self.c43 * other.c33 + self.c44 * other.c43,
+                self.c41 * other.c14 + self.c42 * other.c24 + self.c43 * other.c34 + self.c44 * other.c44,
             ]
             return xf
         
@@ -366,105 +366,144 @@ class Xform(object):
             )
     
     @property 
-    def m00(self): 
-        return self._m[0]
+    def c11(self): return self._m[0]
+    @c11.setter
+    def c11(self,value): self._m[0] = value
+    @property
+    def c12(self): return self._m[1]
+    @c12.setter
+    def c12(self,value): self._m[1] = value
+    @property
+    def c13(self): return self._m[2]
+    @c13.setter
+    def c13(self,value): self._m[2] = value
+    @property
+    def c14(self):  return self._m[3]
+    @c14.setter
+    def c14(self,value): self._m[3] = value
+    
+    @property
+    def c21(self):  return self._m[4]
+    @c21.setter
+    def c21(self,value): self._m[4] = value
+    @property
+    def c22(self): return self._m[5]
+    @c22.setter
+    def c22(self,value): self._m[5] = value
+    @property
+    def c23(self): return self._m[6]
+    @c23.setter
+    def c23(self,value): self._m[6] = value
+    @property
+    def c24(self): return self._m[7]
+    @c24.setter
+    def c24(self,value): self._m[7] = value
+    
+    @property
+    def c31(self): return self._m[8]
+    @c31.setter
+    def c31(self,value): self._m[8] = value
+    @property
+    def c32(self): return self._m[9]
+    @c32.setter
+    def c32(self,value):  self._m[9] = value
+    @property
+    def c33(self):  return self._m[10]
+    @c33.setter
+    def c33(self,value): self._m[10] = value
+    @property
+    def c34(self): return self._m[11]
+    @c34.setter
+    def c34(self,value):  self._m[11] = value
+    
+    @property
+    def c41(self): return self._m[12]
+    @c41.setter
+    def c41(self,value): self._m[12] = value
+    @property
+    def c42(self): return self._m[13]
+    @c42.setter
+    def c42(self,value): self._m[13] = value
+    @property
+    def c43(self): return self._m[14]
+    @c43.setter
+    def c43(self,value): self._m[14] = value
+    @property
+    def c44(self): return self._m[15]
+    @c44.setter
+    def c44(self,value): self._m[15] = value        
+    
+    
+    
+    
+    
+    @property 
+    def m00(self): return self._m[0]
     @m00.setter
-    def m00(self,value): 
-        self._m[0] = value
+    def m00(self,value): self._m[0] = value
     @property
-    def m01(self):   
-        return self._m[1]
+    def m01(self): return self._m[1]
     @m01.setter
-    def m01(self,value):
-        self._m[1] = value
+    def m01(self,value): self._m[1] = value
     @property
-    def m02(self):
-        return self._m[2]
+    def m02(self): return self._m[2]
     @m02.setter
-    def m02(self,value):
-        self._m[2] = value
+    def m02(self,value): self._m[2] = value
     @property
-    def m03(self):       
-        return self._m[3]
+    def m03(self):  return self._m[3]
     @m03.setter
-    def m03(self,value): 
-        self._m[3] = value
+    def m03(self,value): self._m[3] = value
     
     @property
-    def m10(self):      
-        return self._m[4]
+    def m10(self):  return self._m[4]
     @m10.setter
-    def m10(self,value):  
-        self._m[4] = value
+    def m10(self,value): self._m[4] = value
     @property
-    def m11(self):      
-        return self._m[5]
+    def m11(self): return self._m[5]
     @m11.setter
-    def m11(self,value):   
-        self._m[5] = value
+    def m11(self,value): self._m[5] = value
     @property
-    def m12(self):     
-        return self._m[6]
+    def m12(self): return self._m[6]
     @m12.setter
-    def m12(self,value):
-        self._m[6] = value
+    def m12(self,value): self._m[6] = value
     @property
-    def m13(self):     
-        return self._m[7]
+    def m13(self): return self._m[7]
     @m13.setter
-    def m13(self,value):
-        self._m[7] = value
+    def m13(self,value): self._m[7] = value
     
     @property
-    def m20(self):      
-        return self._m[8]
+    def m20(self): return self._m[8]
     @m20.setter
-    def m20(self,value):   
-        self._m[8] = value
+    def m20(self,value): self._m[8] = value
     @property
-    def m21(self):     
-        return self._m[9]
+    def m21(self): return self._m[9]
     @m21.setter
-    def m21(self,value):
-        self._m[9] = value
+    def m21(self,value):  self._m[9] = value
     @property
-    def m22(self):     
-        return self._m[10]
+    def m22(self):  return self._m[10]
     @m22.setter
-    def m22(self,value):  
-        self._m[10] = value
+    def m22(self,value): self._m[10] = value
     @property
-    def m23(self):     
-        return self._m[11]
+    def m23(self): return self._m[11]
     @m23.setter
-    def m23(self,value): 
-        self._m[11] = value
+    def m23(self,value):  self._m[11] = value
     
     @property
-    def m30(self):   
-        return self._m[12]
+    def m30(self): return self._m[12]
     @m30.setter
-    def m30(self,value):   
-        self._m[12] = value
+    def m30(self,value): self._m[12] = value
     @property
-    def m31(self):     
-        return self._m[13]
+    def m31(self): return self._m[13]
     @m31.setter
-    def m31(self,value):
-        self._m[13] = value
+    def m31(self,value): self._m[13] = value
     @property
-    def m32(self):    
-        return self._m[14]
+    def m32(self): return self._m[14]
     @m32.setter
-    def m32(self,value):  
-        self._m[14] = value
+    def m32(self,value): self._m[14] = value
     @property
-    def m33(self):      
-        return self._m[15]
+    def m33(self): return self._m[15]
     @m33.setter
-    def m33(self,value):   
-        self._m[15] = value        
-
+    def m33(self,value): self._m[15] = value    
     
 
 
