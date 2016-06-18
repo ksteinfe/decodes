@@ -266,7 +266,6 @@ class Xform(object):
             pt = other._pt*self
             xf = self.strip_translation()
             vec = other._vec*xf
-            print pt, vec
             if isinstance(other, Line) : return Line(pt,vec)
             if isinstance(other, Ray) : return Ray(pt,vec)
             if isinstance(other, Segment) : return Segment(pt,vec)
