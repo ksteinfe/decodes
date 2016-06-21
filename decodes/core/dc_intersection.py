@@ -118,17 +118,14 @@ class Intersector(object):
         # sort by order found in whitelist collection
         a,b = sorted( [a,b], key = lambda obj: good_types.index(type(obj)) )
         type_a, type_b = type(a), type(b)
-        
-        ignore_backface = False
-        if "ignore_backface" in kargs: ignore_backface = kargs['ignore_backface']
-        
+                
         # INTERSECTIONS WITH A PLANE
         if type_a == Plane:
             plane, other = a,b
 
-            if type_b == Vec : return self._ray_plane(Ray(Point(),other),plane,ignore_backface)
-            if type_b == Line : return self._line_plane(other,plane,ignore_backface)
-            if type_b == Ray : return self._ray_plane(other,plane,ignore_backface)
+            if type_b == Vec : return self._ray_plane(Ray(Point(),other),plane,**kargs)
+            if type_b == Line : return self._line_plane(other,plane,**kargs)
+            if type_b == Ray : return self._ray_plane(other,plane,**kargs)
             if type_b == Segment : return self._seg_plane(other,plane)
             if type_b == PLine : return self._pline_plane(other,plane)
             if type_b == Circle : return self._circle_plane(other,plane)
@@ -146,7 +143,7 @@ class Intersector(object):
         # INTERSECTIONS WITH A PGON
         if type_a == RGon or type_a == PGon:
             pgon, other = a,b
-            if isinstance(other,LinearEntity) : return self._line_pgon(other,pgon,ignore_backface)
+            if isinstance(other,LinearEntity) : return self._line_pgon(other,pgon,**kargs)
 
         # INTERSECTIONS WITH A LINE
         # last resort for Line-Line intersections
@@ -156,7 +153,7 @@ class Intersector(object):
         raise NotImplementedError("I don't know how to intersect a %s with a %s"%(type_a.__name__,type_b.__name__))
 
 
-    def _pgon_plane(self,pgon,plane,ignore_backface=False):
+    def _pgon_plane(self,pgon,plane,**kargs):
         """ Intersects a Polygon with a Plane. Upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection.
         
             :param line: Line to intersect.
@@ -176,7 +173,7 @@ class Intersector(object):
         # TODO
         return False
 
-    def _line_pgon(self,line,pgon,ignore_backface=False):
+    def _line_pgon(self,line,pgon,**kargs):
         """ Intersects a  LinearEntity with a PGon. If the LinearEntity lies in the Plane of PGon, all Segments of intersection will be returned and Intersector.dist property will be set to 0. If the line and plane of PGon intersect at a Point, the Intersector.dist property to the distance between line.spt and the point of intersection. 
         TODO - once line_line_collinear is incorporated, this will be able to handle the case when the LinearEntity overlaps any of the PGon edges
     
@@ -190,6 +187,9 @@ class Intersector(object):
         :rtype: bool
             
         """
+        ignore_backface = False
+        if "ignore_backface" in kargs: ignore_backface = kargs['ignore_backface']
+    
         #first find intersection between LinearEntity and Plane of PGon
         xsec = Intersector()
         basis_success = xsec.of(pgon.basis.xy_plane,line,ignore_backface = ignore_backface)
@@ -239,7 +239,7 @@ class Intersector(object):
             return True
             
             
-    def _line_plane(self,line,plane,ignore_backface=False):
+    def _line_plane(self,line,plane,**kargs):
         """ Intersects a Line with a Plane. Upon success, the Intersector.dist property will be set to the distance between line.spt and the point of intersection.
         
             :param line: Line to intersect.
@@ -252,6 +252,9 @@ class Intersector(object):
             :rtype: bool
             
         """
+        ignore_backface = False
+        if "ignore_backface" in kargs: ignore_backface = kargs['ignore_backface']
+        
         if plane.contains(line.spt) and plane.contains(line.spt+line.vec):
             self.log = "LinearEntity lies in the Plane"
             self.dist = 0.0
@@ -275,7 +278,7 @@ class Intersector(object):
         return True
 
         
-    def _ray_plane(self,ray,plane,ignore_backface=False):
+    def _ray_plane(self,ray,plane,**kargs):
         """ Intersects a Ray with a Plane. Upon success the Intersector.dist property will be set to the distance between the ray.spt and the point of intersection.
         
             :param ray: Ray to intersect.
@@ -288,6 +291,8 @@ class Intersector(object):
             :rtype: bool
             
         """
+        ignore_backface = False
+        if "ignore_backface" in kargs: ignore_backface = kargs['ignore_backface']
     
         xsec = Intersector()
         line_success = xsec._line_plane(ray,plane,ignore_backface = ignore_backface)
