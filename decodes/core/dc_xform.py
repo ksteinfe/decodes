@@ -96,16 +96,32 @@ class Xform(object):
         #TODO: Re-implement this method without using the Rhinocommon Kernel
         
         xf = Xform()
-        if plane=="world_xy" :
-            xf.c33 *= -1
+        
+        if isinstance(plane, basestring):
+            if plane=="world_xy" : xf.c33 *= -1
+            elif plane=="world_xz" : xf.c22 *= -1
+            elif plane=="world_yz" : xf.c11 *= -1
+            else: 
+                raise NotImplementedError("Xform.mirror accepts only the following string values for 'plane':/n'world_xy','world_xz','world_yz'")
             return xf
-        elif plane=="world_xz" :
-            xf.c22 *= -1
-            return xf
-        elif plane=="world_yz" :
-            xf.c11 *= -1
-            return xf
-        else:
+        
+        nx,ny,nz = plane._vec.x, plane._vec.y, plane._vec.z
+        origin = plane.origin
+        xf_plane = Xform()
+        xf_plane.m00 = 1-2*nx*nx
+        xf_plane.m01 = -2*nx*ny
+        xf_plane.m02 = -2*nx*nz
+        xf_plane.m10 = -2*nx*ny
+        xf_plane.m11 = 1-2*ny*ny
+        xf_plane.m12 = -2*ny*nz
+        xf_plane.m20 = -2*nx*nz
+        xf_plane.m21 = -2*ny*nz
+        xf_plane.m22 = 1-2*nz*nz
+        xf_o = Xform.translation(Vec(origin))
+        xf_minuso = Xform.translation(-Vec(origin))
+        return xf_o*xf_plane*xf_minuso           
+        
+        """
             if isinstance(plane, CS) : 
                 #TODO: do this ourselves instead
                 import Rhino
@@ -115,7 +131,8 @@ class Xform(object):
                 return from_rgtransform(rh_xform)
         
         raise NotImplementedError("Xform.mirror currently accepts the following values for 'plane':/n'world_xy','world_xz','world_yz'")
-
+        """
+        
     @staticmethod
     def rotation(**kargs):
         """ Rotates an object around by a center and a rotation angle OR by a center, an axis and a rotation angle. 

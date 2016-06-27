@@ -488,6 +488,7 @@ class Vec(Geometry):
             
                 Vec.bisector(vec_1, vec_2)
         """
+        if v0.is_parallel(v1): raise GeometricError("Cannot find the bisector of parallel vectors")
         return Vec.average([v0.normalized(),v1.normalized()]).normalized()
         
         
@@ -506,6 +507,7 @@ class Vec(Geometry):
             
                 Vec.bisectors(vec_1, vec_2)
         """
+        if v0.is_parallel(v1): raise GeometricError("Cannot find the bisector of parallel vectors")
         va, vb = v0.normalized(),v1.normalized()
         return Vec.average([va,vb]).normalized(), Vec.average([-va,vb]).normalized(), Vec.average([-va,-vb]).normalized(), Vec.average([va,-vb]).normalized()
 
