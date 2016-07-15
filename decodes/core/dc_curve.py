@@ -606,7 +606,7 @@ class Curve(HasBasis,IsParametrized):
 
 
     @staticmethod
-    def circle(ctr,rad,ival=Interval.twopi()):
+    def circle(ctr=Point(),rad=1.0,ival=Interval.twopi()):
         """| Constructs a Curve object that describes a circle given: a center (Point) and radius (float).
            | The plane of the circle will always be parallel to the xy-plane.
         
