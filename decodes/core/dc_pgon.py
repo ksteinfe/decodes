@@ -48,7 +48,7 @@ class PGon(HasPts):
                 super(PGon,self).__init__([Vec(v.x,v.y) for v in verts],cs)
             else:
                 plane = Plane.from_pts(vertices[0],vertices[1],vertices[2])
-                if all([plane.near(v)[2] < tol for v in vertices]):
+                if all([plane.near(v)[2] < EPSILON for v in vertices]):
                     cs = CS(vertices[0],Vec(vertices[0],vertices[1]),Vec(vertices[0],Point.centroid(vertices)))
                     verts = [cs.deval(v) for v in vertices]
                     super(PGon,self).__init__([Vec(v.x,v.y) for v in verts],cs)
@@ -355,7 +355,7 @@ class PGon(HasPts):
                 my_pgon.inflate()
         """
         
-        ipts = [Vec.interpolate(self._verts[n],self._verts[n-1],rotation) for n in range(len(self._verts))]
+        ipts = [Vec.interpolate(self._verts[n],self._verts[n-1],t) for n in range(len(self._verts))]
         return PGon(ipts,self._basis)
     
     
@@ -690,7 +690,8 @@ class RGon(PGon):
                 my_rgon.circle_inscr
             
         """
-        return Circle(self._basis.xy_plane,self.radius)
+        #return Circle(self._basis.xy_plane, self.radius)
+        return Circle(Plane(self.centroid, self._basis.z_axis),self.radius)
 
     @property
     def circle_cirscr(self):
@@ -700,7 +701,8 @@ class RGon(PGon):
             :rtype: Circle
             
         """
-        return Circle(self._basis.xy_plane,self.apothem)
+        #return Circle(self._basis.xy_plane, self.apothem)
+        return Circle(Plane(self.centroid, self._basis.z_axis),self.apothem)
 
     @property
     def interior_angle(self):
@@ -733,17 +735,17 @@ class RGon(PGon):
             
             ::
             
-                my_rgon.inflate()
+                my_rgon.inflate(t)
             
         """
         pt = Point.interpolate(self.pts[0],self.pts[1],t)
-        o = self._basis.origin
+        #o = self._basis.origin
+        o = self.centroid
         x = Vec(o,pt)
         y = self._basis.z_axis.cross(x)
-        basis = CS(o,x,y)
-        return RGon(self._nos,o.dist(pt),basis)
+        return RGon(self._nos, basis = CS(o,x,y), radius = o.dist(pt))
 
-    def deflate(self):
+    def deflate(self, t=0.5):
         """ Returns a regular polygon that circumscribes this one while maintaining the same number of sides.
         
             :result: a regular polygon circumscribing this one.
@@ -751,15 +753,15 @@ class RGon(PGon):
             
             ::
             
-                my_rgon.deflate()
+                my_rgon.deflate(t)
             
         """
-        
-        o = self._basis.origin
-        x = Vec(o,Point.interpolate(self.pts[0],self.pts[1]))
+        pt = Point.interpolate(self.pts[0],self.pts[1],t)
+        #o = self._basis.origin
+        o = self.centroid
+        x = Vec(o,pt)
         y = self._basis.z_axis.cross(x)
-        basis = CS(o,x,y)
-        return RGon(self._nos,basis=basis,apothem=self.radius)
+        return RGon(self._nos,basis=CS(o,x,y),apothem=self.radius)
 
     def to_pgon(self):
         """ Returns the PGon equivalent of this RGon.
