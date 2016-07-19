@@ -579,8 +579,11 @@ class RGon(PGon):
         if num_of_sides < 3 : raise GeometricError("Cannot create a regular polygon with fewer than three sides.")
         if radius is None and edge_length is None and apothem is None : raise GeometricError("You must specify one and only one of the following: radius, edge length, apothem")
         if radius is not None and edge_length is not None  and apothem is not None : raise GeometricError("You must specify one and only one of the following: radius, edge length, apothem")
+        #TOOD: test that one and only one have been set
         self._nos = num_of_sides
-
+        
+        if basis is None : basis = CS()
+        
         if edge_length is not None: 
             if edge_length <= 0 : raise GeometricError("edge_length must be greater than zero")
             self._edge_length = edge_length
@@ -742,8 +745,7 @@ class RGon(PGon):
             
         """
         pt = Point.interpolate(self.pts[0],self.pts[1],t)
-        #o = self._basis.origin
-        o = self.centroid
+        o = self._basis.origin
         x = Vec(o,pt)
         y = self._basis.z_axis.cross(x)
         return RGon(self._nos, basis = CS(o,x,y), radius = o.dist(pt))
@@ -764,8 +766,7 @@ class RGon(PGon):
         """        
         pt_a = Point.interpolate(self.pts[0],self.pts[1],t)
         pt_b = Point.interpolate(self.pts[-1],self.pts[0],t)
-        #o = self._basis.origin
-        o = self.centroid
+        o = self._basis.origin
         x = Vec(o,pt_a)
         y = self._basis.z_axis.cross(x) 
         if (t == 0.5):
