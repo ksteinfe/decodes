@@ -729,7 +729,10 @@ class RGon(PGon):
 
     def inflate(self, t=0.5):
         """ Returns a regular polygon inscribed inside this one while maintaining the same number of sides.
-        
+            Optionally, you may set parameter t 0->1
+           
+            :param t: A decimal number between [0:1].
+            :type t: float
             :result: An regular inscribed polygon.
             :rtype: RGon
             
@@ -747,7 +750,10 @@ class RGon(PGon):
 
     def deflate(self, t=0.5):
         """ Returns a regular polygon that circumscribes this one while maintaining the same number of sides.
-        
+            Optionally, you may set parameter t 0->1
+           
+            :param t: A decimal number between [0:1].
+            :type t: float       
             :result: a regular polygon circumscribing this one.
             :rtype: RGon
             
@@ -755,13 +761,18 @@ class RGon(PGon):
             
                 my_rgon.deflate(t)
             
-        """
-        pt = Point.interpolate(self.pts[0],self.pts[1],t)
+        """        
+        pt_a = Point.interpolate(self.pts[0],self.pts[1],t)
+        pt_b = Point.interpolate(self.pts[-1],self.pts[0],t)
         #o = self._basis.origin
         o = self.centroid
-        x = Vec(o,pt)
-        y = self._basis.z_axis.cross(x)
-        return RGon(self._nos,basis=CS(o,x,y),apothem=self.radius)
+        x = Vec(o,pt_a)
+        y = self._basis.z_axis.cross(x) 
+        if (t == 0.5):
+            return RGon(self._nos, basis = CS(o,x,y), apothem = self.radius) 
+        vec_perp = (Vec(pt_b, pt_a).cross(self._basis.z_axis)).normalized()
+        return RGon(self._nos, basis = CS(o,x,y), apothem = Vec(o,self.pts[0]).dot(vec_perp))
+  
 
     def to_pgon(self):
         """ Returns the PGon equivalent of this RGon.
