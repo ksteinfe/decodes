@@ -693,9 +693,8 @@ class RGon(PGon):
                 my_rgon.circle_inscr
             
         """
-        #return Circle(self._basis.xy_plane, self.radius)
-        return Circle(Plane(self.centroid, self._basis.z_axis),self.radius)
-
+        return Circle(self._basis.xy_plane, self.radius)
+ 
     @property
     def circle_cirscr(self):
         """ Returns the circumscribed circle of this RGon.
@@ -704,9 +703,8 @@ class RGon(PGon):
             :rtype: Circle
             
         """
-        #return Circle(self._basis.xy_plane, self.apothem)
-        return Circle(Plane(self.centroid, self._basis.z_axis),self.apothem)
-
+        return Circle(self._basis.xy_plane, self.apothem)
+ 
     @property
     def interior_angle(self):
         """ Returns the interior angle of this RGon.
