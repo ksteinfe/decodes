@@ -50,7 +50,7 @@ class Strip():
             result.append(self.filling)
             if self.remainder != None : 
                 r = self.remainder.get_filled()
-                if r <> [] : result.extend(r)
+                if r != [] : result.extend(r)
         return result
 
 
@@ -70,9 +70,9 @@ def bin_strips(lengths = [], stock_size = Interval(100,100)):
             flag = False
             for j, s in enumerate(strips):
                 test_strip = s.can_fit(r)
-                if test_strip <> None:
+                if test_strip != None:
                     test_strip.put_item(r)
-                    print "packing into strip ",j
+                    print("packing into strip ",j)
                     flag = True
                     break
             # if we get here we have not placed the rectangle
@@ -81,7 +81,7 @@ def bin_strips(lengths = [], stock_size = Interval(100,100)):
                 strips.append(Strip(no_strips*stock_size.a, stock_size.b))
                 no_strips += 1
                 strips[no_strips-1].put_item(r)
-                print "adding strip ", no_strips-1
+                print("adding strip ", no_strips-1)
 
         return strips
 
@@ -193,7 +193,7 @@ class Bin():
         else:
             for i in range(1,len(self.filling)) :
                 result = self.filling[i].can_fit(shape)
-                if  result<> None : return result
+                if  result!= None : return result
         return None
 
     def get_polygons(self, bin_filled = Color(1), bin_edges = Color(.5)):
@@ -271,7 +271,7 @@ def bin_polygons(shapes = [], sheet_size = Interval(100,100)):
             flag = False
             for j, s in enumerate(sheets):
                 test_bin = s.can_fit(r)
-                if test_bin <> None:
+                if test_bin != None:
                     test_bin.put_item(r)
 #                    print "packing into bin ",j
                     flag = True
