@@ -1,225 +1,303 @@
 
 
 == TEST_VOXEL ==
-test_bounds_and_cpt (decodes.unit_tests.test_voxel.Tests) ... FAIL
-test_constructor (decodes.unit_tests.test_voxel.Tests) ... ok
+test_bounds_and_cpt (decodes.test.test_voxel.Tests) ... FAIL
+test_constructor (decodes.test.test_voxel.Tests) ... ok
 
 ======================================================================
-FAIL: test_bounds_and_cpt (decodes.unit_tests.test_voxel.Tests)
+FAIL: test_bounds_and_cpt (decodes.test.test_voxel.Tests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "G:\git\decodes\decodes\unit_tests\test_voxel.py", line 26, in test_bounds_and_cpt
+  File "c:\home\code\python\sniffer\decodes\test\test_voxel.py", line 26, in test_bounds_and_cpt
     self.assertEqual(vf.dim_pixel,Vec(3,3,2))
 AssertionError: vec[1.0,1.0,1.0] != vec[3,3,2]
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.005s
+Ran 2 tests in 0.001s
 
 FAILED (failures=1)
 
 
 == TEST_XSECT ==
-test_bad_combonations (decodes.unit_tests.test_xsect.Tests) ... ok
-test_circ_circ (decodes.unit_tests.test_xsect.Tests) ... ok
-test_line_line (decodes.unit_tests.test_xsect.Tests) ... ok
-test_line_plane (decodes.unit_tests.test_xsect.Tests) ... ok
-test_plane_plane (decodes.unit_tests.test_xsect.Tests) ... FAIL
-test_ray_pgon (decodes.unit_tests.test_xsect.Tests) ... ok
-test_ray_plane (decodes.unit_tests.test_xsect.Tests) ... ok
-test_seg_plane (decodes.unit_tests.test_xsect.Tests) ... ok
+test_bad_combonations (decodes.test.test_xsect.Tests) ... ok
+test_circ_circ (decodes.test.test_xsect.Tests) ... ok
+test_line_line (decodes.test.test_xsect.Tests) ... ok
+test_line_plane (decodes.test.test_xsect.Tests) ... FAIL
+test_plane_plane (decodes.test.test_xsect.Tests) ... FAIL
+test_ray_pgon (decodes.test.test_xsect.Tests) ... FAIL
+test_ray_plane (decodes.test.test_xsect.Tests) ... ok
+test_seg_plane (decodes.test.test_xsect.Tests) ... FAIL
 
 ======================================================================
-FAIL: test_plane_plane (decodes.unit_tests.test_xsect.Tests)
+FAIL: test_line_plane (decodes.test.test_xsect.Tests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "G:\git\decodes\decodes\unit_tests\test_xsect.py", line 136, in test_plane_plane
+  File "c:\home\code\python\sniffer\decodes\test\test_xsect.py", line 53, in test_line_plane
+    self.assertEqual(xsec.of(line,pln),False)
+AssertionError: True != False
+
+======================================================================
+FAIL: test_plane_plane (decodes.test.test_xsect.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "c:\home\code\python\sniffer\decodes\test\test_xsect.py", line 136, in test_plane_plane
     self.assertEqual(xsec[0].vec.is_parallel(ln.vec),True) # lines are parallel
 AssertionError: False != True
 
+======================================================================
+FAIL: test_ray_pgon (decodes.test.test_xsect.Tests)
 ----------------------------------------------------------------------
-Ran 8 tests in 0.184s
+Traceback (most recent call last):
+  File "c:\home\code\python\sniffer\decodes\test\test_xsect.py", line 104, in test_ray_pgon
+    self.assertEqual(xsec.of(ray,pgon),False)
+AssertionError: None != False
 
-FAILED (failures=1)
+======================================================================
+FAIL: test_seg_plane (decodes.test.test_xsect.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "c:\home\code\python\sniffer\decodes\test\test_xsect.py", line 81, in test_seg_plane
+    self.assertEqual(xsec.of(seg,pln),False)
+AssertionError: True != False
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.009s
+
+FAILED (failures=4)
 
 
 == TEST_CLASSICAL_SURFACE ==
-test_rotational (decodes.unit_tests.test_classical_surface.Tests) ... ERROR
+test_rotational (decodes.test.test_classical_surface.Tests) ... ERROR
 
 ======================================================================
-ERROR: test_rotational (decodes.unit_tests.test_classical_surface.Tests)
+ERROR: test_rotational (decodes.test.test_classical_surface.Tests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "G:\git\decodes\decodes\unit_tests\test_classical_surface.py", line 19, in test_rotational
-    iso = rot_surf.isocurve(u_val=0.25)
-  File "G:\git\decodes\decodes\extensions\classical_surfaces.py", line 87, in isocurve
-    pt_1 = self.axis.to_line().near_pt(pt_0)
-AttributeError: 'Curve' object has no attribute 'to_line'
+  File "c:\home\code\python\sniffer\decodes\test\test_classical_surface.py", line 13, in test_rotational
+    rot_surf = RotationalSurface(cs,crv)
+  File "c:\home\code\python\sniffer\decodes\extensions\classical_surfaces.py", line 44, in __init__
+    self.center = axis._pt
+AttributeError: 'Curve' object has no attribute '_pt'
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.026s
+Ran 1 test in 0.001s
 
 FAILED (errors=1)
 
 
 == TEST_PGON ==
-test_bounds (decodes.unit_tests.test_pgon.Tests) ... ok
-test_containment (decodes.unit_tests.test_pgon.Tests) ... ok
-test_empty_constructor (decodes.unit_tests.test_pgon.Tests) ... ERROR
-test_inflation (decodes.unit_tests.test_pgon.Tests) ... ok
-test_rgon_construction (decodes.unit_tests.test_pgon.Tests) ... ok
-test_rgon_to_pgon (decodes.unit_tests.test_pgon.Tests) ... ok
-test_segs_and_edges (decodes.unit_tests.test_pgon.Tests) ... ok
+test_bounds (decodes.test.test_pgon.Tests) ... ok
+test_containment (decodes.test.test_pgon.Tests) ... ok
+test_empty_constructor (decodes.test.test_pgon.Tests) ... ERROR
+test_inflation (decodes.test.test_pgon.Tests) ... ok
+test_rgon_construction (decodes.test.test_pgon.Tests) ... ok
+test_rgon_to_pgon (decodes.test.test_pgon.Tests) ... ok
+test_segs_and_edges (decodes.test.test_pgon.Tests) ... FAIL
 
 ======================================================================
-ERROR: test_empty_constructor (decodes.unit_tests.test_pgon.Tests)
+ERROR: test_empty_constructor (decodes.test.test_pgon.Tests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "G:\git\decodes\decodes\unit_tests\test_pgon.py", line 9, in test_empty_constructor
+  File "c:\home\code\python\sniffer\decodes\test\test_pgon.py", line 9, in test_empty_constructor
     pgon = PGon()
-  File "G:\git\decodes\decodes\core\dc_pgon.py", line 26, in __init__
-    if basis is None and vertices is None : raise GeometricError("You must define both a basis and a list of vertices to construct a PGon")
-GeometricError: You must define both a basis and a list of vertices to construct a PGon
+  File "c:\home\code\python\sniffer\decodes\core\dc_pgon.py", line 36, in __init__
+    if basis is None and vertices is None : raise GeometricError("You must define either a basis or a list of vertices (or both) to construct a PGon")
+decodes.core.dc_base.GeometricError: You must define either a basis or a list of vertices (or both) to construct a PGon
+
+======================================================================
+FAIL: test_segs_and_edges (decodes.test.test_pgon.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "c:\home\code\python\sniffer\decodes\test\test_pgon.py", line 27, in test_segs_and_edges
+    func(0,Segment(Point(0,0,3),Point(1,0,3)))
+  File "c:\home\code\python\sniffer\decodes\test\test_pgon.py", line 22, in func
+    self.assertEqual(seg.spt,pgon.seg(n).spt)
+AssertionError: pt[0,0,3] != pt[0.0,0.0,2.0]
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.181s
+Ran 7 tests in 0.007s
+
+FAILED (failures=1, errors=1)
+
+
+== TEST_PLINE ==
+test_empty_constructor (decodes.test.test_pline.Tests) ... ERROR
+test_segs_and_edges (decodes.test.test_pline.Tests) ... ok
+
+======================================================================
+ERROR: test_empty_constructor (decodes.test.test_pline.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "c:\home\code\python\sniffer\decodes\test\test_pline.py", line 9, in test_empty_constructor
+    pline = PLine()
+  File "c:\home\code\python\sniffer\decodes\core\dc_pline.py", line 31, in __init__
+    if vertices is None or len(vertices)<2: raise GeometricError("Plines must be constructed with at least two points")
+decodes.core.dc_base.GeometricError: Plines must be constructed with at least two points
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.003s
 
 FAILED (errors=1)
 
 
-== TEST_PLINE ==
-test_empty_constructor (decodes.unit_tests.test_pline.Tests) ... ok
-test_segs_and_edges (decodes.unit_tests.test_pline.Tests) ... ok
-
-----------------------------------------------------------------------
-Ran 2 tests in 0.079s
-
-OK
-
-
 == TEST_MESH ==
-test_empty_constructor (decodes.unit_tests.test_mesh.Tests) ... ok
-test_explode (decodes.unit_tests.test_mesh.Tests) ... ok
-test_face_access (decodes.unit_tests.test_mesh.Tests) ... ok
-test_simple_constructor (decodes.unit_tests.test_mesh.Tests) ... ok
+test_empty_constructor (decodes.test.test_mesh.Tests) ... ok
+test_explode (decodes.test.test_mesh.Tests) ... ok
+test_face_access (decodes.test.test_mesh.Tests) ... ok
+test_simple_constructor (decodes.test.test_mesh.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.029s
+Ran 4 tests in 0.002s
 
 OK
 
 
 == TEST_POINT ==
-test_based_constructor (decodes.unit_tests.test_point.Tests) ... ok
-test_cull_dups (decodes.unit_tests.test_point.Tests) ... ok
-test_cull_dups2 (decodes.unit_tests.test_point.Tests) ... ok
-test_empty_constructor (decodes.unit_tests.test_point.Tests) ... ok
-test_nearest_point (decodes.unit_tests.test_point.Tests) ... ok
+test_based_constructor (decodes.test.test_point.Tests) ... ERROR
+test_cull_dups (decodes.test.test_point.Tests) ... ok
+test_cull_dups2 (decodes.test.test_point.Tests) ... ok
+test_empty_constructor (decodes.test.test_point.Tests) ... ok
+test_nearest_point (decodes.test.test_point.Tests) ... ok
+
+======================================================================
+ERROR: test_based_constructor (decodes.test.test_point.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "c:\home\code\python\sniffer\decodes\test\test_point.py", line 14, in test_based_constructor
+    pta = BPoint(0,0,0,basis=CS(Point(2,2,2)))
+NameError: name 'BPoint' is not defined
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.030s
+Ran 5 tests in 0.001s
 
-OK
+FAILED (errors=1)
 
 
 == TEST_HAS_PTS ==
-test_appending_points (decodes.unit_tests.test_has_pts.Tests) ... ok
-test_basis_applied_and_stripped (decodes.unit_tests.test_has_pts.Tests) ... ok
-test_centroid (decodes.unit_tests.test_has_pts.Tests) ... ok
-test_item_access (decodes.unit_tests.test_has_pts.Tests) ... ok
-test_manipulating_points (decodes.unit_tests.test_has_pts.Tests) ... ok
-test_swap_basis (decodes.unit_tests.test_has_pts.Tests) ... ok
-test_unsetting (decodes.unit_tests.test_has_pts.Tests) ... ok
+test_appending_points (decodes.test.test_has_pts.Tests) ... ERROR
+test_basis_applied_and_stripped (decodes.test.test_has_pts.Tests) ... ok
+test_centroid (decodes.test.test_has_pts.Tests) ... ok
+test_item_access (decodes.test.test_has_pts.Tests) ... ok
+test_manipulating_points (decodes.test.test_has_pts.Tests) ... FAIL
+test_swap_basis (decodes.test.test_has_pts.Tests) ... ok
+test_unsetting (decodes.test.test_has_pts.Tests) ... ok
+
+======================================================================
+ERROR: test_appending_points (decodes.test.test_has_pts.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "c:\home\code\python\sniffer\decodes\test\test_has_pts.py", line 52, in test_appending_points
+    pgon = PGon(basis=CS(1,2,3))
+  File "c:\home\code\python\sniffer\decodes\core\dc_pgon.py", line 58, in __init__
+    super(PGon,self).__init__([Vec(v.x,v.y) for v in vertices],basis) #HasPts constructor handles initialization of verts and basis
+TypeError: 'NoneType' object is not iterable
+
+======================================================================
+FAIL: test_manipulating_points (decodes.test.test_has_pts.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "c:\home\code\python\sniffer\decodes\test\test_has_pts.py", line 72, in test_manipulating_points
+    self.assertEqual(Point(1,0,-1),pgon.pts[1],"access via the pts function returns a list of point objects, which does not permit manipulation")
+AssertionError: pt[1,0,-1] != pt[1.0,0.0,88] : access via the pts function returns a list of point objects, which does not permit manipulation
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.152s
+Ran 7 tests in 0.008s
 
-OK
+FAILED (failures=1, errors=1)
 
 
 == TEST_CURVE ==
-test_bezier (decodes.unit_tests.test_curve.Tests) ... ok
-test_constructor (decodes.unit_tests.test_curve.Tests) ... ok
-test_division (decodes.unit_tests.test_curve.Tests) ... ok
-test_far (decodes.unit_tests.test_curve.Tests) ... ok
-test_hermite (decodes.unit_tests.test_curve.Tests) ... ok
-test_near (decodes.unit_tests.test_curve.Tests) ... ok
-test_subdivide (decodes.unit_tests.test_curve.Tests) ... ok
-test_tolerance (decodes.unit_tests.test_curve.Tests) ... ok
+test_bezier (decodes.test.test_curve.Tests) ... ok
+test_constructor (decodes.test.test_curve.Tests) ... ok
+test_division (decodes.test.test_curve.Tests) ... ok
+test_far (decodes.test.test_curve.Tests) ... ok
+test_hermite (decodes.test.test_curve.Tests) ... ok
+test_near (decodes.test.test_curve.Tests) ... ok
+test_subdivide (decodes.test.test_curve.Tests) ... ok
+test_tolerance (decodes.test.test_curve.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 8 tests in 0.885s
+Ran 8 tests in 0.029s
 
 OK
 
 
 == TEST_SURFACE ==
-test_curvature (decodes.unit_tests.test_surface.Tests) ... ok
-test_iso_curvature (decodes.unit_tests.test_surface.Tests) ... ok
+test_curvature (decodes.test.test_surface.Tests) ... ok
+test_iso_curvature (decodes.test.test_surface.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.346s
+Ran 2 tests in 0.010s
 
 OK
 
 
 == TEST_PLANE ==
-test_copy_constructors (decodes.unit_tests.test_plane.Tests) ... ok
-test_dist_from_origin (decodes.unit_tests.test_plane.Tests) ... ok
-test_empty_constructor (decodes.unit_tests.test_plane.Tests) ... ok
-test_near (decodes.unit_tests.test_plane.Tests) ... ok
-test_xform (decodes.unit_tests.test_plane.Tests) ... ok
+test_copy_constructors (decodes.test.test_plane.Tests) ... ok
+test_dist_from_origin (decodes.test.test_plane.Tests) ... ok
+test_empty_constructor (decodes.test.test_plane.Tests) ... ok
+test_near (decodes.test.test_plane.Tests) ... ok
+test_xform (decodes.test.test_plane.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.016s
+Ran 5 tests in 0.002s
 
 OK
 
 
 == TEST_INTERVAL ==
-test_empty_constructor (decodes.unit_tests.test_interval.Tests) ... ok
-test_operations (decodes.unit_tests.test_interval.Tests) ... ok
-test_properties (decodes.unit_tests.test_interval.Tests) ... ok
+test_empty_constructor (decodes.test.test_interval.Tests) ... ok
+test_operations (decodes.test.test_interval.Tests) ... ok
+test_properties (decodes.test.test_interval.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.003s
+Ran 3 tests in 0.001s
 
 OK
 
 
 == TEST_LINE ==
-test_line (decodes.unit_tests.test_line.Tests) ... ok
-test_near_pt (decodes.unit_tests.test_line.Tests) ... ok
-test_ray (decodes.unit_tests.test_line.Tests) ... ok
-test_segment (decodes.unit_tests.test_line.Tests) ... ok
+test_line (decodes.test.test_line.Tests) ... ERROR
+test_near_pt (decodes.test.test_line.Tests) ... ok
+test_ray (decodes.test.test_line.Tests) ... ok
+test_segment (decodes.test.test_line.Tests) ... ok
+
+======================================================================
+ERROR: test_line (decodes.test.test_line.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "c:\home\code\python\sniffer\decodes\test\test_line.py", line 21, in test_line
+    self.assertEqual(line.ept,Point(1,0,0))
+AttributeError: 'Line' object has no attribute 'ept'
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.016s
+Ran 4 tests in 0.002s
 
-OK
+FAILED (errors=1)
 
 
 == TEST_VEC ==
-test_angle (decodes.unit_tests.test_vec.Tests) ... ok
-test_dot_and_cross_products (decodes.unit_tests.test_vec.Tests) ... ok
-test_empty_constructor (decodes.unit_tests.test_vec.Tests) ... ok
-test_normalizing (decodes.unit_tests.test_vec.Tests) ... ok
-test_operators (decodes.unit_tests.test_vec.Tests) ... ok
-test_properties (decodes.unit_tests.test_vec.Tests) ... ok
-test_static (decodes.unit_tests.test_vec.Tests) ... ok
+test_angle (decodes.test.test_vec.Tests) ... ok
+test_dot_and_cross_products (decodes.test.test_vec.Tests) ... ok
+test_empty_constructor (decodes.test.test_vec.Tests) ... ok
+test_normalizing (decodes.test.test_vec.Tests) ... ok
+test_operators (decodes.test.test_vec.Tests) ... ok
+test_properties (decodes.test.test_vec.Tests) ... ok
+test_static (decodes.test.test_vec.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.012s
+Ran 7 tests in 0.001s
 
 OK
 
 
 == TEST_XFORM ==
-test_mirror (decodes.unit_tests.test_xform.Tests) ... ok
-test_scale (decodes.unit_tests.test_xform.Tests) ... ok
-test_translation (decodes.unit_tests.test_xform.Tests) ... ok
-test_xform_hasbasis (decodes.unit_tests.test_xform.Tests) ... ok
+test_mirror (decodes.test.test_xform.Tests) ... ok
+test_scale (decodes.test.test_xform.Tests) ... ok
+test_translation (decodes.test.test_xform.Tests) ... ok
+test_xform_hasbasis (decodes.test.test_xform.Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.017s
+Ran 4 tests in 0.001s
 
 OK
