@@ -1,6 +1,6 @@
 from decodes.core import *
 from . import dc_base, dc_interval, dc_vec, dc_point, dc_plane, dc_cs #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
-if VERBOSE_FS: print "dc_circle.py loaded"
+if VERBOSE_FS: print("dc_circle.py loaded")
 
 import copy, collections
 import math

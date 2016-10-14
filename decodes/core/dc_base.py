@@ -1,10 +1,10 @@
 from decodes.core import *
-if VERBOSE_FS: print "base.py loaded"
-import copy,exceptions, collections
+if VERBOSE_FS: print("base.py loaded")
+import copy, collections
 
 
 
-class GeometricError(StandardError):
+class GeometricError(Exception):
     pass
 
 class BasisError(GeometricError):

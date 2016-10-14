@@ -1,6 +1,6 @@
 from decodes.core import *
 from . import dc_base, dc_vec, dc_point, dc_line, dc_plane #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
-if VERBOSE_FS: print "tri.py loaded"
+if VERBOSE_FS: print("tri.py loaded")
 
 class Tri(Geometry):
     
@@ -41,7 +41,7 @@ class Tri(Geometry):
     @property
     def circumcenter(self):
         #http://www.mathopenref.com/trianglecircumcenter.html
-        from .dc_intersection import *
+        from  dc_intersection import Intersector
         xsec = Intersector()
         bsec_ab = self.edge_bisector(0)
         bsec_bc = self.edge_bisector(1)
@@ -60,7 +60,7 @@ class Tri(Geometry):
     @property
     def incenter(self):
         #http://www.mathopenref.com/triangleincenter.html
-        from .dc_intersection import *
+        from  dc_intersection import Intersector
         xsec = Intersector()
         bsec_ab = self.angle_bisector(0)
         bsec_bc = self.angle_bisector(1)

@@ -120,8 +120,8 @@ class Grid(Raster):
         dx = 1 if pt.x > self._ivals_x[add[0]].mid else -1
         dy = 1 if pt.y > self._ivals_y[add[1]].mid else -1
         adds = [add,(add[0]+dx,add[1]),(add[0]+dx,add[1]+dy),(add[0],add[1]+dy)]
-        adds = filter(lambda add: add[0]>=0 and add[0]<self.px_width, adds)
-        adds = filter(lambda add: add[1]>=0 and add[1]<self.px_height, adds)
+        adds = [add for add in adds if add[0]>=0 and add[0]<self.px_width]
+        adds = [add for add in adds if add[1]>=0 and add[1]<self.px_height]
         return sorted(adds)
         
     def _recalculate_base_pts(self):

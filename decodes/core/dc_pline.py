@@ -1,6 +1,6 @@
 from decodes.core import *
 from . import dc_base, dc_vec, dc_point, dc_has_pts #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
-if VERBOSE_FS: print "pline.py loaded"
+if VERBOSE_FS: print("pline.py loaded")
 
 import copy, collections
 
@@ -103,7 +103,7 @@ class PLine(HasPts):
             for s in self : pts.append(s)
             for o in other : pts.append(o)
             pts.pop(len(self))
-            print len(self)
+            print(len(self))
             jpline= PLine(pts)
             return jpline
             
@@ -138,7 +138,7 @@ class PLine(HasPts):
             for s in self : pts.append(s)
             for o in other : pts.append(o)
             jpline= PLine(pts)
-            print "new segment created"
+            print("new segment created")
             return jpline
             
     def seg(self,idx):
