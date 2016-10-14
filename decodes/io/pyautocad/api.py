@@ -23,7 +23,7 @@ except Exception:
     # we are under readthedocs.org and need to mock this
     ACAD = None
 
-import types
+from . import types
 
 logger = logging.getLogger(__name__)
 
@@ -102,12 +102,12 @@ class Autocad(object):
             block = self.doc.ActiveLayout.Block
         object_names = object_name_or_list
         if object_names:
-            if isinstance(object_names, basestring):
+            if isinstance(object_names, str):
                 object_names = [object_names]
             object_names = [n.lower() for n in object_names]
 
         count = block.Count
-        for i in xrange(count):
+        for i in range(count):
             item = block.Item(i)  # it's faster than `for item in block`
             if limit and i >= limit:
                 return
@@ -150,7 +150,7 @@ class Autocad(object):
         """ Prints text in console and in `AutoCAD` prompt
         """
         print(text)
-        self.doc.Utility.Prompt(u"%s\n" % text)
+        self.doc.Utility.Prompt("%s\n" % text)
 
     def get_selection(self, text="Select objects"):
         """ Asks user to select objects

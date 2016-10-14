@@ -87,7 +87,7 @@ class GetstateDict(dict):
         self.active = False
 
     def __getstate__(self):
-        return (self.name, dict(self.items()))
+        return (self.name, dict(list(self.items())))
 
     def __setstate__(self, state):
         self.name, vals = state

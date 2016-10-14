@@ -17,16 +17,16 @@ except NameError:
     set = set
 
 try:
-    unicode = unicode
+    str = str
 except NameError:
-    unicode = str
+    str = str
 
 try:
-    long = long
+    long = int
 except NameError:
     long = int
 
 try:
-    unichr = unichr
+    chr = chr
 except NameError:
-    unichr = chr
+    chr = chr

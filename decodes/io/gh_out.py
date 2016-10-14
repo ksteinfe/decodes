@@ -3,7 +3,7 @@ from ..core import *
 from ..core import dc_base, dc_vec, dc_point, dc_cs, dc_line, dc_pline, dc_mesh, dc_pgon
 from .rhino_out import *
 from . import outie
-if VERBOSE_FS: print "gh_out loaded"
+if VERBOSE_FS: print("gh_out loaded")
 
 import clr, collections
 import Rhino.Geometry as rg
@@ -46,7 +46,7 @@ class GrasshopperOut(outie.Outie):
         
     def _is_leaf(self, items): return not any(self._should_iterate(item) for item in items)
 
-    def _should_iterate(self, item): return isinstance(item, collections.Iterable) and not isinstance(item,basestring)
+    def _should_iterate(self, item): return isinstance(item, collections.Iterable) and not isinstance(item,str)
     
     def _add_branch(self, g, tree, tree_p, path):
         # here we sort out what type of geometry we're dealing with, and call the proper draw functions

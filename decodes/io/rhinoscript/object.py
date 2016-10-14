@@ -1,8 +1,8 @@
 import scriptcontext
 import Rhino
-import utility as rhutil
+from . import utility as rhutil
 import System.Guid, System.Enum
-from layer import __getlayer
+from .layer import __getlayer
 
 
 def CopyObject(object_id, translation=None):

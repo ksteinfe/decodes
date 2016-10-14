@@ -1,9 +1,9 @@
 import scriptcontext
-import utility as rhutil
+from . import utility as rhutil
 import Rhino
 import System.Guid, System.Array
 import math
-import view as rhview
+from . import view as rhview
 
 
 def IsXformIdentity(xform):

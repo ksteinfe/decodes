@@ -1,5 +1,5 @@
 import scriptcontext
-import utility as rhutil
+from . import utility as rhutil
 import Rhino
 
 
@@ -41,7 +41,7 @@ def LinetypeNames(sort=False):
     """
     count = scriptcontext.doc.Linetypes.Count
     rc = []
-    for i in xrange(count):
+    for i in range(count):
         linetype = scriptcontext.doc.Linetypes[i]
         if not linetype.IsDeleted: rc.append(linetype.Name)
     if sort: rc.sort()

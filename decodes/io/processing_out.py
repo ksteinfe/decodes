@@ -1,8 +1,8 @@
 from decodes import *
 from decodes.core import *
 from decodes.core import dc_base, dc_vec, dc_point, dc_cs, dc_line, dc_pline, dc_mesh, dc_pgon
-import outie
-if VERBOSE_FS: print "processing_out loaded"
+from . import outie
+if VERBOSE_FS: print("processing_out loaded")
 
 class ProcessingOut(outie.Outie):
     """outie for pushing stuff to a processing applet"""
@@ -41,7 +41,7 @@ class ProcessingOut(outie.Outie):
         self.app.sphereDetail(0)
         
         if hasattr(self, 'color'):
-            print 'this outie has been assigned a color, i should set the pen now'
+            print('this outie has been assigned a color, i should set the pen now')
     
     def _endDraw(self):
         #print 'i have finihsed drawing stuff to the outie'
@@ -51,7 +51,7 @@ class ProcessingOut(outie.Outie):
         # here we sort out what type of geometry we're dealing with, and call the proper draw functions
         # MUST LOOK FOR CHILD CLASSES BEFORE PARENT CLASSES (points before vecs)
         if hasattr(g, 'props') and 'color' in g.props:
-            print 'this object has its own color assigned'
+            print('this object has its own color assigned')
         
         if isinstance(g, Mesh) : 
             return self._drawMesh(g)

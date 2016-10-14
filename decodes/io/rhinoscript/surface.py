@@ -2,8 +2,8 @@ import scriptcontext
 import math
 import Rhino
 import System.Guid
-import utility as rhutil
-import object as rhobject
+from . import utility as rhutil
+from . import object as rhobject
 
 def AddBox(corners):
     """Adds a new box shaped polysurface to the document

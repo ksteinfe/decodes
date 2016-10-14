@@ -48,7 +48,7 @@ def mtext_to_string(s):
 
     """
 
-    return unformat_mtext(s).replace(u'\\P', u'\n')
+    return unformat_mtext(s).replace('\\P', '\n')
 
 
 def string_to_mtext(s):
@@ -56,7 +56,7 @@ def string_to_mtext(s):
 
     Replaces newllines `\\\\n` with `\\\\P`, etc.
     """
-    return s.replace('\\', '\\\\').replace(u'\n', u'\P')
+    return s.replace('\\', '\\\\').replace('\n', '\P')
 
 
 def text_width(text_item):
@@ -88,7 +88,7 @@ def suppressed_regeneration_of(table):
         table.RegenerateTableSuppressed = False
 
 @contextmanager
-def timing(message=u'Elapsed'):
+def timing(message='Elapsed'):
     """ Context manager for timing execution
 
     :param message: message to print
@@ -108,7 +108,7 @@ def timing(message=u'Elapsed'):
         yield begin
     finally:
         elapsed = (time.time() - begin)
-        print u'%s: %.3f s' % (message, elapsed)
+        print('%s: %.3f s' % (message, elapsed))
 
 
 

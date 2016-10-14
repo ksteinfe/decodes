@@ -160,9 +160,9 @@ class _TableImporter(object):
     def read_xls(self, stream):
         book = xlrd.open_workbook(file_contents=stream.read())
         sheet = book.sheet_by_index(0)
-        for row in xrange(sheet.nrows):
+        for row in range(sheet.nrows):
             columns = []
-            for col in xrange(sheet.ncols):
+            for col in range(sheet.ncols):
                 val = sheet.cell(row, col).value
                 columns.append(val)
             yield columns

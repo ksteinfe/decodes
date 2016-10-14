@@ -24,7 +24,7 @@ def ContextIsGrasshopper():
 #should work all of the time unless we can't find the standard lib
 __cfparse = None
 try:
-    import ConfigParser
+    import configparser
 except ImportError:
     __cfparse = None
 else:
@@ -229,7 +229,7 @@ def GetSettings(filename, section=None, entry=None):
     """
     if __cfparse is None: return scriptcontext.errorhandler()
     try:
-        cp = ConfigParser.ConfigParser()
+        cp = configparser.ConfigParser()
         cp.read(filename)
         if not section: return cp.sections()
         section = string.lower(section)
@@ -410,11 +410,11 @@ def coerce3dpointlist(points, raise_on_error=False):
     if type(points) is list or type(points) is tuple:
         count = len(points)
         if count>0 and (coerce3dpoint(points[0]) is not None):
-            return [coerce3dpoint(points[i], raise_on_error) for i in xrange(count)]
+            return [coerce3dpoint(points[i], raise_on_error) for i in range(count)]
         elif count>2 and type(points[0]) is not list:
             point_count = count/3
             rc = []
-            for i in xrange(point_count):
+            for i in range(point_count):
                 pt = Rhino.Geometry.Point3d(points[i*3], points[i*3+1], points[i*3+2])
                 rc.append(pt)
             return rc
@@ -428,18 +428,18 @@ def coerce2dpointlist(points):
         count = len(points)
         if count>0 and type(points[0]) is Rhino.Geometry.Point2d:
             rc = System.Array.CreateInstance(Rhino.Geometry.Point2d, count)
-            for i in xrange(count): rc[i] = points[i]
+            for i in range(count): rc[i] = points[i]
             return rc
         elif count>1 and type(points[0]) is not list:
             point_count = count/2
             rc = System.Array.CreateInstance(Rhino.Geometry.Point2d,point_count)
-            for i in xrange(point_count):
+            for i in range(point_count):
                 rc[i] = Rhino.Geometry.Point2d(points[i*2], points[i*2+1])
             return rc
         elif count>0 and type(points[0]) is list:
             point_count = count
             rc = System.Array.CreateInstance(Rhino.Geometry.Point2d,point_count)
-            for i in xrange(point_count):
+            for i in range(point_count):
                 pt = points[i]
                 rc[i] = Rhino.Geometry.Point2d(pt[0],pt[1])
             return rc

@@ -1,6 +1,6 @@
 import Rhino
 import scriptcontext
-import utility as rhutil
+from . import utility as rhutil
 import math
 import System.Guid
 

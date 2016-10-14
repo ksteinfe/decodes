@@ -1,5 +1,5 @@
 import scriptcontext
-import utility as rhutil
+from . import utility as rhutil
 import Rhino
 import math
 import System.Guid, System.Array, System.Enum
@@ -312,12 +312,12 @@ def AddNurbsCurve(points, knots, degree, weights=None):
     rational = (weights!=None)
     
     nc = Rhino.Geometry.NurbsCurve(3,rational,degree+1,cvcount)
-    for i in xrange(cvcount):
+    for i in range(cvcount):
         cp = Rhino.Geometry.ControlPoint()
         cp.Location = points[i]
         if weights: cp.Weight = weights[i]
         nc.Points[i] = cp
-    for i in xrange(knotcount): nc.Knots[i] = knots[i]
+    for i in range(knotcount): nc.Knots[i] = knots[i]
     rc = scriptcontext.doc.Objects.AddCurve(nc)
     if rc==System.Guid.Empty: raise Exception("Unable to add curve to document")
     scriptcontext.doc.Views.Redraw()
@@ -897,7 +897,7 @@ def CurveCurveIntersection(curveA, curveB, tolerance=-1):
     rc = Rhino.Geometry.Intersect.Intersection.CurveCurve(curveA, curveB, tolerance, 0.0)
     events = []
     if rc:
-        for i in xrange(rc.Count):
+        for i in range(rc.Count):
             event_type = 1
             if( rc[i].IsOverlap ): event_type = 2
             oa = rc[i].OverlapA
@@ -1303,7 +1303,7 @@ def CurvePoints(curve_id, segment_index=-1):
     curve = rhutil.coercecurve(curve_id, segment_index, True)
     nc = curve.ToNurbsCurve()
     if nc is None: return scriptcontext.errorhandler()
-    points = [nc.Points[i].Location for i in xrange(nc.Points.Count)]
+    points = [nc.Points[i].Location for i in range(nc.Points.Count)]
     return points
 
 
@@ -1428,7 +1428,7 @@ def CurveSurfaceIntersection(curve_id, surface_id, tolerance=-1, angle_tolerance
     rc = Rhino.Geometry.Intersect.Intersection.CurveSurface(curve, surface, tolerance, angle_tolerance)
     events = []
     if rc:
-      for i in xrange(rc.Count):
+      for i in range(rc.Count):
           event_type = 2 if rc[i].IsOverlap else 1
           item = rc[i]
           oa = item.OverlapA

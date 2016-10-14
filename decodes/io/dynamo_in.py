@@ -1,7 +1,7 @@
 from .. import *
 from ..core import *
 from ..core import dc_color, dc_base, dc_vec, dc_point, dc_cs, dc_line, dc_mesh, dc_pgon, dc_xform, dc_intersection
-if VERBOSE_FS: print "dynamo_in loaded"
+if VERBOSE_FS: print("dynamo_in loaded")
 
 
 import clr, collections
@@ -87,13 +87,13 @@ class DynamoIn():
         elif any(p in str(type(dyn_in)) for p in DynamoIn.structure_types): 
             return dyn_in
         else :
-            print "UNKNOWN TYPE: "+str(type(dyn_in))+" is an "+ str(type(dyn_in))
+            print("UNKNOWN TYPE: "+str(type(dyn_in))+" is an "+ str(type(dyn_in)))
             #print inspect.getmro(dyn_in.__class__)
             #if issubclass(dyn_in.__class__, ds.GeometryBase ) : print "this is geometry"
             #print dyn_incoming.TypeHint
             #print dyn_incoming.Description
 
-def _should_iterate(item): return isinstance(item, collections.Iterable) and not isinstance(item,basestring)
+def _should_iterate(item): return isinstance(item, collections.Iterable) and not isinstance(item,str)
 
 def from_dynvec(dyn_vec):
     return Vec(dyn_vec.X,dyn_vec.Y,dyn_vec.Z)

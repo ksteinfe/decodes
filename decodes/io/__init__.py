@@ -1,1 +1,1 @@
-print "io loaded"
+print("io loaded")

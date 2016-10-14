@@ -6,7 +6,7 @@ created by the Pickler class.  The Unpickler uses
 these custom key names to identify dictionaries
 that need to be specially handled.
 """
-from compat import set
+from .compat import set
 
 ID = 'py_id'
 OBJECT = 'py_object'

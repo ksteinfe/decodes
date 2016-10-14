@@ -14,16 +14,16 @@ import operator
 import time
 import types
 
-import tags
-from compat import set
-from compat import unicode
-from compat import long
-from compat import PY3
+from . import tags
+from .compat import set
+from .compat import str
+from .compat import int
+from .compat import PY3
 
 
 SEQUENCES = (list, set, tuple)
 SEQUENCES_SET = set(SEQUENCES)
-PRIMITIVES = set((str, unicode, bool, float, int, long))
+PRIMITIVES = set((str, str, bool, float, int, int))
 
 
 def is_type(obj):
@@ -42,7 +42,7 @@ def is_type(obj):
     if PY3:
         return type(obj) is type
     else:
-        return type(obj) is type or type(obj) is types.ClassType
+        return type(obj) is type or type(obj) is type
 
 
 def is_object(obj):
@@ -293,4 +293,4 @@ def b64decode(payload):
 
 
 def itemgetter(obj, getter=operator.itemgetter(0)):
-    return unicode(getter(obj))
+    return str(getter(obj))

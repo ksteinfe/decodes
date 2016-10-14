@@ -1,5 +1,5 @@
 import scriptcontext
-import utility as rhutil
+from . import utility as rhutil
 import Rhino
 import System.Guid
 

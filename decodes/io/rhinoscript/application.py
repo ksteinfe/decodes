@@ -5,7 +5,7 @@ import Rhino.Commands.Command as rhcommand
 import System.TimeSpan, System.Enum
 import System.Windows.Forms.Screen
 import datetime
-import utility as rhutil
+from . import utility as rhutil
 
 
 def AddAlias(alias, macro):

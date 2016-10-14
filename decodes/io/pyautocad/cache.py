@@ -98,11 +98,11 @@ if __name__ == "__main__":
     class Foo(object):
         @property
         def x(self):
-            print 'consuming time'
+            print('consuming time')
             time.sleep(1)
             return 42
 
     foo = Foo()
     cached_foo = Cached(foo)
     for i in range(5):
-        print cached_foo.x
+        print(cached_foo.x)

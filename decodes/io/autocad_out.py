@@ -2,7 +2,7 @@ from .. import *
 from ..core import *
 from ..core import dc_base, dc_vec, dc_point, dc_cs, dc_line, dc_pline, dc_mesh, dc_pgon
 from . import outie
-if VERBOSE_FS: print "autocad-out loaded"
+if VERBOSE_FS: print("autocad-out loaded")
 
 from decodes.io.pyautocad import *
 

@@ -2,7 +2,7 @@ from .. import *
 from ..core import *
 from ..core import dc_color, dc_base, dc_vec, dc_point, dc_cs, dc_line, dc_mesh, dc_pgon, dc_xform, dc_intersection
 from .rhino_in import *
-if VERBOSE_FS: print "gh_in loaded"
+if VERBOSE_FS: print("gh_in loaded")
 
 import Rhino.Geometry as rg
 import System.Drawing.Color
@@ -76,7 +76,7 @@ class GrasshopperIn():
         elif any(p in str(type(gh_in)) for p in GrasshopperIn.friendly_types) : return gh_in
         elif any(p in str(type(gh_in)) for p in GrasshopperIn.structure_types) : return gh_in
         else :
-            print "UNKNOWN TYPE: "+gh_in_str+" is an "+ str(type(gh_in))
+            print("UNKNOWN TYPE: "+gh_in_str+" is an "+ str(type(gh_in)))
             return gh_in
             #print inspect.getmro(gh_in.__class__)
             #if issubclass(gh_in.__class__, rg.GeometryBase ) : print "this is geometry"

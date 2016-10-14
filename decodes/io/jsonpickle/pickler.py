@@ -7,12 +7,13 @@
 # This software is licensed as described in the file COPYING, which
 # you should have received as part of this distribution.
 
-import util as util
-import tags as tags
-import handlers as handlers
+from . import util as util
+from . import tags as tags
+from . import handlers as handlers
 
-from backend import JSONBackend
-from compat import unicode
+from .backend import JSONBackend
+from .compat import str
+import collections
 
 
 def encode(value,
@@ -217,7 +218,7 @@ class Pickler(object):
                 data[tags.REPR] = '%s/%s' % (obj.__name__,
                                              obj.__name__)
             else:
-                data = unicode(obj)
+                data = str(obj)
             return data
 
         if util.is_dictionary_subclass(obj):
@@ -254,11 +255,11 @@ class Pickler(object):
             data = obj.__class__()
 
         flatten = self._flatten_key_value_pair
-        for k, v in sorted(obj.items(), key=util.itemgetter):
+        for k, v in sorted(list(obj.items()), key=util.itemgetter):
             flatten(k, v, data)
 
         # the collections.defaultdict protocol
-        if hasattr(obj, 'default_factory') and callable(obj.default_factory):
+        if hasattr(obj, 'default_factory') and isinstance(obj.default_factory, collections.Callable):
             flatten('default_factory', obj.default_factory, data)
 
         return data
@@ -274,7 +275,7 @@ class Pickler(object):
         """Flatten a key/value pair into the passed-in dictionary."""
         if not util.is_picklable(k, v):
             return data
-        if not isinstance(k, (str, unicode)):
+        if not isinstance(k, str):
             if self.keys:
                 k = tags.JSON_KEY + encode(k,
                                            reset=False, keys=True,
@@ -284,7 +285,7 @@ class Pickler(object):
                 try:
                     k = repr(k)
                 except:
-                    k = unicode(k)
+                    k = str(k)
         data[k] = self._flatten(v)
         return data
 
