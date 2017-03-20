@@ -60,6 +60,12 @@ class GrasshopperIn():
             if (ispolyline) : return from_rgpolyline(gh_polyline)
         elif type(gh_in) is rg.Polyline:
             return from_rgpolyline(gh_in)
+        
+        # ksteinfe add 3/20/17
+        elif type(gh_in) is rg.PolyCurve: 
+            ispolyline, gh_polyline = gh_in.TryGetPolyline()
+            if (ispolyline) : return from_rgpolyline(gh_polyline)
+            
         elif type(gh_in) is rg.NurbsCurve : 
             #TODO: check if gh_in can be described as a line first...
             ispolyline, gh_polyline = gh_in.TryGetPolyline()
