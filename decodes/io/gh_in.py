@@ -2,7 +2,7 @@ from .. import *
 from ..core import *
 from ..core import dc_color, dc_base, dc_vec, dc_point, dc_cs, dc_line, dc_mesh, dc_pgon, dc_xform, dc_intersection
 from .rhino_in import *
-if VERBOSE_FS: print("gh_in loaded")
+if VERBOSE_FS: print "gh_in loaded"
 
 import Rhino.Geometry as rg
 import System.Drawing.Color
@@ -60,6 +60,12 @@ class GrasshopperIn():
             if (ispolyline) : return from_rgpolyline(gh_polyline)
         elif type(gh_in) is rg.Polyline:
             return from_rgpolyline(gh_in)
+        
+        # ksteinfe add 3/20/17
+        elif type(gh_in) is rg.PolyCurve: 
+            ispolyline, gh_polyline = gh_in.TryGetPolyline()
+            if (ispolyline) : return from_rgpolyline(gh_polyline)
+            
         elif type(gh_in) is rg.NurbsCurve : 
             #TODO: check if gh_in can be described as a line first...
             ispolyline, gh_polyline = gh_in.TryGetPolyline()
@@ -76,7 +82,7 @@ class GrasshopperIn():
         elif any(p in str(type(gh_in)) for p in GrasshopperIn.friendly_types) : return gh_in
         elif any(p in str(type(gh_in)) for p in GrasshopperIn.structure_types) : return gh_in
         else :
-            print("UNKNOWN TYPE: "+gh_in_str+" is an "+ str(type(gh_in)))
+            print "UNKNOWN TYPE: "+gh_in_str+" is an "+ str(type(gh_in))
             return gh_in
             #print inspect.getmro(gh_in.__class__)
             #if issubclass(gh_in.__class__, rg.GeometryBase ) : print "this is geometry"
