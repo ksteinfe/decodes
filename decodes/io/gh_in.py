@@ -114,7 +114,7 @@ import Rhino.Geometry as rg
 import System.Drawing.Color
 for input in inputs : 
         gh_in_str = input.Name
-        vars()[gh_in_str] = GrasshopperIn.get(gh_in_str, eval(gh_in_str))
+        if gh_in_str != "code": vars()[gh_in_str] = GrasshopperIn.get(gh_in_str, eval(gh_in_str))
 """
 
 component_footer_code = ""
