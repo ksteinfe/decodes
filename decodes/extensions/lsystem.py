@@ -2,7 +2,7 @@ from ..core import *
 from math import *
 from ..core import dc_color, dc_base, dc_vec, dc_point, dc_cs, dc_line, dc_mesh, dc_pgon, dc_xform
 import copy
-print "lsystem.py loaded"
+print("lsystem.py loaded")
 
 
 class LEngine(object):

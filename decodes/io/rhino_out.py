@@ -2,7 +2,7 @@ from .. import *
 from ..core import *
 from ..core import dc_base, dc_vec, dc_point, dc_cs, dc_line, dc_pline, dc_mesh, dc_pgon
 from . import outie
-if VERBOSE_FS: print "rhino_out loaded"
+if VERBOSE_FS: print("rhino_out loaded")
 
 import scriptcontext
 import Rhino
@@ -186,7 +186,7 @@ def makelayer(layer_name):
     import System
     layer_index = scriptcontext.doc.Layers.Find(layer_name, True)
     if layer_index>=0:
-        if VERBOSE_FS: print "already have a layer called ", layer_name
+        if VERBOSE_FS: print("already have a layer called ", layer_name)
         return layer_index
         
     layer_index = scriptcontext.doc.Layers.Add(layer_name, System.Drawing.Color.FromArgb(0,0,0))

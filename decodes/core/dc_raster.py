@@ -205,7 +205,7 @@ class Image(Raster):
         filename = filename + ".tga"
 
         if verbose:
-            print "saving image to ",os.path.join(path, filename)
+            print("saving image to ",os.path.join(path, filename))
             from time import time
             t0 = time()
 
@@ -234,7 +234,7 @@ class Image(Raster):
                                         BPP, Orientation)
 
         # Array mdule and format documentation at:  http://docs.python.org/library/array.html
-        data = array.array("B", (255 for i in xrange(self.px_width * self.px_height * 3)))
+        data = array.array("B", (255 for i in range(self.px_width * self.px_height * 3)))
 
         for n,clr in enumerate(self._pixels):
             data[n * 3] = int(clr.b*255)
@@ -243,10 +243,10 @@ class Image(Raster):
 
         if verbose: 
             t1 = time()
-            print 'packing data took: %f' %(t1-t0)
+            print('packing data took: %f' %(t1-t0))
 
         if not os.path.exists(path):
-            if verbose : print "creating folder",path
+            if verbose : print("creating folder",path)
             os.makedirs(path)
         
         datafile = open(os.path.join(path, filename), "wb")
@@ -256,7 +256,7 @@ class Image(Raster):
 
         if verbose: 
             t2 = time()
-            print 'writing file took: %f' %(t2-t1)
+            print('writing file took: %f' %(t2-t1))
 
 
 

@@ -9,12 +9,12 @@
 
 import sys
 
-import util as util
-import tags as tags
-import handlers as handlers
+from . import util as util
+from . import tags as tags
+from . import handlers as handlers
 
-from compat import set
-from backend import JSONBackend
+from .compat import set
+from .backend import JSONBackend
 
 
 def decode(string, backend=None, context=None, keys=False, reset=True,
@@ -155,7 +155,7 @@ class Unpickler(object):
         return self._restore_object_instance_variables(obj, instance)
 
     def _restore_object_instance_variables(self, obj, instance):
-        for k, v in sorted(obj.items(), key=util.itemgetter):
+        for k, v in sorted(list(obj.items()), key=util.itemgetter):
             # ignore the reserved attribute
             if k in tags.RESERVED:
                 continue
@@ -204,7 +204,7 @@ class Unpickler(object):
 
     def _restore_dict(self, obj):
         data = {}
-        for k, v in sorted(obj.items(), key=util.itemgetter):
+        for k, v in sorted(list(obj.items()), key=util.itemgetter):
             self._namestack.append(k)
             if self.keys and k.startswith(tags.JSON_KEY):
                 k = decode(k[len(tags.JSON_KEY):],

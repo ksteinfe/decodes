@@ -1,4 +1,4 @@
-print "http://decod.es"
+print("http://decod.es")
 
 """A Platform-Agnostic Computational Geometry Environment 
 
@@ -8,7 +8,7 @@ print "http://decod.es"
 
 class Outies:
     # list here all the outies we currently support
-    Rhino, Grasshopper, SVG , ACAD, Dynamo,ThreeJS,JSON = range(7)
+    Rhino, Grasshopper, SVG , ACAD, Dynamo,ThreeJS,JSON = list(range(7))
 
 
 # keep this up to date with what outies we support
@@ -67,7 +67,7 @@ def make_out(outtype, name="untitled", path=False, **kargs):
         import io.dynamo_out
         return io.dynamo_out.DynamoOut()
     else :
-        print "!!! hey, i don't have an outie of type foo !!!"
+        print("!!! hey, i don't have an outie of type foo !!!")
         return False
 
 # keep this up to date with what outies we support
@@ -77,5 +77,5 @@ def make_in(intype):
     if intype == innies.Dynamo:
         return innies.DynamoIn()
     if intype == innies.Foo:
-        if VERBOSE : print "!!! hey, i don't have an innie of type foo !!!"
+        if VERBOSE : print("!!! hey, i don't have an innie of type foo !!!")
         return False

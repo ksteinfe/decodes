@@ -79,7 +79,7 @@ class Poisson_Sampler():
                 
             cycles+=1
             if cycles > max_cycles:
-                print 'stopped after {} cycles'.format(max_cycles)
+                print('stopped after {} cycles'.format(max_cycles))
                 break
         
         return sample_points

@@ -61,7 +61,7 @@ class DzTile(object):
         factor = tau_pow[self.rlvl]
         xf_scale = Xform.scale(factor)
         # return an world-space copy of each base_pt 
-        return map(lambda pt:(pt*xf_scale)*self.xf,self._base_pts)
+        return [(pt*xf_scale)*self.xf for pt in self._base_pts]
         
     """
     Constructs a child tile of the specified type, positioned by matching a CS on this tile with a CS on the desired child tile

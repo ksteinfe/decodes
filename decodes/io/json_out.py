@@ -2,11 +2,11 @@ from .. import *
 from ..core import *
 from ..core import dc_base, dc_vec, dc_point, dc_cs, dc_line, dc_mesh, dc_pgon
 from . import outie
-if VERBOSE_FS: print "json_out loaded"
+if VERBOSE_FS: print("json_out loaded")
 
 import os, sys, math
-import cStringIO
-import jsonpickle
+import io
+from . import jsonpickle
 
 class JsonOut(outie.Outie):
     """outie for writing stuff to a ThreeJS scene file"""
@@ -171,7 +171,7 @@ class JsonOut(outie.Outie):
         self._json = jsonpickle.encode(self.geom)
         
         if self._save_file: 
-            print "drawing js to "+self.filepath
+            print("drawing js to "+self.filepath)
             # write buffer to file
             fo = open(self.filepath, "wb")
             fo.write( self.json )

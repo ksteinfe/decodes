@@ -1,7 +1,7 @@
 import Rhino.DocObjects
 import scriptcontext
-import utility as rhutil
-from layer import __getlayer
+from . import utility as rhutil
+from .layer import __getlayer
 
 
 def AddMaterialToLayer(layer):

@@ -1,5 +1,5 @@
 import scriptcontext
-import utility as rhutil
+from . import utility as rhutil
 
 def AddGroup(group_name=None):
     """Adds a new empty group to the document

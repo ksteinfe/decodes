@@ -2,7 +2,7 @@ from decodes import *
 from decodes.core import *
 from decodes.core import dc_base, dc_color
 
-if VERBOSE_FS: print "outie loaded"
+if VERBOSE_FS: print("outie loaded")
 import copy, collections
 
 class Outie(object):
@@ -46,14 +46,14 @@ class Outie(object):
         #returns a list of successful writes
         self._startDraw()
         try:
-            results = map(self._drawGeom, self.geom)
+            results = list(map(self._drawGeom, self.geom))
             if False in results:
-                print "dump not completely successful, the following geometry was not written:"
+                print("dump not completely successful, the following geometry was not written:")
                 i = -1
                 try:
                     while 1:
                         i = results.index(False, i+1)
-                        print str(i) , self.geom[i]
+                        print(str(i) , self.geom[i])
                 except ValueError:
                     pass
         

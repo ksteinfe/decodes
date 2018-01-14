@@ -1,6 +1,6 @@
 import Rhino.DocObjects.Layer
 import scriptcontext
-import utility as rhutil
+from . import utility as rhutil
 import System.Guid
 
 

@@ -1,6 +1,6 @@
 from decodes.core import *
 from . import dc_base, dc_vec, dc_point, dc_has_pts #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
-if VERBOSE_FS: print "mesh.py loaded"
+if VERBOSE_FS: print("mesh.py loaded")
 
 import copy, collections
 

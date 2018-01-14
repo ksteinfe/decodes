@@ -2,7 +2,7 @@ from decodes.core import *
 from . import dc_base #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
 
 import math, random
-if VERBOSE_FS: print "vec.py loaded"
+if VERBOSE_FS: print("vec.py loaded")
 
 
 

@@ -1,4 +1,4 @@
-import utility as rhutil
+from . import utility as rhutil
 import Rhino
 import scriptcontext
 import math

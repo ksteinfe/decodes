@@ -1,6 +1,6 @@
 from decodes.core import *
 from . import dc_base, dc_vec, dc_point, dc_cs, dc_line, dc_mesh, dc_pgon, dc_curve
-if VERBOSE_FS: print "surface.py loaded"
+if VERBOSE_FS: print("surface.py loaded")
 
 
 
@@ -367,7 +367,7 @@ class Surface(IsParametrized):
         # * eliminate when we have a matrix class or can import numpy
         def matrix_mult(matrix1,matrix2):
             if len(matrix1[0]) != len(matrix2):
-                print "Matrices can't be multiplied!"
+                print("Matrices can't be multiplied!")
             else:
                 m = len(matrix1)
                 n = len(matrix1[0])

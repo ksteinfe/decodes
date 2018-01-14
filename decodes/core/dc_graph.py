@@ -1,6 +1,6 @@
 from decodes.core import *
 from . import dc_base, dc_vec, dc_point #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
-if VERBOSE_FS: print "graph.py loaded"
+if VERBOSE_FS: print("graph.py loaded")
 
 import math, itertools
 
@@ -41,13 +41,13 @@ class Graph(object):
     def node_list(self):
         return list(self.nodes)
 
-    def __repr__(self): return "graph[{0} nodes ,{1} connections]".format(len(self.nodes),sum([len(edge) for edge in self.edges.values()]))
+    def __repr__(self): return "graph[{0} nodes ,{1} connections]".format(len(self.nodes),sum([len(edge) for edge in list(self.edges.values())]))
 
 
     @property
     def node_pairs(self):
         ret = []
-        for n1, others in self.edges.iteritems():
+        for n1, others in self.edges.items():
              for n2 in others: ret.append((n1,n2))
         return tuple(ret)
     
@@ -165,7 +165,7 @@ class SpatialGraph(Graph):
         
         
     def to_segs(self):
-        return [[Segment(spt,ept) for ept in epts] for spt, epts in self.edges.items()]
+        return [[Segment(spt,ept) for ept in epts] for spt, epts in list(self.edges.items())]
         
         
     def __contains__(self, pt):

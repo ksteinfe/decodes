@@ -2,7 +2,7 @@ from decodes.core import *
 from . import dc_base, dc_vec, dc_point, dc_cs, dc_line, dc_mesh, dc_pgon
 
 
-if VERBOSE_FS: print "xform.py loaded"
+if VERBOSE_FS: print("xform.py loaded")
 
 class Xform(object):
     """
@@ -97,7 +97,7 @@ class Xform(object):
         
         xf = Xform()
         
-        if isinstance(plane, basestring):
+        if isinstance(plane, str):
             if plane=="world_xy" : xf.c33 *= -1
             elif plane=="world_xz" : xf.c22 *= -1
             elif plane=="world_yz" : xf.c11 *= -1

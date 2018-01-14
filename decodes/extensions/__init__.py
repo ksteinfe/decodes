@@ -1,1 +1,1 @@
-print "extensions loaded"
+print("extensions loaded")

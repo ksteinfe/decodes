@@ -2,10 +2,10 @@ from .. import *
 from ..core import *
 from ..core import dc_base, dc_vec, dc_point, dc_cs, dc_line, dc_mesh, dc_pgon
 from . import outie
-if VERBOSE_FS: print "svg_out loaded"
+if VERBOSE_FS: print("svg_out loaded")
 
 import os, sys, math
-import cStringIO
+import io
 
 class SVGOut(outie.Outie):
     """outie for writing stuff to a SVG file"""
@@ -32,10 +32,10 @@ class SVGOut(outie.Outie):
         self.svg = False
 
     def _startDraw(self):
-        if self._verbose: print "building svg string"
+        if self._verbose: print("building svg string")
         self.svg = False
         
-        self.buffer = cStringIO.StringIO()
+        self.buffer = io.StringIO()
         svg_size = ""
         if self._canvas_dim is not False: svg_size = 'width="'+str(self._canvas_dim.a)+'" height="'+str(self._canvas_dim.b)+'"'
         self.buffer.write('<svg '+svg_size+' xmlns="http://www.w3.org/2000/svg" version="1.1">\n')
@@ -45,7 +45,7 @@ class SVGOut(outie.Outie):
         self.svg = self.buffer.getvalue()
         
         if self._save_file: 
-            if self._verbose: print "drawing svg to "+self.filepath
+            if self._verbose: print("drawing svg to "+self.filepath)
             # write buffer to file
             fo = open(self.filepath, "wb")
             fo.write( self.svg )

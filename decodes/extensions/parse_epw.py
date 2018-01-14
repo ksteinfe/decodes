@@ -30,7 +30,7 @@ def epw_metadata(path):
     out: a dict containing EPW metadata
     """
     with open(path) as myfile:
-        head=[myfile.next() for x in xrange(number_of_epw_header_lines)]
+        head=[next(myfile) for x in range(number_of_epw_header_lines)]
     
     #city,state/province/region,country,data source,wmo number,lat,long,timezone,elevation
     #LOCATION,San Francisco Intl Ap,CA,USA,TMY3,724940,37.62,-122.40,-8.0,2.0
@@ -68,7 +68,7 @@ def parse_epw_file(path, desired_keys):
 
 def _parse_epw_line(string, desired_keys):
     vals = string.split(",")
-    if isinstance(desired_keys, basestring):
+    if isinstance(desired_keys, str):
         return float(vals[epw_keycols[desired_keys]])
     else : 
         return {k:float(vals[epw_keycols[k]]) for k in desired_keys}

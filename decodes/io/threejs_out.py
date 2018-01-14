@@ -2,10 +2,10 @@ from .. import *
 from ..core import *
 from ..core import dc_base, dc_vec, dc_point, dc_cs, dc_line, dc_mesh, dc_pgon
 from . import outie
-if VERBOSE_FS: print "threejs_out loaded"
+if VERBOSE_FS: print("threejs_out loaded")
 
 import os, sys, math
-import cStringIO
+import io
 
 class ThreeJSOut(outie.Outie):
     """outie for writing stuff to a ThreeJS scene file"""
@@ -28,10 +28,10 @@ class ThreeJSOut(outie.Outie):
         self.jsonstr = False
 
     def _startDraw(self):
-        print "building 3js string"
+        print("building 3js string")
         self.jsonstr = False
         
-        self.buffer = cStringIO.StringIO()
+        self.buffer = io.StringIO()
         self.buffer.write('{\n"metadata":{},\n')
     
     def _endDraw(self):
@@ -39,7 +39,7 @@ class ThreeJSOut(outie.Outie):
         self.jsonstr = self.buffer.getvalue()
         
         if self._save_file: 
-            print "drawing 3js to "+self.filepath
+            print("drawing 3js to "+self.filepath)
             # write buffer to file
             fo = open(self.filepath, "wb")
             fo.write( self.jsonstr )

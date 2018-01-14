@@ -1,4 +1,4 @@
-print "unit_tests loaded"
+print("unit_tests loaded")
 import unittest, importlib, sys, inspect, os
 
 
@@ -10,7 +10,7 @@ filename = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe(
 logfile = open(filename, "w")
 for submod in __all__:
     logfile.write( "\n\n== "+submod.upper()+" ==\n" )
-    mod = importlib.import_module("decodes.unit_tests."+submod)
+    mod = importlib.import_module("decodes.test."+submod)
     suite = unittest.TestLoader().loadTestsFromTestCase(mod.Tests)
     unittest.TextTestRunner(logfile,verbosity=2).run(suite)
 logfile.close

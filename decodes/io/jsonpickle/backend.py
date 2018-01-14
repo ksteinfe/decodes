@@ -1,4 +1,4 @@
-from compat import PY32
+from .compat import PY32
 
 class JSONBackend(object):
     """Manages encoding and decoding using various backends.

@@ -1,7 +1,7 @@
 from decodes.core import *
 from . import dc_base, dc_vec #here we may only import modules that have been loaded before this one.    see core/__init__.py for proper order
 import math, random, warnings, copy
-if VERBOSE_FS: print "point.py loaded"
+if VERBOSE_FS: print("point.py loaded")
 
 
 # points may define a "basis"

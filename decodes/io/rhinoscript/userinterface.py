@@ -1,11 +1,11 @@
 import Rhino
-import utility as rhutil
+from . import utility as rhutil
 import scriptcontext
 import System.Drawing.Color
 import System.Enum
 import System.Array
 import System.Windows.Forms
-from view import __viewhelper
+from .view import __viewhelper
 
 
 def BrowseForFolder(folder=None, message=None, title=None):
@@ -45,7 +45,7 @@ def CheckListBox(items, message=None, title=None):
     itemstrs = [str(item[0]) for item in items]
     newcheckstates = Rhino.UI.Dialogs.ShowCheckListBox(title, message, itemstrs, checkstates)
     if newcheckstates:
-        rc = zip(itemstrs, newcheckstates)
+        rc = list(zip(itemstrs, newcheckstates))
         return rc
     return scriptcontext.errorhandler()
 
