@@ -3,8 +3,8 @@
 # Packages
 *.egg
 *.egg-info
-#dist
-#build
+dist
+build
 eggs
 parts
 bin
