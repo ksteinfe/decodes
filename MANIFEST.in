@@ -1,1 +1,3 @@
 recursive-include decodes *.txt *.png
+recursive-include tests *.py
+include *.rst *.txt LICENSE 

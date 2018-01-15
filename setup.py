@@ -1,7 +1,4 @@
-# written using this tutorial: http://getpython3.com/diveintopython3/packaging.html
-# to build a windows dist, do this: python setup.py bdist_wininst
-# to build a simple dist, do this: python setup.py sdist
-from distutils.core import setup
+"""
 setup(
     name = 'decodes',
     packages = ['decodes','decodes.core', 'decodes.extensions', 'decodes.io', 'decodes.io.rhinoscript'],
@@ -15,4 +12,93 @@ setup(
       "Topic :: Multimedia :: Graphics :: 3D Modeling"
     ],
 )
+"""
 
+
+# written using this tutorial: https://hynek.me/articles/sharing-your-labor-of-love-pypi-quick-and-dirty/
+
+import codecs
+import os
+import re
+
+from setuptools import setup, find_packages
+
+###################################################################
+
+NAME = "decodes"
+PACKAGES = find_packages(where="src")
+
+
+META_PATH = os.path.join("src", "decodes", "__init__.py")
+# KSTEINFE TODO
+
+KEYWORDS = ["geometry", "vector", "design"]
+CLASSIFIERS = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Natural Language :: English",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 2",
+    "Programming Language :: Python :: 2.7",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.3",
+    "Programming Language :: Python :: 3.4",
+    "Programming Language :: Python :: 3.5",
+    "Programming Language :: Python :: 3.6",
+      "Topic :: Multimedia :: Graphics :: 3D Modeling"
+]
+INSTALL_REQUIRES = []
+
+###################################################################
+
+HERE = os.path.abspath(os.path.dirname(__file__))
+
+
+def read(*parts):
+    """
+    Build an absolute path from *parts* and and return the contents of the
+    resulting file.  Assume UTF-8 encoding.
+    """
+    with codecs.open(os.path.join(HERE, *parts), "rb", "utf-8") as f:
+        return f.read()
+
+
+META_FILE = read(META_PATH)
+
+
+def find_meta(meta):
+    """
+    Extract __*meta*__ from META_FILE.
+    """
+    meta_match = re.search(
+        r"^__{meta}__ = ['\"]([^'\"]*)['\"]".format(meta=meta),
+        META_FILE, re.M
+    )
+    if meta_match:
+        return meta_match.group(1)
+    raise RuntimeError("Unable to find __{meta}__ string.".format(meta=meta))
+
+
+if __name__ == "__main__":
+    setup(
+        name=NAME,
+        description=find_meta("description"),
+        license=find_meta("license"),
+        url=find_meta("uri"),
+        version=find_meta("version"),
+        author=find_meta("author"),
+        author_email=find_meta("email"),
+        maintainer=find_meta("author"),
+        maintainer_email=find_meta("email"),
+        keywords=KEYWORDS,
+        long_description=read("README.rst"),
+        packages=PACKAGES,
+        package_dir={"": "src"},
+        zip_safe=False,
+        classifiers=CLASSIFIERS,
+        install_requires=INSTALL_REQUIRES,
+    )
+    
