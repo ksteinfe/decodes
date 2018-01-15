@@ -1,20 +1,3 @@
-"""
-setup(
-    name = 'decodes',
-    packages = ['decodes','decodes.core', 'decodes.extensions', 'decodes.io', 'decodes.io.rhinoscript'],
-    version = '0.1.0',
-    description = 'a geometry library for 3d designers',
-    url = "http://decod.es",
-    author='Kyle Steinfeld',
-    author_email = "ksteinfe@gmail.com",
-    classifiers = [
-      "Programming Language :: Python :: 2.7",
-      "Topic :: Multimedia :: Graphics :: 3D Modeling"
-    ],
-)
-"""
-
-
 # written using this tutorial: https://hynek.me/articles/sharing-your-labor-of-love-pypi-quick-and-dirty/
 
 import codecs
