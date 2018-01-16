@@ -15,7 +15,7 @@ class SVGOut(outie.Outie):
     min_point_size = 0.001
     default_curve_resolution = 50
 
-    def __init__(self, filename, path=False, canvas_dimensions=False, flip_y=False, save_file=True,verbose=True):
+    def __init__(self, filename, path=False, canvas_dimensions=False, flip_y=False, center_on_origin=False, scale=False, save_file=True,verbose=True):
         super(SVGOut,self).__init__()
         #if not path : self.filepath = __file__.rpartition(os.sep)[0] + os.sep + filename + ".svg"
         if filename[-4:].lower() == ".svg" : filename = filename[:-4]
@@ -27,10 +27,34 @@ class SVGOut(outie.Outie):
         
         self._canvas_dim = canvas_dimensions
         self._flip = flip_y
+        self._cntr_origin = center_on_origin
+        self._scale = scale
         self._save_file = save_file
         self._verbose = verbose
         self.svg = False
+        
+        self._xf = False
+        self._reset_xf()
 
+    def _reset_xf(self):
+        if not self._canvas_dim:
+            self._xf = False
+            return
+        if not self._flip and not self._cntr_origin and not self.scale:
+            self._xf = False
+            return
+            
+        self._xf = Xform()
+        if self._flip: 
+            self._xf *= Xform.translation(Vec(0,self._canvas_dim.b))
+            self._xf *= Xform.mirror(plane="world_xz")
+        
+        if self._cntr_origin: 
+            self._xf *= Xform.translation(Vec(self._canvas_dim.a/2.0,self._canvas_dim.b/2.0))
+
+        if self._scale: 
+            self._xf *= Xform.scale(self._scale)            
+            
     def _startDraw(self):
         if self._verbose: print("building svg string")
         self.svg = False
@@ -43,15 +67,16 @@ class SVGOut(outie.Outie):
     def _endDraw(self):
         self.buffer.write('</svg>')
         self.svg = self.buffer.getvalue()
+        self.buffer.close()
         
-        if self._save_file: 
+        if self._save_file:                     
             if self._verbose: print("drawing svg to "+self.filepath)
             # write buffer to file
-            fo = open(self.filepath, "wb")
+            fo = open(self.filepath, "w")
             fo.write( self.svg )
             fo.close()
                 
-        self.buffer.close()
+        return self.svg
 
         
     def _drawGeom(self, g):
@@ -63,7 +88,7 @@ class SVGOut(outie.Outie):
         if isinstance(g, Tri):  g = PGon([g.pa,g.pb,g.pc])
         
         
-        g = self._flip_geom(g)
+        g = self._xf_geom(g)
 
         if isinstance(g, Point) : return self._drawPoint(g)
         if isinstance(g, PGon) :  return self._drawPolygon(g)
@@ -79,12 +104,9 @@ class SVGOut(outie.Outie):
     def _buffer_append(self,type,atts,style):
         self.buffer.write('<'+type+' '+atts+' style="'+style+'"/>\n')
 
-    def _flip_geom(self,geom):
-        if self._flip and self._canvas_dim is not False:
-            xf = Xform.mirror(plane="world_xz")
-            ngeom = geom*xf
-            xf = Xform.translation(Vec(0,self._canvas_dim.b))
-            ngeom = ngeom*xf
+    def _xf_geom(self,geom):
+        if self._xf: 
+            ngeom = geom*self._xf
             if hasattr(geom, 'props'): ngeom.props = geom.props
             return ngeom
         return geom
@@ -108,7 +130,7 @@ class SVGOut(outie.Outie):
         
     def _drawPolygon(self, pgon):
         type = 'polygon'
-        style = self._extract_props(pgon,force_fill=True) # force filled
+        style = self._extract_props(pgon,force_fill=False) 
         point_string = " ".join([str(v.x)+","+str(v.y) for v in pgon.pts])
         atts = 'points="'+point_string+'"'
         self._buffer_append(type,atts,style)

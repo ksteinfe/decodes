@@ -40,7 +40,7 @@ class Outie(object):
                 raise NotImplementedError("This doesn't look like Decodes Geometry!\nThis outie doesn't allow foreigners!\n{0}".format(ngeom))
         
         
-    def draw(self):
+    def draw(self, clear_buffer = False):
         #iterates over the geom list, 
         #calls the (hopefully overridden) draw function for each geometric object
         #returns a list of successful writes
@@ -58,7 +58,7 @@ class Outie(object):
                     pass
         
             self._endDraw() #finish up anything we need to in our drawing context
-            self.clear() #empty the outie after each draw
+            if clear_buffer: self.clear() #empty the outie after each draw
             return results
         except:
             self._endDraw()

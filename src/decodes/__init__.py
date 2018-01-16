@@ -1,3 +1,5 @@
+print("http://decod.es")
+
 __version__ = "0.2.0"
 __title__ = "decodes"
 __description__ = "a geometry library for 3d designers"
@@ -7,10 +9,6 @@ __author__ = "Kyle Steinfeld"
 __email__ = "ksteinfe@gmail.com"
 __license__ = "MIT"
 __copyright__ = "Copyright (c) 2015 Kyle Steinfeld"
-
-
-print("{}\tv{}".format(__uri__, __version__))
-
 
 
 """A Platform-Agnostic Computational Geometry Environment 
@@ -23,7 +21,7 @@ print("{}\tv{}".format(__uri__, __version__))
 
 class Outies:
     # list here all the outies we currently support
-    Rhino, Grasshopper, SVG , ACAD, Dynamo,ThreeJS,JSON = list(range(7))
+    Rhino, Grasshopper, SVG, ACAD, Dynamo, ThreeJS, JSON, Jupyter = list(range(8))
 
 
 # keep this up to date with what outies we support
@@ -38,22 +36,29 @@ def make_out(outtype, name="untitled", path=False, **kargs):
         :type path: string
         :rtype: child of decodes.outies.outie
     """
-    import io.outie
+    import decodes.io.outie
 
     if outtype == Outies.Rhino:
-        import io.rhino_out
-        return io.rhino_out.RhinoOut(name)
+        import decodes.io.rhino_out
+        return decodes.io.rhino_out.RhinoOut(name)
     elif outtype == Outies.ACAD:
-        import io.autocad_out
-        return io.autocad_out.AutocadOut(name)
+        import decodes.io.autocad_out
+        return decodes.io.autocad_out.AutocadOut(name)
     elif outtype == Outies.Grasshopper:
-        import io.gh_out
-        return io.gh_out.GrasshopperOut(name)
+        import decodes.io.gh_out
+        return decodes.io.gh_out.GrasshopperOut(name)
+        
+    elif outtype == Outies.Jupyter:
+        import decodes.io.jupyter_out
+        return decodes.io.jupyter_out.JupyterOut()
+        
     elif outtype == Outies.SVG:
-        import io.svg_out
+        import decodes.io.svg_out
 
         c_dim=False
         flip=False
+        center_on_origin=False
+        scale=False
         save_file=True
         verbose = False
         if "canvas_dimensions" in kargs : c_dim = kargs["canvas_dimensions"]
@@ -61,26 +66,28 @@ def make_out(outtype, name="untitled", path=False, **kargs):
         if "flip_y" in kargs : 
             if c_dim is False : raise Exception("If you want to flip the y-axis of this SVG, you have to tell me the canvas_dimensions.  Please pass an Interval.")
             flip = kargs["flip_y"]
+        if "center_on_origin" in kargs : center_on_origin = kargs["center_on_origin"]
+        if "scale" in kargs : scale = kargs["scale"]
         if "verbose" in kargs : verbose = kargs["verbose"]
         
-        if path : return io.svg_out.SVGOut(name, path, canvas_dimensions=c_dim, flip_y=flip,save_file=save_file,verbose=verbose)
-        else : return io.svg_out.SVGOut(name, canvas_dimensions=c_dim, flip_y=flip,save_file=save_file,verbose=verbose)
+        if path : return decodes.io.svg_out.SVGOut(name, path, canvas_dimensions=c_dim, flip_y=flip,save_file=save_file,verbose=verbose)
+        else : return decodes.io.svg_out.SVGOut(name, canvas_dimensions=c_dim, flip_y=flip,center_on_origin=center_on_origin,scale=scale,save_file=save_file,verbose=verbose)
     elif outtype == Outies.ThreeJS:
-        import io.threejs_out
+        import decodes.io.threejs_out
         save_file=True
         if "save_file" in kargs : save_file = kargs["save_file"]
-        if path : return io.threejs_out.ThreeJSOut(name, path, save_file=save_file)
-        else : return io.threejs_out.ThreeJSOut(name, save_file=save_file)
+        if path : return decodes.io.threejs_out.ThreeJSOut(name, path, save_file=save_file)
+        else : return decodes.io.threejs_out.ThreeJSOut(name, save_file=save_file)
     elif outtype == Outies.JSON:
-        import io.json_out
+        import decodes.io.json_out
         save_file=True
         if "save_file" in kargs : save_file = kargs["save_file"]
-        if path : return io.json_out.JsonOut(name, path, save_file=save_file)
-        else : return io.json_out.JsonOut(name, save_file=save_file)
+        if path : return decodes.io.json_out.JsonOut(name, path, save_file=save_file)
+        else : return decodes.io.json_out.JsonOut(name, save_file=save_file)
         
     elif outtype == Outies.Dynamo:
-        import io.dynamo_out
-        return io.dynamo_out.DynamoOut()
+        import decodes.io.dynamo_out
+        return decodes.io.dynamo_out.DynamoOut()
     else :
         print("!!! hey, i don't have an outie of type foo !!!")
         return False
