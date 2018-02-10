@@ -59,7 +59,14 @@ class SVGOut(outie.Outie):
         if self._verbose: print("building svg string")
         self.svg = False
         
-        self.buffer = io.StringIO()
+        
+        if (sys.version_info > (3, 0)): # Python 3 code in this block
+            self.buffer = io.StringIO()
+        else: # Python 2 code in this block
+            import StringIO
+            self.buffer = StringIO.StringIO()
+        
+        
         svg_size = ""
         if self._canvas_dim is not False: svg_size = 'width="'+str(self._canvas_dim.a)+'" height="'+str(self._canvas_dim.b)+'"'
         self.buffer.write('<svg '+svg_size+' xmlns="http://www.w3.org/2000/svg" version="1.1">\n')
