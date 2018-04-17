@@ -1,4 +1,16 @@
-# written using this tutorial: https://hynek.me/articles/sharing-your-labor-of-love-pypi-quick-and-dirty/
+'''
+written using this tutorial: https://hynek.me/articles/sharing-your-labor-of-love-pypi-quick-and-dirty/
+
+when ready to install:
+* make sure requirements are installed
+        $ pip install -U pip setuptools wheel twine
+* delete the build and dist directories
+* build
+        $ python setup.py sdist bdist_wheel
+* upload to PIP
+        $ twine upload -r pypi dist/decodes-0.2.X*
+        
+'''
 
 import codecs
 import os

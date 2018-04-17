@@ -1,6 +1,4 @@
-print("http://decod.es")
-
-__version__ = "0.2.0"
+__version__ = "0.2.3"
 __title__ = "decodes"
 __description__ = "a geometry library for 3d designers"
 __uri__ = "http://decod.es/"
@@ -10,6 +8,8 @@ __email__ = "ksteinfe@gmail.com"
 __license__ = "MIT"
 __copyright__ = "Copyright (c) 2015 Kyle Steinfeld"
 
+
+print(__uri__+"\tv"+__version__)
 
 """A Platform-Agnostic Computational Geometry Environment 
 
